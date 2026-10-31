@@ -1,0 +1,78 @@
+
+=== KEM prekey type: Kyber1024 ===
+bundle on the wire: 1828 bytes
+alice: PQXDH done in 38.798625ms; session_version=4, spqr=StillNegotiating { version: V1, min_version: V1 }, pq_state=118B, record=2074B
+  A->B A0 PreKey v4 1759B pq_ratchet=37B
+  B->A B0 Whisper v4 72B pq_ratchet=4B
+  A->B A1 Whisper v4 105B pq_ratchet=37B
+  B->A B1 Whisper v4 72B pq_ratchet=4B
+  A->B A2 Whisper v4 105B pq_ratchet=37B
+  B->A B2 Whisper v4 105B pq_ratchet=37B
+  A->B A3 Whisper v4 105B pq_ratchet=37B
+  B->A B3 Whisper v4 105B pq_ratchet=37B
+  A->B A4 Whisper v4 105B pq_ratchet=37B
+  B->A B4 Whisper v4 105B pq_ratchet=37B
+  A->B A5 Whisper v4 105B pq_ratchet=37B
+  B->A B5 Whisper v4 105B pq_ratchet=37B
+  A->B burst4 (out of order) pq_ratchet=37B
+  A->B burst3 (out of order) pq_ratchet=37B
+  A->B burst2 (out of order) pq_ratchet=37B
+  A->B burst1 (out of order) pq_ratchet=37B
+  A->B burst0 (out of order) pq_ratchet=37B
+alice: session_version=4, spqr=NegotiationComplete(V1), pq_state=4085B, record=4722B
+bob:   session_version=4, spqr=NegotiationComplete(V1), pq_state=4937B, record=5572B
+  spqr epoch 0 -> 1 (A->B) at message #1 (msg type 2)
+  spqr epoch 0 -> 1 (B->A) at message #2 (msg type 5)
+  spqr epoch 1 -> 2 (A->B) at message #65 (msg type 0)
+  spqr epoch 1 -> 2 (B->A) at message #66 (msg type 1)
+  spqr epoch 2 -> 3 (B->A) at message #152 (msg type 0)
+  spqr epoch 2 -> 3 (A->B) at message #153 (msg type 1)
+  spqr epoch 3 -> 4 (A->B) at message #239 (msg type 0)
+  spqr epoch 3 -> 4 (B->A) at message #240 (msg type 1)
+  spqr epoch 4 -> 5 (B->A) at message #326 (msg type 0)
+  spqr epoch 4 -> 5 (A->B) at message #327 (msg type 1)
+after 400 more messages: alice: session_version=4, spqr=NegotiationComplete(V1), pq_state=4801B, record=5436B
+restore session record (6303 B) and continue: "after restore" OK
+replay rejected: message with old counter 1 / 0
+tampered rejected: invalid Whisper message: decryption failed
+bundle with non-pinned identity rejected: untrusted identity for address link-7f3a/bob.1
+
+=== KEM prekey type: MLKEM1024 ===
+bundle on the wire: 1828 bytes
+alice: PQXDH done in 32.754792ms; session_version=4, spqr=StillNegotiating { version: V1, min_version: V1 }, pq_state=118B, record=2074B
+  A->B A0 PreKey v4 1759B pq_ratchet=37B
+  B->A B0 Whisper v4 72B pq_ratchet=4B
+  A->B A1 Whisper v4 105B pq_ratchet=37B
+  B->A B1 Whisper v4 72B pq_ratchet=4B
+  A->B A2 Whisper v4 105B pq_ratchet=37B
+  B->A B2 Whisper v4 105B pq_ratchet=37B
+  A->B A3 Whisper v4 105B pq_ratchet=37B
+  B->A B3 Whisper v4 105B pq_ratchet=37B
+  A->B A4 Whisper v4 105B pq_ratchet=37B
+  B->A B4 Whisper v4 105B pq_ratchet=37B
+  A->B A5 Whisper v4 105B pq_ratchet=37B
+  B->A B5 Whisper v4 105B pq_ratchet=37B
+  A->B burst4 (out of order) pq_ratchet=37B
+  A->B burst3 (out of order) pq_ratchet=37B
+  A->B burst2 (out of order) pq_ratchet=37B
+  A->B burst1 (out of order) pq_ratchet=37B
+  A->B burst0 (out of order) pq_ratchet=37B
+alice: session_version=4, spqr=NegotiationComplete(V1), pq_state=4085B, record=4722B
+bob:   session_version=4, spqr=NegotiationComplete(V1), pq_state=4937B, record=5572B
+  spqr epoch 0 -> 1 (A->B) at message #1 (msg type 2)
+  spqr epoch 0 -> 1 (B->A) at message #2 (msg type 5)
+  spqr epoch 1 -> 2 (A->B) at message #65 (msg type 0)
+  spqr epoch 1 -> 2 (B->A) at message #66 (msg type 1)
+  spqr epoch 2 -> 3 (B->A) at message #152 (msg type 0)
+  spqr epoch 2 -> 3 (A->B) at message #153 (msg type 1)
+  spqr epoch 3 -> 4 (A->B) at message #239 (msg type 0)
+  spqr epoch 3 -> 4 (B->A) at message #240 (msg type 1)
+  spqr epoch 4 -> 5 (B->A) at message #326 (msg type 0)
+  spqr epoch 4 -> 5 (A->B) at message #327 (msg type 1)
+after 400 more messages: alice: session_version=4, spqr=NegotiationComplete(V1), pq_state=4801B, record=5436B
+restore session record (6303 B) and continue: "after restore" OK
+replay rejected: message with old counter 1 / 0
+tampered rejected: invalid Whisper message: decryption failed
+bundle with non-pinned identity rejected: untrusted identity for address link-7f3a/bob.1
+
+DONE

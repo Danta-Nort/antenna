@@ -1,0 +1,17 @@
+(* SPDX-License-Identifier: Apache-2.0 *)
+(* =====================================================================================================
+   NEGATIVE CONTROL: the version and the suite are not part of TH (C3 without v ‖ SUITE ‖ KX), and A also accepts SUITE_LEGACY.
+   A downgrade with compromised TLS is expected: the attacker changes the suite in M1 (psk_mac does not cover it),
+   the sides get the same TH, and A activates a link with the "legacy" suite.
+   ===================================================================================================== *)
+
+(* EXPECT false — Q7 of the main scenario: A activates a link with SUITE_LEGACY *)
+query t: thash, ia: G, ib: G, sk: key; event(A_Activated(hdr(V1, SUITE_LEGACY, KX_PQ), t, ia, ib, sk)).
+
+process
+  ( !( new dictA: channel; new matchedA: channel;     (* owner A and everyone they talk to by voice *)
+       ( !( new s: linksecret; new ea: eid;
+            event InviteCreated(ea);
+            out(c, (ea, s));                          (* the link is intercepted *)
+            A_tnull(NOHDR, false, s, ea, dictA, matchedA) )
+       | !B_tnull(NOHDR, false, c, dictA, matchedA) ) ) )   (* B takes the link from the attacker: it may be substituted *)

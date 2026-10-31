@@ -1,0 +1,9 @@
+provider: added 64 MiB, blake3=f2a97d5ec5
+  [provider ACL] reject Some("c97987134d")
+1. ACL OK: mallory fetch failed: io: connection lost: connection lost: closed by peer: permission (code 1) (local_bytes=0)
+2a. simulated drop at 25 MiB
+2b. after drop: local_bytes=25 MiB complete=false
+2c. resume after store reload: had 25 MiB, downloaded payload 38 MiB in 1.4662451s; content+blake3 match: true
+3a. corrupted 1 byte in provider file <tmp>/prov/data/8d51fc1e56bc15d044c35472129cf16202201837cb75188aa808ede3bd0b409c.data
+3b. OK: tampered chunk rejected: read: stream reset by peer: error 3: stream reset by peer: error 3; verified prefix kept: 2864 KiB of 4096 KiB
+DONE

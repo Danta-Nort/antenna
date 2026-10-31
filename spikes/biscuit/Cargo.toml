@@ -1,0 +1,13 @@
+[package]
+name = "spike-biscuit"
+version = "0.0.0"
+edition = "2024"
+license = "AGPL-3.0-only"
+publish = false
+
+[dependencies]
+biscuit-auth = "=6.0.0"
+anyhow = "1"
+rand = "0.8"
+
+[workspace]

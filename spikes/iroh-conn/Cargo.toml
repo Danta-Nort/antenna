@@ -1,0 +1,17 @@
+[package]
+name = "spike-iroh-conn"
+version = "0.0.0"
+edition = "2024"
+license = "AGPL-3.0-only"
+publish = false
+
+[dependencies]
+iroh = { version = "=1.3.0", features = ["tls-aws-lc-rs"] }
+noq = "=1.3.0"   # only for downcasting HandshakeData (negotiated kx group)
+rustls = { version = "0.23", default-features = false, features = ["aws_lc_rs"] }
+tokio = { version = "1", features = ["full"] }
+anyhow = "1"
+data-encoding = "2"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+[workspace]

@@ -1,0 +1,8 @@
+LISTEN id=65f1556f3ad426eb28a9fd292596cf7c5d10db63c510e54c9184d26f44086732 relay=https://euc1-1.relay.n0.iroh.link./
+LISTEN direct=[0.0.0.0:47151, [::]:41822]
+--- paired dialer (relay URL only, no IPs given):
+DIAL my id=80929ad307302eaf4b880b7f875bec382e1cfc371f0b357aca6cd5ee4411f074
+DIAL OK connect+echo 161.590119ms (echo 68.72338ms) kx=Some(X25519MLKEM768) paths: *relay:https://euc1-1.relay.n0.iroh.link./(rtt 51.547566ms)
+--- unpaired dialer:
+DIAL my id=7e15e2d6dca76435d22b4c8966ce461b21eb9d9f922222574dbd0e3566fb457f
+Error: connect: timeout 20s

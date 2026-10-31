@@ -1,0 +1,9 @@
+/target
+*.swp
+.DS_Store
+# tools/guide_check_test.py imports tools/guide_check.py as a module
+__pycache__/
+# spikes build into the shared spikes/target (CARGO_TARGET_DIR) or into their own target
+/spikes/target
+/spikes/*/target
+/dist/

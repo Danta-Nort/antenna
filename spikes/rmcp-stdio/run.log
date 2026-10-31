@@ -1,0 +1,4 @@
+{"jsonrpc":"2.0","id":1,"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{}},"serverInfo":{"name":"rmcp","version":"3.5.0"}}}
+{"jsonrpc":"2.0","id":2,"result":{"tools":[{"name":"get_trust","description":"Return the local trust level for a contact (read-only)","inputSchema":{"$schema":"https://json-schema.org/draft/2020-12/schema","properties":{"contact":{"description":"Contact name within the link","type":"string"}},"required":["contact"],"type":"object"}}]}}
+{"jsonrpc":"2.0","id":4,"error":{"code":-32602,"message":"tool not found"}}
+{"jsonrpc":"2.0","id":3,"result":{"content":[{"type":"text","text":"spike: contact \"bob\" has trust level 2 (fake data)"}],"isError":false}}

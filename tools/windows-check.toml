@@ -1,0 +1,29 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Stand-ins for the build scripts of C dependencies for `cargo check/clippy --target x86_64-pc-windows-msvc` on Linux
+# (no MSVC, no Windows SDK): the scripts do not run, and the values below replace their output. check/clippy do not
+# link, so the type check is genuine, but nothing can be built or run this way. Use it only through
+# tools/check-windows.sh (which also lets the SQLCipher build script take its prebuilt bindings instead of compiling C).
+# Details: docs/PORTABILITY-WINDOWS.md WP-32, docs/PORTABILITY.md §3.1 (the same method for macOS), TROUBLESHOOTING
+# "Type checking for Windows from Linux".
+#
+# Each value is what the real build script prints for this target, read in its source and compared with its output on
+# Linux. The versions in the keys (`aws_lc_0_45_0`, `ring_core_0_17_14_`) are the `links` fields of those crates:
+# update them here when aws-lc-sys or ring is updated (a stale key means the build script runs again and fails, so the
+# script stops loudly; it never checks less). When openssl-src moves to another OpenSSL version, compare the cfg below
+# with a Linux build's `target/debug/build/openssl-sys-*/output`.
+
+[target.x86_64-pc-windows-msvc.aws_lc_0_45_0]
+# aws-lc-sys 0.45 without its `all-bindings` feature (aws-lc-rs turns its default features off) takes the `universal`
+# bindings on x86_64 Windows, as on x86_64 Linux: only Apple targets and 32-bit Windows get the prefixed ones
+# (`builder/main.rs`: `target_has_prefixed_symbols`)
+rustc-cfg = ["universal"]
+# aws-lc-rs reads DEP_AWS_LC_*_INCLUDE (only to pick the version)
+include = "/nonexistent/aws-lc/include"
+
+[target.x86_64-pc-windows-msvc.ring_core_0_17_14_]
+rustc-link-lib = []
+
+[target.x86_64-pc-windows-msvc.openssl]
+# openssl-src 300.x builds OpenSSL 3.6 with the same options on every target except `no-capieng` on Windows, which
+# openssl-sys does not probe: the cfg below is what its build script prints on Linux for that OpenSSL
+rustc-cfg = ["openssl", "ossl101", "ossl102", "ossl102f", "ossl102h", "ossl110", "ossl110f", "ossl110g", "ossl110h", "ossl111", "ossl111b", "ossl111c", "ossl111d", "ossl300", "ossl320", "ossl330", "ossl340", "ossl350", 'osslconf="OPENSSL_NO_IDEA"', 'osslconf="OPENSSL_NO_CAMELLIA"', 'osslconf="OPENSSL_NO_COMP"', 'osslconf="OPENSSL_NO_SSL3_METHOD"', 'osslconf="OPENSSL_NO_SEED"']

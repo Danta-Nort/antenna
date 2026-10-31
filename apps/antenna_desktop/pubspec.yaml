@@ -1,0 +1,82 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+name: antenna_desktop
+description: "Antenna — P2P messenger for people and AI agents: desktop client of the antennad daemon (control socket)."
+publish_to: 'none'
+version: 0.1.0+12
+
+environment:
+  sdk: ^3.13.5
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # App localization (gen-l10n, docs/DESIGN.md, "Languages"): English by default, Russian from the system or by choice.
+  flutter_localizations:
+    sdk: flutter
+  # intl: the version pinned by flutter_localizations of this Flutter release (3.47: ^0.20.3).
+  intl: ^0.20.3
+  # Picking a file to send: the system dialog (NSOpenPanel / GTK), official Flutter plugin, BSD-3-Clause.
+  # macOS uses Swift Package Manager (no CocoaPods).
+  file_selector: ^1.1.0
+  # Dropping files onto the window (macOS / Linux), Apache-2.0; macOS uses Swift Package Manager.
+  desktop_drop: ^0.8.4
+  # QR code of the invite link (SPEC §6). Pure Dart, BSD-3-Clause; drawn by the app (CustomPainter).
+  qr: ^4.0.0
+  # Code mode: the agent's terminal in the window. A VT100/xterm terminal emulator widget, pure Dart, MIT
+  # (TerminalStudio/xterm.dart; docs/STACK.md).
+  xterm: 4.0.0
+  # Code mode: a pseudo-terminal for the agent's CLI (forkpty through FFI), MIT (TerminalStudio/flutter_pty).
+  flutter_pty: 0.4.2
+  # D-Bus client, pure Dart, MPL-2.0 (Canonical): system notifications on Linux (org.freedesktop.Notifications, D-84).
+  # Already in the app through desktop_drop; listed here because the window now calls it directly.
+  dbus: ^0.7.10
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  # gen-l10n: lib/l10n/app_*.arb → lib/l10n/app_localizations*.dart (settings in l10n.yaml; generated files are committed).
+  generate: true
+  # The AI apps' marks (Agents → AI apps), shipped with their owners' notice. The window draws them from
+  # lib/theme/ai_logos.dart, generated from these files by assets/logos/build.py.
+  assets:
+    - assets/logos/README.md
+    - assets/logos/claude.svg
+    - assets/logos/claudecode.svg
+    - assets/logos/cursor.svg
+    - assets/logos/lmstudio.svg
+    - assets/logos/zedindustries.svg
+    # Profile pictures (tools/avatars.py): the manifest and one folder per set.
+    - assets/avatars/sets.json
+    - assets/avatars/set1/
+    - assets/avatars/set2/
+    - assets/avatars/set3/
+  fonts:
+    # IBM Plex, SIL OFL 1.1 (assets/fonts/OFL-1.1-IBM-Plex.txt). Bundled fonts give the same look on every
+    # platform and real glyphs in golden screenshots.
+    - family: Plex Sans
+      fonts:
+        - asset: assets/fonts/IBMPlexSans-Light.ttf
+          weight: 300
+        - asset: assets/fonts/IBMPlexSans-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/IBMPlexSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/IBMPlexSans-SemiBold.ttf
+          weight: 600
+    # The 10 animal emoji of the verification code (antenna_proto::sas::EMOJI): a Noto Emoji subset (monochrome,
+    # OFL 1.1, assets/fonts/OFL-1.1-Noto-Emoji.txt), 9.6 KB. Both sides see the code the same way on any OS.
+    - family: SAS Emoji
+      fonts:
+        - asset: assets/fonts/NotoEmoji-SAS-subset.ttf
+    - family: Plex Mono
+      fonts:
+        - asset: assets/fonts/IBMPlexMono-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/IBMPlexMono-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/IBMPlexMono-SemiBold.ttf
+          weight: 600

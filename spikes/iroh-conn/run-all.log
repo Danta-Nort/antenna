@@ -1,0 +1,53 @@
+
+== T1 relay-only (clear_ip_transports, n0 relay, address lookup off)
+  alice id=a1f476d0e0 addr: relay=Some("https://euc1-1.relay.n0.iroh.link./") ip_addrs=0
+  echo 15B via relay: 71.747042ms
+  OK connect 68.093474ms; echo 15B 71.747042ms; echo 64KiB 206.500293ms; paths: *relay:https://euc1-1.relay.n0.iroh.link./(rtt 51.3736ms); kx=Some(X25519)
+
+== T2 direct-only (RelayMode::Disabled, 127.0.0.1)
+  OK connect 48.492901ms; echo 18.474213ms; paths: *ip:127.0.0.1:59797(rtt 2.972638ms); kx=Some(X25519)
+
+== T3 relay+IP: dial by EndpointId + relay URL only, expect upgrade to direct path
+  connected in 70.989542ms; paths at start: *relay:https://euc1-1.relay.n0.iroh.link./(rtt 52.39308ms)
+  direct path selected: true after 243.136276ms; echo 1.255102ms; paths: relay:https://euc1-1.relay.n0.iroh.link./(rtt 57.023137ms), *ip:198.51.100.11:50656(rtt 654.453µs)
+
+== T4 accept-list: unpaired key must be dropped
+  OK relay: mallory got NO response, gave up after 8.00145376s (timeout)
+    [hook after_handshake] reject 57669c089f (not paired)
+  OK direct: TLS done, then closed by hook after 64.628704ms: read error: connection lost: connection lost: closed by peer: 403
+  OK paired bob on the same endpoint: echo works
+    [alpn filter] wrong token ["x/link/1/0000000000000000"] -> Ignore
+    [alpn filter] wrong token ["x/link/1/0000000000000000"] -> Ignore
+    [alpn filter] wrong token ["x/link/1/0000000000000000"] -> Ignore
+    [alpn filter] wrong token ["x/link/1/0000000000000000"] -> Ignore
+    [alpn filter] wrong token ["x/link/1/0000000000000000"] -> Ignore
+  [Default] OK mallory (wrong ALPN token, direct UDP): no response, timeout 5.001459933s
+    [alpn filter] ClientHello not parseable from first Initial (multi-packet?) -> Accept, rely on hook
+  [Default] OK bob (right token, paired): echo works, kx=Some(X25519)
+    [alpn filter] ClientHello not parseable from first Initial (multi-packet?) -> Accept, rely on hook
+    [alpn filter] ClientHello not parseable from first Initial (multi-packet?) -> Accept, rely on hook
+  [PreferPq] OK mallory (wrong ALPN token, direct UDP): no response, timeout 5.00147229s
+    [alpn filter] ClientHello not parseable from first Initial (multi-packet?) -> Accept, rely on hook
+  [PreferPq] OK bob (right token, paired): echo works, kx=Some(X25519MLKEM768)
+
+== T6 PQ key exchange inside iroh QUIC TLS (rustls aws-lc-rs)
+  default provider (ring): kx=Some(X25519)
+  PQ-only direct: OK kx=Some(X25519MLKEM768)
+  prefer-PQ via n0 relay: OK kx=Some(X25519MLKEM768) paths: *relay:https://euc1-1.relay.n0.iroh.link./(rtt 51.023452ms)
+  PQ-only endpoint vs n0 relay: FAILED: endpoint.online() timeout (relay unreachable?): deadline has elapsed
+
+== T7 TLS exporter: both sides derive the same channel-binding secret
+  DirectOnly kx=Some(X25519MLKEM768): exporter client=d6a9393d19d1e389 server=d6a9393d19d1e389 equal=true
+  RelayOnly kx=Some(X25519MLKEM768): exporter client=f7abe05f53cb37e1 server=f7abe05f53cb37e1 equal=true
+  DirectOnly kx=Some(X25519MLKEM768): exporter client=cef2c05afe3d02fb server=cef2c05afe3d02fb equal=true
+  exporters of different connections are distinct: true
+
+== T5 many endpoints in one process: 50 pairwise endpoints with n0 relay
+  before: RSS=66480 kB, threads=19, fds=10
+  50 endpoints bound+online in 16.78814674s; RSS=150956 kB, threads=19, fds=213
+  distinct home relays: {"https://euc1-1.relay.n0.iroh.link./"}
+  10/10 pairwise links echoed via relay in 20.478965548s
+  idle 5s with 50 endpoints: RSS=163160 kB, threads=19, fds=210
+  after shutdown: RSS=163160 kB, threads=19, fds=10
+
+DONE, failed=0

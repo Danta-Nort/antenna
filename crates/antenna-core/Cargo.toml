@@ -1,0 +1,78 @@
+[package]
+name = "antenna-core"
+description = "Core of the Antenna daemon: keystore, encrypted store, transport (iroh), pairing, E2E (libsignal Triple Ratchet), control socket"
+license = "AGPL-3.0-only"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+antenna-proto = { workspace = true }
+antenna-files = { workspace = true }
+# Updates that install by themselves (D-103): the same release verification as `antenna update`
+antenna-update = { workspace = true }
+
+serde = { workspace = true }
+serde_bytes = { workspace = true }
+serde_json = { workspace = true }
+data-encoding = { workspace = true }
+futures = { workspace = true }
+async-trait = { workspace = true }
+tracing = { workspace = true }
+tokio = { workspace = true }
+
+# Cryptography (SPEC §7, §14): only established crates, see docs/PROTOCOL.md §2
+argon2 = { workspace = true }
+chacha20poly1305 = { workspace = true }
+# STREAM (streaming messages, v0.2): the same version as antenna-files (`xfile/0`)
+aead-stream = { version = "0.6.0", features = ["alloc"] }
+hkdf = { workspace = true }
+hmac = { workspace = true }
+sha2 = { workspace = true }
+blake3 = { workspace = true }
+subtle = { workspace = true }
+zeroize = { workspace = true }
+rand = { workspace = true }
+ed25519-dalek = { workspace = true }
+libcrux-ml-dsa = { workspace = true }
+# Owner proofs (D-102): ECDSA P-256 verification only (`owner_keys.rs`)
+aws-lc-rs = { workspace = true }
+libsignal-protocol = { workspace = true }
+spqr = { workspace = true }
+
+# Transport and storage
+iroh = { workspace = true }
+# LAN without internet (SPEC §4, §18): iroh mDNS discovery (n0, MIT OR Apache-2.0); the owner turns it on
+# (`antenna lan on`); the network sees only rotating link pseudonyms, never the EndpointId (`lan.rs`, DECISIONS D-77)
+iroh-mdns-address-lookup = "=0.6.0"
+iroh-blobs = { workspace = true }
+noq = { workspace = true }
+rustls = { workspace = true }
+rusqlite = { workspace = true }
+
+# All `unsafe` lives in `antenna-sys` (D-P-1): macOS — processes for agent binding (D-28), `proc_pidinfo`, audit token;
+# Linux — launching the agent on wake without inherited daemon descriptors (`sandbox`, D-61)
+[target.'cfg(unix)'.dependencies]
+antenna-sys = { workspace = true }
+# `thread`: dropping the agent's capabilities in the wake sandbox (`sandbox`). On Windows rustix has no `process` and
+# `fs`; what needs them is not ported there yet (D-134, WP-1)
+rustix = { workspace = true, features = ["thread"] }
+
+# Windows (D-134, D-135): the data folder's access list and lock (`data_folder`), the control pipe and its clients'
+# tokens (`control`)
+[target.'cfg(windows)'.dependencies]
+antenna-sys = { workspace = true }
+
+# Agent sandbox on wake (`sandbox`, SPEC §11, §13): Landlock (FS + TCP) and seccomp inside bwrap or instead of it —
+# the same versions as the file-check worker (antenna-files, D-F-6)
+[target.'cfg(target_os = "linux")'.dependencies]
+landlock = "0.4.7"
+seccompiler = "0.5.0"
+libc = "0.2"
+
+[dev-dependencies]
+tempfile = { workspace = true }
+
+[lints]
+workspace = true

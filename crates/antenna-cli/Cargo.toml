@@ -1,0 +1,59 @@
+[package]
+name = "antenna-cli"
+description = "Antenna command-line interface: owner commands (init, invite, join, trust, approve, agent add) and the agent interface (messages, inbox, policy checks, MCP server)"
+license = "AGPL-3.0-only"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[[bin]]
+name = "antenna"
+path = "src/main.rs"
+
+[dependencies]
+clap = { workspace = true }
+antenna-proto = { workspace = true }
+antenna-update = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+tokio = { workspace = true }
+zeroize = { workspace = true }
+# MCP server `antenna mcp` (SPEC §11); schemars comes through the rmcp re-export
+rmcp = { workspace = true }
+# File previews: PNG from base64 to files (`antenna files preview --images`)
+data-encoding = { workspace = true }
+# QR code of the invite link in the terminal (`antenna invite`, SPEC §6 item 1); text rendering only, no images
+qrcode = { version = "=0.14.1", default-features = false }
+
+# On Windows rustix has no `process`, `fs` and `termios`; what needs them is not ported there yet (D-134, WP-1)
+[target.'cfg(unix)'.dependencies]
+rustix = { workspace = true }
+
+# macOS: PT_DENY_ATTACH (SPEC §13, PORTABILITY M-7); all `unsafe` lives in `antenna-sys`
+[target.'cfg(target_os = "macos")'.dependencies]
+antenna-sys = { workspace = true }
+
+# Windows (D-135): the control pipe's client end and the checks of its server (owner, process, user) before a byte is
+# sent; all `unsafe` lives in `antenna-sys`
+[target.'cfg(windows)'.dependencies]
+antenna-sys = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }
+serde_json = { workspace = true }
+antenna-core = { workspace = true }
+iroh = { workspace = true }
+tokio = { workspace = true }
+# File test: an image with an instruction in a text chunk (SPEC §18, taint through the preview)
+png = "0.18"
+# Automatic installs (D-103): a release signed by a key no build pins
+ed25519-dalek = { workspace = true }
+# Local HTTP relay in integration tests (levels 1–2 work only through a relay)
+iroh-relay = { version = "=1.4.1", features = ["server"] }
+# Owner-proof tests sign with software P-256 keys as the window's Secure Enclave key would (D-102); the same aws-lc-rs
+# the daemon verifies with, already in the build as the TLS provider
+aws-lc-rs = { workspace = true }
+
+[lints]
+workspace = true

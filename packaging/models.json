@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "runtime": {
+    "name": "llama.cpp llama-server",
+    "tag": "v0.6.0",
+    "commit": "d81235049384534c167caea52b85a694f6103d14",
+    "license": "MIT"
+  },
+  "models": [
+    {
+      "id": "qwen3.5-2b",
+      "name": "Qwen3.5 2B",
+      "family": "qwen3.5",
+      "maker": "Qwen (Alibaba Cloud)",
+      "license": "Apache-2.0",
+      "license_url": "https://huggingface.co/Qwen/Qwen3.5-2B/blob/main/LICENSE",
+      "languages": "201 languages, English and Russian among them",
+      "params": "2.27B",
+      "roles": ["chat"],
+      "repo": "unsloth/Qwen3.5-2B-GGUF",
+      "commit": "f6d5376be1edb4d416d56da11e5397a961aca8ae",
+      "file": "Qwen3.5-2B-Q4_K_M.gguf",
+      "size": 1280835840,
+      "sha256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223",
+      "quant": "Q4_K_M",
+      "context": 8192,
+      "memory": 2200000000,
+      "memory_metal": 1900000000,
+      "slot_memory": 120000000,
+      "thinking": false,
+      "chat_template": {
+        "file": "qwen3.5-2b.chat_template.jinja",
+        "sha256": "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80",
+        "source": "Qwen/Qwen3.5-2B@15852e8c16360a2fea060d615a32b45270f8a8fc"
+      }
+    },
+    {
+      "id": "qwen3.5-4b",
+      "name": "Qwen3.5 4B",
+      "family": "qwen3.5",
+      "maker": "Qwen (Alibaba Cloud)",
+      "license": "Apache-2.0",
+      "license_url": "https://huggingface.co/Qwen/Qwen3.5-4B/blob/main/LICENSE",
+      "languages": "201 languages, English and Russian among them",
+      "params": "4B",
+      "roles": ["chat"],
+      "repo": "unsloth/Qwen3.5-4B-GGUF",
+      "commit": "e87f176479d0855a907a41277aca2f8ee7a09523",
+      "file": "Qwen3.5-4B-Q4_K_M.gguf",
+      "size": 2740937888,
+      "sha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+      "quant": "Q4_K_M",
+      "context": 8192,
+      "memory": 4750000000,
+      "memory_metal": 3600000000,
+      "slot_memory": 270000000,
+      "thinking": false,
+      "chat_template": {
+        "file": "qwen3.5.chat_template.jinja",
+        "sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+        "source": "Qwen/Qwen3.5-4B@851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+      }
+    },
+    {
+      "id": "qwen3.5-9b",
+      "name": "Qwen3.5 9B",
+      "family": "qwen3.5",
+      "maker": "Qwen (Alibaba Cloud)",
+      "license": "Apache-2.0",
+      "license_url": "https://huggingface.co/Qwen/Qwen3.5-9B/blob/main/LICENSE",
+      "languages": "201 languages, English and Russian among them",
+      "params": "9B",
+      "roles": ["chat"],
+      "repo": "unsloth/Qwen3.5-9B-GGUF",
+      "commit": "3885219b6810b007914f3a7950a8d1b469d598a5",
+      "file": "Qwen3.5-9B-Q4_K_M.gguf",
+      "size": 5680522464,
+      "sha256": "03b74727a860a56338e042c4420bb3f04b2fec5734175f4cb9fa853daf52b7e8",
+      "quant": "Q4_K_M",
+      "context": 8192,
+      "memory": 9000000000,
+      "memory_metal": 6600000000,
+      "slot_memory": 300000000,
+      "thinking": false,
+      "chat_template": {
+        "file": "qwen3.5.chat_template.jinja",
+        "sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+        "source": "Qwen/Qwen3.5-9B@c202236235762e1c871ad0ccb60c8ee5ba337b9a"
+      }
+    }
+  ]
+}

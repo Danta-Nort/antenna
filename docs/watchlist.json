@@ -1,0 +1,678 @@
+{
+  "schema": 1,
+  "about": "Machine-checkable part of docs/WATCHLIST.md. Check: python3 tools/watchlist_check.py [--update]. The watch field is the item number in WATCHLIST.md; on_change says what to do if the value changed.",
+  "created": "2026-10-02",
+  "last_run": "2026-10-29",
+  "items": [
+    {
+      "id": "w01-libcrux-ml-kem",
+      "watch": "W-01",
+      "title": "libcrux-ml-kem: a release newer than 0.0.10 with the incremental+rand fix (PR #1584, in main since 10.09.2026)",
+      "source": {
+        "type": "crates",
+        "name": "libcrux-ml-kem"
+      },
+      "last_value": "0.0.11 (2026-10-07)",
+      "on_change": "Build spikes/combined option B without [patch]; if it builds — revisit Q-2 option II",
+      "last_changed": "2026-10-08",
+      "last_checked": "2026-10-29",
+      "previous_value": "0.0.10 (2026-07-15)"
+    },
+    {
+      "id": "w01-libcrux-kem",
+      "watch": "W-01",
+      "title": "libcrux-kem (X-Wing): a release newer than 0.0.9",
+      "source": {
+        "type": "crates",
+        "name": "libcrux-kem"
+      },
+      "last_value": "0.0.10 (2026-10-07)",
+      "on_change": "Check which libcrux-ml-kem it depends on and whether it builds next to spqr",
+      "last_changed": "2026-10-08",
+      "last_checked": "2026-10-29",
+      "previous_value": "0.0.9 (2026-07-15)"
+    },
+    {
+      "id": "w01-spqr-libcrux-pin",
+      "watch": "W-01",
+      "title": "spqr: which libcrux-ml-kem version it requires (currently =0.0.10 under the ^0.0.x rules)",
+      "source": {
+        "type": "text",
+        "url": "https://raw.githubusercontent.com/signalapp/SparsePostQuantumRatchet/main/Cargo.toml",
+        "regex": "libcrux-ml-kem\\s*=\\s*\\{\\s*version\\s*=\\s*\"([^\"]+)\"",
+        "mode": "first"
+      },
+      "last_value": "0.0.10",
+      "on_change": "spqr moved to a new libcrux-ml-kem — the feature conflict may go away without patches",
+      "last_changed": "2026-10-02",
+      "last_checked": "2026-10-29"
+    },
+    {
+      "id": "w01-spqr-tag",
+      "watch": "W-01, W-05",
+      "title": "SPQR: latest tag",
+      "source": {
+        "type": "github_tags",
+        "repo": "signalapp/SparsePostQuantumRatchet"
+      },
+      "last_value": "v1.6.0",
+      "on_change": "Read the diff (verification, dependencies), update the rev together with libsignal",
+      "last_changed": "2026-10-02",
+      "last_checked": "2026-10-29"
+    },
+    {
+      "id": "w02-xwing-draft",
+      "watch": "W-02",
+      "title": "X-Wing KEM: draft-connolly-cfrg-xwing-kem (Independent Submission)",
+      "source": {
+        "type": "ietf_draft",
+        "name": "draft-connolly-cfrg-xwing-kem"
+      },
+      "last_value": "-11 draft=active iesg=idexists ise=receive",
+      "on_change": "If it became an RFC — X-Wing gets a stable format; check libcrux-kem for the final version",
+      "last_changed": "2026-10-02",
+      "last_checked": "2026-10-29"
+    },
+    {
+      "id": "w02-hybrid-kems-draft",
+      "watch": "W-02",
+      "title": "CFRG: draft-irtf-cfrg-hybrid-kems (general combiners for hybrid KEMs)",
+      "source": {
+        "type": "ietf_draft",
+        "name": "draft-irtf-cfrg-hybrid-kems"
+      },
+      "last_value": "-12 draft=active iesg=idexists irtf=sheph-w",
+      "on_change": "Compare our transcript/combiner in PROTOCOL.md with the recommendations",
+      "last_changed": "2026-10-02",
+      "last_checked": "2026-10-29"
+    },
+    {
+      "id": "w03-iroh-blobs",
+      "watch": "W-03",
+      "title": "iroh-blobs: version (waiting for 1.x)",
+      "source": {
+        "type": "crates",
+        "name": "iroh-blobs"
+      },
+      "last_value": "0.104.0 (2026-10-28)",
+      "on_change": "If 1.x — move spikes/iroh-blobs and D-4 to it",
+      "last_changed": "2026-10-29",
+      "last_checked": "2026-10-29",
+      "previous_value": "0.103.1 (2026-10-06)"
+    },
+    {
+      "id": "w03-iroh-blobs-readme",
+      "watch": "W-03",
+      "title": "iroh-blobs README: the warning \"not yet considered production quality\"",
+      "source": {
+        "type": "text",
+        "url": "https://raw.githubusercontent.com/n0-computer/iroh-blobs/main/README.md",
+        "regex": "not yet considered production quality",
+        "mode": "present"
+      },
+      "last_value": "present",
+      "on_change": "The warning is removed — n0 considers the crate ready; recheck the API",
+      "last_changed": "2026-10-02",
+      "last_checked": "2026-10-29"
+    },
+    {
+      "id": "w04-iroh-tor-transport",
+      "watch": "W-04",
+      "title": "iroh-tor-transport: version",
+      "source": {
+        "type": "crates",
+        "name": "iroh-tor-transport"
+      },
+      "last_value": "0.1.0 (2026-06-15)",
+      "on_change": "Read the changelog: did Arti replace C tor, is the experimental status gone",
+      "last_changed": "2026-10-02",
+      "last_checked": "2026-10-29"
+    },
+    {
+      "id": "w04-arti-client",
+      "watch": "W-04",
+      "title": "arti-client: version",
+      "source": {
+        "type": "crates",
+        "name": "arti-client"
+      },
+      "last_value": "0.47.0 (2026-10-01)",
+      "on_change": "Read the release notes: onion services (hsservice) — security and status",
+      "last_changed": "2026-10-02",
+      "last_checked": "2026-10-29"
+    },
+    {
+      "id": "w04-arti-onion-limitations",
+      "watch": "W-04",
+      "title": "Arti doc/OnionService.md: \"suitable for testing and experimentation only\"",
+      "source": {
+        "type": "text",
+        "url": "https://gitlab.torproject.org/api/v4/projects/tpo%2Fcore%2Farti/repository/files/doc%2FOnionService.md/raw?ref=main",
+        "regex": "suitable for testing and experimentation only",
+        "mode": "present"
+      },
+      "last_value": "present",
+      "on_change": "The caveat is removed — Arti onion services are declared fit for use; revisit the Tor mode in v0.3",
+      "last_changed": "2026-10-02",
+      "last_checked": "2026-10-29"
+    },
+    {
+      "id": "w05-libsignal-release",
+      "watch": "W-05",
+      "title": "libsignal: latest release",
+      "source": {
+        "type": "github_release",
+        "repo": "signalapp/libsignal"
+      },
+      "last_value": "v0.106.1 (2026-10-28)",
+      "on_change": "Run spikes/libsignal-tr on the new tag; read the rust/protocol diff (the API changes without warning)",
+      "last_changed": "2026-10-29",
+      "last_checked": "2026-10-29",
+      "previous_value": "v0.106.0 (2026-10-23)"
+    },
+    {
+      "id": "w05-libsignal-mlkem-note",
+      "watch": "W-05",
+      "title": "libsignal rust/protocol/Cargo.toml: the caveat \"ML-KEM … may still change incompatibly\"",
+      "source": {
+        "type": "text",
+        "url": "https://raw.githubusercontent.com/signalapp/libsignal/main/rust/protocol/Cargo.toml",
+        "regex": "may still change",
+        "mode": "present"
+      },
+      "last_value": "present",
+      "on_change": "The caveat is removed — the MLKEM1024 format in PQXDH is stable; remove the risk from D-8",
+      "last_changed": "2026-10-02",
+      "last_checked": "2026-10-29"
+    },
+    {
+      "id": "w05-crates-libsignal-protocol",
+      "watch": "W-05",
+      "title": "crates.io libsignal-protocol (the name is taken by a third-party crate from 2019)",
+      "source": {
+        "type": "crates",
+        "name": "libsignal-protocol"
+      },
+      "last_value": "0.1.0 (2019-07-21)",
+      "on_change": "The name passed to Signal or a new version is out — check the owner and the repository",
+      "last_changed": "2026-10-02",
+      "last_checked": "2026-10-29"
+    },
+    {
+      "id": "w05-spqr-lax-count",
+      "watch": "W-05",
+      "title": "SPQR src/lib.rs: number of verification_status(lax) functions",
+      "source": {
+        "type": "text",
+        "url": "https://raw.githubusercontent.com/signalapp/SparsePostQuantumRatchet/main/src/lib.rs",
+        "regex": "verification_status\\(lax\\)",
+        "mode": "count"
+      },
+      "last_value": "1",
+      "on_change": "It became 0 — the top-level send is verified; update the wording of SPEC §14",
+      "last_changed": "2026-10-02",
+      "last_checked": "2026-10-29"
+    },
+    {
+      "id": "w06-quic-multipath",
+      "watch": "W-06",
+      "title": "IETF: draft-ietf-quic-multipath (RFC Editor queue)",
+      "source": {
+        "type": "ietf_draft",
+        "name": "draft-ietf-quic-multipath"
+      },
+      "last_value": "-21 draft=active iesg=rfcqueue ietf=sub-pub rfceditor=blocked",
+      "on_change": "The RFC is out — check that noq/iroh follow the final text",
+      "last_changed": "2026-10-22",
+      "last_checked": "2026-10-29",
+      "previous_value": "-21 draft=active iesg=rfcqueue ietf=sub-pub rfceditor=in_progress"
+    },
+    {
+      "id": "w06-quic-nat-n0",
+      "watch": "W-06",
+      "title": "IETF: draft-bruynooghe-n0-quic-nat-traversal (individual, n0)",
+      "source": {
+        "type": "ietf_draft",
+        "name": "draft-bruynooghe-n0-quic-nat-traversal"
+      },
+      "last_value": "-00 draft=active iesg=idexists",
+      "on_change": "A new revision or adoption by the QUIC WG — read it",
+      "last_changed": "2026-10-02",
+      "last_checked": "2026-10-29"
+    },
+    {
+      "id": "w06-quic-address-discovery",
+      "watch": "W-06",
+      "title": "IETF: draft-ietf-quic-address-discovery (QUIC WG)",
+      "source": {
+        "type": "ietf_draft",
+        "name": "draft-ietf-quic-address-discovery"
+      },
+      "last_value": "-01 draft=active iesg=idexists ietf=wg-doc",
+      "on_change": "Read the revision",
+      "last_changed": "2026-10-02",
+      "last_checked": "2026-10-29"
+    },
+    {
+      "id": "w06-iroh",
+      "watch": "W-06, W-07",
+      "title": "iroh: version",
+      "source": {
+        "type": "crates",
+        "name": "iroh"
+      },
+      "last_value": "1.4.1 (2026-10-21)",
+      "on_change": "Read the release notes; run spikes/iroh-conn; on a major — look at identity (PQ)",
+      "last_changed": "2026-10-22",
+      "last_checked": "2026-10-29",
+      "previous_value": "1.3.0 (2026-09-28)"
+    },
+    {
+      "id": "w07-tls-mldsa",
+      "watch": "W-07",
+      "title": "IETF: draft-ietf-tls-mldsa (ML-DSA in TLS 1.3)",
+      "source": {
+        "type": "ietf_draft",
+        "name": "draft-ietf-tls-mldsa"
+      },
+      "last_value": "-06 draft=active iesg=rfcqueue ietf=sub-pub rfceditor=in_progress",
+      "on_change": "The RFC is out — PQ authentication in TLS is standardized",
+      "last_changed": "2026-10-08",
+      "last_checked": "2026-10-29",
+      "previous_value": "-06 draft=active iesg=rfcqueue ietf=sub-pub rfceditor=blocked"
+    },
+    {
+      "id": "w07-rustls",
+      "watch": "W-07",
+      "title": "rustls: version (ML-DSA by default since 0.23.44)",
+      "source": {
+        "type": "crates",
+        "name": "rustls",
+        "field": "max_stable_version"
+      },
+      "last_value": "0.23.46 (2026-10-14)",
+      "on_change": "Read the changelog: PQ signatures, raw public keys",
+      "last_changed": "2026-10-15",
+      "last_checked": "2026-10-29",
+      "previous_value": "0.23.45 (2026-09-14)"
+    },
+    {
+      "id": "w07-composite-sigs",
+      "watch": "W-07, W-19",
+      "title": "IETF: draft-ietf-lamps-pq-composite-sigs (composite ML-DSA + classical)",
+      "source": {
+        "type": "ietf_draft",
+        "name": "draft-ietf-lamps-pq-composite-sigs"
+      },
+      "last_value": "-19 draft=active iesg=rfcqueue ietf=sub-pub rfceditor=blocked",
+      "on_change": "RFC — compare the hybrid signature format of the link-root (Ed25519 + ML-DSA-65)",
+      "last_changed": "2026-10-22",
+      "last_checked": "2026-10-29",
+      "previous_value": "-19 draft=active iesg=rfcqueue ietf=sub-pub rfceditor=in_progress"
+    },
+    {
+      "id": "w08-pqpake-draft",
+      "watch": "W-08",
+      "title": "IETF/CFRG: draft-vos-cfrg-pqpake (CPaceOQUAKE+)",
+      "source": {
+        "type": "ietf_draft",
+        "name": "draft-vos-cfrg-pqpake"
+      },
+      "last_value": "-03 draft=active iesg=idexists",
+      "on_change": "Adopted by CFRG (draft-irtf-…) — look for implementations",
+      "last_changed": "2026-10-15",
+      "last_checked": "2026-10-29",
+      "previous_value": "-02 draft=active iesg=idexists"
+    },
+    {
+      "id": "w08-cpace-draft",
+      "watch": "W-08",
+      "title": "IETF/CFRG: draft-irtf-cfrg-cpace (classical CPace, at the RFC Editor)",
+      "source": {
+        "type": "ietf_draft",
+        "name": "draft-irtf-cfrg-cpace"
+      },
+      "last_value": "-21 draft=active iesg=idexists irtf=rfc-edit rfceditor=in_progress",
+      "on_change": "The RFC is out — choose an audited CPace implementation",
+      "last_changed": "2026-10-02",
+      "last_checked": "2026-10-29"
+    },
+    {
+      "id": "w08-pake-kem",
+      "watch": "W-08",
+      "title": "crates.io pake-kem (Meta, KEM-based PAKE, not audited)",
+      "source": {
+        "type": "crates",
+        "name": "pake-kem"
+      },
+      "last_value": "0.1.0-pre.7 (2026-08-04)",
+      "on_change": "0.1.0 without -pre is out or an audit is mentioned — evaluate for spoken codes",
+      "last_changed": "2026-10-02",
+      "last_checked": "2026-10-29"
+    },
+    {
+      "id": "w09-mls-pq-ciphersuites",
+      "watch": "W-09",
+      "title": "IETF: draft-ietf-mls-pq-ciphersuites (WG Last Call)",
+      "source": {
+        "type": "ietf_draft",
+        "name": "draft-ietf-mls-pq-ciphersuites"
+      },
+      "last_value": "-06 draft=active iesg=pub-req ietf=sub-pub",
+      "on_change": "Passed WGLC/RFC — the suite code points are stable; groups in v2",
+      "last_changed": "2026-10-22",
+      "last_checked": "2026-10-29",
+      "previous_value": "-06 draft=active iesg=idexists ietf=wg-lc"
+    },
+    {
+      "id": "w09-mls-combiner",
+      "watch": "W-09",
+      "title": "IETF: draft-ietf-mls-combiner (PQ/classical hybrid in MLS)",
+      "source": {
+        "type": "ietf_draft",
+        "name": "draft-ietf-mls-combiner"
+      },
+      "last_value": "-02 draft=expired iesg=idexists ietf=chair-w",
+      "on_change": "Read the revision",
+      "last_changed": "2026-10-02",
+      "last_checked": "2026-10-29"
+    },
+    {
+      "id": "w09-openmls",
+      "watch": "W-09",
+      "title": "openmls: version (PQ suites behind the draft-ietf-mls-pq-ciphersuites feature)",
+      "source": {
+        "type": "crates",
+        "name": "openmls"
+      },
+      "last_value": "0.9.2 (2026-10-22)",
+      "on_change": "Read the CHANGELOG: PQ suites outside the feature flag?",
+      "last_changed": "2026-10-26",
+      "last_checked": "2026-10-29",
+      "previous_value": "0.9.1 (2026-10-07)"
+    },
+    {
+      "id": "w09-mls-rs",
+      "watch": "W-09",
+      "title": "mls-rs (AWS): version",
+      "source": {
+        "type": "crates",
+        "name": "mls-rs"
+      },
+      "last_value": "0.57.0 (2026-10-28)",
+      "on_change": "Read the CHANGELOG (PQ, audit)",
+      "last_changed": "2026-10-29",
+      "last_checked": "2026-10-29",
+      "previous_value": "0.56.0 (2026-08-19)"
+    },
+    {
+      "id": "w10-channels-preview",
+      "watch": "W-10",
+      "title": "Claude Code Channels: mentions of \"research preview\" in the documentation",
+      "source": {
+        "type": "text",
+        "url": "https://code.claude.com/docs/en/channels.md",
+        "regex": "research preview",
+        "mode": "count"
+      },
+      "last_value": "5",
+      "on_change": "It became 0 — probably GA; reread the section on the allowlist and the protocol",
+      "last_changed": "2026-10-02",
+      "last_checked": "2026-10-29"
+    },
+    {
+      "id": "w10-channels-allowlist",
+      "watch": "W-10",
+      "title": "Channels: --channels accepts only plugins from the Anthropic allowlist",
+      "source": {
+        "type": "text",
+        "url": "https://code.claude.com/docs/en/channels.md",
+        "regex": "only accepts plugins from an Anthropic-maintained allowlist",
+        "mode": "present"
+      },
+      "last_value": "present",
+      "on_change": "The restriction is lifted — our own x mcp channel can be connected without the dev flag",
+      "last_changed": "2026-10-02",
+      "last_checked": "2026-10-29"
+    },
+    {
+      "id": "w10-channels-mcp-revision",
+      "watch": "W-10",
+      "title": "Claude Code: MCP revision 2026-07-28 \"can't carry channel messages\"",
+      "source": {
+        "type": "text",
+        "url": "https://code.claude.com/docs/en/mcp.md",
+        "regex": "can't carry channel messages",
+        "mode": "present"
+      },
+      "last_value": "present",
+      "on_change": "Channels appeared in the new MCP revision — no need to keep the old revision for push",
+      "last_changed": "2026-10-02",
+      "last_checked": "2026-10-29"
+    },
+    {
+      "id": "w10-mcp-schema-latest",
+      "watch": "W-10",
+      "title": "MCP: latest schema revision in the specification repository",
+      "source": {
+        "type": "github_dir",
+        "repo": "modelcontextprotocol/modelcontextprotocol",
+        "path": "schema",
+        "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+      },
+      "last_value": "2026-07-28",
+      "on_change": "A new revision — read the changelog, check rmcp",
+      "last_changed": "2026-10-02",
+      "last_checked": "2026-10-29"
+    },
+    {
+      "id": "w10-rmcp",
+      "watch": "W-10",
+      "title": "rmcp (official MCP Rust SDK): version",
+      "source": {
+        "type": "crates",
+        "name": "rmcp"
+      },
+      "last_value": "3.8.0 (2026-10-26)",
+      "on_change": "Run spikes/rmcp-stdio",
+      "last_changed": "2026-10-29",
+      "last_checked": "2026-10-29",
+      "previous_value": "3.7.0 (2026-10-22)"
+    },
+    {
+      "id": "w11-a2a-release",
+      "watch": "W-11",
+      "title": "A2A: specification release",
+      "source": {
+        "type": "github_release",
+        "repo": "a2aproject/A2A"
+      },
+      "last_value": "v1.0.1 (2026-05-28)",
+      "on_change": "Read the breaking changes (Agent Card, Task, Message)",
+      "last_changed": "2026-10-02",
+      "last_checked": "2026-10-29"
+    },
+    {
+      "id": "w11-a2a-lf",
+      "watch": "W-11",
+      "title": "a2a-lf (official A2A Rust SDK): version",
+      "source": {
+        "type": "crates",
+        "name": "a2a-lf"
+      },
+      "last_value": "0.4.2 (2026-10-16)",
+      "on_change": "Evaluate for the local A2A endpoint in v0.3",
+      "last_changed": "2026-10-19",
+      "last_checked": "2026-10-29",
+      "previous_value": "0.4.1 (2026-09-30)"
+    },
+    {
+      "id": "w12-mcp-sep-1913",
+      "watch": "W-12",
+      "title": "MCP SEP-1913 Trust and Sensitivity Annotations",
+      "source": {
+        "type": "github_issue",
+        "repo": "modelcontextprotocol/modelcontextprotocol",
+        "number": 1913
+      },
+      "last_value": "open [SEP,draft,roadmap/security,security]",
+      "on_change": "Accepted — put labels (openWorldHint/attribution) on contact data in x mcp",
+      "last_changed": "2026-10-02",
+      "last_checked": "2026-10-29"
+    },
+    {
+      "id": "w13-biscuit-auth",
+      "watch": "W-13",
+      "title": "biscuit-auth: version (waiting for a release with ed25519-dalek 3)",
+      "source": {
+        "type": "crates",
+        "name": "biscuit-auth"
+      },
+      "last_value": "6.0.0 (2025-07-16)",
+      "on_change": "Check ed25519-dalek/rand in the tree; run spikes/biscuit",
+      "last_changed": "2026-10-02",
+      "last_checked": "2026-10-29"
+    },
+    {
+      "id": "w13-biscuit-pr-349",
+      "watch": "W-13",
+      "title": "biscuit-rust PR #349: ed25519-dalek 3, rand 0.10",
+      "source": {
+        "type": "github_pr",
+        "repo": "eclipse-biscuit/biscuit-rust",
+        "number": 349
+      },
+      "last_value": "merged (2026-10-08)",
+      "on_change": "Merged — wait for the release; closed without merging — the Ed25519 duplicate stays for long",
+      "last_changed": "2026-10-12",
+      "last_checked": "2026-10-29",
+      "previous_value": "open"
+    },
+    {
+      "id": "w14-dangerzone",
+      "watch": "W-14",
+      "title": "Dangerzone: release",
+      "source": {
+        "type": "github_release",
+        "repo": "freedomofpress/dangerzone"
+      },
+      "last_value": "v0.11.1 (2026-10-22)",
+      "on_change": "Read the release notes: a library/CLI mode without a GUI, sandbox changes",
+      "last_changed": "2026-10-26",
+      "last_checked": "2026-10-29",
+      "previous_value": "v0.11.0 (2026-07-02)"
+    },
+    {
+      "id": "w14-yara-x",
+      "watch": "W-14",
+      "title": "yara-x: version",
+      "source": {
+        "type": "crates",
+        "name": "yara-x"
+      },
+      "last_value": "1.22.1 (2026-10-26)",
+      "on_change": "Update when integrating the §10 pipeline",
+      "last_changed": "2026-10-29",
+      "last_checked": "2026-10-29",
+      "previous_value": "1.22.0 (2026-10-20)"
+    },
+    {
+      "id": "w15-hetzner-vtpm",
+      "watch": "W-15",
+      "title": "Hetzner Cloud FAQ: \"do not support vTPM\"",
+      "source": {
+        "type": "text",
+        "url": "https://docs.hetzner.com/cloud/servers/faq/",
+        "regex": "do not support vTPM",
+        "mode": "present"
+      },
+      "last_value": "present",
+      "on_change": "The phrase disappeared — a vTPM may have appeared; revisit Q-4",
+      "last_changed": "2026-10-02",
+      "last_checked": "2026-10-29"
+    },
+    {
+      "id": "w18-iroh-ffi",
+      "watch": "W-18",
+      "title": "iroh-ffi (Swift/Kotlin/Python/JS): release",
+      "source": {
+        "type": "github_release",
+        "repo": "n0-computer/iroh-ffi"
+      },
+      "last_value": "v1.2.0 (2026-10-22)",
+      "on_change": "Read: did blobs/mDNS appear in the FFI, Dart/Flutter",
+      "last_changed": "2026-10-26",
+      "last_checked": "2026-10-29",
+      "previous_value": "v1.1.0 (2026-07-16)"
+    },
+    {
+      "id": "w19-libcrux-ml-dsa",
+      "watch": "W-19",
+      "title": "libcrux-ml-dsa: version (0.0.x)",
+      "source": {
+        "type": "crates",
+        "name": "libcrux-ml-dsa"
+      },
+      "last_value": "0.0.11 (2026-10-07)",
+      "on_change": "Run the link-root signature from spikes/combined",
+      "last_changed": "2026-10-08",
+      "last_checked": "2026-10-29",
+      "previous_value": "0.0.10 (2026-07-15)"
+    },
+    {
+      "id": "w20-ietf-agentproto",
+      "watch": "W-20",
+      "title": "IETF WG agentproto (Agent Communication Protocols): state",
+      "source": {
+        "type": "ietf_group",
+        "acronym": "agentproto"
+      },
+      "last_value": "active",
+      "on_change": "Chartered — read the first drafts (dialog context, identity)",
+      "last_changed": "2026-10-12",
+      "last_checked": "2026-10-29",
+      "previous_value": "proposed"
+    },
+    {
+      "id": "w20-ietf-dmsc",
+      "watch": "W-20",
+      "title": "IETF dmsc (Dynamic Multi-agent Secured Collaboration): state",
+      "source": {
+        "type": "ietf_group",
+        "acronym": "dmsc"
+      },
+      "last_value": "bof-conc",
+      "on_change": "Became a WG — read the charter: cross-owner authorization of agents",
+      "last_changed": "2026-10-12",
+      "last_checked": "2026-10-29",
+      "previous_value": "bof"
+    },
+    {
+      "id": "w20-a2a-mls-draft",
+      "watch": "W-20",
+      "title": "IETF: draft-chapman-a2a-mls (A2A + MLS + Governed Objects)",
+      "source": {
+        "type": "ietf_draft",
+        "name": "draft-chapman-a2a-mls"
+      },
+      "last_value": "-03 draft=active iesg=idexists",
+      "on_change": "A new revision or an implementation — compare with our permissions/taint scheme",
+      "last_changed": "2026-10-02",
+      "last_checked": "2026-10-29"
+    },
+    {
+      "id": "w21-privacypass-crate",
+      "watch": "W-21",
+      "title": "privacypass (Rust): new versions — check the README for \"not independently audited\"",
+      "source": {
+        "type": "crates",
+        "name": "privacypass"
+      },
+      "last_value": "0.2.0-pre.4 (2026-10-27)",
+      "on_change": "Open the README/CHANGELOG: has an independent audit appeared; if yes — revisit anonymous tokens for Antenna Cloud (MAILBOX §6)",
+      "last_changed": "2026-10-29",
+      "last_checked": "2026-10-29",
+      "previous_value": "0.2.0-pre.3 (2026-08-18)"
+    }
+  ]
+}

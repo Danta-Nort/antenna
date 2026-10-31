@@ -1,0 +1,81 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Checks for every pull request and every push to main, on GitHub-hosted runners only: a pull request from a fork never
+# reaches a self-hosted machine (release.yml and windows.yml run only on tags, by hand or on maintainers' branches).
+# The same commands as CONTRIBUTING.md "Building and testing"; the release runs them again from a clean checkout.
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FLUTTER_VERSION: '3.47.6'   # keep in step with release.yml
+  CARGO_TERM_COLOR: always
+
+jobs:
+  core:
+    name: core (fmt, clippy, tests)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends protobuf-compiler cmake build-essential perl clang pkg-config
+      - name: Rust (version from rust-toolchain.toml)
+        run: rustup show active-toolchain || rustup toolchain install
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ci-cargo-${{ hashFiles('Cargo.lock', 'rust-toolchain.toml') }}
+          restore-keys: ci-cargo-
+      - name: fmt
+        run: cargo fmt --all --check
+      - name: clippy
+        run: cargo clippy --workspace --all-targets --locked -- -D warnings
+      - name: clippy (no unwrap or panic outside tests)
+        run: cargo clippy --workspace --lib --bins --locked -- -D clippy::unwrap_used -D clippy::panic
+      - name: tests
+        run: cargo test --workspace --locked
+      - name: MCP round trip
+        run: python3 tools/mcp_smoke.py target/debug
+      - name: Protocol test vectors
+        run: python3 docs/protocol_vectors.py
+
+  window:
+    name: window (analyze, widget and golden tests)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends clang cmake ninja-build pkg-config libgtk-3-dev
+      - name: Flutter
+        run: |
+          git clone --depth 1 --branch "$FLUTTER_VERSION" https://github.com/flutter/flutter.git "$HOME/flutter"
+          echo "$HOME/flutter/bin" >> "$GITHUB_PATH"
+      - name: analyze and tests (without the live tests, which need a built daemon)
+        working-directory: apps/antenna_desktop
+        run: |
+          flutter pub get
+          flutter analyze
+          flutter test --exclude-tags live
+      - name: Guide (labels and screenshots match the window)
+        run: |
+          python3 tools/guide_shots.py
+          git diff --exit-code docs/guide/img
+          python3 tools/guide_check.py

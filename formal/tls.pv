@@ -1,0 +1,37 @@
+(* SPDX-License-Identifier: Apache-2.0 *)
+(* =====================================================================================================
+   pairing v0: "TLS 1.3 intact, the link intercepted, a future quantum attacker" (PROTOCOL §15, G4).
+   - Transport T-tls: an abstraction of TLS 1.3 with mutual authentication by the endpoints' Ed25519 keys and a hybrid
+     X25519 + ML-KEM-768 exchange (pq = true). The M1…M4 records are in the clear (this only strengthens the attacker).
+   - The link is intercepted and can be substituted (the attacker knows s).
+   - Phase 0: an active classical attacker. Phase 1 ("decrypt later"): the attacker gets all X25519 scalars
+     and Ed25519 keys of the honest sides (a quantum computer); the ML-KEM keys stay secret.
+     attacker(M) in the queries means "in any phase", that is, including phase 1.
+   - KCONLY truncation: the sides stop after key confirmation (A sent M4, B checked it). K_A, K_B are used afterwards
+     only in the MACs of M5/M6; the full model with TLS did not saturate within 10 min. Agreement and activation with honest TLS
+     follow from the main scenario: there the transport belongs to the attacker, which is strictly stronger (README "Scenarios").
+   E2E secrecy against a quantum attacker: e2e_pq.pv (even with TLS broken).
+   ===================================================================================================== *)
+
+(* EXPECT false — sanity check: honest A and B reach key confirmation (reachable) *)
+query ea: eid, eb: eid, x: exporter, h: bitstring, t: thash, ka: key, kb: key, lid: bitstring;
+  event(B_KC(ea, eb, x, h, t, ka, kb, lid)) && event(InviteCreated(ea)).
+
+(* EXPECT true ×4 — T1. B's session with a genuine invite from A: X, K_A, K_B, link_id are secret both now and after
+   a quantum computer appears (with s known!): this rests on ML-KEM-768 in TLS *)
+query ea: eid, eb: eid, x: exporter, h: bitstring, t: thash, ka: key, kb: key, lid: bitstring;
+  event(B_KC(ea, eb, x, h, t, ka, kb, lid)) && event(InviteCreated(ea)) && attacker(x).
+query ea: eid, eb: eid, x: exporter, h: bitstring, t: thash, ka: key, kb: key, lid: bitstring;
+  event(B_KC(ea, eb, x, h, t, ka, kb, lid)) && event(InviteCreated(ea)) && attacker(ka).
+query ea: eid, eb: eid, x: exporter, h: bitstring, t: thash, ka: key, kb: key, lid: bitstring;
+  event(B_KC(ea, eb, x, h, t, ka, kb, lid)) && event(InviteCreated(ea)) && attacker(kb).
+query ea: eid, eb: eid, x: exporter, h: bitstring, t: thash, ka: key, kb: key, lid: bitstring;
+  event(B_KC(ea, eb, x, h, t, ka, kb, lid)) && event(InviteCreated(ea)) && attacker(lid).
+
+process
+  ( !( new dictA: channel; new matchedA: channel;
+       ( !( new s: linksecret; new eka: esk;
+            event InviteCreated(epk(eka));
+            out(c, (epk(eka), s));                    (* the link is intercepted *)
+            A_tls(KCONLY, true, true, s, eka, dictA, matchedA) )
+       | !B_tls(KCONLY, true, true, c, dictA, matchedA) ) ) )

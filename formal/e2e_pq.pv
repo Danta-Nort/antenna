@@ -1,0 +1,24 @@
+(* SPDX-License-Identifier: Apache-2.0 *)
+(* =====================================================================================================
+   pairing v0: secrecy of the E2E key against a future quantum attacker (G4, C8) with TLS BROKEN today.
+   - Transport T-null (the attacker knows X), the link is intercepted and can be substituted, as in the main scenario.
+   - Phase 1: all libsignal X25519 scalars (identity, signed prekey, EK) are revealed: a quantum computer;
+     the secret key of the KEM prekey (ML-KEM-1024) and the encapsulation randomness are not revealed.
+   Expected: the E2E key of an activated link stays secret in phase 1 too: ML-KEM in PQXDH holds it, regardless of TLS.
+   ===================================================================================================== *)
+
+(* EXPECT false ×2 — sanity checks: an honest run is reachable *)
+query h: bitstring, t: thash, ia: G, ib: G, sk: key; event(A_Activated(h, t, ia, ib, sk)).
+query h: bitstring, t: thash, ia: G, ib: G, sk: key; event(B_Activated(h, t, ia, ib, sk)).
+
+(* EXPECT true ×2 — T2. The E2E key (PQXDH) of an activated link is secret, including in phase 1 *)
+query h: bitstring, t: thash, ia: G, ib: G, sk: key; event(A_Activated(h, t, ia, ib, sk)) && attacker(sk).
+query h: bitstring, t: thash, ia: G, ib: G, sk: key; event(B_Activated(h, t, ia, ib, sk)) && attacker(sk).
+
+process
+  ( !( new dictA: channel; new matchedA: channel;     (* owner A and everyone they talk to by voice *)
+       ( !( new s: linksecret; new ea: eid;
+            event InviteCreated(ea);
+            out(c, (ea, s));                          (* the link is intercepted *)
+            A_tnull(OK, true, s, ea, dictA, matchedA) )
+       | !B_tnull(OK, true, c, dictA, matchedA) ) ) )   (* B takes the link from the attacker: it may be substituted *)

@@ -1,0 +1,38 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Stand-ins for the build scripts of C dependencies for `cargo check/clippy --target *-apple-darwin` on Linux (no macOS
+# SDK): the scripts do not run, and the values below replace their output. check/clippy do not link, so the type check
+# is genuine, but nothing can be built or run this way. Use it only through tools/check-darwin.sh (which also puts the
+# prebuilt SQLCipher bindings into OUT_DIR). Details: docs/PORTABILITY.md §3.1, TROUBLESHOOTING "macOS portability of
+# the core".
+#
+# The versions in the keys (`aws_lc_0_45_0`, `ring_core_0_17_14_`) are the `links` field from Cargo.lock: update them
+# here when aws-lc-sys or ring is updated.
+
+[target.aarch64-apple-darwin.aws_lc_0_45_0]
+# The prebuilt aws-lc-sys bindings for this target live in the crate itself (src/aarch64_apple_darwin_crypto.rs)
+rustc-cfg = ["aarch64_apple_darwin"]
+# aws-lc-rs reads DEP_AWS_LC_*_INCLUDE (only to pick the version)
+include = "/nonexistent/aws-lc/include"
+
+[target.aarch64-apple-darwin.ring_core_0_17_14_]
+rustc-link-lib = []
+
+[target.aarch64-apple-darwin.openssl]
+# openssl-src 300.x: the same cfg the openssl-sys build script would set for OpenSSL 3.6
+rustc-cfg = ["openssl", "ossl101", "ossl102", "ossl102f", "ossl102h", "ossl110", "ossl110f", "ossl110g", "ossl110h", "ossl111", "ossl111b", "ossl111c", "ossl111d", "ossl300", "ossl320", "ossl330", "ossl340"]
+
+[target.aarch64-apple-darwin.sqlite3]
+rustc-link-lib = []
+
+[target.x86_64-apple-darwin.aws_lc_0_45_0]
+rustc-cfg = ["x86_64_apple_darwin"]
+include = "/nonexistent/aws-lc/include"
+
+[target.x86_64-apple-darwin.ring_core_0_17_14_]
+rustc-link-lib = []
+
+[target.x86_64-apple-darwin.openssl]
+rustc-cfg = ["openssl", "ossl101", "ossl102", "ossl102f", "ossl102h", "ossl110", "ossl110f", "ossl110g", "ossl110h", "ossl111", "ossl111b", "ossl111c", "ossl111d", "ossl300", "ossl320", "ossl330", "ossl340"]
+
+[target.x86_64-apple-darwin.sqlite3]
+rustc-link-lib = []

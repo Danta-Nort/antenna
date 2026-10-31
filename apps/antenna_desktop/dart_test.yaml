@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+tags:
+  # Tests against real `antennad` daemons (need the binary: ANTENNAD_BIN or <repo>/target/debug/antennad).
+  live:
+    timeout: 2x
+  # Tests against a real third-party CLI (the Claude Code canary, tools/claude-canary.sh); also tagged `live`, and
+  # skipped unless their switch is set.
+  real-cli:
+    timeout: 2x

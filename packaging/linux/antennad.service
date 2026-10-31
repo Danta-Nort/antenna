@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# systemd **user** service for the Antenna daemon. install.sh fills in @ANTENNAD@ (binary path) and @ARGS@ (arguments)
+# and writes the result to ~/.config/systemd/user/antennad.service. After start the keys stay locked until
+# `antenna unlock`. Logs: journalctl --user -u antennad
+[Unit]
+Description=Antenna daemon — P2P messenger for people and AI agents
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=@ANTENNAD@ @ARGS@
+Restart=on-failure
+RestartSec=2
+UMask=0077
+
+[Install]
+WantedBy=default.target

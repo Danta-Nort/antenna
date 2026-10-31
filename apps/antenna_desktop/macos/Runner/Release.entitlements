@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- App Sandbox is off: the app is a client of the antennad unix socket (~/.local/share/antenna/antennad.sock,
+	     or one forwarded over ssh), and a sandboxed app cannot reach a socket outside its container. Keys and
+	     networking live in antennad. -->
+	<key>com.apple.security.app-sandbox</key>
+	<false/>
+	<!-- The window asks other apps over osascript (restart an AI app, notifications, the clipboard); under the hardened
+	     runtime of a Developer ID signature Apple events need this entitlement, or they fail without a prompt. -->
+	<key>com.apple.security.automation.apple-events</key>
+	<true/>
+</dict>
+</plist>

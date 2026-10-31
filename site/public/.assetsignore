@@ -1,0 +1,3 @@
+# Not uploaded by wrangler (Workers static assets). This file itself is never uploaded either.
+# Source PNG of the hero screenshot; the site serves the WebP files made by build/screens.py.
+assets/screen-light.png

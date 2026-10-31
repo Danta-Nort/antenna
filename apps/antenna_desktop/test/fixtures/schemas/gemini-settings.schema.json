@@ -1,0 +1,474 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://raw.githubusercontent.com/google-gemini/gemini-cli/main/schemas/settings.schema.json",
+ "type": "object",
+ "additionalProperties": false,
+ "properties": {
+  "mcpServers": {
+   "default": {},
+   "type": "object",
+   "additionalProperties": {
+    "$ref": "#/$defs/MCPServerConfig"
+   }
+  },
+  "ui": {
+   "default": {},
+   "type": "object",
+   "properties": {
+    "debugRainbow": {
+     "default": false,
+     "type": "boolean"
+    },
+    "theme": {
+     "type": "string"
+    },
+    "autoThemeSwitching": {
+     "default": true,
+     "type": "boolean"
+    },
+    "terminalBackgroundPollingInterval": {
+     "default": 60,
+     "type": "number"
+    },
+    "customThemes": {
+     "default": {},
+     "type": "object",
+     "additionalProperties": {
+      "$ref": "#/$defs/CustomTheme"
+     }
+    },
+    "hideWindowTitle": {
+     "default": false,
+     "type": "boolean"
+    },
+    "inlineThinkingMode": {
+     "default": "off",
+     "type": "string",
+     "enum": [
+      "off",
+      "full"
+     ]
+    },
+    "showStatusInTitle": {
+     "default": false,
+     "type": "boolean"
+    },
+    "dynamicWindowTitle": {
+     "default": true,
+     "type": "boolean"
+    },
+    "showHomeDirectoryWarning": {
+     "default": true,
+     "type": "boolean"
+    },
+    "showCompatibilityWarnings": {
+     "default": true,
+     "type": "boolean"
+    },
+    "hideTips": {
+     "default": false,
+     "type": "boolean"
+    },
+    "escapePastedAtSymbols": {
+     "default": false,
+     "type": "boolean"
+    },
+    "showShortcutsHint": {
+     "default": true,
+     "type": "boolean"
+    },
+    "compactToolOutput": {
+     "default": true,
+     "type": "boolean"
+    },
+    "hideBanner": {
+     "default": false,
+     "type": "boolean"
+    },
+    "hideContextSummary": {
+     "default": false,
+     "type": "boolean"
+    },
+    "footer": {
+     "default": {},
+     "type": "object",
+     "properties": {
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      },
+      "showLabels": {
+       "default": true,
+       "type": "boolean"
+      },
+      "hideCWD": {
+       "default": false,
+       "type": "boolean"
+      },
+      "hideSandboxStatus": {
+       "default": false,
+       "type": "boolean"
+      },
+      "hideModelInfo": {
+       "default": false,
+       "type": "boolean"
+      },
+      "hideContextPercentage": {
+       "default": true,
+       "type": "boolean"
+      }
+     },
+     "additionalProperties": false
+    },
+    "hideFooter": {
+     "default": false,
+     "type": "boolean"
+    },
+    "collapseDrawerDuringApproval": {
+     "default": true,
+     "type": "boolean"
+    },
+    "showMemoryUsage": {
+     "default": false,
+     "type": "boolean"
+    },
+    "showLineNumbers": {
+     "default": true,
+     "type": "boolean"
+    },
+    "showCitations": {
+     "default": false,
+     "type": "boolean"
+    },
+    "showModelInfoInChat": {
+     "default": false,
+     "type": "boolean"
+    },
+    "showUserIdentity": {
+     "default": true,
+     "type": "boolean"
+    },
+    "useAlternateBuffer": {
+     "default": false,
+     "type": "boolean"
+    },
+    "renderProcess": {
+     "default": true,
+     "type": "boolean"
+    },
+    "terminalBuffer": {
+     "default": false,
+     "type": "boolean"
+    },
+    "useBackgroundColor": {
+     "default": true,
+     "type": "boolean"
+    },
+    "incrementalRendering": {
+     "default": true,
+     "type": "boolean"
+    },
+    "showSpinner": {
+     "default": true,
+     "type": "boolean"
+    },
+    "loadingPhrases": {
+     "default": "off",
+     "type": "string",
+     "enum": [
+      "tips",
+      "witty",
+      "all",
+      "off"
+     ]
+    },
+    "errorVerbosity": {
+     "default": "low",
+     "type": "string",
+     "enum": [
+      "low",
+      "full"
+     ]
+    },
+    "customWittyPhrases": {
+     "default": [],
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "accessibility": {
+     "default": {},
+     "type": "object",
+     "properties": {
+      "enableLoadingPhrases": {
+       "default": true,
+       "type": "boolean"
+      },
+      "screenReader": {
+       "default": false,
+       "type": "boolean"
+      }
+     },
+     "additionalProperties": false
+    }
+   },
+   "additionalProperties": false
+  }
+ },
+ "$defs": {
+  "CustomTheme": {
+   "type": "object",
+   "additionalProperties": false,
+   "properties": {
+    "type": {
+     "type": "string",
+     "enum": [
+      "custom"
+     ],
+     "default": "custom"
+    },
+    "name": {
+     "type": "string"
+    },
+    "text": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "primary": {
+       "type": "string"
+      },
+      "secondary": {
+       "type": "string"
+      },
+      "link": {
+       "type": "string"
+      },
+      "accent": {
+       "type": "string"
+      },
+      "response": {
+       "type": "string"
+      }
+     }
+    },
+    "background": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "primary": {
+       "type": "string"
+      },
+      "diff": {
+       "type": "object",
+       "additionalProperties": false,
+       "properties": {
+        "added": {
+         "type": "string"
+        },
+        "removed": {
+         "type": "string"
+        }
+       }
+      }
+     }
+    },
+    "border": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "default": {
+       "type": "string"
+      },
+      "focused": {
+       "type": "string"
+      }
+     }
+    },
+    "ui": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "comment": {
+       "type": "string"
+      },
+      "symbol": {
+       "type": "string"
+      },
+      "gradient": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      }
+     }
+    },
+    "status": {
+     "type": "object",
+     "additionalProperties": false,
+     "properties": {
+      "error": {
+       "type": "string"
+      },
+      "success": {
+       "type": "string"
+      },
+      "warning": {
+       "type": "string"
+      }
+     }
+    },
+    "Background": {
+     "type": "string"
+    },
+    "Foreground": {
+     "type": "string"
+    },
+    "LightBlue": {
+     "type": "string"
+    },
+    "AccentBlue": {
+     "type": "string"
+    },
+    "AccentPurple": {
+     "type": "string"
+    },
+    "AccentCyan": {
+     "type": "string"
+    },
+    "AccentGreen": {
+     "type": "string"
+    },
+    "AccentYellow": {
+     "type": "string"
+    },
+    "AccentRed": {
+     "type": "string"
+    },
+    "DiffAdded": {
+     "type": "string"
+    },
+    "DiffRemoved": {
+     "type": "string"
+    },
+    "Comment": {
+     "type": "string"
+    },
+    "Gray": {
+     "type": "string"
+    },
+    "DarkGray": {
+     "type": "string"
+    },
+    "GradientColors": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    }
+   },
+   "required": [
+    "type",
+    "name"
+   ]
+  },
+  "MCPServerConfig": {
+   "type": "object",
+   "additionalProperties": false,
+   "properties": {
+    "command": {
+     "type": "string"
+    },
+    "args": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "env": {
+     "type": "object",
+     "additionalProperties": {
+      "type": "string"
+     }
+    },
+    "cwd": {
+     "type": "string"
+    },
+    "url": {
+     "type": "string"
+    },
+    "httpUrl": {
+     "type": "string"
+    },
+    "headers": {
+     "type": "object",
+     "additionalProperties": {
+      "type": "string"
+     }
+    },
+    "tcp": {
+     "type": "string"
+    },
+    "type": {
+     "type": "string",
+     "enum": [
+      "stdio",
+      "sse",
+      "http"
+     ]
+    },
+    "timeout": {
+     "type": "number"
+    },
+    "trust": {
+     "type": "boolean"
+    },
+    "description": {
+     "type": "string"
+    },
+    "includeTools": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "excludeTools": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "extension": {
+     "type": "object",
+     "additionalProperties": {
+      "type": [
+       "string",
+       "boolean",
+       "number"
+      ]
+     }
+    },
+    "oauth": {
+     "type": "object",
+     "additionalProperties": true
+    },
+    "authProviderType": {
+     "type": "string",
+     "enum": [
+      "dynamic_discovery",
+      "google_credentials",
+      "service_account_impersonation"
+     ]
+    },
+    "targetAudience": {
+     "type": "string"
+    },
+    "targetServiceAccount": {
+     "type": "string"
+    }
+   }
+  }
+ }
+}

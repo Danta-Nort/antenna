@@ -1,0 +1,55 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+name: Bug report
+description: Something does not work as the guide says it should.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time. **Security problems go to a private report instead** (see SECURITY.md).
+        Please don't paste invite links, tokens, passwords or message contents: `antenna doctor` output is safe to share.
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: "`antenna --version`, or Settings → Advanced in the app."
+      placeholder: antenna 0.1.0 (abcdef123456)
+    validations:
+      required: true
+  - type: dropdown
+    id: system
+    attributes:
+      label: System
+      options:
+        - macOS (app)
+        - macOS (command line only)
+        - Linux desktop (app)
+        - Linux server (install.sh or .deb)
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what you saw instead (the exact message helps most).
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. …
+        2. …
+  - type: textarea
+    id: doctor
+    attributes:
+      label: Diagnostics
+      description: Output of `antenna doctor`, and if relevant the end of the daemon log (macOS `~/Library/Logs/Antenna/antennad.log`, Linux `journalctl --user -u antennad`).
+      render: text
+  - type: input
+    id: agent
+    attributes:
+      label: AI app involved (if any)
+      placeholder: Claude Code 2.1.x, Codex, ChatGPT desktop…

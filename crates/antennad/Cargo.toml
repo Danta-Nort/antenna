@@ -1,0 +1,32 @@
+[package]
+name = "antennad"
+description = "Antenna daemon: keystore, encrypted store, pairwise iroh endpoints, pairing, Triple Ratchet messaging, control socket"
+license = "AGPL-3.0-only"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+antenna-proto = { workspace = true }
+antenna-core = { workspace = true }
+antenna-files = { workspace = true }
+clap = { workspace = true }
+tokio = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+# The root key across an automatic update's restart (D-103) is wiped from memory like every secret
+zeroize = { workspace = true }
+# All `unsafe` lives in `antenna-sys` (D-P-1): CLOEXEC on inherited descriptors (D-P-8);
+# on macOS also PT_DENY_ATTACH (M-7).
+antenna-sys = { workspace = true }
+
+# On Windows rustix has no `process` and `fs`; the daemon there is W1 (D-134, WP-1)
+[target.'cfg(unix)'.dependencies]
+rustix = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }
+
+[lints]
+workspace = true

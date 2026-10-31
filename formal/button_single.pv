@@ -1,0 +1,26 @@
+(* SPDX-License-Identifier: Apache-2.0 *)
+(* =====================================================================================================
+   D-95: owner A confirms "yes" WITHOUT a code (one button after the joiner entered the code), but the daemon accepts
+   it only when no other invite of this node showed a code while this one was open (`invites.rs`, CONTROL §6); with
+   two codes on the screen at once the owner types the code as in v1. In the model: each owner A has one invite with a
+   code at a time, so the voice channel of that owner carries only this invite's code; any number of people (B) may
+   talk to the owner, and the link is intercepted (TLS broken, link leaked).
+   Contrast: `neg_nocode.pv`, the same "yes" without a code with several invites of one owner at once (attack found).
+   Outside the model, as before (README "The human factor"): an owner who confirms without hearing "it matched" about
+   the code now on the screen, e.g. after a match spoken about an invite that already ended.
+   ===================================================================================================== *)
+
+(* EXPECT true ×2 — Q4 of the main scenario: activation only after owner B accepted the code of this TH and owner A
+   confirmed *)
+query h: bitstring, t: thash, ia: G, ib: G, sk: key;
+  event(A_Activated(h, t, ia, ib, sk)) ==> event(B_CodeOK(h, t)) && event(OwnerA_Confirm(h, t)).
+query h: bitstring, t: thash, ia: G, ib: G, sk: key;
+  event(B_Activated(h, t, ia, ib, sk)) ==> event(B_CodeOK(h, t)) && event(OwnerA_Confirm(h, t)).
+
+process
+  ( !( new dictA: channel; new matchedA: channel;     (* owner A with one invite showing a code, and everyone they talk to *)
+       ( ( new s: linksecret; new ea: eid;
+           event InviteCreated(ea);
+           out(c, (ea, s));                           (* the link is intercepted *)
+           A_tnull(NOCODE, false, s, ea, dictA, matchedA) )
+       | !B_tnull(NOCODE, false, c, dictA, matchedA) ) ) )   (* B takes the link from the attacker: it may be substituted *)

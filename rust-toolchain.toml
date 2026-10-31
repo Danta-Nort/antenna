@@ -1,0 +1,5 @@
+# Pinned toolchain for reproducible builds (SPEC §15). Update deliberately, with a build/test/clippy run.
+[toolchain]
+channel = "1.99.0"
+profile = "minimal"
+components = ["clippy", "rustfmt"]

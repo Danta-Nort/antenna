@@ -1,0 +1,307 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# The native Windows port, phase W0 (docs/PORTABILITY-WINDOWS.md, DECISIONS D-134):
+# does the tree build, pass clippy and test on Windows (x86_64, MSVC)?
+#
+# It reports, it does not hide. Every package is built and tested on its own, every result goes into the run summary
+# and the logs artifact, and the last step fails the job when anything failed. Until W0 is done the job is expected to
+# be red: the summary says which crates and which checks are still open.
+#
+#   tools    NASM and protoc from their official archives, pinned by SHA-256 (the image has neither); Strawberry Perl
+#            from the image for OpenSSL (never Git's MSYS perl); Rust 1.99.0 from rust-toolchain.toml, MSVC host
+#   cargo    `cargo build --workspace --locked --keep-going`, then per package: build with all targets, then its tests;
+#            then the two clippy passes of release.yml's Linux job
+#   window   Flutter 3.47.6, `flutter analyze`, the non-live tests (report only), `flutter build windows`
+#   logs     every log as the `windows-w0-logs` artifact, 7 days
+#
+# Runs on manual dispatch and on pushes to `windows/*` branches; never on tags (releases are release.yml). The machine
+# is a self-hosted Windows runner by default, as for the macOS jobs (D-81), so no plan minutes are used; WIN_RUNNER can
+# point the job at a hosted image instead, whose minutes are billed. One run per branch at a time (a newer push cancels
+# the older run), 60 minutes at most, per-step limits.
+# Every action is pinned by commit SHA (the tag in the comment is for reading; check the SHA when bumping it).
+name: windows
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['windows/**']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: windows-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FLUTTER_VERSION: '3.47.6'
+  CARGO_TERM_COLOR: always
+  CARGO_INCREMENTAL: '0'
+  AWS_LC_SYS_USE_SYSTEM: '0'   # our own AWS-LC, never a system one (as on macOS, docs/PORTABILITY.md §3)
+  # Its assembly built with the NASM installed below, never prebuilt objects: rustls's aws_lc_rs feature turns on
+  # aws-lc-rs/prebuilt-nasm, which links them quietly when NASM is missing (PORTABILITY-WINDOWS §3, WP-2).
+  AWS_LC_SYS_PREBUILT_NASM: '0'
+  # Official archives, SHA-256 of the files as downloaded on 2026-10-13 (protoc: equal to the digest GitHub lists for
+  # the release asset). Bump both together.
+  NASM_VERSION: '3.02'
+  NASM_SHA256: '161d0bfaff53c2f9e9f3e69fd0672323ebabafd1268976a5cec11be92a19aee7'
+  PROTOC_VERSION: '36.2'
+  PROTOC_SHA256: 'f0c128dc0d8492eceece83bb459a4c0e316764b929ffbf1aa416357fd644edd3'
+  # Packages in dependency order, so a failure is reported where it starts.
+  PACKAGES: 'antenna-proto antenna-sys antenna-update antenna-release antenna-files antenna-core antennad antenna-cli'
+
+jobs:
+  w0:
+    name: W0 build and test (Windows, x86_64 MSVC)
+    # Like the macOS jobs (D-81): a self-hosted Windows build machine registered to this repository with the label
+    # `antenna` by default, so no plan minutes are used; the repository variable WIN_RUNNER (JSON) can point it at a
+    # hosted image instead, e.g. "windows-2025" (Windows Server 2025 with Visual Studio 2026, checked 2026-10-13).
+    runs-on: ${{ fromJSON(vars.WIN_RUNNER || '["self-hosted","Windows","X64","antenna"]') }}
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1   # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Runner facts
+        run: |
+          $ErrorActionPreference = 'Continue'   # a missing tool is a fact to print here; the steps below decide
+          New-Item -ItemType Directory -Force logs | Out-Null
+          $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+          & {
+            "runner: $env:RUNNER_ENVIRONMENT $env:RUNNER_NAME $env:ImageOS $env:ImageVersion"
+            [System.Environment]::OSVersion.VersionString
+            "cpus: $env:NUMBER_OF_PROCESSORS"
+            Get-PSDrive -PSProvider FileSystem | Format-Table -AutoSize | Out-String
+            "visual studio: " + (& $vswhere -latest -property catalog_productDisplayVersion)
+            "vs path: " + (& $vswhere -latest -property installationPath)
+            "cmake: " + ((cmake --version) | Select-Object -First 1)
+            "ninja: " + (ninja --version)
+            "git: " + (git --version)
+            "perl on PATH: " + ((Get-Command perl -All -ErrorAction SilentlyContinue | ForEach-Object Source) -join '; ')
+          } *>&1 | Tee-Object -FilePath logs/runner.txt
+          exit 0
+
+      - name: NASM and protoc (official archives, SHA-256 pinned)
+        timeout-minutes: 5
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $tools = Join-Path $env:RUNNER_TEMP 'tools'
+          New-Item -ItemType Directory -Force $tools | Out-Null
+          function Get-Pinned([string]$url, [string]$sha, [string]$zip) {
+            Invoke-WebRequest -Uri $url -OutFile $zip
+            $got = (Get-FileHash -Algorithm SHA256 $zip).Hash.ToLowerInvariant()
+            if ($got -ne $sha) { throw "SHA-256 mismatch for ${url}: $got, expected $sha" }
+          }
+          $nasmZip = Join-Path $tools 'nasm.zip'
+          Get-Pinned "https://www.nasm.us/pub/nasm/releasebuilds/$env:NASM_VERSION/win64/nasm-$env:NASM_VERSION-win64.zip" $env:NASM_SHA256 $nasmZip
+          Expand-Archive $nasmZip -DestinationPath $tools -Force
+          $nasmDir = Join-Path $tools "nasm-$env:NASM_VERSION"
+          $protocZip = Join-Path $tools 'protoc.zip'
+          Get-Pinned "https://github.com/protocolbuffers/protobuf/releases/download/v$env:PROTOC_VERSION/protoc-$env:PROTOC_VERSION-win64.zip" $env:PROTOC_SHA256 $protocZip
+          $protocDir = Join-Path $tools 'protoc'
+          Expand-Archive $protocZip -DestinationPath $protocDir -Force
+          Add-Content $env:GITHUB_PATH $nasmDir
+          Add-Content $env:GITHUB_ENV "PROTOC=$(Join-Path $protocDir 'bin\protoc.exe')"
+          & (Join-Path $nasmDir 'nasm.exe') -v
+          & (Join-Path $protocDir 'bin\protoc.exe') --version
+
+      - name: Perl for OpenSSL (Strawberry Perl, not Git's MSYS perl)
+        # openssl-src runs `perl Configure` and nmake: it needs a native Windows Perl. Git for Windows puts an MSYS
+        # perl on PATH in its bash; OPENSSL_SRC_PERL makes the choice explicit.
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $perl = Get-Command perl -All -ErrorAction SilentlyContinue | ForEach-Object Source |
+            Where-Object { $_ -notmatch '\\Git\\' } | Select-Object -First 1
+          if (-not $perl -and (Test-Path 'C:\Strawberry\perl\bin\perl.exe')) { $perl = 'C:\Strawberry\perl\bin\perl.exe' }
+          if (-not $perl) { throw 'no native Windows Perl found (Strawberry Perl expected on the image)' }
+          & $perl -e 'print "$^V $^O\n"'
+          Add-Content $env:GITHUB_ENV "OPENSSL_SRC_PERL=$perl"
+
+      - name: Rust 1.99.0 (rust-toolchain.toml), MSVC host
+        timeout-minutes: 10
+        run: |
+          $ErrorActionPreference = 'Stop'
+          rustup toolchain install
+          rustup show active-toolchain
+          $host_line = rustc -vV | Select-String '^host:'
+          "$host_line"
+          if ("$host_line" -notmatch 'x86_64-pc-windows-msvc') { throw "expected the MSVC host, got $host_line" }
+          cargo --version
+
+      - name: Cargo cache (restore)
+        id: cargo-cache
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9   # v6.1.0
+        with:
+          path: |
+            ~/.cargo/registry/index
+            ~/.cargo/registry/cache
+            ~/.cargo/git/db
+            target
+          key: windows-w0-${{ hashFiles('Cargo.lock', 'rust-toolchain.toml') }}-${{ github.sha }}
+          restore-keys: |
+            windows-w0-${{ hashFiles('Cargo.lock', 'rust-toolchain.toml') }}-
+
+      - name: cargo build --workspace (all packages, keep going)
+        id: workspace
+        continue-on-error: true
+        timeout-minutes: 35
+        shell: bash
+        run: |
+          set -o pipefail
+          cargo build --workspace --locked --keep-going 2>&1 | tee logs/cargo-build-workspace.log
+
+      - name: Per package (build with all targets, then its tests)
+        id: packages
+        continue-on-error: true
+        timeout-minutes: 25
+        shell: bash
+        run: |
+          set -u -o pipefail
+          printf 'package\tbuild\terrors\ttests\n' > logs/summary.tsv
+          failed=0
+          for p in $PACKAGES; do
+            if cargo build -p "$p" --locked --all-targets > "logs/build-$p.log" 2>&1; then b=ok; else b=FAILED; failed=1; fi
+            e=$(grep -c '^error' "logs/build-$p.log" || true)
+            t=skipped
+            if [ "$b" = ok ]; then
+              # Integration tests start antennad and antenna from target/debug (CONTRIBUTING.md): build them first.
+              if [ "$p" = antenna-cli ] || [ "$p" = antennad ]; then
+                cargo build -p antennad -p antenna-cli --locked >> "logs/build-$p.log" 2>&1 || true
+              fi
+              if cargo test -p "$p" --locked --no-fail-fast > "logs/test-$p.log" 2>&1; then t=ok; else t=FAILED; failed=1; fi
+            fi
+            printf '%s\t%s\t%s\t%s\n' "$p" "$b" "$e" "$t" | tee -a logs/summary.tsv
+          done
+          exit $failed
+
+      - name: Clippy (the two passes of release.yml's Linux job)
+        id: clippy
+        continue-on-error: true
+        timeout-minutes: 20
+        shell: bash
+        run: |
+          set -o pipefail
+          failed=0
+          cargo clippy --workspace --all-targets --locked -- -D warnings 2>&1 | tee logs/clippy.log || failed=1
+          cargo clippy --workspace --lib --bins --locked -- -D clippy::unwrap_used -D clippy::panic 2>&1 |
+            tee logs/clippy-unwrap-panic.log || failed=1
+          exit $failed
+
+      - name: Cargo cache (save, also after failures)
+        if: always() && steps.cargo-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9   # v6.1.0
+        with:
+          path: |
+            ~/.cargo/registry/index
+            ~/.cargo/registry/cache
+            ~/.cargo/git/db
+            target
+          key: windows-w0-${{ hashFiles('Cargo.lock', 'rust-toolchain.toml') }}-${{ github.sha }}
+
+      - name: Flutter ${{ env.FLUTTER_VERSION }}
+        timeout-minutes: 10
+        uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2   # v2.23.0
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: 'Window: pub get and analyze'
+        id: analyze
+        continue-on-error: true
+        timeout-minutes: 8
+        working-directory: apps/antenna_desktop
+        run: |
+          flutter --version
+          cmd /c "flutter pub get > ..\..\logs\flutter-pub-get.log 2>&1 && flutter analyze > ..\..\logs\flutter-analyze.log 2>&1"
+          $code = $LASTEXITCODE
+          Get-Content ..\..\logs\flutter-analyze.log -Tail 60 -ErrorAction SilentlyContinue
+          exit $code
+
+      - name: 'Window: non-live tests (report only; goldens are Linux frames and are left out)'
+        id: window-tests
+        continue-on-error: true
+        timeout-minutes: 15
+        working-directory: apps/antenna_desktop
+        run: |
+          cmd /c "flutter test --exclude-tags live test/widget test/host test/protocol > ..\..\logs\flutter-test.log 2>&1"
+          $code = $LASTEXITCODE
+          Get-Content ..\..\logs\flutter-test.log -Tail 80
+          exit $code
+
+      - name: 'Window: flutter build windows'
+        id: window-build
+        continue-on-error: true
+        timeout-minutes: 15
+        working-directory: apps/antenna_desktop
+        run: |
+          flutter doctor -v *> ..\..\logs\flutter-doctor.log
+          cmd /c "flutter build windows --debug > ..\..\logs\flutter-build-windows.log 2>&1"
+          $code = $LASTEXITCODE
+          Get-Content ..\..\logs\flutter-build-windows.log -Tail 80
+          exit $code
+
+      - name: Summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "## Windows W0 (x86_64 MSVC, runner $RUNNER_NAME)"
+            echo
+            echo "| Check | Result |"
+            echo "| --- | --- |"
+            echo "| cargo build --workspace | ${{ steps.workspace.outcome }} |"
+            echo "| per package (build and tests) | ${{ steps.packages.outcome }} |"
+            echo "| clippy (both passes) | ${{ steps.clippy.outcome }} |"
+            echo "| window: analyze | ${{ steps.analyze.outcome }} |"
+            echo "| window: non-live tests | ${{ steps.window-tests.outcome }} |"
+            echo "| window: build windows | ${{ steps.window-build.outcome }} |"
+            echo
+            if [ -f logs/summary.tsv ]; then
+              echo "| Package | Build | Error lines | Tests |"
+              echo "| --- | --- | --- | --- |"
+              tail -n +2 logs/summary.tsv | awk -F'\t' '{ printf "| %s | %s | %s | %s |\n", $1, $2, $3, $4 }'
+              echo
+            fi
+            for f in logs/build-*.log; do
+              [ -f "$f" ] || continue
+              if grep -q '^error' "$f"; then
+                echo "<details><summary>$(basename "$f"): first errors</summary>"
+                echo
+                echo '```'
+                grep -A4 '^error' "$f" | head -n 60
+                echo '```'
+                echo "</details>"
+              fi
+            done
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload the logs
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9   # v7.0.2
+        with:
+          name: windows-w0-logs
+          path: logs/
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Verdict (fails while anything above failed)
+        if: always()
+        run: |
+          $outcomes = @{
+            'cargo build --workspace' = '${{ steps.workspace.outcome }}'
+            'per package' = '${{ steps.packages.outcome }}'
+            'clippy' = '${{ steps.clippy.outcome }}'
+            'window: analyze' = '${{ steps.analyze.outcome }}'
+            'window: non-live tests' = '${{ steps.window-tests.outcome }}'
+            'window: build windows' = '${{ steps.window-build.outcome }}'
+          }
+          $bad = $outcomes.GetEnumerator() | Where-Object { $_.Value -ne 'success' }
+          if ($bad) {
+            $bad | ForEach-Object { "::error::$($_.Key): $($_.Value)" }
+            exit 1
+          }
+          'W0: everything built and passed'

@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/Danta-Nort/antenna/security/advisories/new
+    about: Please report security problems privately, never in a public issue.
+  - name: Guide and troubleshooting
+    url: https://github.com/Danta-Nort/antenna/blob/main/docs/USER-GUIDE.md#if-something-does-not-work
+    about: The exact messages Antenna shows, each with what to do.

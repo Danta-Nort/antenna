@@ -1,0 +1,21 @@
+(* SPDX-License-Identifier: Apache-2.0 *)
+(* =====================================================================================================
+   ONE-TIME USE OF THE LINK, the cryptographic part (PROTOCOL §4). Here A, hypothetically, does NOT burn
+   the invite and accepts any number of sessions with one link (in the code, after a correct psk_mac the invite
+   burns on any outcome). The link secret has not leaked. The question: can someone else's M1 be replayed?
+   - TLS intact (T-tls): psk_mac is bound to the exporter X, and X is unique to each connection, so a replay is impossible (true).
+   - TLS compromised (T-null): see replay_tnull.pv: a replay is possible, and only the burning of the invite stops it.
+   KCONLY truncation (after key confirmation): the psk_mac check event happens earlier.
+   ===================================================================================================== *)
+
+(* EXPECT true — each psk_mac acceptance at A is a separate M1 send at B with the same body *)
+query ea: eid, eb: eid, x: exporter, b: bitstring; inj-event(A_PskOk(ea, eb, x, b)) ==> inj-event(B_SentJoin(ea, eb, x, b)).
+
+process
+  ( !( new dictA: channel; new matchedA: channel;
+       !( new s: linksecret; new eka: esk; new linkch: channel;
+          event InviteCreated(epk(eka));
+          out(c, epk(eka));
+          ( out(linkch, (epk(eka), s))
+          | !A_tls(KCONLY, true, false, s, eka, dictA, matchedA)
+          | B_tls(KCONLY, true, false, linkch, dictA, matchedA) ) ) ) )

@@ -1,0 +1,42 @@
+{
+  // antenna.contact — static site + closed-beta form (docs/SITE.md).
+  // Deploy from site/ with CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID in the environment:
+  //
+  //   node build/check.mjs && npx --yes wrangler@4 deploy
+  //
+  // Migrations — BEFORE deploying code that reads them:
+  //   npx --yes wrangler@4 d1 execute antenna-beta --remote --file=migrations/000N_….sql
+  "name": "antenna-site",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    // Every request goes through the worker: redirects of the secondary domains and the same
+    // security headers on every response (CSP, HSTS, …).
+    "run_worker_first": true,
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "d1_databases": [
+    { "binding": "DB", "database_name": "antenna-beta", "database_id": "1032540b-f1d0-48af-ba38-2b97cf61a1c7" }
+  ],
+  // POST /api/beta: 5 requests per minute per client address, kept in memory at the edge only.
+  "ratelimits": [
+    { "name": "BETA_RL", "namespace_id": "2001", "simple": { "limit": 5, "period": 60 } }
+  ],
+  "routes": [
+    { "pattern": "antenna.contact", "custom_domain": true },
+    { "pattern": "www.antenna.contact", "custom_domain": true },
+    { "pattern": "antennachat.com", "custom_domain": true },
+    { "pattern": "www.antennachat.com", "custom_domain": true },
+    { "pattern": "antennachat.org", "custom_domain": true },
+    { "pattern": "www.antennachat.org", "custom_domain": true },
+    { "pattern": "antennachat.app", "custom_domain": true },
+    { "pattern": "www.antennachat.app", "custom_domain": true }
+  ],
+  "workers_dev": false,
+  "preview_urls": false,
+  // No Workers Logs: the privacy policy promises we keep no IPs or request data.
+  "observability": { "enabled": false }
+}

@@ -1,0 +1,95 @@
+{
+  "_about": "The AI apps' marks shown in Agents → AI apps, in Connect and as agents' avatars. The marks belong to their owners; Antenna uses them only to identify an integration, small, with no endorsement implied. Checked 2026-10-03; details and quotes of each vendor's guidelines in docs/CONNECT-APPS.md, \"Marks\". build.py turns this file and the SVGs next to it into lib/theme/ai_logos.dart.",
+  "brands": [
+    {
+      "brand": "openai",
+      "name": "OpenAI (ChatGPT, Codex)",
+      "svg": null,
+      "why_none": "Simple Icons removed the OpenAI mark in 16.0.0 (2025-11-30) because OpenAI's terms grant only a non-transferable licence; openai.com/brand could not be read (403). Monogram until OpenAI's terms are confirmed for this use.",
+      "guidelines": "https://openai.com/brand/"
+    },
+    {
+      "brand": "claude",
+      "name": "Claude (Anthropic)",
+      "svg": "claude.svg",
+      "source": "https://cdn.jsdelivr.net/npm/simple-icons@16.33.0/icons/claude.svg",
+      "simple_icons_source": "https://claude.ai",
+      "license": "Simple Icons SVG data CC0-1.0; the mark is Anthropic's trademark. Anthropic publishes the mark in its press kit (https://www.anthropic.com/press-kit); no third-party usage terms were found.",
+      "on_light": "D97757",
+      "on_dark": "D97757",
+      "date": "2026-10-03"
+    },
+    {
+      "brand": "claudecode",
+      "name": "Claude Code (Anthropic)",
+      "svg": "claudecode.svg",
+      "source": "https://cdn.jsdelivr.net/npm/simple-icons@16.33.0/icons/claudecode.svg",
+      "simple_icons_source": "https://code.claude.com",
+      "license": "Simple Icons SVG data CC0-1.0; the mark is Anthropic's trademark (press kit: https://www.anthropic.com/press-kit, \"Claude Code logo\"); no third-party usage terms were found.",
+      "on_light": "D97757",
+      "on_dark": "D97757",
+      "date": "2026-10-03"
+    },
+    {
+      "brand": "gemini",
+      "name": "Google Gemini",
+      "svg": null,
+      "why_none": "Google product icons are \"Ask first\": permission through the Partner Marketing Hub (https://about.google/brand-resource-center/guidance/). Monogram.",
+      "guidelines": "https://about.google/brand-resource-center/brand-elements/"
+    },
+    {
+      "brand": "cursor",
+      "name": "Cursor (Anysphere)",
+      "svg": "cursor.svg",
+      "source": "https://cdn.jsdelivr.net/npm/simple-icons@16.33.0/icons/cursor.svg",
+      "simple_icons_source": "https://cursor.com/brand",
+      "license": "Simple Icons SVG data CC0-1.0; the mark is Anysphere's trademark. cursor.com/brand offers the icon in light and dark; no third-party usage terms were found.",
+      "on_light": "000000",
+      "on_dark": "FFFFFF",
+      "date": "2026-10-03"
+    },
+    {
+      "brand": "copilot",
+      "name": "VS Code with GitHub Copilot",
+      "svg": null,
+      "why_none": "Microsoft does not allow the VS Code icon to identify another product (https://code.visualstudio.com/brand), and Simple Icons removed it in 13.0.0 at Microsoft's request; GitHub Copilot has had no standalone logo since 2025 (https://github.com/logos). Monogram.",
+      "guidelines": "https://code.visualstudio.com/brand"
+    },
+    {
+      "brand": "windsurf",
+      "name": "Devin Desktop (formerly Windsurf)",
+      "svg": null,
+      "why_none": "Windsurf's guidelines ask for a mockup for any use they do not cover (https://windsurf.com/brand), and the app is now Devin Desktop, which has no mark in Simple Icons. Monogram.",
+      "guidelines": "https://windsurf.com/brand"
+    },
+    {
+      "brand": "zed",
+      "name": "Zed (Zed Industries)",
+      "svg": "zedindustries.svg",
+      "source": "https://cdn.jsdelivr.net/npm/simple-icons@16.33.0/icons/zedindustries.svg",
+      "simple_icons_source": "https://github.com/zed-industries/zed/blob/ccc939124fa2f366b3029926447fd0a0c46a85c7/assets/icons/logo_96.svg",
+      "license": "Simple Icons SVG data CC0-1.0; the mark is Zed Industries' trademark. zed.dev/brand: only brand blue (#1348DC), white or black, and no use that could imply an official connection or endorsement.",
+      "on_light": "1348DC",
+      "on_dark": "FFFFFF",
+      "date": "2026-10-03"
+    },
+    {
+      "brand": "lmstudio",
+      "name": "LM Studio (Element Labs)",
+      "svg": "lmstudio.svg",
+      "source": "https://cdn.jsdelivr.net/npm/simple-icons@16.33.0/icons/lmstudio.svg",
+      "simple_icons_source": "https://files.lmstudio.ai/lmstudio_icon2.svg",
+      "license": "Simple Icons SVG data CC0-1.0; the mark is LM Studio's trademark. lmstudio.ai/brand: use the logo when referring to LM Studio, no implied sponsorship or endorsement, do not recolour (black, white or the colour versions).",
+      "on_light": "000000",
+      "on_dark": "FFFFFF",
+      "date": "2026-10-03"
+    },
+    {
+      "brand": "xai",
+      "name": "Grok (xAI)",
+      "svg": null,
+      "why_none": "No xAI or Grok mark in Simple Icons; xAI's guidelines require marks exactly as provided and say only xAI may grant use (https://x.ai/legal/brand-guidelines). Monogram.",
+      "guidelines": "https://x.ai/legal/brand-guidelines"
+    }
+  ]
+}

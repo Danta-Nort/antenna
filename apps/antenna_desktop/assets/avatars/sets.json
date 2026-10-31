@@ -1,0 +1,250 @@
+{
+  "version": 1,
+  "sides": [
+    512,
+    128
+  ],
+  "sets": [
+    {
+      "id": "set1",
+      "name": "Soft",
+      "cover": "cover-128.webp",
+      "animals": [
+        {
+          "id": "fox",
+          "name": "Fox"
+        },
+        {
+          "id": "rabbit",
+          "name": "Rabbit"
+        },
+        {
+          "id": "owl",
+          "name": "Owl"
+        },
+        {
+          "id": "squirrel",
+          "name": "Squirrel"
+        },
+        {
+          "id": "hedgehog",
+          "name": "Hedgehog"
+        },
+        {
+          "id": "raccoon",
+          "name": "Raccoon"
+        },
+        {
+          "id": "bear",
+          "name": "Bear"
+        },
+        {
+          "id": "koala",
+          "name": "Koala"
+        },
+        {
+          "id": "panda",
+          "name": "Panda"
+        },
+        {
+          "id": "deer",
+          "name": "Deer"
+        },
+        {
+          "id": "giraffe",
+          "name": "Giraffe"
+        },
+        {
+          "id": "elephant",
+          "name": "Elephant"
+        },
+        {
+          "id": "lion",
+          "name": "Lion"
+        },
+        {
+          "id": "penguin",
+          "name": "Penguin"
+        },
+        {
+          "id": "otter",
+          "name": "Otter"
+        },
+        {
+          "id": "sloth",
+          "name": "Sloth"
+        },
+        {
+          "id": "capybara",
+          "name": "Capybara"
+        },
+        {
+          "id": "cat",
+          "name": "Cat"
+        },
+        {
+          "id": "dog",
+          "name": "Dog"
+        }
+      ]
+    },
+    {
+      "id": "set2",
+      "name": "Modern",
+      "cover": "cover-128.webp",
+      "animals": [
+        {
+          "id": "eagle",
+          "name": "Eagle"
+        },
+        {
+          "id": "falcon",
+          "name": "Falcon"
+        },
+        {
+          "id": "peacock",
+          "name": "Peacock"
+        },
+        {
+          "id": "raven",
+          "name": "Raven"
+        },
+        {
+          "id": "toucan",
+          "name": "Toucan"
+        },
+        {
+          "id": "cobra",
+          "name": "Cobra"
+        },
+        {
+          "id": "wolf",
+          "name": "Wolf"
+        },
+        {
+          "id": "octopus",
+          "name": "Octopus"
+        },
+        {
+          "id": "panther",
+          "name": "Panther"
+        },
+        {
+          "id": "lion",
+          "name": "Lion"
+        },
+        {
+          "id": "tiger",
+          "name": "Tiger"
+        },
+        {
+          "id": "bear",
+          "name": "Bear"
+        },
+        {
+          "id": "deer",
+          "name": "Deer"
+        },
+        {
+          "id": "ram",
+          "name": "Ram"
+        },
+        {
+          "id": "elephant",
+          "name": "Elephant"
+        },
+        {
+          "id": "crocodile",
+          "name": "Crocodile"
+        },
+        {
+          "id": "shark",
+          "name": "Shark"
+        },
+        {
+          "id": "bat",
+          "name": "Bat"
+        }
+      ]
+    },
+    {
+      "id": "set3",
+      "name": "Playful",
+      "cover": "cover-128.webp",
+      "animals": [
+        {
+          "id": "fox",
+          "name": "Fox"
+        },
+        {
+          "id": "rabbit",
+          "name": "Rabbit"
+        },
+        {
+          "id": "owl",
+          "name": "Owl"
+        },
+        {
+          "id": "raccoon",
+          "name": "Raccoon"
+        },
+        {
+          "id": "snow-leopard",
+          "name": "Snow Leopard"
+        },
+        {
+          "id": "bear",
+          "name": "Bear"
+        },
+        {
+          "id": "chameleon",
+          "name": "Chameleon"
+        },
+        {
+          "id": "tiger",
+          "name": "Tiger"
+        },
+        {
+          "id": "raven",
+          "name": "Raven"
+        },
+        {
+          "id": "red-panda",
+          "name": "Red Panda"
+        },
+        {
+          "id": "axolotl",
+          "name": "Axolotl"
+        },
+        {
+          "id": "frog",
+          "name": "Frog"
+        },
+        {
+          "id": "capybara",
+          "name": "Capybara"
+        },
+        {
+          "id": "dragon",
+          "name": "Dragon"
+        },
+        {
+          "id": "robot",
+          "name": "Robot"
+        },
+        {
+          "id": "mushroom-sprite",
+          "name": "Mushroom Sprite"
+        },
+        {
+          "id": "forest-spirit",
+          "name": "Forest Spirit"
+        },
+        {
+          "id": "alien",
+          "name": "Alien"
+        }
+      ]
+    }
+  ]
+}

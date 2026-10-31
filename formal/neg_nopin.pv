@@ -1,0 +1,20 @@
+(* SPDX-License-Identifier: Apache-2.0 *)
+(* =====================================================================================================
+   NEGATIVE CONTROL: B does not check the bundle's identity against P_A.identity_key from TH (§8 B8, C8).
+   Expected: with compromised TLS and an intercepted link the attacker knows K_A, forges M6 with its own
+   bundle, and B brings up an E2E session with the attacker, without owner A's confirmation.
+   ===================================================================================================== *)
+
+(* EXPECT false — Q6 of the main scenario for B *)
+query h: bitstring, t: thash, ia: G, ib: G, sk: key; event(B_Activated(h, t, ia, ib, sk)) && attacker(sk).
+(* EXPECT false — Q4 of the main scenario for B *)
+query h: bitstring, t: thash, ia: G, ib: G, sk: key;
+  event(B_Activated(h, t, ia, ib, sk)) ==> event(OwnerA_Confirm(h, t)).
+
+process
+  ( !( new dictA: channel; new matchedA: channel;     (* owner A and everyone they talk to by voice *)
+       ( !( new s: linksecret; new ea: eid;
+            event InviteCreated(ea);
+            out(c, (ea, s));                          (* the link is intercepted *)
+            A_tnull(NOPIN, false, s, ea, dictA, matchedA) )
+       | !B_tnull(NOPIN, false, c, dictA, matchedA) ) ) )   (* B takes the link from the attacker: it may be substituted *)

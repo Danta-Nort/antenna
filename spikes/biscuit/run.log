@@ -1,0 +1,12 @@
+1. issued token: 336 bytes base64, 1 block(s)
+2. read  shared/report.pdf: Ok(())
+   write shared/report.pdf: Ok(())
+   read  ../etc/passwd    : denied (FailedLogic(NoMatchingPolicy { checks: [] }))
+3. attenuated (read-only): read=true
+   attenuated write => denied
+4a. stolen token, no PoP: denied
+4b. holder PoP: Ok(())
+4c. PoP signed by other key: denied
+4d. replay old PoP for new nonce: denied
+4e. PoP block moved to another token: rejected at append (error deserializing or verifying the token)
+DONE

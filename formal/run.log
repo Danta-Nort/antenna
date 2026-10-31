@@ -1,0 +1,104 @@
+# formal/run.sh — 2026-10-03T08:22:25Z, Proverif 2.05. Cryptographic protocol verifier
+# host: Linux 6.8.0-137-generic x86_64, 16 CPU; per-process limits: 4000000 KB of memory, 3000 s; 2 in parallel
+
+== pairing_v1.pv  (exit 0, 176 s)
+   [ok] expected false · got false · not event(A_Activated(h_2,t_2,ia,ib,sk_3)) is false.
+   [ok] expected false · got false · not event(B_Activated(h_2,t_2,ia,ib,sk_3)) is false.
+   [ok] expected true  · got true  · event(B_CodeOK(h_2,t_2)) ==> event(A_ShowSAS(t_2,code_2)) is true.
+   [ok] expected true  · got true  · inj-event(A_Activated(h_2,t_2,ia,ib,sk_3)) ==> inj-event(B_SentInit(h_2,t_2,ia,ib,sk_3)) is true.
+   [ok] expected true  · got true  · inj-event(B_Activated(h_2,t_2,ia,ib,sk_3)) ==> inj-event(A_Activated(h_2,t_2,ia,ib,sk_3)) is true.
+   [ok] expected true  · got true  · event(A_Activated(h_2,t_2,ia,ib,sk_3)) ==> event(B_CodeOK(h_2,t_2)) && event(OwnerA_Confirm(h_2,t_2)) is true.
+   [ok] expected true  · got true  · event(B_Activated(h_2,t_2,ia,ib,sk_3)) ==> event(B_CodeOK(h_2,t_2)) && event(OwnerA_Confirm(h_2,t_2)) is true.
+   [ok] expected false · got false · event(A_PeerCodeEntered(t_2)) ==> event(B_CodeOK(h_2,t_2)) is false.
+   [ok] expected true  · got true  · not (event(A_Activated(h_2,t_2,ia,ib,sk_3)) && attacker_p1(sk_3)) is true.
+   [ok] expected true  · got true  · not (event(B_Activated(h_2,t_2,ia,ib,sk_3)) && attacker_p1(sk_3)) is true.
+   [ok] expected true  · got true  · not event(A_Activated(hdr(V1,SUITE_LEGACY,KX_PQ),t_2,ia,ib,sk_3)) is true.
+   result: matches expectations
+
+== psk.pv  (exit 0, 23 s)
+   [ok] expected false · got false · not event(A_Activated(h_2,t_2,ia,ib,sk_3)) is false.
+   [ok] expected true  · got true  · event(A_PskOk(ea_3,eb_3,x_2,b)) ==> event(B_SentJoin(ea_3,eb_3,x_2,b)) is true.
+   [ok] expected true  · got true  · event(A_KC(ea_3,eb_3,x_2,h_2,t_2,ka_2,kb_2,lid)) ==> event(B_Reveal(h_2,t_2)) is true.
+   [ok] expected true  · got true  · event(B_KC(ea_3,eb_3,x_2,h_2,t_2,ka_2,kb_2,lid)) ==> event(A_KC(ea_3,eb_3,x_2,h_2,t_2,ka_2,kb_2,lid)) is true.
+   [ok] expected true  · got true  · not (event(A_KC(ea_3,eb_3,x_2,h_2,t_2,ka_2,kb_2,lid)) && attacker_p1(ka_2)) is true.
+   [ok] expected true  · got true  · not (event(A_KC(ea_3,eb_3,x_2,h_2,t_2,ka_2,kb_2,lid)) && attacker_p1(kb_2)) is true.
+   [ok] expected true  · got true  · not (event(A_KC(ea_3,eb_3,x_2,h_2,t_2,ka_2,kb_2,lid)) && attacker_p1(lid)) is true.
+   [ok] expected true  · got true  · not (event(B_KC(ea_3,eb_3,x_2,h_2,t_2,ka_2,kb_2,lid)) && attacker_p1(ka_2)) is true.
+   [ok] expected true  · got true  · not (event(B_KC(ea_3,eb_3,x_2,h_2,t_2,ka_2,kb_2,lid)) && attacker_p1(kb_2)) is true.
+   [ok] expected true  · got true  · not (event(B_KC(ea_3,eb_3,x_2,h_2,t_2,ka_2,kb_2,lid)) && attacker_p1(lid)) is true.
+   [ok] expected true  · got true  · event(A_PeerCodeEntered(t_2)) ==> event(B_CodeOK(h_2,t_2)) is true.
+   result: matches expectations
+
+== tls.pv  (exit 0, 327 s)
+   [ok] expected false · got false · not (event(B_KC(ea_2,eb_2,x_2,h_2,t_2,ka_2,kb_2,lid)) && event(InviteCreated(ea_2))) is false.
+   [ok] expected true  · got true  · not (event(B_KC(ea_2,eb_2,x_2,h_2,t_2,ka_2,kb_2,lid)) && event(InviteCreated(ea_2)) && attacker_p1(x_2)) is true.
+   [ok] expected true  · got true  · not (event(B_KC(ea_2,eb_2,x_2,h_2,t_2,ka_2,kb_2,lid)) && event(InviteCreated(ea_2)) && attacker_p1(ka_2)) is true.
+   [ok] expected true  · got true  · not (event(B_KC(ea_2,eb_2,x_2,h_2,t_2,ka_2,kb_2,lid)) && event(InviteCreated(ea_2)) && attacker_p1(kb_2)) is true.
+   [ok] expected true  · got true  · not (event(B_KC(ea_2,eb_2,x_2,h_2,t_2,ka_2,kb_2,lid)) && event(InviteCreated(ea_2)) && attacker_p1(lid)) is true.
+   result: matches expectations
+
+== e2e_pq.pv  (exit 0, 69 s)
+   [ok] expected false · got false · not event(A_Activated(h_2,t_2,ia,ib,sk_3)) is false.
+   [ok] expected false · got false · not event(B_Activated(h_2,t_2,ia,ib,sk_3)) is false.
+   [ok] expected true  · got true  · not (event(A_Activated(h_2,t_2,ia,ib,sk_3)) && attacker_p1(sk_3)) is true.
+   [ok] expected true  · got true  · not (event(B_Activated(h_2,t_2,ia,ib,sk_3)) && attacker_p1(sk_3)) is true.
+   result: matches expectations
+
+== replay.pv  (exit 0, 1 s)
+   [ok] expected true  · got true  · inj-event(A_PskOk(ea_2,eb_2,x_2,b)) ==> inj-event(B_SentJoin(ea_2,eb_2,x_2,b)) is true.
+   result: matches expectations
+
+== replay_tnull.pv  (exit 0, 7 s)
+   [ok] expected false · got false · inj-event(A_PskOk(ea_3,eb_3,x_2,b)) ==> inj-event(B_SentJoin(ea_3,eb_3,x_2,b)) is false.
+   [ok] expected true  · got true  · event(A_PskOk(ea_3,eb_3,x_2,b)) ==> event(B_SentJoin(ea_3,eb_3,x_2,b)) is true.
+   [ok] expected true  · got true  · event(A_KC(ea_3,eb_3,x_2,h_2,t_2,ka_2,kb_2,lid)) ==> event(B_Reveal(h_2,t_2)) is true.
+   result: matches expectations
+
+== neg_nocommit.pv  (exit 0, 0 s)
+   [ok] expected false · got false · event(B_CodeOK(h_2,t_2)) ==> event(A_ShowSAS(t_2,code_2)) is false.
+   [ok] expected false · got false · event(OwnerA_Confirm(h_2,t_2)) ==> event(B_CodeOK(h_2,t_2)) is false.
+   result: matches expectations
+
+== neg_nocheck.pv  (exit 0, 1 s)
+   [ok] expected false · got false · event(B_CodeOK(h_2,t_2)) ==> event(A_ShowSAS(t_2,code_2)) is false.
+   [ok] expected false · got false · event(OwnerA_Confirm(h_2,t_2)) ==> event(B_CodeOK(h_2,t_2)) is false.
+   result: matches expectations
+
+== neg_autoconfirm.pv  (exit 0, 33 s)
+   [ok] expected false · got false · event(A_Activated(h_2,t_2,ia,ib,sk_3)) ==> event(B_CodeOK(h_2,t_2)) is false.
+   [ok] expected false · got false · inj-event(A_Activated(h_2,t_2,ia,ib,sk_3)) ==> inj-event(B_SentInit(h_2,t_2,ia,ib,sk_3)) is false.
+   result: matches expectations
+
+== neg_nocode.pv  (exit 0, 68 s)
+   [ok] expected false · got false · event(A_Activated(h_2,t_2,ia,ib,sk_3)) ==> event(B_CodeOK(h_2,t_2)) is false.
+   result: matches expectations
+
+== neg_nohdr.pv  (exit 0, 36 s)
+   [ok] expected false · got false · not event(A_Activated(hdr(V1,SUITE_LEGACY,KX_PQ),t_2,ia,ib,sk_3)) is false.
+   result: matches expectations
+
+== neg_nopin.pv  (exit 0, 205 s)
+   [ok] expected false · got false · not (event(B_Activated(h_2,t_2,ia,ib,sk_3)) && attacker_p1(sk_3)) is false.
+   [ok] expected false · got false · event(B_Activated(h_2,t_2,ia,ib,sk_3)) ==> event(OwnerA_Confirm(h_2,t_2)) is false.
+   result: matches expectations
+
+== neg_v0mac.pv  (exit 0, 3 s)
+   [ok] expected false · got false · event(A_PskOk(ea_3,eb_3,x_2,b)) ==> event(B_SentJoin(ea_3,eb_3,x_2,b)) is false.
+   result: matches expectations
+
+== neg_classic_tls.pv  (exit 0, 47 s)
+   [ok] expected false · got false · not (event(B_KC(ea_2,eb_2,x_2,h_2,t_2,ka_2,kb_2,lid)) && event(InviteCreated(ea_2)) && attacker_p1(x_2)) is false.
+   [ok] expected false · got false · not (event(B_KC(ea_2,eb_2,x_2,h_2,t_2,ka_2,kb_2,lid)) && event(InviteCreated(ea_2)) && attacker_p1(ka_2)) is false.
+   [ok] expected false · got false · not (event(B_KC(ea_2,eb_2,x_2,h_2,t_2,ka_2,kb_2,lid)) && event(InviteCreated(ea_2)) && attacker_p1(lid)) is false.
+   result: matches expectations
+
+# ALL SCENARIOS MATCH EXPECTATIONS
+# formal/run.sh — 2026-10-05T07:25:20Z, Proverif 2.05. Cryptographic protocol verifier
+# host: Linux 6.8.0-137-generic x86_64, 16 CPU; per-process limits: 6000000 KB of memory, 3600 s; 1 in parallel
+
+== button_single.pv  (exit 0, 23 s)
+   [ok] expected true  · got true  · event(A_Activated(h_2,t_2,ia,ib,sk_3)) ==> event(B_CodeOK(h_2,t_2)) && event(OwnerA_Confirm(h_2,t_2)) is true.
+   [ok] expected true  · got true  · event(B_Activated(h_2,t_2,ia,ib,sk_3)) ==> event(B_CodeOK(h_2,t_2)) && event(OwnerA_Confirm(h_2,t_2)) is true.
+   result: matches expectations
+
+# ALL SCENARIOS MATCH EXPECTATIONS

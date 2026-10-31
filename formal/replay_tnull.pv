@@ -1,0 +1,27 @@
+(* SPDX-License-Identifier: Apache-2.0 *)
+(* =====================================================================================================
+   ONE-TIME USE OF THE LINK with compromised TLS (T-null), pairing v1. Like replay.pv, but the attacker sets X itself,
+   and A, hypothetically, does not burn the invite. The link secret has not leaked.
+   - Replaying M1 IN FULL (expected false): the attacker gives two connections to A the same X and E_B; psk_mac v1
+     is bound to (X, E_A, E_B) and the body of M1, but all of them are replayed; the MAC does not catch the replay, only the burning
+     of the invite after the first correct psk_mac does (PROTOCOL §4, the code of run_inviter). This is how PROTOCOL §15 states it.
+   - Substituting fields of M1 (expected true): in v1 the body of M1 is authentic even with TLS broken (in v0 it is not: neg_v0mac.pv).
+   - A replay is harmless (expected true): even without burning, a replayed M1 does not pass key confirmation (M3) without s.
+   ===================================================================================================== *)
+
+(* EXPECT false *)
+query ea: eid, eb: eid, x: exporter, b: bitstring; inj-event(A_PskOk(ea, eb, x, b)) ==> inj-event(B_SentJoin(ea, eb, x, b)).
+(* EXPECT true *)
+query ea: eid, eb: eid, x: exporter, b: bitstring; event(A_PskOk(ea, eb, x, b)) ==> event(B_SentJoin(ea, eb, x, b)).
+(* EXPECT true *)
+query ea: eid, eb: eid, x: exporter, h: bitstring, t: thash, ka: key, kb: key, lid: bitstring;
+  event(A_KC(ea, eb, x, h, t, ka, kb, lid)) ==> event(B_Reveal(h, t)).
+
+process
+  ( !( new dictA: channel; new matchedA: channel;
+       !( new s: linksecret; new ea: eid; new linkch: channel;
+          event InviteCreated(ea);
+          out(c, ea);                                 (* E_A is not a secret; only B has s *)
+          ( out(linkch, (ea, s))
+          | !A_tnull(OK, false, s, ea, dictA, matchedA)
+          | B_tnull(OK, false, linkch, dictA, matchedA) ) ) ) )

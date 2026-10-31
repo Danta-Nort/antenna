@@ -1,0 +1,47 @@
+[package]
+name = "antenna-sys"
+description = "Minimal OS FFI for the Antenna daemon (macOS: process info for agent binding, peer audit token, debugger denial). The only crate of the workspace with unsafe code"
+license = "AGPL-3.0-only"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+# The only crate of the workspace with `unsafe` (PORTABILITY §6 item 1, D-P-1):
+# `unsafe_code = "deny"` instead of the root's `forbid`; `#[allow(unsafe_code)]` only on FFI wrappers with `// SAFETY:`.
+# Only safe functions are exported. On Linux only `fds` is built (CLOEXEC on inherited descriptors, D-P-8).
+[target.'cfg(unix)'.dependencies]
+libc = "0.2.189"
+
+# Windows (D-134, WP-1): Microsoft's bindings (MIT OR Apache-2.0), the version already in `Cargo.lock`; each feature
+# comes with the wrapper that needs it (W1).
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61.2", features = [
+    "Win32_Foundation",
+    "Win32_Security",
+    "Win32_Security_Authorization",
+    "Win32_Storage_FileSystem",
+    "Win32_System_Console",
+    "Win32_System_JobObjects",
+    "Win32_System_Pipes",
+    "Win32_System_SystemInformation",
+    "Win32_System_SystemServices",
+    "Win32_System_Threading",
+] }
+# The control pipe (D-135): tokio's named pipes; their one unsafe constructor (security attributes) is called here.
+tokio = { workspace = true }
+
+[lints.rust]
+unsafe_code = "deny"
+unsafe_op_in_unsafe_fn = "deny"
+missing_docs = "warn"
+
+[lints.clippy]
+all = { level = "warn", priority = -1 }
+undocumented_unsafe_blocks = "deny"
+# The same as the workspace lints (root Cargo.toml): this crate keeps its own table for `unsafe_code`.
+dbg_macro = "warn"
+todo = "warn"
+unimplemented = "warn"
+significant_drop_in_scrutinee = "warn"
+allow_attributes_without_reason = "warn"

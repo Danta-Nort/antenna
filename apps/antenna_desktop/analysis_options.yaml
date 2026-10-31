@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - build/**
+    - macos/**
+    - linux/**
+    - windows/**
+  language:
+    strict-casts: true
+    strict-raw-types: true
+
+linter:
+  rules:
+    - prefer_single_quotes
+    - prefer_final_locals
+    - always_declare_return_types
+    - avoid_print
+    - unawaited_futures
+    - directives_ordering
+    - sort_child_properties_last

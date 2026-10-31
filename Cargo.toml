@@ -1,0 +1,109 @@
+# Cargo workspace of Antenna.
+# Licenses (SPEC §16): protocol and formats are Apache-2.0 (antenna-proto); the application is AGPL-3.0-only
+# (antenna-core, antennad, antenna-cli, antenna-files, antenna-sys, antenna-update, antenna-release).
+# spikes/ are one-off stack checks (stage 0), NOT workspace members: each has its own [workspace] and lockfile.
+
+[workspace]
+resolver = "3"
+members = [
+    "crates/antenna-proto",
+    "crates/antenna-core",
+    "crates/antennad",
+    "crates/antenna-cli",
+    "crates/antenna-files",
+    "crates/antenna-sys",
+    "crates/antenna-update",
+    "crates/antenna-release",
+]
+exclude = ["spikes"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.99"
+publish = false
+
+[workspace.dependencies]
+antenna-proto = { path = "crates/antenna-proto" }
+antenna-core = { path = "crates/antenna-core" }
+antenna-files = { path = "crates/antenna-files" }
+antenna-sys = { path = "crates/antenna-sys" }
+antenna-update = { path = "crates/antenna-update" }
+
+serde = { version = "1", features = ["derive"] }
+serde_bytes = "0.11"
+serde_json = "1"
+ciborium = "0.2.2"
+clap = { version = "4.6", features = ["derive", "env"] }
+data-encoding = "2.11"
+futures = "0.3"
+async-trait = "0.1"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+rustix = { version = "1.1", features = ["process", "termios", "stdio", "fs"] }
+tempfile = "3"
+
+# --- Cryptography of v0.1 slice 1 (SPEC §7, §14: chacha20poly1305, blake3, hkdf, argon2). The RustCrypto generation
+# --- matches libsignal's (hkdf/hmac 0.13, sha2 0.11, aead 0.6) to avoid duplicates (STACK.md, 0.15).
+argon2 = { version = "0.6.0", default-features = false, features = ["alloc", "zeroize"] }
+chacha20poly1305 = "0.11.0"
+hkdf = "0.13"
+hmac = "0.13"
+sha2 = "0.11"
+blake3 = "1.8"
+subtle = "2.6"
+zeroize = { version = "1.9", features = ["derive"] }
+rand = "0.9"
+ed25519-dalek = "=3.0.0"
+# The same spqr that libsignal pulls in (same git URL and tag => one package in the tree), only to read the PQ
+# ratchet version
+spqr = { git = "https://github.com/signalapp/SparsePostQuantumRatchet.git", tag = "v1.6.0" }
+# noq only for downcasting HandshakeData (the negotiated TLS group); iroh does not re-export this type
+noq = "=1.4.0"
+rustls = { version = "0.23", default-features = false, features = ["aws_lc_rs"] }
+# ECDSA P-256 verification of owner proofs (D-102): the same aws-lc-rs that rustls and iroh already build as their TLS
+# provider, with the same features, so nothing new enters the build (`cargo tree -d` unchanged).
+aws-lc-rs = { version = "=1.18.1", default-features = false, features = ["aws-lc-sys"] }
+
+# --- The stack verified by the stage 0 spikes (docs/STACK.md). Use it in a crate as `foo = { workspace = true }`;
+# --- change versions only together with STACK.md.
+iroh = { version = "=1.4.1", features = ["tls-aws-lc-rs"] }
+iroh-blobs = "=0.103.0"
+libsignal-protocol = { git = "https://github.com/signalapp/libsignal", rev = "e8cc2dddd578859b4a029c9c94670b24ce2b616a", features = ["mlkem1024"] } # tag v0.103.1
+libcrux-kem = "=0.0.9"
+libcrux-ml-dsa = "=0.0.10"
+rmcp = { version = "=3.5.0", features = ["server", "transport-io", "macros"] }
+biscuit-auth = "=6.0.0"
+rusqlite = { version = "=0.40.2", features = ["bundled-sqlcipher-vendored-openssl"] }
+tokio = { version = "1.53", features = ["full"] }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
+# Debugging leftovers and stubs never ship.
+dbg_macro = "warn"
+todo = "warn"
+unimplemented = "warn"
+# A lock guard in an `if let` or `match` scrutinee lives until the end of the whole expression (the deadlocks in
+# TROUBLESHOOTING "Locks and the daemon" and in the v0.2 daemon notes): bind the locked value with its own `let` first.
+significant_drop_in_scrutinee = "warn"
+# Every `#[allow]` says why.
+allow_attributes_without_reason = "warn"
+
+[profile.release]
+overflow-checks = true
+
+# Dependencies are built with optimization in debug: Argon2id (64 MiB), ML-KEM/ML-DSA, PQXDH and SQLCipher at -O0
+# slow the tests down tenfold and more. Our own code stays debug (debug-assertions, overflow-checks).
+[profile.dev.package."*"]
+opt-level = 2
+debug = false
+
+# antenna-files: the STREAM cipher is generic (`EncryptorBE32<ChaCha20Poly1305>`) and is instantiated in this crate; at
+# -O0 encryption ran at 7 MB/s instead of ~580 MB/s (TROUBLESHOOTING "x-files", D-F-12). The dev profile's
+# debug-assertions and overflow-checks stay.
+[profile.dev.package.antenna-files]
+opt-level = 2

@@ -1,0 +1,9 @@
+cipher_version=4.14.0 community provider=openssl OpenSSL 3.6.3 9 Jun 2026 sqlite=3.51.3
+file 12288 bytes; plain SQLite header: false; plaintext found in file: false
+reopen with right key: "secret message"
+2026-10-02 06:55:43.392: ERROR CORE sqlcipher_page_cipher: hmac check failed for pgno=1
+2026-10-02 06:55:43.392: ERROR CORE sqlite3Codec: error decrypting page 1 data: 1
+2026-10-02 06:55:43.392: ERROR CORE sqlcipher_codec_ctx_set_error 1
+reopen with wrong key: rejected (file is not a database)
+rekey OK, rows=1
+DONE

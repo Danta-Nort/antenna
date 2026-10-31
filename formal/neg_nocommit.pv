@@ -1,0 +1,22 @@
+(* SPDX-License-Identifier: Apache-2.0 *)
+(* =====================================================================================================
+   NEGATIVE CONTROL: B reveals N_B right away in M1 (the commitment hides nothing).
+   A man-in-the-middle attack with a weak SAS is expected: having seen N_B, the attacker grinds N_A' to match the code that A has already
+   shown in its own session. Proves that the SAS model is genuinely "weak" and that commit-then-reveal (§14 C2)
+   is what Q1–Q2 of the main scenario rest on.
+   The model is truncated after owner A's decision and after the code entry on B (libsignal does not take part): the SAS properties are decided
+   earlier, and with N_B revealed, saturation of the full model did not terminate (README, "Negative controls").
+   ===================================================================================================== *)
+
+(* EXPECT false — Q1 of the main scenario: the code accepted by B belongs to a different transcript *)
+query h: bitstring, t: thash, code: sascode; event(B_CodeOK(h, t)) ==> event(A_ShowSAS(t, code)).
+(* EXPECT false — consequence: owner A confirms a transcript that B never saw (a link with an intermediary) *)
+query h: bitstring, t: thash; event(OwnerA_Confirm(h, t)) ==> event(B_CodeOK(h, t)).
+
+process
+  ( !( new dictA: channel; new matchedA: channel;     (* owner A and everyone they talk to by voice *)
+       ( !( new s: linksecret; new ea: eid;
+            event InviteCreated(ea);
+            out(c, (ea, s));                          (* the link is intercepted *)
+            A_tnull(NOCOMMIT, false, s, ea, dictA, matchedA) )
+       | !B_tnull(NOCOMMIT, false, c, dictA, matchedA) ) ) )   (* B takes the link from the attacker: it may be substituted *)

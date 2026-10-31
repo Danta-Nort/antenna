@@ -1,0 +1,20 @@
+(* SPDX-License-Identifier: Apache-2.0 *)
+(* =====================================================================================================
+   NEGATIVE CONTROL: A does not check that N_B opens C_B (§8 A6 skipped).
+   An attack is expected: the attacker completes the session with B, learns its SAS, and in the session with A grinds N_B' after N_A.
+   The model is truncated after owner A's decision and after the code entry on B (libsignal does not take part): the SAS properties are decided
+   earlier, and with N_B revealed, saturation of the full model did not terminate (README, "Negative controls").
+   ===================================================================================================== *)
+
+(* EXPECT false — Q1 of the main scenario: the code accepted by B belongs to a different transcript *)
+query h: bitstring, t: thash, code: sascode; event(B_CodeOK(h, t)) ==> event(A_ShowSAS(t, code)).
+(* EXPECT false — consequence: owner A confirms a transcript that B never saw (a link with an intermediary) *)
+query h: bitstring, t: thash; event(OwnerA_Confirm(h, t)) ==> event(B_CodeOK(h, t)).
+
+process
+  ( !( new dictA: channel; new matchedA: channel;     (* owner A and everyone they talk to by voice *)
+       ( !( new s: linksecret; new ea: eid;
+            event InviteCreated(ea);
+            out(c, (ea, s));                          (* the link is intercepted *)
+            A_tnull(NOCHECK, false, s, ea, dictA, matchedA) )
+       | !B_tnull(NOCHECK, false, c, dictA, matchedA) ) ) )   (* B takes the link from the attacker: it may be substituted *)

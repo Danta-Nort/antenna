@@ -1,0 +1,56 @@
+(* SPDX-License-Identifier: Apache-2.0 *)
+(* =====================================================================================================
+   pairing v1: the MAIN scenario, the strongest attacker.
+   - Transport T-null: TLS is compromised (the attacker sets X and the peers' keys itself, reads and changes everything).
+   - The link is intercepted AND can be substituted: the attacker knows E_A and s and can give B any link.
+   - The SAS is weak (the attacker grinds its own field to match any code if it knows the other inputs of TH).
+   - Sessions and invites are unbounded and run in parallel; owner A has many invites at once and talks to many
+     people, and the voice does not name the session: "it matched" is bound to an invite only by the code that the owner enters (v1).
+   What remains: only the owners' voice channel (authentic, not secret) and libsignal (the identity from TH).
+   Run: proverif -lib formal/pairing_v1 formal/pairing_v1.pv   (or formal/run.sh)
+   ===================================================================================================== *)
+
+(* --- Q0. Sanity checks: an honest run reaches the end on both sides. EXPECT false ×2 (reachable) --- *)
+query h: bitstring, t: thash, ia: G, ib: G, sk: key; event(A_Activated(h, t, ia, ib, sk)).
+query h: bitstring, t: thash, ia: G, ib: G, sk: key; event(B_Activated(h, t, ia, ib, sk)).
+
+(* --- Q1. SAS / commit-then-reveal: if node B accepted a code, it is the code of THE SAME transcript that A showed.
+       EXPECT true --- *)
+query h: bitstring, t: thash, code: sascode; event(B_CodeOK(h, t)) ==> event(A_ShowSAS(t, code)).
+
+(* --- Q2. Injective agreement A → B: A's link is active ⇒ B sent M7 with the same TH, identities and E2E key.
+       EXPECT true --- *)
+query h: bitstring, t: thash, ia: G, ib: G, sk: key;
+  inj-event(A_Activated(h, t, ia, ib, sk)) ==> inj-event(B_SentInit(h, t, ia, ib, sk)).
+
+(* --- Q3. Injective agreement B → A. EXPECT true --- *)
+query h: bitstring, t: thash, ia: G, ib: G, sk: key;
+  inj-event(B_Activated(h, t, ia, ib, sk)) ==> inj-event(A_Activated(h, t, ia, ib, sk)).
+
+(* --- Q4. Activation only after BOTH owners: B entered the correct code and owner A confirmed.
+       EXPECT true ×2 --- *)
+query h: bitstring, t: thash, ia: G, ib: G, sk: key;
+  event(A_Activated(h, t, ia, ib, sk)) ==> event(B_CodeOK(h, t)) && event(OwnerA_Confirm(h, t)).
+query h: bitstring, t: thash, ia: G, ib: G, sk: key;
+  event(B_Activated(h, t, ia, ib, sk)) ==> event(B_CodeOK(h, t)) && event(OwnerA_Confirm(h, t)).
+
+(* --- Q5. The network "B entered the code" (M5) does NOT by itself prove that owner B entered the code:
+       with compromised TLS and an intercepted link the attacker computes mac_B itself.
+       EXPECT false — this is exactly why A waits for the spoken confirmation (Q4 is still true). --- *)
+query h: bitstring, t: thash; event(A_PeerCodeEntered(t)) ==> event(B_CodeOK(h, t)).
+
+(* --- Q6. Secrecy of the E2E key (PQXDH) of an activated link. EXPECT true ×2 --- *)
+query h: bitstring, t: thash, ia: G, ib: G, sk: key; event(A_Activated(h, t, ia, ib, sk)) && attacker(sk).
+query h: bitstring, t: thash, ia: G, ib: G, sk: key; event(B_Activated(h, t, ia, ib, sk)) && attacker(sk).
+
+(* --- Q7. Downgrade: A (in the model) also accepts a hypothetical SUITE_LEGACY in M1, but never activates
+       a link with it: an honest B does not offer it, and the suite is part of TH. EXPECT true --- *)
+query t: thash, ia: G, ib: G, sk: key; event(A_Activated(hdr(V1, SUITE_LEGACY, KX_PQ), t, ia, ib, sk)).
+
+process
+  ( !( new dictA: channel; new matchedA: channel;     (* owner A and everyone they talk to by voice *)
+       ( !( new s: linksecret; new ea: eid;
+            event InviteCreated(ea);
+            out(c, (ea, s));                          (* the link is intercepted *)
+            A_tnull(OK, false, s, ea, dictA, matchedA) )
+       | !B_tnull(OK, false, c, dictA, matchedA) ) ) )   (* B takes the link from the attacker: it may be substituted *)

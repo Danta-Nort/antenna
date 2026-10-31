@@ -1,0 +1,21 @@
+(* SPDX-License-Identifier: Apache-2.0 *)
+(* =====================================================================================================
+   NEGATIVE CONTROL: A does not wait for the spoken "it matched" from owner B and trusts the network M5
+   (this is how `x invite --confirm` works, allowed only for a test daemon, PROTOCOL §9, D-26).
+   Expected: whoever intercepted the link activates a link with A even though owner B never entered the code.
+   ===================================================================================================== *)
+
+(* EXPECT false — Q4 of the main scenario *)
+query h: bitstring, t: thash, ia: G, ib: G, sk: key;
+  event(A_Activated(h, t, ia, ib, sk)) ==> event(B_CodeOK(h, t)).
+(* EXPECT false — Q2 of the main scenario: A's link is active with an intermediary *)
+query h: bitstring, t: thash, ia: G, ib: G, sk: key;
+  inj-event(A_Activated(h, t, ia, ib, sk)) ==> inj-event(B_SentInit(h, t, ia, ib, sk)).
+
+process
+  ( !( new dictA: channel; new matchedA: channel;     (* owner A and everyone they talk to by voice *)
+       ( !( new s: linksecret; new ea: eid;
+            event InviteCreated(ea);
+            out(c, (ea, s));                          (* the link is intercepted *)
+            A_tnull(AUTOCONFIRM, false, s, ea, dictA, matchedA) )
+       | !B_tnull(AUTOCONFIRM, false, c, dictA, matchedA) ) ) )   (* B takes the link from the attacker: it may be substituted *)

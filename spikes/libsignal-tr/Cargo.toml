@@ -1,0 +1,17 @@
+[package]
+name = "spike-libsignal-tr"
+version = "0.0.0"
+edition = "2024"
+license = "AGPL-3.0-only"
+publish = false
+
+[dependencies]
+# libsignal is not published on crates.io: git only. Tag v0.103.1 = commit e8cc2dddd578859b4a029c9c94670b24ce2b616a
+libsignal-protocol = { git = "https://github.com/signalapp/libsignal", tag = "v0.103.1", features = ["mlkem1024"] }
+# The same spqr as libsignal uses (tag v1.6.0), only to read the PQ ratchet state in the spike
+spqr = { git = "https://github.com/signalapp/SparsePostQuantumRatchet.git", tag = "v1.6.0" }
+rand = "0.9"
+futures = "0.3"
+anyhow = "1"
+
+[workspace]

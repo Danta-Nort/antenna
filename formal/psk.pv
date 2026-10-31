@@ -1,0 +1,49 @@
+(* SPDX-License-Identifier: Apache-2.0 *)
+(* =====================================================================================================
+   pairing v1: the scenario "the link secret has not leaked" (PROTOCOL §15, G6; SPEC §6 item 3).
+   - Transport T-null: TLS is compromised (the attacker sets X and the peers' keys, sees and changes everything).
+   - The link reached B over a private channel: the attacker knows E_A, but not s.
+   What we check: without s the attacker does not pass the psk_mac check and cannot become an intermediary EVEN BEFORE the SAS comparison;
+   in v1 psk_mac authenticates the whole body of M1 (F-3), key confirmation catches the substitution of any field of TH; the keys K_A, K_B,
+   link_id are secret even with TLS broken. The negative control with the v0 MAC is neg_v0mac.pv.
+   ===================================================================================================== *)
+
+(* EXPECT false — sanity check: an honest run is reachable *)
+query h: bitstring, t: thash, ia: G, ib: G, sk: key; event(A_Activated(h, t, ia, ib, sk)).
+
+(* EXPECT true — P1. psk_mac v1: A accepted M1 for (E_A, E_B, X) with body b (v, suite, C_B, P_B, addrs) ⇒ B, who knows s,
+   sent M1 with exactly these values: no field of M1 can be substituted without s even with TLS broken (F-3) *)
+query ea: eid, eb: eid, x: exporter, b: bitstring; event(A_PskOk(ea, eb, x, b)) ==> event(B_SentJoin(ea, eb, x, b)).
+
+(* EXPECT true — P2. Key confirmation already authenticates the whole TH: substitution of any field is detected before the SAS *)
+query ea: eid, eb: eid, x: exporter, h: bitstring, t: thash, ka: key, kb: key, lid: bitstring;
+  event(A_KC(ea, eb, x, h, t, ka, kb, lid)) ==> event(B_Reveal(h, t)).
+(* EXPECT true *)
+query ea: eid, eb: eid, x: exporter, h: bitstring, t: thash, ka: key, kb: key, lid: bitstring;
+  event(B_KC(ea, eb, x, h, t, ka, kb, lid)) ==> event(A_KC(ea, eb, x, h, t, ka, kb, lid)).
+
+(* EXPECT true ×6 — P3. Secrecy of K_A, K_B, link_id on both sides with compromised TLS *)
+query ea: eid, eb: eid, x: exporter, h: bitstring, t: thash, ka: key, kb: key, lid: bitstring;
+  event(A_KC(ea, eb, x, h, t, ka, kb, lid)) && attacker(ka).
+query ea: eid, eb: eid, x: exporter, h: bitstring, t: thash, ka: key, kb: key, lid: bitstring;
+  event(A_KC(ea, eb, x, h, t, ka, kb, lid)) && attacker(kb).
+query ea: eid, eb: eid, x: exporter, h: bitstring, t: thash, ka: key, kb: key, lid: bitstring;
+  event(A_KC(ea, eb, x, h, t, ka, kb, lid)) && attacker(lid).
+query ea: eid, eb: eid, x: exporter, h: bitstring, t: thash, ka: key, kb: key, lid: bitstring;
+  event(B_KC(ea, eb, x, h, t, ka, kb, lid)) && attacker(ka).
+query ea: eid, eb: eid, x: exporter, h: bitstring, t: thash, ka: key, kb: key, lid: bitstring;
+  event(B_KC(ea, eb, x, h, t, ka, kb, lid)) && attacker(kb).
+query ea: eid, eb: eid, x: exporter, h: bitstring, t: thash, ka: key, kb: key, lid: bitstring;
+  event(B_KC(ea, eb, x, h, t, ka, kb, lid)) && attacker(lid).
+
+(* EXPECT true — P4. The network "B entered the code" (M5) cannot be forged while s is undisclosed (compare Q5 of the main scenario) *)
+query h: bitstring, t: thash; event(A_PeerCodeEntered(t)) ==> event(B_CodeOK(h, t)).
+
+process
+  ( !( new dictA: channel; new matchedA: channel;
+       !( new s: linksecret; new ea: eid; new linkch: channel;
+          event InviteCreated(ea);
+          out(c, ea);                                 (* E_A is not a secret; only B has s *)
+          ( out(linkch, (ea, s))
+          | A_tnull(OK, false, s, ea, dictA, matchedA)
+          | B_tnull(OK, false, linkch, dictA, matchedA) ) ) ) )

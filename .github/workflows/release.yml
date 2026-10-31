@@ -1,0 +1,487 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Antenna release (DECISIONS "Releases and variants", D-60, D-81): on a `v*` tag, checks, builds and a GitHub Release in
+# the private repository; manually (Actions → release → Run workflow), the same checks and builds into run artifacts, and
+# a release is created only if the run was started on a tag.
+#
+#   version  version from Cargo.toml = tag (otherwise stop), commit, whether it is a prerelease (the version has a "-")
+#   core     the core on macOS (docs/PORTABILITY.md, M-1…M-18): clippy, all core tests, XNU facts, Seatbelt sandboxes
+#            (file check and agent wake, D-P-12, D-P-13), a live `antenna mcp` (tools/mcp_smoke.py);
+#            arm64 always, Intel with the `intel` flag (a GitHub-hosted Intel image)
+#   linux    core and window tests (against the built antennad), archive antenna-<ver>-linux-x86_64.tar.gz, install.sh
+#            check; the Linux window antenna-desktop-<ver>-linux-x86_64.tar.gz (with the same core inside), check under
+#            Xvfb. Runs only when the repository variable LINUX_ON_GITHUB is 'true'; otherwise the same work is done by
+#            packaging/release-linux.sh on a Linux build machine outside GitHub Actions (D-81)
+#   macos    window check, Antenna-<ver>-macos-arm64.dmg and antenna-<ver>-macos-arm64-cli.tar.gz (packaging/macos/build-dmg.sh)
+#   publish  only on a tag and only if everything above is green: SHA256SUMS.txt, notes (packaging/release-notes.sh),
+#            `gh release create --draft` (with `--prerelease` for versions like 0.1.0-preview.1). The release key never
+#            reaches GitHub (D-82): packaging/release-linux.sh on the build machine adds the Linux files (or, with
+#            --sign-only, takes the ones built here), signs the release manifest, regenerates SHA256SUMS.txt and
+#            publishes the release
+#
+# Runners (D-81). `version`, `core` (arm64), `macos` and `publish` run on the runner named by the repository variable
+# MAC_RUNNER, a JSON value for `runs-on`; unset, it is the self-hosted Apple Silicon Mac with the `antenna` label. Back to
+# GitHub-hosted runners without editing this file: MAC_RUNNER='"macos-14"' and LINUX_ON_GITHUB='true'.
+# A self-hosted runner keeps its workspace between runs, so every job checks out with `clean: false` and then removes
+# everything untracked except target/ (incremental builds survive, stale dist/ and build/ do not); the Cargo cache action
+# runs only on GitHub-hosted runners; tool installs check first and do not upgrade.
+name: release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      intel:
+        description: 'Also check the core on an Intel Mac (GitHub-hosted macos-15-intel)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  FLUTTER_VERSION: '3.47.6'
+  CARGO_TERM_COLOR: always
+  MACOSX_DEPLOYMENT_TARGET: '12.0'   # same as the window (docs/PORTABILITY.md §3)
+  HOMEBREW_NO_AUTO_UPDATE: '1'       # tool installs below must not turn into a Homebrew upgrade on a self-hosted Mac
+  HOMEBREW_NO_INSTALL_CLEANUP: '1'
+
+jobs:
+  version:
+    runs-on: ${{ fromJSON(vars.MAC_RUNNER || '["self-hosted","macOS","ARM64","antenna"]') }}
+    timeout-minutes: 10
+    outputs:
+      version: ${{ steps.v.outputs.version }}
+      commit: ${{ steps.v.outputs.commit }}
+      prerelease: ${{ steps.v.outputs.prerelease }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          clean: false   # a self-hosted runner keeps target/ between runs; the next step cleans the rest
+      - name: Clean the workspace (everything untracked except target/)
+        run: git clean -ffdx -e /target/
+
+      - id: v
+        name: Version (Cargo.toml) and tag
+        run: |
+          set -euo pipefail
+          v="$(packaging/version.sh)"
+          if [ "$GITHUB_REF_TYPE" = tag ] && [ "$GITHUB_REF_NAME" != "v$v" ]; then
+            echo "::error::tag $GITHUB_REF_NAME does not match the version in Cargo.toml ($v): expected v$v"
+            exit 1
+          fi
+          grep -q "^version: $v+" apps/antenna_desktop/pubspec.yaml \
+            || { echo "::error::pubspec.yaml version ≠ $v"; exit 1; }
+          case "$v" in *-*) pre=true ;; *) pre=false ;; esac
+          {
+            echo "version=$v"
+            echo "commit=$(git rev-parse --short=12 HEAD)"
+            echo "prerelease=$pre"
+          } >> "$GITHUB_OUTPUT"
+          echo "Antenna $v, commit $(git rev-parse --short=12 HEAD), prerelease=$pre"
+
+  core:
+    name: core (macOS ${{ matrix.arch }})
+    needs: version
+    strategy:
+      fail-fast: false
+      matrix:
+        # arm64 runs on MAC_RUNNER; macos-15-intel is GitHub's last Intel image (check that the label is still current)
+        include: ${{ fromJSON(inputs.intel && '[{"arch":"arm64"},{"os":"macos-15-intel","arch":"x86_64"}]' || '[{"arch":"arm64"}]') }}
+    runs-on: ${{ matrix.os || fromJSON(vars.MAC_RUNNER || '["self-hosted","macOS","ARM64","antenna"]') }}
+    # A hung test must not hold the runner (or eat hosted macOS minutes): step limits below too
+    timeout-minutes: 75
+    env:
+      AWS_LC_SYS_USE_SYSTEM: '0'   # docs/PORTABILITY.md §3: our own AWS-LC, not the system one
+      ANTENNA_COMMIT: ${{ needs.version.outputs.commit }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          clean: false
+      - name: Clean the workspace (everything untracked except target/)
+        run: git clean -ffdx -e /target/
+
+      - name: PATH (a self-hosted runner under launchd may lack Homebrew and rustup)
+        run: |
+          for d in /opt/homebrew/bin "$HOME/.cargo/bin"; do
+            if [ -d "$d" ]; then echo "$d" >> "$GITHUB_PATH"; fi
+          done
+
+      - name: Rust (version from rust-toolchain.toml)
+        timeout-minutes: 15
+        run: |
+          rustup show active-toolchain || rustup toolchain install
+          rustc -vV
+
+      - name: protoc and cmake (prost for libsignal; cmake just in case for aws-lc-sys)
+        timeout-minutes: 15
+        run: |
+          for f in protobuf cmake; do brew list --formula "$f" >/dev/null 2>&1 || brew install "$f"; done
+          protoc --version
+
+      - name: Cargo cache (GitHub-hosted only; a self-hosted runner keeps target/)
+        if: ${{ runner.environment == 'github-hosted' }}
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: macos-core-${{ matrix.arch }}-${{ hashFiles('Cargo.lock', 'rust-toolchain.toml') }}
+
+      - name: Runner environment (facts for PORTABILITY §5 step 2)
+        run: |
+          echo "runner: $RUNNER_ENVIRONMENT $RUNNER_NAME"
+          sw_vers; uname -m; id
+          echo "ulimit -n: $(ulimit -n)"; launchctl limit maxfiles || true
+          ps -o pid,ppid,user,comm -p $$ -p $PPID || true
+          python3 -c 'import os; p=os.getppid(); print("getsid(1) =", os.getsid(1), "getsid(ppid) =", os.getsid(p))' || true
+
+      - name: Build antennad and antenna
+        id: build
+        timeout-minutes: 30
+        run: |
+          cargo build --locked -p antennad -p antenna-cli
+          target/debug/antenna --version
+
+      # From here on every step runs even if the previous one failed (`!cancelled()`): one run should show everything.
+      - name: clippy -D warnings (macOS cfg branches are not visible on Linux)
+        timeout-minutes: 20
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
+        run: cargo clippy --locked -p antenna-sys -p antenna-proto -p antenna-core -p antennad -p antenna-cli -p antenna-files --all-targets -- -D warnings
+
+      - name: XNU facts, assumptions marked "to verify" (antenna-sys, procinfo)
+        timeout-minutes: 10
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
+        run: |
+          cargo test --locked -p antenna-sys -- --nocapture --test-threads=1
+          cargo test --locked -p antenna-core --lib procinfo -- --nocapture --test-threads=1
+
+      - name: "Core tests (all except the tests through the n0 relay: those are marked ignore)"
+        timeout-minutes: 30
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
+        run: cargo test --locked -p antenna-sys -p antenna-proto -p antenna-core -p antennad -p antenna-cli
+
+      # Seatbelt for the file check worker (D-P-12): FACT lines for reading ~/.ssh, writing outside the sandbox, network
+      # (all denied); what is enabled; the memory limit (daemon watchdog). Then all of antenna-files (corpus, pipeline,
+      # regression tests)
+      - name: File check sandbox (Seatbelt), facts and antenna-files tests
+        timeout-minutes: 20
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
+        run: |
+          cargo test --locked -p antenna-files --test sandbox -- --nocapture --test-threads=1
+          cargo test --locked -p antenna-files
+
+      # Seatbelt for agent wake (D-P-13): FACT lines for writing to "CLAUDE.md" and reading the daemon directory (denied),
+      # direct TCP (denied), through the daemon proxy (allowed); orphans and the lifeline; the whole profile; the daemon
+      # "escape" scenario
+      - name: Agent wake sandbox (Seatbelt), facts
+        timeout-minutes: 15
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
+        run: |
+          cargo test --locked -p antenna-core --lib sandbox::seatbelt -- --nocapture
+          cargo test --locked -p antenna-cli --test wake_sandbox -- --nocapture --test-threads=1
+          cargo test --locked -p antenna-cli --test wake the_sandbox_keeps_the_agent_inside -- --nocapture
+
+      - name: antenna mcp on macOS (initialize, tools/list, binding to the MCP host, no owner commands)
+        timeout-minutes: 10
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
+        run: python3 tools/mcp_smoke.py target/debug
+
+      # GitHub-hosted only: the test opens Calculator and then kills whatever process is named Calculator, which on a
+      # self-hosted Mac would be the desktop user's own window
+      - name: GUI host on a real app (D-P-3), informational
+        timeout-minutes: 10
+        if: ${{ !cancelled() && steps.build.outcome == 'success' && runner.environment == 'github-hosted' }}
+        continue-on-error: true
+        run: cargo test --locked -p antenna-core --lib gui_host -- --ignored --nocapture
+
+      - name: PT_DENY_ATTACH in the release build (M-7), informational
+        timeout-minutes: 10
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
+        continue-on-error: true
+        run: |
+          # Without developer mode (DevToolsSecurity) an lldb attach asks for a password on the Mac's screen and waits
+          if [ "$RUNNER_ENVIRONMENT" = self-hosted ] && ! DevToolsSecurity -status 2>&1 | grep -q 'currently enabled'; then
+            echo "::notice::PT_DENY_ATTACH check skipped: developer mode is off on this Mac (DevToolsSecurity -status)"
+            exit 0
+          fi
+          cargo build --release --locked -p antennad
+          d="$(mktemp -d /tmp/adrel.XXXXXX)"
+          target/release/antennad --data-dir "$d/d" --relay disabled --bind-ip 127.0.0.1 2>"$d/log" & ad_pid=$!
+          sleep 600 & ctl=$!
+          sleep 3
+          echo "== control: lldb to a regular process (should attach if debugging is allowed on the runner)"
+          lldb --batch -p "$ctl" -o 'process detach' 2>&1 | tail -n 5 || true
+          echo "== lldb to the release antennad (expected to be refused)"
+          out="$(lldb --batch -p "$ad_pid" -o 'process detach' 2>&1 || true)"
+          echo "$out" | tail -n 5
+          kill "$ad_pid" "$ctl" || true
+          rm -rf "$d"
+          ! echo "$out" | grep -q 'Process [0-9]* stopped'
+
+  linux:
+    name: linux (x86_64)
+    needs: version
+    # Off by default (D-81): packaging/release-linux.sh builds and checks the Linux files outside GitHub Actions
+    if: ${{ vars.LINUX_ON_GITHUB == 'true' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      ANTENNA_COMMIT: ${{ needs.version.outputs.commit }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build packages (CI runner)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends protobuf-compiler cmake build-essential perl jq \
+            clang ninja-build pkg-config libgtk-3-dev xvfb
+
+      - name: Rust (version from rust-toolchain.toml)
+        run: |
+          rustup show active-toolchain || rustup toolchain install
+          rustc --version
+
+      - name: Cargo cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: linux-cargo-${{ hashFiles('Cargo.lock', 'rust-toolchain.toml') }}
+
+      # The same commands as packaging/release-linux.sh: keep the two in step
+      - name: Core tests (fmt, clippy, all tests)
+        run: |
+          cargo fmt --all --check
+          cargo clippy --workspace --all-targets --locked -- -D warnings
+          cargo clippy --workspace --lib --bins --locked -- -D clippy::unwrap_used -D clippy::panic
+          cargo test --workspace --locked
+          python3 tools/mcp_smoke.py target/debug
+
+      - name: Window against the built antennad (analyze, widgets, live tests, golden)
+        run: |
+          git clone --depth 1 --branch "$FLUTTER_VERSION" https://github.com/flutter/flutter.git "$HOME/flutter"
+          echo "$HOME/flutter/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/flutter/bin:$PATH"
+          cd apps/antenna_desktop
+          flutter pub get
+          flutter analyze
+          flutter test --exclude-tags live
+          # live tests wait for real deliveries: one file at a time, as in packaging/release-linux.sh
+          ANTENNAD_BIN="$GITHUB_WORKSPACE/target/debug/antennad" flutter test --tags live --concurrency=1
+
+      # The golden tests above just confirmed docs/design/screens/ matches the window; keep the two in step with
+      # packaging/release-linux.sh.
+      - name: "Guide: screenshots and check (tools/guide_shots.py, tools/guide_check.py)"
+        run: |
+          python3 tools/guide_shots.py
+          python3 tools/guide_check.py
+
+      - name: Build .tar.gz
+        env:
+          VERSION: ${{ needs.version.outputs.version }}
+        run: packaging/linux/build-tarball.sh
+
+      - name: Check install.sh from the archive (no systemd, in a temporary HOME)
+        run: packaging/linux/check-install.sh dist/antenna-[0-9]*-linux-x86_64.tar.gz
+
+      - name: Window for Linux (.tar.gz, the core is the same release binaries)
+        env:
+          VERSION: ${{ needs.version.outputs.version }}
+          BUILD_NUMBER: ${{ github.run_number }}
+          CORE_BIN_DIR: ${{ github.workspace }}/target/release
+        run: packaging/linux/build-desktop.sh
+
+      - name: Check the window from the archive (contents, ldd, menu entry, start under Xvfb, antenna:// link)
+        run: packaging/linux/check-desktop.sh dist/antenna-desktop-*-linux-x86_64.tar.gz
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: antenna-linux-x86_64
+          path: |
+            dist/*.tar.gz
+            dist/*.sha256
+          if-no-files-found: error
+          retention-days: 7
+
+  macos:
+    name: macos (arm64 .dmg and CLI)
+    needs: version
+    runs-on: ${{ fromJSON(vars.MAC_RUNNER || '["self-hosted","macOS","ARM64","antenna"]') }}   # Apple Silicon
+    timeout-minutes: 90
+    env:
+      ANTENNA_COMMIT: ${{ needs.version.outputs.commit }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          clean: false
+      - name: Clean the workspace (everything untracked except target/)
+        run: git clean -ffdx -e /target/
+
+      - name: PATH (a self-hosted runner under launchd may lack Homebrew and rustup)
+        run: |
+          for d in /opt/homebrew/bin "$HOME/.cargo/bin"; do
+            if [ -d "$d" ]; then echo "$d" >> "$GITHUB_PATH"; fi
+          done
+
+      - name: Rust (version from rust-toolchain.toml)
+        timeout-minutes: 15
+        run: |
+          rustup show active-toolchain || rustup toolchain install
+          rustc --version
+
+      - name: protoc and cmake (prost for libsignal, aws-lc-sys)
+        timeout-minutes: 15
+        run: |
+          for f in protobuf cmake; do brew list --formula "$f" >/dev/null 2>&1 || brew install "$f"; done
+          protoc --version
+
+      # A checkout of its own in the runner's tool cache (not ~/flutter: on a self-hosted Mac that may be the desktop
+      # user's own Flutter): reused when it is already at the pinned tag, moved to it otherwise
+      - name: Flutter ${{ env.FLUTTER_VERSION }}
+        timeout-minutes: 15
+        run: |
+          set -euo pipefail
+          dir="$RUNNER_TOOL_CACHE/flutter"
+          if [ -d "$dir/.git" ] && git -C "$dir" rev-parse -q --verify HEAD >/dev/null; then
+            if [ "$(git -C "$dir" describe --tags --exact-match HEAD 2>/dev/null || true)" != "$FLUTTER_VERSION" ]; then
+              echo "updating $dir to $FLUTTER_VERSION"
+              git -C "$dir" fetch --depth 1 origin "+refs/tags/$FLUTTER_VERSION:refs/tags/$FLUTTER_VERSION"
+              git -C "$dir" checkout --force --detach "refs/tags/$FLUTTER_VERSION"
+            else
+              echo "reusing $dir at $FLUTTER_VERSION"
+            fi
+            git -C "$dir" reset --hard --quiet
+          else
+            rm -rf "$dir"
+            git clone --depth 1 --branch "$FLUTTER_VERSION" https://github.com/flutter/flutter.git "$dir"
+          fi
+          echo "$dir/bin" >> "$GITHUB_PATH"
+
+      - name: Cargo cache (GitHub-hosted only; a self-hosted runner keeps target/)
+        if: ${{ runner.environment == 'github-hosted' }}
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: macos-cargo-${{ hashFiles('Cargo.lock', 'rust-toolchain.toml') }}
+
+      - name: Window check (analyze + widget tests; golden images are drawn on Linux, macOS rasterizes fonts differently)
+        timeout-minutes: 20
+        working-directory: apps/antenna_desktop
+        run: |
+          flutter --version
+          flutter pub get
+          flutter analyze
+          flutter test --exclude-tags live test/widget test/host
+
+      - name: Build the .dmg and the CLI archive
+        timeout-minutes: 45
+        env:
+          ARCH: arm64
+          VERSION: ${{ needs.version.outputs.version }}
+          BUILD_NUMBER: ${{ github.run_number }}
+        run: packaging/macos/build-dmg.sh
+
+      - name: Contents of the .dmg (Helpers, signatures, version)
+        timeout-minutes: 10
+        run: |
+          set -euo pipefail
+          dmg="$(ls dist/Antenna-*-macos-arm64.dmg)"
+          mnt="$(mktemp -d)"
+          hdiutil attach -nobrowse -readonly -mountpoint "$mnt" "$dmg"
+          ls -la "$mnt" "$mnt/Antenna.app/Contents/MacOS" "$mnt/Antenna.app/Contents/Helpers"
+          "$mnt/Antenna.app/Contents/Helpers/antenna" --version
+          "$mnt/Antenna.app/Contents/Helpers/antennad" --version
+          codesign --verify --deep --strict --verbose=2 "$mnt/Antenna.app"
+          /usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' -c 'Print :CFBundleShortVersionString' \
+            "$mnt/Antenna.app/Contents/Info.plist"
+          hdiutil detach "$mnt"
+          rmdir "$mnt"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: antenna-macos-arm64
+          path: |
+            dist/*.dmg
+            dist/*-cli.tar.gz
+            dist/*.sha256
+          if-no-files-found: error
+          # the release keeps the files; artifacts count against the plan's storage quota
+          retention-days: 7
+
+  publish:
+    name: GitHub Release
+    needs: [version, core, linux, macos]
+    # Only on a tag and only if everything above is green; `linux` may be skipped on purpose (LINUX_ON_GITHUB is not
+    # 'true'), and then the release is a draft until packaging/release-linux.sh adds the Linux files and publishes it
+    if: >-
+      ${{ !cancelled() && github.ref_type == 'tag'
+      && needs.version.result == 'success' && needs.core.result == 'success' && needs.macos.result == 'success'
+      && (needs.linux.result == 'success' || (needs.linux.result == 'skipped' && vars.LINUX_ON_GITHUB != 'true')) }}
+    runs-on: ${{ fromJSON(vars.MAC_RUNNER || '["self-hosted","macOS","ARM64","antenna"]') }}
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    env:
+      LINUX_PENDING: ${{ needs.linux.result == 'skipped' && '1' || '' }}
+      SIGNATURE_PENDING: '1'   # the notes of the draft say that the signed release manifest follows (D-82)
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          clean: false
+      - name: Clean the workspace (everything untracked except target/)
+        run: git clean -ffdx -e /target/
+
+      - name: gh (preinstalled on GitHub-hosted runners)
+        timeout-minutes: 10
+        run: |
+          if [ -d /opt/homebrew/bin ]; then echo /opt/homebrew/bin >> "$GITHUB_PATH"; PATH="/opt/homebrew/bin:$PATH"; fi
+          command -v gh >/dev/null || brew install gh
+          gh --version
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+
+      - name: Checksums and notes
+        env:
+          COMMIT: ${{ needs.version.outputs.commit }}
+        run: |
+          set -euo pipefail
+          cd dist
+          rm -f ./*.sha256
+          ls -la
+          shasum -a 256 -- * | tee SHA256SUMS.txt
+          cd ..
+          # LINUX_PENDING=1: the notes say that the Linux files follow (release-linux.sh rewrites them when it publishes)
+          packaging/release-notes.sh "$GITHUB_REF_NAME" "$COMMIT" "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" > notes.md
+
+      - name: gh release create
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PRERELEASE: ${{ needs.version.outputs.prerelease }}
+          VERSION: ${{ needs.version.outputs.version }}
+        run: |
+          set -euo pipefail
+          # Always a draft: the release manifest is signed on the build machine, which holds the release key (D-82)
+          flags=(--verify-tag --title "Antenna $VERSION" --notes-file notes.md --draft)
+          [ "$PRERELEASE" = true ] && flags+=(--prerelease)
+          if [ -n "$LINUX_PENDING" ]; then
+            echo "::notice::draft release: run packaging/release-linux.sh $GITHUB_REF_NAME on the Linux build machine to add the Linux files, sign the release manifest and publish it"
+          else
+            echo "::notice::draft release: run packaging/release-linux.sh --sign-only $GITHUB_REF_NAME on the build machine to sign the release manifest and publish it"
+          fi
+          gh release create "$GITHUB_REF_NAME" "${flags[@]}" dist/*
+          gh release view "$GITHUB_REF_NAME" --json url,isDraft,isPrerelease,assets \
+            --jq '{url, isDraft, isPrerelease, assets: [.assets[].name]}'

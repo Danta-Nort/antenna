@@ -1,0 +1,18 @@
+(* SPDX-License-Identifier: Apache-2.0 *)
+(* =====================================================================================================
+   NEGATIVE CONTROL F-3: psk_mac as in v0, only X ‖ E_A ‖ E_B, without the body of M1. TLS is compromised,
+   the link secret has not leaked. Expected: the attacker transparently relays the B → A connection with the same X and changes the body of M1
+   (C_B, P_B, addrs, suite), and A accepts the psk_mac. In v1 (psk.pv, P1) it is true.
+   ===================================================================================================== *)
+
+(* EXPECT false — P1 from psk.pv *)
+query ea: eid, eb: eid, x: exporter, b: bitstring; event(A_PskOk(ea, eb, x, b)) ==> event(B_SentJoin(ea, eb, x, b)).
+
+process
+  ( !( new dictA: channel; new matchedA: channel;
+       !( new s: linksecret; new ea: eid; new linkch: channel;
+          event InviteCreated(ea);
+          out(c, ea);                                 (* E_A is not a secret; only B has s *)
+          ( out(linkch, (ea, s))
+          | A_tnull(V0MAC, false, s, ea, dictA, matchedA)
+          | B_tnull(V0MAC, false, linkch, dictA, matchedA) ) ) ) )

@@ -1,0 +1,36 @@
+[package]
+name = "spike-combined"
+version = "0.0.0"
+edition = "2024"
+license = "AGPL-3.0-only"
+publish = false
+
+# Compatibility of the whole stack in ONE dependency tree (as it will be in antenna-core): does it resolve,
+# does it build, which crates are duplicated.
+#   cargo build                      — variant A: without libcrux-kem (builds)
+#   cargo build --features xwing     — variant B: + libcrux-kem (X-Wing) => libcrux-ml-kem 0.0.10
+#                                      with features incremental (spqr) + rand (libcrux-kem) does not compile
+#   + uncomment [patch.crates-io] below — variant C: libcrux-ml-kem and libcrux-kem from git main
+#   (ml-kem alone does not build: libcrux-kem 0.0.9 is incompatible with the main API). Script: ./variants.sh
+[dependencies]
+iroh = { version = "=1.3.0", features = ["tls-aws-lc-rs"] }
+iroh-blobs = "=0.103.0"
+libsignal-protocol = { git = "https://github.com/signalapp/libsignal", rev = "e8cc2dddd578859b4a029c9c94670b24ce2b616a", features = ["mlkem1024"] }
+libcrux-kem = { version = "=0.0.9", optional = true }
+libcrux-ml-dsa = "=0.0.10"
+rmcp = { version = "=3.5.0", features = ["server", "transport-io", "macros"] }
+biscuit-auth = "=6.0.0"
+rusqlite = { version = "=0.40.2", features = ["bundled-sqlcipher-vendored-openssl"] }
+tokio = { version = "1", features = ["full"] }
+rand09 = { package = "rand", version = "0.9" }
+rand010 = { package = "rand", version = "0.10", optional = true }
+rand_core010 = { package = "rand_core", version = "0.10", optional = true }
+
+[features]
+xwing = ["dep:libcrux-kem", "dep:rand010", "dep:rand_core010"]
+
+# [patch.crates-io]
+# libcrux-ml-kem = { git = "https://github.com/cryspen/libcrux", rev = "c938b46170bf0628d71fe986101fc77d988fedf2" }
+# libcrux-kem = { git = "https://github.com/cryspen/libcrux", rev = "c938b46170bf0628d71fe986101fc77d988fedf2" }
+
+[workspace]

@@ -1,0 +1,12 @@
+# Every text file has LF line ends in every checkout, Windows included (D-134): tests and `include_str!` read
+# source files byte for byte, and Git for Windows converts to CRLF by default (`core.autocrlf`).
+* text=auto eol=lf
+
+# Byte for byte as they are: test fixtures and vendored license texts.
+crates/antenna-files/tests/corpus/** -text
+*.pdf binary
+**/fonts/OFL-*.txt -text
+
+# Windows command scripts need CRLF.
+*.bat text eol=crlf
+*.cmd text eol=crlf

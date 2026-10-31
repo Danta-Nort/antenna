@@ -1,0 +1,23 @@
+(* SPDX-License-Identifier: Apache-2.0 *)
+(* =====================================================================================================
+   PQ NEGATIVE CONTROL: TLS with X25519 only (pq = false), the link is intercepted, a quantum attacker in phase 1.
+   Expected: X, K_A and link_id of an honest session are revealed in phase 1 ("harvest now, decrypt later").
+   Shows that T1 in tls.pv holds precisely because of ML-KEM-768 in TLS. KCONLY truncation as in tls.pv.
+   (The E2E key is still not revealed: ML-KEM-1024 in PQXDH holds it; see e2e_pq.pv, where TLS is broken entirely.)
+   ===================================================================================================== *)
+
+(* EXPECT false ×3 — T1 from tls.pv for X, K_A and link_id *)
+query ea: eid, eb: eid, x: exporter, h: bitstring, t: thash, ka: key, kb: key, lid: bitstring;
+  event(B_KC(ea, eb, x, h, t, ka, kb, lid)) && event(InviteCreated(ea)) && attacker(x).
+query ea: eid, eb: eid, x: exporter, h: bitstring, t: thash, ka: key, kb: key, lid: bitstring;
+  event(B_KC(ea, eb, x, h, t, ka, kb, lid)) && event(InviteCreated(ea)) && attacker(ka).
+query ea: eid, eb: eid, x: exporter, h: bitstring, t: thash, ka: key, kb: key, lid: bitstring;
+  event(B_KC(ea, eb, x, h, t, ka, kb, lid)) && event(InviteCreated(ea)) && attacker(lid).
+
+process
+  ( !( new dictA: channel; new matchedA: channel;
+       ( !( new s: linksecret; new eka: esk;
+            event InviteCreated(epk(eka));
+            out(c, (epk(eka), s));                    (* the link is intercepted *)
+            A_tls(KCONLY, false, true, s, eka, dictA, matchedA) )
+       | !B_tls(KCONLY, false, true, c, dictA, matchedA) ) ) )

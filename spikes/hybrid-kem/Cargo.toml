@@ -1,0 +1,14 @@
+[package]
+name = "spike-hybrid-kem"
+version = "0.0.0"
+edition = "2024"
+license = "AGPL-3.0-only"
+publish = false
+
+[dependencies]
+libcrux-kem = "=0.0.9"
+x-wing = { version = "=0.1.1", features = ["getrandom"] }
+rand = "0.10"
+rand_core = "0.10"
+
+[workspace]

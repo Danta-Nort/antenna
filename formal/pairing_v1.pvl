@@ -1,0 +1,399 @@
+(* SPDX-License-Identifier: Apache-2.0 *)
+(* =====================================================================================================
+   Formal model of pairing v1 (docs/PROTOCOL.md §3–§11, combination points §14 C1–C8): the shared part.
+   v1 versus v0: psk_mac covers the whole body of M1 (F-3); owner A confirms the link with the ENTERED code (F-4,
+   CONTROL.md §6), which is why the human channel here is shared by all of the owner's invites rather than one session.
+   ProVerif 2.05, a symbolic Dolev–Yao model. The scenarios (who knows what, which transport) are in the *.pv files next to this one;
+   run with formal/run.sh; the mapping of model steps to specification sections and all assumptions are in formal/README.md.
+
+   Abstractions (in detail and with justification: README.md):
+   - Hash, HKDF, HMAC are free constructors without destructors (one-way, collision-free). Different
+     domain separation labels "x/pair/v0/..." = different function symbols (the labels differ, the fields are fixed-length
+     or in lp(), see §7).
+   - The SAS (C7) is a WEAK function: 6 digits are not second-preimage resistant. An attacker who knows all the other
+     inputs of TH grinds its own field to match any code given in advance (forge_na, forge_nb): a symbolic rendering of
+     an offline search over 10^6 variants. Only the ordering stops it: it must fix its own contribution before it
+     sees the honest side's last random contribution (commit-then-reveal, §14 C2). The probability of guessing the code
+     blindly (10^-6) is invisible to the symbolic model; it is a separate probabilistic argument (README.md).
+   - The human channel: voice/in person. dictA: owner A reads out the code of one of THEIR invites to one of
+     the people they talk to; matchedA: that person says "it matched" about the code read out to them, and owner A
+     enters THAT code in `x pairing confirm`. The channels are shared by all of the owner's invites and all the people they talk to:
+     people do not tell sessions apart; only the code binds "it matched" to an invite. Authentic (the attacker cannot
+     insert its own word), but not secret (the attacker hears the code).
+   - libsignal PQXDH (C8): at the level of binding identities to the transcript: X25519 (the DH equation), XEdDSA signatures
+     with the same identity key, ML-KEM, AEAD. Triple Ratchet is not modeled (verified by Signal).
+   - The TLS 1.3 transport: two variants of wrappers at the end of the file:
+       T-null: the transport is entirely the attacker's (compromised): the attacker tells each side the exporter X,
+               the peer's key and the TLS group;
+       T-tls : an abstraction of TLS 1.3 1-RTT with mutual authentication by raw Ed25519 keys (iroh EndpointId),
+               the hybrid X25519 + ML-KEM-768 exchange, X = Exporter(key schedule, transcript, both keys).
+               For simplicity the TLS records (M1…M8) in T-tls go in the clear; this only strengthens the attacker.
+   ===================================================================================================== *)
+
+set preciseActions = trueWithoutArgsInNames.
+(* Each input of one session receives exactly one message; names depend only on the session number.
+   Without this ProVerif "merges" sessions and finds false attacks on commit-then-reveal (README "Precision"). *)
+
+free c: channel.             (* the network and the relay: the attacker reads, changes, delays and inserts everything *)
+
+type eid.          (* EndpointId: the Ed25519 public key of an ephemeral endpoint (E_A, E_B) *)
+type esk.          (* the endpoint's secret key *)
+type exporter.     (* X = TLS-Exporter("EXPORTER-x-pair-v0", "", 32) *)
+type linksecret.   (* s: the link secret *)
+type nonce.        (* N_A, N_B *)
+type thash.        (* TH *)
+type sascode.      (* the 6 SAS digits *)
+type key.          (* symmetric keys: K_psk, PRK, K_A, K_B, libsignal keys *)
+type G.            (* X25519 group elements *)
+type exponent.     (* secret X25519 scalars *)
+type kemsk.        (* ML-KEM secret key *)
+type kempub.       (* ML-KEM encapsulation key *)
+type coins.        (* ML-KEM encapsulation randomness *)
+type variant.      (* the switch for negative controls (deliberately broken versions of the protocol) *)
+
+(* --------------------------------------------------------------------------------------------------
+   Constants
+   -------------------------------------------------------------------------------------------------- *)
+const V1: bitstring.            (* pairing version 1 *)
+const SUITE1: bitstring.        (* SUITE from §7: "x-pair/1;…" *)
+const SUITE_LEGACY: bitstring.  (* a hypothetical "old" suite: in the model A ACCEPTS it (the code does not), §8 A3 *)
+const KX_PQ: bitstring.         (* "X25519MLKEM768" *)
+const L_KC, L_CODE, L_OWNER: bitstring.   (* "key-confirm", "code-entered", "owner-confirmed" *)
+const L_INIT, L_ACK: bitstring.           (* L_INIT, L_ACK §7 *)
+const SERVER, CLIENT: bitstring.(* the server and client CertificateVerify labels in the TLS abstraction *)
+const g: G.
+
+const OK, NOCOMMIT, NOCHECK, AUTOCONFIRM, NOCODE, NOHDR, NOPIN, V0MAC, KCONLY: variant.
+(* OK          — the protocol as in PROTOCOL.md;
+   NOCOMMIT    — B reveals N_B right away in M1 (the commitment hides nothing);
+   NOCHECK     — A does not check that N_B opens C_B (§8 A6);
+   AUTOCONFIRM — A does not wait for the spoken "it matched" (as `x invite --confirm`, §9);
+   NOCODE      — owner A confirms "yes" without a code (as in pairing v0 / slice 1): the "yes" may go to the wrong
+                 invite (F-4);
+   NOHDR       — the version and the suite are not part of TH (§7, C3);
+   NOPIN       — B does not check the bundle's identity against P_A.identity_key from TH (§8 B8, C8);
+   V0MAC       — psk_mac as in v0: only X ‖ E_A ‖ E_B, without the body of M1 (F-3);
+   KCONLY      — NOT a corruption but a truncation: the protocol as is, but the sides stop after key confirmation (M4).
+                 For queries about the secrecy of X, K_A, K_B, link_id with intact TLS: the later steps do not use them
+                 (afterwards K_A, K_B go only into the MACs of M5/M6), and the full model with TLS did not saturate (README). *)
+
+(* --------------------------------------------------------------------------------------------------
+   Primitives
+   -------------------------------------------------------------------------------------------------- *)
+(* X25519 / Diffie–Hellman *)
+fun exp(G, exponent): G.
+equation forall x: exponent, y: exponent; exp(exp(g, x), y) = exp(exp(g, y), x).
+
+(* Signature with the libsignal identity key (XEdDSA with the same scalar as for DH) *)
+fun g2b(G): bitstring [typeConverter].
+fun k2b(kempub): bitstring [typeConverter].
+fun sign(exponent, bitstring): bitstring.
+reduc forall k: exponent, m: bitstring; checksig(sign(k, m), exp(g, k)) = m.
+
+(* The endpoint's Ed25519 key (iroh EndpointId): the CertificateVerify signature in TLS *)
+fun epk(esk): eid.
+fun esign(esk, bitstring): bitstring.
+reduc forall k: esk, m: bitstring; everify(esign(k, m), epk(k)) = m.
+
+(* ML-KEM (ML-KEM-768 in TLS, ML-KEM-1024 in PQXDH) *)
+fun kempk(kemsk): kempub.
+fun kemct(kempub, coins): bitstring.
+fun kemss(kempub, coins): key.
+reduc forall sk: kemsk, r: coins; kemdec(sk, kemct(kempk(sk), r)) = kemss(kempk(sk), r).
+
+(* AEAD (libsignal messages) *)
+fun aenc(key, bitstring, bitstring): bitstring.
+reduc forall k: key, ad: bitstring, m: bitstring; adec(k, ad, aenc(k, ad, m)) = m.
+
+(* TLS 1.3: ephemeral–ephemeral X25519 as a KEM (DHKEM): the client sends g^x = dhpk(x), the server g^y = dhct(g^x, y),
+   the shared secret g^xy = dhss(g^x, y) = dhdec(x, g^y). Without the Diffie–Hellman equation (expensive for ProVerif); the only thing lost
+   is the ability to forward someone else's g^y to another client, which gives the attacker nothing (it does not know the secret). *)
+fun dhpk(exponent): G.
+fun dhct(G, exponent): G.
+fun dhss(G, exponent): key.
+reduc forall x: exponent, y: exponent; dhdec(x, dhct(dhpk(x), y)) = dhss(dhpk(x), y).
+(* Key schedule and exporter *)
+fun hsHybrid(key, key): key.    (* the handshake secret from X25519 + ML-KEM-768 *)
+fun hsClassic(key): key.        (* X25519 only: for the PQ negative control *)
+fun exporterF(key, bitstring, eid, eid): exporter.
+
+(* ---- Combination points of §14 ---- *)
+(* C1 (v1): K_psk = HKDF(psk-salt, s, psk-mac-key);
+   psk_mac = HMAC(K_psk, "x/pair/v1/psk-proof" ‖ X ‖ E_A ‖ E_B ‖ the body of M1), body = u16be(v) ‖ lp(suite) ‖ C_B ‖ party(P_B)
+   ‖ addrs(P_B.addrs); the encoding is unambiguous (PROTOCOL §7), so the body is the m1body structure.
+   pskmac0 is the v0 formula (without the body), only for the V0MAC negative control; the v0 and v1 labels differ. *)
+fun kpsk(linksecret): key.
+fun m1body(bitstring, bitstring, bitstring, bitstring, bitstring): bitstring [data].   (* v, suite, C_B, P_B, addrs *)
+fun pskmac(key, exporter, eid, eid, bitstring): bitstring.
+fun pskmac0(key, exporter, eid, eid): bitstring.
+(* C2: C_B = H(commit ‖ X ‖ N_B) *)
+fun commitB(exporter, nonce): bitstring.
+(* Cleartext structures (encoding, not cryptography).
+   party(P) = lp(identity_key) ‖ root_ed25519 ‖ lp(root_mldsa65) ‖ endpoint: identity_key separately (it is used
+   in libsignal); the rest (link-root Ed25519 + ML-DSA-65, the pairwise endpoint) is in this slice only content of TH,
+   hence a single value. The TH header: v ‖ lp(SUITE) ‖ lp(KX). *)
+fun party(G, bitstring): bitstring [data].
+fun hdr(bitstring, bitstring, bitstring): bitstring [data].
+(* C3: TH = H(transcript ‖ v ‖ SUITE ‖ KX ‖ E_A ‖ E_B ‖ X ‖ C_B ‖ N_A ‖ N_B ‖ party(P_A) ‖ party(P_B)).
+   The fields are grouped: th(pre, N_A, N_B, pp), pre = (hdr, E_A, E_B, X, C_B), pp = (party(P_A), party(P_B)):
+   the same order and the same unambiguous parsing, with fewer arguments for the model's functions. *)
+fun th(bitstring, nonce, nonce, bitstring): thash.
+(* C4: PRK = HKDF-Extract(prk, X ‖ s) *)
+fun prk(exporter, linksecret): key.
+(* C5: K_A, K_B, link_id = HKDF-Expand(PRK, label ‖ TH) *)
+fun kA(key, thash): key.
+fun kB(key, thash): key.
+fun linkid(key, thash): bitstring.
+(* C6: kc_A, kc_B, mac_A, mac_B = HMAC(K, label ‖ TH) *)
+fun mac(key, bitstring, thash): bitstring.
+
+(* C7: SAS = HKDF(sas-salt, TH, sas-digits, 4) mod 10^6 is a WEAK function.
+   forge_na(code, pre, N_B, pp) is an N_A such that SAS(TH) = code; forge_nb is such an N_B.
+   Why these two are enough (README "Weak SAS"): all other fields of TH that the attacker chooses
+   (E_A', E_B', X with broken TLS, C_B', P_A', P_B') are sent no later than N_A' (in M2 or earlier) or
+   before N_A (in M1 or earlier). Grinding on an earlier field requires knowing everything known by the time of N_A'
+   or N_B', so it is no stronger than grinding on N_A' / N_B'. Grinding the commitment C_B is useless: A checks
+   that N_B opens it. *)
+fun sasH(thash): sascode.
+fun forge_na(sascode, bitstring, nonce, bitstring): nonce.
+fun forge_nb(sascode, bitstring, nonce, bitstring): nonce.
+fun sasOf(thash): sascode
+reduc
+  forall t: sascode, pre: bitstring, nb: nonce, pp: bitstring;
+    sasOf(th(pre, forge_na(t, pre, nb, pp), nb, pp)) = t
+  otherwise forall t: sascode, pre: bitstring, na: nonce, pp: bitstring;
+    sasOf(th(pre, na, forge_nb(t, pre, na, pp), pp)) = t
+  otherwise forall t: thash; sasOf(t) = sasH(t).
+
+(* C8: PQXDH. Full libsignal: SK = KDF(DH1 ‖ DH2 ‖ DH3 [‖ DH4] ‖ SS), DH1 = DH(IK_B, SPK_A),
+   DH2 = DH(EK_B, IK_A), DH3 = DH(EK_B, SPK_A), DH4 = DH(EK_B, OPK_A), SS is ML-KEM-1024 to the signed KEM prekey.
+   In the model SK = KDF(DH1 ‖ SS). This coarsening only favors the attacker: each omitted input is just one more
+   obstacle for it, and the attacker computes DH2–DH4 with its own EK anyway. So everything proven (secrecy of SK,
+   agreement) also holds for full PQXDH. The reason is time: with DH2 the query Q2 did not finish within 10 min and 2 GB (README). *)
+fun pqxdh(G, key): key.
+fun kinit(key): key.
+fun kack(key): key.
+
+(* --------------------------------------------------------------------------------------------------
+   Events (what the queries assert)
+   -------------------------------------------------------------------------------------------------- *)
+event InviteCreated(eid).                                        (* A issued a link with E_A *)
+event B_Started(eid).                                            (* B brought up the ephemeral endpoint E_B *)
+event B_SentJoin(eid, eid, exporter, bitstring).                 (* B sent M1: (E_A, E_B, X, the body of M1) *)
+event A_PskOk(eid, eid, exporter, bitstring).                    (* A accepted psk_mac: (E_A, E_B, X, the body of M1) *)
+event B_Reveal(bitstring, thash).                                (* B sent M3 (kc_B) for TH *)
+event A_KC(eid, eid, exporter, bitstring, thash, key, key, bitstring).  (* A checked kc_B: …, K_A, K_B, link_id *)
+event B_KC(eid, eid, exporter, bitstring, thash, key, key, bitstring).  (* B checked kc_A *)
+event A_ShowSAS(thash, sascode).                                 (* A showed the code to the owner *)
+event B_CodeOK(bitstring, thash).                                (* node B: the entered code = SAS(TH) *)
+event A_PeerCodeEntered(thash).                                  (* A received a correct M5 ("B entered the code") *)
+event OwnerA_Confirm(bitstring, thash).                          (* owner A confirmed (A9) *)
+event B_SentInit(bitstring, thash, G, G, key).                   (* B sent M7: v‖SUITE‖KX, TH, IK_A, IK_B, SK *)
+event A_Activated(bitstring, thash, G, G, key).                  (* A's link is active (A12) *)
+event B_Activated(bitstring, thash, G, G, key).                  (* B's link is active (B10) *)
+
+(* --------------------------------------------------------------------------------------------------
+   Side A after the transport (PROTOCOL §8, steps A3–A12). ea, eb, x come from the transport; side A's keys
+   (the libsignal identity ikA; the link-root and the pairwise endpoint, rootA) are created per invite (§8 A5).
+   leakq = true: in phase 1 (a future quantum computer) the attacker gets all X25519 scalars.
+   -------------------------------------------------------------------------------------------------- *)
+let A_after_confirm(v: variant, leakq: bool, h: bitstring, t: thash, ka: key, ikA: exponent, ikB: G) =
+  event OwnerA_Confirm(h, t);
+  (* the SAS negative controls (NOCOMMIT, NOCHECK) are truncated here: their properties are decided before libsignal,
+     and with N_B revealed, saturation of the full model did not terminate (README, "Negative controls") *)
+  if v = NOCOMMIT || v = NOCHECK then 0 else
+  (* A10: the libsignal bundle: identity = P_A.identity_key, the signed prekey and the KEM prekey are signed by the identity *)
+  new spkA: exponent; new pqskA: kemsk;
+  let IKA = exp(g, ikA) in
+  let SPK = exp(g, spkA) in
+  let PQPK = kempk(pqskA) in
+  (if leakq then (phase 1; out(c, spkA))) |
+  (
+  out(c, (mac(ka, L_OWNER, t), IKA, SPK, sign(ikA, g2b(SPK)), PQPK, sign(ikA, k2b(PQPK))));   (* M6 *)
+  (* A11: M7 = PreKeySignalMessage(IK_B, EK_B, ct, AEAD(L_INIT ‖ TH)); IK_B is pinned from TH *)
+  in(c, (ikbR: G, ekbR: G, ct: bitstring, e7: bitstring));
+  if ikbR = ikB then
+  let sk = pqxdh(exp(ikbR, spkA), kemdec(pqskA, ct)) in
+  let (=L_INIT, =t) = adec(kinit(sk), (ikbR, IKA), e7) in
+  (* A12: A's link is active; M8 = SignalMessage(L_ACK ‖ TH) *)
+  event A_Activated(h, t, IKA, ikB, sk);
+  out(c, aenc(kack(sk), (ikbR, IKA), (L_ACK, t)))
+  ).
+
+let A_core(v: variant, leakq: bool, s: linksecret, ea: eid, eb: eid, x: exporter,
+           ikA: exponent, rootA: bitstring, dictA: channel, matchedA: channel) =
+  let pa = party(exp(g, ikA), rootA) in
+  (* A3: M1 join{v, suite, psk_mac, C_B, P_B (with addrs)}; psk_mac is over the fields of the RECEIVED M1 *)
+  in(c, (v1: bitstring, suite1: bitstring, pm: bitstring, cb: bitstring, pb: bitstring, ad: bitstring));
+  if v1 = V1 && (suite1 = SUITE1 || suite1 = SUITE_LEGACY) then
+  let body = m1body(v1, suite1, cb, pb, ad) in
+  if (v = V0MAC && pm = pskmac0(kpsk(s), x, ea, eb)) || (v <> V0MAC && pm = pskmac(kpsk(s), x, ea, eb, body)) then
+  event A_PskOk(ea, eb, x, body);
+  (* A4: from here on the invite is used; parsing P_B *)
+  let party(ikB: G, rootB: bitstring) = pb in
+  (* A5: M2 offer{P_A, N_A} *)
+  new na: nonce;
+  out(c, (pa, na));
+  (* A6: M3 reveal{N_B, kc_B}; check the commitment, TH, keys, kc_B *)
+  in(c, (nb: nonce, kcb: bitstring));
+  if v = NOCHECK || cb = commitB(x, nb) then
+  let h = hdr(v1, suite1, KX_PQ) in
+  let hth = if v = NOHDR then hdr(V1, SUITE1, KX_PQ) else h in
+  let t = th((hth, ea, eb, x, cb), na, nb, (pa, pb)) in
+  let p = prk(x, s) in
+  let ka = kA(p, t) in
+  let kb = kB(p, t) in
+  if kcb = mac(kb, L_KC, t) then
+  event A_KC(ea, eb, x, h, t, ka, kb, linkid(p, t));
+  out(c, mac(ka, L_KC, t));                                   (* M4 key_confirm{kc_A} *)
+  if v = KCONLY then 0 else
+  (* A7: the SAS to owner A; they read the code out to owner B (voice: authentic, but the attacker hears it) *)
+  (* the node does not wait for the person to finish speaking: output to the human channel is asynchronous (a parallel branch) *)
+  let code = sasOf(t) in
+  event A_ShowSAS(t, code);
+  out(c, code);
+  ( out(dictA, code)
+  | (
+  (* A8: M5 code_entered{mac_B} *)
+  in(c, macb: bitstring);
+  if macb = mac(kb, L_CODE, t) then
+  event A_PeerCodeEntered(t);
+  (* A9: owner A's decision, after the spoken "it matched"; `x pairing confirm` carries the code that was confirmed to them,
+     and the daemon accepts "yes" only for the invite with that code (v1, CONTROL §6). Negative controls:
+     AUTOCONFIRM, without the owner; NOCODE, "yes" without a code (v0). *)
+  if v = AUTOCONFIRM then
+    A_after_confirm(v, leakq, h, t, ka, ikA, ikB)
+  else
+    in(matchedA, heard: sascode);
+    if v = NOCODE || heard = code then
+    A_after_confirm(v, leakq, h, t, ka, ikA, ikB)
+  ) ).
+
+(* --------------------------------------------------------------------------------------------------
+   Side B after the transport (PROTOCOL §8, steps B2–B10)
+   -------------------------------------------------------------------------------------------------- *)
+let B_core(v: variant, leakq: bool, s: linksecret, ea: eid, eb: eid, x: exporter,
+           dictA: channel, matchedA: channel) =
+  (* B2: link keys, N_B, C_B, psk_mac; M1 *)
+  new ikB: exponent; new rootB: bitstring; new adB: bitstring;   (* adB: the addrs route hints *)
+  let IKB = exp(g, ikB) in
+  let pb = party(IKB, rootB) in
+  new nb: nonce;
+  let cb = commitB(x, nb) in
+  let h = hdr(V1, SUITE1, KX_PQ) in
+  let body = m1body(V1, SUITE1, cb, pb, adB) in
+  event B_SentJoin(ea, eb, x, body);
+  (if leakq then (phase 1; out(c, ikB))) |
+  (if v = NOCOMMIT then out(c, nb)) |                          (* negative control: N_B is not hidden *)
+  (
+  let pm = if v = V0MAC then pskmac0(kpsk(s), x, ea, eb) else pskmac(kpsk(s), x, ea, eb, body) in
+  out(c, (V1, SUITE1, pm, cb, pb, adB));
+  (* B3: M2 offer{P_A, N_A}; TH, keys; M3 reveal{N_B, kc_B} *)
+  in(c, (pa: bitstring, na: nonce));
+  let party(ikA: G, rootA: bitstring) = pa in
+  let t = th((h, ea, eb, x, cb), na, nb, (pa, pb)) in
+  let p = prk(x, s) in
+  let ka = kA(p, t) in
+  let kb = kB(p, t) in
+  event B_Reveal(h, t);
+  out(c, (nb, mac(kb, L_KC, t)));
+  (* B4: M4 key_confirm{kc_A} *)
+  in(c, kca: bitstring);
+  if kca = mac(ka, L_KC, t) then
+  event B_KC(ea, eb, x, h, t, ka, kb, linkid(p, t));
+  if v = KCONLY then 0 else
+  (* B5: owner B enters the code read out by owner A; the node checks it against SAS(TH) *)
+  in(dictA, code: sascode);                                    (* the code read out by owner A *)
+  if code = sasOf(t) then
+  event B_CodeOK(h, t);
+  out(matchedA, code) |                                        (* "it matched", about this code (asynchronously) *)
+  if v = NOCOMMIT || v = NOCHECK then 0 else (                 (* truncation of the SAS negative controls *)
+  (* B6: M5 code_entered{mac_B} *)
+  out(c, mac(kb, L_CODE, t));
+  (* B7: M6 confirmed{mac_A, bundle} *)
+  in(c, (maca: bitstring, bik: G, bspk: G, bspksig: bitstring, bpq: kempub, bpqsig: bitstring));
+  if maca = mac(ka, L_OWNER, t) then
+  (* B8: the bundle's identity = P_A.identity_key from TH; libsignal checks the signatures of the SPK and the KEM prekey *)
+  if v = NOPIN || bik = ikA then
+  if checksig(bspksig, bik) = g2b(bspk) then
+  if checksig(bpqsig, bik) = k2b(bpq) then
+  new ekB: exponent; new r: coins;
+  let EKB = exp(g, ekB) in
+  let sk = pqxdh(exp(bspk, ikB), kemss(bpq, r)) in
+  event B_SentInit(h, t, bik, IKB, sk);
+  (if leakq then (phase 1; out(c, ekB))) |
+  (
+  out(c, (IKB, EKB, kemct(bpq, r), aenc(kinit(sk), (IKB, bik), (L_INIT, t))));   (* M7 *)
+  (* B9: M8 done{SignalMessage(L_ACK ‖ TH)} *)
+  in(c, e8: bitstring);
+  let (=L_ACK, =t) = adec(kack(sk), (IKB, bik), e8) in
+  (* B10: B's link is active *)
+  event B_Activated(h, t, bik, IKB, sk)
+  )
+  )
+  ).
+
+(* --------------------------------------------------------------------------------------------------
+   Transport T-null: TLS is compromised. The attacker tells each side the peer's key, the exporter X
+   and the TLS group (it can give both the same X; then it is a transparent intermediary with access to everything).
+   leakq: in phase 1 the libsignal X25519 scalars leak (a quantum attacker), the ML-KEM keys do not.
+   -------------------------------------------------------------------------------------------------- *)
+let A_tnull(v: variant, leakq: bool, s: linksecret, ea: eid, dictA: channel, matchedA: channel) =
+  new ikA: exponent; new rootA: bitstring;
+  (if leakq then (phase 1; out(c, ikA))) |
+  (
+  (* A2: the connection and the TLS group check (§5) *)
+  in(c, (eb: eid, x: exporter, grp: bitstring));
+  if grp = KX_PQ then
+  A_core(v, leakq, s, ea, eb, x, ikA, rootA, dictA, matchedA)
+  ).
+
+let B_tnull(v: variant, leakq: bool, linkch: channel, dictA: channel, matchedA: channel) =
+  (* B1: the link (E_A, s) comes from the linkch channel: an open one (interception and substitution) or a private one *)
+  in(linkch, (ea: eid, s: linksecret));
+  new eb: eid;
+  event B_Started(eb);
+  out(c, eb);
+  in(c, (x: exporter, grp: bitstring));
+  if grp = KX_PQ then
+  B_core(v, leakq, s, ea, eb, x, dictA, matchedA).
+
+(* --------------------------------------------------------------------------------------------------
+   Transport T-tls: an abstraction of TLS 1.3 (QUIC, iroh): ClientHello{g^xb, ek_kem} → ServerHello{g^y, ct},
+   the CertificateVerify of the server (E_A) and the client (E_B) over the transcript; the secret = DH ‖ ML-KEM (pq = true) or DH only
+   (pq = false, a negative control); X = Exporter(secret, transcript, E_A, E_B).
+   leakq: in phase 1 the X25519 scalars and Ed25519 keys leak (a "harvest now, decrypt later" quantum attacker);
+   the ML-KEM secret keys never leak.
+   -------------------------------------------------------------------------------------------------- *)
+let A_tls(v: variant, pq: bool, leakq: bool, s: linksecret, eka: esk, dictA: channel, matchedA: channel) =
+  let ea = epk(eka) in
+  new ikA: exponent; new rootA: bitstring;
+  in(c, (gx: G, kpk: kempub));                                 (* ClientHello: the X25519 share and the ML-KEM-768 key *)
+  new y: exponent; new r: coins;
+  let gy = dhct(gx, y) in
+  let kct = kemct(kpk, r) in
+  let tr = (gx, kpk, gy, kct) in
+  out(c, (gy, kct, esign(eka, (tr, SERVER))));                 (* ServerHello + CertificateVerify(E_A) *)
+  in(c, (eb: eid, sigb: bitstring));                           (* the client's Certificate + CertificateVerify (E_B) *)
+  let (=tr, =ea, =CLIENT) = everify(sigb, eb) in
+  let hsk = if pq then hsHybrid(dhss(gx, y), kemss(kpk, r)) else hsClassic(dhss(gx, y)) in
+  let x = exporterF(hsk, tr, ea, eb) in
+  (if leakq then (phase 1; out(c, (y, eka, ikA)))) |
+  A_core(v, leakq, s, ea, eb, x, ikA, rootA, dictA, matchedA).
+
+let B_tls(v: variant, pq: bool, leakq: bool, linkch: channel, dictA: channel, matchedA: channel) =
+  in(linkch, (ea: eid, s: linksecret));
+  new ekb: esk;
+  let eb = epk(ekb) in
+  event B_Started(eb);
+  new xb: exponent; new kd: kemsk;
+  let gx = dhpk(xb) in
+  out(c, (gx, kempk(kd)));
+  in(c, (gy: G, kct: bitstring, siga: bitstring));
+  let tr = (gx, kempk(kd), gy, kct) in
+  let (=tr, =SERVER) = everify(siga, ea) in                    (* the server is the owner of E_A from the link *)
+  out(c, (eb, esign(ekb, (tr, ea, CLIENT))));
+  let hsk = if pq then hsHybrid(dhdec(xb, gy), kemdec(kd, kct)) else hsClassic(dhdec(xb, gy)) in
+  let x = exporterF(hsk, tr, ea, eb) in
+  (if leakq then (phase 1; out(c, (xb, ekb)))) |
+  B_core(v, leakq, s, ea, eb, x, dictA, matchedA).

@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+name: Feature request
+description: An idea that would make Antenna more useful.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: The situation and the problem, before any solution. Who is talking to whom, which agents, which computers.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would help
+      description: How you imagine it working. If another app already does it well, name it.
+  - type: textarea
+    id: security
+    attributes:
+      label: Trust and security
+      description: Should this be allowed at every trust level, or only for some contacts or agents? Anything it must never allow?
