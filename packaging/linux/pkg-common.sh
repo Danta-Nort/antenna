@@ -41,7 +41,9 @@ EOF
   # Only the [Unit]/[Service]/[Install] body is shared with install.sh's template: its header comment talks about
   # filling in placeholders at install time, which does not apply to a package (fixed paths, baked in at build time).
   {
+    # REUSE-IgnoreStart
     echo "# SPDX-License-Identifier: AGPL-3.0-only"
+    # REUSE-IgnoreEnd
     echo "# systemd --user service for the Antenna daemon, from the antenna .deb/.rpm package (D-109). Enable it"
     echo "# yourself: systemctl --user enable --now antennad. Logs: journalctl --user -u antennad"
     sed -n '/^\[Unit\]/,$p' "$ROOT/packaging/linux/antennad.service" \

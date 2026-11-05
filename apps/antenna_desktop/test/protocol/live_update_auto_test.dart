@@ -5,7 +5,7 @@
 // content accepted without a second copy, `duplicate`; another file under the name saved as `report (2).txt`, D-128; an
 // invalid name). Skipped with the reason while the daemon answers these commands `not_implemented` or does not know
 // them (a daemon older than v7).
-// Run: ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test --tags live test/protocol/live_update_auto_test.dart
+// Run: ANTENNAD_BIN=<path to antennad> flutter test --tags live test/protocol/live_update_auto_test.dart
 @Tags(['live'])
 library;
 

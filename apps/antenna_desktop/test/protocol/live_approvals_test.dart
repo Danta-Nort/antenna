@@ -3,7 +3,7 @@
 // a connection without an owner session; approving still needs the password; a request nobody answers closes by
 // itself and the window drops it from the list and the conversation. The daemon runs with a short request lifetime
 // (`--approval-ttl-ms`, test-only; it can only shorten the 10 minutes).
-// Run: ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test test/protocol/live_approvals_test.dart
+// Run: ANTENNAD_BIN=<path to antennad> flutter test test/protocol/live_approvals_test.dart
 @Tags(['live'])
 library;
 

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // App state (AppModel) on top of a REAL daemon: unlock, links, history, sending, receiving through the subscription,
 // trust level change with the password, an external `antenna lock` → the window returns to the password screen.
-// Run: ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test test/protocol/live_model_test.dart
+// Run: ANTENNAD_BIN=<path to antennad> flutter test test/protocol/live_model_test.dart
 @Tags(['live'])
 library;
 

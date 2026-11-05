@@ -205,8 +205,8 @@ Gotchas, workarounds, incompatibilities. Format: date · symptom · cause · fix
 ### Installation without system packages
 - **No OCaml, and we don't install system packages on the build host.** The opam 2.6.0 binary from GitHub releases →
   `~/.local/bin/opam`; `OPAMROOTISOK=1 opam init --bare --disable-sandboxing` (bubblewrap is not installed, and opam's
-  sandbox does not work without it); `opam switch create pv ocaml-base-compiler.4.14.2` under `nice -n 10` — about
-  4 minutes on 16 cores. Everything lives in `~/.opam`.
+  sandbox does not work without it); `opam switch create pv ocaml-base-compiler.4.14.2` — about 4 minutes on
+  16 cores. Everything lives in `~/.opam`.
 - **`opam install proverif` pulls in `lablgtk` → GTK2 → system packages.** Build from source instead: `proverif2.05.tar.gz`
   (sha256 `4871f53c…eabc4`, matches opam), `./build -nointeract` — needs only `ocamlopt`, no ocamlfind and no GTK;
   the interactive simulator is not built and not needed. Binary: `~/.local/opt/proverif2.05/proverif`, symlink in
@@ -394,7 +394,7 @@ Gotchas, workarounds, incompatibilities. Format: date · symptom · cause · fix
 - **`pumpAndSettle` never finishes** with infinite animations (`CircularProgressIndicator`, a blinking cursor) — golden
   scenarios use only `pump(Duration)`.
 - **PNG size.** The sign-in screen with a gradient and mountains is ~0.45 MB at DPR 1 and ~0.85 MB at DPR 1.5; regression
-  tests use DPR 1, showcase frames for the maintainer DPR 1.5 (`showcase_test.dart`).
+  tests use DPR 1, showcase frames DPR 1.5 (`showcase_test.dart`).
 
 ### Tests against a live daemon
 - **Unix socket path ≤ 108 bytes.** The scratch directory path is long (~95 bytes) — `…/alice/xd.sock` does not fit.
@@ -956,8 +956,8 @@ below marked "to check" is an assumption that the first run of the `core` job wi
   without user data) and record it here.
 - **Claude Code on a Mac keeps its login in the keychain** (not in `~/.claude/.credentials.json`), and the keychain is
   closed to the agent (`com.apple.SecurityServer` is not in the profile): for wake on a Mac use
-  `--secret-env CLAUDE_CODE_OAUTH_TOKEN --no-home-files`. A real `claude -p` under Seatbelt is to be run manually on the
-  maintainer's Mac.
+  `--secret-env CLAUDE_CODE_OAUTH_TOKEN --no-home-files`. A real `claude -p` under Seatbelt is to be run manually on a
+  Mac.
 
 ## 2026-10-03 · v0.2: streaming messages and agent wake (`stream.rs`, `wake.rs`; decisions in DECISIONS D-63…D-72)
 
@@ -2211,7 +2211,7 @@ an edit from outside could undo the write of another Claude Code running at the 
   `cargo build -p antennad -p antenna-cli` (not an old cached archive — see the next entry) and run `antenna update
   --json` from its `bin/`; `"kind":"unsupported"` and the reason names the package manager.
 - **Repackaging an old cached release archive proves the packaging scripts, not a fix to the binaries inside it.**
-  `/root/.cache/antenna-release/v0.1.0-preview.7/` predates the `.antenna-package` marker and the local-model runtime
+  `~/.cache/antenna-release/v0.1.0-preview.7/` predates the `.antenna-package` marker and the local-model runtime
   (D-104): `build-deb.sh`/`build-rpm.sh` ran on it without complaint (both handle a missing `bin/llama/` the way
   `install.sh` already does), but `antenna update --json` on the result still showed the old refusal text. Rebuilt a
   throwaway `antenna-<version>-linux-<arch>` tree by hand from `target/debug/{antenna,antennad}` (same version
@@ -2228,7 +2228,7 @@ an edit from outside could undo the write of another Claude Code running at the 
   CLAUDE.md, agents do not install system packages; `build-rpm.sh` treats this as expected (writes the `.spec` files
   and their source payloads to `OUT/rpm-sources/` instead of a `.rpm`, exit 0) and `check-rpm.sh`/`check-deb.sh` skip
   the checks that need them, named plainly in their output, rather than failing the whole packaging run over a tool
-  nobody asked to install. Ask the maintainer before adding `rpm-build`/`desktop-file-utils` to the host if a real
+  nobody asked to install. Decide before adding `rpm-build`/`desktop-file-utils` to the build machine if a real
   `.rpm` build or a `desktop-file-validate` pass becomes a release requirement.
 
 ## 2026-10-06 · Chats per agent (`crates/antenna-core/src/chats.rs`, `crates/antenna-cli/src/{connect,owner/chats}.rs`, `apps/antenna_desktop/lib/{state/chat_list,ui/home/chat_menu}.dart`; D-113, D-UI-32)
@@ -2459,8 +2459,8 @@ an edit from outside could undo the write of another Claude Code running at the 
   --dir …`, `connect … --instructions --git-name … --git-email … --allow …`, and the window's Start an agent (D-124).
   The MCP instructions, tool descriptions, the agent CLI's help and the template are checked against the owner's
   commands by unit tests.
-- **`~/Antenna/links/hel server/` broke shell commands.** New links' folders are the label as one shell word
-  (`hel-server`, D-125); an older folder under the label as it is keeps working, so nothing moves. An agent finds the
+- **`~/Antenna/links/atlas server/` broke shell commands.** New links' folders are the label as one shell word
+  (`atlas-server`, D-125); an older folder under the label as it is keeps working, so nothing moves. An agent finds the
   folder in `list_contacts` (`folder`). Check: `a_label_with_spaces_gets_a_folder_a_shell_takes_as_one_word`.
 - **`.claude/settings.json` "not strict JSON": the folder setup refused to add rules.** The file has comments or another
   shape of `permissions`/`allow`; Antenna changes another program's config only when it can keep everything else
@@ -2667,7 +2667,7 @@ an edit from outside could undo the write of another Claude Code running at the 
 ## 2026-10-06 · A file attached in one chat waited in another; a chat opened in the middle (`apps/antenna_desktop/lib/{state/drafts,state/files,state/conversation,ui/chat/chat_view,ui/chat/composer}.dart`; D-UI-42)
 
 - **Symptom.** A screenshot attached in one chat was still in the composer after opening another chat ("Nothing is
-  sent yet: on Send (Enter) these go to “hel server”…"), where Enter would have sent it. A chat left at its end opened
+  sent yet: on Send (Enter) these go to “atlas server”…"), where Enter would have sent it. A chat left at its end opened
   in the middle, at an old message, after visiting another chat.
 - **Cause.** The composer was one widget for every chat, and the waiting files were kept per contact, not per chat:
   a contact's person chat and its agents' chats shared them, and the hint named only the contact. The chats of a

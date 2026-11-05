@@ -1757,7 +1757,7 @@ impl Session {
         if old == 5 && level < 5 {
             self.device_keys_forget(&row.link_id, &[])?;
         }
-        // A request made before this change is the person's to answer; approvers on a computer below ∞ are gone
+        // A request made before this trust change is the person's to answer; approvers on a computer below ∞ are gone
         // (PG-57)
         self.delegation_trust_changed(&row.link_id, old, level);
         if new_mode != row.net_mode {

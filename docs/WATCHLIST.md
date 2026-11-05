@@ -23,7 +23,7 @@ Last full check: **2026-10-26**. Last machine check: **2026-10-26**. Machine che
 | # | What we wait for | SPEC | How we cover it now | Adopt when… | Frequency |
 | --- | --- | --- | --- | --- | --- |
 | W-01 | A `libcrux-ml-kem` release > 0.0.10 with the `incremental`+`rand` fix; X-Wing (`libcrux-kem`) next to SPQR | §6 item 4, §14; Q-2 (II), D-9 | Hybrid from TLS 1.3 `X25519MLKEM768` (Q-2 I) | a release on crates.io **and** `spikes/combined` option B builds without `[patch]` | week (script) |
-| W-02 | X-Wing as an RFC | §6, §7 | Not needed with Q-2 I | the RFC is out and the maintainer wants option II | month (script) |
+| W-02 | X-Wing as an RFC | §6, §7 | Not needed with Q-2 I | the RFC is out and option II is chosen | month (script) |
 | W-03 | `iroh-blobs` 1.x | §10, §14 | `iroh-blobs 0.103` pinned, fallback `bao-tree` | 1.0 on crates.io or the "not production quality" warning removed | week (script) |
 | W-04 | iroh Tor transport on Arti, mature Arti onion services | §4 (Tor mode, v0.3) | "Relay only" mode | Arti onion services without the "testing only" caveat **and** a transport without an external `tor` | month (script) |
 | W-05 | libsignal: support outside Signal / crates.io; stable ML-KEM-1024 in PQXDH; full verification of SPQR | §7, §14, §16; D-4, D-8, Q-3 | git rev, `MLKEM1024`, the SPEC wording refined | the ML-KEM caveat removed; `lax` = 0; a publication appeared | week (script) |
@@ -71,10 +71,10 @@ Last full check: **2026-10-26**. Last machine check: **2026-10-26**. Machine che
   the ML-DSA-65 checks pass. As predicted below, the tree holds two of each libcrux crate (`libcrux-ml-kem` 0.0.10 for
   SPQR and 0.0.11 for `libcrux-kem`; likewise `sha3`, `sha2`, `traits`, `secrets`, `intrinsics`, `platform`,
   `hacl-rs`, `macros`). The spike's own X-Wing code needed no change. Two of the three conditions are met; the third
-  (the maintainer wants option II) is a decision, not a release.
+  (choosing option II) is a decision, not a release.
 - **Subtlety.** When `libcrux-kem` ships on `libcrux-ml-kem 0.0.11` while SPQR stays on 0.0.10, Cargo will take both versions. There will be no feature conflict, but the binary will contain two libcrux-ml-kem. It becomes clean only when SPQR upgrades.
 - **How we cover it.** TLS 1.3 `X25519MLKEM768` (aws-lc-rs) — maintainer decision Q-2 I. This group is now RFC 10024 (W-02).
-- **Adopt when:** a new version on crates.io **and** `spikes/combined` option B builds without `[patch.crates-io]` **and** the maintainer wants option II.
+- **Adopt when:** a new version on crates.io **and** `spikes/combined` option B builds without `[patch.crates-io]` **and** option II is chosen.
 - **Where to check:** crates.io API `libcrux-ml-kem`, `libcrux-kem`; the version marker in SPQR's `Cargo.toml`; SPQR tags. Script: `w01-*`.
 - **Frequency:** week.
 
@@ -277,7 +277,7 @@ Last full check: **2026-10-26**. Last machine check: **2026-10-26**. Machine che
   SSE reconnects on permanent GET errors ([release](https://github.com/modelcontextprotocol/rust-sdk/releases/tag/rmcp-v3.8.0)).
   HTTP client paths only, our stdio server is untouched; spike not rerun. Nothing on channels. Not met.
 - **How we cover it:** `wait_for_message` (long-poll) and client hooks. For Claude Code in v0.2 — the dev flag or the organization allowlist.
-- **Adopt when:** Channels GA **and** our own channel without the Anthropic allowlist. The alternative is our plugin in `claude-plugins-official`, but that is external publication, only on the maintainer's decision.
+- **Adopt when:** Channels GA **and** our own channel without the Anthropic allowlist. The alternative is our plugin in `claude-plugins-official`, but that is external publication, only by maintainer decision.
 - **Where:** markers in `channels.md`/`mcp.md`, the `schema/` directory of the MCP specification, crates.io `rmcp`. Script: `w10-*`. **Frequency:** week.
 
 ### W-11 · A2A

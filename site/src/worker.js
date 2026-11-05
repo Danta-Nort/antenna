@@ -118,7 +118,7 @@ async function handle(request, env, url) {
   return secure(res, { 'Cache-Control': cacheControl(url.pathname, res.status) });
 }
 
-// ---------- downloads ----------
+// Downloads.
 
 const REPO = 'https://github.com/Danta-Nort/antenna';
 // Stable first; until the first stable release exists, the newest preview.
@@ -160,7 +160,7 @@ async function download(key) {
   return redirect(`${REPO}/releases/latest`, 302);
 }
 
-// ---------- closed beta ----------
+// The closed beta.
 
 const AGENTS = new Set(['claude-code', 'codex', 'cursor', 'mcp-other', 'own', 'none']);
 const POW_DIFFICULTY = 15; // must match public/assets/site.js

@@ -1,3 +1,4 @@
+<!-- SPDX-License-Identifier: AGPL-3.0-only -->
 # Contributing to Antenna
 
 Antenna is a peer-to-peer messenger for people and AI agents: every pair of contacts gets an isolated, post-quantum
@@ -69,23 +70,23 @@ vectors and never change (D-57).
 - **macOS type check from Linux:** `rustup target add aarch64-apple-darwin x86_64-apple-darwin`.
 - **Windows type check from Linux:** `rustup target add x86_64-pc-windows-msvc`.
 
-On a shared machine, run builds with `nice -n 10` and `CARGO_BUILD_JOBS=8`, as the commands below do.
+On a shared machine, prefix builds with `nice -n 10` and cap the jobs with `CARGO_BUILD_JOBS`.
 
 ## Building and testing
 
 From the repository root:
 
 ```sh
-CARGO_BUILD_JOBS=8 nice -n 10 cargo fmt --all --check
-CARGO_BUILD_JOBS=8 nice -n 10 cargo clippy --workspace --all-targets --locked -- -D warnings
+cargo fmt --all --check
+cargo clippy --workspace --all-targets --locked -- -D warnings
 # No unwrap() or panic!() outside tests: a second pass over the library and binary code only
-CARGO_BUILD_JOBS=8 nice -n 10 cargo clippy --workspace --lib --bins --locked -- -D clippy::unwrap_used -D clippy::panic
+cargo clippy --workspace --lib --bins --locked -- -D clippy::unwrap_used -D clippy::panic
 # The full test run, with two extra inherited descriptors as on CI runners (D-61)
-bash -c 'exec 7<Cargo.toml 8<Cargo.toml; CARGO_BUILD_JOBS=8 nice -n 10 cargo test --workspace --locked'
+bash -c 'exec 7<Cargo.toml 8<Cargo.toml; cargo test --workspace --locked'
 
 # Testing one package: build the binaries its tests start first, or they run a stale daemon
-CARGO_BUILD_JOBS=8 nice -n 10 cargo build -p antennad -p antenna-cli
-CARGO_BUILD_JOBS=8 nice -n 10 cargo test -p antenna-cli --test agents
+cargo build -p antennad -p antenna-cli
+cargo test -p antenna-cli --test agents
 
 python3 tools/mcp_smoke.py target/debug     # a live MCP round trip against the built binaries
 tools/check-darwin.sh                       # macOS code: clippy for both darwin targets, without a Mac
@@ -99,10 +100,10 @@ formal/run.sh                               # after any change to PROTOCOL ยง6โ€
 The desktop app, from `apps/antenna_desktop`:
 
 ```sh
-nice -n 10 flutter analyze
-nice -n 10 flutter test --exclude-tags live                 # widget, host and golden tests, no daemon needed
-nice -n 10 flutter test --tags live --concurrency=1         # against a real antennad from target/debug, one file at a time
-nice -n 10 flutter test --update-goldens test/goldens       # only when a frame changes on purpose
+flutter analyze
+flutter test --exclude-tags live                 # widget, host and golden tests, no daemon needed
+flutter test --tags live --concurrency=1         # against a real antennad from target/debug, one file at a time
+flutter test --update-goldens test/goldens       # only when a frame changes on purpose
 ```
 
 Live tests start real daemons and wait for delivery with timeouts, so they run one file at a time. They find the
@@ -210,6 +211,11 @@ without `--release` is green.
   `docs/UPDATES.md`), `formal/` and the protocol vector script. The application is **AGPL-3.0-only**: the daemon, the
   core, the CLI and MCP server, files, updates, the desktop app, packaging. The full texts are `LICENSE-APACHE-2.0` and
   `LICENSE-AGPL-3.0`.
+<!-- REUSE-IgnoreStart -->
 - Every source file starts with an SPDX header (`// SPDX-License-Identifier: AGPL-3.0-only`, or `#` after the shebang
   in scripts); every `Cargo.toml` has a `license` field. A new file takes the license of the component it belongs to.
+<!-- REUSE-IgnoreEnd -->
 - The license boundary runs along crate boundaries: `antenna-proto` never depends on an AGPL crate.
+- The tree follows the [REUSE specification](https://reuse.software): `REUSE.toml` gives every file its copyright line
+  and licenses the files that cannot carry a header (images, lock files, generated files), and `LICENSES/` holds every
+  license text in use. CI runs `reuse lint`; run it locally with `pipx run reuse lint`.

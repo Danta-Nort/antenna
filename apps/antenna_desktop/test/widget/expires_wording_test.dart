@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-only
-// The time left of an approval request in words (state/format.dart `expiresIn`). The maintainer read "08:35" in the
-// corner of a request from another own computer as the time of day (it was 21:53 there). Every approval card now says
+// The time left of an approval request in words (state/format.dart `expiresIn`). "08:35" in the corner of a request
+// from another own computer read as the time of day (it was 21:53 there). Every approval card says
 // "Expires in 8 min": the cards here (the conversation, the list) and the cards of another computer's requests in My
 // devices and the agent map's "Approve on …".
 

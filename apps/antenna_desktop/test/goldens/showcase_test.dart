@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // Design screenshots (DPR 1.5, 2160×1350) in docs/design/screens/*.png: the same scenarios as goldens_test.
 // Frames are in English (the website uses them too), plus the Russian `*_ru` variants listed below.
-// Update: nice -n 10 flutter test --update-goldens test/goldens/showcase_test.dart
+// Update: flutter test --update-goldens test/goldens/showcase_test.dart
 
 import 'package:flutter_test/flutter_test.dart';
 

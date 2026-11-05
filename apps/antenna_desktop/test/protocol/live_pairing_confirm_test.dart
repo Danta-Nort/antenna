@@ -4,7 +4,7 @@
 // invite created without a follow connection is confirmed with `pairing_confirm` and the password, without the code;
 // with two invites showing codes at once (formal model F-4) the daemon does not offer it and refuses a confirmation
 // without the code with `code_required`, and the typed code still links.
-// Run: ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test --tags live test/protocol/live_pairing_confirm_test.dart
+// Run: ANTENNAD_BIN=<path to antennad> flutter test --tags live test/protocol/live_pairing_confirm_test.dart
 @Tags(['live'])
 library;
 

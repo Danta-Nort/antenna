@@ -59,7 +59,7 @@ Finder _thumb(String id) => find.byKey(Key('image-thumb-${id.substring(0, 8)}'))
 
 void main() {
   testWidgets('a sent screenshot keeps its own preview after the original file is gone', (t) async {
-    // The maintainer's case: a macOS screenshot dragged from its floating thumbnail is a temporary file that macOS
+    // The field case: a macOS screenshot dragged from its floating thumbnail is a temporary file that macOS
     // deletes right after the drop; the window's staged copy is deleted once the daemon has the file. The bubble must
     // show the window's own preview copy, rebuilt from the bytes that were sent, with none of the original's metadata.
     final d = FakeDaemon(contacts: demoContacts(), history: demoHistory());

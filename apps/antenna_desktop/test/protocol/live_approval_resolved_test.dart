@@ -4,7 +4,7 @@
 // window; the owner's subscription gets `approval_resolved{completed}`, the message is in the history on both sides,
 // and the agent never repeats its call. The window's card goes from "finishing" to gone.
 // A daemon that does not finish approved actions yet (no `completes` on the request) skips the test with a reason.
-// Run: ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test --tags live test/protocol/live_approval_resolved_test.dart
+// Run: ANTENNAD_BIN=<path to antennad> flutter test --tags live test/protocol/live_approval_resolved_test.dart
 @Tags(['live'])
 library;
 

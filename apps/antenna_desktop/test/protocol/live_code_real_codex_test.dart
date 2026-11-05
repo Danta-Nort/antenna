@@ -18,7 +18,7 @@
 //    continues it once, nothing typed.
 // Runs only with ANTENNA_REAL_CODEX=<path to codex> and CODEX_HOME=<an empty throwaway folder>; skipped otherwise (the
 // account's own ~/.codex is never used). Codex 0.160.1 on 2026-10-06 (PG-21).
-// Run: CODEX_HOME=$(mktemp -d) ANTENNA_REAL_CODEX=<path to codex> ANTENNAD_BIN=<path to antennad> nice -n 10 flutter
+// Run: CODEX_HOME=$(mktemp -d) ANTENNA_REAL_CODEX=<path to codex> ANTENNAD_BIN=<path to antennad> flutter
 // test --tags real-cli test/protocol/live_code_real_codex_test.dart
 @Tags(['live', 'real-cli'])
 @TestOn('linux || mac-os')

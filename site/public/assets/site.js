@@ -14,7 +14,7 @@
 (() => {
   const $ = (id) => document.getElementById(id);
 
-  // ---------- 1. Invite handler ----------
+  // 1. Invite handler.
   // Same format as antenna_proto::invite (docs/PROTOCOL.md §3): <E_A>.<s>.<relay>[.<direct>]
   // E_A and s — 32 bytes in lowercase base32 without padding (52 chars); relay/direct — base64url.
   const INVITE_SCHEME = 'antenna://pair#';
@@ -104,7 +104,7 @@
     window.addEventListener('hashchange', checkFragment);
   }
 
-  // ---------- 2. Closed-beta form ----------
+  // 2. Closed-beta form.
   // Proof-of-work: find n such that SHA-256("antenna-beta/v1|ts|email|n") starts with DIFFICULTY zero
   // bits. ~33 000 hashes on average: about a second in a browser, real cost for a spam bot.
   // The worker (src/worker.js) checks the same rule with one hash.

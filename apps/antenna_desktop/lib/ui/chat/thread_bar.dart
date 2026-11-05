@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // The filter bar under the conversation header (v6, CONTROL §20, D-UI-18, D-UI-32, D-UI-44): inside an agent's chat,
-// "With me" (the default), "Between agents" and "All" (field feedback 2026-10-06: "a person does not care what the
-// AIs discuss among themselves... by default show the person ↔ agent conversation"); topics, when there are any,
+// "With me" (the default), "Between agents" and "All" (field feedback 2026-10-06: a person rarely needs to read
+// what agents discuss among themselves, so the default shows the person ↔ agent conversation); topics, when there are any,
 // move into a secondary "Topics ▾" menu. The person chat keeps the plain "All" + topics bar of D-UI-18, shown only
 // when there is something to filter by. Plain text tabs, the selected one on the soft brand fill (reference v3).
 

@@ -118,7 +118,7 @@ void main() {
     });
     test('2.1.289: the faint placeholder with the cursor after "❯ " is idle, in manual and in auto mode', () {
       expect(ready(claude289IdleManual), isTrue);
-      expect(ready(claude289IdleAuto), isTrue, reason: 'no "? for shortcuts" in auto mode (the maintainer\'s Mac)');
+      expect(ready(claude289IdleAuto), isTrue, reason: 'no "? for shortcuts" in auto mode');
       expect(ready(claude289AfterTurn), isTrue);
     });
     test('2.1.289: the empty prompt drawn as "❯" and a no-break space is idle; a no-break space typed after it is not',

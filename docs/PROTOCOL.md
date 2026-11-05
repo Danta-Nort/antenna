@@ -876,7 +876,7 @@ one that failed the check at the sender, or one with hard links is not served au
 at a time, ≤ 20 per hour, the same unanswered file is refused, unanswered serving is ≤ the level's daily volume. The answer is an ordinary `file` offer (the requester gets the same
 quarantine) and the receipt `request_file` / `allowed`; a refusal is the receipt `request_file` / `denied` without a reason.
 
-## 20. Streaming messages (v0.2; maintainer proposal "the agent's reply as it is being written")
+## 20. Streaming messages (v0.2; "the agent's reply as it is being written")
 
 A stream is a "live" display of a message that is still being written (an agent's reply, `<program> | antenna send --stream`). The history,
 hash-DAG, signatures and verification (§12, §16) get **only the final message**: an ordinary signed `type: "text"` message, which

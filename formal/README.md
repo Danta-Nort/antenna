@@ -37,7 +37,7 @@ exits with code 1 on any mismatch. The full output with traces of the attacks fo
 ```bash
 curl -sSLo ~/.local/bin/opam https://github.com/ocaml/opam/releases/download/2.6.0/opam-2.6.0-x86_64-linux && chmod +x ~/.local/bin/opam
 export OPAMROOTISOK=1 OPAMYES=1
-opam init --bare --disable-sandboxing && nice -n 10 opam switch create pv ocaml-base-compiler.4.14.2
+opam init --bare --disable-sandboxing && opam switch create pv ocaml-base-compiler.4.14.2
 eval $(opam env --switch=pv)
 curl -sSLO https://bblanche.gitlabpages.inria.fr/proverif/proverif2.05.tar.gz   # sha256 4871f53c32ab4a04669a060c4886ba5d9080496963fb980a9a62d2c429ceabc4
 mkdir -p ~/.local/opt && tar xzf proverif2.05.tar.gz -C ~/.local/opt && cd ~/.local/opt/proverif2.05 && ./build -nointeract

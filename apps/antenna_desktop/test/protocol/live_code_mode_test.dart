@@ -5,7 +5,7 @@
 // agent: `antenna mcp` binds the token to the agent's own process (not the terminal's session leader, D-28), the
 // window stays the owner, Stop ends the binding. A negative control starts `antenna mcp` under a session leader
 // without the wrapper: the daemon refuses to bind.
-// Run: ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test test/protocol/live_code_mode_test.dart
+// Run: ANTENNAD_BIN=<path to antennad> flutter test test/protocol/live_code_mode_test.dart
 @Tags(['live'])
 @TestOn('linux || mac-os')
 library;

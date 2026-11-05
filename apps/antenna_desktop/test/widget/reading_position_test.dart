@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
-// The reading position per chat (state/drafts.dart `ReadingPosition`, ui/chat/chat_view.dart; fake daemon). The
-// maintainer left chat A at its very end, opened chat B, came back, and A opened in the middle, at an old message;
-// they had to scroll down every time. One list was shared by the chats of a contact and kept the other chat's offset.
-// Now, as in any messenger: left at the end, back at the end; left elsewhere, back to the same message at the same
+// The reading position per chat (state/drafts.dart `ReadingPosition`, ui/chat/chat_view.dart; fake daemon). A chat
+// left at its very end opened in the middle, at an old message, after a visit to another chat of the same contact:
+// one list was shared by the chats of a contact and kept the other chat's offset. As in any messenger: left at the end, back at the end; left elsewhere, back to the same message at the same
 // height; messages that came meanwhile wait below a "New messages" line with the jump button's count, the view staying
 // on the last message read; the person's own message always shows the end.
 
@@ -71,7 +70,7 @@ void main() {
     expect(find.text(en.chatNewMessagesLine), findsNothing);
   });
 
-  testWidgets("two chats of one contact keep their own places (the maintainer's case)", (t) async {
+  testWidgets("two chats of one contact keep their own places", (t) async {
     final d = FakeDaemon(contacts: [jordanTeam, emily], history: demoHistory());
     d.historyMap[jordanTeam.linkId] = [
       for (var i = 1; i <= 30; i++) ...[

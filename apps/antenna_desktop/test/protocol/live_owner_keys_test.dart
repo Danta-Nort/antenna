@@ -14,7 +14,7 @@
 //    text (`proof_invalid`), a used challenge and a challenge of the other kind both ways (`challenge_invalid`), a key
 //    that is not enrolled (`owner_key_unknown`),
 //    a password next to a proof, an enrollment proved by another key, a wrong slot key (`slot_invalid`).
-// Run: ANTENNAD_BIN=<path to a debug antennad> nice -n 10 flutter test --tags live test/protocol/live_owner_keys_test.dart
+// Run: ANTENNAD_BIN=<path to a debug antennad> flutter test --tags live test/protocol/live_owner_keys_test.dart
 @Tags(['live'])
 library;
 

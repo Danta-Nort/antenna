@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
-// Drafts per chat (state/drafts.dart; fake daemon). The maintainer attached a screenshot in one chat, opened another,
-// and the file was still waiting in that chat's composer, where Enter would have sent it to the wrong recipient. Now
-// each chat keeps its own text, files and To choice: another chat's composer is empty and its Send cannot send them;
+// Drafts per chat (state/drafts.dart; fake daemon). A screenshot attached in one chat used to still be waiting
+// in the composer after switching to another chat, where Enter would have sent it to the wrong recipient. Each chat
+// keeps its own text, files and To choice: another chat's composer is empty and its Send cannot send them;
 // coming back finds the draft; the chat list says "Draft"; the hint under the files names the exact recipient.
 
 import 'package:antenna_desktop/host/outgoing_staging.dart';

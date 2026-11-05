@@ -1,18 +1,18 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # Offline mailbox, content-free push and our own relay: specification
 
-Status: **draft v1 for the maintainer's decision and review**, 2026-10-02. No code yet. License: Apache-2.0 (SPEC §16): this
+Status: **draft v1 for decision and review**, 2026-10-02. No code yet. License: Apache-2.0 (SPEC §16): this
 document is enough to write the server, the client in the daemon and a formal model (ProVerif) independently of the reference implementation.
 
-Basis: the maintainer's requirement "we need a server at least for users to talk to each other: notifications and delivery even
-when a user is offline; bring in things like Signal has", and the decision that followed (DECISIONS "Server for mass adoption");
+Basis: the requirement of a server at least for users to reach each other, with notifications and delivery even
+when a user is offline, on a par with what Signal offers, and the decision that followed (DECISIONS "Server for mass adoption");
 SPEC §4 (offline delivery v2: the mailbox stores only E2E blobs, the address changes every ratchet epoch; our own relay is v1.0),
 §5, §7, §8, §13, §15, §19. Link format, envelope, padding, history verification, rekey: `docs/PROTOCOL.md` §12, §16–§19;
 streams: PROTOCOL §20 (written in parallel; only referenced here). Notation: PROTOCOL §0 (`HKDF`, `HMAC`, `H` = SHA-256,
 `lp`, `u8`, `u32be`, `u64be`, `rand`, `ct_eq`). New domain separation labels are in the `x/…` family (D-57).
 
 This document does not change pairing or the link format unless explicitly marked; everything that changes PROTOCOL is collected in §9 and will go there
-as a separate section after the maintainer's decision.
+as a separate section once it is decided.
 
 ---
 
@@ -561,8 +561,8 @@ filtering entitlement is available, §6.5) → `handles` → a handle in `create
 - **Sleeping endpoints (Q-1, option B) become possible.** Today each link keeps its own relay connection with a ping
   every 15 s (Q-1). At scale this is the main cost: 100 thousand users × 50 links × 30 % online = 1.5 million
   connections. With a mailbox, the endpoint of a link with no traffic need not hold the relay: incoming messages go to the mailbox, and the
-  endpoint comes up when there is something to send or verify. For levels 1–2 this is also privacy (§9.5). The decision is the
-  maintainer's, after measurement (§11, Q-M8).
+  endpoint comes up when there is something to send or verify. For levels 1–2 this is also privacy (§9.5). The decision is a
+  maintainer decision, after measurement (§11, Q-M8).
 
 ---
 
@@ -752,7 +752,7 @@ sleeping endpoints, §7) and people: on-call duty, support requests, abuse, lega
 | **M0 · specification** (now) | This document; maintainer decisions (§12); an independent review of the specification | ProVerif before code: `formal/mailbox_caps.pv`: secrecy of `rcap` (from S and the server), `wcap`/`kbox` (from the server and the network), the correspondence "a write under `wcap_e` ⇒ R issued epoch `e` to this S"; `formal/mailbox_unlink.pv`: observational equivalence (`choice`): "two mailboxes of one link" ≡ "mailboxes of different links" for the server (without IP and time) and "handles of one device" ≡ "of different devices"; **negative controls**: a blob with `link_id` (`NEG_LINKID`), without the outer AEAD with a cleartext ratchet key (`NEG_NOOUTER`), a deterministic handle (`NEG_DETHANDLE`): the model must tell them apart |
 | **M1 · server** | `antenna-server`: the roles `mailbox` + `relay` (+ `forward`), SQLite, the API of §4.6, the PoW of §5.2, the quotas and GC of §4.7, metrics, image, systemd | Unit tests + fuzzing (`cargo-fuzz`) of CBOR parsing and PoW; API integration tests; a load run on a VPS to confirm the table in §10.3; a DB dump: no `link_id`, no cleartext capabilities, no tokens |
 | **M2 · client in the daemon** | A `mailbox` module in `antenna-core`: `features`, `control` announcements, epochs, the path of §9.2, long polling, `ack` after commit, the rule of §4.10, sleeping endpoints for levels ≤ 2, revocation; x-control, the CLI `antenna mailbox …` | Two `antennad` + a local `antenna-server` (like the local relay, D-36): offline delivery in both directions; wiping the server → recovery through verification; rotation (the old mailbox is deleted, the new one works); level 1 through the mailbox and a presence probe; level limits when fetching; a delivery model in `stateright` 0.31 (MIT): "no duplicates in the history", "`ack` only after commit", "no message is ever forgotten" under crashes, server loss and TTL; liveness under fair fetching or a meeting |
-| **M3 · push and mobile** | The `push` role (APNs, FCM, UnifiedPush), the handles of §6.3; the mobile client: a spool in the NSE (M3a), decryption in the NSE (M3b), FCM/UnifiedPush, a no-push mode. **Maintainer steps:** Apple Developer Program, a Firebase project, the application for the filtering entitlement | Real devices: the latencies of §11; no token logs (a configuration check); negative tests: someone else's token without a code, an expired handle, `gone` |
+| **M3 · push and mobile** | The `push` role (APNs, FCM, UnifiedPush), the handles of §6.3; the mobile client: a spool in the NSE (M3a), decryption in the NSE (M3b), FCM/UnifiedPush, a no-push mode. **Account steps:** Apple Developer Program, a Firebase project, the application for the filtering entitlement | Real devices: the latencies of §11; no token logs (a configuration check); negative tests: someone else's token without a code, an expired handle, `gone` |
 | **M4 · Cloud and extensions** | Regions, monitoring, abuse handling, a status page, a privacy policy; switching the relay away from n0; then: anonymous tokens (the paid tier), offline attachments, asynchronous verification through the mailbox, Tor (v0.3), multi-device mailboxes (v1.x) | ProVerif for attachments and tokens; an audit before v1.0 (SPEC §17) together with the rest of the protocol |
 
 **Not** formally verified (and this is stated in the reports): timing and IP correlation, which is statistics rather than a symbolic model;
@@ -767,7 +767,7 @@ the behavior of Apple/Google, which is outside the model.
 | Q-M1 | Mailbox by default | a) on, the server is Antenna Cloud (like the n0 relay now), "no server" via a toggle; b) on only on phones; c) off, the owner turns it on |
 | Q-M2 | Cloud jurisdiction and hosting | a) EU (Germany/Finland, budget hosting; GDPR: an IP is personal data, a policy and a DPA are needed); b) Switzerland; c) US (CLOUD Act); avoid countries with mandatory interception/retention for messengers. Check with a lawyer (including the status of the EU regulation on scanning private messages, not confirmed) |
 | Q-M3 | Blob retention period | a) 30 days (as APNs keeps a notification ≤ 30 days); b) 14 days (as Session); c) 7 days |
-| Q-M4 | Who signs the apps and runs the push gateway | a) a company (Apple Developer and Firebase require a real name or a legal entity); b) the maintainer personally; without this there will be no push on iOS |
+| Q-M4 | Who signs the apps and runs the push gateway | a) a company (Apple Developer and Firebase require a real name or a legal entity); b) an individual developer account; without this there will be no push on iOS |
 | Q-M5 | Cloud logs | a) no IPs and no capabilities, counters in memory, errors without identifiers; b) IPs for 24 h for abuse investigation; c) according to the jurisdiction's requirements |
 | Q-M6 | Anonymous tokens for the paid tier | a) wait for an audited Privacy Pass implementation; no paid tier for people until then; b) `zkgroup` from libsignal + commission an audit of the integration; c) a paid subscription without anonymity (links the mailboxes; not recommended) |
 | Q-M7 | Device attestation (App Attest / Play Integrity) as the entry point for generous quotas | a) no; b) only as the entry point for tokens (Apple/Google learn about the request) |

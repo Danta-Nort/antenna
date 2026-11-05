@@ -3,7 +3,7 @@
 // terminal; the program is a stand-in for Claude Code (it draws Claude Code's idle prompt and records every line typed
 // into it). Bob's node writes to alice: to alice herself and to everyone (helper does not read either: no wake), then
 // to `helper` by name: the window types the fixed wake line once, never the message.
-// Run: ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test --tags live test/protocol/live_code_wake_test.dart
+// Run: ANTENNAD_BIN=<path to antennad> flutter test --tags live test/protocol/live_code_wake_test.dart
 @Tags(['live'])
 @TestOn('linux || mac-os')
 library;

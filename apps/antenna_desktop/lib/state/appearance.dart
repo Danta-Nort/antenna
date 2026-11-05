@@ -190,7 +190,7 @@ class Appearance extends ChangeNotifier implements AgentRunStore {
     notifyListeners();
   }
 
-  /// The one-time notice about level 5 (it now also sends secrets without asking, maintainer decision 2026-10-05) is
+  /// The one-time notice about level 5 (level 5 also sends secrets without asking, maintainer decision 2026-10-05) is
   /// still to be shown, or to be marked as not needed. Without a settings file there is nowhere to remember it, so it
   /// is not shown at all, like the Code mode offer.
   bool get selfNoticeDue => store != null && !_selfNoticeShown;

@@ -17,10 +17,13 @@
   <a href="docs/USER-GUIDE.md">User guide</a> ·
   <a href="docs/PROTOCOL.md">Protocol</a> ·
   <a href="SECURITY.md">Security</a> ·
+  <a href="CHANGELOG.md">Changelog</a> ·
   <a href="https://antenna.contact">antenna.contact</a>
 </p>
 
 <p align="center">
+  <a href="https://github.com/Danta-Nort/antenna/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Danta-Nort/antenna/actions/workflows/ci.yml/badge.svg?branch=main"></a>
+  <a href="https://github.com/Danta-Nort/antenna/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/Danta-Nort/antenna?color=1560F6"></a>
   <a href="#license"><img alt="License: AGPL-3.0 (app), Apache-2.0 (protocol)" src="https://img.shields.io/badge/license-AGPL--3.0%20%2F%20Apache--2.0-1560F6"></a>
   <img alt="Platforms: macOS (Apple Silicon), Linux x86_64" src="https://img.shields.io/badge/platforms-macOS%20%7C%20Linux-1560F6">
   <img alt="Status: early" src="https://img.shields.io/badge/status-early-orange">
@@ -144,7 +147,8 @@ Issues and pull requests are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING
 principles (proven technology first, no custom cryptography, the daemon enforces permissions), how to test and how
 decisions are recorded. This project follows a [code of conduct](CODE_OF_CONDUCT.md).
 
-**Found a security issue?** Please don't open a public issue: see [SECURITY.md](SECURITY.md).
+Questions and help: [SUPPORT.md](SUPPORT.md). **Found a security issue?** Please don't open a public issue: see
+[SECURITY.md](SECURITY.md).
 
 ## License
 
@@ -153,4 +157,6 @@ Copyright © 2026 Stillbyte LLC.
 The application (daemon, CLI, MCP server, desktop app) is licensed under the
 [GNU Affero General Public License v3.0](LICENSE-AGPL-3.0). The protocol crate, the specification, the formats and the formal
 model are licensed under the [Apache License 2.0](LICENSE-APACHE-2.0), so other implementations can use them freely.
-Each file carries an SPDX header; see [CONTRIBUTING.md](CONTRIBUTING.md#repository-layout) for the layout.
+Every file carries its license and copyright in [REUSE](https://reuse.software) form (an SPDX header, or
+[`REUSE.toml`](REUSE.toml)); see [CONTRIBUTING.md](CONTRIBUTING.md#repository-layout) for the layout. Fonts, the AI
+apps' marks and the Flutter runner templates keep their own licenses, listed in `REUSE.toml`.

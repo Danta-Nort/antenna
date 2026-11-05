@@ -2,7 +2,7 @@
 // "Connect an agent" against REAL `antennad` and `antenna`: the owner issues a token from the window (agent_add with
 // the password), and the screen's ready-made snippets actually work: the script agent from the "Any script" tab gets a
 // message and replies, and `antenna mcp` from the Claude Code config answers initialize and tools/list.
-// Run: ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test test/protocol/live_agent_test.dart (`antenna` next to `antennad`).
+// Run: ANTENNAD_BIN=<path to antennad> flutter test test/protocol/live_agent_test.dart (`antenna` next to `antennad`).
 @Tags(['live'])
 library;
 

@@ -2,7 +2,7 @@
 // The agents' questions (D-118) against a REAL `antennad`: the agent asks with the agent CLI; the window's model lists
 // the question and gets the subscription's `escalation` event, answers it, and the agent's `wait` returns the answer
 // once; where an agent's questions go is set with the password and shows in the agent list.
-// Run: ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test --tags live test/protocol/live_questions_test.dart
+// Run: ANTENNAD_BIN=<path to antennad> flutter test --tags live test/protocol/live_questions_test.dart
 @Tags(['live'])
 @TestOn('linux || mac-os')
 library;

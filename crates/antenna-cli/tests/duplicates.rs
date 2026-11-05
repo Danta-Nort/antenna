@@ -127,7 +127,7 @@ fn the_owner_accepts_a_resent_identical_file_without_a_second_copy() {
 
 /// The field report of 2026-10-06: an agent re-sent `DECISIONS.md` with new content to a level-5 own computer three
 /// times over an afternoon; the recipient's `shared/` kept the first copy, nothing else was saved, and the sending
-/// agent saw "sent" and could not tell. Now (D-128) the daemon saves new content under the next free number,
+/// agent saw "sent" and could not tell. With D-128 the daemon saves new content under the next free number,
 /// `DECISIONS (2).md`, and the same content again is that file, without a copy. The recipient's records and its agent's
 /// `inbox` name the saved file; the sender's node gets `name_number` in the receipt (`file-saved-as/0`), so the sending
 /// agent is told the name, and the sender's audit log says it. Negative control (seen failing): without the number the
@@ -257,7 +257,7 @@ fn at_level_5_a_file_that_cannot_be_saved_waits_with_the_reason() {
 }
 
 /// Level 5: the daemon accepts a re-sent identical file by itself instead of leaving it in quarantine (the release
-/// files the maintainer's Mac received twice).
+/// files a Mac received twice in the field report).
 #[test]
 fn at_level_5_a_resent_identical_file_is_accepted_by_itself() {
     let root = tempfile::tempdir().unwrap();

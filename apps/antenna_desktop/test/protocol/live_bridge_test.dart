@@ -6,7 +6,7 @@
 // XDaemonUnreachable with the CLI's reason. On Windows the same client goes through the pipe (the window's Windows
 // runner, by hand); this harness starts daemons on unix sockets.
 //
-// Run: ANTENNAD_BIN=<path to antennad, with antenna beside it> nice -n 10 flutter test test/protocol/live_bridge_test.dart
+// Run: ANTENNAD_BIN=<path to antennad, with antenna beside it> flutter test test/protocol/live_bridge_test.dart
 @Tags(['live'])
 @TestOn('!windows')
 library;

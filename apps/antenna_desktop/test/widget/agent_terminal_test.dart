@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-only
-// Scrolling back in an agent's terminal (ui/code/agent_terminal.dart, state/terminal_mouse.dart). The maintainer could
-// not scroll the dock's terminal back: Claude Code asked something, the output went on, and the question was gone.
+// Scrolling back in an agent's terminal (ui/code/agent_terminal.dart, state/terminal_mouse.dart). The dock's terminal
+// could not be scrolled back: Claude Code asked something, the output went on, and the question was gone.
 // On the main screen: the wheel scrolls the bounded scrollback, new output keeps the view where the person reads, and
 // "Jump to the latest" brings it to the end. On the alternate screen (where Claude Code runs, with mouse reports on):
 // the wheel reaches the program with the protocol's codes (64 up, 65 down), which xterm 4.0.0 got wrong (68, 69).

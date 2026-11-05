@@ -629,29 +629,29 @@ void main() {
 
   testWidgets('own computers on the left whatever else there is: the only other computer, no report, no devices',
       (t) async {
-    // The maintainer's case: one own computer (∞) and no other contact; it has not reported itself yet.
-    final d = FakeDaemon(contacts: [contact('hel server', 71, trust: 5, peerKind: 'agent')])
+    // The field case: one own computer (∞) and no other contact; it has not reported itself yet.
+    final d = FakeDaemon(contacts: [contact('atlas server', 71, trust: 5, peerKind: 'agent')])
       ..devicesEnabled = true
       ..agentList = [mapAgent('claude-code', alive: true)];
     d.devicesState = DevicesReply(
       self: const ThisDevice(name: 'Mayas-MacBook-Pro', os: 'macos', arch: 'aarch64', version: 'antennad 0.2.0'),
-      devices: [DeviceInfo(contact: 'hel server', linkId: contact('hel server', 71).linkId, presence: 'online', supported: true)],
+      devices: [DeviceInfo(contact: 'atlas server', linkId: contact('atlas server', 71).linkId, presence: 'online', supported: true)],
     );
     final m = AppModel(connector: (_) => d, socketPath: d.socketPath, live: false, clock: () => fixedNow);
     await m.connect();
     await m.refreshAgentMap();
     await _open(t, m);
     final lay = _map(t).layout!;
-    expect(lay.clusters['c/hel server']!.center.dx, lessThan(lay.clusters['here']!.center.dx), reason: 'on the left');
-    expect(t.getCenter(_key('agent-map-cluster-c/hel server')).dx, lessThan(t.getCenter(_key('agent-map-cluster-here')).dx));
-    expect(_key('agent-map-report-missing-c/hel server'), findsOneWidget);
+    expect(lay.clusters['c/atlas server']!.center.dx, lessThan(lay.clusters['here']!.center.dx), reason: 'on the left');
+    expect(t.getCenter(_key('agent-map-cluster-c/atlas server')).dx, lessThan(t.getCenter(_key('agent-map-cluster-here')).dx));
+    expect(_key('agent-map-report-missing-c/atlas server'), findsOneWidget);
     expect(find.text('${en.mapReportMissing} · ${en.devicesOnline}'), findsOneWidget);
     // And a contact next to it goes right
     d.contactList.add(contact('Bob', 63, trust: 3));
     await m.refreshContacts();
     await _settle(t);
     final both = _map(t).layout!;
-    expect(both.clusters['c/hel server']!.center.dx, lessThan(both.clusters['here']!.center.dx));
+    expect(both.clusters['c/atlas server']!.center.dx, lessThan(both.clusters['here']!.center.dx));
     expect(both.clusters['c/Bob']!.center.dx, greaterThan(both.clusters['here']!.center.dx));
   });
 

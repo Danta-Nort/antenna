@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // Golden screenshots of all screens (regression, DPR 1): test/goldens/*.png.
-// Update: nice -n 10 flutter test --update-goldens test/goldens/goldens_test.dart
+// Update: flutter test --update-goldens test/goldens/goldens_test.dart
 
 import 'package:flutter_test/flutter_test.dart';
 

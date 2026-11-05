@@ -7,7 +7,7 @@
 // from another client, through the `local_agent` event); Stop ends a long reply as `interrupted`; the conversation
 // survives a daemon restart; New conversation deletes it.
 // Run (one file at a time; needs bwrap or Landlock for the sandboxes, python3 for the stand-in runtime):
-//   ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test --tags live test/protocol/live_local_models_test.dart
+//   ANTENNAD_BIN=<path to antennad> flutter test --tags live test/protocol/live_local_models_test.dart
 @Tags(['live'])
 library;
 

@@ -104,7 +104,7 @@ Future<void> _settings(WidgetTester t, String section) async {
 }
 
 void main() {
-  /// The maintainer's case (preview.8): Agents → Start an agent showed "Owner password" though Touch ID was on.
+  /// The field case (preview.8): Agents → Start an agent showed "Owner password" though Touch ID was on.
   /// Negative control (seen failing): `OwnerAuthController.usesTouch` returning `false`.
   testWidgets('Start an agent: with Touch ID on, no password field; one touch issues the token', (t) async {
     final (m, d, h) = await _setup(agents: [const AgentInfo(name: 'jarvis', createdMs: 0, localLevel: 5)]);

@@ -22,7 +22,7 @@
 // Claude Code: Haiku (the cheapest model), Antenna's MCP tools allowed, and the tools that would stop a turn at a
 // permission dialog (shell, edits, web) denied, reads outside the test's folder refused, so that every turn ends by
 // itself.
-// Run: tools/claude-canary.sh, or ANTENNA_REAL_CLAUDE=1 ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test
+// Run: tools/claude-canary.sh, or ANTENNA_REAL_CLAUDE=1 ANTENNAD_BIN=<path to antennad> flutter test
 // --tags real-cli test/protocol/live_code_real_claude_test.dart
 @Tags(['live', 'real-cli'])
 @TestOn('linux || mac-os')

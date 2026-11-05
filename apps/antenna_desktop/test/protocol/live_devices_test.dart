@@ -6,7 +6,7 @@
 // device key), and a denial with neither; the mini's daemon checks each against the keys its owner confirmed for the
 // laptop, and carries the approved message to Bob. Then "Lend this computer to my teams" on the laptop reaches the
 // mini.
-// Run: ANTENNAD_BIN=<path to a debug antennad> nice -n 10 flutter test --tags live test/protocol/live_devices_test.dart
+// Run: ANTENNAD_BIN=<path to a debug antennad> flutter test --tags live test/protocol/live_devices_test.dart
 @Tags(['live'])
 library;
 

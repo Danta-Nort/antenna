@@ -7,7 +7,7 @@
 // `main` is refused (`approval_required`) and shows as the owner's request; a wrong password applies nothing; the
 // owner's password moves `main` to the team's branch. Then the owner's own actions: a task, a worker, Stop, Remove.
 // Run (one file at a time; Linux with bwrap, git 2.38+, python3):
-//   ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test --tags live test/protocol/live_teams_test.dart
+//   ANTENNAD_BIN=<path to antennad> flutter test --tags live test/protocol/live_teams_test.dart
 @Tags(['live'])
 library;
 

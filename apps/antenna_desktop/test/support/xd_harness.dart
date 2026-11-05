@@ -2,7 +2,7 @@
 // Real `antennad` daemons for client tests: one data dir per node, no relay, 127.0.0.1 only, the same way as
 // crates/antenna-cli/tests/common/mod.rs. Binary: `ANTENNAD_BIN` (the old `XD_BIN` is a fallback) or
 // `<repo>/target/debug/antennad`
-// (build it with `export PATH=$HOME/.cargo/bin:$PATH; nice -n 10 cargo build -p antennad` at the repository root).
+// (build it with `cargo build -p antennad` at the repository root).
 
 import 'dart:async';
 import 'dart:io';

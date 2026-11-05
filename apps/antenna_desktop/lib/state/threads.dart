@@ -92,7 +92,7 @@ final class MyAgentFilter extends ThreadFilter {
 
 /// Inside an agent's chat (D-UI-44): this side was the person, either direction — the owner's own conversation with
 /// that agent, as opposed to what it exchanges with the owner's other agents. The default filter of an agent's chat
-/// (field feedback 2026-10-06: "a person does not care what the AIs discuss among themselves").
+/// (field feedback 2026-10-06: a person rarely needs to read what agents discuss among themselves).
 final class WithMeFilter extends ThreadFilter {
   const WithMeFilter();
 

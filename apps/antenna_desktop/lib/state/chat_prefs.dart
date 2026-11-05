@@ -4,8 +4,8 @@
 // daemon's local-settings store. There is no such store for these two, so they follow the window's own local-settings
 // pattern instead (`appearance.dart`, `window.json`): a small JSON file next to it, `chat_prefs.json`.
 //
-// - **A stable order** (field feedback 2026-10-06): the maintainer kept losing track of which agent chat was which
-//   because the list reordered itself by the latest message. The order a contact's agent chats are shown in is now
+// - **A stable order** (field feedback 2026-10-06): a list that reordered itself by the latest message made it hard to keep
+//   track of which agent chat was which. The order a contact's agent chats are shown in is
 //   the order they first appeared, drag-reorderable, saved here; a **Pin** stays on top in the order it was pinned.
 //   Activity still shows (the unread badge, the time), it just does not move the row.
 // - **A local picture** for a contact's agent (D-UI-32's agent chats, D-115's pictures): a phone book entry on top of

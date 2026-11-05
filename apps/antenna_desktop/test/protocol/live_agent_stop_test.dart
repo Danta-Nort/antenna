@@ -6,7 +6,7 @@
 // `contacts[].peer_urgent`; an urgent message to an own computer's agent goes with the flag, the receiving daemon marks
 // it urgent (and only once per agent per 30 s), and urgent is refused below ∞ and without an agent. Skipped cleanly
 // with a daemon from before the switch (`agent_stop` unknown).
-// Run: ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test --tags live test/protocol/live_agent_stop_test.dart
+// Run: ANTENNAD_BIN=<path to antennad> flutter test --tags live test/protocol/live_agent_stop_test.dart
 @Tags(['live'])
 library;
 

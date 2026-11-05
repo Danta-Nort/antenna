@@ -2,7 +2,7 @@
 // x-control/2 against REAL `antennad`, through the window state (two windows, one per node): "History verified" with
 // the same fingerprint on both sides, unread and mark_read, renaming, a database rollback from a "backup" → rekey with
 // two codes (each owner types the other's code) → "verified" again, deleting the link.
-// Run: ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test test/protocol/live_history_test.dart
+// Run: ANTENNAD_BIN=<path to antennad> flutter test test/protocol/live_history_test.dart
 @Tags(['live'])
 library;
 

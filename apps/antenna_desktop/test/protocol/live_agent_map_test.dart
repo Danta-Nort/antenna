@@ -10,7 +10,7 @@
 // reviewer (`agent_connect` with `local`), the daemon's `agent_list` shows the route both ways and each one's
 // counterpart, and the line's default disconnect removes it without a password; a daemon built before local
 // connections (no `session.local_routes`) skips that test with the reason.
-// Run: ANTENNAD_BIN=<path to a debug antennad> nice -n 10 flutter test --tags live test/protocol/live_agent_map_test.dart
+// Run: ANTENNAD_BIN=<path to a debug antennad> flutter test --tags live test/protocol/live_agent_map_test.dart
 // Not on Windows (D-135): its afunix.sys bugchecks the machine when a process with a unix socket connection ends.
 @TestOn('!windows')
 @Tags(['live'])

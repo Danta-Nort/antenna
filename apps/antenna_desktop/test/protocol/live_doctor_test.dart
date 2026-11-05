@@ -2,7 +2,7 @@
 // The Check panel's daemon facts against a REAL `antennad` (D-UI-26): the keys and the service as the window sees them,
 // the relay setting, and a process refused because another program holds the agent's token, read from the real
 // `agent_list` (`refused_*`, preview.6). Locked: the panel says so and the link checks wait for the keys.
-// Run: ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test --tags live test/protocol/live_doctor_test.dart
+// Run: ANTENNAD_BIN=<path to antennad> flutter test --tags live test/protocol/live_doctor_test.dart
 @Tags(['live'])
 @TestOn('linux || mac-os')
 library;

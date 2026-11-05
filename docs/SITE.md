@@ -1,7 +1,7 @@
 # SITE — the antenna.contact website
 
 The product site: description, closed-beta form, handler for invite links `https://antenna.contact/#…`.
-Launched on 2026-10-02 at the maintainer's request. Sources are in `site/`; this file describes how the site is built,
+Launched on 2026-10-02. Sources are in `site/`; this file describes how the site is built,
 its style, files and data.
 
 ## Summary
@@ -35,7 +35,7 @@ site/
   the feature icons are inline SVG in the markup, the laptop around the screenshot is drawn in CSS.
   No analytics, trackers, cookies or captcha. Workers Logs are off (`observability.enabled: false`) — the privacy
   policy promises that we do not store IPs or request data.
-- **Style** — light minimalism following the maintainer's v2 reference (docs/DESIGN.md "Reference v2", `docs/design/reference-light-v2.webp`),
+- **Style** — light minimalism following the v2 reference (docs/DESIGN.md "Reference v2", `docs/design/reference-light-v2.webp`),
   details in "Style" below. Language — English only (maintainer decision).
 
 ### Style (since 2026-10-02, reference v2)
@@ -136,4 +136,4 @@ A repeated request with the same email updates the record (`submissions + 1`), t
 ## What's next
 - When the app learns `antenna://` — check the "Open in Antenna" button on macOS/Linux. Since 2026-10-03 the node
   issues links `https://antenna.contact/#<body>` (DECISIONS D-74): the site handler already reads exactly this form.
-- Public download — only when the maintainer opens releases; at the same time — a download page (candidate — antennachat.app).
+- Public download — only once releases are public; at the same time — a download page (candidate — antennachat.app).

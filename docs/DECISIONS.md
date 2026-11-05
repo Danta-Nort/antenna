@@ -77,7 +77,7 @@ changes the meaning of SPEC is listed below under "Questions for the maintainer"
 
 ### D-9 · libcrux-kem (X-Wing) is not added to the core dependencies for now
 - **Decision.** It is not in `workspace.dependencies`. At stage 0 the hybrid X25519 + ML-KEM-768 for pairing is recommended
-  via the transport's TLS 1.3. The final call is question for the maintainer no. 2.
+  via the transport's TLS 1.3. The final call is open question no. 2 for the maintainer.
 - **Why.** `libcrux-kem 0.0.9` and `spqr` in one tree break the build of `libcrux-ml-kem 0.0.10` (STACK.md, d). The only
   workaround is a git patch to libcrux's unreleased main.
 
@@ -187,10 +187,10 @@ strangers, but that breaks direct connections.
 | Q-2 · PQ during pairing | **I. Hybrid from the transport's TLS 1.3** (`X25519MLKEM768`, aws-lc-rs, prefer-PQ) + PSK-MAC over the TLS exporter + commit-then-reveal of random nonces (SAS-MCA) + SAS from the transcript | Amendment to SPEC §6 items 4–5: a nonce is committed, not a key share. libcrux-kem is not added |
 | Q-4 · keys without TPM | **a. Password + Argon2id by default**, `x unlock` after boot; `systemd-creds` and a key file only with an explicit flag and a warning in `x doctor` | MVP keystore: an Argon2id wrapper; hardware backends later |
 | Q-5 · the §18 criterion | **Refine the wording**: "through the relay, without a reply; directly, closed right after the transport handshake, before any application data and application cryptography; the address of a pairwise endpoint is never published" | The §18 acceptance test checks exactly this |
-| Q-3 · libsignal | The maintainer was not asked separately; for the MVP the recommendation **a. git dependency with a pinned rev** was accepted. Revisit before v1.0 (publication, `cargo install`) | — |
+| Q-3 · libsignal | No separate decision was taken; for the MVP the recommendation **a. git dependency with a pinned rev** was accepted. Revisit before v1.0 (publication, `cargo install`) | — |
 
 The SPEC amendments (§6, §7, §14, §18, the §3 diagram) live here for now; `SPEC.md` has not been edited for them — to be
-updated on the maintainer's word. (`SPEC.md` did get one naming update, recorded under "SPEC amendments from research".)
+updated by a maintainer decision. (`SPEC.md` did get one naming update, recorded under "SPEC amendments from research".)
 
 ---
 
@@ -351,7 +351,7 @@ Code review against PROTOCOL.md (an independent reviewer, read-only). No critica
   their historical names, as D-57 requires: `x/…`, `x-control/N`, `x://pair#`.
 
 ### SPEC amendments by the maintainer
-`SPEC.md` is not edited for these until the maintainer says so; the decision named holds the details.
+`SPEC.md` is not edited for these yet; the decision named holds the details.
 - **§9, trust level 5 (SPEC amendment by the maintainer, 2026-10-05; D-99).** "Forbidden at every level: keys,
   passwords, tokens…" now reads, for the owner's own computers: at level 5 (own computers, chosen after a warning the
   owner accepts) secrets are not held for approval, in messages, streams, files or file names; the daemon's scanner
@@ -362,16 +362,16 @@ Code review against PROTOCOL.md (an independent reviewer, read-only). No critica
 - **§10, level 5 without a project folder (2026-10-05; D-99).** "At level 5 the owner explicitly specifies the path to
   the project folder": until one is set, accepted files go to the link's `shared/`, as at levels 3–4.
 - **§10, the link folder's name (2026-10-06; D-125).** `~/Antenna/links/<contact>/` is the contact's label as one
-  shell word ("hel server" → `hel-server`); a folder made before under the label as it is keeps working.
+  shell word ("atlas server" → `atlas-server`); a folder made before under the label as it is keeps working.
 - **§9 and §18, an agent that approves for the owner at level 5 (SPEC amendment by the maintainer, 2026-10-06;
   D-127, experimental).** "An agent cannot grant permissions to itself or anyone else" and "An agent cannot … approve"
   now read, for the owner's own computers: an agent the owner names an approver (with the password or Touch ID) may
   answer other agents' approval requests in the owner's place, within the scope the owner set, only while everything
   the request touches stays at level 5, and never its own or another approver's requests. The owner's `approve` and
   every other owner command stay absent from agents.
-- **§10–§11, what holds a received file (SPEC amendment by the maintainer, 2026-10-06; D-130).** The maintainer: "The
-  security settings must be lowered, because ordinary files are already blocked from transfer. This is the basis of
-  any messenger: nobody blocks file transfer, especially pictures." From trust level 3, the check's heuristic findings
+- **§10–§11, what holds a received file (SPEC amendment by the maintainer, 2026-10-06; D-130).** The requirement:
+  the file check must not block ordinary files, the way no messenger blocks file transfer, pictures above all. From
+  trust level 3, the check's heuristic findings
   (markup or scripts in a file, an HTML polyglot, secret patterns on receive, unknown types) never hold a file: they
   are labels, and the file is accepted the normal way for its level. Held for the owner at every level from 3: native
   executables, installers and disk images outside the signed update flow, archives containing those, real antivirus
@@ -526,7 +526,7 @@ maintainer (slice 2)" below and is **not** considered decided.
 | Q-19 | Owner password length: an agent of the same uid can brute-force `keystore.cbor` offline | Minimum 8 bytes | a) minimum 12 and a dictionary check; b) a passphrase of 4+ words by default; c) leave it |
 
 ### Maintainer proposal: streaming agent replies (2026-10-02) — planned for v0.2, together with wake
-The maintainer: agents write for a long time, so the user should see an agent's reply gradually, as it is being written,
+Agents write for a long time, so the user should see an agent's reply gradually, as it is being written,
 as in ChatGPT/Claude.
 Maintainer decision: do it in v0.2 together with wake (SPEC §11); lay the groundwork in the protocol and design now.
 Sketch (to be refined in PROTOCOL.md during implementation):
@@ -684,7 +684,7 @@ code field stays for two invites with codes at once and for older daemons.*
 
 ### D-UI-9 · Golden screenshots
 - **Decision.** In tests, fonts are loaded from the same `FontManifest.json` as in the app (`test/flutter_test_config.dart`);
-  regression at DPR 1 (`test/goldens/`), frames for the maintainer are the same scenarios at DPR 1.5
+  regression at DPR 1 (`test/goldens/`), showcase frames are the same scenarios at DPR 1.5
   (`docs/design/screens/`); mockups of the future are separate `D*` frames with a banner "DESIGN · NOT YET IMPLEMENTED IN
   THE DAEMON".
 - **Why.** By default flutter_test draws text with the Ahem font (black rectangles); DPR 1.5 is readable on Retina with
@@ -868,7 +868,7 @@ is `crates/x-cli/tests/history.rs`. Whatever changes SPEC is under "Questions fo
   `sudo -k`); **connection** of the window/TUI (`login {hold}`) — while the connection is open, the `xos_…` token is
   accepted only from the same process. The tree of a bound agent stays an agent before any session check (D-28). The CLI
   in a terminal without a session asks for the password itself and repeats the command.
-- **Why.** "Like sudo" is the maintainer's explicit requirement, and it is the pattern people understand best. The key is
+- **Why.** "Like sudo" is an explicit requirement, and it is the pattern people understand best. The key is
   the terminal, not a file with a token: an agent would read a file of the same uid. Claude Code runs commands in a new
   session without a terminal (D-28), so a terminal session does not extend to them. An implicit session exists only for a
   terminal: for scripts and the window it must be explicit.
@@ -1090,7 +1090,7 @@ not by words.
   escalation); to undo — `x agent remove` from the window or another terminal.
 - **Checks.** Tests `child_is_an_anchor_session_leader_is_not` (a session leader without `.app` is not an anchor),
   `app_main_executable_paths`; on a real app — `gui_host_accepts_a_launched_app` (Calculator via `open`, CI,
-  informational). The experiment with Claude Desktop (PORTABILITY §5 step 2) is the first thing to run on the maintainer's
+  informational). The experiment with Claude Desktop (PORTABILITY §5 step 2) is the first thing to run on a
   Mac.
 
 ### D-P-4 · SPEC §13 on macOS: `RLIMIT_CORE=0` + `PT_DENY_ATTACH` (release) + hardened runtime (M-7)
@@ -1704,7 +1704,7 @@ contacts get receipts as before (identical ones at most once a minute).
 - `x files accept --as` is named `--name`; the MCP tool is `file_accept` (consistent with `file_preview`, `file_reject`).
 - The `x-files` sandbox tests (corpus, pipeline, review, sandbox) and `crates/x-cli/tests/files.rs` are Linux only
   (`#![cfg(target_os = "linux")]`): there is no worker sandbox on macOS yet, the check there is fail-closed (D-P-6).
-- Office page rasterization (Q-F-1 — later), ClamAV by default (Q-F-2 — not mandatory) — per the maintainer's decisions.
+- Office page rasterization (Q-F-1 — later), ClamAV by default (Q-F-2 — not mandatory) — per maintainer decisions.
 
 ### D-F-23 · How long to serve what was sent; requests from `shared/` one at a time
 - The ciphertext of a sent file lies in the link store while the contact can download it. The contact's answer — an
@@ -1721,7 +1721,7 @@ contacts get receipts as before (identical ones at most once a minute).
 
 
 ### Product name: Antenna (maintainer decision, 2026-10-02)
-- The maintainer chose "Antenna" as the name. This closes the open question of SPEC §19 (the product name). The working
+- The name is "Antenna". This closes the open question of SPEC §19 (the product name). The working
   name `x` goes away.
 - Name check (2026-10-02): on crates.io the name `antenna` is taken by an unrelated WASM library for P2P meshes over WebRTC
   (v0.1.1) — a nearby area, possible confusion in search; `antennad`, `antenna-core`, `antenna-proto` are free.
@@ -1786,7 +1786,7 @@ important, 6 medium, 5 minor. Fixed (regression tests — `crates/x-cli/tests/fi
 
 
 ### Releases and variants (maintainer decision, 2026-10-02)
-- The maintainer asked for a download link and several variants: a visual one and a command-line-only one; the command
+- The requirement: a download link and several variants: a visual one and a command-line-only one; the command
   line can be built into the visual one if that is safe.
 - Decision: releases are GitHub Releases of the private repository, triggered by a `v*` tag; files:
   `Antenna-<ver>-macos-arm64.dmg` (the window + the bundled `antenna`/`antennad`), `antenna-<ver>-macos-arm64-cli.tar.gz`
@@ -1859,7 +1859,7 @@ file and TROUBLESHOOTING were not rewritten: they keep the names of their time, 
   continues, a file checked in quarantine before the move is accepted after it into `~/Antenna/links` (the blob store and
   the quarantine records are alive), a second start moves nothing; an old daemon
   with a live socket blocks the move. LaunchAgent — `test/host/daemon_host_test.dart` with a stubbed `launchctl`. **Not
-  checked:** on a real Mac (we have no Mac) — the first thing for the maintainer to check.
+  checked:** on a real Mac (we have no Mac) — the first thing to check on one.
 
 ### D-57 · Protocol labels stay historical
 - **Do not change:** ALPN `x/pair/0`, `x/link/0`; HKDF/HMAC/BLAKE3/signature domains `x/pair/v0/…`, `x/pair/v1/psk-proof`,
@@ -1969,7 +1969,7 @@ file and TROUBLESHOOTING were not rewritten: they keep the names of their time, 
   (an unrelated process could also be named `sh`). The core code did not change: the protection was not weakened.
 
 ### Server for mass adoption: mailbox and push (maintainer's idea, 2026-10-02)
-- The maintainer: we may need a server at least for users to talk to each other — it could make the product mass-market:
+- The idea: a server at least for users to talk to each other could make the product mass-market:
   notifications and message delivery even when the user is offline; we need features like Signal's.
 - Team decision (within SPEC §4 "offline mailbox v2" and v1.0 "own relay"): bring it forward, together with the mobile
   client. Components: (1) **mailbox** — stores only E2E ciphertext, the mailbox address changes every ratchet epoch, TTL,
@@ -1984,7 +1984,7 @@ file and TROUBLESHOOTING were not rewritten: they keep the names of their time, 
 
 ## v0.2 · agent wake and streaming replies (2026-10-03)
 
-Goal: "chat with an agent that replies by itself — as a stream, as in ChatGPT/Claude" — the maintainer's proposal
+Goal: "chat with an agent that replies by itself — as a stream, as in ChatGPT/Claude" — the proposal
 "streaming agent replies" (above, slice 2) together with wake (SPEC §11). Protocol — PROTOCOL §20, control protocol —
 CONTROL §15–§16 (x-control/4), code — `crates/antenna-core/src/{stream,wake,sandbox}`, tests —
 `crates/antenna-cli/tests/{stream,wake,wake_sandbox}.rs`.
@@ -2034,8 +2034,8 @@ CONTROL §15–§16 (x-control/4), code — `crates/antenna-core/src/{stream,wak
 - **The recipient** accepts a stream only from a contact whose level it has set to ≥ 3 (otherwise `rejected{level}`): live
   text is contact data too, and a stream holds the connection; with the asymmetry "3 for me, 2 for them", the sender learns
   of the refusal before the first chunk (`stream_started.live = false, reason = contact_refused`).
-- **"What the agent is doing"** (`activity`, `tool:<name>`) — only to contacts of levels 4–5 (beyond ChatGPT, the
-  maintainer's proposal).
+- **"What the agent is doing"** (`activity`, `tool:<name>`) — only to contacts of levels 4–5 (beyond ChatGPT, as
+  proposed).
 - **Limits**: ≤ 4 incoming streams per link, opening counts as a message against the level limit, text ≤ 64 KiB − 64 B,
   ≤ 8192 chunks, ≤ 30 minutes, ≤ 60 s between frames (if the source is silent, an empty chunk every 15 s); frames at most
   every 30 ms (coalescing), the first one immediately.
@@ -2617,7 +2617,7 @@ maintainer decision).
   conversation keeps at least 500 px), foldable to a strip. The terminal is dark in both window themes (Claude Code and
   Codex draw for a dark terminal); copy and paste are Cmd+C / Cmd+V on a Mac and Ctrl+Shift+C / Ctrl+Shift+V on Linux,
   so Ctrl+V and Ctrl+A reach the program. Settings get a section list on the left (General, Interface, Network,
-  Security, Agents, Advanced) after the maintainer's reference v3.
+  Security, Agents, Advanced) after reference v3.
 - **Why.** The conversation, the chats and the agent's terminal must fit next to each other on a laptop screen; the
   window theme is kept for everything around the terminal.
 
@@ -2775,9 +2775,9 @@ maintainer decision).
 ## Conversations for agents and batch approvals (2026-10-03…04)
 
 ### D-90 · Addressing and topics are fields of the signed message, sent only to nodes with `addr/0` (maintainer decision)
-- **Context.** A live session with a build agent and a ChatGPT agent on one node, both talking to the lead agent of the
+- **Context.** A field test with a build agent and a ChatGPT agent on one node, both talking to the lead agent of the
   server node: everything landed in one chat, every agent on the node read every message the contact sent (one had to
-  write "Builder: not for you"), and the maintainer asked whether ChatGPT could read the whole conversation. Maintainer
+  write "Builder: not for you"), and it was unclear whether ChatGPT could read the whole conversation. Maintainer
   decisions: separate conversations for different agents or different tasks; an agent reads only what is for it.
 - **Decision** (PROTOCOL §23). `envelope-core` gains two optional fields: `to` (`"person"`, `"everyone"` or
   `{"agent": <name>}`, the name an agent of the recipient side announced in §21) and `topic` (`{id: 16 random bytes,
@@ -2822,9 +2822,9 @@ maintainer decision).
   the person's. Visibility decides whether the agent gets the text at all, authority how it is to take it.
 - **The wake agent reads what is for the person.** The owner sets wake up with the password to answer a contact for
   them (D-67); the contact writes to the person by default, so without this the wake agent would never see a message.
-  It still never sees what the contact addresses to another of the owner's agents. This refines the maintainer's "an
-  agent never reads what is for the person": the wake agent is the person's stand-in on that one link (confirmed by
-  the maintainer, 2026-10-04).
+  It still never sees what the contact addresses to another of the owner's agents. This refines the rule "an
+  agent never reads what is for the person": the wake agent is the person's stand-in on that one link (maintainer
+  decision, 2026-10-04).
 - **The cursor moves past what the agent will never see**, so unseen messages do not pile up in every `inbox` call;
   turning `everyone` on later does not reveal older messages to everyone (like D-30: from now on).
 - **Not covered.** File offers are not addressed: every agent with the link in scope still sees them in
@@ -2838,8 +2838,8 @@ maintainer decision).
   the wake agent; its reply goes to the person who wrote); unit tests `addressing::tests::the_visibility_rule`.
 
 ### D-92 · Approving several requests: one password per call, each request approved on its own (maintainer decision)
-- **Context.** The maintainer, during the same live session: "approve several requests at once: press 'approve all'
-  and enter the password once."
+- **Context.** The same field test: several requests waited at once, and approving them should take one "Approve
+  all" and the password entered once.
 - **Decision** (CONTROL §20). `approve_many {items: [{id, fingerprint?}], password}` (≤ 64): the daemon checks the
   password once for the call (one Argon2id), then calls the same single approval for each item: each request keeps its
   own binding (its request hash with its own nonce, SPEC §9) and is used up only by the request it was made for; the
@@ -2878,8 +2878,8 @@ maintainer decision).
      request's fingerprint) and Deny selected (`deny_many`, no password); per-item failures are listed alone. A card in
      the conversation offers "Approve all from this agent (N)" when one agent waits with several requests.
   6. **"Sees messages to everyone"** per agent: the password to turn it on, none to turn it off.
-- **Why.** The maintainer's words: a ChatGPT task about avatars must not sit in the same chat as the build agent's;
-  "approve all and enter the password once"; "in my window I look like the computer". Grouping by counterpart needs no
+- **Why.** The requirements: a ChatGPT task about avatars must not sit in the same chat as the build agent's;
+  approve all with the password entered once; in their own window the owner must not appear as the computer. Grouping by counterpart needs no
   state in the daemon; topics and the owner's-agent filters separate tasks and agents within one counterpart.
 - **Checked.** `test/widget/threads_test.dart` (15 scenarios, including a v5 daemon), `test/protocol/client_v6_test.dart`
   (the fallback and the v6 requests on a real unix socket), the live `test/protocol/live_threads_test.dart` (two real
@@ -3065,7 +3065,7 @@ recorded. Agents started on wake inherit none of the daemon's environment (a tes
 
 **Decision.** The product is built from existing, verified technologies (`docs/STACK.md`, "Principle: proven technology first"). A mechanism of our own design ships **marked experimental** until it has had its own tests, a written threat analysis, negative and adversarial tests, a formal model where one applies, and time in use; only then does it become the default. In v0.1.0-preview.4 the experimental ones are: resident agents (`wake set --resident`), addressing and topics, task authority, `share_file_content`; the window labels them "Experimental" and the user guide says so. Token files are a hardening of an existing mechanism (the token stays the same, only its storage changes) and are not marked. No custom cryptography stays absolute (SPEC §7, §15).
 
-**Why.** The maintainer: a technology can look great to its authors and still have holes; what users rely on must be proven, and what we invent is tested separately first.
+**Why.** A technology can look great to its authors and still have holes; what users rely on must be proven, and what we invent is tested separately first.
 
 ---
 
@@ -3073,9 +3073,9 @@ recorded. Agents started on wake inherit none of the daemon's environment (a tes
 
 ### D-96 · A built-in local assistant: the doctor first, then local models as sandboxed agents without authority (proposed, experimental)
 - **Status.** Proposed 2026-10-05, not built; the design is `docs/LOCAL-ASSISTANT.md`. Everything of our own design in
-  it ships on the experimental track (D-94). The maintainer's decisions it records are marked as such; the open
+  it ships on the experimental track (D-94). The maintainer decisions it records are marked as such; the open
   questions are Q-LM1…Q-LM11 there.
-- **Question.** The maintainer's idea (2026-10-05): a local open-weight model, downloaded inside Antenna without an
+- **Question.** The idea (2026-10-05): a local open-weight model, downloaded inside Antenna without an
   account or API key, appears as one more agent with its own chat and helps people who are not technical to set up and
   troubleshoot Antenna (it sees the node's status and logs, explains, proposes fixes), with a chat view and a terminal
   view, without weakening security. Refinements of the same day (maintainer decisions): fix-it buttons that need no
@@ -3164,7 +3164,7 @@ recorded. Agents started on wake inherit none of the daemon's environment (a tes
 
 ### D-95 · The inviter confirms with one button once the joiner entered the code (maintainer decision, 2026-10-05)
 - **Question.** At the confirmation step the inviter (A) typed the same code again after the joiner (B) had typed it correctly
-  (D-UI-4, D-41/F-4). The maintainer, on the clean Mac: "the computer already knows the code"; replace the retyping with one
+  (D-UI-4, D-41/F-4). On a clean Mac the retyping is needless, since the computer already knows the code; replace it with one
   button, "The contact confirmed — codes match".
 - **Decision.** After a correct M5 (B's node reports, with `mac_B`, that B's owner entered the code that matched the SAS, PROTOCOL
   §8 B5), owner A confirms with one explicit action and no code: the button in the window, `yes` in `antenna invite`, `antenna
@@ -3226,7 +3226,7 @@ recorded. Agents started on wake inherit none of the daemon's environment (a tes
   binding tests still pass (`agents.rs`, `wake*.rs`, `control.rs`).
 
 ### D-98 · The sender can withdraw a file the contact has not accepted (maintainer decision, 2026-10-05)
-- **Question.** A sent photo hung as "offered" with no way to take it back. The maintainer: add "Cancel" on the outgoing file
+- **Question.** A sent photo hung as "offered" with no way to take it back. The requirement: add "Cancel" on the outgoing file
   card while the contact has not accepted it; the receiver's pending offer disappears or shows "withdrawn by the sender"; if the
   receiver already has it, say so and promise no false "unsend"; use the file protocol's own path or add one, feature-gated.
 - **Decision** (PROTOCOL §19, CONTROL §14). The owner's `file_withdraw {id}` (session, no password: it only reduces what
@@ -3252,7 +3252,7 @@ recorded. Agents started on wake inherit none of the daemon's environment (a tes
 - **Question.** On the clean Mac: Claude Code showed "Not found on this computer"; the agent in Code mode inherited the
   window's own session markers (`CLAUDE_CODE_CHILD_SESSION` from the Claude Code session that had started the window: no
   transcript, no resume) and launchd's short PATH (`cargo` not found); the status line said "0 contacts" right after a
-  pairing; the Connect dialog for Claude Desktop ended with "Waiting for the app" and the maintainer did not know what to do.
+  pairing; the Connect dialog for Claude Desktop ended with "Waiting for the app" and the owner did not know what to do.
 - **Decision.**
   1. One `ProgramLocator` (`lib/host/program_locator.dart`) serves AI apps, Start agent / Code mode, the agents' PATH and the
      core binaries outside the bundle: the login shell's PATH (`$SHELL -ilc`, once per window session, 5 s), the window's
@@ -3280,13 +3280,13 @@ recorded. Agents started on wake inherit none of the daemon's environment (a tes
 
 ## Own computers and approvals that finish by themselves (2026-10-05)
 
-The maintainer, managing a freshly installed Mac as one of their own machines: the agent in the terminal stopped at
-every file and every command and waited for Approve, and after each approval the maintainer had to tell the agent in
-its terminal that it was approved. "After approval everything should continue by itself. And there must be a way to
-send absolutely all files, even with passwords, to my own machine. Otherwise there is no point: with 20 or 30 such
-machines, am I going to press approve on each?" Findings (c) and (f) of the build on the second Mac (2026-10-03) were
-the same two problems. Earlier the same day level 5 had been decided to skip the prompts for ordinary files only; the
-maintainer then chose that level 5 itself means "my own computer", with no separate switch.
+On a freshly installed Mac managed as one of the owner's own machines, the agent in the terminal stopped at every
+file and every command and waited for Approve, and after each approval the owner had to tell the agent in its
+terminal that it was approved. The requirements: after approval everything continues by itself, and there is a way to
+send absolutely all files, even with passwords, to the owner's own machine; with 20 or 30 such machines, approving on
+each one defeats the purpose. Findings (c) and (f) of the build on the second Mac (2026-10-03) were the same two
+problems. Earlier the same day level 5 had been decided to skip the prompts for ordinary files only; the maintainer
+decision that followed made level 5 itself mean "my own computer", with no separate switch.
 
 ### D-UI-21 · Attachments wait in the composer until Send (maintainer decision, 2026-10-05)
 - **Question.** An attached, dropped or pasted file was sent at once; every messenger lets the user see it, add a caption
@@ -3315,7 +3315,7 @@ maintainer then chose that level 5 itself means "my own computer", with no separ
   and GTK) over `antenna/clipboard`. Copies are deleted after the send, when a chip is removed, on lock, or after a day.
 - **What is new and why nothing existing fits.** `super_drag_and_drop` would bring a second Rust build that fetches crates
   outside our lock file (0.9.1 also downloads prebuilt binaries), for one missing behavior; `pasteboard` would bring the
-  `crypto` package, a cryptography dependency that needs the maintainer's decision. The bridge is a stopgap: remove its
+  `crypto` package, a cryptography dependency that needs a maintainer decision. The bridge is a stopgap: remove its
   paste part once Flutter ships the fix (`docs/WATCHLIST.md`).
 - **Checked.** Unit and widget tests for staging (a source deleted 0 and 100 ms after the drop is still sent), data drops,
   the paste rules and the clipboard reader against a mocked channel; the Linux reader under Xvfb with a real GTK clipboard;
@@ -3476,7 +3476,7 @@ maintainer then chose that level 5 itself means "my own computer", with no separ
 - **Question.** An agent CLI in a Code mode terminal (Claude Code) reads Antenna only while a turn runs; when the turn
   ends it waits for the keyboard. Messages from a lead agent on another node reached the computer and the daemon
   carried out approved requests itself (D-100), but somebody still had to type "check the chat" or "approved" into that
-  computer's terminal. The maintainer: the lead must be able to drive such an agent over Antenna without anyone
+  computer's terminal. The requirement: the lead must be able to drive such an agent over Antenna without anyone
   touching the computer, and the window may type only phrases built into the app.
 - **Decision.**
   1. **Wake.** When the owner's subscription reports a new incoming text message that an agent running in a terminal
@@ -3546,8 +3546,8 @@ maintainer then chose that level 5 itself means "my own computer", with no separ
   already read the message costs one short turn.
 
 ### D-UI-24 · Visual polish to reference v3: one button system, one "Secure" indicator, an 8 px grid and type scale, conversations that read like a group chat, minimal settings (maintainer decision, 2026-10-05)
-- **Question.** The maintainer, looking at the window on a Mac next to the reference v3 style guide: the drawn design
-  "still has not come out; it was laconic and minimal there". The conversation header showed a cluster ("E2E · PQ",
+- **Question.** Next to the reference v3 style guide, the window on a Mac still fell short of the drawn design, which
+  was laconic and minimal. The conversation header showed a cluster ("E2E · PQ",
   "History verified" with three animals and a time, "Direct", "online") with a monospaced dump of TLS and libsignal
   facts on hover; Code mode had an icon-only navigation; a row of ten slash commands sat under the message field;
   settings carried a paragraph under every option; buttons were Material defaults outside the approval UI. And for
@@ -3578,8 +3578,8 @@ maintainer then chose that level 5 itself means "my own computer", with no separ
      card between. My agents' pictures stand on my side. An agent's picture is the mark of its AI only for the owner's
      own agent and only from a fact the window has (the CLI it started in Code mode, now also remembered across
      restarts, or the AI app it connected), otherwise a neutral monogram with a small agent badge; a contact's agent
-     always gets the monogram (D-UI-18: a name proves nothing). No character set is drawn before the maintainer chooses
-     one: `AgentPicture` is the hook for pictures later (ROADMAP "Profile pictures"). A conversation between two people
+     always gets the monogram (D-UI-18: a name proves nothing). No character set is drawn before one is
+     chosen: `AgentPicture` is the hook for pictures later (ROADMAP "Profile pictures"). A conversation between two people
      keeps its unsigned bubbles.
   5. **"This Mac"** ("this computer" on Linux) after the name of one of my agents that runs here, as a fact the window
      has: it was started in this window's terminal (in this session or remembered), or an AI app's configuration on this
@@ -3597,11 +3597,11 @@ maintainer then chose that level 5 itself means "my own computer", with no separ
      room. The slash commands are offered when the owner types "/", not as a permanent row. The thread and filter bar is
      lighter (outlined counterparts, plain filter tabs, no divider). On macOS the title bar takes the app's theme and
      the navigation's color instead of the system's (`WindowChrome`, `MainFlutterWindow.swift`).
-- **Why.** The maintainer's measure is the user, not the market: the header must say "secure" in one word and explain
+- **Why.** The measure is the user, not the market: the header must say "secure" in one word and explain
   itself when asked; settings must read at a glance; a conversation of agents must look like the group chat it is. Every
   existing warning stays reachable, and the facts behind the word are the same the card always showed.
 - **Not done here.** The ∞ "My computer" display of level 5 and the trust picker (a separate change); avatars from a
-  character set or photos (the maintainer chooses the style first); a full-size content view on macOS with the
+  character set or photos (the style is chosen first); a full-size content view on macOS with the
   navigation under the traffic lights (needs a Mac to verify dragging and the inset); the live stream bubble keeps its
   name line without a picture.
 - **Checked.** `test/widget/design_tokens_test.dart` (3, with a negative control in the test and one seen failing in
@@ -3662,10 +3662,10 @@ maintainer then chose that level 5 itself means "my own computer", with no separ
   real daemon.
 
 ### D-UI-25 · Code mode wakes Claude Code from its hooks; its screen is only the fallback (maintainer decision, 2026-10-05)
-- **Question.** On the maintainer's Mac Claude Code 2.1.289 runs in auto mode: its idle prompt shows
+- **Question.** On a test Mac Claude Code 2.1.289 runs in auto mode: its idle prompt shows
   `⏵⏵ auto mode on (shift+tab to cycle)` instead of "? for shortcuts", the faint placeholder `Try "fix lint errors"`
   stands after `❯`, and the screen check of D-UI-23 read the placeholder as a draft: the wake and "Approved —
-  continue." never fired. The maintainer: Claude Code changes its screen with every release; base the wake on its
+  continue." never fired. Claude Code changes its screen with every release, so the requirement: base the wake on its
   documented, versioned interfaces, keep reading the screen only as a fallback, and say so when neither works.
 - **Decision.** (Revises D-UI-23 items 2 and 7; the lines, the rate limit, the switch and the log stay.)
   1. **State from hooks.** Code mode starts Claude Code with session-only settings (`--settings`, as for the policy
@@ -3765,7 +3765,7 @@ maintainer then chose that level 5 itself means "my own computer", with no separ
   installers are linked, not run (the D-96 design's install-in-a-terminal-tab is left for later).
 
 ### D-UI-27 · A screenshot for an agent in Code mode (maintainer decision, 2026-10-05)
-- **Question.** The maintainer: a button by the Code mode terminal takes a screenshot (an area or a window) and hands it
+- **Question.** The requirement: a button by the Code mode terminal takes a screenshot (an area or a window) and hands it
   to that agent, so the owner does not have to explain where on the screen something is. Only window-made content may
   reach the terminal, only on the owner's click, never into a dialog.
 - **Decision.**
@@ -3942,7 +3942,7 @@ maintainer then chose that level 5 itself means "my own computer", with no separ
 
 ### D-103 · Signed updates install by themselves when the owner turned that on (maintainer decision, 2026-10-06)
 - **Question.** An update needs the owner at the computer twice: to install it and to unlock the keys after the
-  restart. The maintainer manages their own computers through Antenna and wants an update sent at night to install
+  restart. An owner who manages their own computers through Antenna wants an update sent at night to install
   and come back by itself, agents included (proposal §4).
 - **Decision (maintainer, 2026-10-06).** Experimental, off by default, turned on per computer with the password:
   1. **Automatic install** of a release that `antenna update` would accept anyway (the pinned release keys, newer,
@@ -4003,7 +4003,7 @@ maintainer then chose that level 5 itself means "my own computer", with no separ
 ### D-UI-29 · The window's part of signed updates that install by themselves: the switch, "ready to install", Code mode agents restored after the update, received files whose name is taken (2026-10-06)
 - **Question.** D-103 needs the window in four places: the per-computer switch; a way to see and start an install;
   Code mode agents that come back after the update's restart (the installer closes the window with SIGTERM, and nobody
-  signs in to the new one); and two findings on the maintainer's Mac. First, the Install button existed only on the
+  signs in to the new one); and two findings on a test Mac. First, the Install button existed only on the
   accepted manifest's card in Files → Decided, among 22 items, while the re-sent copies above it said only "Part of the
   signed Antenna update …". Second, accepting identical re-sent release files (the same BLAKE3, already in the link's
   `shared/`) opened "Another name" with the same name filled in, and pressing Accept did nothing: no error, the dialog
@@ -4081,7 +4081,7 @@ maintainer then chose that level 5 itself means "my own computer", with no separ
   UUID, compact or spaced, from Claude Code's input and Codex's argument), `agent_launch_test.dart` (+3),
   `appearance_test.dart` (+1). Frames `60_update_ready` (`_ru`, `_dark`), `61_update_auto` (`_ru`),
   `62_file_rename` (`_ru`); `01_unlock(_ru)`, `02_init` and `20_login` show `x-control/7`, and `32_update` the new
-  setting behind its dialog. The non-live suite: 605 passed, 1 skipped (was 557 + 1). The maintainer's finding was
+  setting behind its dialog. The non-live suite: 605 passed, 1 skipped (was 557 + 1). The field finding was
   reproduced first: the regression test failed on the old flow (it sent the refused name again and the dialog stack
   broke). Negative controls, each seen failing: the restore without the `status.updated` check, without the unlocked
   check, without the "started before the update" check, twice for one update, with `--continue`, with a token instead
@@ -4123,14 +4123,14 @@ maintainer then chose that level 5 itself means "my own computer", with no separ
      dialog (`confirmSelfLevel`) use `XColors.danger` — the moment of picking it is marked, not merely labelled;
      `Icons.all_inclusive_rounded` replaces the computer icon wherever level 5 is a glyph rather than a digit
      (the warning dialog, `OwnComputerToggle`, `SelfMark`). Once chosen and applied, the picker is gone and only the
-     quiet resting badge remains: the red lives only in the act of choosing, per the maintainer's word.
+     quiet resting badge remains: the red lives only in the act of choosing (maintainer decision).
   3. **Wording.** Every window string that named "Trust level 5" or "'Self'" now says "∞" and "'My computer'"
      (`selfWarnTitle`, `selfWarnBody`, `selfOwnComputerToggle` "This is my own computer (∞)", the one-time level-5
      notice). A CLI-echo note (`antenna trust →`) keeps the real number, since it quotes the command the daemon ran.
   4. **Russian.** Translated the same way (`app_ru.arb`: `trustSelfName`, `trustGroupPeople`, `trustGroupDevices`);
      the glossary (`lib/l10n/GLOSSARY-ru.md`) now notes the window and the site read level 5 differently (the site
      still says "Self" in Russian; not in scope here).
-- **Why.** The maintainer's own measure (25.08.2026, "rise above the problem first" — engineering principle 7): level
+- **Why.** "Rise above the problem first" (engineering principle 7): level
   5 is not a trust rung, it is the owner's own hardware, and the display should say that outright rather than make the
   owner read "5" and recall what it means. Red at the moment of choice repeats the warning dialog's own colour
   language instead of adding a new one; a quiet badge afterward keeps the header from reading as a standing alarm.
@@ -4145,7 +4145,7 @@ maintainer then chose that level 5 itself means "my own computer", with no separ
 ## Local models: the first slice of phase 2 (2026-10-06)
 
 ### D-104 · Local models as ordinary agents: a pinned runtime in its own sandbox, a verified catalog, a pool, and a loop of ours (2026-10-06, experimental)
-- **Question.** D-96 phase 2 (`docs/LOCAL-ASSISTANT.md` §11) for preview.8, under a maintainer direction of the same
+- **Question.** D-96 phase 2 (`docs/LOCAL-ASSISTANT.md` §11) for preview.8, under a maintainer decision of the same
   day: the target is local multi-agent work (a lead agent creates workers on this computer, several models placed in
   the memory at once, the product plan §3), so the foundation must make a local model an ordinary
   Antenna agent, addressable by name, each in its own sandbox, able to get tools later without a redesign, and the
@@ -4252,12 +4252,12 @@ maintainer then chose that level 5 itself means "my own computer", with no separ
   overrides removed, no links fetched, no images. The badge reads "Local · runs on this Mac" or "… on this computer"
   by the daemon's `hardware.os` and shows only for `runtime: "local"`. With a v6 daemon there is no card and no
   section. Frames `65_local_models` and `66_local_chat` (light, dark, Russian).
-- **Why.** The maintainer's direction: several local agents at once, each its own agent; a model is a resource, not a
+- **Why.** The direction: several local agents at once, each its own agent; a model is a resource, not a
   conversation.
 
 ## Decisions for the first complete version (2026-10-06)
 
-The maintainer accepted the recommendations of the product plan §7 on 2026-10-06.
+The recommendations of the product plan §7 were accepted as maintainer decisions on 2026-10-06.
 
 ### D-105 · The first complete version is 0.2.0, a public beta; signed with a Developer ID of the company (maintainer decision, 2026-10-06)
 - **Question.** The version number of the publishable release; whose name is on the Apple certificate.
@@ -4512,7 +4512,7 @@ a comparison when the terminal work comes up).
      the archive without needing root or fakeroot to build it). `build-rpm.sh` shares the same staging and writes a
      `.spec` plus a payload tarball; with `rpmbuild` present it builds the `.rpm` the same way, otherwise it writes
      the `.spec` and payload to `OUT/rpm-sources/` and says so — a documented fallback, not a fake `.rpm` (`rpmbuild`
-     is not installed on the build server, and this is not a reason to install it without the maintainer's word, CLAUDE.md). The
+     is not installed on the build server, and this alone is not a reason to install it there). The
      two `.deb`/`.rpm` files per package are signed into the release manifest like the archives, under their own
      asset kinds (`deb_app`/`deb_cli`, `rpm_app`/`rpm_cli`, `docs/UPDATES.md` §2): never a kind `antenna update`'s own
      platform matching asks for, so they can never be picked as "the asset for this installation".
@@ -4521,7 +4521,7 @@ a comparison when the terminal work comes up).
   not own; signing the packages into the manifest reuses D-82's verification instead of a separate trust path for
   them.
 - **Checked** (Linux, the build server, 2026-10-06): `build-deb.sh`/`check-deb.sh` against the preview.7 archives in
-  `/root/.cache/antenna-release/v0.1.0-preview.7/` (copied first, not touched there) — contents, `root:root`
+  `~/.cache/antenna-release/v0.1.0-preview.7/` (copied first, not touched there) — contents, `root:root`
   ownership and permissions recorded in the `.deb` (`dpkg-deb -c`, not what unprivileged extraction gives on disk),
   the systemd unit's content, the desktop entry (`Exec`, `MimeType`, `StartupWMClass`; `desktop-file-validate` is not
   installed here, skipped and said so), and, under `xvfb-run`, the window starting the daemon from the package's
@@ -4538,9 +4538,9 @@ a comparison when the terminal work comes up).
 ## Chats per agent (2026-10-06)
 
 ### D-113 · Each agent of a contact is its own chat; a message for an agent nobody has is answered; `antenna connect` (maintainer decision, 2026-10-06)
-- **Question.** PG-6 (the product plan §3.8). The maintainer: talking to one agent session must be
-  separate from talking to another, and neither session sees the other's conversation; "a chat with you that I can
-  rename, e.g. 'Antenna development', another one 'Volna development', and later another app, another chat". Threads
+- **Question.** PG-6 (the product plan §3.8). The requirement: talking to one agent session must be
+  separate from talking to another, and neither session sees the other's conversation; a chat per session that the
+  owner can rename, e.g. 'Website', another one 'Mobile app', and another chat for each later app. Threads
   (D-UI-18) split one conversation inside the window only; nothing kept two sessions of one computer apart unless the
   owner made two agents by hand. The same day a real failure: a message addressed to an agent "chatgpt" showed
   "delivered", but the other computer had no agent by that name (the ChatGPT app's agent there had another name), so
@@ -4618,7 +4618,7 @@ a comparison when the terminal work comes up).
   (D-UI-31). With an older daemon the rows come from the loaded history and the settings are disabled with "Needs a
   newer Antenna daemon on this computer". Frames `67_agent_chats` (light, dark, Russian) and `68_chat_menu` (light,
   Russian).
-- **Why.** The maintainer's direction of D-113: a chat per agent that the owner can name and silence, and that a person
+- **Why.** The direction of D-113: a chat per agent that the owner can name and silence, and that a person
   can tell apart at a glance; the threads bar inside one conversation hid that there were separate counterparts.
 - **Checked.** `test/widget/chats_test.dart` (rows and unread per chat, rename, notifications and archive from the
   menu, a new agent and New chat, notifications, the no-agent line, search and filters, counts read elsewhere, two
@@ -4744,7 +4744,7 @@ a comparison when the terminal work comes up).
   Russian), `70_device_revoke` (light, Russian); every frame with the navigation gained the item.
 ### D-UI-34 · Teams in the window: the board is a view of the daemon's records, the owner's password applies, a lead in Code mode is woken by task facts (2026-10-06, experimental)
 - **Question.** Work package 8 of the plan (the product plan §3.5, §6): the window's side of
-  teams of agents (D-111). The maintainer's direction: a complete product, the way a coding agent directs its own
+  teams of agents (D-111). The direction: a complete product, the way a coding agent directs its own
   helpers (a lead creates agents, gives them tasks, they do them, it checks the result); obvious UX, every button with
   visible feedback, nothing hidden; exact labels in the guides.
 - **Decision.**
@@ -4822,8 +4822,8 @@ a comparison when the terminal work comes up).
 ### D-115 · Profile pictures: drawn sets travel as an id, own photos only as pixels rebuilt in the check sandbox, behind `picture/0` (maintainer decision on the drawings, 2026-10-06)
 - **Question.** PG-29 (the product plan; scenarios S3, S4, S18): people and agents need pictures
   so a list of contacts and a group chat of agents can be told apart at a glance (D-UI-24 left `AgentPicture` as the
-  hook). Decision 3 of the plan: the maintainer chooses the drawings. The maintainer drew three sets of animal
-  pictures (1 "soft 3D", 2 "modern, for developers", 3 "for everyone", 18–19 each, one cover icon per set). A photo is
+  hook). Decision 3 of the plan: the drawings are a maintainer decision. Three sets of animal
+  pictures were drawn (1 "soft 3D", 2 "modern, for developers", 3 "for everyone", 18–19 each, one cover icon per set). A photo is
   personal data and an image file from a contact: it must not carry metadata out, and nobody's window may decode
   bytes a contact chose.
 - **Decision.**
@@ -4858,7 +4858,7 @@ a comparison when the terminal work comes up).
   feature, experimental like the agent announcements it follows (§21). The photo path is the existing check and CDR
   (SPEC §10) reused, not a new parser: the only new code that touches image bytes outside the sandbox decodes the PNG
   this daemon assembled from the worker's RGBA, and encodes a JPEG with the `image` crate already in the stack.
-- **Why.** The maintainer's measure is the user: a picture is the fastest way to tell people and agents apart, and the
+- **Why.** The measure is the user: a picture is the fastest way to tell people and agents apart, and the
   drawn sets give everyone a good one without a photo. Sending the id keeps the message tiny and lets every Antenna
   draw the set at its own quality. A photo is the one personal file every contact gets: rebuilding it on both sides
   means no location or camera metadata leaves, and no contact can make another person's window decode bytes it
@@ -4903,7 +4903,7 @@ a comparison when the terminal work comes up).
   **Picture…**; Profile says "Needs a newer Antenna daemon on this computer" with **Change…** disabled. Frames
   `78_picture_picker` (light, Russian; dark on the Modern set), `79_chat_pictures` (light, dark, Russian),
   `80_settings_profile`, `81_picture_crop`; every Settings frame shows the new section.
-- **Why.** PG-29 and D-115: a person and each agent recognisable at a glance, with the drawn sets the maintainer chose
+- **Why.** PG-29 and D-115: a person and each agent recognisable at a glance, with the chosen drawn sets
   or a photo. The window hands the daemon a re-encoded square, not the file, so nothing of the file leaves the window,
   and the daemon rebuilds it again in its sandbox; drawing only the daemon's bytes means a contact's photo is never
   decoded here before the check (SPEC §10).
@@ -5259,10 +5259,10 @@ a comparison when the terminal work comes up).
 ## The agent map (2026-10-06)
 
 ### D-123 · The agent map: the owner draws an agent's default counterpart; the other side of a line to an own computer is an approval request there (2026-10-06, experimental)
-- **Question.** PG-56 of the plan (the product plan). The maintainer: he had picked an agent on
+- **Question.** PG-56 of the plan (the product plan). The owner had picked an agent on
   this computer and the right session on the server by hand; a person should see a screen where they connect this
-  session with that agent directly, a "tunnel": when he writes to the session, it knows which agent to talk to; like a
-  mind map where you connect two objects, so a person sees which agents talk to whom.
+  session with that agent directly, a "tunnel": when the owner writes to the session, it knows which agent to talk
+  to; like a mind map where you connect two objects, so a person sees which agents talk to whom.
 - **Decision.**
   1. **A line is the agent's default counterpart** (CONTROL §30): a contact's agent, an own computer's agent, or a
      contact's person, kept on this computer (`agent_counterparts`, schema 12) and set only by the owner
@@ -5317,7 +5317,7 @@ a comparison when the terminal work comes up).
   at 4 made a request).
 
 ### D-UI-38 · The agent map in the window: a view of Agents, lines drawn from this computer's agents, each side said in words (2026-10-06, experimental)
-- **Question.** The window's side of D-123: the maintainer's "map where you connect two objects", visually convenient,
+- **Question.** The window's side of D-123: the requirement of a "map where you connect two objects", visually convenient,
   showing which agents talk to whom.
 - **Decision** (DESIGN "The agent map").
   1. **A view of Agents, not a navigation item**: Agents → **List** | **Map** in the page header. The map shows the same
@@ -5340,7 +5340,7 @@ a comparison when the terminal work comes up).
 - **Checked.** `test/widget/agent_map_graph_test.dart` (9: clusters from agents, own computers and contacts; connected, both-ways, waiting, traffic and team lines; traffic hidden under a connected line; the ends that cannot be connected; the drops), `agent_map_test.dart` (10: the map, the dialog's requests for an own computer, a contact's agent and a person, the result states with **Approve now** and **Ask again**, disconnect without a password, drops that send nothing, an older daemon, the agent's card), `test/protocol/client_connections_test.dart` (4), the live `live_agent_map_test.dart` (two real daemons: connect from the window client, the request there, approved there with its password, the line both ways with tasks, a message without a contact routed, `agent_traffic`, a disconnect without a password making a request there); `flutter test --exclude-tags live` 941 passed. Negative controls, each seen failing after the merge with `main`: `peer_tasks` sent for a contact that is not an own computer, a line between two agents of this computer accepted, a wake agent, worker or local-model agent accepted as an end, disconnect sending a password, an older daemon still offered connecting. Frames `86_agent_map` (light, dark, Russian), `87_agent_connect` (light, Russian); the Agents frames redrawn for the header toggle.
 
 ### D-124 · What needs the owner is set when the owner makes the agent: its folder, instruction files, git identity, Claude Code rules (2026-10-06)
-- **Question.** Field feedback from two days of an agent working through Antenna with the maintainer's Mac: settings
+- **Question.** Field feedback from two days of an agent working through Antenna with a test Mac: settings
   that need the owner's authority (the folder an agent works in, its repository instructions, the git identity it
   commits under, the Claude Code permission rules it needs) reached the agent later as another agent's message, and the
   receiving agent's runtime rightly refused them as a possible prompt injection.
@@ -5386,11 +5386,11 @@ a comparison when the terminal work comes up).
   CLI's help naming `antenna agent add` (found by the new check, reworded).
 
 ### D-125 · A link's folder is the contact's label as one shell word (SPEC §10 amendment from field feedback, 2026-10-06)
-- **Question.** A link folder named "hel server" broke every shell command that named it (`cp ~/Antenna/links/hel
+- **Question.** A link folder named "atlas server" broke every shell command that named it (`cp ~/Antenna/links/atlas
   server/shared/…`), in the hands of agents above all.
 - **Decision.** The folder of a link is the label as one shell word: letters and digits of any script, `.`, `_` and
-  `-` stay, every other character becomes `-`, runs of `-` become one, `-` and `.` are taken off both ends ("hel
-  server" → `hel-server`, "Bob's Mac" → `Bob-s-Mac`); nothing left, or a special name: the first 16 hex of the link ID;
+  `-` stay, every other character becomes `-`, runs of `-` become one, `-` and `.` are taken off both ends ("atlas
+  server" → `atlas-server`, "Bob's Mac" → `Bob-s-Mac`); nothing left, or a special name: the first 16 hex of the link ID;
   names that coincide ignoring case and Unicode form get `-<8 hex>` as before. The label stays the contact's name
   everywhere it is shown. **No silent move:** a link whose folder was made before under the label as it is keeps that
   folder while it exists (the files already there, the paths in scripts and approvals). An agent reads its links'
@@ -5401,9 +5401,9 @@ a comparison when the terminal work comes up).
   amendments by the maintainer" above.
 - **Checked.** `files::tests::link_folders_are_shell_words_and_old_folders_stay` (the rule, collisions, an older
   folder kept); `tests/agent_view.rs::a_label_with_spaces_gets_a_folder_a_shell_takes_as_one_word` (real daemons at
-  level 5: a file for "hel server" lands in `hel-server/shared/`, the agent's contacts name that folder, a folder from
+  level 5: a file for "atlas server" lands in `atlas-server/shared/`, the agent's contacts name that folder, a folder from
   before under the label as it is keeps receiving). Negative control seen failing: the label used as it is (the file
-  landed in `hel server/`).
+  landed in `atlas server/`).
 
 ### D-126 · An agent gets every message whole, the files saved for it with where they are, and SHA-256 next to BLAKE3 (2026-10-06)
 - **Question.** The same field feedback: `inbox` cut long messages ("… 1190 more characters not shown") and marked them
@@ -5651,7 +5651,7 @@ a comparison when the terminal work comes up).
   Russian), `90_approvers_list` (light, Russian); no existing frame changed.
 
 ### D-128 · A taken name is saved as `name (2).ext`; both sides are told the name (field feedback, 2026-10-06)
-- **Question.** Two field reports of the same day. Files sent to the maintainer's Mac could not be saved when the name
+- **Question.** Two field reports of the same day. Files sent to a test Mac could not be saved when the name
   was taken in the link folder: the window's "Another name" came back with the same name, three times, then nothing
   (preview.7; main's reworked dialog stopped the loop, but every taken name still went through a dialog). And an agent
   re-sent `DECISIONS.md` with new content to a level-5 own computer three times over an afternoon: the recipient's
@@ -5773,7 +5773,7 @@ a comparison when the terminal work comes up).
   that never prompts.
 - **Not changed.** The release signing stays ad hoc. Developer ID is the real fix (a DR on the Team ID that every
   release satisfies, notarization, Gatekeeper trust) and waits for an Apple Developer account.
-- **Proposal for the maintainer: a stable self-signed signature until the Developer ID exists** (evaluated, not built).
+- **Proposal: a stable self-signed signature until the Developer ID exists** (evaluated, not built).
   The build Mac would keep a code-signing certificate of its own (a self-signed root made with Keychain Access →
   Certificate Assistant, code signing only, a long validity such as 10 years, named after the product) and
   `build-dmg.sh` would sign with `codesign --force --sign "<its name>"` (an optional `SIGN_IDENTITY`; ad hoc stays the
@@ -5827,10 +5827,10 @@ a comparison when the terminal work comes up).
   a DMG.
 
 ### D-UI-42 · The first hour of preview.8 in the window: drafts and reading positions per chat, long text as a file, Copy text and Show all, the sender's own image copy, a terminal that scrolls back, time left in words (field feedback, 2026-10-06)
-- **Question.** What the maintainer hit in the first hour with `0.1.0-preview.8` on a Mac: a screenshot attached in one
+- **Question.** What came up in the first hour with `0.1.0-preview.8` on a Mac: a screenshot attached in one
   chat waited in another chat's composer, where Enter would have sent it to the wrong recipient, and the hint named
-  only the contact; a chat left at its end opened in the middle when he came back; a pasted crash log over 64 KB said
-  only "not sent: bad_request"; selecting a long message from its top lost the start once the list scrolled; his own
+  only the contact; a chat left at its end opened in the middle on coming back; a pasted crash log over 64 KB said
+  only "not sent: bad_request"; selecting a long message from its top lost the start once the list scrolled; the owner's own
   screenshot's bubble said "Couldn't show the preview image"; the dock's terminal could not be scrolled back; "08:35"
   on a request from another computer read as the time of day.
 - **Decision.**
@@ -5889,10 +5889,9 @@ a comparison when the terminal work comes up).
   screenshot's bubble; the hover button and the right-click menu with a trackpad.
 
 ### D-UI-43 · A stable order for a contact's agent chats, Pin, and a local picture for one (field feedback, 2026-10-06)
-- **Question.** The maintainer: "if you write to me, you are on top; if the other agent writes to me about Volna, it
-  is on top; you keep swapping places. That is inconvenient, I mix up who is who. If I could also set pictures for
-  you, your Antenna logo for you and the Volna logo for Volna, you could be recognized. But it is still better that
-  you don't jump around and stay in one place." `agentChatsOf` (D-UI-32) sorted a contact's agent chats by the latest
+- **Question.** A contact's agent chats kept swapping places: whichever agent wrote last went on top, so the person
+  mixed up who was who. A picture set locally for each agent chat (a project's logo) would help tell them apart, but a
+  stable place matters more. `agentChatsOf` (D-UI-32) sorted a contact's agent chats by the latest
   message, so a busy agent kept jumping to the top of the list.
 - **Prior art.** Telegram, WhatsApp and iMessage order the list by the latest message and let the person pin chats on
   top; Telegram lets pins be dragged into order. Slack keeps a sidebar section's channels in a list the person
@@ -5900,7 +5899,7 @@ a comparison when the terminal work comes up).
   person set on their own device over the one the contact chose. We keep the recency order for the contacts (all three
   do), but a contact's agents are a handful of parallel work sessions the person tells apart by position, which is
   Slack's channel list more than a stream of conversations: a stable order they can drag, Pin on top, and a picture
-  set locally. The difference from the messengers is the point of this decision, stated by the maintainer.
+  set locally. The difference from the messengers is the point of this decision.
 - **Decision.** All of this is this window's own address book on top of what a contact's agent announces, kept on
   this computer only, in a new `chat_prefs.json` next to the window's settings file (`lib/state/chat_prefs.dart`,
   `appearance.dart`'s pattern). Not in the daemon's `chats` table (D-113): that table holds the owner's *name*,
@@ -5922,7 +5921,7 @@ a comparison when the terminal work comes up).
      through `AgentAvatar`) the contact card all show it. "Reset to theirs" deletes it.
   5. **A photo that is not shown says why**: the contact card's agent row shows one line for the daemon's reason
      (`withheld`: level, refused, unavailable) instead of a bare monogram (`PicturesMixin.pictureWithheldOf`).
-- **Why.** The maintainer's words above. A person tells parallel sessions apart by where they stand and what they
+- **Why.** The requirement above. A person tells parallel sessions apart by where they stand and what they
   look like.
 - **Checked.** `test/widget/chats_test.dart`: a lower chat getting a new message does not move it (reverting
   `agentChatsOf` to `chatActivityMs` fails it); drag order saved to a real `ChatPrefsStore` and read by a second
@@ -5933,12 +5932,11 @@ a comparison when the terminal work comes up).
   Flutter's own `ReorderableDelayedDragStartListener`); on a real Mac.
 
 ### D-UI-44 · "With me", "Between agents" and "All" in an agent's chat; agent-to-agent traffic quiet by default (field feedback, 2026-10-06)
-- **Question.** The maintainer, about an agent chat where his own agent and the contact's agent coordinate:
-  "Notifications come for everything, even when it is not for me: you are just writing with code. The chips at the
-  top (All, # pictures check, claude-code) split it into discussion topics, but few people need that. The filters
-  that matter are: the messages for me, my conversation with you; your conversation with other AIs; all messages. A
-  person does not care what the AIs discuss among themselves: they set the work and care about what is needed from
-  them. So by default show the person ↔ agent conversation."
+- **Question.** In an agent chat where the owner's agent and the contact's agent coordinate, notifications came for
+  everything, even for agents exchanging code. The chips at the top (All, # pictures check, claude-code) split it into
+  discussion topics, which few people need. The filters that matter: the messages for the person (their conversation
+  with the agent); the agent's conversation with other AIs; all messages. A person sets the work and cares about what
+  is needed from them, not what the AIs discuss among themselves, so the default is the person ↔ agent conversation.
 - **Prior art.** Slack keeps a channel's thread replies out of the main view and notifies about a thread only when
   you take part in it or are mentioned; its preferences are per channel (everything, mentions, nothing). Telegram
   mutes per chat and badges muted chats quietly (a grey count). iMessage notifies per conversation and can hide
@@ -5961,7 +5959,7 @@ a comparison when the terminal work comes up).
      (`chatUnreadForPerson` / `chatUnreadBetweenAgents`). Known limit, stated rather than hidden: for a chat the
      window has not loaded, a message cannot be classified, so it counts toward "for the person": the badge may be
      one too high, never hide a message that might be for the owner.
-- **Why.** The maintainer's words above; the over-count bias is "could not verify = refuse" (CONTRIBUTING.md principle 4)
+- **Why.** The requirement above; the over-count bias is "could not verify = refuse" (CONTRIBUTING.md principle 4)
   applied to a notice.
 - **Checked.** `threads_test.dart`: the default "With me" shows exactly the person's messages, "Between agents" the
   agent-to-agent ones, "All" everything, the Topics menu works, each chat keeps its filter, the person chat has no
@@ -5977,7 +5975,7 @@ a comparison when the terminal work comes up).
 ## Files: what holds a received file (2026-10-06)
 
 ### D-129 · An image's own metadata (XMP, content credentials, EXIF) is not read as HTML (field feedback, 2026-10-06)
-- **Question.** An app icon made by an image generator (`AppIcon-transparent.png`), sent between the maintainer's own
+- **Question.** An app icon made by an image generator (`AppIcon-transparent.png`), sent between two of the owner's own
   computers, was held as a threat on both sides: `polyglot_html: binary image/png file contains HTML/script markup in
   its first 1 KiB`. Such PNGs carry an XMP packet in an `iTXt` chunk and content credentials (C2PA, a JUMBF box in a
   `caBX` chunk, about 23 KB here) before the pixels; the polyglot check (D-F-9) searched the first KiB of the raw bytes
@@ -6013,21 +6011,20 @@ a comparison when the terminal work comes up).
   corpus, 4 picture, 11 pipeline, 10 review, 12 sandbox, 5 transfer (1 ignored), all green. **Negative controls**, each
   seen failing: the metadata left in (the three tests above fail: the field report reproduced), images skipped
   altogether (the true polyglots of those tests and `detect::tests::polyglots` fail).
-- **Not checked yet.** The maintainer's own file (only its description reached us); GIF's XMP application extension
+- **Not checked yet.** The original file (only its description reached us); GIF's XMP application extension
   is not left out (no report of it).
 
 ### D-130 · From trust level 3 the check labels; programs, installers and signatures wait for the owner's keep-anyway; every sender learns its file's fate (SPEC amendment by the maintainer, 2026-10-06)
-- **Question.** Field report (2026-10-06, the server node to the maintainer's Mac, both at ∞): a coding agent sent
+- **Question.** Field report (2026-10-06, a server node to a Mac, both at ∞): a coding agent sent
   `panel-prototypes-2026-10-06.zip`, three HTML prototypes with inline JavaScript, and saw "sent [threat]"; the same
   pages as `.txt` showed "sent [suspicious]". What matched, reproduced with the worker's `analyze` on the same kind of
   files (`worker::tests::the_field_report_files_are_code_and_markup`): the ZIP was written **stored** (Python's
   `zipfile` default), so the first page's markup lay in the archive's first KiB and `polyglot_html` (threat) fired;
   the same ZIP deflated is clean; the `.txt` copies are HTML by content with `active_content` (suspicious). No secret
   pattern, unknown type or YARA rule matched. The same day a generated PNG was held as `polyglot_html` (D-129), and the
-  sender's window read "The contact declined the file" for a file that was in fact held. The maintainer: "The security
-  settings must be lowered, because ordinary files are already blocked from transfer. This is the basis of any
-  messenger: nobody blocks file transfer, especially pictures." And: "Even for dangerous files: show that the file is
-  dangerous, the way a browser does … I can press 'I understand, keep it anyway'."
+  sender's window read "The contact declined the file" for a file that was in fact held. The requirement: the
+  check must not block ordinary files, the way no messenger blocks file transfer, pictures above all; and even a
+  dangerous file is shown as dangerous, the way a browser does, with a way for the owner to keep it anyway.
 - **Decision** (`antenna_files::kinds`, `antenna-core/src/file_fate.rs`, CONTROL §14, PROTOCOL §18–§19).
   1. **Heuristics are labels from level 3.** At levels 3–5 the check's heuristic findings (markup or a script in a
      file, an HTML polyglot, secret patterns on receive, unknown types, a structure the preview cannot read, PDF and
@@ -6067,7 +6064,7 @@ a comparison when the terminal work comes up).
      absent for agents): `executables`, `installers` or an extension (`.dmg`) let a level-5 contact's programs or
      installers through; in effect only while it stays at 5, never for a signature or a failed check, refused below 5.
      The first request's `code` category is gone: from level 3 code and markup is not held anyway, and levels 1–2 stay
-     as they are by the maintainer's decision.
+     as they are by a maintainer decision.
   8. **Save folders for own computers** (owner command `file_save_dir`, absent for agents; the password to set, none to
      clear): files from a contact at level 5 go to the folder of the agent whose key signed the offer, else the
      contact's folder, else `--project-dir`, else the link's `shared/`. The folder must exist in the owner's home (not
@@ -6080,7 +6077,7 @@ a comparison when the terminal work comes up).
      owner's attention.
   2. *Running code:* Antenna never runs a received file and clears exec bits on accept; what runs when opened
      (programs, installers, disk images, archives of them) still waits for the owner at every level from 3. Left open on
-     purpose by the maintainer's decision: documents whose active content runs when opened in another program (PDF
+     purpose by a maintainer decision: documents whose active content runs when opened in another program (PDF
      `/Launch`, Office external templates and DDE, macros) and scripts as text are labels from level 3; the protection
      there is the opening program's, and on macOS Gatekeeper's: every saved file carries the `com.apple.quarantine`
      attribute a browser gives a download (`0081;<time>;Antenna;`, set before the file has a name).
@@ -6091,7 +6088,7 @@ a comparison when the terminal work comes up).
   4. *Secrets on receive* are the sender's own; a label for the owner. Passing them on stays guarded (no write-down,
      the flow between links, the outgoing scanner below level 5).
   5. *Archives:* every member's type is read; a program inside holds the archive. At level 5 an archive that cannot be
-     opened whole is saved (the owner's own computer, by the maintainer's list); at 3–4 it waits.
+     opened whole is saved (the owner's own computer, by the decided list); at 3–4 it waits.
   6. *A compromised check worker* can lie about the class; the daemon's own look at the magic numbers catches a
      top-level program or installer called anything else. Members are only the worker's word, as its verdict always was.
   7. *The fate receipt as an oracle:* a sender learns why its own file waits. Heuristic rules are never sent (labels
@@ -6146,10 +6143,10 @@ a comparison when the terminal work comes up).
   Desktop/…" with Show in folder; Touch ID for Keep anyway (the password for now).
 
 ### D-131 · Touch ID everywhere once enrolled: every owner prompt, the terminal, and unlocking when Antenna opens (maintainer decision, 2026-10-06; experimental)
-- **Question.** After enrolling Touch ID on preview.8 the maintainer still had to type the password, for example in
+- **Question.** After enrolling Touch ID on preview.8 the owner still had to type the password, for example in
   **Agents → Start an agent**, and when entering the app. D-102 had built the daemon side for most commands but left
   the window's other prompts on the password (D-102 item 9) and kept a list of password-only commands.
-- **Decision (maintainer, 2026-10-06).** "If I added Touch ID, then Touch ID everywhere. Even when entering the app."
+- **Decision (maintainer, 2026-10-06).** Once Touch ID is enrolled, it serves everywhere, entering the app included.
   1. **The daemon** takes a D-102 owner proof for every command that asks for the password, with three exceptions:
      `init` (it sets the password), `owner_key_add` (it enrolls a key with the password and a proof by that key) and
      `update_auto_set` turning installs on (the daemon needs the password itself to open the root key it keeps for the
@@ -6214,12 +6211,12 @@ a comparison when the terminal work comes up).
 ## Pictures and files in the window (2026-10-06)
 
 ### D-UI-46 · Pictures and files as a messenger shows them: pictures inline and in albums, compact rows, the viewer's actions, Media and files, an own computer's file settings (field feedback, 2026-10-06)
-- **Question.** After preview.8 the maintainer received logos an agent made: "It must appear right here in the chat,
-  nicely, not just as a name. Going to Files to find a picture? If pictures are there at all, sort them separately:
-  files, pictures, text. Small tiles, so that many fit on the screen, not one file taking almost the whole screen. I
-  can't open this file, I can't even press 'show in folder'. We need a proper file history inside one conversation.
-  Space in the chat is gold. When I attach a picture, the picture takes 5–10 % and the rest is the file name and its
-  size; for a picture the content matters most. And I want to drag pictures to reorder them before sending." Earlier
+- **Question.** After preview.8, logos an agent made arrived only as file names. The requirements: a picture
+  appears right in the chat, not as a name, and nobody goes to Files to find it; files, pictures and text are sorted
+  apart; small tiles, so that many fit on the screen, not one file taking almost the whole screen; every file can be
+  opened and shown in its folder; a proper file history inside one conversation. Space in the chat is precious: an
+  attached picture took 5–10 % of its card and the rest was the file name and its size, while for a picture the
+  content matters most. Pictures can be dragged to reorder them before sending. Earlier
   the same evening: open an attachment before sending, a full-screen viewer with previous and next, Save as… and Show
   in Finder, Copy, a chat's Media and files, a search by name. Every file was a card of 120–400 px with a progress
   strip, its name and size under the picture; a decided file had no action at all.
@@ -6275,7 +6272,7 @@ a comparison when the terminal work comes up).
      saved (Choose folder…, Default) and which of its programs, installers or extensions are saved without Keep anyway.
      Setting takes the owner (one touch or the password, D-131); going back and taking an entry off do not. The window
      speaks `file_save_dir`, `file_allow` and `file_disallow` and reads `contacts[].save_dirs` and `file_allow`.
-- **Why.** The maintainer's words above; space in the conversation goes to what the person reads, and every file can
+- **Why.** The requirements above; space in the conversation goes to what the person reads, and every file can
   be acted on where it shows.
 - **Checked** (Linux build server, `flutter test`): `chat_media_test.dart` (7: the picture at its size and the name only
   on hover, bounded sizes and the badge, an album and its viewer, the compact row with its click and menu, Copy image
@@ -6297,8 +6294,8 @@ a comparison when the terminal work comes up).
   once the contact answered, so the conversation shows them as file lines then); videos.
 
 ### D-132 · A local route between two agents of one computer: the owner connects them, the text carries its writer's taint, and what a link would ask is refused (2026-10-06, experimental)
-- **Question.** The maintainer, on the first evening with preview.8, expected to connect any two of their agents on the
-  agent map "like in a constructor"; two agents of one computer have no link between them, so D-123 drew no line
+- **Question.** On the first evening with preview.8, the expectation was to connect any two of the owner's agents on
+  the agent map like in a constructor; two agents of one computer have no link between them, so D-123 drew no line
   there (LOCAL-ASSISTANT §8.3 named a local channel as the direction, with its own threat analysis). How does agent A
   write to agent B of the same node, under the rules a link has?
 - **Decision** (CONTROL §32).
@@ -6377,11 +6374,11 @@ a comparison when the terminal work comes up).
   with the read path's route check (the old message was read after the disconnect).
 
 ### D-UI-47 · The agent map is an editor: a free layout kept per window, handles draw and bodies move, a click selects a line and Delete disconnects it, recent messages are an optional layer, local lines inside the group (2026-10-06, experimental)
-- **Question.** The maintainer, on the first evening with preview.8: he expected the map to work like a constructor,
-  where connections are set up and removed by hand and everything is moved around freely; instead it was only
-  something to look at. He could not disconnect; two thin "Messages lately" lines from two of his agents to a third
+- **Question.** On the first evening with preview.8, the map was expected to work like a constructor, where
+  connections are set up and removed by hand and everything is moved around freely; instead it was only something to
+  look at. A line could not be disconnected; two thin "Messages lately" lines from two of the owner's agents to a third
   agent read as connections to the wrong agent, and they could not be removed because they are history, not
-  connections; and his own server (∞) was drawn in the right-hand Contacts column.
+  connections; and the owner's own server (∞) was drawn in the right-hand Contacts column.
 - **Decision** (DESIGN "The agent map"; the bar is the boards people already know: Node-RED, n8n, Figma, Miro).
   1. **A canvas of its own** that fills the page at any window size: a small viewport (a `Transform` under a
      `Listener`) rather than `InteractiveViewer`, so a drag on a group, a card or a handle is that thing's own
@@ -6702,8 +6699,8 @@ a comparison when the terminal work comes up).
 ## Native Windows (2026-10-13)
 
 ### D-134 · Native Windows: an AF_UNIX control socket, process checks that only restrict, AppContainer sandboxes, a per-user installer signed through Artifact Signing, built on GitHub-hosted runners (design, 2026-10-13)
-- **Question.** The maintainer asked for a native Windows app with agents working inside it (2026-10-12: WSL2 is not
-  native: keyboard layouts do not switch in WSLg, the window froze), and set its order: the window with Code mode
+- **Question.** The requirement is a native Windows app with agents working inside it (2026-10-12: WSL2 is not
+  native: keyboard layouts do not switch in WSLg, the window froze), in this order: the window with Code mode
   (Claude Code, Codex), AI apps over MCP and local models on an NVIDIA GPU first. Every Linux- and macOS-specific piece
   needs a Windows counterpart that keeps the protections: the same-user control socket and the D-28 binding, process
   hardening (D-50), the two sandboxes, the quarantine flag, packaging, signing, updates and Touch ID. The item list is
@@ -6730,7 +6727,7 @@ a comparison when the terminal work comes up).
   - Biometrics: KeePassXC and Bitwarden unlock with a Windows Hello `KeyCredential` (RSA-2048): a signature over a
     stored random challenge, hashed into the key that wraps the vault key; Flutter's `local_auth_windows` only asks
     `UserConsentVerifier` for a yes or no.
-- **Decision** (team design; the order and the build machine are the maintainer's).
+- **Decision** (team design; the order and the build machine are maintainer decisions).
   1. **Targets and machines.** Windows 10 22H2 and 11, x86_64 (MSVC) first, arm64 later. The build and test machine is
      a GitHub-hosted runner (`windows-2025`, pinned; `.github/workflows/windows.yml`, manual and `windows/*` pushes
      only, 60 minutes, one run per branch, every action pinned by SHA); a Windows 11 PC with an RTX 4090 is for the
@@ -6828,7 +6825,7 @@ a comparison when the terminal work comes up).
 - **Why.** A transport through which an ordinary process can bring down the user's computer is ruled out, whatever
   the cause of the bug. Named pipes are Windows' own local IPC, the most used one, and tokio carries them, so we need
   less FFI of our own than AF_UNIX would. What we lose is a peer PID reported by the kernel, and on Windows that PID
-  could only restrict anyway (D-134 items 3 and 4). Team decision; the maintainer is informed.
+  could only restrict anyway (D-134 items 3 and 4). Team decision.
 - **Built (2026-10-13, W1 on the build PC; CONTROL §1, §3, §11 item 15, §34; PORTABILITY-WINDOWS §2.0).** The
   daemon's pipe, the client's checks before it sends anything, the window's bridge, the data folder made and checked,
   and owner commands in a terminal. What the decision left open, and the choices made:
@@ -6863,8 +6860,8 @@ a comparison when the terminal work comes up).
 - **Question.** `antenna update` (D-82) and automatic installs (D-103) can fetch a signed release from an update URL,
   but no build had one: `DEFAULT_UPDATE_URL` was empty while the repository was private, and the daemon checked a URL
   only with automatic installs on. So a preview stayed where it was until the owner downloaded the next one by hand.
-  The maintainer wants updates to reach the Mac app the way the project's other Mac apps get theirs. Should the app
-  use the update framework of those apps (Sparkle) or our own signed updater, where does it look, and what happens
+  The requirement: updates reach the Mac app the way other Mac apps get theirs. Should the app
+  use the update framework most of those apps use (Sparkle) or our own signed updater, where does it look, and what happens
   when automatic installs are off?
 - **Prior art.**
   - Sparkle, which most Mac apps outside the App Store use: a daily check by default (`SUScheduledCheckInterval`

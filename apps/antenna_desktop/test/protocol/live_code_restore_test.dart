@@ -10,7 +10,7 @@
 //
 // Not covered here: the daemon's own `status.updated` (it exists only after a real automatic install, the installer's
 // part of D-103); the test gives the new window that fact itself, the one thing it does not read from the daemon.
-// Run: ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test --tags live test/protocol/live_code_restore_test.dart
+// Run: ANTENNAD_BIN=<path to antennad> flutter test --tags live test/protocol/live_code_restore_test.dart
 @Tags(['live'])
 @TestOn('linux || mac-os')
 library;

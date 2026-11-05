@@ -405,7 +405,7 @@ impl ProtocolHandler for BlobsHandler {
 
 /// A name a shell takes as one word without quotes (D-125): letters and digits of any script, `.`, `_` and `-` stay;
 /// every other character (a space, a quote, `$`, `&`, …) becomes `-`, runs of `-` become one, and `-` and `.` are
-/// taken off both ends ("hel server" → `hel-server`, "Bob's Mac" → `Bob-s-Mac`). Empty when nothing is left.
+/// taken off both ends ("atlas server" → `atlas-server`, "Bob's Mac" → `Bob-s-Mac`). Empty when nothing is left.
 pub(crate) fn shell_word(label: &str) -> String {
     let mut out = String::new();
     for c in label.chars() {
@@ -423,7 +423,7 @@ pub(crate) fn shell_word(label: &str) -> String {
 
 /// A link folder name without regard to other links (D-125): the contact label as one shell word ([`shell_word`]) if
 /// that is a safe name, otherwise the start of the link ID. A link whose folder was made under the label as it is
-/// (before D-125, "hel server") keeps that folder while it exists: nothing is moved silently. The label stays the
+/// (before D-125, "atlas server") keeps that folder while it exists: nothing is moved silently. The label stays the
 /// contact's display name everywhere.
 fn folder_base(row: &LinkRow, links_dir: Option<&Path>) -> String {
     folder_name(&row.label, &row.link_id.to_hex(), links_dir)
@@ -2394,7 +2394,7 @@ mod tests {
     /// under the label as it is keeps working; labels that become the same word get the link ID's start.
     #[test]
     fn link_folders_are_shell_words_and_old_folders_stay() {
-        assert_eq!(shell_word("hel server"), "hel-server");
+        assert_eq!(shell_word("atlas server"), "atlas-server");
         assert_eq!(shell_word("Bob's Mac (work)"), "Bob-s-Mac-work");
         assert_eq!(shell_word("  José  "), "José");
         assert_eq!(shell_word("a & b; $(rm)"), "a-b-rm");
@@ -2403,27 +2403,27 @@ mod tests {
         let t = tempfile::tempdir().unwrap();
         let hex = |n: u8| format!("{n:02x}").repeat(32);
         let items = vec![
-            ("hel server".to_string(), hex(1)),
-            ("hel-server".to_string(), hex(2)),
+            ("atlas server".to_string(), hex(1)),
+            ("atlas-server".to_string(), hex(2)),
             ("!!!".to_string(), hex(3)),
             ("alice".to_string(), hex(4)),
         ];
         assert_eq!(
             folder_names(&items, Some(t.path())),
             [
-                "hel-server",
-                &format!("hel-server-{}", &hex(2)[..8]),
+                "atlas-server",
+                &format!("atlas-server-{}", &hex(2)[..8]),
                 &hex(3)[..16],
                 "alice"
             ]
         );
         // The folder of an older link made under the label as it is: kept, nothing moved
-        std::fs::create_dir(t.path().join("hel server")).unwrap();
+        std::fs::create_dir(t.path().join("atlas server")).unwrap();
         assert_eq!(
             folder_names(&items, Some(t.path())),
-            ["hel server", "hel-server", &hex(3)[..16], "alice"]
+            ["atlas server", "atlas-server", &hex(3)[..16], "alice"]
         );
-        assert_eq!(folder_names(&items[..1], None), ["hel-server"]);
+        assert_eq!(folder_names(&items[..1], None), ["atlas-server"]);
     }
 
     // A unix symlink (a junction on Windows comes with WP-21).

@@ -2,7 +2,7 @@
 // Compatibility of the window (x-control/2) with an x-control/3 daemon (slice 4, files; CONTROL §14): a contact sends a
 // file through the CLI, and the window does not fail on the new `file` events and `kind: file` messages in history and
 // the subscription, and stays in its session. The Files screen is tested elsewhere; this only checks nothing breaks.
-// Run: ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test test/protocol/live_v3_compat_test.dart (`antenna` next to `antennad`).
+// Run: ANTENNAD_BIN=<path to antennad> flutter test test/protocol/live_v3_compat_test.dart (`antenna` next to `antennad`).
 @Tags(['live'])
 library;
 

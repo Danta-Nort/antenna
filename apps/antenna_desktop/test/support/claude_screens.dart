@@ -129,7 +129,7 @@ final claude289IdleManual = ClaudeScreen([
   '  ⏸ manual mode on · ? for shortcuts',
 ], cursor: (5, 2));
 
-/// 2.1.289 in auto mode, as on the maintainer's Mac: the auto-mode hint replaces "? for shortcuts", the effort row
+/// 2.1.289 in auto mode, as seen on a Mac: the auto-mode hint replaces "? for shortcuts", the effort row
 /// above the box.
 final claude289IdleAuto = ClaudeScreen([
   ..._banner289,

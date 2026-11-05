@@ -820,7 +820,7 @@ process → preview → **explicit** accept by the owner or the agent. Nothing g
 2), `<link folder>/shared/` (levels 3–4; a contact at level 3+ can also request a file from here), the project folder `--project-dir`
 (level 5). The link folder is the contact's label as one shell word (0.2.0, D-125): letters and digits of any script,
 `.`, `_` and `-` stay, every other character becomes `-` (runs of `-` become one, `-` and `.` are taken off both ends),
-so "hel server" is `hel-server`; a link whose folder was made before under the label as it is keeps that folder while it
+so "atlas server" is `atlas-server`; a link whose folder was made before under the label as it is keeps that folder while it
 exists (nothing is moved). Special names and labels with nothing left: the first 16 hex of `link_id`; names that
 coincide ignoring case and Unicode form get the suffix `-<8 hex link_id>`, all except the oldest link. An agent reads
 its links' folders in `agent_contacts[].folder`. Quarantine is

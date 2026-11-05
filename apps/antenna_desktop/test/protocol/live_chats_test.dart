@@ -4,7 +4,7 @@
 // own chat from the daemon, opens one by its own page, writes to that session only, and reads it by chat; each session
 // reads only what is addressed to it; the owner's local name, notifications and archive are kept by the Mac's daemon,
 // reach the window's subscription when another client changes them, and never reach the server.
-// Run: ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test --tags live --concurrency=1 test/protocol/live_chats_test.dart
+// Run: ANTENNAD_BIN=<path to antennad> flutter test --tags live --concurrency=1 test/protocol/live_chats_test.dart
 @Tags(['live'])
 library;
 
@@ -62,7 +62,7 @@ void main() {
       await openOwnerSession(a, mac.password);
       await openOwnerSession(b, server.password);
 
-      // The link: the server is the owner's own computer (∞), as in the maintainer's own setup.
+      // The link: the server is the owner's own computer (∞), a common setup.
       final inv = Events(a.open(InviteRequest(trust: 5, ttlSecs: 120, label: 'server', password: mac.password)));
       final created = await inv.next<InviteCreated>();
       final join = Events(b.open(JoinRequest(

@@ -4,7 +4,7 @@
 // messages both ways, history, event subscription, trust level change, PQ facts from the daemon's state.
 //
 // The tests are one scenario in order (init in the second, the link in the fourth).
-// Run: ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test test/protocol/live_daemon_test.dart
+// Run: ANTENNAD_BIN=<path to antennad> flutter test test/protocol/live_daemon_test.dart
 @Tags(['live'])
 library;
 

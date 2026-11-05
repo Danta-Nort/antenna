@@ -4,7 +4,7 @@
 // to the person with a topic, and the history items carry `to` / `to_agent` / `topic` on both nodes; the contact's
 // agent reads only what is addressed to it; showing one thread marks exactly its messages read; `approve_many`
 // approves two requests with one password, and `deny_many` denies two without one (also without an owner session).
-// Run: ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test --tags live --concurrency=1 test/protocol/live_threads_test.dart
+// Run: ANTENNAD_BIN=<path to antennad> flutter test --tags live --concurrency=1 test/protocol/live_threads_test.dart
 @Tags(['live'])
 library;
 

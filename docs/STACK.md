@@ -16,7 +16,7 @@ The spikes live in `spikes/<name>/`. They are **not** workspace members: each ha
 (committed, so the versions are reproducible). They build into the shared `spikes/target`:
 
 ```sh
-cd spikes/<name> && CARGO_TARGET_DIR=../target CARGO_BUILD_JOBS=8 nice -n 10 cargo run
+cd spikes/<name> && CARGO_TARGET_DIR=../target cargo run
 ```
 
 The output of each spike's last run lies next to it, in `run*.log`. "Checked" below means: built, run, output in the log.
@@ -310,7 +310,7 @@ underline and dim), ends only dim on `22`, drops the colon of sub-parameters (`4
 arguments of `58` (underline color) as codes of their own. The window passes a program's output through `SgrFilter`
 (`lib/state/terminal_sgr.dart`), which rewrites exactly these sequences. xterm's latest release is 4.0.0 and its main
 branch has the same parser (checked 2026-10-05); the MIT fork `xterm2` ≥ 5.0.0 (2026-07) parses all of them. Moving to
-it is the maintainer's decision (the live test on Linux and a build on a Mac), and the filter goes with the move: it
+it is a maintainer decision (the live test on Linux and a build on a Mac), and the filter goes with the move: it
 relies on 4.0.0's own readings.
 
 **Checked with Claude Code 2.1.233** (the CLI installed on the build server): `--mcp-config '<json>'`,

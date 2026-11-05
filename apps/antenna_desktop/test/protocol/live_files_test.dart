@@ -3,7 +3,7 @@
 // the window sees the quarantine stages as `file` events, takes the safe preview (the image is rebuilt by the daemon as
 // PNG, not the original bytes), accepts a clean file into shared/, does not accept a threat without force and rejects
 // it; the window sends a file to the contact, and a file with a secret only after approval with the owner password.
-// Run: ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test --tags live test/protocol/live_files_test.dart
+// Run: ANTENNAD_BIN=<path to antennad> flutter test --tags live test/protocol/live_files_test.dart
 @Tags(['live'])
 library;
 
@@ -211,7 +211,7 @@ void main() {
     }
   }, skip: antennad == null || !hasFiles ? 'needs antennad with files (x-control/3)' : false, timeout: const Timeout(Duration(minutes: 3)));
 
-  // The maintainer's own setup: an agent on the owner's server (∞, level 5) sends a picture to the Mac. The daemon
+  // A common setup: an agent on the owner's server (∞, level 5) sends a picture to the Mac. The daemon
   // accepts it at once (D-99), so the window first sees it accepted, and the picture in the conversation comes from
   // the safe preview of an accepted file, over one long reply line. Up to preview.8 both failed on every computer:
   // the accept deleted the preview (`file_preview` answered `bad_state`), and the window refused any reply line over

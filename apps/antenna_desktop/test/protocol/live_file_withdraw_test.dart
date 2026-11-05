@@ -3,7 +3,7 @@
 // and withdraws it before the contact answers (the contact's node deletes its pending copy and tells its owner); the
 // contact withdraws a file it sent and the window shows it withdrawn, also from the history receipt; a file the
 // contact has accepted cannot be withdrawn (`not_found`).
-// Run: ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test --tags live test/protocol/live_file_withdraw_test.dart
+// Run: ANTENNAD_BIN=<path to antennad> flutter test --tags live test/protocol/live_file_withdraw_test.dart
 @Tags(['live'])
 library;
 

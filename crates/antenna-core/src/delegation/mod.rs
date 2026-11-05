@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 //! Agents that answer other agents' approval requests on the owner's own computers (PG-57, `docs/CONTROL.md` §31,
-//! D-127; experimental). The maintainer's rule: an agent may approve another agent's request when everything is at
+//! D-127; experimental). The rule: an agent may approve another agent's request when everything is at
 //! level 5, the owner's own computers (D-99).
 //!
 //! - The owner names an **approver**: an agent of this computer, or an agent of an own computer (a contact at level

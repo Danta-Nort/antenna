@@ -467,8 +467,8 @@ fn the_owner_sets_up_an_agents_folder_once() {
     );
 }
 
-/// A contact label with spaces ("hel server") breaks commands that name its folder, so a new link's folder is the
-/// label as one shell word (`hel-server`, D-125) while the label stays the display name; a folder made before under
+/// A contact label with spaces ("atlas server") breaks commands that name its folder, so a new link's folder is the
+/// label as one shell word (`atlas-server`, D-125) while the label stays the display name; a folder made before under
 /// the label as it is keeps receiving files (no silent move).
 #[test]
 fn a_label_with_spaces_gets_a_folder_a_shell_takes_as_one_word() {
@@ -495,20 +495,20 @@ fn a_label_with_spaces_gets_a_folder_a_shell_takes_as_one_word() {
             std::thread::sleep(Duration::from_millis(150));
         }
     };
-    a.json(&["rename", "bob", "hel server"]);
+    a.json(&["rename", "bob", "atlas server"]);
     let p = send("one.txt");
     // Canonical paths on both sides: on macOS the temporary folder is /var/…, a symlink to /private/var/…
     assert_eq!(
         Path::new(&p).canonicalize().unwrap(),
         a.links()
-            .join("hel-server/shared/one.txt")
+            .join("atlas-server/shared/one.txt")
             .canonicalize()
             .unwrap(),
         "{p}"
     );
     assert_eq!(
-        a.contact("hel server")["label"],
-        "hel server",
+        a.contact("atlas server")["label"],
+        "atlas server",
         "the label is the display name"
     );
     // An agent learns the folder from its contacts
@@ -520,12 +520,12 @@ fn a_label_with_spaces_gets_a_folder_a_shell_takes_as_one_word() {
         .to_string();
     assert_eq!(
         Path::new(&folder).canonicalize().unwrap(),
-        a.links().join("hel-server").canonicalize().unwrap(),
+        a.links().join("atlas-server").canonicalize().unwrap(),
         "{c}"
     );
     // A folder from before under the label as it is
     std::fs::create_dir_all(a.links().join("old box/shared")).unwrap();
-    a.json(&["rename", "hel server", "old box"]);
+    a.json(&["rename", "atlas server", "old box"]);
     let p = send("two.txt");
     assert_eq!(
         Path::new(&p).canonicalize().unwrap(),

@@ -3,7 +3,7 @@
 // the daemon's words, then goes as a `.txt` file named after its first line, which the contact receives whole; (2) a
 // sent image keeps the window's own preview copy after the original file is deleted (the macOS screenshot case): the
 // daemon's FileInfo says image/png by signature, and the copy is a PNG rebuilt from pixels, not the original bytes.
-// Run: ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test --tags live test/protocol/live_sending_test.dart
+// Run: ANTENNAD_BIN=<path to antennad> flutter test --tags live test/protocol/live_sending_test.dart
 @Tags(['live'])
 library;
 

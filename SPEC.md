@@ -477,7 +477,9 @@ The E2E layer uses libsignal and SPQR under AGPL-3.0, so it lives in the AGPL pa
 - [ ] Create a GitHub organization under the project's name, not under a personal name.
 - [ ] In every repository: Add file → `LICENSE` → Choose a license template.
 - [ ] Copyright line: `Copyright 2026 <studio or pseudonym>`.
+<!-- REUSE-IgnoreStart -->
 - [ ] In the header of every file: `SPDX-License-Identifier: Apache-2.0` or `AGPL-3.0-only`.
+<!-- REUSE-IgnoreEnd -->
 - [ ] The `license` field in every crate's `Cargo.toml`.
 - [ ] For contributors: DCO (`Signed-off-by` in the commit). A CLA if dual licensing is planned, i.e. a commercial license for companies.
 - [ ] `cargo-deny` in CI checks the license compatibility of dependencies.

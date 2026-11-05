@@ -3,7 +3,7 @@
 // window on A sets a drawn picture; B lists it for the contact, and B's window draws it. The window on A sets a photo
 // from a PNG file it rendered (as the crop step does); B's `picture_photo` bytes are a JPEG that B's daemon made, not
 // the file's bytes, and B's window draws exactly those bytes. Removing the picture on A is initials on B again.
-// Run: ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test --tags live --concurrency=1 \
+// Run: ANTENNAD_BIN=<path to antennad> flutter test --tags live --concurrency=1 \
 //   test/protocol/live_pictures_test.dart
 @Tags(['live'])
 library;

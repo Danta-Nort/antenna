@@ -439,7 +439,7 @@ void main() {
     // design-bot, the lower chat, gets the newest message of the two: under the old "most recent first" rule this
     // would have put it on top; the order stays as it was (negative control: reverting `agentChatsOf` to sort by
     // `chatActivityMs` makes this assertion fail). Newer than backend's latest (4 minutes ago) but not newer than
-    // Emily's (3 minutes ago), so the contact list's own, unrelated activity order (unaffected by this change) does
+    // Emily's (3 minutes ago), so the contact list's own, unrelated activity order (unaffected by `agentChatsOf`) does
     // not also move Jordan's whole row and confound the measurement.
     final fresh = msg(90, false, 'Palette is ready.', fixedNow.subtract(const Duration(minutes: 3, seconds: 30)),
         viaAgent: 'design-bot', to: 'person', unread: true);

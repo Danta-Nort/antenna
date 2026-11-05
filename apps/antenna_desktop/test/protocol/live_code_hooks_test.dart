@@ -5,7 +5,7 @@
 // (a shell command, the event's JSON on standard input; Stop's answer read from standard output). While the owner's
 // turn runs, bob writes to `helper`: nothing is typed into the terminal; the turn's Stop hook continues with the fixed
 // line instead, once.
-// Run: ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test --tags live test/protocol/live_code_hooks_test.dart
+// Run: ANTENNAD_BIN=<path to antennad> flutter test --tags live test/protocol/live_code_hooks_test.dart
 @Tags(['live'])
 @TestOn('linux || mac-os')
 library;

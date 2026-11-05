@@ -3,7 +3,7 @@
 // daemon: the same file is accepted with one click and the card says so (preview.8 daemon: `duplicate`), also before
 // the click (`file_name_check`); a different file under the name opens "Another name" with the daemon's free
 // suggestion, checks each edit, keeps Accept disabled with the reason while the name is taken or invalid, and shows
-// every refusal of the accept itself. The maintainer's finding (a preview.5 window on the Mac: identical re-sent release
+// every refusal of the accept itself. The field report (a preview.5 window on a Mac: identical re-sent release
 // files, the rename dialog with the same name prefilled, Accept did nothing) is the first test: it failed before the
 // fix (the window sent the refused name again and, after three tries, closed the dialog without a word).
 

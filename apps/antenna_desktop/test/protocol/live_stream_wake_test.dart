@@ -6,7 +6,7 @@
 // outgoing one), "what it is doing" at level 4, the final message replaces the bubble; an agent crash → an
 // "interrupted" final; a secret in the middle of a reply → "waiting for your approval" on bob's side, and after approval
 // the final goes out by itself; the run log and turning it off.
-// Run: ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test --tags live test/protocol/live_stream_wake_test.dart
+// Run: ANTENNAD_BIN=<path to antennad> flutter test --tags live test/protocol/live_stream_wake_test.dart
 // (`antenna` next to antennad; needs a Linux sandbox: bwrap or Landlock).
 @Tags(['live'])
 library;

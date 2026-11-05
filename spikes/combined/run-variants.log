@@ -5,8 +5,8 @@ iroh id 9df6776435 | blake3 3ae7d805f6 | libsignal idk 33B | xwing pk 0B | biscu
 error: could not compile `libcrux-ml-kem` (lib) due to 6 previous errors
 error[E0432]: unresolved import `rand::RngCore`
 error[E0432]: unresolved import `rand::TryRngCore`
-   --> /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libcrux-ml-kem-0.0.10/src/mlkem.rs:161:33
-   --> /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libcrux-ml-kem-0.0.10/src/mlkem.rs:372:17
+   --> ~/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libcrux-ml-kem-0.0.10/src/mlkem.rs:161:33
+   --> ~/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libcrux-ml-kem-0.0.10/src/mlkem.rs:372:17
 === C: + [patch] libcrux-ml-kem and libcrux-kem from git cryspen/libcrux@c938b46 (main, not a release)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.35s
 iroh id 019785d0c6 | blake3 3ae7d805f6 | libsignal idk 33B | xwing pk 1216B | biscuit pk a14fd53c | sqlcipher 4.14.0 community | mcp ProtocolVersion("2026-07-28") | ml-dsa-65 vk 1952B sig 3309B verify ok, wrong ctx/tampered rejected

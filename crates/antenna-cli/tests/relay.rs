@@ -3,8 +3,7 @@
 //!
 //! Run (from the workspace root, so that `antennad` is built):
 //! ```sh
-//! export PATH=$HOME/.cargo/bin:$PATH
-//! CARGO_BUILD_JOBS=8 nice -n 10 cargo test -p antenna-cli --test relay -- --ignored --nocapture
+//! cargo test -p antenna-cli --test relay -- --ignored --nocapture
 //! ```
 //! What is checked: pairing and messages in "relay only" mode (level 2: neither side discloses its IP), the TLS group
 //! X25519MLKEM768 through the relay, Triple Ratchet v4 + SPQR, and that an unpaired key through the relay gets **no**

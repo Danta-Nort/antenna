@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Dependency updates. The Rust and Dart stacks are pinned exactly and change only together with docs/STACK.md, after
+# the checks it describes, so for them Dependabot opens security updates only (open-pull-requests-limit: 0 turns the
+# version updates off; security updates still come when they are enabled in the repository settings). The actions in
+# the workflows are pinned by commit SHA and are kept current here, in one weekly pull request.
+version: 2
+updates:
+  - package-ecosystem: cargo
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 0
+  - package-ecosystem: pub
+    directory: /apps/antenna_desktop
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 0
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ['*']

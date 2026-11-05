@@ -84,7 +84,7 @@ free name and checks each name you type.
 
 An accepted file is in the contact's link folder, `~/Antenna/links/<folder>/` (`inbox/` at level 2, `shared/` at
 levels 3–4 and ∞ when no project folder is set). A new link's folder is the contact's name as one word a
-terminal takes without quotes — a contact named "hel server" gets `hel-server` — while the name you see stays as you
+terminal takes without quotes — a contact named "atlas server" gets `atlas-server` — while the name you see stays as you
 typed it; a folder made earlier keeps its name.
 
 Your agents learn of a saved file by themselves: each agent that may see the file (not one addressed to another of your

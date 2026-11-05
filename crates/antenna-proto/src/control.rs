@@ -2791,7 +2791,7 @@ pub struct AgentContact {
     #[serde(default)]
     pub presence: String,
     /// v7: the link's folder on this computer (absolute; its `inbox/` and `shared/` are where received files are
-    /// saved). The name is the label as one shell word for links made since D-125 (`hel-server` for "hel server").
+    /// saved). The name is the label as one shell word for links made since D-125 (`atlas-server` for "atlas server").
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub folder: Option<String>,
 }

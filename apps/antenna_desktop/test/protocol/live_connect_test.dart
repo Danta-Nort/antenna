@@ -5,7 +5,7 @@
 // binds it, tells the owner (`agent` event), reports it connected and when it was last seen, and the server's
 // instructions say whose messages are tasks. Then the app quits (disconnected), the owner changes the tasks, and
 // Disconnect removes the entry and the agent's token file.
-// Run: ANTENNAD_BIN=<path to antennad> nice -n 10 flutter test --tags live test/protocol/live_connect_test.dart
+// Run: ANTENNAD_BIN=<path to antennad> flutter test --tags live test/protocol/live_connect_test.dart
 // (`antenna` next to `antennad`).
 @Tags(['live'])
 library;

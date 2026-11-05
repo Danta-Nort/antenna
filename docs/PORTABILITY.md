@@ -98,7 +98,7 @@ looks up the socket in the same order).
 - **There is no D-28 at all**: neither binding the token to the MCP host nor the rule "the host's tree is the agent". The
   agent's Bash tool connects to `antenna` as the owner: trust commands will still ask for the password (Q-12a), but
   `send`/`inbox` will go through as the owner, without taint and no-write-down. This is already recorded as a limit
-  (CONTROL §11 item 2 "Outside Linux there is no binding"), but on the Mac — the maintainer's first platform — this is the
+  (CONTROL §11 item 2 "Outside Linux there is no binding"), but on the Mac — the first platform — this is the
   main mode. Closed by M-3…M-6.
 - **SPEC §13 "no core dumps and no ptrace"** disappears after M-1/M-2: `RLIMIT_CORE=0`, `PT_DENY_ATTACH` and signing with
   hardened runtime (M-7) are needed. The environment of `antenna mcp` (the token in `ANTENNA_AGENT_TOKEN`) on macOS can be
@@ -243,7 +243,7 @@ on `network-outbound` for a unix socket, `(remote ip "localhost:PORT")`, `(targe
 macOS 14 kernel; (3) `sandbox_check` is exported and sees a child's profile (`FACT sandbox_check …`); (4)
 `ri_phys_footprint` grows with written memory (`FACT phys_footprint`); (5) ordinary programs (`/bin/sh`, `curl`, `perl`,
 `grep`, `antenna`) work under the agent profile — whether `SYSTEM_READ`/`ETC_READ`/sysctl/Mach are enough (the `wake*.rs`
-tests); (6) a real `claude -p` in Seatbelt — only manually on the maintainer's Mac (CI does not spend the subscription):
+tests); (6) a real `claude -p` in Seatbelt — only manually on a Mac (CI does not spend the subscription):
 login via `CLAUDE_CODE_OAUTH_TOKEN` (the keychain is closed).
 
 ## 3. Dependencies and building on macOS
@@ -304,7 +304,7 @@ For the window bundle, the binaries go into `Antenna.app/Contents/Helpers/` (`ap
 and are signed before the `.app` itself. After `strip` or any change to a binary the signature is re-created
 (`codesign -v` must pass).
 
-**Signing and notarization — a question for the maintainer.** Without notarization, a binary downloaded by a browser gets
+**Signing and notarization — an open question.** Without notarization, a binary downloaded by a browser gets
 the quarantine attribute, and Gatekeeper will not run it (workaround — "Open Anyway" in the settings or
 `xattr -d com.apple.quarantine`); what is downloaded with `curl` does not get quarantined. Notarization requires an Apple
 Developer ID in the **real name** of a person, or of an organization with a D-U-N-S number, and that name is visible in
@@ -344,7 +344,7 @@ macOS; a tempdir under `/var/folders/…` fits into 104 bytes), `antenna-cli/tes
 
 1. **Wait for slices 3 and 4 to be committed** (owner.rs, `tty` in procinfo, antenna-files stage B in the root workspace).
    Until then, do not touch `crates/`.
-2. **Manual experiments on the maintainer's Mac (before the code, 10 minutes).** They confirm or refute the "to check"
+2. **Manual experiments on a Mac (before the code, 10 minutes).** They confirm or refute the "to check"
    assumptions; the results go into TROUBLESHOOTING:
    ```sh
    ps -o pid,ppid,user,comm -p $$ -p $PPID      # in Terminal.app, is the shell's parent the root process login?
@@ -391,15 +391,14 @@ macOS; a tempdir under `/var/folders/…` fits into 104 bytes), `antenna-cli/tes
    ("a session leader with a terminal")? Decide after the experiment from §5 step 2.
 3. **The data directory** (M-16): decided — `~/.local/share/<name>` on macOS too (D-P-5); after the rename —
    `~/.local/share/antenna` with a one-time migration from `~/.local/share/x` (D-56).
-4. **Notarization and the name in the signature** (§3): a Developer ID requires a real name — whose name goes into the
-   signature?
+4. **Notarization and the name in the signature** (§3): a Developer ID requires a verified legal name — an individual's or an
+   organization's?
 5. **Time Machine** (M-13): exclude the directory automatically (recommended, per SPEC §8 and §15, "the database outside backups") or
    ask during `antenna init`?
 
 **Answers (2026-10-02):** item 1 — team: `antenna-sys` (D-P-1); item 2 — team: the conservative option, done (D-P-3: a
 session leader only if it is a GUI host `.app` launched by launchd without a terminal); items 3 and 5 — the audit's
-recommendations were accepted (D-P-5), to be revisited on the word of the team or the maintainer; item 4 — open (for the
-maintainer).
+recommendations were accepted (D-P-5), to be revisited by a later decision; item 4 — open.
 
 ## 7. What to move into DECISIONS and TROUBLESHOOTING after checking on a Mac
 

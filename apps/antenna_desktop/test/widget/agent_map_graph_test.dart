@@ -302,34 +302,34 @@ void main() {
 
   test('placement: own computers always on the left, contacts on the right, whatever the counts', () {
     double x(MapLayout l, String id) => l.clusters[id]!.center.dx;
-    final server = contact('hel server', 71, trust: 5, peerKind: 'agent');
+    final server = contact('atlas server', 71, trust: 5, peerKind: 'agent');
     final agents = [mapAgent('claude-code', alive: true)];
-    // The maintainer's case: the only other computer is an own one, and it has not reported itself yet
+    // The field case: the only other computer is an own one, and it has not reported itself yet
     final missing = buildAgentMap(agents: agents, contacts: [server], devices: [
-      DeviceInfo(contact: 'hel server', linkId: server.linkId, presence: 'online', supported: true),
+      DeviceInfo(contact: 'atlas server', linkId: server.linkId, presence: 'online', supported: true),
     ]);
-    final c = missing.cluster('c/hel server')!;
+    final c = missing.cluster('c/atlas server')!;
     expect((c.kind, c.reportMissing, c.online), (MapClusterKind.ownComputer, true, true));
-    expect(x(layoutAgentMap(missing), 'c/hel server'), lessThan(x(layoutAgentMap(missing), 'here')));
+    expect(x(layoutAgentMap(missing), 'c/atlas server'), lessThan(x(layoutAgentMap(missing), 'here')));
     // Not in `devices` at all (an older daemon, devices refused or not read yet): still an own computer, on the left
     final noDevices = buildAgentMap(agents: agents, contacts: [server]);
-    expect(noDevices.cluster('c/hel server')!.kind, MapClusterKind.ownComputer);
-    expect(noDevices.cluster('c/hel server')!.reportMissing, isTrue);
-    expect(x(layoutAgentMap(noDevices), 'c/hel server'), lessThan(x(layoutAgentMap(noDevices), 'here')));
+    expect(noDevices.cluster('c/atlas server')!.kind, MapClusterKind.ownComputer);
+    expect(noDevices.cluster('c/atlas server')!.reportMissing, isTrue);
+    expect(x(layoutAgentMap(noDevices), 'c/atlas server'), lessThan(x(layoutAgentMap(noDevices), 'here')));
     // Reported: no note
     final reported = buildAgentMap(agents: agents, contacts: [server], devices: [
       DeviceInfo(
-          contact: 'hel server',
+          contact: 'atlas server',
           linkId: server.linkId,
           presence: 'online',
           supported: true,
-          status: const DeviceView(atMs: 0, name: 'hel', os: 'linux', arch: 'x86_64', version: 'v', agents: [])),
+          status: const DeviceView(atMs: 0, name: 'atlas', os: 'linux', arch: 'x86_64', version: 'v', agents: [])),
     ]);
-    expect(reported.cluster('c/hel server')!.reportMissing, isFalse);
+    expect(reported.cluster('c/atlas server')!.reportMissing, isFalse);
     // Several own computers and no contact: all on the left; only contacts: all on the right
     final two = buildAgentMap(agents: agents, contacts: [server, contact('Mac mini', 61, trust: 5)]);
     final l2 = layoutAgentMap(two);
-    expect([x(l2, 'c/hel server'), x(l2, 'c/Mac mini')], everyElement(lessThan(x(l2, 'here'))));
+    expect([x(l2, 'c/atlas server'), x(l2, 'c/Mac mini')], everyElement(lessThan(x(l2, 'here'))));
     final people = buildAgentMap(agents: agents, contacts: mapDemo().contacts.where((c) => c.trust < 5).toList());
     final lp = layoutAgentMap(people);
     expect([x(lp, 'c/Bob'), x(lp, 'c/Emily Carter')], everyElement(greaterThan(x(lp, 'here'))));

@@ -5,7 +5,7 @@
 3. tampered ML-KEM part of ct: decapsulate returns Ok but a DIFFERENT secret (implicit rejection) => key confirmation MAC is mandatory
    tampered X25519 part of ct: secret differs as well
 
-thread 'main' (3323610) panicked at /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libcrux-kem-0.0.9/src/kem.rs:246:61:
+thread 'main' (3323610) panicked at ~/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libcrux-kem-0.0.9/src/kem.rs:246:61:
 range end index 1184 out of range for slice of length 100
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 4. GRABLE: PublicKey::decode(XWing, 100 bytes) PANICS (no length check) => check len == 1216 before decode

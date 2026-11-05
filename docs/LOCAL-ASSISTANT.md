@@ -7,7 +7,7 @@ conversation; D-104, D-UI-31; what was built and measured: [§14](#14-as-built-t
 Decision entry: D-96 (proposed). Every part of our own design here ships on the experimental track (D-94,
 `docs/STACK.md` "Principle: proven technology first").
 
-**The maintainer's idea** (2026-10-05). Inside Antenna the user downloads a local open-weight model (no account, no API
+**The idea** (2026-10-05). Inside Antenna the user downloads a local open-weight model (no account, no API
 key), and it appears as one more agent with its own chat. It helps people who are not technical to set up Antenna and
 troubleshoot it: it sees the node's status and logs, explains what is wrong in plain words, proposes fixes and helps
 connect AI apps and contacts; it can be switched between a chat view and a terminal view. It must not weaken security:
@@ -665,7 +665,7 @@ at once (§9).
 - **Another of the owner's devices** (phase 4, needs "My devices"): "Local · runs on <device>", only over a link the
   owner has marked as their own device, from a field in that node's signed agent announcement (PROTOCOL §21). A
   contact's agents never get the badge.
-- **Wording.** The maintainer's "data does not leave your devices" is true of the model's own processing, but a local
+- **Wording.** The proposed "data does not leave your devices" is true of the model's own processing, but a local
   model's reply can go into a conversation with a cloud agent; the tooltip above says what is always true. Open
   question Q-LM4.
 
@@ -868,7 +868,7 @@ TROUBLESHOOTING entries and an independent security review before it leaves the 
 - **Q-LM3 · The default model.** One button "Set up the assistant" that downloads the model recommended for this
   computer (size and license shown), with the catalog one click away; or always the catalog first? On 8 GB machines:
   offer the small model, or the doctor only, by default?
-- **Q-LM4 · The badge's words.** "Local · runs on this Mac" with the tooltip of §7.5, or the maintainer's "data does
+- **Q-LM4 · The badge's words.** "Local · runs on this Mac" with the tooltip of §7.5, or the proposed "data does
   not leave your devices", which is not true once a local model replies into a conversation with a cloud agent?
 - **Q-LM5 · Bundle the runtime** in every release (about +12 MB on macOS, +18 MB on Linux, compressed) so executable
   code arrives only through signed releases, or download it on demand with the first model?
@@ -982,7 +982,7 @@ Decision entry: D-104 (and D-UI-31 for the window). What phase 2 (§11) asked fo
 | Power setting and scheduler | the scheduler's rules of §9 (one copy with slots, a second model only if both fit, never swap, idle unload); no Power setting |
 
 **Deviations from the design, and why.**
-1. **Models and agents are separate** (the maintainer's direction of 2026-10-06: several local agents at once, each an
+1. **Models and agents are separate** (decision of 2026-10-06: several local agents at once, each an
    ordinary agent). Several agents may run on one model, each with its own conversation; removing a model keeps its
    agents. The design's §7.3 "removal deletes the file and the agent" assumed one agent per model.
 2. **No tools in the loop yet.** The loop does not start `antenna mcp` in this slice, so it holds no usable token;

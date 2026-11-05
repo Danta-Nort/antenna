@@ -1,0 +1,47 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright and licensing for the whole tree, per the REUSE specification (https://reuse.software). Source files carry
+# their own SPDX-License-Identifier header, which wins ("closest"); this file gives every file its copyright line and
+# licenses the files that cannot carry a header (images, lock files, generated files). When annotations overlap, the
+# last one that matches wins. Check with `reuse lint`.
+version = 1
+
+[[annotations]]
+path = "**"
+precedence = "closest"
+SPDX-FileCopyrightText = "2026 Stillbyte LLC"
+SPDX-License-Identifier = "AGPL-3.0-only"
+
+# The protocol, the specification, the formats and the formal model (CONTRIBUTING.md, "Licensing").
+[[annotations]]
+path = ["crates/antenna-proto/**", "formal/**", "SPEC.md"]
+precedence = "closest"
+SPDX-FileCopyrightText = "2026 Stillbyte LLC"
+SPDX-License-Identifier = "Apache-2.0"
+
+# The platform runners of the desktop app started from Flutter's templates (BSD-3-Clause) and were changed by us.
+[[annotations]]
+path = ["apps/antenna_desktop/linux/**", "apps/antenna_desktop/macos/**", "apps/antenna_desktop/windows/**"]
+precedence = "closest"
+SPDX-FileCopyrightText = ["2014 The Flutter Authors", "2026 Stillbyte LLC"]
+SPDX-License-Identifier = "AGPL-3.0-only AND BSD-3-Clause"
+
+# Fonts, unchanged or subset, under the SIL Open Font License; the full notices are next to them.
+[[annotations]]
+path = ["apps/antenna_desktop/assets/fonts/IBMPlex*", "site/public/assets/fonts/IBMPlex*", "apps/antenna_desktop/assets/fonts/OFL-1.1-IBM-Plex.txt", "site/public/assets/fonts/OFL-1.1-IBM-Plex.txt"]
+precedence = "override"
+SPDX-FileCopyrightText = "2017 IBM Corp."
+SPDX-License-Identifier = "OFL-1.1"
+
+[[annotations]]
+path = ["apps/antenna_desktop/assets/fonts/NotoEmoji*", "apps/antenna_desktop/assets/fonts/OFL-1.1-Noto-Emoji.txt"]
+precedence = "override"
+SPDX-FileCopyrightText = "2013 Google LLC"
+SPDX-License-Identifier = "OFL-1.1"
+
+# The SVG path data of the AI apps' marks comes from Simple Icons (CC0-1.0); the marks themselves belong to their
+# owners and are shown only to identify an integration (assets/logos/README.md).
+[[annotations]]
+path = "apps/antenna_desktop/assets/logos/*.svg"
+precedence = "override"
+SPDX-FileCopyrightText = "Simple Icons contributors"
+SPDX-License-Identifier = "CC0-1.0"

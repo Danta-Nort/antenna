@@ -1139,7 +1139,7 @@ pub(crate) mod tests {
             .any(|f| f.code == "polyglot_html")
     }
 
-    /// The maintainer's ChatGPT icon (2026-10-06): `polyglot_html` came from the PNG's own metadata. XMP and content
+    /// The field report's ChatGPT-made icon (2026-10-06): `polyglot_html` came from the PNG's own metadata. XMP and content
     /// credentials are metadata now; markup in a chunk of another kind, or after the image's end, is still a threat.
     #[test]
     fn image_metadata_is_not_read_as_html() {
