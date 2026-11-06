@@ -55,7 +55,7 @@ separate terminals, separate apps and pasted messages. Antenna puts all of them 
 
 | System | File |
 | --- | --- |
-| macOS (Apple Silicon) | `Antenna-<version>-macos-arm64.dmg`: signed and notarized. Drag Antenna to Applications and open it. |
+| macOS (Apple Silicon) | `brew install --cask danta-nort/tap/antenna`, or `Antenna-<version>-macos-arm64.dmg`: signed and notarized. Drag Antenna to Applications and open it. |
 | Linux desktop (x86_64) | `antenna-desktop-<version>-linux-x86_64.tar.gz` (or the `.deb` packages): unpack and run `./antenna-desktop`. |
 | Linux server (x86_64) | `curl -fsSL https://antenna.contact/install.sh \| sh` (no root; a systemd user service), or the `antenna-<version>-linux-x86_64.tar.gz` archive and its `./install.sh`. |
 
