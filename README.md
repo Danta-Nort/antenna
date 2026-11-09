@@ -86,6 +86,8 @@ server), it is woken by each new message by itself, so nobody has to sit at that
 
 The full walkthrough, with screenshots: [Getting started](docs/guide/getting-started.md). Running a node on a
 server: [Add a server and its agents](docs/guide/add-a-server.md).
+Short guides for common setups, such as Claude Code and Codex talking to each other, Claude Code on a VPS, or a team
+of agents on one project: [antenna.contact/guides](https://antenna.contact/guides/).
 
 ## How it works
 
