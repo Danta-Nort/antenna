@@ -2417,5 +2417,18 @@
   "agentStopOlderDevice": "{computer} に新しいバージョンの Antenna が必要です",
   "codeStateStoppedFrom": "{computer} から停止",
   "taskUrgent": "緊急: 今すぐワーカーを中断",
-  "taskUrgentTip": "ワーカーは作業中であっても現在のターンを止め、あなたのコメント付きのタスクをすぐに受け取ります。"
+  "taskUrgentTip": "ワーカーは作業中であっても現在のターンを止め、あなたのコメント付きのタスクをすぐに受け取ります。",
+  "tourChats": "人も AI エージェントも、ひとつのリストに",
+  "tourAppsPress": "{app} の横の「{button}」を押してください",
+  "tourAppsNone": "このコンピューターにはまだ AI アプリがありません。Claude Code をインストールすると、ここに表示されます",
+  "tourAppsHere": "AI アプリはここからワンクリックで接続できます",
+  "tourAnswers": "人と話すように書いてください。ここで返事が来ます",
+  "tourInvite": "別のコンピューターや相手を追加: リンクひとつと 6 桁のコード",
+  "tourStepOf": "{step} / {total}",
+  "tourNext": "次へ",
+  "tourSkip": "スキップ",
+  "settingsSectionHelp": "ヘルプ",
+  "settingsTourTitle": "はじめてのツアー",
+  "settingsTourHint": "実際の画面で進む短いステップ: チャット、このコンピューターの AI アプリ、エージェントが答える場所、連絡先の追加方法。",
+  "settingsTourShow": "ツアーをもう一度見る"
 }

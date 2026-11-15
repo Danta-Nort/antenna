@@ -9,9 +9,11 @@ import '../../l10n/l10n.dart';
 import '../../state/agent_status.dart';
 import '../../state/ai_apps.dart';
 import '../../state/ai_apps_model.dart';
+import '../../state/tour.dart';
 import '../../theme/x_theme.dart';
 import '../app_scope.dart';
 import '../code/start_agent_dialog.dart';
+import '../home/tour.dart';
 import '../widgets/ai_logo.dart';
 import '../widgets/experimental_tag.dart';
 import '../widgets/section_page.dart';
@@ -137,7 +139,9 @@ class _AiAppsCardState extends State<AiAppsCard> {
     final rows = m.aiAppRows;
     final here = rows.where((r) => r.found || r.connected).toList();
     final elsewhere = rows.where((r) => !r.found && !r.connected).toList();
-    return SectionCard(
+    // The app the first-run tour points at (D-151): its button carries the mark.
+    final pick = tourApp(rows, code: m.codeAvailable);
+    final card = SectionCard(
       key: const Key('ai-apps'),
       padding: const EdgeInsets.fromLTRB(20, 16, 16, 12),
       child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
@@ -150,7 +154,7 @@ class _AiAppsCardState extends State<AiAppsCard> {
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: Text(l.appsNoneFound, style: XText.bodyDim),
           ),
-        for (final r in here) AiAppRowView(r),
+        for (final r in here) AiAppRowView(r, tourMark: pick?.$1.app.id == r.app.id ? pick?.$2 : null),
         if (elsewhere.isNotEmpty) ...[
           const SizedBox(height: 8),
           Text(l.appsNotFoundHeader.toUpperCase(), style: XText.overline),
@@ -159,14 +163,18 @@ class _AiAppsCardState extends State<AiAppsCard> {
         ],
       ]),
     );
+    return TourTarget(TourSpot.aiApps, child: card);
   }
 }
 
 enum _Menu { guide, disconnect, tasks }
 
 class AiAppRowView extends StatelessWidget {
-  const AiAppRowView(this.row, {super.key});
+  const AiAppRowView(this.row, {super.key, this.tourMark});
   final AiAppRow row;
+
+  /// The first-run tour points at this row's button for this action.
+  final TourAppAction? tourMark;
 
   @override
   Widget build(BuildContext context) {
@@ -207,6 +215,8 @@ class AiAppRowView extends StatelessWidget {
     } else {
       primary = null;
     }
+    Widget marked(Widget w, bool on) => on ? TourTarget(TourSpot.aiApp, child: w) : w;
+    final startMark = tourMark == TourAppAction.start;
     final menu = <_Menu>[
       _Menu.guide,
       if (row.agent != null) _Menu.tasks,
@@ -239,14 +249,17 @@ class AiAppRowView extends StatelessWidget {
           ]),
         ),
         const SizedBox(width: 8),
-        ?primary,
+        if (primary != null) marked(primary, terminal && app.config == null ? startMark : tourMark != null && !startMark),
         if (terminal && app.config != null) ...[
           const SizedBox(width: 8),
-          IconButton(
-            key: Key('app-start-${app.id.name}'),
-            tooltip: l.appsStartCode,
-            onPressed: () => showStartAgentDialog(context, cli: app.terminal, agent: row.agent?.name),
-            icon: const Icon(Icons.terminal_rounded, size: 18),
+          marked(
+            IconButton(
+              key: Key('app-start-${app.id.name}'),
+              tooltip: l.appsStartCode,
+              onPressed: () => showStartAgentDialog(context, cli: app.terminal, agent: row.agent?.name),
+              icon: const Icon(Icons.terminal_rounded, size: 18),
+            ),
+            startMark,
           ),
         ],
         if (menu.isNotEmpty)

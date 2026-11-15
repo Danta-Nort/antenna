@@ -3,7 +3,7 @@
 // language when the window has it, otherwise English, or an explicit choice in "Settings") and the interface mode
 // (Chat by default; Code puts the agents' terminals in the window).
 // The choice is kept in a small window settings file, `{"theme": …, "lang": …, "ui": …, "code_offered": …,
-// "self_notice_shown": …, "agent_runs": {agent: {cli, dir, cmd?, session?, token_file?, restore?, running?, started_ms?,
+// "self_notice_shown": …, "tour_seen": …, "agent_runs": {agent: {cli, dir, cmd?, session?, token_file?, restore?, running?, started_ms?,
 // restored_ms?}}, "code_wake_off": [agent…], "agent_map": {"clusters": {id: [x, y]}, "order": {id: [node…]}, "view":
 // [scale, dx, dy], "recent": bool}}`; the window stores no passwords, tokens, history or links (`token_file` is the
 // path of the daemon's token file, D-86: what a Code mode agent restored after an update reads, D-103). `agent_map` is
@@ -73,6 +73,7 @@ typedef WindowPrefs = ({
   InterfaceMode ui,
   bool codeOffered,
   bool selfNoticeShown,
+  bool tourSeen,
   RolePreset? rolePreset,
   Map<String, Object?> agentRuns,
   Set<String> codeWakeOff,
@@ -86,6 +87,7 @@ class Appearance extends ChangeNotifier implements AgentRunStore {
     this._ui = InterfaceMode.chat,
     this._codeOffered = false,
     this._selfNoticeShown = false,
+    this._tourSeen = false,
     this._rolePreset,
     Map<String, Object?>? agentRuns,
     Set<String>? codeWakeOff,
@@ -104,6 +106,7 @@ class Appearance extends ChangeNotifier implements AgentRunStore {
       ui: p.ui,
       codeOffered: p.codeOffered,
       selfNoticeShown: p.selfNoticeShown,
+      tourSeen: p.tourSeen,
       rolePreset: p.rolePreset,
       agentRuns: p.agentRuns,
       codeWakeOff: p.codeWakeOff,
@@ -118,6 +121,7 @@ class Appearance extends ChangeNotifier implements AgentRunStore {
   InterfaceMode _ui;
   bool _codeOffered;
   bool _selfNoticeShown;
+  bool _tourSeen;
   RolePreset? _rolePreset;
   final Map<String, Object?> _agentRuns;
   final Set<String> _codeWakeOff;
@@ -129,6 +133,7 @@ class Appearance extends ChangeNotifier implements AgentRunStore {
         ui: _ui,
         codeOffered: _codeOffered,
         selfNoticeShown: _selfNoticeShown,
+        tourSeen: _tourSeen,
         rolePreset: _rolePreset,
         agentRuns: _agentRuns,
         codeWakeOff: _codeWakeOff,
@@ -197,6 +202,17 @@ class Appearance extends ChangeNotifier implements AgentRunStore {
   void markSelfNoticeShown() {
     if (_selfNoticeShown) return;
     _selfNoticeShown = true;
+    _save();
+  }
+
+  /// The first-run tour is still to be shown to a new node, or to be marked as not needed for a node in use (D-151).
+  /// Without a settings file there is nowhere to remember it, so it is not shown by itself at all, like the notice
+  /// above; Settings → Help shows it any time.
+  bool get tourDue => store != null && !_tourSeen;
+
+  void markTourSeen() {
+    if (_tourSeen) return;
+    _tourSeen = true;
     _save();
   }
 
@@ -297,6 +313,7 @@ class AppearanceStore {
       ui: pick(InterfaceMode.values, 'ui', InterfaceMode.chat),
       codeOffered: j is Map && j['code_offered'] == true,
       selfNoticeShown: j is Map && j['self_notice_shown'] == true,
+      tourSeen: j is Map && j['tour_seen'] == true,
       rolePreset: RolePreset.values.where((r) => j is Map && r.name == j['role_preset']).firstOrNull,
       agentRuns: runs is Map ? {for (final e in runs.entries) '${e.key}': e.value} : <String, Object?>{},
       codeWakeOff: wakeOff is List ? {for (final n in wakeOff) if (n is String) n} : <String>{},
@@ -315,6 +332,7 @@ class AppearanceStore {
         if (p.ui != InterfaceMode.chat) 'ui': p.ui.name,
         if (p.codeOffered) 'code_offered': true,
         if (p.selfNoticeShown) 'self_notice_shown': true,
+        if (p.tourSeen) 'tour_seen': true,
         if (p.rolePreset case final r?) 'role_preset': r.name,
         if (p.agentRuns.isNotEmpty) 'agent_runs': p.agentRuns,
         if (p.codeWakeOff.isNotEmpty) 'code_wake_off': (p.codeWakeOff.toList()..sort()),

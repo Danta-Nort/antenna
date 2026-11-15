@@ -2417,5 +2417,18 @@
   "agentStopOlderDevice": "需要 {computer} 上有更新版本的 Antenna",
   "codeStateStoppedFrom": "已从 {computer} 停止",
   "taskUrgent": "紧急：立即打断工作智能体",
-  "taskUrgentTip": "工作智能体会停止当前这一轮，并立即拿回附有你意见的任务，即使它正在处理这个任务。"
+  "taskUrgentTip": "工作智能体会停止当前这一轮，并立即拿回附有你意见的任务，即使它正在处理这个任务。",
+  "tourChats": "人和 AI 智能体，都在同一个列表里",
+  "tourAppsPress": "点击 {app} 旁边的“{button}”",
+  "tourAppsNone": "这台电脑上还没有 AI 应用：安装 Claude Code 后，它会出现在这里",
+  "tourAppsHere": "AI 应用在这里一键接入",
+  "tourAnswers": "像对人一样给它写消息：它在这里回复",
+  "tourInvite": "添加你的另一台电脑或一个人：一个链接和一个 6 位数字码",
+  "tourStepOf": "{step}/{total}",
+  "tourNext": "下一步",
+  "tourSkip": "跳过",
+  "settingsSectionHelp": "帮助",
+  "settingsTourTitle": "新手导览",
+  "settingsTourHint": "在真实界面上走几个简短步骤：你的聊天、这台电脑上的 AI 应用、智能体在哪里回复，以及如何添加联系人。",
+  "settingsTourShow": "再看一遍导览"
 }

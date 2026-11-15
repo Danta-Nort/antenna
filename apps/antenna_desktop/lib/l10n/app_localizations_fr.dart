@@ -9418,4 +9418,50 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get taskUrgentTip =>
       'L’exécutant arrête son tour en cours et récupère aussitôt la tâche avec vos commentaires, même pendant qu’il y travaille.';
+
+  @override
+  String get tourChats => 'Personnes et agents IA, dans une seule liste';
+
+  @override
+  String tourAppsPress(String button, String app) {
+    return 'Cliquez sur « $button » à côté de $app';
+  }
+
+  @override
+  String get tourAppsNone =>
+      'Aucune app IA sur cet ordinateur pour l’instant : installez Claude Code et il apparaîtra ici';
+
+  @override
+  String get tourAppsHere => 'Les apps IA se connectent ici, en un clic';
+
+  @override
+  String get tourAnswers => 'Écrivez-lui comme à une personne : il répond ici';
+
+  @override
+  String get tourInvite =>
+      'Ajoutez votre autre ordinateur ou une personne : un lien et un code à six chiffres';
+
+  @override
+  String tourStepOf(int step, int total) {
+    return '$step sur $total';
+  }
+
+  @override
+  String get tourNext => 'Suivant';
+
+  @override
+  String get tourSkip => 'Passer';
+
+  @override
+  String get settingsSectionHelp => 'Aide';
+
+  @override
+  String get settingsTourTitle => 'Visite guidée';
+
+  @override
+  String get settingsTourHint =>
+      'Quelques étapes courtes sur les vrais écrans : vos discussions, les apps IA de cet ordinateur, où un agent répond et comment ajouter un contact.';
+
+  @override
+  String get settingsTourShow => 'Revoir la visite guidée';
 }

@@ -8,6 +8,12 @@ capability exchange, and the control protocol only adds.
 
 ## [Unreleased]
 
+### Added
+- A first-run tour: after a new node is created, a few one-line steps on the real screens show the chat list, the AI
+  apps found on the computer (with a ring around the button that connects one, such as **Start in Code mode** next to
+  Claude Code), where an agent in Code mode answers, and **Invite**. **Skip** or Escape closes it; it shows once, and
+  **Settings → Help → Show the tour again** brings it back ([D-151](docs/DECISIONS.md)).
+
 ## [0.1.1] - 2026-11-15
 
 ### Changed

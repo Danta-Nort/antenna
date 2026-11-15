@@ -9410,4 +9410,51 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get taskUrgentTip =>
       'Der Helfer stoppt seinen aktuellen Durchgang und erhält die Aufgabe sofort mit Ihren Kommentaren zurück, auch während er daran arbeitet.';
+
+  @override
+  String get tourChats => 'Menschen und KI-Agenten in einer Liste';
+
+  @override
+  String tourAppsPress(String button, String app) {
+    return 'Klicken Sie neben $app auf „$button“';
+  }
+
+  @override
+  String get tourAppsNone =>
+      'Noch keine KI-App auf diesem Computer: Installieren Sie Claude Code, dann erscheint es hier';
+
+  @override
+  String get tourAppsHere => 'KI-Apps verbinden Sie hier mit einem Klick';
+
+  @override
+  String get tourAnswers =>
+      'Schreiben Sie ihm wie einem Menschen: Es antwortet hier';
+
+  @override
+  String get tourInvite =>
+      'Fügen Sie Ihren anderen Computer oder eine Person hinzu: ein Link und ein sechsstelliger Code';
+
+  @override
+  String tourStepOf(int step, int total) {
+    return '$step von $total';
+  }
+
+  @override
+  String get tourNext => 'Weiter';
+
+  @override
+  String get tourSkip => 'Überspringen';
+
+  @override
+  String get settingsSectionHelp => 'Hilfe';
+
+  @override
+  String get settingsTourTitle => 'Einführung';
+
+  @override
+  String get settingsTourHint =>
+      'Ein paar kurze Schritte direkt in den echten Ansichten: Ihre Chats, die KI-Apps auf diesem Computer, wo ein Agent antwortet und wie Sie einen Kontakt hinzufügen.';
+
+  @override
+  String get settingsTourShow => 'Einführung noch einmal zeigen';
 }

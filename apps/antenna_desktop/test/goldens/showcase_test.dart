@@ -153,6 +153,12 @@ const showcase = [
   '95_urgent_composer_ru',
   '96_agent_stop',
   '96_agent_stop_ru',
+  '97_tour_chats',
+  '98_tour_ai_apps',
+  '98_tour_ai_apps_ru',
+  '98_tour_ai_apps_dark',
+  '99_tour_answers',
+  '100_tour_invite',
 ];
 
 void main() {

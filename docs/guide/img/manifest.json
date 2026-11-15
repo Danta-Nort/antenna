@@ -52,7 +52,7 @@
     "src": "docs/design/screens/21_agents.png"
   },
   "22_settings.png": {
-    "sha256": "a42e6b96ee3be13880d0bdf18f1e4e21b770cf6bcbd84671727450e6d9b327bf",
+    "sha256": "5a56fbca12e0a331e77c3367d00ed1f9a897b0de4b4713cb6791da29235404c3",
     "src": "docs/design/screens/22_settings.png"
   },
   "23_card.png": {
@@ -84,7 +84,7 @@
     "src": "docs/design/screens/30_contact_agents.png"
   },
   "31_lan.png": {
-    "sha256": "53a21439baaaaa1d487b4e77fd1161711f75df311d92a386faae0ce7ea693168",
+    "sha256": "0728bbf1387e4d16ef3b810091dc0da9cf5b20c7204bd72e9541115d738268f5",
     "src": "docs/design/screens/31_lan.png"
   },
   "33_approval_in_chat.png": {
@@ -140,11 +140,11 @@
     "src": "docs/design/screens/52_secure_details.png"
   },
   "53_settings_help.png": {
-    "sha256": "a52894dc219a3ac5df1be9e768aa234a04e51656dc60ee4a44d1d7bfc1e4fe8b",
+    "sha256": "e937c1703959079d3359270716acbedc1c5c30b0bf3408b66fc5328b779a9f68",
     "src": "docs/design/screens/53_settings_help.png"
   },
   "54_check_panel.png": {
-    "sha256": "0ab2a873a3cf3a355828a1dbaf90c9d085cca04bc23f7d9ed50d83e7b237302f",
+    "sha256": "7c5012a6208e60cdd0bfd10fcf5b89124590924ada3d1d78800d2e728ec8162d",
     "src": "docs/design/screens/54_check_panel.png"
   },
   "55_code_screenshot.png": {
@@ -152,11 +152,11 @@
     "src": "docs/design/screens/55_code_screenshot.png"
   },
   "56_touch_id_settings.png": {
-    "sha256": "ffcafe9a3d8d87b658140e6210d425cf8333091d1e4ccc893f028c344f39080f",
+    "sha256": "1ae4c71f7a1a5de0292272ca04ed88a73b61e3fcfd1b49dca81cc59d0785e20b",
     "src": "docs/design/screens/56_touch_id_settings.png"
   },
   "57_touch_id_enroll.png": {
-    "sha256": "4826e5f3faf9247739b877b432c988f82ad61342514c3d925dd29646d1bb4014",
+    "sha256": "42f1b09a6783424edf830ac38c3c5edb8cedb1f778ea92068c70b2c982daaf2e",
     "src": "docs/design/screens/57_touch_id_enroll.png"
   },
   "58_approval_touch_id.png": {
@@ -172,7 +172,7 @@
     "src": "docs/design/screens/60_update_ready.png"
   },
   "61_update_auto.png": {
-    "sha256": "d97f58ba532edce61b2d5b1227ef711ce8d4b5df831843e109654002bc536f4e",
+    "sha256": "6f869e357e8e7910cbdd1a1e4758bf0339e2bfd3fcaf8382cf58bc6f74ec3440",
     "src": "docs/design/screens/61_update_auto.png"
   },
   "62_file_rename.png": {
@@ -240,7 +240,7 @@
     "src": "docs/design/screens/77_code_team_worker.png"
   },
   "78_picture_picker.png": {
-    "sha256": "44ae5fbeee97d64a5791b79860a30e56ea937f1118d70e9e7a2dc0e86ff1ae0a",
+    "sha256": "2dce0c3da01459f2ab689f937ef201d415a283b6c59ea9f4d329d7ebe6292f9c",
     "src": "docs/design/screens/78_picture_picker.png"
   },
   "79_chat_pictures.png": {
@@ -248,15 +248,15 @@
     "src": "docs/design/screens/79_chat_pictures.png"
   },
   "80_settings_profile.png": {
-    "sha256": "5ee670af7e289467256fc6bced04c038dbd439e87bf71dc51ab3e6f0e7d73f04",
+    "sha256": "2a0bd0051183829fcccd0dc8d06b2be95b944d82c0a241fe17acc3456f317fa1",
     "src": "docs/design/screens/80_settings_profile.png"
   },
   "81_picture_crop.png": {
-    "sha256": "ba138870eee6157f150c6b98589061a0613123fe9c4047b917254271e391ab6e",
+    "sha256": "089ef970efa5707a70bfa74ee225f821c1e9002ed9a6eeec22fad2e747c49998",
     "src": "docs/design/screens/81_picture_crop.png"
   },
   "82_install_cli.png": {
-    "sha256": "cc85cd55a9a4029b45218e2eff62c35c30c293a2491e7e70441f4ecf3f9b70fc",
+    "sha256": "9df9535a2d56f4b537715ae5867bf987da2e5261892bb50d2c887090aa5e73ff",
     "src": "docs/design/screens/82_install_cli.png"
   },
   "83_agent_question.png": {
@@ -310,5 +310,9 @@
   "96_agent_stop.png": {
     "sha256": "1677bc561d12290936f56b1d9935c6cbfcf52c9d7215e8c3887df5d0f9c7af5e",
     "src": "docs/design/screens/96_agent_stop.png"
+  },
+  "98_tour_ai_apps.png": {
+    "sha256": "f758bf50103d8da88fa400a3dd17d4801773045763a8b2bda954c8dc3dd81d61",
+    "src": "docs/design/screens/98_tour_ai_apps.png"
   }
 }

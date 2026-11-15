@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: AGPL-3.0-only -->
 # Settings
 
-*Where it is.* The left navigation's **Settings** item, with eight sections down the left side of the page;
+*Where it is.* The left navigation's **Settings** item, with nine sections down the left side of the page;
 Settings opens on the first one, Profile. Every
 row has a name, a small `?` with the explanation (hover, click or Tab), and the control — [USER-GUIDE: "Where
 things are in the window"](../USER-GUIDE.md#where-things-are-in-the-window) names every row by its exact label.
@@ -51,6 +51,12 @@ The Check panel: fixed checks with one-click fixes. Full detail: [Check](check.m
 Daemon facts and **Stop daemon**; the **antenna command in the terminal…** button (USER-GUIDE: "The antenna command
 in the Terminal"); **Updates**: the per-computer **Install signed updates by itself** switch and its status. Full
 detail: [Updates](updates.md).
+
+## Help
+
+**First-run tour**: **Show the tour again** starts the short tour of the real screens that a new node gets once
+(the chat list, the AI apps found on this computer, where an agent answers in Code mode, **Invite**). See [Getting
+started](getting-started.md).
 
 ## Settings help
 

@@ -2417,5 +2417,18 @@
   "agentStopOlderDevice": "Wymaga nowszej Antenny na {computer}",
   "codeStateStoppedFrom": "zatrzymany z {computer}",
   "taskUrgent": "Pilne: przerwij pomocnika teraz",
-  "taskUrgentTip": "Pomocnik przerywa bieżącą turę i od razu dostaje zadanie z powrotem z twoimi uwagami, nawet jeśli właśnie nad nim pracuje."
+  "taskUrgentTip": "Pomocnik przerywa bieżącą turę i od razu dostaje zadanie z powrotem z twoimi uwagami, nawet jeśli właśnie nad nim pracuje.",
+  "tourChats": "Ludzie i agenci AI na jednej liście",
+  "tourAppsPress": "Naciśnij „{button}” obok {app}",
+  "tourAppsNone": "Na tym komputerze nie ma jeszcze aplikacji AI: zainstaluj Claude Code, a pojawi się tutaj",
+  "tourAppsHere": "Aplikacje AI łączysz tutaj jednym kliknięciem",
+  "tourAnswers": "Pisz do niego jak do człowieka: odpowiada tutaj",
+  "tourInvite": "Dodaj swój drugi komputer albo osobę: jeden link i sześciocyfrowy kod",
+  "tourStepOf": "{step} z {total}",
+  "tourNext": "Dalej",
+  "tourSkip": "Pomiń",
+  "settingsSectionHelp": "Pomoc",
+  "settingsTourTitle": "Krótkie wprowadzenie",
+  "settingsTourHint": "Kilka krótkich kroków na prawdziwych ekranach: twoje czaty, aplikacje AI na tym komputerze, gdzie odpowiada agent i jak dodać kontakt.",
+  "settingsTourShow": "Pokaż wprowadzenie jeszcze raz"
 }

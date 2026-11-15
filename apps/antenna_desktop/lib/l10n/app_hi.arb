@@ -2417,5 +2417,18 @@
   "agentStopOlderDevice": "{computer} पर नए Antenna की ज़रूरत है",
   "codeStateStoppedFrom": "{computer} से रोका गया",
   "taskUrgent": "Urgent: worker को अभी रोकें",
-  "taskUrgentTip": "Worker अपनी मौजूदा बारी रोकता है और task आपकी टिप्पणियों के साथ तुरंत वापस पाता है, भले ही वह उस पर काम कर रहा हो।"
+  "taskUrgentTip": "Worker अपनी मौजूदा बारी रोकता है और task आपकी टिप्पणियों के साथ तुरंत वापस पाता है, भले ही वह उस पर काम कर रहा हो।",
+  "tourChats": "लोग और AI agents, एक ही लिस्ट में",
+  "tourAppsPress": "{app} के आगे “{button}” दबाएँ",
+  "tourAppsNone": "इस कंप्यूटर पर अभी कोई AI ऐप नहीं है: Claude Code इंस्टॉल करें, वह यहाँ दिखेगा",
+  "tourAppsHere": "AI ऐप यहाँ एक क्लिक में कनेक्ट होते हैं",
+  "tourAnswers": "इसे किसी इंसान की तरह लिखें: जवाब यहीं आता है",
+  "tourInvite": "अपना दूसरा कंप्यूटर या किसी व्यक्ति को जोड़ें: एक लिंक और छह अंकों का कोड",
+  "tourStepOf": "{total} में से {step}",
+  "tourNext": "आगे",
+  "tourSkip": "छोड़ें",
+  "settingsSectionHelp": "मदद",
+  "settingsTourTitle": "शुरुआती टूर",
+  "settingsTourHint": "असली स्क्रीन पर कुछ छोटे कदम: आपकी चैट, इस कंप्यूटर के AI ऐप, agent कहाँ जवाब देता है और कॉन्टैक्ट कैसे जोड़ें।",
+  "settingsTourShow": "टूर फिर से दिखाएँ"
 }

@@ -27,6 +27,7 @@ import '../files/file_card.dart';
 import '../files/file_drop.dart';
 import '../files/media_files.dart';
 import '../home/chat_menu.dart';
+import '../home/tour.dart';
 import '../pairing/pairing_dialogs.dart';
 import '../security/owner_confirm.dart';
 import '../widgets/agent_avatar.dart';
@@ -824,10 +825,14 @@ class _NoSelection extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            FilledButton.icon(
-              onPressed: () => showInviteDialog(context),
-              icon: const Icon(Icons.qr_code_2, size: 18),
-              label: Text(context.l.commonInvite),
+            TourTarget(
+              TourSpot.invite,
+              child: FilledButton.icon(
+                key: const Key('first-invite'),
+                onPressed: () => showInviteDialog(context),
+                icon: const Icon(Icons.qr_code_2, size: 18),
+                label: Text(context.l.commonInvite),
+              ),
             ),
             const SizedBox(width: 12),
             OutlinedButton.icon(

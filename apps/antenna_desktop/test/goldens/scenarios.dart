@@ -67,6 +67,7 @@ part 'stream_scenarios.dart';
 part 'team_scenarios.dart';
 part 'thread_scenarios.dart';
 part 'touch_id_scenarios.dart';
+part 'tour_scenarios.dart';
 part 'update_scenarios.dart';
 
 const _size = Size(1440, 900);
@@ -90,7 +91,7 @@ const ruVariants = ['04_home_chat', '01_unlock', '10_approvals', '06_invite_link
     '84_resident_session',
     '86_agent_map', '87_agent_connect', '88_approver_warning', '89_approver_card', '90_approvers_list',
     '91_screen_permission', '92_media_files', '93_map_line_selected', '94_local_connect',
-    '95_urgent_composer', '96_agent_stop'];
+    '95_urgent_composer', '96_agent_stop', '98_tour_ai_apps'];
 
 const _bins = CoreBinaries(
   daemon: '/Applications/Antenna.app/Contents/Helpers/antennad',
@@ -181,6 +182,7 @@ void defineScenarios() {
   _definePictureScenarios();
   _defineMapScenarios();
   _defineApproverScenarios();
+  _defineTourScenarios();
   _s('01_unlock', (t) async {
     const name = '01_unlock';
     final m = await _model(FakeDaemon(state: DaemonState.locked));

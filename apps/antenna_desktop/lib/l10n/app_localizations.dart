@@ -14636,6 +14636,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The worker stops its current turn and gets the task back with your comments at once, even while it is working on it.'**
   String get taskUrgentTip;
+
+  /// First-run tour, step 1 (D-151): the line next to the chat list.
+  ///
+  /// In en, this message translates to:
+  /// **'People and AI agents, in one list'**
+  String get tourChats;
+
+  /// First-run tour, step 2: the line next to the button of an AI app found on this computer.
+  ///
+  /// In en, this message translates to:
+  /// **'Press {button} next to {app}'**
+  String tourAppsPress(String button, String app);
+
+  /// First-run tour, step 2, when no AI app was found on this computer (the list looks again when the window comes back to the front).
+  ///
+  /// In en, this message translates to:
+  /// **'No AI app on this computer yet: install Claude Code and it shows up here'**
+  String get tourAppsNone;
+
+  /// First-run tour, step 2, when every app found is connected already, or there is no AI apps list here.
+  ///
+  /// In en, this message translates to:
+  /// **'Your AI apps connect here, with one press'**
+  String get tourAppsHere;
+
+  /// First-run tour, step 3, shown only while an agent runs in Code mode: the line next to its terminal.
+  ///
+  /// In en, this message translates to:
+  /// **'Write to it like to a person: it answers here'**
+  String get tourAnswers;
+
+  /// First-run tour, the last step: the line next to Invite (or New contact). The verification code is 6 digits (or 6 animals).
+  ///
+  /// In en, this message translates to:
+  /// **'Add your other computer or a person: one link and a six-digit code'**
+  String get tourInvite;
+
+  /// First-run tour: which step this is.
+  ///
+  /// In en, this message translates to:
+  /// **'{step} of {total}'**
+  String tourStepOf(int step, int total);
+
+  /// First-run tour: the button to the next step (the last step says commonDone).
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get tourNext;
+
+  /// First-run tour: closes the tour on any step; it does not come back by itself.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get tourSkip;
+
+  /// Settings: the section with the first-run tour.
+  ///
+  /// In en, this message translates to:
+  /// **'Help'**
+  String get settingsSectionHelp;
+
+  /// Settings → Help: the first-run tour's row.
+  ///
+  /// In en, this message translates to:
+  /// **'First-run tour'**
+  String get settingsTourTitle;
+
+  /// Settings → Help: the "?" next to the first-run tour.
+  ///
+  /// In en, this message translates to:
+  /// **'A few short steps over the real screens: your chats, the AI apps on this computer, where an agent answers, and how to add a contact.'**
+  String get settingsTourHint;
+
+  /// Settings → Help: starts the first-run tour again.
+  ///
+  /// In en, this message translates to:
+  /// **'Show the tour again'**
+  String get settingsTourShow;
 }
 
 class _AppLocalizationsDelegate

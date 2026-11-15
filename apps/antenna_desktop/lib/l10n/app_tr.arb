@@ -2417,5 +2417,18 @@
   "agentStopOlderDevice": "{computer} üzerinde daha yeni bir Antenna gerekir",
   "codeStateStoppedFrom": "{computer} üzerinden durduruldu",
   "taskUrgent": "Acil: çalışanı şimdi yarıda kes",
-  "taskUrgentTip": "Çalışan mevcut turunu durdurur ve üzerinde çalışırken bile görevi yorumlarınızla birlikte hemen geri alır."
+  "taskUrgentTip": "Çalışan mevcut turunu durdurur ve üzerinde çalışırken bile görevi yorumlarınızla birlikte hemen geri alır.",
+  "tourChats": "İnsanlar ve yapay zeka ajanları tek listede",
+  "tourAppsPress": "{app} yanındaki “{button}” düğmesine basın",
+  "tourAppsNone": "Bu bilgisayarda henüz yapay zeka uygulaması yok: Claude Code’u kurun, burada görünür",
+  "tourAppsHere": "Yapay zeka uygulamaları burada tek tıkla bağlanır",
+  "tourAnswers": "Ona bir insana yazar gibi yazın: yanıtı burada verir",
+  "tourInvite": "Diğer bilgisayarınızı ya da bir kişiyi ekleyin: bir bağlantı ve altı haneli bir kod",
+  "tourStepOf": "{step} / {total}",
+  "tourNext": "İleri",
+  "tourSkip": "Geç",
+  "settingsSectionHelp": "Yardım",
+  "settingsTourTitle": "Tanıtım turu",
+  "settingsTourHint": "Gerçek ekranlar üzerinde birkaç kısa adım: sohbetleriniz, bu bilgisayardaki yapay zeka uygulamaları, bir ajanın nerede yanıt verdiği ve nasıl kişi ekleneceği.",
+  "settingsTourShow": "Tanıtım turunu yeniden göster"
 }

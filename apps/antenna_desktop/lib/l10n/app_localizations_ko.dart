@@ -9021,4 +9021,48 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get taskUrgentTip =>
       '워커가 진행 중인 턴을 멈추고, 작업 중이더라도 내 코멘트와 함께 작업을 바로 돌려받아요.';
+
+  @override
+  String get tourChats => '사람과 AI 에이전트를 한 목록에서';
+
+  @override
+  String tourAppsPress(String button, String app) {
+    return '$app 옆의 “$button”을(를) 누르세요';
+  }
+
+  @override
+  String get tourAppsNone => '이 컴퓨터에는 아직 AI 앱이 없어요. Claude Code를 설치하면 여기에 나타나요';
+
+  @override
+  String get tourAppsHere => 'AI 앱은 여기서 클릭 한 번으로 연결돼요';
+
+  @override
+  String get tourAnswers => '사람에게 쓰듯 써 보세요. 답은 여기로 와요';
+
+  @override
+  String get tourInvite => '다른 컴퓨터나 사람을 추가하세요: 링크 하나와 6자리 코드';
+
+  @override
+  String tourStepOf(int step, int total) {
+    return '$step / $total';
+  }
+
+  @override
+  String get tourNext => '다음';
+
+  @override
+  String get tourSkip => '건너뛰기';
+
+  @override
+  String get settingsSectionHelp => '도움말';
+
+  @override
+  String get settingsTourTitle => '첫 실행 둘러보기';
+
+  @override
+  String get settingsTourHint =>
+      '실제 화면에서 진행하는 짧은 단계: 채팅, 이 컴퓨터의 AI 앱, 에이전트가 답하는 곳, 연락처를 추가하는 방법.';
+
+  @override
+  String get settingsTourShow => '둘러보기 다시 보기';
 }

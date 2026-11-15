@@ -9319,4 +9319,50 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get taskUrgentTip =>
       'The worker stops its current turn and gets the task back with your comments at once, even while it is working on it.';
+
+  @override
+  String get tourChats => 'People and AI agents, in one list';
+
+  @override
+  String tourAppsPress(String button, String app) {
+    return 'Press $button next to $app';
+  }
+
+  @override
+  String get tourAppsNone =>
+      'No AI app on this computer yet: install Claude Code and it shows up here';
+
+  @override
+  String get tourAppsHere => 'Your AI apps connect here, with one press';
+
+  @override
+  String get tourAnswers => 'Write to it like to a person: it answers here';
+
+  @override
+  String get tourInvite =>
+      'Add your other computer or a person: one link and a six-digit code';
+
+  @override
+  String tourStepOf(int step, int total) {
+    return '$step of $total';
+  }
+
+  @override
+  String get tourNext => 'Next';
+
+  @override
+  String get tourSkip => 'Skip';
+
+  @override
+  String get settingsSectionHelp => 'Help';
+
+  @override
+  String get settingsTourTitle => 'First-run tour';
+
+  @override
+  String get settingsTourHint =>
+      'A few short steps over the real screens: your chats, the AI apps on this computer, where an agent answers, and how to add a contact.';
+
+  @override
+  String get settingsTourShow => 'Show the tour again';
 }

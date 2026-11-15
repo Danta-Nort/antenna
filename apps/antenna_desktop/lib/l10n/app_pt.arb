@@ -2417,5 +2417,18 @@
   "agentStopOlderDevice": "Precisa de um Antenna mais recente em {computer}",
   "codeStateStoppedFrom": "parado a partir de {computer}",
   "taskUrgent": "Urgente: interromper o trabalhador agora",
-  "taskUrgentTip": "O trabalhador para o turno atual e recebe a tarefa de volta com os seus comentários na hora, mesmo enquanto trabalha nela."
+  "taskUrgentTip": "O trabalhador para o turno atual e recebe a tarefa de volta com os seus comentários na hora, mesmo enquanto trabalha nela.",
+  "tourChats": "Pessoas e agentes de IA, em uma só lista",
+  "tourAppsPress": "Clique em “{button}” ao lado de {app}",
+  "tourAppsNone": "Ainda não há app de IA neste computador: instale o Claude Code e ele aparece aqui",
+  "tourAppsHere": "Os apps de IA se conectam aqui, com um clique",
+  "tourAnswers": "Escreva para ele como para uma pessoa: ele responde aqui",
+  "tourInvite": "Adicione seu outro computador ou uma pessoa: um link e um código de seis dígitos",
+  "tourStepOf": "{step} de {total}",
+  "tourNext": "Próximo",
+  "tourSkip": "Pular",
+  "settingsSectionHelp": "Ajuda",
+  "settingsTourTitle": "Tour inicial",
+  "settingsTourHint": "Alguns passos curtos nas telas reais: seus chats, os apps de IA deste computador, onde um agente responde e como adicionar um contato.",
+  "settingsTourShow": "Ver o tour de novo"
 }

@@ -34,7 +34,7 @@ instead of describing something a reader cannot yet click.
 | [My devices](my-devices.md) | Your own computers in one place: versions, health, agents, their requests answered from here, lending to teams, a lost computer |
 | [Code mode](code-mode.md) | Running Claude Code or Codex inside the window: start, status, wake, quick replies, Screenshot |
 | [Files](files.md) | Quarantine, previews, accept and reject, the secret scanner, images in a file card |
-| [Settings](settings.md) | All eight sections: Profile, General, Interface, Network, Security, Agents, Check, Advanced |
+| [Settings](settings.md) | All nine sections: Profile, General, Interface, Network, Security, Agents, Check, Advanced, Help |
 | [Profile pictures](profile-pictures.md) | Your picture and your agents': a drawn animal or your own photo, what contacts see, why photos are rebuilt |
 | [Check](check.md) | The Check panel's fixed checks and their one-click fixes |
 | [Touch ID](touch-id.md) | Approving and unlocking with a fingerprint instead of the password |

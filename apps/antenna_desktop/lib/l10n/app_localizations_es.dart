@@ -9402,4 +9402,50 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get taskUrgentTip =>
       'El trabajador detiene su turno actual y recibe la tarea de vuelta con tus comentarios al momento, aunque esté trabajando en ella.';
+
+  @override
+  String get tourChats => 'Personas y agentes de IA, en una sola lista';
+
+  @override
+  String tourAppsPress(String button, String app) {
+    return 'Pulsa “$button” junto a $app';
+  }
+
+  @override
+  String get tourAppsNone =>
+      'Aún no hay ninguna app de IA en esta computadora: instala Claude Code y aparecerá aquí';
+
+  @override
+  String get tourAppsHere => 'Las apps de IA se conectan aquí, con un clic';
+
+  @override
+  String get tourAnswers => 'Escríbele como a una persona: responde aquí';
+
+  @override
+  String get tourInvite =>
+      'Añade tu otra computadora o a una persona: un enlace y un código de seis dígitos';
+
+  @override
+  String tourStepOf(int step, int total) {
+    return '$step de $total';
+  }
+
+  @override
+  String get tourNext => 'Siguiente';
+
+  @override
+  String get tourSkip => 'Omitir';
+
+  @override
+  String get settingsSectionHelp => 'Ayuda';
+
+  @override
+  String get settingsTourTitle => 'Recorrido inicial';
+
+  @override
+  String get settingsTourHint =>
+      'Unos pasos cortos sobre las pantallas reales: tus chats, las apps de IA de esta computadora, dónde responde un agente y cómo añadir un contacto.';
+
+  @override
+  String get settingsTourShow => 'Ver el recorrido otra vez';
 }

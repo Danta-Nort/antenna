@@ -15,6 +15,7 @@ import '../app.dart' show AppearanceScope;
 import '../app_scope.dart';
 import '../code/agents_detected.dart';
 import '../code/start_agent_dialog.dart';
+import '../home/tour.dart';
 import '../widgets/badges.dart';
 import '../widgets/section_page.dart';
 import '../widgets/self_level.dart';
@@ -65,11 +66,14 @@ class _AgentsPageState extends State<AgentsPage> {
       action: Row(mainAxisSize: MainAxisSize.min, children: [
         const _ViewToggle(),
         const SizedBox(width: 16),
-        FilledButton.icon(
-          key: const Key('agent-connect'),
-          onPressed: () => showAgentsDialog(context),
-          icon: const Icon(Icons.add, size: 18),
-          label: Text(l.agentConnect),
+        TourTarget(
+          TourSpot.connectAgent,
+          child: FilledButton.icon(
+            key: const Key('agent-connect'),
+            onPressed: () => showAgentsDialog(context),
+            icon: const Icon(Icons.add, size: 18),
+            label: Text(l.agentConnect),
+          ),
         ),
       ]),
       children: map

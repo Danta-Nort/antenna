@@ -9464,5 +9464,77 @@
   "taskUrgentTip": "The worker stops its current turn and gets the task back with your comments at once, even while it is working on it.",
   "@taskUrgentTip": {
     "description": "Teams: the urgent switch's tooltip."
+  },
+  "tourChats": "People and AI agents, in one list",
+  "@tourChats": {
+    "description": "First-run tour, step 1 (D-151): the line next to the chat list."
+  },
+  "tourAppsPress": "Press {button} next to {app}",
+  "@tourAppsPress": {
+    "description": "First-run tour, step 2: the line next to the button of an AI app found on this computer.",
+    "placeholders": {
+      "button": {
+        "type": "String",
+        "example": "Start in Code mode",
+        "description": "The button's own label: appsStartCode, appsConnect or appsSetUp."
+      },
+      "app": {
+        "type": "String",
+        "example": "Claude Code",
+        "description": "The app's name, not translated."
+      }
+    }
+  },
+  "tourAppsNone": "No AI app on this computer yet: install Claude Code and it shows up here",
+  "@tourAppsNone": {
+    "description": "First-run tour, step 2, when no AI app was found on this computer (the list looks again when the window comes back to the front)."
+  },
+  "tourAppsHere": "Your AI apps connect here, with one press",
+  "@tourAppsHere": {
+    "description": "First-run tour, step 2, when every app found is connected already, or there is no AI apps list here."
+  },
+  "tourAnswers": "Write to it like to a person: it answers here",
+  "@tourAnswers": {
+    "description": "First-run tour, step 3, shown only while an agent runs in Code mode: the line next to its terminal."
+  },
+  "tourInvite": "Add your other computer or a person: one link and a six-digit code",
+  "@tourInvite": {
+    "description": "First-run tour, the last step: the line next to Invite (or New contact). The verification code is 6 digits (or 6 animals)."
+  },
+  "tourStepOf": "{step} of {total}",
+  "@tourStepOf": {
+    "description": "First-run tour: which step this is.",
+    "placeholders": {
+      "step": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "tourNext": "Next",
+  "@tourNext": {
+    "description": "First-run tour: the button to the next step (the last step says commonDone)."
+  },
+  "tourSkip": "Skip",
+  "@tourSkip": {
+    "description": "First-run tour: closes the tour on any step; it does not come back by itself."
+  },
+  "settingsSectionHelp": "Help",
+  "@settingsSectionHelp": {
+    "description": "Settings: the section with the first-run tour."
+  },
+  "settingsTourTitle": "First-run tour",
+  "@settingsTourTitle": {
+    "description": "Settings → Help: the first-run tour's row."
+  },
+  "settingsTourHint": "A few short steps over the real screens: your chats, the AI apps on this computer, where an agent answers, and how to add a contact.",
+  "@settingsTourHint": {
+    "description": "Settings → Help: the \"?\" next to the first-run tour."
+  },
+  "settingsTourShow": "Show the tour again",
+  "@settingsTourShow": {
+    "description": "Settings → Help: starts the first-run tour again."
   }
 }

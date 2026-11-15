@@ -90,7 +90,7 @@ Below the name: the **Secure connection** chip — click it for the details popo
 the network mode (Direct or Relay only); online/offline (or "hidden" when presence is off for this contact); a queued
 count when messages are still waiting to send.
 
-**Settings**, eight sections down the left side of the page:
+**Settings**, nine sections down the left side of the page:
 - **Profile** — **Your picture**: **Change…** (a drawn animal or your photo, see [Profile pictures](#profile-pictures)) ·
   **Remove**.
 - **General** — Appearance (System/Light/Dark) · Language (System, or one of the window’s languages: English, Spanish, Portuguese, Chinese, Hindi, French, German, Japanese, Korean, Turkish, Italian, Polish, Russian, Ukrainian, each listed in itself).
@@ -101,6 +101,7 @@ count when messages are still waiting to send.
 - **Check** — the Check panel: fixed checks with one-click fixes.
 - **Advanced** — daemon facts and **Stop daemon**, the **antenna command in the terminal…** button · **Updates**: the
   per-computer "install signed updates by itself" switch and its status.
+- **Help** — **First-run tour**: **Show the tour again** (see [First run](#first-run)).
 
 **Teams page** (tagged **Experimental**): **New team**, then one card per team (its project, lead, workers, tasks per
 column, and "Waiting for you: apply to main" when its lead asked). A card opens the team's board: **New task**, **Add
@@ -173,6 +174,16 @@ permissions) and **antenna** (commands for the Terminal and for AI assistants). 
 4. **Every time the window opens** it asks for the password too ("Sign in"), even if the daemon kept running the whole time: without the password the window is not
    the owner (this protects against programs running on your behalf on the same Mac). One entry unlocks both the keys and
    the window; once the window is closed, the sign-in ends, while assistants and message delivery keep working.
+
+5. **A short tour.** Right after a new node is created, the window shows a few one-line steps on its real screens: the
+   chat list, then **Agents → AI apps** with a ring around the button of an AI app found on this computer (for
+   example **Start in Code mode** next to Claude Code; with none found, it says to install Claude Code), then, if you
+   started an agent there, its terminal in Code mode, and last **Invite** for your other computer or a person. Press
+   the button under the ring to do it for real, **Next** to move on, or **Skip** (or Escape) to close the tour. It
+   shows once, and only on a node with no contacts and no agents yet; **Settings → Help → Show the tour again** shows
+   it any time.
+
+   ![The tour on Agents → AI apps](design/screens/98_tour_ai_apps.png)
 
 ## Connecting with a person
 

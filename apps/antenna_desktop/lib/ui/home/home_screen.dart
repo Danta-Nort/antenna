@@ -13,6 +13,7 @@ import '../../host/links.dart';
 import '../../l10n/l10n.dart';
 import '../../state/app_model.dart';
 import '../../state/appearance.dart';
+import '../../state/tour.dart';
 import '../../theme/antenna_mark.dart';
 import '../../theme/x_theme.dart';
 import '../../version.dart';
@@ -35,6 +36,7 @@ import '../widgets/badges.dart';
 import '../widgets/dialog_shell.dart';
 import 'contact_list.dart';
 import 'self_notice.dart';
+import 'tour.dart';
 
 enum HomeSection { chats, teams, agents, devices, files, settings }
 
@@ -63,9 +65,22 @@ class _HomeScreenState extends State<HomeScreen> {
   /// The Code mode dock's "Open board" asks for the Teams section.
   StreamSubscription<void>? _teamsRequests;
 
+  /// The first-run tour (D-151): each step opens its section.
+  final _tour = Tour();
+  final _anchors = TourAnchors();
+  TourStep? _tourStep;
+
+  /// Watched until it is settled whether this node gets the tour by itself (it needs the contacts).
+  AppModel? _tourModel;
+  bool _tourChecking = false;
+
+  /// An invite link opened the join dialog at start: that comes first, and the tour waits for another start.
+  bool _linkAtStart = false;
+
   @override
   void initState() {
     super.initState();
+    _tour.addListener(_onTour);
     // An invite link reached the app (antenna://, a launch argument, a second window) → "Join"; while the keys are
     // locked, it waits here.
     IncomingLinks.instance.addListener(_openLinks);
@@ -79,6 +94,8 @@ class _HomeScreenState extends State<HomeScreen> {
         _teamsRequests = AppScope.read(context).showTeamsRequests.listen((_) {
           if (mounted) setState(() => _section = HomeSection.teams);
         });
+        _tourModel = AppScope.read(context)..addListener(_firstTour);
+        _firstTour();
       }
     });
   }
@@ -87,8 +104,60 @@ class _HomeScreenState extends State<HomeScreen> {
   void dispose() {
     IncomingLinks.instance.removeListener(_openLinks);
     _noticeModel?.removeListener(_selfNotice);
+    _tourModel?.removeListener(_firstTour);
     unawaited(_teamsRequests?.cancel());
+    _tour
+      ..removeListener(_onTour)
+      ..dispose();
+    _anchors.dispose();
     super.dispose();
+  }
+
+  /// The tour starts by itself once, for a new node: once the contacts are known, the agents are asked (as the
+  /// Agents section does); with nothing there yet, it shows. A node already in use is marked as settled without it.
+  void _firstTour() {
+    final m = _tourModel;
+    if (!mounted || m == null || _tourChecking) return;
+    final look = AppearanceScope.read(context);
+    if (look == null || !look.tourDue) {
+      _settleTour();
+      return;
+    }
+    if (m.phase != Phase.unlocked || !m.contactsLoaded) return;
+    _tourChecking = true;
+    _settleTour();
+    unawaited(() async {
+      if (m.contacts.isEmpty) await m.refreshAgents();
+      if (!mounted || _linkAtStart || m.phase != Phase.unlocked) return;
+      final fresh = freshForTour(
+          contacts: m.contacts.length, agents: m.agents.length, localAgents: m.localAgents.length);
+      look.markTourSeen();
+      if (fresh) _tour.start();
+    }());
+  }
+
+  void _settleTour() {
+    _tourModel?.removeListener(_firstTour);
+    _tourModel = null;
+  }
+
+  void _onTour() {
+    final s = _tour.step;
+    if (s == _tourStep || !mounted) return;
+    _tourStep = s;
+    final m = AppScope.read(context);
+    setState(() {
+      switch (s) {
+        case TourStep.chats || TourStep.invite:
+          _section = HomeSection.chats;
+        case TourStep.aiApps:
+          _section = HomeSection.agents;
+          _tour.agentsAtAiApps = m.agents.length;
+        // The terminals are beside every section.
+        case TourStep.answers || null:
+          break;
+      }
+    });
   }
 
   /// The one-time notice about contacts already at level 5, once the contacts are known.
@@ -105,6 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (!mounted) return;
     final link = IncomingLinks.instance.take();
     if (link == null) return;
+    _linkAtStart = true;
     setState(() => _section = HomeSection.chats);
     unawaited(showJoinDialog(context, link: link));
   }
@@ -121,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
           final cardFits = c.maxWidth >= 980;
           final card = widget.right != null || (cardFits && _showCard && m.selected != null);
           return Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-            SizedBox(width: narrow ? c.maxWidth : (code ? codeListWidth : 340), child: const ContactList()),
+            SizedBox(width: narrow ? c.maxWidth : (code ? codeListWidth : 340), child: const TourTarget(TourSpot.chatList, child: ContactList())),
             if (!narrow) ...[
               VerticalDivider(width: 1, color: XColors.line),
               Expanded(
@@ -167,9 +237,7 @@ class _HomeScreenState extends State<HomeScreen> {
       if (widget.ribbon != null) Positioned(top: 10, right: 16, child: widget.ribbon!),
     ]);
     final Widget area = offer ? Column(children: [CodeOfferBanner(look), Expanded(child: main)]) : main;
-    return Scaffold(
-      backgroundColor: XColors.bg1,
-      body: LayoutBuilder(
+    final Widget frame = LayoutBuilder(
         builder: (context, window) => Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
           // The labelled navigation of the reference v3; icons only when the window is too narrow for it next to the
           // terminals of Code mode.
@@ -190,17 +258,36 @@ class _HomeScreenState extends State<HomeScreen> {
                       Expanded(child: area),
                       if (strip) ...[
                         VerticalDivider(width: 1, color: XColors.line),
-                        SizedBox(width: dockStripWidth, child: AgentDock(folded: w == null)),
+                        TourTarget(TourSpot.dock,
+                            child: SizedBox(width: dockStripWidth, child: AgentDock(folded: w == null))),
                       ] else ...[
                         DockHandle(
                           onDrag: (dx) => m.setDock(width: (w - dx).clamp(dockMinWidth, c.maxWidth - dockMinContent)),
                         ),
-                        SizedBox(width: w, child: const AgentDock()),
+                        TourTarget(TourSpot.dock, child: SizedBox(width: w, child: const AgentDock())),
                       ],
                     ]);
                   }),
           ),
         ]),
+    );
+    return TourScope(
+      tour: _tour,
+      anchors: _anchors,
+      child: Scaffold(
+        backgroundColor: XColors.bg1,
+        // The tour's coach mark lies over the whole window and takes no clicks but its own card; a scroll moves what
+        // it points at.
+        body: NotificationListener<ScrollNotification>(
+          onNotification: (_) {
+            if (_tour.active) _anchors.moved();
+            return false;
+          },
+          child: Stack(children: [
+            Positioned.fill(child: frame),
+            if (_tour.active) const Positioned.fill(child: TourOverlay()),
+          ]),
+        ),
       ),
     );
   }

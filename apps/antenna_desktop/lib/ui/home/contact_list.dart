@@ -22,6 +22,7 @@ import '../widgets/agent_logo.dart';
 import '../widgets/badges.dart';
 import '../widgets/local_badge.dart';
 import 'chat_menu.dart';
+import 'tour.dart';
 
 enum _Filter { all, unread, queued }
 
@@ -113,11 +114,14 @@ class _ContactListState extends State<ContactList> {
                 onPressed: () => showNewChatDialog(context),
                 icon: const Icon(Icons.forum_outlined, size: 20),
               ),
-            IconButton(
-              key: const Key('new-link'),
-              tooltip: context.l.listNewContactTooltip,
-              onPressed: () => showPairingMenu(context),
-              icon: const Icon(Icons.add_comment_outlined, size: 20),
+            TourTarget(
+              TourSpot.newContact,
+              child: IconButton(
+                key: const Key('new-link'),
+                tooltip: context.l.listNewContactTooltip,
+                onPressed: () => showPairingMenu(context),
+                icon: const Icon(Icons.add_comment_outlined, size: 20),
+              ),
             ),
           ]),
         ),

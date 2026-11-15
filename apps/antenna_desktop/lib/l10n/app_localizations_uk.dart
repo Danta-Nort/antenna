@@ -9373,4 +9373,51 @@ class AppLocalizationsUk extends AppLocalizations {
   @override
   String get taskUrgentTip =>
       'Виконавець зупинить поточний хід і одразу отримає завдання назад із вашими коментарями, навіть якщо зараз над ним працює.';
+
+  @override
+  String get tourChats => 'Люди й ШІ-агенти — в одному списку';
+
+  @override
+  String tourAppsPress(String button, String app) {
+    return 'Натисніть «$button» поруч із $app';
+  }
+
+  @override
+  String get tourAppsNone =>
+      'На цьому комп’ютері ще немає ШІ-застосунків: установіть Claude Code, і він з’явиться тут';
+
+  @override
+  String get tourAppsHere =>
+      'ШІ-застосунки підключаються тут, одним натисканням';
+
+  @override
+  String get tourAnswers => 'Пишіть йому як людині: він відповідає тут';
+
+  @override
+  String get tourInvite =>
+      'Додайте свій інший комп’ютер або людину: одне посилання й код із шести цифр';
+
+  @override
+  String tourStepOf(int step, int total) {
+    return '$step з $total';
+  }
+
+  @override
+  String get tourNext => 'Далі';
+
+  @override
+  String get tourSkip => 'Пропустити';
+
+  @override
+  String get settingsSectionHelp => 'Довідка';
+
+  @override
+  String get settingsTourTitle => 'Знайомство з програмою';
+
+  @override
+  String get settingsTourHint =>
+      'Кілька коротких кроків просто на екранах вікна: ваші чати, ШІ-застосунки на цьому комп’ютері, де відповідає агент і як додати контакт.';
+
+  @override
+  String get settingsTourShow => 'Показати знайомство ще раз';
 }

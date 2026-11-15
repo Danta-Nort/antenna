@@ -9330,4 +9330,52 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get taskUrgentTip =>
       'Çalışan mevcut turunu durdurur ve üzerinde çalışırken bile görevi yorumlarınızla birlikte hemen geri alır.';
+
+  @override
+  String get tourChats => 'İnsanlar ve yapay zeka ajanları tek listede';
+
+  @override
+  String tourAppsPress(String button, String app) {
+    return '$app yanındaki “$button” düğmesine basın';
+  }
+
+  @override
+  String get tourAppsNone =>
+      'Bu bilgisayarda henüz yapay zeka uygulaması yok: Claude Code’u kurun, burada görünür';
+
+  @override
+  String get tourAppsHere =>
+      'Yapay zeka uygulamaları burada tek tıkla bağlanır';
+
+  @override
+  String get tourAnswers =>
+      'Ona bir insana yazar gibi yazın: yanıtı burada verir';
+
+  @override
+  String get tourInvite =>
+      'Diğer bilgisayarınızı ya da bir kişiyi ekleyin: bir bağlantı ve altı haneli bir kod';
+
+  @override
+  String tourStepOf(int step, int total) {
+    return '$step / $total';
+  }
+
+  @override
+  String get tourNext => 'İleri';
+
+  @override
+  String get tourSkip => 'Geç';
+
+  @override
+  String get settingsSectionHelp => 'Yardım';
+
+  @override
+  String get settingsTourTitle => 'Tanıtım turu';
+
+  @override
+  String get settingsTourHint =>
+      'Gerçek ekranlar üzerinde birkaç kısa adım: sohbetleriniz, bu bilgisayardaki yapay zeka uygulamaları, bir ajanın nerede yanıt verdiği ve nasıl kişi ekleneceği.';
+
+  @override
+  String get settingsTourShow => 'Tanıtım turunu yeniden göster';
 }

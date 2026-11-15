@@ -16,6 +16,7 @@ import '../app_scope.dart';
 import '../cli/cli_dialog.dart';
 import '../code/agents_detected.dart' show RolePresetCard;
 import '../home/home_screen.dart';
+import '../home/tour.dart';
 import '../pictures/profile_card.dart';
 import '../security/owner_confirm.dart';
 import '../updates/auto_update_card.dart';
@@ -415,7 +416,7 @@ class _CheckResult extends StatelessWidget {
 }
 
 /// The parts of Settings, listed on the left.
-enum SettingsSection { profile, general, interface, network, security, agents, check, advanced }
+enum SettingsSection { profile, general, interface, network, security, agents, check, advanced, help }
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key, this.initialSection = SettingsSection.profile, this.onOpenAgents});
@@ -625,6 +626,22 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           const UpdatesCard(),
         ],
+      // The first-run tour, any time (D-151).
+      SettingsSection.help => [
+          SectionCard(
+            child: SettingRow(
+              id: 'tour',
+              title: l.settingsTourTitle,
+              help: l.settingsTourHint,
+              control: OutlinedButton.icon(
+                key: const Key('tour-show'),
+                onPressed: () => TourScope.read(context)?.tour.start(),
+                icon: const Icon(Icons.play_circle_outline_rounded, size: 16),
+                label: Text(l.settingsTourShow),
+              ),
+            ),
+          ),
+        ],
     };
   }
 }
@@ -648,6 +665,7 @@ class _SectionItem extends StatelessWidget {
       SettingsSection.agents => (Icons.smart_toy_outlined, l.settingsSectionAgents),
       SettingsSection.check => (Icons.fact_check_outlined, l.settingsSectionCheck),
       SettingsSection.advanced => (Icons.settings_outlined, l.settingsSectionAdvanced),
+      SettingsSection.help => (Icons.help_outline_rounded, l.settingsSectionHelp),
     };
     final fg = selected ? XColors.accent : XColors.textDim;
     return Padding(

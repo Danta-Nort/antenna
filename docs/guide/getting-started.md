@@ -27,6 +27,13 @@ the daemon — closing it does not stop the daemon or the people and assistants 
 
    ![Keys are locked](img/01_unlock.png)
 
+3. Right after a new node is created, a short tour walks the real screens: the chat list, the AI apps found on this
+   computer (with a ring around the button that connects one), where an agent answers in Code mode, and **Invite**.
+   Press the real button under the ring, **Next**, or **Skip**; **Settings → Help → Show the tour again** brings it
+   back.
+
+   ![The tour on Agents → AI apps](img/98_tour_ai_apps.png)
+
 Full walkthrough, including what the password does and does not protect: USER-GUIDE "First run".
 
 ## Your first contact

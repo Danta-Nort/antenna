@@ -9333,4 +9333,50 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get taskUrgentTip =>
       'Worker अपनी मौजूदा बारी रोकता है और task आपकी टिप्पणियों के साथ तुरंत वापस पाता है, भले ही वह उस पर काम कर रहा हो।';
+
+  @override
+  String get tourChats => 'लोग और AI agents, एक ही लिस्ट में';
+
+  @override
+  String tourAppsPress(String button, String app) {
+    return '$app के आगे “$button” दबाएँ';
+  }
+
+  @override
+  String get tourAppsNone =>
+      'इस कंप्यूटर पर अभी कोई AI ऐप नहीं है: Claude Code इंस्टॉल करें, वह यहाँ दिखेगा';
+
+  @override
+  String get tourAppsHere => 'AI ऐप यहाँ एक क्लिक में कनेक्ट होते हैं';
+
+  @override
+  String get tourAnswers => 'इसे किसी इंसान की तरह लिखें: जवाब यहीं आता है';
+
+  @override
+  String get tourInvite =>
+      'अपना दूसरा कंप्यूटर या किसी व्यक्ति को जोड़ें: एक लिंक और छह अंकों का कोड';
+
+  @override
+  String tourStepOf(int step, int total) {
+    return '$total में से $step';
+  }
+
+  @override
+  String get tourNext => 'आगे';
+
+  @override
+  String get tourSkip => 'छोड़ें';
+
+  @override
+  String get settingsSectionHelp => 'मदद';
+
+  @override
+  String get settingsTourTitle => 'शुरुआती टूर';
+
+  @override
+  String get settingsTourHint =>
+      'असली स्क्रीन पर कुछ छोटे कदम: आपकी चैट, इस कंप्यूटर के AI ऐप, agent कहाँ जवाब देता है और कॉन्टैक्ट कैसे जोड़ें।';
+
+  @override
+  String get settingsTourShow => 'टूर फिर से दिखाएँ';
 }

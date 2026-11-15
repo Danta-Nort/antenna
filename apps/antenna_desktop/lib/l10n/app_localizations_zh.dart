@@ -8899,4 +8899,48 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get taskUrgentTip => '工作智能体会停止当前这一轮，并立即拿回附有你意见的任务，即使它正在处理这个任务。';
+
+  @override
+  String get tourChats => '人和 AI 智能体，都在同一个列表里';
+
+  @override
+  String tourAppsPress(String button, String app) {
+    return '点击 $app 旁边的“$button”';
+  }
+
+  @override
+  String get tourAppsNone => '这台电脑上还没有 AI 应用：安装 Claude Code 后，它会出现在这里';
+
+  @override
+  String get tourAppsHere => 'AI 应用在这里一键接入';
+
+  @override
+  String get tourAnswers => '像对人一样给它写消息：它在这里回复';
+
+  @override
+  String get tourInvite => '添加你的另一台电脑或一个人：一个链接和一个 6 位数字码';
+
+  @override
+  String tourStepOf(int step, int total) {
+    return '$step/$total';
+  }
+
+  @override
+  String get tourNext => '下一步';
+
+  @override
+  String get tourSkip => '跳过';
+
+  @override
+  String get settingsSectionHelp => '帮助';
+
+  @override
+  String get settingsTourTitle => '新手导览';
+
+  @override
+  String get settingsTourHint =>
+      '在真实界面上走几个简短步骤：你的聊天、这台电脑上的 AI 应用、智能体在哪里回复，以及如何添加联系人。';
+
+  @override
+  String get settingsTourShow => '再看一遍导览';
 }

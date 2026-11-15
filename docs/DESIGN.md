@@ -807,3 +807,19 @@ shows. Frames: `63_chat_images` (an album, a row, a picture waiting for a decisi
 Checks: `chat_media_test.dart`, `image_viewer_test.dart`, `composer_attachments_test.dart`, `media_files_test.dart`,
 `files_page_test.dart`, `file_prefs_test.dart`. To verify on a Mac: dragging attachments with a real pointer, Show in
 Finder, the save dialog, Copy image.
+
+## First-run tour (D-151, 2026-11-15)
+A new node opens on a short tour of the real screens instead of an empty chat. Frames: `97_tour_chats`,
+`98_tour_ai_apps` (light, dark, Russian), `99_tour_answers`, `100_tour_invite`; redrawn for the new **Help** section:
+every Settings frame (`22_settings`, `31_lan(_ru)`, `32_update`, `53_settings_help(_ru)`, `54_check_panel(_ru, _dark)`,
+`56_touch_id_settings(_ru, _dark)`, `57_touch_id_enroll(_ru, _dark)`, `61_update_auto(_ru)`,
+`78_picture_picker(_ru, _dark)`, `80_settings_profile`, `81_picture_crop`, `82_install_cli(_ru)`).
+
+| What | How | Code |
+| --- | --- | --- |
+| Coach mark | a 2 px ring in the logo blue (with a soft 6 px halo) around the target, a light shade over the rest of the window with a hole for the target, and a card (at most 340 px, `xPanel` with the accent line and glow) below the target when it fits, else above, else beside it; with no target on screen, at the bottom. The card: "2 of 4" (Caption, accent), the step's line (Title 15), **Skip** (tertiary) and **Next** (primary; **Done** on the last step). Nothing but the card takes clicks, so the real button under the ring works | `ui/home/tour.dart` |
+| Steps | the chat list; Agents → AI apps (the button of the app the tour picks, or the card, or "Connect an agent" in the Map view); Code mode's terminals, only while an agent runs there; Invite on the empty conversation (New contact above the list in a narrow window). Each step opens its section; connecting an app or starting an agent on the AI apps step moves on when its dialog closes | `ui/home/home_screen.dart`, `state/tour.dart` |
+| Once | shown by itself after the first unlock of a node with no contacts, agents or local agents; `tour_seen` in the window's settings file; a node in use is marked without it. Escape closes it while no dialog is open (a dialog keeps its own Escape) | `state/appearance.dart` |
+| Settings → Help | **First-run tour** with **Show the tour again** | `ui/settings/settings_page.dart` |
+
+Checks: `tour_test.dart`.

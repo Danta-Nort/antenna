@@ -9266,4 +9266,50 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get taskUrgentTip =>
       'Исполнитель прервёт текущий ход и сразу получит задачу обратно с вашими замечаниями, даже пока работает над ней.';
+
+  @override
+  String get tourChats => 'Люди и ИИ-агенты — в одном списке';
+
+  @override
+  String tourAppsPress(String button, String app) {
+    return 'Рядом с $app нажмите: $button';
+  }
+
+  @override
+  String get tourAppsNone =>
+      'На этом компьютере пока нет ИИ-приложений: установите Claude Code, и оно появится здесь';
+
+  @override
+  String get tourAppsHere => 'ИИ-приложения подключаются здесь, одним нажатием';
+
+  @override
+  String get tourAnswers => 'Пишите ему как человеку: он отвечает здесь';
+
+  @override
+  String get tourInvite =>
+      'Добавьте свой второй компьютер или человека: одна ссылка и код из шести цифр';
+
+  @override
+  String tourStepOf(int step, int total) {
+    return '$step из $total';
+  }
+
+  @override
+  String get tourNext => 'Далее';
+
+  @override
+  String get tourSkip => 'Пропустить';
+
+  @override
+  String get settingsSectionHelp => 'Справка';
+
+  @override
+  String get settingsTourTitle => 'Знакомство с программой';
+
+  @override
+  String get settingsTourHint =>
+      'Несколько коротких шагов прямо на экранах окна: ваши чаты, ИИ-приложения на этом компьютере, где отвечает агент и как добавить связь.';
+
+  @override
+  String get settingsTourShow => 'Показать знакомство ещё раз';
 }

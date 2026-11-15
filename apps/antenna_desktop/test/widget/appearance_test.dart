@@ -67,7 +67,9 @@ void main() {
     expect(XColors.isDark, isTrue);
     await t.pump(const Duration(milliseconds: 300));
     expect(Theme.of(t.element(find.text('Settings').first)).brightness, Brightness.dark);
-    expect(json.decode(File(store.path).readAsStringSync()), {'theme': 'dark', 'lang': 'system', 'self_notice_shown': true});
+    // A node in use settles the first-run tour at once (D-151).
+    expect(json.decode(File(store.path).readAsStringSync()),
+        {'theme': 'dark', 'lang': 'system', 'self_notice_shown': true, 'tour_seen': true});
     expect(AppearanceStore(store.path).load().theme, ThemeChoice.dark);
     expect(m.selectedLinkId, selected);
     await t.tap(find.byKey(const Key('theme-light')));
@@ -151,7 +153,9 @@ void main() {
     expect(find.text(_ru.settingsLanguage), findsOneWidget);
     expect(find.text(_ru.settingsAppearance), findsOneWidget);
     expect(find.text(_ru.langName), findsOneWidget);
-    expect(json.decode(File(store.path).readAsStringSync()), {'theme': 'system', 'lang': 'ru', 'self_notice_shown': true});
+    // A node in use settles the first-run tour at once (D-151).
+    expect(json.decode(File(store.path).readAsStringSync()),
+        {'theme': 'system', 'lang': 'ru', 'self_notice_shown': true, 'tour_seen': true});
     expect(m.selectedLinkId, selected);
     await _pickLang(t, 'en');
     expect(find.text('Language'), findsOneWidget);

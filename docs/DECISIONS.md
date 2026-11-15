@@ -7034,3 +7034,38 @@ a comparison when the terminal work comes up).
   on the site; the site and guides say "not yet" until a release has the node.
 - Maintainer decision pending (decided by the 80–90 % rule on 2026-11-14, for approval): ship the ARM node from the
   next release.
+
+### D-151 · First-run tour: a few coach marks over the real screens, built around the AI apps on this computer (2026-11-15)
+- **Question.** After a new node is created, the window opened on an empty chat ("Your first contact", Invite, Join,
+  and a line about AI apps). Nothing showed what Antenna does, and the first thing it asked for, a second person or
+  device, is the one thing a newcomer usually does not have at hand. What should the first minute be?
+- **Prior art.**
+  - VS Code: a "Welcome" walkthrough on first start, a few steps with one short line each that point at real commands;
+    every step can be skipped, and it opens again from **Help → Welcome**.
+  - Slack: in a new workspace, one-line tips anchored to the real controls (the sidebar, the message field), each
+    closed by doing the thing or by dismissing it.
+  - Notion: the first page is a built-in sample ("Getting Started") the newcomer works on, so the first minute does the
+    product's main job with nothing brought in.
+  - Signal, Telegram, WhatsApp: no tour; they start on the contact list, because a phone already has contacts. A new
+    Antenna node has none, which is why their way does not carry over.
+- **Decision.** A tour of three or four steps on the real screens, one short line each, with **Skip** and **Next** on
+  every step and Escape to close: (1) the chat list, "People and AI agents, in one list"; (2) Agents → AI apps, with
+  a ring around the button of an app found on this computer, "Press Start in Code mode next to Claude Code" (Claude
+  Code first, then Codex, while Code mode is available; otherwise the first app found that is not connected, with its
+  own Connect or Set up label), or, with none found, "No AI app on this computer yet: install Claude Code and it shows
+  up here"; (3) only while an agent runs in Code mode, its terminal, "Write to it like to a person: it answers here";
+  (4) Invite, "Add your other computer or a person: one link and a six-digit code". The tour never blocks: only its
+  own card takes clicks, so the owner can press the real button under the ring; connecting an app or starting an agent
+  on step 2 moves it on once the dialog closes. It shows once, by itself, after the first unlock of a new node: the
+  window's settings file has no `tour_seen` yet and the daemon lists no contacts, no agents and no local agents. A node
+  that already has any of them is marked as seen without the tour, so nobody gets it after an update; without a
+  settings file it does not start by itself. **Settings → Help → Show the tour again** starts it any time. Plain UI:
+  no new daemon call (the agent list is the one the Agents section reads), no network, nothing experimental.
+- **Why.** The strongest moment Antenna has that needs nothing else at hand is the AI apps already installed on most
+  of our users' computers: found, connected with one press, and answering in Antenna's own window, with Code mode as
+  the strongest form. Pairing a second device needs that device, so it is the last step rather than the first.
+  Pointing at the real buttons (rather than screenshots in a dialog) teaches where things are, and a tour that takes
+  no clicks cannot break a flow under it. A built-in sample agent was not built: an agent that does not run would be
+  a mockup, and a running one needs an AI app, which step 2 connects for real.
+- Maintainer decision (2026-11-01): every app opens with a short, skippable tutorial on its real screens, shown once
+  and reachable again from Help, built around the app's strongest moment.

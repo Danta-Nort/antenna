@@ -9060,4 +9060,49 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get taskUrgentTip =>
       'ワーカーは作業中であっても現在のターンを止め、あなたのコメント付きのタスクをすぐに受け取ります。';
+
+  @override
+  String get tourChats => '人も AI エージェントも、ひとつのリストに';
+
+  @override
+  String tourAppsPress(String button, String app) {
+    return '$app の横の「$button」を押してください';
+  }
+
+  @override
+  String get tourAppsNone =>
+      'このコンピューターにはまだ AI アプリがありません。Claude Code をインストールすると、ここに表示されます';
+
+  @override
+  String get tourAppsHere => 'AI アプリはここからワンクリックで接続できます';
+
+  @override
+  String get tourAnswers => '人と話すように書いてください。ここで返事が来ます';
+
+  @override
+  String get tourInvite => '別のコンピューターや相手を追加: リンクひとつと 6 桁のコード';
+
+  @override
+  String tourStepOf(int step, int total) {
+    return '$step / $total';
+  }
+
+  @override
+  String get tourNext => '次へ';
+
+  @override
+  String get tourSkip => 'スキップ';
+
+  @override
+  String get settingsSectionHelp => 'ヘルプ';
+
+  @override
+  String get settingsTourTitle => 'はじめてのツアー';
+
+  @override
+  String get settingsTourHint =>
+      '実際の画面で進む短いステップ: チャット、このコンピューターの AI アプリ、エージェントが答える場所、連絡先の追加方法。';
+
+  @override
+  String get settingsTourShow => 'ツアーをもう一度見る';
 }
