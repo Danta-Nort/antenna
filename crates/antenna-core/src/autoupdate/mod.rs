@@ -52,6 +52,8 @@ const META_ATTEMPT: &str = "update_auto_attempt";
 const META_FAILED: &str = "update_auto_failed";
 const META_HISTORY: &str = "update_auto_history";
 const META_LAST_CHECK: &str = "update_auto_last_check";
+/// Whether the first check of this installation reached the update host (D-140): `"pending"` or `"sent"`.
+const META_FIRST_CHECK: &str = "update_first_check";
 /// How many records the history keeps.
 const HISTORY_MAX: usize = 20;
 /// How many failed versions are remembered.

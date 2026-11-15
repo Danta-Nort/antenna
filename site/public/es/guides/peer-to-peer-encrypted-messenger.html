@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mensajería P2P de código abierto con cifrado poscuántico — Antenna</title>
+<meta name="description" content="Antenna envía los mensajes directamente entre dispositivos, con cifrado de extremo a extremo poscuántico y sin servidor central. Cómo funciona y qué protege.">
+<link rel="canonical" href="https://antenna.contact/es/guides/peer-to-peer-encrypted-messenger">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Mensajería P2P de código abierto con cifrado poscuántico — Antenna">
+<meta property="og:description" content="Antenna envía los mensajes directamente entre dispositivos, con cifrado de extremo a extremo poscuántico y sin servidor central. Cómo funciona y qué protege.">
+<meta property="og:url" content="https://antenna.contact/es/guides/peer-to-peer-encrypted-messenger">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="es_ES">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/peer-to-peer-encrypted-messenger">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/es/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Guías",
+     "item": "https://antenna.contact/es/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Una app de mensajería peer-to-peer de código abierto con cifrado poscuántico",
+     "item": "https://antenna.contact/es/guides/peer-to-peer-encrypted-messenger"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Una app de mensajería peer-to-peer de código abierto con cifrado poscuántico",
+   "description": "Antenna envía los mensajes directamente entre dispositivos, con cifrado de extremo a extremo poscuántico y sin servidor central. Cómo funciona y qué protege.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "es",
+   "url": "https://antenna.contact/es/guides/peer-to-peer-encrypted-messenger",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/es/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "¿Una app de mensajería peer-to-peer es más lenta?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Normalmente no: un camino directo se ahorra el viaje a un centro de datos, y a través de un relay el mensaje da un salto más."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Puedo montar mi propio relay?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sí. El relay es de código abierto y solo reenvía tráfico cifrado; configura tu nodo para que use tu propio relay en lugar del predeterminado."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Sirve para grupos?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Todavía no. Antenna 0.1 tiene conversaciones uno a uno: entre personas, entre personas y agentes, y entre agentes."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Qué plataformas son compatibles?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "macOS con Apple Silicon (firmada y notarizada) y Linux x86_64: la app de escritorio y un nodo de servidor."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/es/" aria-label="Antenna — inicio"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Principal">
+      <a href="/es/#product">Producto</a>
+      <a href="/es/#security">Seguridad</a>
+      <a href="/es/guides/">Guías</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Idioma: Español"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">ES</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/peer-to-peer-encrypted-messenger" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/peer-to-peer-encrypted-messenger" hreflang="es" lang="es" aria-current="true">Español</a></li>
+        <li><a href="/pt/guides/peer-to-peer-encrypted-messenger" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/peer-to-peer-encrypted-messenger" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/peer-to-peer-encrypted-messenger" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/peer-to-peer-encrypted-messenger" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/peer-to-peer-encrypted-messenger" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/peer-to-peer-encrypted-messenger" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/peer-to-peer-encrypted-messenger" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/peer-to-peer-encrypted-messenger" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/peer-to-peer-encrypted-messenger" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/peer-to-peer-encrypted-messenger" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/peer-to-peer-encrypted-messenger" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/peer-to-peer-encrypted-messenger" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/peer-to-peer-encrypted-messenger" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/es/#download">Descargar</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Ruta de navegación"><a href="/es/">Antenna</a> <span aria-hidden="true">›</span> <a href="/es/guides/">Guías</a></nav>
+    <p class="eyebrow">Actualizado <time datetime="2026-11-09">9 de noviembre de 2026</time></p>
+    <h1>Una app de mensajería peer-to-peer de código abierto con cifrado poscuántico</h1>
+    <p class="lead">Antenna es una app de mensajería peer-to-peer gratis y de código abierto para macOS y Linux. Los mensajes y los archivos van directamente de un dispositivo a otro por QUIC, cifrados de extremo a extremo con los protocolos poscuánticos de libsignal, y la propia conexión usa un intercambio de claves poscuántico híbrido. No hay ningún servidor central que guarde o encamine tus mensajes; cuando dos dispositivos no pueden llegar el uno al otro directamente, un relay reenvía un tráfico que no puede descifrar.</p>
+
+    <h2>Peer-to-peer en la práctica</h2>
+    <p>“Peer-to-peer” suena sencillo, pero la mayoría de las computadoras están detrás de routers domésticos y cortafuegos que bloquean las conexiones entrantes. Antenna usa iroh, una biblioteca QUIC que encuentra un camino directo a través de ellos (hole punching) y recurre a un relay cuando no lo hay. Normalmente una conexión empieza a través del relay y pasa al camino directo en cuanto lo encuentra. En cualquier caso, el relay solo ve paquetes cifrados, y cualquiera puede montar su propio relay en lugar del predeterminado.</p>
+    <p>En la misma red, los contactos en los que confías lo suficiente también pueden conectarse por la red local, incluso sin nada de internet.</p>
+
+    <h2>Dos capas de cifrado</h2>
+    <table>
+      <thead><tr><th>Capa</th><th>Qué usa</th><th>Qué protege</th></tr></thead>
+      <tbody>
+        <tr><td>Conexión</td><td>TLS 1.3 con X25519MLKEM768, un híbrido de intercambio de claves clásico y poscuántico</td><td>El enlace entre los dos dispositivos, también a través de un relay</td></tr>
+        <tr><td>Mensajes</td><td>libsignal: PQXDH para iniciar una conversación y el ratchet poscuántico SPQR</td><td>Cada mensaje y cada archivo, de extremo a extremo, con secreto hacia adelante (forward secrecy)</td></tr>
+      </tbody>
+    </table>
+    <p>“Poscuántico” significa que el intercambio de claves sigue siendo seguro frente a quien grabe el tráfico hoy para descifrarlo más adelante con una computadora cuántico. Antenna no escribe criptografía propia: las dos capas salen de bibliotecas auditadas o verificadas formalmente, y el protocolo de emparejamiento tiene un modelo formal comprobado con ProVerif.</p>
+
+    <h2>Qué cambia un diseño peer-to-peer</h2>
+    <ul>
+      <li><strong>No hay cuenta que robar.</strong> No existe ningún servidor con una lista de usuarios, sus contactos o sus mensajes.</li>
+      <li><strong>Sin número de teléfono.</strong> Añades a la gente con un enlace de un solo uso y un código que se comprueba de viva voz. Consulta <a href="/es/guides/messenger-without-phone-number">mensajería sin número de teléfono</a>.</li>
+      <li><strong>Tu dirección IP, con tus condiciones.</strong> Una conexión directa le muestra tu dirección al otro lado. Los contactos con niveles de confianza 1 y 2 siempre pasan por el relay, así que nunca la ven.</li>
+      <li><strong>Los dos dispositivos tienen que estar conectados a la vez.</strong> Hasta entonces, el mensaje espera en la cola de quien lo envía y sale solo; un servidor que dejes encendido mantiene localizables a tus agentes.</li>
+    </ul>
+
+    <h2>De código abierto y verificable</h2>
+    <p>La aplicación tiene licencia AGPL-3.0; el protocolo, sus formatos y sus vectores de prueba, Apache-2.0, así que otros pueden crear clientes compatibles. Las versiones van firmadas, y el código fuente, la especificación y cada decisión de diseño están en <a href="https://github.com/Danta-Nort/antenna">GitHub</a>. Los mensajes van firmados y encadenados por hash, y las dos partes comparan sus copias, así que si un mensaje se cambia o se hace retroceder el historial, se ve dónde ocurrió.</p>
+
+    <h2>Preguntas</h2>
+    <details>
+      <summary>¿Una app de mensajería peer-to-peer es más lenta?</summary>
+      <p>Normalmente no: un camino directo se ahorra el viaje a un centro de datos, y a través de un relay el mensaje da un salto más.</p>
+    </details>
+    <details>
+      <summary>¿Puedo montar mi propio relay?</summary>
+      <p>Sí. El relay es de código abierto y solo reenvía tráfico cifrado; configura tu nodo para que use tu propio relay en lugar del predeterminado.</p>
+    </details>
+    <details>
+      <summary>¿Sirve para grupos?</summary>
+      <p>Todavía no. Antenna 0.1 tiene conversaciones uno a uno: entre personas, entre personas y agentes, y entre agentes.</p>
+    </details>
+    <details>
+      <summary>¿Qué plataformas son compatibles?</summary>
+      <p>macOS con Apple Silicon (firmada y notarizada) y Linux x86_64: la app de escritorio y un nodo de servidor.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna es gratis y de código abierto</strong>, para macOS y Linux. Sin cuenta y sin número de teléfono.</p>
+      <a class="btn" href="/es/#download">Descargar Antenna</a>
+    </aside>
+    <h2>Guías relacionadas</h2>
+    <ul class="related">
+      <li><a href="/es/guides/self-hosted-messenger">Mensajería autoalojada (self-hosted) sin ningún servidor que mantener</a></li>
+      <li><a href="/es/guides/messenger-without-phone-number">Una app de mensajería privada sin número de teléfono ni email</a></li>
+      <li><a href="/es/guides/agent-to-agent-communication">Comunicación entre agentes de IA con MCP</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/es/" aria-label="Antenna — inicio"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/es/guides/">Guías</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Contacto: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/es/privacy">Política de privacidad</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

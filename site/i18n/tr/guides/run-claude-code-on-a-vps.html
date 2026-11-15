@@ -1,0 +1,49 @@
+<!--guide {"title": "Claude Code’u VPS’te 7/24 çalıştırma ve dizüstünden kontrol — Antenna", "h1": "Claude Code’u VPS’te 7/24 çalıştırın ve dizüstünüzden onunla konuşun", "description": "Antenna’yı VPS’inize kurun, Claude Code ya da Codex’i onunla başlatın ve dizüstünüzdeki sohbetten görev verin. Açık port yok, açık tutulacak SSH oturumu yok.", "summary": "Sunucunuzda sürekli çalışan ve dizüstünüzden sohbetle ulaştığınız Claude Code ya da Codex.", "source": "2026-11-09"}-->
+<p class="lead">Claude Code’u ve Antenna düğümünü Linux VPS’inize kurun, sunucuyu dizüstü bilgisayarınızla bir kez eşleştirin ve Claude Code’u proje klasörünüzde Antenna üzerinden başlatın. Bundan sonra oturumu kapattığınızda da kendi tmux oturumunda çalışmaya devam eder, kendisine bir mesaj geldiğinde uyanır ve dizüstünüzdeki bir sohbette yanıt verir. Açmanız gereken gelen bağlantı portu ya da açık tutmanız gereken bir SSH oturumu yoktur; Codex de aynı şekilde çalışır.</p>
+
+<h2>Neye ihtiyacınız var</h2>
+<ul>
+  <li>Claude Code (ya da Codex) kurulu ve oturum açılmış, tmux’ı olan x86_64 bir Linux sunucu.</li>
+  <li>Dizüstü bilgisayarınızda <a href="/#download">Antenna</a>: macOS ya da Linux.</li>
+</ul>
+
+<h2>1. Antenna düğümünü sunucuya kurun</h2>
+<pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+sudo loginctl enable-linger $USER</code></pre>
+<p>Kurulum betiği en yeni sürümü imzalı manifestten okur, arşivi doğrular, <code>antennad</code> ve <code>antenna</code> programlarını <code>~/.local/bin</code> içine bir systemd kullanıcı servisi olarak kurar (root gerekmez) ve düğümünüzü bir parolayla oluşturur. İkinci satır, oturumu kapattıktan sonra da servisin çalışmaya devam etmesini sağlar. Ubuntu ya da Fedora’da bunun yerine <code>.deb</code> veya <code>.rpm</code> paketini kurabilirsiniz.</p>
+
+<h2>2. Dizüstü bilgisayarınızla eşleştirin</h2>
+<p>Dizüstünüzde: <strong>New contact → Invite</strong>, bir ad verin, <strong>This is my own computer (∞)</strong> seçeneğini işaretleyin, <strong>Create link</strong> düğmesine basın ve bağlantıyı kopyalayın. Sunucuda:</p>
+<pre><code>antenna join '&lt;link&gt;' --trust 5 --label mac</code></pre>
+<p>Tek tırnakları koruyun: bağlantıda bir <code>#</code> var. Dizüstünüzün gösterdiği kodu sunucunun terminaline yazın, ardından dizüstünde <strong>The contact confirmed — codes match</strong> düğmesine basın. 5. seviye iki tarafta da ∞ demektir; böylece sunucu sizin kendi bilgisayarınız sayılır.</p>
+
+<h2>3. Claude Code’u Antenna üzerinden başlatın</h2>
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api
+antenna session attach api-dev</code></pre>
+<p>connect satırı oturuma kendi ajanını ve tokenını verir ve selam gönderir; böylece dizüstünüzde <code>api-dev</code> adlı bir sohbet belirir. start satırı Claude Code’u Antenna’nın kendi tmux sunucusunda çalıştırır (sizin tmux’ınıza dokunulmaz). Claude Code’un klasöre güvenip güvenmediği gibi ilk sorularını yanıtlamak için bir kez bağlanın, sonra <code>Ctrl-b d</code> ile ayrılın: çalışmaya devam eder. Codex için <code>antenna connect codex</code> ve <code>--cli codex</code> kullanın.</p>
+
+<h2>4. Onunla konuşun</h2>
+<p>Dizüstünüzdeki <code>api-dev</code> sohbetine yazın: “Migration testlerini çalıştır ve başarısız olanları düzelt.” Claude Code komut isteminde boşta beklerken Antenna, mesajınızı okuması için kısa tek bir satır yazar; bir kişinin metnini asla yazmaz ve onun yerine bir soruyu asla yanıtlamaz. Sunucunun <strong>My devices</strong> içindeki kartı sağlık durumunu ve ajanlarını gösterir; isteklerini de dizüstünüzden onaylayabilirsiniz.</p>
+
+<h2>Yeniden başlatmadan sonra</h2>
+<p>Sunucu yeniden başladıktan sonra düğümün anahtarları kilitlidir: servis çalışır, ama siz oturum açıp <code>antenna unlock</code> çalıştırana kadar bağlantıları sessiz kalır. Böylece sunucu diskinin bir kopyası kimseye anahtarlarınızı vermez. <code>antenna status</code> kilitli olup olmadığını söyler.</p>
+
+<h2>Sorular</h2>
+<details>
+  <summary>Neden sadece SSH ve tmux kullanmıyoruz?</summary>
+  <p>Terminal başında oturduğunuz sürece bu işe yarar. Antenna buna, dizüstünüzden istediğiniz zaman yazabileceğiniz bir sohbet ekler, yazdığınızda oturumu uyandırır ve kendi kontrol ettiği izinlerle diğer ajanların ona iş vermesini sağlar.</p>
+</details>
+<details>
+  <summary>Sunucunun genel bir IP’ye ya da açık portlara ihtiyacı var mı?</summary>
+  <p>Hayır. İki taraf da dışarıya bağlanır: ağ izin verdiğinde doğrudan, vermediğinde bir aktarma sunucusu (relay) üzerinden. Aktarma sunucusu yalnızca şifreli trafiği iletir.</p>
+</details>
+<details>
+  <summary>Bir sunucuda birden fazla oturum çalıştırabilir miyim?</summary>
+  <p>Evet: her proje klasörü için bir ajan; her birinin kendi adı ve dizüstünüzde kendi sohbeti olur.</p>
+</details>
+<details>
+  <summary>ARM sürümü var mı?</summary>
+  <p>Henüz yok. Sunucu düğümü x86_64 Linux için derleniyor.</p>
+</details>

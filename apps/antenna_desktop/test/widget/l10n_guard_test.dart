@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // Localization guard (docs/DESIGN.md, "Languages"):
-// (a) app_en.arb (template) and app_ru.arb have the same keys and placeholders, nothing is untranslated, and the
-//     generated AppLocalizations knows every key (the ARB was regenerated);
+// (a) app_en.arb (template) and every other app_<code>.arb have the same keys and placeholders, nothing is
+//     untranslated, and the generated AppLocalizations knows every key (the ARB was regenerated);
 // (b) lib/ (outside lib/l10n/) has no string literals with Cyrillic: visible text goes only through the ARB;
-// (c) Russian text lives only in the Russian localization (app_ru.arb and its generated file).
+// (c) Cyrillic text lives only in the Russian and Ukrainian localizations (their ARBs and generated files).
 
 import 'dart:convert';
 import 'dart:io';
@@ -17,7 +17,12 @@ const _allow = <String, String>{};
 final _cyrillic = RegExp(r'[\u0400-\u04FF]');
 
 /// The only files where Russian text belongs.
-const _russianOk = {'lib/l10n/app_ru.arb', 'lib/l10n/app_localizations_ru.dart'};
+const _russianOk = {
+  'lib/l10n/app_ru.arb',
+  'lib/l10n/app_localizations_ru.dart',
+  'lib/l10n/app_uk.arb',
+  'lib/l10n/app_localizations_uk.dart',
+};
 
 Map<String, Object?> _arb(String name) =>
     (json.decode(File('lib/l10n/$name').readAsStringSync()) as Map<String, Object?>);
@@ -30,21 +35,30 @@ Set<String> _placeholders(String message) =>
     {for (final m in RegExp(r'(?<![\w=])\{([A-Za-z_]\w*)(?=[,}])').allMatches(message)) m.group(1)!};
 
 void main() {
-  test('ARB: the same keys and placeholders in en and ru, nothing untranslated, generated code is fresh', () {
+  test('ARB: the same keys and placeholders in every language, nothing untranslated, generated code is fresh', () {
     final en = _arb('app_en.arb');
-    final ru = _arb('app_ru.arb');
     expect(en['@@locale'], 'en');
-    expect(ru['@@locale'], 'ru');
     final keys = _messageKeys(en);
     expect(keys.length, greaterThan(500), reason: 'all window strings live in the ARB');
-    expect(_messageKeys(ru).difference(keys), isEmpty, reason: 'keys only in app_ru.arb');
-    expect(keys.difference(_messageKeys(ru)), isEmpty, reason: 'keys missing from app_ru.arb');
-    for (final k in keys) {
-      final meta = en['@$k'] as Map<String, Object?>?;
-      final declared = ((meta?['placeholders'] as Map<String, Object?>?) ?? const {}).keys.toSet();
-      expect(_placeholders(en[k]! as String), declared, reason: '$k: en placeholders vs @$k.placeholders');
-      expect(_placeholders(ru[k]! as String), declared, reason: '$k: ru placeholders');
-      expect((ru[k]! as String).trim(), isNotEmpty, reason: '$k: empty translation');
+    final codes = [
+      for (final f in Directory('lib/l10n').listSync().whereType<File>())
+        if (RegExp(r'app_(\w+)\.arb$').firstMatch(f.path)?.group(1) case final c? when c != 'en') c,
+    ]..sort();
+    expect(codes, containsAll(['ru']));
+    for (final code in codes) {
+      final tr = _arb('app_$code.arb');
+      expect(tr['@@locale'], code);
+      expect(_messageKeys(tr).difference(keys), isEmpty, reason: 'keys only in app_$code.arb');
+      expect(keys.difference(_messageKeys(tr)), isEmpty, reason: 'keys missing from app_$code.arb');
+      for (final k in keys) {
+        final meta = en['@$k'] as Map<String, Object?>?;
+        final declared = ((meta?['placeholders'] as Map<String, Object?>?) ?? const {}).keys.toSet();
+        if (code == codes.first) {
+          expect(_placeholders(en[k]! as String), declared, reason: '$k: en placeholders vs @$k.placeholders');
+        }
+        expect(_placeholders(tr[k]! as String), declared, reason: '$k: $code placeholders');
+        expect((tr[k]! as String).trim(), isNotEmpty, reason: '$k: empty $code translation');
+      }
     }
     // The gen-l10n untranslated messages file (l10n.yaml → untranslated-messages-file) is empty.
     expect(json.decode(File('lib/l10n/untranslated.json').readAsStringSync()), isEmpty);
@@ -99,7 +113,7 @@ final t = """
         reason: 'these files no longer need the exception — remove them from _allow');
   });
 
-  test('Russian text lives only in the Russian localization (lib/ and test/)', () {
+  test('Cyrillic text lives only in the Russian and Ukrainian localizations (lib/ and test/)', () {
     final files = [
       for (final dir in ['lib', 'test'])
         ...Directory(dir).listSync(recursive: true).whereType<File>().where((f) => f.path.endsWith('.dart') || f.path.endsWith('.arb')),
@@ -109,7 +123,8 @@ final t = """
       for (final f in files)
         if (!_russianOk.contains(f.path) && _cyrillic.hasMatch(f.readAsStringSync())) f.path,
     ]..sort();
-    expect(hits, isEmpty, reason: 'translate these files to English (Russian belongs only in app_ru.arb)');
+    expect(hits, isEmpty,
+        reason: 'translate these files to English (Cyrillic belongs only in app_ru.arb and app_uk.arb)');
   });
 }
 

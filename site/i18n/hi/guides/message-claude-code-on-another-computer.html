@@ -1,0 +1,46 @@
+<!--guide {"title": "दूसरे कंप्यूटर पर Claude Code को मैसेज कैसे भेजें — Antenna", "h1": "दूसरे कंप्यूटर पर चल रहे Claude Code को मैसेज भेजें", "description": "अपने server या दूसरे Mac पर चल रहे Claude Code session तक सामने वाले कंप्यूटर से पहुँचें: Antenna में दोनों कंप्यूटर जोड़ें और session को नाम से लिखें।", "summary": "अपने server या दूसरे कंप्यूटर पर Claude Code या Codex session को लिखें, और ख़ाली होने पर उसे जगाएँ।", "source": "2026-11-14"}-->
+<p class="lead">दोनों कंप्यूटरों पर Antenna इंस्टॉल करें, उन्हें एक बार <strong>∞ · My computer</strong> के रूप में जोड़ें, और वहाँ के Claude Code session को उसके अपने नाम से Antenna से जोड़ दें। उसके बाद आप अपने Mac से उस session को वैसे ही लिखते हैं जैसे चैट में किसी कॉन्टैक्ट को, या अपने लोकल Claude Code से उसे लिखवाते हैं। अगर आप session को Antenna के ज़रिए शुरू करते हैं, तो ख़ाली बैठे होने पर उसे जगाया जाता है, और urgent मैसेज उसकी बारी को बीच में रोक सकता है। एक ही कंप्यूटर पर दो sessions? तब उन्हें agent map पर जोड़ें: <a href="/guides/claude-code-and-codex-talk-to-each-other">दो agents की बातचीत</a>।</p>
+
+<h2>इसकी ज़रूरत कब पड़ती है</h2>
+<ul>
+  <li>Claude Code लंबे कामों के लिए server या डेस्कटॉप पर चलता है, और आप उसे अगला task अपने लैपटॉप से देना चाहते हैं।</li>
+  <li>एक session योजना बनाता है और दूसरा build करता है, हर एक अपनी मशीन पर।</li>
+  <li>आप कई मशीनें इस्तेमाल करते हैं और हर मशीन के लिए एक terminal के बजाय हर session के लिए एक चैट चाहते हैं।</li>
+</ul>
+
+<h2>1. दोनों कंप्यूटरों को जोड़ें</h2>
+<p>दोनों पर Antenna इंस्टॉल करें: Mac या Linux डेस्कटॉप पर ऐप, Linux server पर server node (<a href="/guides/run-claude-code-on-a-vps">VPS पर Claude Code</a> में पूरा तरीक़ा है)। एक पर level ∞ का इनवाइट बनाएँ, उसे दूसरे पर खोलें, और एक तरफ़ दिखा छह अंकों का कोड दूसरी तरफ़ डालें। Pairing वैसी ही है जैसी किसी इंसान के साथ, और इसे सिर्फ़ आप कर सकते हैं: इसके लिए दोनों तरफ़ आपका owner password चाहिए।</p>
+
+<h2>2. Session को नाम दें</h2>
+<p>दूसरे कंप्यूटर पर, प्रोजेक्ट फ़ोल्डर में:</p>
+<pre><code>antenna connect claude-code --agent api-dev --links mac --hello mac</code></pre>
+<p>यहाँ <code>mac</code> वह नाम है जो pairing के समय server ने आपके Mac को दिया था। यह agent <code>api-dev</code> बनाता है, Claude Code में Antenna सिर्फ़ इसी फ़ोल्डर के लिए जोड़ता है (आपकी हाँ के बाद), और आपके Mac को hello भेजता है, ताकि वहाँ <code>api-dev</code> नाम की चैट तुरंत दिख जाए। दूसरे फ़ोल्डर के session को अपना नाम और अपनी चैट मिलती है। Codex भी <code>antenna connect codex</code> से इसी तरह काम करता है।</p>
+
+<h2>3. उसे जगा कर रखें</h2>
+<p>Claude Code, Antenna को तभी पढ़ता है जब वह किसी काम पर लगा हो। ख़ाली prompt पर बैठे होने पर भी वह मैसेज उठा ले, इसके लिए उसे Antenna के ज़रिए शुरू करें:</p>
+<pre><code>antenna session start api-dev --dir ~/projects/api</code></pre>
+<p>(इसके लिए server पर tmux चाहिए।) फिर मैसेज आने पर Antenna ख़ाली prompt पर एक छोटी लाइन टाइप करता है, और session मैसेज को डेटा की तरह पढ़कर काम में लग जाता है। डेस्कटॉप पर Antenna का Code mode यही काम विंडो के अंदर एक terminal टैब में करता है। <em>Experimental।</em></p>
+
+<h2>4. उसे लिखें</h2>
+<p>अपने Mac पर <code>api-dev</code> चैट खोलें और लिखें, जैसे किसी इंसान को लिखते। या अपने लोकल Claude Code से लिखवाएँ: “<code>api-dev</code> से migration tests चलाने और रिपोर्ट भेजने को कहो।” जब इंतज़ार न किया जा सके, तो भेजने से पहले <strong>Urgent: interrupt now</strong> (Send के बगल में बिजली वाला बटन) चालू करें (terminal से, <code>antenna send --urgent</code>): Antenna जिस session को चलाता है, Code mode में या <code>antenna session start</code> से, उसकी चल रही बारी को Antenna एक बार रोक देता है, जैसे आप Esc दबाते, और session आपका मैसेज पढ़ लेता है। Terminal में खुले किसी सवाल या permission prompt पर वह कभी Esc नहीं दबाता। <em>Experimental।</em></p>
+
+<h2>क्या जाता है और क्या नहीं</h2>
+<p>मैसेज एक कंप्यूटर पर encrypt होता है और दूसरे पर decrypt। कोई terminal शेयर नहीं होता और कोई port खोलने या forward करने की ज़रूरत नहीं: दूसरा session सिर्फ़ मैसेज पाता है, और उनके साथ वह क्या कर सकता है, यह उसका अपना Antenna तय करता है। Agent का token उसी कंप्यूटर पर रहता है जहाँ वह बना था।</p>
+
+<h2>सवाल-जवाब</h2>
+<details>
+  <summary>क्या यह terminal का remote control है?</summary>
+  <p>नहीं। आप दूसरा terminal न देखते हैं, न उसमें टाइप करते हैं। आप session को मैसेज और tasks भेजते हैं, और वह चैट में जवाब देता है। पूरे terminal के लिए पहले की तरह SSH इस्तेमाल करें।</p>
+</details>
+<details>
+  <summary>Session क्या कर रहा है, यह कैसे देखें?</summary>
+  <p>चैट उसके जवाब दिखाती है, और agent map दिखाता है कि किसने किससे बात की। <strong>My devices</strong> में आप अपने दूसरे कंप्यूटरों के agents भी देख सकते हैं और किसी एक को उसके शुरू किए सब कुछ समेत रोक सकते हैं।</p>
+</details>
+<details>
+  <summary>क्या server को public address चाहिए?</summary>
+  <p>नहीं। दोनों कंप्यूटर बाहर की ओर कनेक्ट करते हैं; जब वे सीधे एक-दूसरे तक नहीं पहुँच पाते, तो relay encrypted ट्रैफ़िक आगे पहुँचाता है।</p>
+</details>
+<details>
+  <summary>Server reboot होने के बाद क्या होता है?</summary>
+  <p>Reboot के बाद keys लॉक हो जाती हैं। एक बार login करें और <code>antenna unlock</code> चलाएँ; फिर session दोबारा शुरू किया जा सकता है।</p>
+</details>

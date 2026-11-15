@@ -1,0 +1,45 @@
+<!--guide {"title": "Claude Code: vários agentes trabalhando juntos no mesmo projeto", "h1": "Vários agentes do Claude Code trabalhando juntos no mesmo projeto", "description": "Um agente líder do Claude Code divide o trabalho, agentes programam em paralelo em sandboxes próprias, tudo é conferido e nada entra no seu branch sem você.", "summary": "Um agente líder e trabalhadores em paralelo num repositório, cada um na sua sandbox, com verificações e a palavra final sua.", "source": "2026-11-09"}-->
+<p class="lead">No Antenna, uma <strong>equipe</strong> é um agente líder com agentes trabalhadores num projeto git. Você define um orçamento uma vez (por exemplo, “até 2 programadores Claude Code”), e o líder divide o trabalho em tarefas, inicia trabalhadores dentro desse orçamento, revisa cada resultado e o devolve ou aceita. Cada trabalhador programa em paralelo na sua própria sandbox, numa cópia própria do projeto, e o trabalho da equipe só chega ao seu branch quando você aprova. <em>Experimental.</em></p>
+
+<h2>O problema de vários agentes na mesma pasta</h2>
+<p>Rodar duas ou três sessões do Claude Code lado a lado é fácil; difícil é impedir que uma atropele a outra. Elas editam os mesmos arquivos, rodam comandos na mesma pasta, e cada uma consegue ler tudo o que as outras leem. Alguém precisa distribuir as tarefas, conferir o que volta e fazer o merge, e esse alguém costuma ser você, pulando de um terminal para outro.</p>
+
+<h2>Como uma equipe funciona</h2>
+<ol>
+  <li><strong>Você cria a equipe</strong> em <strong>Teams → New team</strong>: a pasta do projeto, o líder (um dos seus agentes, um modelo local ou você mesmo), o orçamento de trabalhadores e as regras: se os trabalhadores podem rodar comandos, quais <strong>Check commands</strong> (comandos de verificação) uma tarefa pode indicar (<code>cargo test</code>, <code>npm test</code>) e quais registros de pacotes essas verificações podem acessar.</li>
+  <li><strong>Você passa o objetivo ao líder</strong>, no terminal dele: “Divida a funcionalidade de login em tarefas pequenas para dois programadores.”</li>
+  <li><strong>O líder planeja e monta o time.</strong> Ele escreve as tarefas, inicia trabalhadores como <code>web.coder-1</code> dentro do orçamento e as atribui.</li>
+  <li><strong>Os trabalhadores programam em paralelo.</strong> Cada um recebe uma cópia nova do projeto no branch da equipe, lê só a própria tarefa, trabalha e entrega, ou faz uma pergunta ao líder quando trava.</li>
+  <li><strong>O Antenna confere cada resultado</strong> rodando o comando de verificação da tarefa numa sandbox separada, sem tokens e sem rede além dos registros que você indicou. Uma verificação que falha volta sozinha para o trabalhador, até um limite, antes de o líder decidir.</li>
+  <li><strong>O líder revisa:</strong> aceita ou devolve com comentários. O trabalho aceito se acumula num branch da equipe, <code>antenna/web</code>.</li>
+  <li><strong>Você aplica.</strong> <strong>Review and apply</strong> (revisar e aplicar) mostra o que será mesclado no seu branch; com a sua senha, o merge é feito, como fast-forward. Sem ela, nada sai do lugar.</li>
+</ol>
+
+<h2>O que você vê</h2>
+<p>O quadro da equipe mostra cada tarefa por estado, de Open e Working a In review, Blocked, Accepted e Applied, com a saída ao vivo de cada trabalhador, o que o resultado dele muda, a saída da verificação e os tokens usados. Você pode fazer tudo o que o líder faz: responder à pergunta de um trabalhador, pedir alterações, cancelar uma tarefa ou parar um trabalhador. Quando o líder roda no Code mode do Antenna, ele é acordado sempre que um trabalhador entrega algo ou faz uma pergunta, então a equipe continua andando enquanto você está fora.</p>
+
+<h2>O que mantém o projeto seguro</h2>
+<ul>
+  <li><strong>Os trabalhadores nunca veem a sua pasta</strong>, os seus outros arquivos nem as cópias uns dos outros, e só alcançam o provedor do modelo.</li>
+  <li><strong>O líder não consegue aumentar o próprio orçamento</strong>, aprovar nada no seu lugar nem ver o token de um trabalhador: quem decide cada chamada é o Antenna, não o modelo.</li>
+  <li><strong>Entradas não confiáveis ficam contidas.</strong> Uma tarefa escrita depois de ler a mensagem de um contato de nível 2 não roda comandos nem verificações, então uma instrução escondida nessa mensagem não chega ao seu computador.</li>
+  <li><strong>Só local, se você quiser.</strong> Uma equipe pode ficar limitada a modelos rodando no seu próprio computador, sem nenhum modelo na nuvem.</li>
+</ul>
+
+<h2>Perguntas</h2>
+<details>
+  <summary>Quais agentes podem ser trabalhadores?</summary>
+  <p>O Claude Code com o seu próprio login, outro programa que fale o stream-json do Claude Code ou um modelo local para papéis mais leves, como triagem, resumos e documentação.</p>
+</details>
+<details>
+  <summary>O líder pode ser o Codex ou outro app?</summary>
+  <p>O líder pode ser qualquer um dos seus agentes conectados ao Antenna: ele recebe as ferramentas da equipe via MCP na próxima vez que o app dele iniciar. Você também pode liderar a equipe pessoalmente, pelo quadro.</p>
+</details>
+<details>
+  <summary>Como eu limito o custo?</summary>
+  <p>O orçamento limita quantos trabalhadores de cada tipo podem existir, e as regras limitam a duração de um turno e de uma verificação e os tokens que uma tarefa pode usar.</p>
+</details>
+<details>
+  <summary>Funciona no meu Mac?</summary>
+  <p>Sim, no macOS e no Linux. Os trabalhadores rodam no computador onde a equipe está; trabalhadores nos seus outros computadores vêm depois.</p>
+</details>

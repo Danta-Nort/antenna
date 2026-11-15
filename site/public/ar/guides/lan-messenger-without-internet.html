@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>برنامج دردشة عبر الشبكة المحلية بدون إنترنت لـ Mac وLinux — Antenna</title>
+<meta name="description" content="يجد Antenna جهات اتصالك الموثوقة على الشبكة نفسها، وتستمر المحادثة حين ينقطع الإنترنت، بتشفير تام بين الطرفين ودون الإعلان عن هويتك.">
+<link rel="canonical" href="https://antenna.contact/ar/guides/lan-messenger-without-internet">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="برنامج دردشة عبر الشبكة المحلية بدون إنترنت لـ Mac وLinux — Antenna">
+<meta property="og:description" content="يجد Antenna جهات اتصالك الموثوقة على الشبكة نفسها، وتستمر المحادثة حين ينقطع الإنترنت، بتشفير تام بين الطرفين ودون الإعلان عن هويتك.">
+<meta property="og:url" content="https://antenna.contact/ar/guides/lan-messenger-without-internet">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ar_AR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/lan-messenger-without-internet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ar/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "الأدلة",
+     "item": "https://antenna.contact/ar/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "تطبيق مراسلة عبر الشبكة المحلية (LAN) لـ Mac وLinux يعمل دون إنترنت",
+     "item": "https://antenna.contact/ar/guides/lan-messenger-without-internet"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "تطبيق مراسلة عبر الشبكة المحلية (LAN) لـ Mac وLinux يعمل دون إنترنت",
+   "description": "يجد Antenna جهات اتصالك الموثوقة على الشبكة نفسها، وتستمر المحادثة حين ينقطع الإنترنت، بتشفير تام بين الطرفين ودون الإعلان عن هويتك.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "ar",
+   "url": "https://antenna.contact/ar/guides/lan-messenger-without-internet",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ar/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "هل يجب أن نقترن عبر الإنترنت أولًا؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "الاقتران الأول أسهل مع وجود اتصال: تتبادلان رابط دعوة لمرة واحدة وتقارنان رمزًا صوتيًا. بعد ذلك تكفي الشبكة المحلية."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يمكنني إرسال الملفات عبر الشبكة المحلية؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "نعم. تمر الملفات عبر الاتصال المشفر نفسه، وتُفحص عند وصولها كأي ملف آخر في Antenna."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل توجد نسخة لـ Windows أو للهاتف؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ليس بعد. يعمل Antenna 0.1 على macOS ‏(Apple Silicon) وLinux."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">انتقل إلى المحتوى</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="القائمة الرئيسية">
+      <a href="/ar/#product">المنتج</a>
+      <a href="/ar/#security">الأمان</a>
+      <a href="/ar/guides/">الأدلة</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="اللغة: العربية"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">AR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/lan-messenger-without-internet" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/lan-messenger-without-internet" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/lan-messenger-without-internet" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/lan-messenger-without-internet" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/lan-messenger-without-internet" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/lan-messenger-without-internet" hreflang="ar" lang="ar" aria-current="true">العربية</a></li>
+        <li><a href="/fr/guides/lan-messenger-without-internet" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/lan-messenger-without-internet" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/lan-messenger-without-internet" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/lan-messenger-without-internet" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/lan-messenger-without-internet" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/lan-messenger-without-internet" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/lan-messenger-without-internet" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/lan-messenger-without-internet" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/lan-messenger-without-internet" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ar/#download">تنزيل</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="مسار التنقل"><a href="/ar/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ar/guides/">الأدلة</a></nav>
+    <p class="eyebrow">آخر تحديث <time datetime="2026-11-09">9 نوفمبر 2026</time></p>
+    <h1>تطبيق مراسلة عبر الشبكة المحلية (LAN) لـ Mac وLinux يعمل دون إنترنت</h1>
+    <p class="lead">يستطيع Antenna الوصول إلى من تتحدث معهم عبر الشبكة المحلية حين لا يتوفر الإنترنت، ما دمتم على الموجّه (router) نفسه، في البيت أو في المكتب. فعّل <strong>Local network (no internet)</strong> في الإعدادات، أو شغّل <code>antenna lan on</code>، فيُعثر على جهات الاتصال التي تثق بها في المستويين 3 و4، وعلى حواسيبك أنت، إن كانت قريبة. تبقى الرسائل والملفات مشفّرة تشفيرًا تامًا بين الطرفين، ولا يبث Antenna اسمك على الشبكة أبدًا.</p>
+
+    <h2>لماذا تتوقف معظم تطبيقات المراسلة حين ينقطع الإنترنت</h2>
+    <p>في معظم تطبيقات المراسلة تذهب الرسالة إلى خادم أولًا، حتى لو كان من تكتب إليه يجلس على بُعد مكتبين منك. اقطع الإنترنت فتتوقف المحادثة. أما Antenna فيربط الحواسيب مباشرة أصلًا، فلا يحتاج على الشبكة المحلية إلا إلى العثور على الحاسوب الآخر، وهذا يعمل دون أي إنترنت.</p>
+
+    <h2>التفعيل</h2>
+    <ol>
+      <li><a href="/ar/#download">ثبّت Antenna</a> على الحاسوبين (macOS أو Linux) واقرنهما مرة واحدة، ما دام الاتصال متاحًا.</li>
+      <li>افتح <strong>Settings → Local network (no internet)</strong> وفعّله بكلمة مرور المالك. ومن الطرفية: <code>antenna lan on</code>، ويعرض <code>antenna lan</code> الحالة.</li>
+      <li>أسفل المفتاح يعرض Antenna “Listening on the local network” (يستمع على الشبكة المحلية) وأي جهات اتصالك وجدها قريبة.</li>
+    </ol>
+    <p>الميزة معطّلة افتراضيًا، والأفضل قصرها على الشبكات التي تثق بها: فعلى شبكة Wi-Fi في مقهى أو مطار لا داعي للإعلان عن وجود جهازك.</p>
+
+    <h2>ما يراه جيرانك على الشبكة</h2>
+    <p>لا يعلن Antenna عن نفسه بصوت عالٍ. فهو يستمع، ولا يعلن عن نفسه إلا حين يكون لديه ما يوصله ولا يرد الطرف الآخر على العناوين المعروفة. وحتى عندها لا يستخدم اسمك ولا مفتاحك، بل اسمًا مستعارًا لا يفهمه إلا جهة الاتصال تلك، ويتغير هذا الاسم كل ساعة. يرى الآخرون على الشبكة أن جهازًا ما يبحث عن شخص ما، لا من أنت ولا مع من تتحدث. ولا يُرسل إلا العناوين المحلية، لا عناوين خادم الترحيل ولا عناوين VPN أبدًا.</p>
+    <p>وحدّ واحد نقوله بصراحة: يستطيع جار منتبه أن يتعرّف على الجهاز نفسه على شبكة أخرى من خلال رقم المنفذ.</p>
+
+    <h2>من يمكن الوصول إليه بهذه الطريقة</h2>
+    <p>جهات الاتصال في مستويي الثقة 3 و4، وحواسيبك أنت (∞). أما المستويان 1 و2 فللأشخاص الذين تعرفهم معرفة أقل: تمر تلك الاتصالات دائمًا عبر خادم ترحيل، فلا تعرف تلك الجهات عنوانك أبدًا، لا على الشبكة المحلية ولا في أي مكان آخر.</p>
+
+    <h2>أسئلة</h2>
+    <details>
+      <summary>هل يجب أن نقترن عبر الإنترنت أولًا؟</summary>
+      <p>الاقتران الأول أسهل مع وجود اتصال: تتبادلان رابط دعوة لمرة واحدة وتقارنان رمزًا صوتيًا. بعد ذلك تكفي الشبكة المحلية.</p>
+    </details>
+    <details>
+      <summary>هل يمكنني إرسال الملفات عبر الشبكة المحلية؟</summary>
+      <p>نعم. تمر الملفات عبر الاتصال المشفر نفسه، وتُفحص عند وصولها كأي ملف آخر في Antenna.</p>
+    </details>
+    <details>
+      <summary>هل توجد نسخة لـ Windows أو للهاتف؟</summary>
+      <p>ليس بعد. يعمل Antenna 0.1 على macOS ‏(Apple Silicon) وLinux.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna مجاني ومفتوح المصدر</strong>، لنظامي macOS وLinux. بلا حساب وبلا رقم هاتف.</p>
+      <a class="btn" href="/ar/#download">نزّل Antenna</a>
+    </aside>
+    <h2>أدلة ذات صلة</h2>
+    <ul class="related">
+      <li><a href="/ar/guides/peer-to-peer-encrypted-messenger">تطبيق مراسلة مفتوح المصدر يعمل ند لند (P2P) بتشفير ما بعد الكم</a></li>
+      <li><a href="/ar/guides/self-hosted-messenger">تطبيق مراسلة مستضاف ذاتيًا دون خادم تديره</a></li>
+      <li><a href="/ar/guides/messenger-without-phone-number">تطبيق مراسلة خاص بلا رقم هاتف ولا بريد إلكتروني</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ar/guides/">الأدلة</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>للتواصل: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ar/privacy">سياسة الخصوصية</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

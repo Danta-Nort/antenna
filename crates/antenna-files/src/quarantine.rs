@@ -286,6 +286,8 @@ fn mkdir700(p: &Path) -> Result<()> {
 
 /// Quarantine record limit (the preview is in a separate file).
 const MAX_RECORD: usize = 1 << 20;
+/// How long a person's decision on a file (accept, reject) waits for the daemon's own operation on it to end.
+const DECISION_WAIT: std::time::Duration = std::time::Duration::from_secs(5);
 /// Preview file limit.
 const MAX_PREVIEW: usize = 128 << 20;
 
@@ -321,6 +323,27 @@ impl Quarantine {
             ));
         }
         Ok(Busy { q: self, key })
+    }
+
+    /// [`Self::lock`] for a decision of the owner or an agent (accept, reject): the daemon's own short operation on
+    /// the same file (the end of its check, marking the file held for the owner, D-130) ends first, instead of the
+    /// decision failing with "in progress" on a file the list already shows as checked (seen on a loaded Mac). After
+    /// `wait` it refuses as before: two decisions at once, or a check that runs long.
+    async fn lock_waiting(
+        &self,
+        link: &[u8; 32],
+        id: &str,
+        wait: std::time::Duration,
+    ) -> Result<Busy<'_>> {
+        let until = tokio::time::Instant::now() + wait;
+        loop {
+            match self.lock(link, id) {
+                Err(e) if e.code == code::BAD_STATE && tokio::time::Instant::now() < until => {
+                    tokio::time::sleep(std::time::Duration::from_millis(20)).await;
+                }
+                r => return r,
+            }
+        }
     }
 
     /// Link directory.
@@ -702,7 +725,7 @@ impl Quarantine {
         rename: Option<&str>,
         allow: &crate::kinds::Allow,
     ) -> Result<Accepted> {
-        let _busy = self.lock(link, id)?;
+        let _busy = self.lock_waiting(link, id, DECISION_WAIT).await?;
         let (mut item, secret) = self.load(link, id)?;
         let level = level_now.min(item.level_at_offer);
         let verdict = match (&item.state, &item.report) {
@@ -908,7 +931,7 @@ impl Quarantine {
     /// `antenna files reject <id>`: wipes the record with the file key and the preview, deletes the blob, remembers the
     /// rejection (a repeat of the same offer is not accepted).
     pub async fn reject(&self, link: &[u8; 32], id: &str, blobs: &LinkBlobs) -> Result<()> {
-        let _busy = self.lock(link, id)?;
+        let _busy = self.lock_waiting(link, id, DECISION_WAIT).await?;
         let item = self.get(link, id)?;
         let mark = self.item_path(link, id, ".rejected")?;
         // Mark: a repeat of the same offer is not accepted; the size counts toward the link's daily volume.
@@ -993,3 +1016,7 @@ impl Quarantine {
         total
     }
 }
+
+#[cfg(test)]
+#[path = "quarantine_tests.rs"]
+mod tests;

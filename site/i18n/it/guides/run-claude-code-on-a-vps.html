@@ -1,0 +1,49 @@
+<!--guide {"title": "Claude Code su una VPS 24/7, da usare dal tuo portatile — Antenna", "h1": "Claude Code su una VPS giorno e notte, e tu gli parli dal portatile", "description": "Installa Antenna sulla VPS, avvia lì Claude Code o Codex e dagli compiti dalla chat del portatile. Niente porte aperte né sessioni SSH da tenere vive.", "summary": "Un Claude Code o Codex sempre attivo sul tuo server, che raggiungi via chat dal portatile.", "source": "2026-11-09"}-->
+<p class="lead">Installa Claude Code e il nodo Antenna sulla tua VPS Linux, abbina una volta il server al portatile e avvia Claude Code tramite Antenna nella cartella del progetto. Da lì gira nella propria sessione tmux anche dopo il logout, si sveglia quando arriva un messaggio per lui e risponde in una chat sul portatile. Nessuna porta in ingresso da aprire, nessuna sessione SSH da tenere viva, e Codex funziona allo stesso modo.</p>
+
+<h2>Che cosa ti serve</h2>
+<ul>
+  <li>Un server Linux x86_64, con Claude Code (o Codex) installato e con l'accesso effettuato, e tmux.</li>
+  <li><a href="/#download">Antenna</a> sul portatile: macOS o Linux.</li>
+</ul>
+
+<h2>1. Installa il nodo Antenna sul server</h2>
+<pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+sudo loginctl enable-linger $USER</code></pre>
+<p>L'installer legge la versione più recente dal manifest firmato, verifica l'archivio, installa <code>antennad</code> e <code>antenna</code> in <code>~/.local/bin</code> come servizio utente systemd (senza bisogno di root) e crea il tuo nodo con una password. La seconda riga mantiene attivo il servizio dopo il logout. Su Ubuntu o Fedora puoi installare invece il pacchetto <code>.deb</code> o <code>.rpm</code>.</p>
+
+<h2>2. Abbinalo al portatile</h2>
+<p>Sul portatile: <strong>New contact → Invite</strong>, dagli un nome, spunta <strong>This is my own computer (∞)</strong>, premi <strong>Create link</strong> e copialo. Sul server:</p>
+<pre><code>antenna join '&lt;link&gt;' --trust 5 --label mac</code></pre>
+<p>Lascia gli apici singoli: il link contiene un <code>#</code>. Digita nel terminale del server il codice che mostra il portatile, poi premi <strong>The contact confirmed — codes match</strong> sul portatile. Il livello 5 corrisponde a ∞ su entrambi i lati, quindi il server conta come un tuo computer.</p>
+
+<h2>3. Avvia Claude Code tramite Antenna</h2>
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api
+antenna session attach api-dev</code></pre>
+<p>La riga connect dà alla sessione un agente e un token propri e manda un saluto, così sul portatile compare una chat chiamata <code>api-dev</code>. La riga start avvia Claude Code nel server tmux di Antenna (il tuo tmux non viene toccato). Collegati una volta per rispondere alle prime domande di Claude Code, per esempio se si fida della cartella, poi esci con <code>Ctrl-b d</code>: continua a girare. Per Codex usa <code>antenna connect codex</code> e <code>--cli codex</code>.</p>
+
+<h2>4. Parlagli</h2>
+<p>Scrivi nella chat <code>api-dev</code> sul portatile: “Esegui i test di migrazione e correggi ciò che fallisce.” Quando Claude Code è fermo al suo prompt, Antenna digita una breve riga perché legga il tuo messaggio; non digita mai il testo di un contatto e non risponde mai a una domanda al suo posto. La scheda del server in <strong>My devices</strong> mostra il suo stato e i suoi agenti, e puoi approvare le sue richieste dal portatile.</p>
+
+<h2>Dopo un riavvio</h2>
+<p>Dopo il riavvio del server le chiavi del nodo sono bloccate: il servizio gira, ma i suoi collegamenti restano muti finché non accedi ed esegui <code>antenna unlock</code>. Così una copia del disco del server non dà a nessuno le tue chiavi. <code>antenna status</code> ti dice se è bloccato.</p>
+
+<h2>Domande</h2>
+<details>
+  <summary>Perché non usare semplicemente SSH e tmux?</summary>
+  <p>Funziona finché stai davanti a un terminale. Antenna aggiunge una chat a cui puoi scrivere dal portatile in qualsiasi momento, sveglia la sessione quando lo fai e permette ad altri agenti di affidarle lavoro, con permessi che controlla da sé.</p>
+</details>
+<details>
+  <summary>Il server ha bisogno di un IP pubblico o di porte aperte?</summary>
+  <p>No. Entrambi i lati si collegano verso l'esterno, direttamente quando la rete lo permette e tramite un relay altrimenti. Il relay inoltra solo traffico cifrato.</p>
+</details>
+<details>
+  <summary>Posso far girare più sessioni sullo stesso server?</summary>
+  <p>Sì: un agente per cartella di progetto, ognuno con il proprio nome e la propria chat sul portatile.</p>
+</details>
+<details>
+  <summary>Esiste una build per ARM?</summary>
+  <p>Non ancora. Il nodo server è compilato per Linux x86_64.</p>
+</details>

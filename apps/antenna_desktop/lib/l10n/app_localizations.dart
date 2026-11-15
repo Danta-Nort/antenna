@@ -7,8 +7,20 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'app_localizations_de.dart';
 import 'app_localizations_en.dart';
+import 'app_localizations_es.dart';
+import 'app_localizations_fr.dart';
+import 'app_localizations_hi.dart';
+import 'app_localizations_it.dart';
+import 'app_localizations_ja.dart';
+import 'app_localizations_ko.dart';
+import 'app_localizations_pl.dart';
+import 'app_localizations_pt.dart';
 import 'app_localizations_ru.dart';
+import 'app_localizations_tr.dart';
+import 'app_localizations_uk.dart';
+import 'app_localizations_zh.dart';
 
 // ignore_for_file: type=lint
 
@@ -96,8 +108,20 @@ abstract class AppLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('de'),
     Locale('en'),
+    Locale('es'),
+    Locale('fr'),
+    Locale('hi'),
+    Locale('it'),
+    Locale('ja'),
+    Locale('ko'),
+    Locale('pl'),
+    Locale('pt'),
     Locale('ru'),
+    Locale('tr'),
+    Locale('uk'),
+    Locale('zh'),
   ];
 
   /// No description provided for @commonCancel.
@@ -583,7 +607,7 @@ abstract class AppLocalizations {
   /// No description provided for @trust4Commands.
   ///
   /// In en, this message translates to:
-  /// **'Only from the allowlist, in a sandbox (builds, tests)'**
+  /// **'Each one waits for your approval'**
   String get trust4Commands;
 
   /// No description provided for @trust5Commands.
@@ -1437,6 +1461,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Select a contact'**
   String get chatSelectContact;
+
+  /// Under Invite and Join before the first contact: opens Agents, where the AI apps found on this computer connect in one click.
+  ///
+  /// In en, this message translates to:
+  /// **'Or connect Claude Code, Codex or another AI app'**
+  String get chatFirstConnectAgent;
 
   /// No description provided for @chatNoSelectionBody.
   ///
@@ -3595,20 +3625,14 @@ abstract class AppLocalizations {
   /// No description provided for @settingsLanguageHint.
   ///
   /// In en, this message translates to:
-  /// **'“System”: Russian if the system is in Russian, otherwise English.'**
+  /// **'“System”: the system’s language if the app has it, otherwise English.'**
   String get settingsLanguageHint;
 
-  /// Name of the English language. The language picker shows each language's name from that language's own strings (the endonym), whatever the current UI language.
+  /// This language's own name (its endonym, e.g. Deutsch, 日本語). The language picker in Settings shows each language by the langName of its own strings, whatever the current UI language.
   ///
   /// In en, this message translates to:
   /// **'English'**
-  String get langEnglish;
-
-  /// Name of the Russian language. The language picker takes it from the Russian strings (the endonym), so this value is not shown in the picker.
-  ///
-  /// In en, this message translates to:
-  /// **'Russian'**
-  String get langRussian;
+  String get langName;
 
   /// No description provided for @settingsKeys.
   ///
@@ -14624,8 +14648,22 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['en', 'ru'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>[
+    'de',
+    'en',
+    'es',
+    'fr',
+    'hi',
+    'it',
+    'ja',
+    'ko',
+    'pl',
+    'pt',
+    'ru',
+    'tr',
+    'uk',
+    'zh',
+  ].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -14634,10 +14672,34 @@ class _AppLocalizationsDelegate
 AppLocalizations lookupAppLocalizations(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'de':
+      return AppLocalizationsDe();
     case 'en':
       return AppLocalizationsEn();
+    case 'es':
+      return AppLocalizationsEs();
+    case 'fr':
+      return AppLocalizationsFr();
+    case 'hi':
+      return AppLocalizationsHi();
+    case 'it':
+      return AppLocalizationsIt();
+    case 'ja':
+      return AppLocalizationsJa();
+    case 'ko':
+      return AppLocalizationsKo();
+    case 'pl':
+      return AppLocalizationsPl();
+    case 'pt':
+      return AppLocalizationsPt();
     case 'ru':
       return AppLocalizationsRu();
+    case 'tr':
+      return AppLocalizationsTr();
+    case 'uk':
+      return AppLocalizationsUk();
+    case 'zh':
+      return AppLocalizationsZh();
   }
 
   throw FlutterError(

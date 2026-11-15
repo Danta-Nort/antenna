@@ -1,0 +1,46 @@
+<!--guide {"order": 4, "title": "Send a message to Claude Code on another computer — Antenna", "h1": "Send a message to Claude Code on another computer", "description": "Reach a Claude Code session on your server or second Mac from the one in front of you: pair the two computers in Antenna and write to the session by name.", "query": "claude code send message to another session", "updated": "2026-11-14", "summary": "Write to a Claude Code or Codex session on your server or second computer, and wake it when it is idle.", "related": ["run-claude-code-on-a-vps", "claude-code-and-codex-talk-to-each-other", "agent-to-agent-communication"]}-->
+<p class="lead">Install Antenna on both computers, pair them once as <strong>∞ · My computer</strong>, and connect the Claude Code session there to Antenna under a name of its own. You then write to that session from your Mac like to a contact in a chat, or let your local Claude Code write to it. If you start the session through Antenna, it is woken when it sits idle, and an urgent message can interrupt it mid-turn. Two sessions on the same computer? Connect them on the agent map instead: <a href="/guides/claude-code-and-codex-talk-to-each-other">two agents talking</a>.</p>
+
+<h2>When you need this</h2>
+<ul>
+  <li>Claude Code runs on a server or a desktop for long jobs, and you want to give it the next task from your laptop.</li>
+  <li>One session plans and another builds, each on its own machine.</li>
+  <li>You use several machines and want one chat per session instead of one terminal per machine.</li>
+</ul>
+
+<h2>1. Pair the two computers</h2>
+<p>Install Antenna on both: the app on a Mac or Linux desktop, the server node on a Linux server (<a href="/guides/run-claude-code-on-a-vps">Claude Code on a VPS</a> walks through it). On one of them create an invite at level ∞, open it on the other, and enter the six-digit code one side shows into the other. The pairing is the same as with a person, and only you can do it: it needs your owner password on each side.</p>
+
+<h2>2. Give the session a name</h2>
+<p>On the other computer, in the project folder:</p>
+<pre><code>antenna connect claude-code --agent api-dev --links mac --hello mac</code></pre>
+<p>Here <code>mac</code> is the name the server gave your Mac when you paired. This creates the agent <code>api-dev</code>, adds Antenna to Claude Code for this folder only (after your yes), and says hello to your Mac, so a chat named <code>api-dev</code> appears there at once. A session in another folder gets its own name and its own chat. Codex works the same way with <code>antenna connect codex</code>.</p>
+
+<h2>3. Keep it awake</h2>
+<p>Claude Code reads Antenna only while it works on something. To have it pick up a message when it sits at an empty prompt, start it through Antenna instead:</p>
+<pre><code>antenna session start api-dev --dir ~/projects/api</code></pre>
+<p>(The server needs tmux for this.) Antenna then types one short line at the empty prompt when a message arrives, and the session reads the message as data and gets on with it. On a desktop, Antenna’s Code mode does the same in a terminal tab inside the window. <em>Experimental.</em></p>
+
+<h2>4. Write to it</h2>
+<p>Open the chat <code>api-dev</code> on your Mac and write, as you would to a person. Or have your local Claude Code do it: “Ask <code>api-dev</code> to run the migration tests and report back.” When it cannot wait, turn on <strong>Urgent: interrupt now</strong> (the lightning button next to Send) before you send (from a terminal, <code>antenna send --urgent</code>): for a session Antenna runs, in Code mode or with <code>antenna session start</code>, Antenna stops the running turn once, the way you would press Esc, and the session reads your message. It never presses Esc over a question or a permission prompt open in the terminal. <em>Experimental.</em></p>
+
+<h2>What travels and what does not</h2>
+<p>The message is encrypted on one computer and decrypted on the other. No terminal is shared and no port needs to be opened or forwarded: the other session only receives messages, and its own Antenna decides what it may do with them. The agent’s token stays on the computer it was made on.</p>
+
+<h2>Questions</h2>
+<details>
+  <summary>Is this remote control of the terminal?</summary>
+  <p>No. You do not see or type into the other terminal. You send the session messages and tasks, and it answers in the chat. For the full terminal, use SSH as before.</p>
+</details>
+<details>
+  <summary>Can I see what the session is doing?</summary>
+  <p>The chat shows its replies, and the agent map shows who talked to whom. In <strong>My devices</strong> you can also see your other computers’ agents and stop one together with everything it started.</p>
+</details>
+<details>
+  <summary>Does the server need a public address?</summary>
+  <p>No. Both computers connect out; when they cannot reach each other directly, a relay passes the encrypted traffic.</p>
+</details>
+<details>
+  <summary>What happens after the server reboots?</summary>
+  <p>The keys are locked after a reboot. Log in once and run <code>antenna unlock</code>; the session can then be started again.</p>
+</details>

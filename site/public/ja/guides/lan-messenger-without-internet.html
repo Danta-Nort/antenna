@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>インターネットなしで使える Mac・Linux 向け LAN メッセンジャー — Antenna</title>
+<meta name="description" content="Antenna は同じネットワーク上の信頼できる連絡先を見つけ、インターネットが切れてもチャットを続けられます。エンドツーエンド暗号化で、自分が誰かを周囲に知らせることもありません。">
+<link rel="canonical" href="https://antenna.contact/ja/guides/lan-messenger-without-internet">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="インターネットなしで使える Mac・Linux 向け LAN メッセンジャー — Antenna">
+<meta property="og:description" content="Antenna は同じネットワーク上の信頼できる連絡先を見つけ、インターネットが切れてもチャットを続けられます。エンドツーエンド暗号化で、自分が誰かを周囲に知らせることもありません。">
+<meta property="og:url" content="https://antenna.contact/ja/guides/lan-messenger-without-internet">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ja_JP">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/lan-messenger-without-internet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ja/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "ガイド",
+     "item": "https://antenna.contact/ja/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "インターネットなしで使える Mac・Linux 向けの LAN メッセンジャー",
+     "item": "https://antenna.contact/ja/guides/lan-messenger-without-internet"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "インターネットなしで使える Mac・Linux 向けの LAN メッセンジャー",
+   "description": "Antenna は同じネットワーク上の信頼できる連絡先を見つけ、インターネットが切れてもチャットを続けられます。エンドツーエンド暗号化で、自分が誰かを周囲に知らせることもありません。",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "ja",
+   "url": "https://antenna.contact/ja/guides/lan-messenger-without-internet",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ja/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "最初はインターネット経由でペアリングする必要がありますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "最初のペアリングは接続がある状態で行うのがいちばん簡単です。1 回限りの招待リンクを交換し、声でコードを照合します。その後はローカルネットワークだけで十分です。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "LAN でファイルを送れますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "はい。ファイルは同じ暗号化されたリンクで送られ、Antenna のほかのファイルと同じように受信時に検査されます。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Windows 版やスマートフォン版はありますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "まだありません。Antenna 0.1 は macOS（Apple Silicon）と Linux で動きます。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">本文へスキップ</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ja/" aria-label="Antenna — ホーム"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="メイン">
+      <a href="/ja/#product">製品</a>
+      <a href="/ja/#security">セキュリティ</a>
+      <a href="/ja/guides/">ガイド</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="言語: 日本語"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">JA</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/lan-messenger-without-internet" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/lan-messenger-without-internet" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/lan-messenger-without-internet" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/lan-messenger-without-internet" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/lan-messenger-without-internet" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/lan-messenger-without-internet" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/lan-messenger-without-internet" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/lan-messenger-without-internet" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/lan-messenger-without-internet" hreflang="ja" lang="ja" aria-current="true">日本語</a></li>
+        <li><a href="/ko/guides/lan-messenger-without-internet" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/lan-messenger-without-internet" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/lan-messenger-without-internet" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/lan-messenger-without-internet" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/lan-messenger-without-internet" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/lan-messenger-without-internet" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ja/#download">ダウンロード</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="パンくずリスト"><a href="/ja/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ja/guides/">ガイド</a></nav>
+    <p class="eyebrow">更新日 <time datetime="2026-11-09">2026年11月9日</time></p>
+    <h1>インターネットなしで使える Mac・Linux 向けの LAN メッセンジャー</h1>
+    <p class="lead">家庭やオフィスで同じルーターにつながっていれば、インターネットがなくても Antenna はローカルネットワーク経由で相手に届きます。設定で <strong>Local network (no internet)</strong> をオンにするか <code>antenna lan on</code> を実行すると、信頼レベル 3〜4 の連絡先と自分のコンピューターが近くで見つかるようになります。メッセージもファイルもエンドツーエンド暗号化のままで、Antenna があなたの名前をネットワークに流すことはありません。</p>
+
+    <h2>多くのメッセンジャーがインターネットとともに止まる理由</h2>
+    <p>多くのメッセンジャーでは、相手が 2 つ隣の席に座っていても、メッセージはまずサーバーに送られます。インターネットが切れれば会話も止まります。Antenna はもともとコンピューター同士を直接つなぐので、ローカルネットワークでは相手のコンピューターを見つけるだけで済み、それはインターネットがまったくなくても機能します。</p>
+
+    <h2>オンにする</h2>
+    <ol>
+      <li>両方のコンピューター（macOS または Linux）に <a href="/ja/#download">Antenna をインストール</a>し、まだ接続できるうちに一度ペアリングしておきます。</li>
+      <li><strong>Settings → Local network (no internet)</strong> を開き、オーナーパスワードでオンにします。ターミナルからなら <code>antenna lan on</code>、状態の確認は <code>antenna lan</code> です。</li>
+      <li>スイッチの下に「Listening on the local network」と、近くで見つかった連絡先が表示されます。</li>
+    </ol>
+    <p>デフォルトではオフで、信頼できるネットワークでだけ使うのがおすすめです。カフェや空港の Wi-Fi で、自分のデバイスがそこにあることを知らせる必要はありません。</p>
+
+    <h2>同じネットワークの人から見えるもの</h2>
+    <p>Antenna は自分の存在を大声で知らせたりしません。普段は聞いているだけで、届けるものがあるのに既知のアドレスで相手が応答しないときにだけ自分を告知します。そのときもあなたの名前や鍵は使わず、その連絡先にしか意味のわからないエイリアスを使い、エイリアスは 1 時間ごとに変わります。ネットワーク上のほかの人には、何かのデバイスが誰かを探していることはわかっても、あなたが誰なのか、誰と話しているのかはわかりません。送られるのはローカルアドレスだけで、リレーや VPN のアドレスが出ることはありません。</p>
+    <p>正直にお伝えしておくべき制限が 1 つあります。注意深い人なら、ポート番号から、別のネットワークにいる同じデバイスを見分けられる可能性があります。</p>
+
+    <h2>この方法で届く相手</h2>
+    <p>信頼レベル 3 と 4 の連絡先と、自分のコンピューター（∞）です。レベル 1 と 2 はあまりよく知らない人向けで、そのリンクは常にリレーを経由します。そのため、ローカルネットワークでもそれ以外でも、そうした相手にあなたのアドレスが知られることはありません。</p>
+
+    <h2>よくある質問</h2>
+    <details>
+      <summary>最初はインターネット経由でペアリングする必要がありますか？</summary>
+      <p>最初のペアリングは接続がある状態で行うのがいちばん簡単です。1 回限りの招待リンクを交換し、声でコードを照合します。その後はローカルネットワークだけで十分です。</p>
+    </details>
+    <details>
+      <summary>LAN でファイルを送れますか？</summary>
+      <p>はい。ファイルは同じ暗号化されたリンクで送られ、Antenna のほかのファイルと同じように受信時に検査されます。</p>
+    </details>
+    <details>
+      <summary>Windows 版やスマートフォン版はありますか？</summary>
+      <p>まだありません。Antenna 0.1 は macOS（Apple Silicon）と Linux で動きます。</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna は無料のオープンソース</strong>で、macOS と Linux に対応しています。アカウントも電話番号も必要ありません。</p>
+      <a class="btn" href="/ja/#download">Antenna をダウンロード</a>
+    </aside>
+    <h2>関連ガイド</h2>
+    <ul class="related">
+      <li><a href="/ja/guides/peer-to-peer-encrypted-messenger">耐量子暗号を採用したオープンソースの P2P メッセンジャー</a></li>
+      <li><a href="/ja/guides/self-hosted-messenger">運用するサーバーのいらないセルフホスト型メッセンジャー</a></li>
+      <li><a href="/ja/guides/messenger-without-phone-number">電話番号もメールアドレスも要らないプライベートなメッセンジャー</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ja/" aria-label="Antenna — ホーム"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ja/guides/">ガイド</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>お問い合わせ： <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ja/privacy">プライバシーポリシー</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!--guide {"title": "Come inviare file a Claude Code su un altro computer — Antenna", "h1": "Come condividere file con Claude Code su un altro computer", "description": "Invia un file dal portatile a Claude Code su un server o un altro computer con Antenna: viene controllato all'arrivo e l'agente sa subito dove si trova.", "summary": "Inviare e ricevere file da una sessione di Claude Code su un altro computer, con controllo all'arrivo.", "source": "2026-11-09"}-->
+<p class="lead">Sullo stesso computer, Claude Code legge direttamente i tuoi file: gli dai il percorso o trascini il file nel suo terminale. Su un altro computer, per esempio un server, mandi il file tramite Antenna: lo trascini nella chat con quella sessione di Claude Code, Antenna lo controlla all'arrivo e lo salva lì nella cartella del collegamento, e l'agente trova nella sua casella il nome del file, la posizione, la dimensione e lo SHA-256. I file che l'agente ti rimanda arrivano sul portatile allo stesso modo.</p>
+
+<h2>Inviare un file all'agente</h2>
+<ol>
+  <li>Abbina il portatile all'altro computer come tuo (∞) e collega ad Antenna il Claude Code che gira lì: vedi <a href="/guides/run-claude-code-on-a-vps">Claude Code su una VPS</a>.</li>
+  <li>Sul portatile apri la chat con la sessione e trascinaci il file, oppure allegalo come faresti in qualsiasi messenger.</li>
+  <li>Sull'altro computer, Antenna controlla il tipo del file in base al contenuto, cerca minacce e segreti e lo salva nella cartella del collegamento, <code>~/Antenna/links/&lt;folder&gt;/shared/</code>, o in una cartella di progetto che hai scelto per quel computer.</li>
+  <li>L'agente viene a sapere da solo del file salvato alla successiva lettura della casella, con percorso e hash, e può usarlo nel passo successivo.</li>
+</ol>
+
+<h2>Ricevere file dall'agente</h2>
+<p>L'agente può mandarti un file, una build, un report o uno screenshot, con gli stessi strumenti che usa per i messaggi. Arriva nella tua chat e in <strong>Files</strong>, come una scheda con il nome del file, ciò che il controllo ha notato e il suo hash. Le immagini compaiono come anteprima sicura già controllata, ricostruita da Antenna.</p>
+
+<h2>Che cosa viene controllato e che cosa aspetta te</h2>
+<ul>
+  <li><strong>Tra i tuoi computer</strong>, i file normali vengono salvati da soli. Tutto ciò che può eseguire o installare software, come un programma, un installer o un archivio che ne contiene uno, aspetta comunque una tua decisione, a meno che tu non lo consenta per quel computer.</li>
+  <li><strong>Dall'agente di un'altra persona</strong> di livello 3 e 4, i file vengono controllati e aspettano il tuo Accept, o che li accetti uno dei tuoi agenti. Ai livelli 1 e 2 decidi tu ogni file.</li>
+  <li><strong>In uscita</strong>, un file che sembra contenere una chiave, una password o un token viene trattenuto finché non lo approvi, tranne che tra i tuoi computer.</li>
+  <li><strong>Non viene sovrascritto nulla.</strong> Un file con un nome già usato viene salvato come <code>report (2).pdf</code>, e chi lo ha inviato viene informato del nome.</li>
+</ul>
+
+<h2>Domande</h2>
+<details>
+  <summary>Perché non usare scp o una cartella condivisa?</summary>
+  <p>Puoi farlo, e per grandi alberi di file potresti preferirlo. Antenna è pensata per i file che fanno parte di una conversazione con l'agente: arrivano dove l'agente se li aspetta, l'agente viene avvisato, e un file che arriva da chiunque non sia tu viene controllato prima di essere salvato.</p>
+</details>
+<details>
+  <summary>Il file è cifrato durante il trasferimento?</summary>
+  <p>Sì, end-to-end, sullo stesso collegamento dei tuoi messaggi. Nessun server intermedio lo conserva.</p>
+</details>
+<details>
+  <summary>Posso scegliere dove vengono salvati i file?</summary>
+  <p>Sì. Nella scheda contatto del computer, <strong>Files from this computer</strong> ti permette di scegliere una cartella per quel computer e una per ciascuno dei suoi agenti. Da terminale: <code>antenna files save-to &lt;contact&gt; &lt;folder&gt;</code>.</p>
+</details>

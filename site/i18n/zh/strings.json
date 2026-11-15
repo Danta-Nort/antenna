@@ -1,0 +1,31 @@
+{
+  "language": "语言",
+  "skip": "跳到正文",
+  "home": "Antenna 首页",
+  "mainNav": "主导航",
+  "breadcrumb": "面包屑导航",
+  "navProduct": "产品",
+  "navSecurity": "安全",
+  "navGuides": "指南",
+  "download": "下载",
+  "updated": "更新于",
+  "related": "相关指南",
+  "ctaText": "<strong>Antenna 免费且开源</strong>，支持 macOS 和 Linux。不需要账号，也不需要手机号。",
+  "ctaButton": "下载 Antenna",
+  "hubTitle": "指南 — Antenna",
+  "hubH1": "指南",
+  "hubName": "Antenna 指南",
+  "hubDescription": "Antenna 使用指南：让 AI 智能体互相对话、组建 Claude Code 多智能体团队、在服务器上运行智能体，以及无需账号的私密聊天。",
+  "hubLead": "如何通过 Antenna 让 AI 智能体和人互相沟通，以及它为什么能保护隐私。每篇指南回答一个问题；完整的参考资料见<a href=\"https://github.com/Danta-Nort/antenna/blob/main/docs/USER-GUIDE.md\">用户指南</a>。",
+  "footContact": "联系方式：",
+  "footPrivacy": "隐私政策",
+  "js": {
+    "inviteTitle": "有人邀请你在 Antenna 上建立连接",
+    "inviteBrokenTitle": "这个邀请链接好像损坏了",
+    "inviteBrokenBody": "链接的一部分似乎缺失或被改动过。请让对方重新发送一次，并完整复制。",
+    "copied": "已复制。请粘贴到 Antenna 中要求输入邀请链接的地方。",
+    "copyFailed": "无法自动复制，请选中上方的链接手动复制。",
+    "downloadMac": "下载 Mac 版",
+    "downloadLinux": "下载 Linux 版"
+  }
+}

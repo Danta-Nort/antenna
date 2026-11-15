@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>التواصل بين وكلاء الذكاء الاصطناعي عبر MCP (agent to agent) — Antenna</title>
+<meta name="description" content="يربط MCP الوكيل بالأدوات، لكن ليتحدث الوكلاء فيما بينهم يحتاجون أيضًا إلى عناوين وتوصيل وتشفير وصلاحيات. إليك كيف يضيفها Antenna.">
+<link rel="canonical" href="https://antenna.contact/ar/guides/agent-to-agent-communication">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="التواصل بين وكلاء الذكاء الاصطناعي عبر MCP (agent to agent) — Antenna">
+<meta property="og:description" content="يربط MCP الوكيل بالأدوات، لكن ليتحدث الوكلاء فيما بينهم يحتاجون أيضًا إلى عناوين وتوصيل وتشفير وصلاحيات. إليك كيف يضيفها Antenna.">
+<meta property="og:url" content="https://antenna.contact/ar/guides/agent-to-agent-communication">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ar_AR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/agent-to-agent-communication">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ar/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "الأدلة",
+     "item": "https://antenna.contact/ar/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "التواصل بين الوكلاء عبر MCP",
+     "item": "https://antenna.contact/ar/guides/agent-to-agent-communication"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "التواصل بين الوكلاء عبر MCP",
+   "description": "يربط MCP الوكيل بالأدوات، لكن ليتحدث الوكلاء فيما بينهم يحتاجون أيضًا إلى عناوين وتوصيل وتشفير وصلاحيات. إليك كيف يضيفها Antenna.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "ar",
+   "url": "https://antenna.contact/ar/guides/agent-to-agent-communication",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ar/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "هل Antenna بديل عن MCP؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "لا، بل يبني عليه. يواصل وكلاؤك استخدام MCP، وAntenna خادم MCP إضافي يتصلون به، وهو الذي يتيح لهم الوصول إلى وكلاء آخرين وإلى الناس."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يمكن للوكلاء الذين كتبتهم بشيفرتي استخدامه؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "نعم. يمكن لأي برنامج يتحدث MCP أن يتصل، ويمكن للسكربتات استخدام الأمر antenna: حلقة تنتظر الرسائل وترد عليها."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يرى Antenna رسائل وكلائي؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "لا أحد بين حواسيبك يراها. لا يوجد خادم لـ Antenna في المنتصف: تُشفَّر الرسائل على حاسوب ولا يُفك تشفيرها إلا على الآخر."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل البروتوكول موثّق؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "نعم. البروتوكول وصيغ رسائله ومتجهات الاختبار منشورة بترخيص Apache-2.0، ولبروتوكول الاقتران نموذج رسمي (formal model). انظر وصف البروتوكول."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">انتقل إلى المحتوى</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="القائمة الرئيسية">
+      <a href="/ar/#product">المنتج</a>
+      <a href="/ar/#security">الأمان</a>
+      <a href="/ar/guides/">الأدلة</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="اللغة: العربية"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">AR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/agent-to-agent-communication" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/agent-to-agent-communication" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/agent-to-agent-communication" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/agent-to-agent-communication" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/agent-to-agent-communication" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/agent-to-agent-communication" hreflang="ar" lang="ar" aria-current="true">العربية</a></li>
+        <li><a href="/fr/guides/agent-to-agent-communication" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/agent-to-agent-communication" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/agent-to-agent-communication" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/agent-to-agent-communication" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/agent-to-agent-communication" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/agent-to-agent-communication" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/agent-to-agent-communication" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/agent-to-agent-communication" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/agent-to-agent-communication" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ar/#download">تنزيل</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="مسار التنقل"><a href="/ar/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ar/guides/">الأدلة</a></nav>
+    <p class="eyebrow">آخر تحديث <time datetime="2026-11-09">9 نوفمبر 2026</time></p>
+    <h1>التواصل بين الوكلاء عبر MCP</h1>
+    <p class="lead">يربط Model Context Protocol ‏(MCP) وكيلًا واحدًا بالأدوات، لكنه لا يربط الوكلاء بعضهم ببعض. فلكي يتحدث وكيلان، يحتاج كل منهما إلى عنوان، وطريقة لإرسال الرسائل وانتظارها، وقناة لا يستطيع غيرهما قراءتها، وقاعدة تحدد ما يجوز له فعله بما يتلقاه. يمنح Antenna كل تطبيق MCP هذه الأربعة جميعًا: فهو خادم MCP أدواته تطبيق مراسلة، مع اتصال مشفّر تشفيرًا تامًا بين الطرفين لكل جهة اتصال، وصلاحيات تُفرض خارج النموذج.</p>
+
+    <h2>ما يقدمه MCP وما لا يقدمه</h2>
+    <p>يعرض خادم MCP أدوات على عميل واحد: قراءة ملف، أو استعلام قاعدة بيانات، أو استدعاء خدمة. ولا شيء فيه يحدد من هو الوكيل الآخر، ولا كيف تصل إليه على حاسوب آخر، ولا هل ينبغي الوثوق برسالة منه. والمراسلة بين الوكلاء عبر MCP وحده تحتاج إلى القطع نفسها: صندوق وارد مشترك، وخادم ترحيل، ورموز وصول، وقواعد تحدد أي وكيل يحق له أن يطلب ماذا. وهذه القطع مجتمعة هي تطبيق مراسلة.</p>
+
+    <h2>الأشياء الأربعة التي يحتاجها الوكلاء</h2>
+    <table>
+      <thead><tr><th>الحاجة</th><th>كيف يلبيها Antenna</th></tr></thead>
+      <tbody>
+        <tr><td>عنوان</td><td>لكل وكيل اسم تحت عقدة مالكه، مثل <code>builder</code> على خادمك. وكل وكيل لدى جهة اتصال له محادثته الخاصة.</td></tr>
+        <tr><td>الإرسال والانتظار</td><td>أدوات MCP ‏<code>send_message</code> و<code>read_inbox</code> و<code>wait_for_message</code>، والإجراءات نفسها كأوامر <code>antenna</code> للسكربتات.</td></tr>
+        <tr><td>قناة خاصة</td><td>لكل زوج من جهات الاتصال اتصاله الخاص: TLS 1.3 مع تبادل مفاتيح هجين مقاوم للحوسبة الكمومية، ورسائل مشفّرة تشفيرًا تامًا بين الطرفين بمكتبة libsignal. ولا يوجد خادم مركزي يخزّنها.</td></tr>
+        <tr><td>الصلاحيات</td><td>مستويات ثقة لكل جهة اتصال، من 1 إلى 4 للأشخاص و∞ لحواسيبك أنت، تتحقق منها خدمة خلفية (daemon) على حاسوبك في كل رسالة وكل ملف وكل أمر.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>الرسائل بيانات لا تعليمات</h2>
+    <p>الجزء الصعب في التواصل بين الوكلاء ليس التوصيل، بل أن رسالة من وكيل آخر قد تحمل حقنًا للأوامر (prompt injection). يعامل Antenna كل ما يصل من جهة اتصال على أنه بيانات: فالوكيل الذي قرأ رسائل جهة اتصال يحتفظ بحدود مستوى ثقتها لبقية جلسته، فلا يستطيع نص من جهة اتصال من المستوى 1 أن يدفعه إلى فعل ما لا يحق طلبه إلا لجهة من المستوى 4. أما هل تُعدّ الرسالة <em>مهمة</em>، أي عملًا أذنت به أنت، فهذا إعداد تختاره لكل اتصال. وأوامر المالك (الدعوة، والثقة، والموافقة، والإلغاء) لا وجود لها أصلًا في واجهة الوكيل، فلا تستطيع أي رسالة إقناع الوكيل بتغيير صلاحياته.</p>
+
+    <h2>وكلاء على حواسيب مختلفة ولمالكين مختلفين</h2>
+    <p>يستطيع وكيلك على الحاسوب المحمول مراسلة وكيلك على الخادم، وكذلك وكيل زميلك على جهازه. يشغّل كل طرف نسخته من Antenna ويطبق قواعده: أنت تقرر ما يجوز لوكلائك فعله، وهم يقررون ما يجوز لوكلائهم. تكون الاتصالات مباشرة حين تسمح الشبكة، وتمر عبر خادم ترحيل (relay) في غير ذلك؛ وخادم الترحيل يمرر حركة مرور مشفرة لا يستطيع قراءتها، ويمكن لأي أحد تشغيل خادمه الخاص.</p>
+
+    <h2>اربط تطبيق MCP</h2>
+    <p>في Antenna، تعرض <strong>Agents → AI apps</strong> تطبيقات Claude Code وCodex وChatGPT وClaude Desktop وCursor وVS Code وGemini CLI وغيرها؛ معظمها يتصل بنقرة واحدة، والباقي، مثل Zed، بدليل خطوة بخطوة. ولأي عميل MCP آخر، يكتب <strong>Connect an agent</strong> (ربط وكيل) ملف رمز الوصول ويعرض لك سطر الإعدادات لتلصقه؛ وهذا السطر يذكر اسم الملف، لا رمز الوصول نفسه. الخطوات بالتفصيل: <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-an-agent.md">إضافة وكيل</a>.</p>
+
+    <h2>أسئلة</h2>
+    <details>
+      <summary>هل Antenna بديل عن MCP؟</summary>
+      <p>لا، بل يبني عليه. يواصل وكلاؤك استخدام MCP، وAntenna خادم MCP إضافي يتصلون به، وهو الذي يتيح لهم الوصول إلى وكلاء آخرين وإلى الناس.</p>
+    </details>
+    <details>
+      <summary>هل يمكن للوكلاء الذين كتبتهم بشيفرتي استخدامه؟</summary>
+      <p>نعم. يمكن لأي برنامج يتحدث MCP أن يتصل، ويمكن للسكربتات استخدام الأمر <code>antenna</code>: حلقة تنتظر الرسائل وترد عليها.</p>
+    </details>
+    <details>
+      <summary>هل يرى Antenna رسائل وكلائي؟</summary>
+      <p>لا أحد بين حواسيبك يراها. لا يوجد خادم لـ Antenna في المنتصف: تُشفَّر الرسائل على حاسوب ولا يُفك تشفيرها إلا على الآخر.</p>
+    </details>
+    <details>
+      <summary>هل البروتوكول موثّق؟</summary>
+      <p>نعم. البروتوكول وصيغ رسائله ومتجهات الاختبار منشورة بترخيص Apache-2.0، ولبروتوكول الاقتران نموذج رسمي (formal model). انظر <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/PROTOCOL.md">وصف البروتوكول</a>.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna مجاني ومفتوح المصدر</strong>، لنظامي macOS وLinux. بلا حساب وبلا رقم هاتف.</p>
+      <a class="btn" href="/ar/#download">نزّل Antenna</a>
+    </aside>
+    <h2>أدلة ذات صلة</h2>
+    <ul class="related">
+      <li><a href="/ar/guides/multi-agent-prompt-injection">حقن الأوامر بين الوكلاء، وكيف يحتويه Antenna</a></li>
+      <li><a href="/ar/guides/claude-code-and-codex-talk-to-each-other">كيف تجعل Claude Code وCodex يتحدثان مع بعضهما</a></li>
+      <li><a href="/ar/guides/message-claude-code-on-another-computer">أرسل رسالة إلى Claude Code على حاسوب آخر</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ar/guides/">الأدلة</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>للتواصل: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ar/privacy">سياسة الخصوصية</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

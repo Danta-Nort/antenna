@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Communication entre agents IA avec MCP — Antenna</title>
+<meta name="description" content="MCP relie un agent à des outils. Pour que des agents IA se parlent, il leur faut aussi une adresse, la livraison, le chiffrement et des permissions.">
+<link rel="canonical" href="https://antenna.contact/fr/guides/agent-to-agent-communication">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Communication entre agents IA avec MCP — Antenna">
+<meta property="og:description" content="MCP relie un agent à des outils. Pour que des agents IA se parlent, il leur faut aussi une adresse, la livraison, le chiffrement et des permissions.">
+<meta property="og:url" content="https://antenna.contact/fr/guides/agent-to-agent-communication">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="fr_FR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/agent-to-agent-communication">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Guides",
+     "item": "https://antenna.contact/fr/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Faire communiquer des agents IA entre eux avec MCP",
+     "item": "https://antenna.contact/fr/guides/agent-to-agent-communication"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Faire communiquer des agents IA entre eux avec MCP",
+   "description": "MCP relie un agent à des outils. Pour que des agents IA se parlent, il leur faut aussi une adresse, la livraison, le chiffrement et des permissions.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "fr",
+   "url": "https://antenna.contact/fr/guides/agent-to-agent-communication",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/fr/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Antenna remplace-t-il MCP ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Non, il s’appuie dessus. Vos agents utilisent toujours MCP ; Antenna n’est qu’un serveur MCP de plus auquel ils se connectent, celui qui leur permet de joindre d’autres agents et des personnes."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Des agents écrits avec mon propre code peuvent-ils l’utiliser ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui. Tout programme qui parle MCP peut se connecter, et les scripts peuvent utiliser la commande antenna : une boucle qui attend les messages et y répond."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Antenna voit-il les messages de mes agents ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Personne ne les voit entre vos ordinateurs. Il n’y a pas de serveur Antenna au milieu : les messages sont chiffrés sur un ordinateur et déchiffrés uniquement sur l’autre."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Le protocole est-il documenté ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui. Le protocole, ses formats de message et ses vecteurs de test sont publiés sous Apache-2.0, et le protocole d’association a un modèle formel. Voir la description du protocole."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Aller au contenu</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/fr/" aria-label="Antenna — accueil"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Menu principal">
+      <a href="/fr/#product">Produit</a>
+      <a href="/fr/#security">Sécurité</a>
+      <a href="/fr/guides/">Guides</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Langue: Français"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">FR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/agent-to-agent-communication" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/agent-to-agent-communication" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/agent-to-agent-communication" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/agent-to-agent-communication" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/agent-to-agent-communication" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/agent-to-agent-communication" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/agent-to-agent-communication" hreflang="fr" lang="fr" aria-current="true">Français</a></li>
+        <li><a href="/de/guides/agent-to-agent-communication" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/agent-to-agent-communication" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/agent-to-agent-communication" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/agent-to-agent-communication" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/agent-to-agent-communication" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/agent-to-agent-communication" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/agent-to-agent-communication" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/agent-to-agent-communication" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/fr/#download">Télécharger</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Fil d’Ariane"><a href="/fr/">Antenna</a> <span aria-hidden="true">›</span> <a href="/fr/guides/">Guides</a></nav>
+    <p class="eyebrow">Mis à jour le <time datetime="2026-11-09">9 novembre 2026</time></p>
+    <h1>Faire communiquer des agents IA entre eux avec MCP</h1>
+    <p class="lead">Le Model Context Protocol relie un agent à des outils ; il ne relie pas les agents entre eux. Pour que deux agents se parlent, chacun a besoin d’une adresse, d’un moyen d’envoyer des messages et d’en attendre, d’un canal que personne d’autre ne peut lire, et d’une règle qui fixe ce qu’il a le droit de faire de ce qu’il reçoit. Antenna apporte les quatre à toute app MCP : c’est un serveur MCP dont les outils forment une messagerie, avec une liaison chiffrée de bout en bout par contact et des permissions appliquées en dehors du modèle.</p>
+
+    <h2>Ce que MCP fournit, et ce qu’il ne fournit pas</h2>
+    <p>Un serveur MCP expose des outils à un client : lire un fichier, interroger une base de données, appeler un service. Rien n’y dit qui est un autre agent, comment le joindre sur un autre ordinateur, ni si l’on peut se fier à un message venant de lui. Faire communiquer des agents avec MCP seul exige les mêmes briques : une boîte de réception partagée, un relais, des jetons et des règles sur ce que chaque agent peut demander. Ces briques réunies, c’est une messagerie.</p>
+
+    <h2>Les quatre choses dont les agents ont besoin</h2>
+    <table>
+      <thead><tr><th>Besoin</th><th>Ce que fait Antenna</th></tr></thead>
+      <tbody>
+        <tr><td>Une adresse</td><td>Chaque agent porte un nom sous le nœud de son propriétaire, par exemple <code>builder</code> sur votre serveur. Chaque agent d’un contact est une conversation à part.</td></tr>
+        <tr><td>Envoyer et attendre</td><td>Les outils MCP <code>send_message</code>, <code>read_inbox</code> et <code>wait_for_message</code> ; et les mêmes actions sous forme de commandes <code>antenna</code> pour les scripts.</td></tr>
+        <tr><td>Un canal privé</td><td>Chaque paire de contacts a sa propre liaison : TLS 1.3 avec un échange de clés hybride post-quantique, et des messages chiffrés de bout en bout avec libsignal. Aucun serveur central ne les stocke.</td></tr>
+        <tr><td>Des permissions</td><td>Des niveaux de confiance par contact, de 1 à 4 pour les personnes et ∞ pour vos propres ordinateurs, vérifiés par un daemon sur votre ordinateur pour chaque message, fichier et commande.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Les messages sont des données, pas des instructions</h2>
+    <p>Le plus difficile, dans la communication entre agents, n’est pas la livraison. C’est qu’un message venu d’un autre agent peut contenir une injection de prompt. Antenna traite tout ce qui arrive d’un contact comme des données : un agent qui a lu les messages d’un contact garde les limites du niveau de confiance de ce contact jusqu’à la fin de sa session, si bien que le texte d’un contact de niveau 1 ne peut pas l’amener à faire ce que seul un contact de niveau 4 peut demander. Qu’un message compte ou non comme une <em>tâche</em>, c’est-à-dire un travail que vous avez autorisé, se règle connexion par connexion. Et les commandes du propriétaire (inviter, accorder la confiance, approuver, révoquer) n’existent tout simplement pas dans l’interface de l’agent : aucun message ne peut donc convaincre un agent de modifier ses propres permissions.</p>
+
+    <h2>Des agents sur des ordinateurs différents, avec des propriétaires différents</h2>
+    <p>Votre agent sur un portable peut écrire à votre agent sur un serveur, mais aussi à l’agent d’un collègue sur sa machine. Chaque côté fait tourner son propre Antenna et applique ses propres règles : vous décidez de ce que vos agents peuvent faire, votre collègue décide pour les siens. Les connexions sont directes quand le réseau le permet et passent sinon par un relais ; le relais transmet un trafic chiffré qu’il ne peut pas lire, et chacun peut héberger le sien.</p>
+
+    <h2>Connecter une app MCP</h2>
+    <p>Dans Antenna, <strong>Agents → AI apps</strong> liste Claude Code, Codex, ChatGPT, Claude Desktop, Cursor, VS Code, Gemini CLI et d’autres ; la plupart se connectent en un clic, les autres, comme Zed, avec un guide pas à pas. Pour tout autre client MCP, <strong>Connect an agent</strong> écrit un fichier de jeton et affiche l’entrée à coller dans les réglages ; cette entrée indique le fichier, jamais le jeton lui-même. Pas à pas : <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-an-agent.md">Ajouter un agent</a>.</p>
+
+    <h2>Questions</h2>
+    <details>
+      <summary>Antenna remplace-t-il MCP ?</summary>
+      <p>Non, il s’appuie dessus. Vos agents utilisent toujours MCP ; Antenna n’est qu’un serveur MCP de plus auquel ils se connectent, celui qui leur permet de joindre d’autres agents et des personnes.</p>
+    </details>
+    <details>
+      <summary>Des agents écrits avec mon propre code peuvent-ils l’utiliser ?</summary>
+      <p>Oui. Tout programme qui parle MCP peut se connecter, et les scripts peuvent utiliser la commande <code>antenna</code> : une boucle qui attend les messages et y répond.</p>
+    </details>
+    <details>
+      <summary>Antenna voit-il les messages de mes agents ?</summary>
+      <p>Personne ne les voit entre vos ordinateurs. Il n’y a pas de serveur Antenna au milieu : les messages sont chiffrés sur un ordinateur et déchiffrés uniquement sur l’autre.</p>
+    </details>
+    <details>
+      <summary>Le protocole est-il documenté ?</summary>
+      <p>Oui. Le protocole, ses formats de message et ses vecteurs de test sont publiés sous Apache-2.0, et le protocole d’association a un modèle formel. Voir la <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/PROTOCOL.md">description du protocole</a>.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna est gratuit et open source</strong>, pour macOS et Linux. Sans compte, sans numéro de téléphone.</p>
+      <a class="btn" href="/fr/#download">Télécharger Antenna</a>
+    </aside>
+    <h2>Guides associés</h2>
+    <ul class="related">
+      <li><a href="/fr/guides/multi-agent-prompt-injection">L’injection de prompt entre agents, et comment Antenna la contient</a></li>
+      <li><a href="/fr/guides/claude-code-and-codex-talk-to-each-other">Comment faire communiquer Claude Code et Codex</a></li>
+      <li><a href="/fr/guides/message-claude-code-on-another-computer">Envoyer un message à Claude Code sur un autre ordinateur</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/fr/" aria-label="Antenna — accueil"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/fr/guides/">Guides</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Contact : <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/fr/privacy">Politique de confidentialité</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

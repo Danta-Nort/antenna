@@ -1,0 +1,46 @@
+<!--guide {"title": "Claude Code izin isteklerini uzaktan, her bilgisayardan onaylayın", "h1": "Claude Code’un isteklerini başka bir bilgisayardan onaylayın", "description": "Sunucudaki ya da ikinci bilgisayardaki Claude Code onay bekliyorsa Antenna isteği tüm bilgisayarlarınıza getirir; parola ya da Touch ID ile yanıtlarsınız.", "summary": "Başka bir bilgisayardaki Claude Code’dan gelen onay istekleri; hangi bilgisayarınızın başındaysanız oradan yanıtlayın.", "source": "2026-11-15"}-->
+<p class="lead">Claude Code’u Antenna üzerinden başlatın (pencerede Code modunda ya da sunucuda <code>antenna session</code> ile); Antenna daemon’u kullandığı her aracı ve gönderdiği her mesajı denetler. Bir adım sizi gerektirdiğinde bir onay isteğine dönüşür ve kendi bilgisayarınız olarak eşleştirdiğiniz her bilgisayarda, <strong>My devices</strong> (cihazlarım) bölümünde bir bildirimle görünür. İsteği orada o bilgisayarın parolasıyla ya da Touch ID ile onaylayın: Claude Code’un çalıştığı bilgisayar yanıtınızı denetler, adımı uygular ve Claude Code kaldığı yerden devam eder.</p>
+
+<h2>Size neler gelir</h2>
+<ul>
+  <li><strong>Bir kişinin mesajını okuduktan sonraki adımlar.</strong> Claude Code bir ekip arkadaşınızın mesajını okuduktan sonra neler yapabileceğini o kişinin güven seviyesi belirler: 4. seviyede her komut sizi bekler; 2. ve 3. seviyede her düzenleme sizi bekler, komutlar ise reddedilir.</li>
+  <li><strong>Kendi kurulumundaki değişiklikler.</strong> Herhangi bir kişinin mesajını okuduktan sonra, bu mesaj kendi dizüstünüzden gelse bile, <code>CLAUDE.md</code>, <code>.claude/</code>, kabuk profilleri, anahtarlar ve <code>package.json</code> gibi derleme dosyalarındaki düzenlemeler sizi bekler.</li>
+  <li><strong>Verilerinizi dışarı taşıyacak mesajlar.</strong> Projenizin dosyalarını okuduktan sonra ∞ altındaki bir kişiye gönderdiği her mesaj sizi bekler; böyle bir kişiye giden ve anahtar, parola ya da token içeriyor gibi görünen her mesaj da öyle. Bir sohbeti okuduktan sonra başka bir sohbete yazdığı mesaj da bekler.</li>
+  <li><strong>Sorular.</strong> <em>Deneysel.</em> Bir ajanın soruları, çalıştığı bilgisayarda <strong>Questions from your agents</strong> (ajanlarınızdan gelen sorular) altında görünür. Bunları dizüstünüzde almak için o bilgisayarda <code>antenna agent escalate api-dev --to mac</code> komutunu çalıştırın: her soru ajanın sohbetine gelir ve sohbette yanıtlarsınız.</li>
+</ul>
+<p>Claude Code’un kendi izin sorusu (“Do you want to proceed?”) kendi terminalinde kalır: Antenna oraya asla bir şey yazmaz. Sürekli kullandığınız araçlara Claude Code’un ayarlarından izin verin ya da bu soruyu <code>antenna session attach</code> ile yanıtlayın.</p>
+
+<h2>Kurulum</h2>
+<ol>
+  <li>İki bilgisayara da <a href="/#download">Antenna’yı kurun</a> ve onları <strong>This is my own computer (∞)</strong> (bu benim kendi bilgisayarım) işaretli olarak bir kez eşleştirin; adımlar <a href="/guides/run-claude-code-on-a-vps">VPS’te Claude Code</a> rehberindekiyle aynı.</li>
+  <li>Claude Code’u Antenna üzerinden başlatın. Masaüstünde: <strong>Agents → AI apps → Start in Code mode</strong>. Sunucuda:
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api</code></pre></li>
+  <li>Claude Code’un çalıştığı bilgisayarda, onay vereceğiniz bilgisayardan gelen yanıtları kabul edin: <strong>My devices</strong> → o bilgisayarın kartı → <strong>Approvals</strong> (onaylar) → <strong>Accept approvals signed with …</strong> (şu anahtarla imzalanmış onayları kabul et), parolanızla. Sunucuda: <code>antenna devices confirm mac</code>.</li>
+</ol>
+
+<h2>Herhangi bir bilgisayardan yanıtlayın</h2>
+<p>İstek, soran bilgisayarın <strong>My devices</strong> içindeki kartında (<em>deneysel</em>), “Antenna: approval needed on Mac mini” gibi bir bildirimle görünür. Kart hangi ajanın, ne için ve neden sorduğunu söyler ve metnini alıntılar; içinde gizli bilgi olan metin hariç, çünkü o metin soran bilgisayardan asla çıkmaz. Mac’te <strong>Approve with Touch ID</strong> (<em>deneysel</em>), başında olduğunuz bilgisayarın parolasıyla <strong>Approve with password</strong> ya da <strong>Deny</strong> (reddet) düğmesine basın.</p>
+<p>Soran bilgisayar imzayı orada kabul ettiğiniz anahtarlara, kendi tek kullanımlık challenge değerine ve tam olarak bu isteğe göre denetler, ardından isteği kendisi ve yalnızca bir kez uygular. O bilgisayarın kendisinde istek <strong>Approval requests</strong> (onay istekleri) içinde, terminalde ise <code>antenna approvals</code> ve <code>antenna approve &lt;id&gt;</code> ile görünür.</p>
+<p>Claude Code 50 saniyeye kadar bekler ve bu süre içinde onaylanan adım hemen çalışır. Daha geç kalırsanız başka işlere geçer; onayladığınızda Antenna istem satırına “Approved — continue.” yazar ve Claude Code adımı yeniden çalıştırır.</p>
+
+<h2>Kimse yanıt vermezse</h2>
+<p>Bir istek 10 dakika sonra kapanır: hiçbir şey çalışmaz, hiçbir şey gönderilmez ve Claude Code kimsenin onaylamadığını öğrenir. Bundan kısa süre önce bir bildirim sizi uyarır. Parola gerektirmeyen <strong>Deny</strong> düğmesinden sonra Claude Code hayır dediğinizi öğrenir.</p>
+
+<h2>Sizin yerinize onaylayan bir ajan</h2>
+<p><em>Deneysel.</em> <strong>Agents</strong> bölümündeki <strong>Can approve for…</strong> (şunlar için onaylayabilir) seçeneği, güvendiğiniz bir ajanın diğer ajanlarınızın mesajlar ve dosyalarla ilgili isteklerini yanıtlamasına izin verir; yanıtı yalnızca isteğin dokunduğu her şey ∞ seviyesindeyse geçerli olur. Komutlar ve düzenlemeler her zaman size gelir.</p>
+
+<h2>Sorular</h2>
+<details>
+  <summary>Bu Codex ile çalışıyor mu?</summary>
+  <p>Kısmen. Codex’in Antenna üzerinden gönderdikleri aynı şekilde denetlenir ve bu istekler tüm bilgisayarlarınıza ulaşır; Codex’in kendi komutları ise terminalindeki Codex onaylarına bağlı kalır.</p>
+</details>
+<details>
+  <summary>Herhangi bir bilgisayar onay verebilir mi?</summary>
+  <p>Hayır. Yalnızca kendi bilgisayarınız olarak eşleştirdiğiniz ve anahtarlarını soran bilgisayarda kabul ettiğiniz bir bilgisayar, parolayla. Kaybolan bir bilgisayar için diğerlerinin her birinde <strong>Revoke this computer</strong> (bu bilgisayarın yetkisini kaldır) seçeneğini kullanın.</p>
+</details>
+<details>
+  <summary>Telefonumdan onaylayabilir miyim?</summary>
+  <p>Henüz değil. Antenna bugün macOS ve Linux’ta çalışıyor.</p>
+</details>

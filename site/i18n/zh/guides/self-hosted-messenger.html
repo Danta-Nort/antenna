@@ -1,0 +1,37 @@
+<!--guide {"title": "无需搭建服务器的自托管（Self-hosted）聊天软件 — Antenna", "h1": "不用自己搭服务器的自托管聊天软件", "description": "Antenna 把每条消息都只保存在聊天双方的电脑上。默认什么都不用托管；需要时再加一个常驻节点或自建中继。", "summary": "为什么 Antenna 不需要服务器，以及需要时如何加一个常驻节点或自建中继。", "source": "2026-11-09"}-->
+<p class="lead">人们自托管聊天软件，是为了不让自己的消息留在别人的服务器上。Antenna 干脆连服务器都不要，就做到了这一点：每个人在自己的电脑上运行 Antenna，消息在这些电脑之间端到端加密传输，聊天记录只保存在那里的加密数据库中。如果你想要更多掌控，可以加一个常驻在线的 Linux 节点，或者自己运行中继，两者都是开源的。</p>
+
+<h2>自托管服务器通常意味着什么</h2>
+<p>传统的自托管聊天软件，是一台需要你安装、更新、备份并保持在线的服务器，上面保存着所有使用者的每个账号和每条消息。它把信任从一家公司转移到了你身上，随之转移过来的还有工作量和风险：服务器一旦被攻破，所有人的聊天记录也就跟着泄露了。</p>
+
+<h2>Antenna 的做法</h2>
+<ul>
+  <li><strong>没有需要托管的账号。</strong>你的身份是你电脑上的一把密钥，由你的密码保护。添加联系人只需一个一次性邀请链接和一个通过语音核对的验证码。</li>
+  <li><strong>中间没有消息存储。</strong>你的聊天记录保存在你的电脑上的 SQLCipher 加密数据库中，以及对方的电脑上。</li>
+  <li><strong>没有需要保持在线的服务器。</strong>网络允许时两台电脑直接连接，否则经过一个只转发加密流量、什么都不保存的中继。</li>
+</ul>
+
+<h2>加一个常驻节点</h2>
+<p>笔记本会休眠，服务器不会。如果想让你的 AI 智能体全天候都能联系上，就在一台 Linux 服务器（x86_64）上安装 Antenna 节点：解压发布包并运行 <code>./install.sh</code>，它会在不需要 root 的情况下设置一个 systemd 用户服务；也可以安装 <code>.deb</code> 或 <code>.rpm</code> 包。然后像添加联系人一样把它和你的电脑配对，级别选 <strong>∞ · My computer</strong>。详细步骤见：<a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md">添加服务器</a>。</p>
+<p>重启后，节点的密钥会保持锁定，直到你登录并运行 <code>antenna unlock</code>：即使磁盘镜像被盗，也没人能拿到你的密钥。</p>
+
+<h2>自建中继</h2>
+<p>中继是唯一共享的部分，它只能看到加密的数据包，以及哪些端点在通过它通信。如果你希望这台机器是你自己的，就运行开源的 <code>iroh-relay</code>，并用 <code>antennad --relay &lt;your relay URL&gt;</code> 启动你的节点。信任级别为 1 和 2 的联系人始终通过中继连接，所以他们永远不会知道你的 IP 地址。</p>
+
+<h2>常见问题</h2>
+<details>
+  <summary>我的家人能用吗？</summary>
+  <p>在电脑上可以：Antenna 0.1 支持 macOS（Apple Silicon）和 Linux。目前还没有手机版。</p>
+</details>
+<details>
+  <summary>中继会为离线的联系人保存消息吗？</summary>
+  <p>不会。发给离线联系人的消息会在你自己的电脑上等待，等对方上线后自动发出。</p>
+</details>
+<details>
+  <summary>有什么是我必须托管的吗？</summary>
+  <p>没有。Antenna 使用默认中继就能工作，不需要你自己的任何服务器。节点和中继只在你需要时才用。</p>
+</details>
+<details>
+  <summary>服务器上怎么更新？</summary>
+  <p>用 <code>install.sh</code> 安装的节点通过 <code>antenna update</code> 更新，它会先校验发布签名；用软件包安装的，就通过你的包管理器更新。</p>
+</details>

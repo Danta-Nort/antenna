@@ -1,0 +1,49 @@
+<!--guide {"title": "Claude Code na VPS 24/7, sterowany z laptopa — Antenna", "h1": "Claude Code na VPS przez całą dobę, z rozmową z laptopa", "description": "Zainstaluj Antennę na VPS, uruchom przez nią Claude Code albo Codex i zlecaj zadania z czatu na laptopie. Bez otwartych portów i bez podtrzymywanej sesji SSH.", "summary": "Claude Code albo Codex stale działający na twoim serwerze, z którym rozmawiasz z laptopa przez czat.", "source": "2026-11-09"}-->
+<p class="lead">Zainstaluj Claude Code i węzeł Antenny na swoim VPS z Linuksem, raz połącz serwer z laptopem i uruchom Claude Code przez Antennę w folderze projektu. Od tej chwili działa we własnej sesji tmux także po wylogowaniu, budzi się, gdy przyjdzie do niego wiadomość, i odpowiada na czacie na twoim laptopie. Nie trzeba otwierać portu przychodzącego ani podtrzymywać sesji SSH, a Codex działa tak samo.</p>
+
+<h2>Czego potrzebujesz</h2>
+<ul>
+  <li>Serwera z Linuksem na x86_64, z zainstalowanym i zalogowanym Claude Code (albo Codex) oraz tmuxem.</li>
+  <li><a href="/#download">Antenny</a> na laptopie: macOS albo Linux.</li>
+</ul>
+
+<h2>1. Zainstaluj węzeł Antenny na serwerze</h2>
+<pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+sudo loginctl enable-linger $USER</code></pre>
+<p>Instalator odczytuje najnowsze wydanie z podpisanego manifestu, sprawdza archiwum, instaluje <code>antennad</code> i <code>antenna</code> do <code>~/.local/bin</code> jako usługę użytkownika systemd (root nie jest potrzebny) i tworzy twój węzeł z hasłem. Druga linia sprawia, że usługa działa dalej po wylogowaniu. Na Ubuntu albo Fedorze możesz zamiast tego zainstalować pakiet <code>.deb</code> albo <code>.rpm</code>.</p>
+
+<h2>2. Połącz serwer z laptopem</h2>
+<p>Na laptopie: <strong>New contact → Invite</strong>, nadaj nazwę, zaznacz <strong>This is my own computer (∞)</strong>, kliknij <strong>Create link</strong> i skopiuj link. Na serwerze:</p>
+<pre><code>antenna join '&lt;link&gt;' --trust 5 --label mac</code></pre>
+<p>Zostaw pojedyncze cudzysłowy: link zawiera znak <code>#</code>. Wpisz w terminalu serwera kod pokazany na laptopie, a potem na laptopie kliknij <strong>The contact confirmed — codes match</strong>. Poziom 5 to ∞ po obu stronach, więc serwer liczy się jako twój własny komputer.</p>
+
+<h2>3. Uruchom Claude Code przez Antennę</h2>
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api
+antenna session attach api-dev</code></pre>
+<p>Linia z connect daje sesji własnego agenta i token oraz wysyła powitanie, więc na laptopie pojawia się czat <code>api-dev</code>. Linia ze start uruchamia Claude Code na własnym serwerze tmux Antenny (twojego tmuxa nic nie dotyka). Podłącz się raz, żeby odpowiedzieć na pierwsze pytania Claude Code, na przykład czy ufa temu folderowi, a potem odłącz się skrótem <code>Ctrl-b d</code>: Claude Code działa dalej. W przypadku Codexa użyj <code>antenna connect codex</code> i <code>--cli codex</code>.</p>
+
+<h2>4. Rozmawiaj z nim</h2>
+<p>Napisz na czacie <code>api-dev</code> na laptopie: „Uruchom testy migracji i napraw to, co nie przechodzi”. Gdy Claude Code czeka bezczynnie przy swoim prompcie, Antenna wpisuje jedną krótką linię, żeby przeczytał twoją wiadomość; nigdy nie wpisuje tekstu od kontaktu i nigdy nie odpowiada za niego na pytania. Karta serwera w <strong>My devices</strong> pokazuje jego stan i agentów, a jego prośby możesz zatwierdzać z laptopa.</p>
+
+<h2>Po restarcie</h2>
+<p>Po restarcie serwera klucze węzła są zablokowane: usługa działa, ale połączenia milczą, dopóki się nie zalogujesz i nie uruchomisz <code>antenna unlock</code>. Dzięki temu kopia dysku serwera nikomu nie da twoich kluczy. <code>antenna status</code> pokazuje, czy węzeł jest zablokowany.</p>
+
+<h2>Pytania</h2>
+<details>
+  <summary>Czemu nie po prostu SSH i tmux?</summary>
+  <p>To działa, dopóki siedzisz przy terminalu. Antenna dodaje czat, do którego możesz napisać z laptopa w każdej chwili, budzi sesję, gdy to zrobisz, i pozwala innym agentom zlecać jej pracę, z uprawnieniami, które sama sprawdza.</p>
+</details>
+<details>
+  <summary>Czy serwer potrzebuje publicznego IP albo otwartych portów?</summary>
+  <p>Nie. Obie strony łączą się na zewnątrz, bezpośrednio, gdy pozwala na to sieć, a w przeciwnym razie przez przekaźnik (relay). Przekaźnik przekazuje wyłącznie zaszyfrowany ruch.</p>
+</details>
+<details>
+  <summary>Czy mogę uruchomić kilka sesji na jednym serwerze?</summary>
+  <p>Tak: jeden agent na folder projektu, każdy z własną nazwą i własnym czatem na laptopie.</p>
+</details>
+<details>
+  <summary>Czy jest wersja na ARM?</summary>
+  <p>Jeszcze nie. Węzeł serwerowy jest budowany na Linuksa x86_64.</p>
+</details>

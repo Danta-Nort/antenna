@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-only
-// Window appearance: theme (light by default, dark following the system or via the switch), language (English by
-// default, Russian if the system language is Russian, or an explicit choice in "Settings") and the interface mode
+// Window appearance: theme (light by default, dark following the system or via the switch), language (the system's
+// language when the window has it, otherwise English, or an explicit choice in "Settings") and the interface mode
 // (Chat by default; Code puts the agents' terminals in the window).
 // The choice is kept in a small window settings file, `{"theme": …, "lang": …, "ui": …, "code_offered": …,
 // "self_notice_shown": …, "agent_runs": {agent: {cli, dir, cmd?, session?, token_file?, restore?, running?, started_ms?,
@@ -20,7 +20,7 @@ import 'agent_map_prefs.dart';
 enum ThemeChoice { system, light, dark }
 
 /// Window language: "same as system" or explicit.
-enum LangChoice { system, en, ru }
+enum LangChoice { system, en, es, pt, zh, hi, fr, de, ja, ko, tr, it, pl, ru, uk }
 
 /// Interface mode: Chat (conversations only) or Code (plus the agents' terminals next to the conversation).
 enum InterfaceMode { chat, code }
@@ -38,17 +38,16 @@ enum RolePreset {
   final int level;
 }
 
-/// Window languages (in `supportedLocales` order); English is the default.
-const windowLanguages = ['en', 'ru'];
+/// Window languages in the order the language picker lists them (English, Spanish, Portuguese, then by speakers);
+/// English is the default. Arabic waits for a right-to-left pass of the layout.
+final windowLanguages = [for (final c in LangChoice.values) if (c != LangChoice.system) c.name];
 
 /// Window language from the choice and the system languages ([system] is `PlatformDispatcher.locales`, in order of
 /// preference): "same as system" picks the first system language the window knows; if none, English.
-Locale resolveLanguage(LangChoice choice, List<Locale> system) => switch (choice) {
-      LangChoice.en => const Locale('en'),
-      LangChoice.ru => const Locale('ru'),
-      LangChoice.system => Locale(
-          system.map((l) => l.languageCode).firstWhere(windowLanguages.contains, orElse: () => windowLanguages.first)),
-    };
+Locale resolveLanguage(LangChoice choice, List<Locale> system) => choice == LangChoice.system
+    ? Locale(
+        system.map((l) => l.languageCode).firstWhere(windowLanguages.contains, orElse: () => windowLanguages.first))
+    : Locale(choice.name);
 
 /// The `agent_runs` entries of the settings file, as Code mode reads and writes them: how each agent was last started
 /// (`cli`, `dir`, `cmd`) and what a restore after an update needs (code_restore.dart): `session`, `token_file` (the

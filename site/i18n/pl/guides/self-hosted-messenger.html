@@ -1,0 +1,37 @@
+<!--guide {"title": "Komunikator self-hosted bez serwera do utrzymywania — Antenna", "h1": "Komunikator self-hosted, który nie wymaga stawiania serwera", "description": "Antenna trzyma każdą wiadomość na komputerach rozmawiających osób. Domyślnie nic nie hostujesz; stały węzeł albo własny przekaźnik dodasz tylko, jeśli chcesz.", "summary": "Dlaczego Antenna nie potrzebuje serwera i jak dodać stały węzeł albo własny przekaźnik, gdy go chcesz.", "source": "2026-11-09"}-->
+<p class="lead">Ludzie hostują komunikator samodzielnie, żeby ich wiadomości nie leżały na cudzym serwerze. Antenna osiąga to samo w ogóle bez serwera: każdy uruchamia Antennę na własnym komputerze, wiadomości idą między tymi komputerami zaszyfrowane end-to-end, a historia jest przechowywana tylko na nich, w zaszyfrowanej bazie danych. Jeśli chcesz mieć większą kontrolę, możesz dodać stale działający węzeł na Linuksie albo postawić własny przekaźnik (relay) — oba są open source.</p>
+
+<h2>Co zwykle oznacza serwer self-hosted</h2>
+<p>Klasyczny komunikator self-hosted to serwer, który instalujesz, aktualizujesz, z którego robisz kopie zapasowe i który utrzymujesz online, a który przechowuje wszystkie konta i wszystkie wiadomości wszystkich użytkowników. Przenosi on zaufanie z firmy na ciebie, a razem z nim pracę i ryzyko: jeśli ktoś włamie się na serwer, ma historię wszystkich.</p>
+
+<h2>Co Antenna robi zamiast tego</h2>
+<ul>
+  <li><strong>Żadnych kont do hostowania.</strong> Twoja tożsamość to klucz na twoim komputerze, chroniony twoim hasłem. Ludzi dodajesz jednorazowym linkiem z zaproszeniem i kodem porównywanym głosowo.</li>
+  <li><strong>Żadnego magazynu wiadomości pośrodku.</strong> Twoja historia jest na twoim komputerze, w bazie danych zaszyfrowanej SQLCipherem, oraz na komputerze drugiej osoby.</li>
+  <li><strong>Żadnego serwera do utrzymywania online.</strong> Dwa komputery łączą się bezpośrednio, gdy pozwala na to sieć, a w przeciwnym razie przez przekaźnik, który przekazuje zaszyfrowany ruch i niczego nie przechowuje.</li>
+</ul>
+
+<h2>Dodaj stale działający węzeł</h2>
+<p>Laptop usypia, serwer nie. Żeby twoi agenci AI byli osiągalni przez całą dobę, zainstaluj węzeł Antenny na serwerze z Linuksem (x86_64): rozpakuj wydanie i uruchom <code>./install.sh</code>, który konfiguruje usługę użytkownika systemd bez roota, albo zainstaluj pakiet <code>.deb</code> lub <code>.rpm</code>. Potem połącz go ze swoim komputerem jak kontakt, na poziomie <strong>∞ · My computer</strong>. Krok po kroku: <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md">dodawanie serwera</a>.</p>
+<p>Po restarcie klucze węzła pozostają zablokowane, dopóki się nie zalogujesz i nie uruchomisz <code>antenna unlock</code>: skradziony obraz dysku nikomu nie da twoich kluczy.</p>
+
+<h2>Postaw własny przekaźnik</h2>
+<p>Przekaźnik to jedyny wspólny element i widzi tylko zaszyfrowane pakiety oraz to, które punkty końcowe się przez niego komunikują. Jeśli wolisz, żeby była to twoja własna maszyna, uruchom open source’owy <code>iroh-relay</code> i startuj swój węzeł poleceniem <code>antennad --relay &lt;your relay URL&gt;</code>. Kontakty z poziomem zaufania 1 i 2 zawsze łączą się przez przekaźnik, więc nigdy nie poznają twojego adresu IP.</p>
+
+<h2>Pytania</h2>
+<details>
+  <summary>Czy moja rodzina może z tego korzystać?</summary>
+  <p>Na komputerach tak: Antenna 0.1 działa na macOS (Apple Silicon) i Linuksie. Aplikacji na telefon jeszcze nie ma.</p>
+</details>
+<details>
+  <summary>Czy przekaźnik przechowuje wiadomości dla kontaktów offline?</summary>
+  <p>Nie. Wiadomość dla kontaktu, który jest offline, czeka na twoim własnym komputerze i wychodzi sama, gdy kontakt wróci.</p>
+</details>
+<details>
+  <summary>Czy muszę cokolwiek hostować?</summary>
+  <p>Nie. Antenna działa z domyślnym przekaźnikiem i bez żadnego twojego serwera. Węzeł i przekaźnik są na wypadek, gdy ich zechcesz.</p>
+</details>
+<details>
+  <summary>Jak działają aktualizacje na serwerze?</summary>
+  <p>Węzeł zainstalowany przez <code>install.sh</code> aktualizujesz poleceniem <code>antenna update</code>, które najpierw sprawdza podpis wydania; instalację z pakietu aktualizujesz menedżerem pakietów.</p>
+</details>

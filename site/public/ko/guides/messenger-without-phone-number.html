@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>전화번호·이메일 없이 쓰는 보안 메신저 — Antenna</title>
+<meta name="description" content="Antenna는 전화번호, 이메일, 계정이 필요 없어요. 내 컴퓨터에 있는 키가 곧 나이고, 일회용 링크와 음성으로 확인하는 코드로 사람을 추가해요.">
+<link rel="canonical" href="https://antenna.contact/ko/guides/messenger-without-phone-number">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="전화번호·이메일 없이 쓰는 보안 메신저 — Antenna">
+<meta property="og:description" content="Antenna는 전화번호, 이메일, 계정이 필요 없어요. 내 컴퓨터에 있는 키가 곧 나이고, 일회용 링크와 음성으로 확인하는 코드로 사람을 추가해요.">
+<meta property="og:url" content="https://antenna.contact/ko/guides/messenger-without-phone-number">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ko_KR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/messenger-without-phone-number">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ko/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "가이드",
+     "item": "https://antenna.contact/ko/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "전화번호도 이메일도 없이 쓰는 비공개 메신저",
+     "item": "https://antenna.contact/ko/guides/messenger-without-phone-number"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "전화번호도 이메일도 없이 쓰는 비공개 메신저",
+   "description": "Antenna는 전화번호, 이메일, 계정이 필요 없어요. 내 컴퓨터에 있는 키가 곧 나이고, 일회용 링크와 음성으로 확인하는 코드로 사람을 추가해요.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "ko",
+   "url": "https://antenna.contact/ko/guides/messenger-without-phone-number",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ko/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "스마트폰 앱이 있나요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "아직은 없어요. Antenna 0.1은 컴퓨터용이에요. Apple Silicon의 macOS와 Linux에서 돌아가요."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "비밀번호를 잃어버리면 어떻게 되나요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "복구할 수 없어요. 내 키의 사본을 가진 사람이 아무도 없다는 게 핵심이니까요. 노드를 새로 만들고 연락처들을 다시 초대해야 해요."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "누가 검색으로 나를 찾을 수 있나요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "아니요. 디렉터리가 없어요. 사람들은 둘 중 한 명이 상대에게 준 초대 링크로만 나에게 닿을 수 있어요."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "무료인가요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "네, AGPL-3.0 라이선스의 오픈소스예요. 프로토콜은 Apache-2.0으로 공개되어 있어요."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ko/" aria-label="Antenna 홈"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="주 메뉴">
+      <a href="/ko/#product">제품</a>
+      <a href="/ko/#security">보안</a>
+      <a href="/ko/guides/">가이드</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="언어: 한국어"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">KO</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/messenger-without-phone-number" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/messenger-without-phone-number" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/messenger-without-phone-number" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/messenger-without-phone-number" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/messenger-without-phone-number" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/messenger-without-phone-number" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/messenger-without-phone-number" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/messenger-without-phone-number" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/messenger-without-phone-number" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/messenger-without-phone-number" hreflang="ko" lang="ko" aria-current="true">한국어</a></li>
+        <li><a href="/tr/guides/messenger-without-phone-number" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/messenger-without-phone-number" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/messenger-without-phone-number" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/messenger-without-phone-number" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/messenger-without-phone-number" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ko/#download">다운로드</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="현재 위치"><a href="/ko/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ko/guides/">가이드</a></nav>
+    <p class="eyebrow">업데이트 <time datetime="2026-11-09">2026년 11월 9일</time></p>
+    <h1>전화번호도 이메일도 없이 쓰는 비공개 메신저</h1>
+    <p class="lead">Antenna는 macOS와 Linux용 무료 오픈소스 메신저로, 전화번호도, 이메일도, 계정도 요구하지 않아요. 내 신원은 내 컴퓨터에서 만들어진 키이고, 나만 아는 비밀번호로 보호돼요. 상대를 추가할 때는 일회용 초대 링크를 보내고 여섯 자리 코드를 음성이나 직접 만나서 비교해요. 그래서 누구도 번호로 나를 찾을 수 없고, 어떤 서버도 내 대화를 읽거나 서로 엮을 수 없어요.</p>
+
+    <h2>메신저가 전화번호를 묻는 이유</h2>
+    <p>전화번호는 연락처를 찾고 스팸을 막기에 편한 수단이라서 대부분의 메신저가 요구해요. 하지만 번호는 내 이름, 통신사, 그리고 종종 주소와도 연결돼 있고, 번호를 아는 누구나 나를 찾아볼 수 있게 해요. 번호를 알려 주고 싶지 않다면, 다른 방법으로 사람을 찾는 메신저가 필요해요.</p>
+
+    <h2>Antenna 시작하기</h2>
+    <ol>
+      <li><a href="/ko/#download">Antenna를 내려받아</a> 여세요.</li>
+      <li>비밀번호를 정하세요. 이 컴퓨터에 있는 키를 보호하고, 복구할 수 없으니 잘 보관하세요.</li>
+      <li>가입은 이게 전부예요. 서버에 프로필이 없어요. 프로필을 보관하는 서버 자체가 없으니까요.</li>
+    </ol>
+
+    <h2>사람 추가하기</h2>
+    <p><strong>New contact → Invite</strong>를 누르고, 얼마나 신뢰할지 고른 다음, 원하는 방법으로 링크를 보내세요. 상대가 링크를 열면 내 화면에 여섯 자리 코드(또는 동물 여섯 마리)가 나타나요. 통화나 직접 만나서 읽어 주면 상대가 입력하고, Antenna가 확인해요. 일치하면 중간에 아무도 없었다는 뜻이에요. 링크는 한 번만, 내가 정한 시간 동안만 유효해서 나중에 새어 나가도 쓸모가 없고, 링크를 가로챈 사람도 코드는 몰라요.</p>
+
+    <h2>계정 대신 얻는 것</h2>
+    <ul>
+      <li><strong>연락처마다 별도의 연결.</strong> 대화마다 자기 키가 있고, 양자 내성 보호가 적용된 종단 간 암호화를 써요.</li>
+      <li><strong>신뢰 레벨.</strong> 텍스트만 오가는 1부터 파트너를 위한 4까지, 그리고 내 컴퓨터끼리는 ∞예요. 레벨에 따라 연락처가 내게 무엇을 보낼 수 있는지, 내가 온라인인지 볼 수 있는지, 내 IP 주소를 볼 수 있는지가 정해져요. 레벨 1과 2는 항상 릴레이를 거쳐요.</li>
+      <li><strong>확인할 수 있는 대화 기록.</strong> 메시지는 서명되고 서로 연결되며, 양쪽이 사본을 비교해서 바뀌거나 빠진 메시지가 드러나요.</li>
+      <li><strong>에이전트도 환영해요.</strong> Claude Code나 ChatGPT 같은 AI 비서가 자기 이름으로, 내가 준 권한만 갖고 채팅에 참여할 수 있어요.</li>
+    </ul>
+
+    <h2>자주 묻는 질문</h2>
+    <details>
+      <summary>스마트폰 앱이 있나요?</summary>
+      <p>아직은 없어요. Antenna 0.1은 컴퓨터용이에요. Apple Silicon의 macOS와 Linux에서 돌아가요.</p>
+    </details>
+    <details>
+      <summary>비밀번호를 잃어버리면 어떻게 되나요?</summary>
+      <p>복구할 수 없어요. 내 키의 사본을 가진 사람이 아무도 없다는 게 핵심이니까요. 노드를 새로 만들고 연락처들을 다시 초대해야 해요.</p>
+    </details>
+    <details>
+      <summary>누가 검색으로 나를 찾을 수 있나요?</summary>
+      <p>아니요. 디렉터리가 없어요. 사람들은 둘 중 한 명이 상대에게 준 초대 링크로만 나에게 닿을 수 있어요.</p>
+    </details>
+    <details>
+      <summary>무료인가요?</summary>
+      <p>네, AGPL-3.0 라이선스의 오픈소스예요. 프로토콜은 Apache-2.0으로 공개되어 있어요.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna는 무료 오픈소스예요.</strong> macOS와 Linux에서 쓸 수 있고, 계정도 전화번호도 필요 없어요.</p>
+      <a class="btn" href="/ko/#download">Antenna 다운로드</a>
+    </aside>
+    <h2>관련 가이드</h2>
+    <ul class="related">
+      <li><a href="/ko/guides/peer-to-peer-encrypted-messenger">양자 내성 암호화를 쓰는 오픈소스 P2P 메신저</a></li>
+      <li><a href="/ko/guides/self-hosted-messenger">운영할 서버가 필요 없는 셀프 호스팅 메신저</a></li>
+      <li><a href="/ko/guides/chatgpt-and-claude-talk-to-each-other">ChatGPT와 Claude가 서로 대화하게 하는 방법</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ko/" aria-label="Antenna 홈"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ko/guides/">가이드</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>문의: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ko/privacy">개인정보 처리방침</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

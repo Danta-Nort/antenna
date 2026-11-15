@@ -43,10 +43,13 @@ import 'stream_bubble.dart';
 import 'thread_bar.dart';
 
 class ChatView extends StatelessWidget {
-  const ChatView({super.key, this.cardVisible = false, this.onToggleCard});
+  const ChatView({super.key, this.cardVisible = false, this.onToggleCard, this.onOpenAgents});
 
   final bool cardVisible;
   final VoidCallback? onToggleCard;
+
+  /// Open Agents, where the AI apps found on this computer connect in one click: offered before the first contact.
+  final VoidCallback? onOpenAgents;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +58,7 @@ class ChatView extends StatelessWidget {
     return ColoredBox(
       color: XColors.bg1,
       child: c == null
-          ? const _NoSelection()
+          ? _NoSelection(onOpenAgents: onOpenAgents)
           : Column(children: [
               ChatHeader(c, cardVisible: cardVisible, onToggleCard: onToggleCard),
               const Divider(height: 1),
@@ -799,7 +802,9 @@ class _HistoryHead extends StatelessWidget {
 }
 
 class _NoSelection extends StatelessWidget {
-  const _NoSelection();
+  const _NoSelection({this.onOpenAgents});
+
+  final VoidCallback? onOpenAgents;
 
   @override
   Widget build(BuildContext context) {
@@ -831,6 +836,16 @@ class _NoSelection extends StatelessWidget {
               label: Text(context.l.commonJoin),
             ),
           ]),
+          // Many start with their own agents, not a person: the AI apps need no contact, so they are offered here too.
+          if (m.contacts.isEmpty && onOpenAgents != null && m.aiAppsAvailable) ...[
+            const SizedBox(height: 12),
+            TextButton.icon(
+              key: const Key('first-connect-agent'),
+              onPressed: onOpenAgents,
+              icon: const Icon(Icons.smart_toy_outlined, size: 18),
+              label: Text(context.l.chatFirstConnectAgent),
+            ),
+          ],
         ]),
       ),
     );

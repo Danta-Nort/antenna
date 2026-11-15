@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VPS에서 Claude Code 24시간 돌리고 노트북에서 대화하기 — Antenna</title>
+<meta name="description" content="VPS에 Antenna를 설치하고 Claude Code나 Codex를 실행한 뒤, 노트북 채팅으로 작업을 맡기세요. 포트를 열 필요도, SSH 세션을 유지할 필요도 없어요.">
+<link rel="canonical" href="https://antenna.contact/ko/guides/run-claude-code-on-a-vps">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="VPS에서 Claude Code 24시간 돌리고 노트북에서 대화하기 — Antenna">
+<meta property="og:description" content="VPS에 Antenna를 설치하고 Claude Code나 Codex를 실행한 뒤, 노트북 채팅으로 작업을 맡기세요. 포트를 열 필요도, SSH 세션을 유지할 필요도 없어요.">
+<meta property="og:url" content="https://antenna.contact/ko/guides/run-claude-code-on-a-vps">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ko_KR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/run-claude-code-on-a-vps">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ko/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "가이드",
+     "item": "https://antenna.contact/ko/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "VPS에서 Claude Code를 24시간 돌리고 노트북에서 대화하기",
+     "item": "https://antenna.contact/ko/guides/run-claude-code-on-a-vps"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "VPS에서 Claude Code를 24시간 돌리고 노트북에서 대화하기",
+   "description": "VPS에 Antenna를 설치하고 Claude Code나 Codex를 실행한 뒤, 노트북 채팅으로 작업을 맡기세요. 포트를 열 필요도, SSH 세션을 유지할 필요도 없어요.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "ko",
+   "url": "https://antenna.contact/ko/guides/run-claude-code-on-a-vps",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ko/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "그냥 SSH와 tmux를 쓰면 안 되나요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "터미널 앞에 앉아 있는 동안은 그것도 돼요. Antenna는 노트북에서 언제든 메시지를 보낼 수 있는 채팅을 더해 주고, 메시지를 보내면 세션을 깨우고, 다른 에이전트도 일을 맡길 수 있게 해 줘요. 권한은 Antenna가 직접 확인하고요."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "서버에 공인 IP나 열린 포트가 필요한가요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "아니요. 양쪽 모두 바깥으로 연결해요. 네트워크가 허락하면 직접, 아니면 릴레이를 거쳐서요. 릴레이는 암호화된 트래픽만 전달해요."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "서버 하나에서 세션을 여러 개 돌릴 수 있나요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "네. 프로젝트 폴더마다 에이전트 하나씩, 각자 자기 이름과 노트북의 자기 채팅을 가져요."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "ARM 빌드가 있나요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "아직은 없어요. 서버 노드는 x86_64 Linux용으로 빌드돼요."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ko/" aria-label="Antenna 홈"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="주 메뉴">
+      <a href="/ko/#product">제품</a>
+      <a href="/ko/#security">보안</a>
+      <a href="/ko/guides/">가이드</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="언어: 한국어"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">KO</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/run-claude-code-on-a-vps" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/run-claude-code-on-a-vps" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/run-claude-code-on-a-vps" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/run-claude-code-on-a-vps" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/run-claude-code-on-a-vps" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/run-claude-code-on-a-vps" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/run-claude-code-on-a-vps" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/run-claude-code-on-a-vps" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/run-claude-code-on-a-vps" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/run-claude-code-on-a-vps" hreflang="ko" lang="ko" aria-current="true">한국어</a></li>
+        <li><a href="/tr/guides/run-claude-code-on-a-vps" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/run-claude-code-on-a-vps" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/run-claude-code-on-a-vps" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/run-claude-code-on-a-vps" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/run-claude-code-on-a-vps" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ko/#download">다운로드</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="현재 위치"><a href="/ko/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ko/guides/">가이드</a></nav>
+    <p class="eyebrow">업데이트 <time datetime="2026-11-09">2026년 11월 9일</time></p>
+    <h1>VPS에서 Claude Code를 24시간 돌리고 노트북에서 대화하기</h1>
+    <p class="lead">Linux VPS에 Claude Code와 Antenna 노드를 설치하고, 서버와 노트북을 한 번 페어링한 다음, 프로젝트 폴더에서 Antenna로 Claude Code를 시작하세요. 그러면 로그아웃한 뒤에도 Claude Code가 자기 tmux 세션에서 계속 돌고, 메시지가 오면 깨어나서 노트북의 채팅으로 답해요. 열어야 할 인바운드 포트도, 유지해야 할 SSH 세션도 없고, Codex도 똑같이 돼요.</p>
+
+    <h2>준비물</h2>
+    <ul>
+      <li>Claude Code(또는 Codex)가 설치되고 로그인된 x86_64 Linux 서버, 그리고 tmux.</li>
+      <li>노트북의 <a href="/ko/#download">Antenna</a>: macOS 또는 Linux.</li>
+    </ul>
+
+    <h2>1. 서버에 Antenna 노드 설치하기</h2>
+    <pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+    sudo loginctl enable-linger $USER</code></pre>
+    <p>설치 스크립트는 서명된 매니페스트에서 최신 릴리스를 읽고, 아카이브를 확인한 뒤, <code>antennad</code>와 <code>antenna</code>를 <code>~/.local/bin</code>에 systemd 사용자 서비스로 설치하고(root 권한 불필요), 비밀번호로 노드를 만들어요. 두 번째 줄은 로그아웃한 뒤에도 서비스가 계속 돌게 해요. Ubuntu나 Fedora라면 <code>.deb</code>나 <code>.rpm</code>으로 설치해도 돼요.</p>
+
+    <h2>2. 노트북과 페어링하기</h2>
+    <p>노트북에서 <strong>New contact → Invite</strong>로 가서 이름을 붙이고, <strong>This is my own computer (∞)</strong>를 체크한 다음, <strong>Create link</strong>를 눌러 링크를 복사하세요. 서버에서는:</p>
+    <pre><code>antenna join '&lt;link&gt;' --trust 5 --label mac</code></pre>
+    <p>작은따옴표를 꼭 붙이세요. 링크에 <code>#</code>이 들어 있거든요. 노트북에 표시된 코드를 서버 터미널에 입력한 다음, 노트북에서 <strong>The contact confirmed — codes match</strong>를 누르세요. 레벨 5는 양쪽 모두 ∞라서, 서버가 내 컴퓨터로 취급돼요.</p>
+
+    <h2>3. Antenna로 Claude Code 시작하기</h2>
+    <pre><code>cd ~/projects/api
+    antenna connect claude-code --agent api-dev --links mac --hello mac
+    antenna session start api-dev --dir ~/projects/api
+    antenna session attach api-dev</code></pre>
+    <p>connect 줄은 세션에 전용 에이전트와 토큰을 주고, 인사를 보내서 노트북에 <code>api-dev</code>라는 채팅이 나타나게 해요. start 줄은 Antenna 전용 tmux 서버에서 Claude Code를 실행해요(내 tmux는 건드리지 않아요). 한 번 붙어서 폴더를 신뢰할지 같은 Claude Code의 첫 질문에 답한 다음, <code>Ctrl-b d</code>로 빠져나오세요. Claude Code는 계속 돌아요. Codex라면 <code>antenna connect codex</code>와 <code>--cli codex</code>를 쓰세요.</p>
+
+    <h2>4. 대화하기</h2>
+    <p>노트북의 <code>api-dev</code> 채팅에 쓰세요: “마이그레이션 테스트 돌리고 실패하는 거 고쳐 줘.” Claude Code가 프롬프트에서 쉬고 있으면 Antenna가 짧은 한 줄을 입력해서 메시지를 읽게 해요. 연락처의 텍스트를 입력하거나 Claude Code 대신 질문에 답하는 일은 절대 없어요. <strong>My devices</strong>의 서버 카드에는 서버 상태와 에이전트가 보이고, 서버의 요청을 노트북에서 승인할 수 있어요.</p>
+
+    <h2>재부팅한 뒤에는</h2>
+    <p>서버가 재시작되면 노드의 키가 잠겨요. 서비스는 돌지만, 내가 로그인해서 <code>antenna unlock</code>을 실행할 때까지 연결은 조용히 있어요. 그래서 서버 디스크를 복사해 가도 누구도 내 키를 얻을 수 없어요. 잠겨 있는지는 <code>antenna status</code>로 확인할 수 있어요.</p>
+
+    <h2>자주 묻는 질문</h2>
+    <details>
+      <summary>그냥 SSH와 tmux를 쓰면 안 되나요?</summary>
+      <p>터미널 앞에 앉아 있는 동안은 그것도 돼요. Antenna는 노트북에서 언제든 메시지를 보낼 수 있는 채팅을 더해 주고, 메시지를 보내면 세션을 깨우고, 다른 에이전트도 일을 맡길 수 있게 해 줘요. 권한은 Antenna가 직접 확인하고요.</p>
+    </details>
+    <details>
+      <summary>서버에 공인 IP나 열린 포트가 필요한가요?</summary>
+      <p>아니요. 양쪽 모두 바깥으로 연결해요. 네트워크가 허락하면 직접, 아니면 릴레이를 거쳐서요. 릴레이는 암호화된 트래픽만 전달해요.</p>
+    </details>
+    <details>
+      <summary>서버 하나에서 세션을 여러 개 돌릴 수 있나요?</summary>
+      <p>네. 프로젝트 폴더마다 에이전트 하나씩, 각자 자기 이름과 노트북의 자기 채팅을 가져요.</p>
+    </details>
+    <details>
+      <summary>ARM 빌드가 있나요?</summary>
+      <p>아직은 없어요. 서버 노드는 x86_64 Linux용으로 빌드돼요.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna는 무료 오픈소스예요.</strong> macOS와 Linux에서 쓸 수 있고, 계정도 전화번호도 필요 없어요.</p>
+      <a class="btn" href="/ko/#download">Antenna 다운로드</a>
+    </aside>
+    <h2>관련 가이드</h2>
+    <ul class="related">
+      <li><a href="/ko/guides/message-claude-code-on-another-computer">다른 컴퓨터의 Claude Code에 메시지 보내기</a></li>
+      <li><a href="/ko/guides/ai-agent-that-replies-to-messages">메시지에 답장하는 AI 에이전트 설정하기</a></li>
+      <li><a href="/ko/guides/claude-code-multiple-agents-working-together">여러 Claude Code 에이전트가 한 프로젝트에서 함께 일하게 하기</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ko/" aria-label="Antenna 홈"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ko/guides/">가이드</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>문의: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ko/privacy">개인정보 처리방침</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

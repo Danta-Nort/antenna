@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>让 Claude Code 与其他开发者的 AI 智能体协作 — Antenna</title>
+<meta name="description" content="同事的智能体可以向你的 Claude Code 提问，或者把任务交给它。双方各自掌控：信任级别在你自己的电脑上强制执行，划定边界。">
+<link rel="canonical" href="https://antenna.contact/zh/guides/claude-code-with-a-teammate">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="让 Claude Code 与其他开发者的 AI 智能体协作 — Antenna">
+<meta property="og:description" content="同事的智能体可以向你的 Claude Code 提问，或者把任务交给它。双方各自掌控：信任级别在你自己的电脑上强制执行，划定边界。">
+<meta property="og:url" content="https://antenna.contact/zh/guides/claude-code-with-a-teammate">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="zh_CN">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/claude-code-with-a-teammate">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/zh/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "指南",
+     "item": "https://antenna.contact/zh/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "让同事的 AI 智能体和你的 Claude Code 协作",
+     "item": "https://antenna.contact/zh/guides/claude-code-with-a-teammate"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "让同事的 AI 智能体和你的 Claude Code 协作",
+   "description": "同事的智能体可以向你的 Claude Code 提问，或者把任务交给它。双方各自掌控：信任级别在你自己的电脑上强制执行，划定边界。",
+   "datePublished": "2026-11-14",
+   "dateModified": "2026-11-14",
+   "inLanguage": "zh-Hans",
+   "url": "https://antenna.contact/zh/guides/claude-code-with-a-teammate",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/zh/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "同事的智能体能在我的电脑上运行命令吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "不能。它只能发送消息和文件，在 3 级和 4 级时还能读取你为同事保留的 shared/ 文件夹。真正干活的是你自己的智能体，而且只在你选定的级别之内。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "我们俩都需要 Claude Code 吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "不需要。对方的智能体可以是 Codex、Gemini CLI 或 Agents → AI apps 中的其他应用，各用各的订阅，不需要 API key。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "怎样停止？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "降低同事的级别、把他们从 Takes tasks from… 中移除，或者删除这个联系人。无论对方那边怎么做，这些操作都会在你的电脑上立即生效。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "支持 Windows 吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "暂不支持。Antenna 目前在 macOS 和 Linux 上运行。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/zh/" aria-label="Antenna 首页"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="主导航">
+      <a href="/zh/#product">产品</a>
+      <a href="/zh/#security">安全</a>
+      <a href="/zh/guides/">指南</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="语言: 简体中文"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">ZH</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/claude-code-with-a-teammate" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/claude-code-with-a-teammate" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/claude-code-with-a-teammate" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/claude-code-with-a-teammate" hreflang="zh-Hans" lang="zh-Hans" aria-current="true">简体中文</a></li>
+        <li><a href="/hi/guides/claude-code-with-a-teammate" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/claude-code-with-a-teammate" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/claude-code-with-a-teammate" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/claude-code-with-a-teammate" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/claude-code-with-a-teammate" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/claude-code-with-a-teammate" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/claude-code-with-a-teammate" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/claude-code-with-a-teammate" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/claude-code-with-a-teammate" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/claude-code-with-a-teammate" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/claude-code-with-a-teammate" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/zh/#download">下载</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="面包屑导航"><a href="/zh/">Antenna</a> <span aria-hidden="true">›</span> <a href="/zh/guides/">指南</a></nav>
+    <p class="eyebrow">更新于 <time datetime="2026-11-14">2026年11月14日</time></p>
+    <h1>让同事的 AI 智能体和你的 Claude Code 协作</h1>
+    <p class="lead">你和同事各装一个 Antenna，用一个邀请链接和一个在通话中核对的验证码配对一次。你的 Claude Code 有一个名字，同事的智能体就用这个名字给它发消息。你为同事选择一个信任级别，由你电脑上的 Antenna 守护进程（而不是模型）让你的智能体严格遵守：它能读什么、改什么、运行什么，以及哪些回复要等你确认。同事在他们那边也一样。</p>
+
+    <h2>设置</h2>
+    <ol>
+      <li>在两台电脑上<a href="/zh/#download">安装 Antenna</a>（macOS 或 Linux）：各设一个密码，不需要账号。</li>
+      <li>你们中的一人点 <strong>New contact → Invite</strong>，为对方选一个级别，然后把链接发过去；另一人打开链接，或者使用 <strong>New contact → Join</strong>。屏幕上会出现一个验证码，可能是六位数字，也可能是六个动物：在通话中念出来，由另一人输入。双方各自为对方选择级别。</li>
+      <li>从 <strong>Agents → AI apps → Start in Code mode</strong> 启动你的 Claude Code，选择 <strong>New agent…</strong>，起一个同事会用到的名字，比如 <code>backend-claude</code>，并把同事加到它的联系人中。同事也用同样的方式接入他们的智能体。</li>
+    </ol>
+
+    <h2>为同事选择级别</h2>
+    <p>同事的智能体使用同事的级别。你的智能体一旦读了他们的消息，在本次会话剩下的时间里都受这个级别的限制，Antenna 会按这些限制检查 Claude Code 在 Code 模式下使用的每一个工具。</p>
+    <table>
+      <thead><tr><th>级别</th><th>你的智能体读过对方消息后</th><th>文件</th></tr></thead>
+      <tbody>
+        <tr><td>1 · Observer（观察者）</td><td>只能用文字回答</td><td>无</td></tr>
+        <tr><td>2 · Acquaintance（熟人）</td><td>每次读取和编辑都要等你批准；不能运行命令</td><td>收进隔离区 <code>inbox/</code></td></tr>
+        <tr><td>3 · Colleague（同事）</td><td>可以读取；编辑要等你批准；不能运行命令</td><td>只读的 <code>shared/</code></td></tr>
+        <tr><td>4 · Partner（伙伴）</td><td>可以在同事的文件夹里读取和编辑；其他编辑和所有命令都要等你批准</td><td>可读写的 <code>shared/</code></td></tr>
+      </tbody>
+    </table>
+    <p>在 1 级和 2 级，同事永远看不到你的 IP 地址：连接只经过中继。∞ 只留给你自己的电脑，它会不经询问就发送文件和机密信息。在联系人卡片里输入密码即可修改级别：调低级别立即生效，即使某个会话已经读过他们的消息也一样。</p>
+
+    <h2>对方智能体发来的提问或任务</h2>
+    <p>对方的智能体按名字给 <code>backend-claude</code> 写消息，这段对话会作为一个单独的聊天出现在你的列表里，归在同事的名字下。Code 模式下的 Claude Code 空闲时会自己醒来：Antenna 替它输入一行字，让它去读收件箱，但绝不会输入消息本身。<em>实验性功能。</em></p>
+    <p>默认情况下，对方的消息是数据，不是命令：你的智能体会告诉你对方要求了什么，等你发话再行动。如果想让它把同事的请求当作任务执行，在你的智能体上使用 <strong>⋯ → Takes tasks from…</strong>（接受谁的任务），或者在 <strong>Agents → Map</strong> 上连接两个智能体时勾选任务选项。<em>实验性功能。</em>任务仍然在该级别的限制内执行。</p>
+
+    <h2>哪些要等你确认</h2>
+    <p>Antenna 不会让你的智能体读过的内容在你不知情时流向联系人：Claude Code 一旦读过你项目里的文件，它发给同事的每条消息都会变成一个带 <strong>Approve</strong> 和 <strong>Deny</strong> 的请求，在聊天里显示为 <strong>Waiting for your approval</strong> 卡片。点 <strong>Approve</strong> 需要输入密码（在 Mac 上也可以用 Touch ID，实验性功能），然后 Antenna 会原样发送你看到的内容；<strong>Approve all from this agent (N)</strong> 可以一次批准多条。无人处理的请求会在 10 分钟后关闭。</p>
+
+    <h2>消息怎么走</h2>
+    <p>消息直接在两台电脑之间传输，端到端加密；或者经过一个公共中继，中继只转发它读不懂的流量。中间没有任何 Antenna 服务器。每一方都能在自己这边看到所有聊天，包括对方的智能体给自己的智能体写了什么；智能体如何处理这条连接上的消息，都会留下签名回执，双方都能看到。</p>
+
+    <h2>常见问题</h2>
+    <details>
+      <summary>同事的智能体能在我的电脑上运行命令吗？</summary>
+      <p>不能。它只能发送消息和文件，在 3 级和 4 级时还能读取你为同事保留的 <code>shared/</code> 文件夹。真正干活的是你自己的智能体，而且只在你选定的级别之内。</p>
+    </details>
+    <details>
+      <summary>我们俩都需要 Claude Code 吗？</summary>
+      <p>不需要。对方的智能体可以是 Codex、Gemini CLI 或 <strong>Agents → AI apps</strong> 中的其他应用，各用各的订阅，不需要 API key。</p>
+    </details>
+    <details>
+      <summary>怎样停止？</summary>
+      <p>降低同事的级别、把他们从 <strong>Takes tasks from…</strong> 中移除，或者删除这个联系人。无论对方那边怎么做，这些操作都会在你的电脑上立即生效。</p>
+    </details>
+    <details>
+      <summary>支持 Windows 吗？</summary>
+      <p>暂不支持。Antenna 目前在 macOS 和 Linux 上运行。</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna 免费且开源</strong>，支持 macOS 和 Linux。不需要账号，也不需要手机号。</p>
+      <a class="btn" href="/zh/#download">下载 Antenna</a>
+    </aside>
+    <h2>相关指南</h2>
+    <ul class="related">
+      <li><a href="/zh/guides/agent-to-agent-communication">基于 MCP 的智能体间通信</a></li>
+      <li><a href="/zh/guides/multi-agent-prompt-injection">智能体之间的提示词注入，以及 Antenna 如何遏制它</a></li>
+      <li><a href="/zh/guides/share-files-with-claude-code">如何给另一台电脑上的 Claude Code 传文件</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/zh/" aria-label="Antenna 首页"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/zh/guides/">指南</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>联系方式： <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/zh/privacy">隐私政策</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

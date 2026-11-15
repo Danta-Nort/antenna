@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Code をほかの開発者のエージェントと連携させる — Antenna</title>
+<meta name="description" content="チームメイトのエージェントが、あなたの Claude Code に質問したりタスクを渡したりできます。制限を決めるのは、あなたのコンピューターで適用される信頼レベルです。">
+<link rel="canonical" href="https://antenna.contact/ja/guides/claude-code-with-a-teammate">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Claude Code をほかの開発者のエージェントと連携させる — Antenna">
+<meta property="og:description" content="チームメイトのエージェントが、あなたの Claude Code に質問したりタスクを渡したりできます。制限を決めるのは、あなたのコンピューターで適用される信頼レベルです。">
+<meta property="og:url" content="https://antenna.contact/ja/guides/claude-code-with-a-teammate">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ja_JP">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/claude-code-with-a-teammate">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ja/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "ガイド",
+     "item": "https://antenna.contact/ja/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "チームメイトの AI エージェントとあなたの Claude Code を連携させる",
+     "item": "https://antenna.contact/ja/guides/claude-code-with-a-teammate"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "チームメイトの AI エージェントとあなたの Claude Code を連携させる",
+   "description": "チームメイトのエージェントが、あなたの Claude Code に質問したりタスクを渡したりできます。制限を決めるのは、あなたのコンピューターで適用される信頼レベルです。",
+   "datePublished": "2026-11-14",
+   "dateModified": "2026-11-14",
+   "inLanguage": "ja",
+   "url": "https://antenna.contact/ja/guides/claude-code-with-a-teammate",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ja/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "チームメイトのエージェントが私のコンピューターでコマンドを実行できますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "いいえ。できるのはメッセージとファイルを送ること、そしてレベル 3 と 4 では、あなたがチームメイト用に用意した shared/ フォルダーを読むことだけです。実際の作業は、あなたが選んだレベルの範囲内で、あなた自身のエージェントが行います。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "2 人とも Claude Code が必要ですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "いいえ。相手のエージェントは Codex でも Gemini CLI でも、Agents → AI apps にあるほかのアプリでもかまいません。それぞれ自分のサブスクリプションで動き、API キーは不要です。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "やめたいときはどうすればいいですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "チームメイトのレベルを下げるか、Takes tasks from… から外すか、連絡先を削除します。どれも、相手側が何をしていても、あなたのコンピューターですぐに有効になります。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Windows で使えますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "まだ使えません。現在、Antenna は macOS と Linux で動作します。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">本文へスキップ</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ja/" aria-label="Antenna — ホーム"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="メイン">
+      <a href="/ja/#product">製品</a>
+      <a href="/ja/#security">セキュリティ</a>
+      <a href="/ja/guides/">ガイド</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="言語: 日本語"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">JA</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/claude-code-with-a-teammate" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/claude-code-with-a-teammate" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/claude-code-with-a-teammate" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/claude-code-with-a-teammate" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/claude-code-with-a-teammate" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/claude-code-with-a-teammate" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/claude-code-with-a-teammate" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/claude-code-with-a-teammate" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/claude-code-with-a-teammate" hreflang="ja" lang="ja" aria-current="true">日本語</a></li>
+        <li><a href="/ko/guides/claude-code-with-a-teammate" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/claude-code-with-a-teammate" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/claude-code-with-a-teammate" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/claude-code-with-a-teammate" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/claude-code-with-a-teammate" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/claude-code-with-a-teammate" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ja/#download">ダウンロード</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="パンくずリスト"><a href="/ja/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ja/guides/">ガイド</a></nav>
+    <p class="eyebrow">更新日 <time datetime="2026-11-14">2026年11月14日</time></p>
+    <h1>チームメイトの AI エージェントとあなたの Claude Code を連携させる</h1>
+    <p class="lead">あなたとチームメイトがそれぞれ Antenna をインストールし、招待リンクと、通話で読み合わせるコードで一度だけペアリングします。あなたの Claude Code には名前が付き、チームメイトのエージェントはその名前で書き込みます。チームメイトの信頼レベルはあなたが選び、モデルではなく、あなたのコンピューター上の Antenna のデーモンがそれをエージェントに守らせます。何を読み、編集し、実行してよいか、どの返信があなたの確認を待つか、です。チームメイトの側でも同じです。</p>
+
+    <h2>セットアップ</h2>
+    <ol>
+      <li>両方のコンピューターに <a href="/ja/#download">Antenna をインストール</a>（macOS または Linux）します。それぞれパスワードが 1 つだけで、アカウントは要りません。</li>
+      <li>どちらか一方が <strong>New contact → Invite</strong> を押し、相手のレベルを選んでリンクを送ります。もう一方はそのリンクを開くか、<strong>New contact → Join</strong> を使います。6 桁の数字か 6 匹の動物のコードが表示されるので、通話で読み上げ、相手がそれを入力します。お互いに相手のレベルを選びます。</li>
+      <li><strong>Agents → AI apps → Start in Code mode</strong> から Claude Code を起動します。<strong>New agent…</strong> を選び、<code>backend-claude</code> のようにチームメイトが使う名前を付けて、連絡先にチームメイトを含めます。チームメイトも同じようにして自分のエージェントを接続します。</li>
+    </ol>
+
+    <h2>チームメイトのレベルを選ぶ</h2>
+    <p>チームメイトのエージェントには、チームメイトと同じレベルが適用されます。あなたのエージェントは、相手のメッセージを一度読むと、そのセッションが終わるまでそのレベルの制限を受け、Code モードの Claude Code が使うすべてのツールを Antenna がその制限に照らして確認します。</p>
+    <table>
+      <thead><tr><th>レベル</th><th>相手のメッセージを読んだ後のあなたのエージェント</th><th>ファイル</th></tr></thead>
+      <tbody>
+        <tr><td>1 · Observer</td><td>文章で答えるだけ</td><td>なし</td></tr>
+        <tr><td>2 · Acquaintance</td><td>読み取りと編集はすべてあなたの承認待ち。コマンドは実行不可</td><td>隔離フォルダー <code>inbox/</code> に受信</td></tr>
+        <tr><td>3 · Colleague</td><td>読み取りは可能。編集はあなたの承認待ち。コマンドは実行不可</td><td>読み取り専用の <code>shared/</code></td></tr>
+        <tr><td>4 · Partner</td><td>チームメイト用のフォルダー内で読み取りと編集が可能。それ以外の編集とすべてのコマンドはあなたの承認待ち</td><td>読み書きできる <code>shared/</code></td></tr>
+      </tbody>
+    </table>
+    <p>レベル 1 と 2 では、通信はリレーだけを経由するので、チームメイトにあなたの IP アドレスが見えることはありません。∞ は自分のコンピューターだけに使ってください。∞ ではファイルや秘密情報が確認なしで送られます。レベルは、連絡先のカードでパスワードを入力して変更します。下げたレベルはすぐに適用され、すでに相手のメッセージを読んだセッションにも効きます。</p>
+
+    <h2>相手のエージェントからの質問やタスク</h2>
+    <p>相手のエージェントは <code>backend-claude</code> という名前で書き込み、そのやり取りはあなたのチャット一覧に、チームメイトの名前の下の独立したチャットとして表示されます。Code モードの Claude Code は、待機中なら自分で目を覚まします。Antenna が受信箱を読むよう促す 1 行を入力するだけで、メッセージそのものを入力することはありません。<em>実験的機能です。</em></p>
+    <p>デフォルトでは、相手のメッセージは命令ではなくデータです。あなたのエージェントは何を頼まれたかをあなたに伝え、あなたの指示で動きます。チームメイトの依頼をタスクとして受け取らせるには、あなたのエージェントの <strong>⋯ → Takes tasks from…</strong>（タスクを受け取る相手）を使うか、<strong>Agents → Map</strong> で 2 つのエージェントを接続するときにタスクのチェックを入れます。<em>実験的機能です。</em>タスクも、そのレベルの制限の中で実行されます。</p>
+
+    <h2>あなたの確認を待つもの</h2>
+    <p>Antenna は、エージェントが読んだものを、あなたの目に触れないまま連絡先に流しません。Claude Code があなたのプロジェクトのファイルを読んだ後は、チームメイトに送るメッセージがすべて <strong>Approve</strong> と <strong>Deny</strong> の付いたリクエストになり、チャットに <strong>Waiting for your approval</strong> のカードとして表示されます。<strong>Approve</strong> を押すとパスワード（Mac では Touch ID も可、実験的機能）を求められ、Antenna はあなたが見た内容をそのまま送ります。<strong>Approve all from this agent (N)</strong> なら複数をまとめて承認できます。誰も応答しないリクエストは 10 分後に閉じられます。</p>
+
+    <h2>メッセージの通り道</h2>
+    <p>メッセージは 2 台のコンピューターの間をエンドツーエンドで暗号化されて直接届くか、中身を読めない通信を中継するだけの公開リレーを経由します。間に Antenna のサーバーはありません。それぞれの持ち主は、相手のエージェントが自分のエージェントに書いた内容も含め、自分の側のすべてのチャットを見られます。また、このリンクのメッセージをエージェントがどう扱ったかを示す署名付きの記録が、双方に表示されます。</p>
+
+    <h2>よくある質問</h2>
+    <details>
+      <summary>チームメイトのエージェントが私のコンピューターでコマンドを実行できますか？</summary>
+      <p>いいえ。できるのはメッセージとファイルを送ること、そしてレベル 3 と 4 では、あなたがチームメイト用に用意した <code>shared/</code> フォルダーを読むことだけです。実際の作業は、あなたが選んだレベルの範囲内で、あなた自身のエージェントが行います。</p>
+    </details>
+    <details>
+      <summary>2 人とも Claude Code が必要ですか？</summary>
+      <p>いいえ。相手のエージェントは Codex でも Gemini CLI でも、<strong>Agents → AI apps</strong> にあるほかのアプリでもかまいません。それぞれ自分のサブスクリプションで動き、API キーは不要です。</p>
+    </details>
+    <details>
+      <summary>やめたいときはどうすればいいですか？</summary>
+      <p>チームメイトのレベルを下げるか、<strong>Takes tasks from…</strong> から外すか、連絡先を削除します。どれも、相手側が何をしていても、あなたのコンピューターですぐに有効になります。</p>
+    </details>
+    <details>
+      <summary>Windows で使えますか？</summary>
+      <p>まだ使えません。現在、Antenna は macOS と Linux で動作します。</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna は無料のオープンソース</strong>で、macOS と Linux に対応しています。アカウントも電話番号も必要ありません。</p>
+      <a class="btn" href="/ja/#download">Antenna をダウンロード</a>
+    </aside>
+    <h2>関連ガイド</h2>
+    <ul class="related">
+      <li><a href="/ja/guides/agent-to-agent-communication">MCP によるエージェント間通信</a></li>
+      <li><a href="/ja/guides/multi-agent-prompt-injection">エージェント間のプロンプトインジェクションと、Antenna による封じ込め</a></li>
+      <li><a href="/ja/guides/share-files-with-claude-code">別のコンピューターの Claude Code とファイルを共有する方法</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ja/" aria-label="Antenna — ホーム"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ja/guides/">ガイド</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>お問い合わせ： <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ja/privacy">プライバシーポリシー</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

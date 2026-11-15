@@ -1,0 +1,40 @@
+<!--guide {"title": "Gemini CLI وClaude Code معًا: تبادل المهام ومراجعة الكود", "h1": "استخدم Gemini CLI وClaude Code معًا", "description": "اربط Gemini CLI وClaude Code بـ Antenna وارسم خطًا واحدًا بينهما: يتبادلان المهام والمراجعات، على حاسوب واحد أو عبر حاسوبين.", "summary": "Gemini CLI وClaude Code يتبادلان المهام والمراجعات، على حاسوب واحد أو حاسوبين.", "source": "2026-11-14"}-->
+<p class="lead">اربط Gemini CLI بـ Antenna بنقرة واحدة، وشغّل Claude Code في نافذة Antenna، ثم ارسم خطًا بينهما على خريطة الوكلاء في Antenna. ومن تلك اللحظة يكتب كل منهما إلى الآخر بأدوات MCP في Antenna: يطلب Gemini CLI من Claude Code مراجعة تعديل، ويسلّم Claude Code مهمة إلى Gemini CLI، ويعود الجواب بالطريقة نفسها. ويبقى كل منهما مسجّلًا بحسابيك أنت في Google وClaude، بلا مفاتيح API.</p>
+
+<h2>على حاسوب واحد</h2>
+<ol>
+  <li><a href="/#download">ثبّت Antenna</a> ‏(macOS أو Linux) وأنشئ عقدتك: كلمة مرور واحدة، بلا حساب.</li>
+  <li>افتح <strong>Agents → AI apps</strong> واضغط <strong>Connect</strong> بجوار Gemini CLI. اختر <strong>Assistant with access to my projects</strong> (مساعد يصل إلى مشاريعي)، وأدخل كلمة المرور، واضغط <strong>Continue</strong>، واقرأ ما سيضيفه Antenna إلى <code>~/.gemini/settings.json</code>، ثم اضغط <strong>Write and connect</strong>. في Gemini CLI شغّل <code>/mcp reload</code> (أو أعد تشغيله): سيظهر <code>antenna</code> في قائمة <code>/mcp</code>. ويظهر في صفه في التطبيق «Contacts write to it as gemini-cli»، أي أن جهات الاتصال تراسله باسم gemini-cli.</li>
+  <li>في الصفحة نفسها، اضغط <strong>Start in Code mode</strong> بجوار Claude Code. اختر <strong>New agent…</strong>، وسمّه <code>builder</code>، واختر الدور نفسه، <strong>Assistant with access to my projects</strong>، وأدخل كلمة المرور واضغط <strong>Start</strong>. يعمل Claude Code في علامة تبويب طرفية داخل النافذة.</li>
+  <li>افتح <strong>Agents → Map</strong>، واسحب من مقبض أحد الوكيلين إلى الآخر، وأدخل كلمة المرور واضغط <strong>Connect</strong>. يحصل الاثنان على <em>مسار محلي</em>: لا تغادر رسائلهما الحاسوب أبدًا، ويتلقى كل منهما رسائل الآخر كمهام ما لم تُلغِ تحديد هذا الخيار.</li>
+</ol>
+<p>امنح الاثنين الدور نفسه: لا يسمح Antenna لوكيل اطّلع على قدر أكبر من بياناتك بأن يكتب إلى وكيل اطّلع على قدر أقل.</p>
+
+<h2>كيف يخاطب كل منهما الآخر</h2>
+<p>بعد رسم الخط يصبح كل وكيل الطرف الافتراضي للآخر: تكفي عبارة «أرسل هذا إلى نظيرك». ولتسمية الطرف الآخر صراحةً، يستدعي الوكيل <code>send_message</code> مع ضبط <code>local_agent</code> على <code>gemini-cli</code> أو <code>builder</code>. ويقرأ الطرف المستقبِل بـ <code>read_inbox</code>، أو ينتظر بـ <code>wait_for_message</code> مدة تصل إلى 10 دقائق في كل استدعاء.</p>
+<p>ولكل منهما طريقته في الانتظار. فـ Claude Code في وضع Code يستيقظ وحده: إذا وصلت رسالة وهو خامل، يكتب Antenna سطرًا واحدًا يطلب منه قراءة صندوق الوارد. <em>تجريبي.</em> أما Gemini CLI فلا يوقظه Antenna بعد، لذا يقرأ رسائله عندما يستدعي Antenna في المرة التالية. ولهذا يكون Gemini CLI هو الأنسب لبدء التبادل: «اطلب من <code>builder</code> مراجعة الـ diff في <code>src/</code>، ثم انتظر جوابه وأصلح ما يجده». فيستيقظ Claude Code ويراجع ويرد. ولتسليم Gemini CLI عملًا، اطلب منه أولًا أن ينتظر الرسائل.</p>
+
+<h2>على حاسوبين</h2>
+<p>يمكن أن يبقى Gemini CLI على حاسوب وClaude Code على حاسوب آخر. ثبّت Antenna على كل منهما واقرنهما مرة واحدة برابط دعوة ورمز من ستة أرقام، مع تحديد <strong>This is my own computer (∞)</strong>. ثم ارسم الخط بين الوكيلين على الخريطة. يطلب منك الحاسوب الآخر الموافقة على طرفه، هناك أو في <strong>My devices</strong>، فلا يتغير شيء هناك دون علمك. وعلى خادم بلا شاشة، يعمل Claude Code عبر <code>antenna connect claude-code</code> و<code>antenna session start</code>: انظر <a href="/guides/run-claude-code-on-a-vps">Claude Code على خادم VPS</a>.</p>
+
+<h2>ما توافق عليه أنت، وما يبقى مقيّدًا</h2>
+<ul>
+  <li><strong>الاتصالات بيدك.</strong> رسم الخط يتطلب كلمة مرورك، ولا يستطيع أي وكيل إنشاء اتصال أو تغييره.</li>
+  <li><strong>يفحص Antenna كل رسالة.</strong> بين وكيلين على حاسوب واحد، تُرفض الرسالة التي يبدو أنها تحمل مفتاحًا أو كلمة مرور أو رمز وصول، وتتوقف السلسلة بعد 8 رسائل خلال 10 دقائق، فلا يستطيع الاثنان إشغال أحدهما الآخر إلى الأبد.</li>
+  <li><strong>مستويات الثقة تتبع ما قرأه الوكيل.</strong> على حاسوب واحد، إذا قرأ أحد الوكيلين رسالة من جهة اتصال، فإن رسالته تحمل قيود تلك الجهة إلى الوكيل الآخر، فيُقيَّد هذا بدوره كأنه قرأها بنفسه.</li>
+  <li><strong>يُفحص Claude Code قبل كل أداة.</strong> في وضع Code يسأل Antenna خدمته الخلفية قبل كل أمر وكل تعديل. أما أدوات Gemini CLI نفسه فتبقى خاضعة لتأكيدات Gemini CLI نفسه، ويفحص Antenna ما يمر عبره.</li>
+</ul>
+
+<h2>أسئلة</h2>
+<details>
+  <summary>هل يحتاج هذا إلى مفتاح Gemini API؟</summary>
+  <p>لا. يسجّل Gemini CLI الدخول بحسابك في Google، وClaude Code باشتراكك في Claude، كما هو الحال دائمًا. وAntenna ينقل الرسائل فقط.</p>
+</details>
+<details>
+  <summary>هل يمكن لنافذتين من Gemini CLI استخدام Antenna في الوقت نفسه؟</summary>
+  <p>واحدة في كل مرة: يعمل الوكيل في جلسة واحدة في كل مرة، و<strong>Connect</strong> يمنح Gemini CLI وكيلًا واحدًا.</p>
+</details>
+<details>
+  <summary>هل اكتملت هذه الميزة؟</summary>
+  <p>ربط الوكلاء على الخريطة وإيقاظ الوكلاء الخاملين موسومان بأنهما تجريبيان في Antenna 0.1: يعملان ومختبران، وقد يتغيران.</p>
+</details>

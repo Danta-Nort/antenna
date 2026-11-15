@@ -1,0 +1,49 @@
+<!--guide {"title": "Rodar o Claude Code numa VPS 24/7 e falar com ele pelo notebook", "h1": "Rode o Claude Code numa VPS o tempo todo e fale com ele pelo notebook", "description": "Instale o Antenna na sua VPS, inicie o Claude Code ou o Codex por ele e passe tarefas pelo chat do notebook. Sem portas abertas e sem sessão SSH para manter.", "summary": "Um Claude Code ou Codex sempre ligado no seu servidor, que você acessa pelo chat do notebook.", "source": "2026-11-09"}-->
+<p class="lead">Instale o Claude Code e o nó do Antenna na sua VPS Linux, pareie o servidor com o seu notebook uma vez e inicie o Claude Code pelo Antenna na pasta do projeto. A partir daí, ele roda na sua própria sessão tmux depois que você sai, acorda quando chega uma mensagem para ele e responde num chat no seu notebook. Nenhuma porta de entrada para abrir, nenhuma sessão SSH para manter viva, e o Codex funciona do mesmo jeito.</p>
+
+<h2>O que você precisa</h2>
+<ul>
+  <li>Um servidor Linux x86_64, com o Claude Code (ou o Codex) instalado e com login feito, e o tmux.</li>
+  <li>O <a href="/#download">Antenna</a> no seu notebook: macOS ou Linux.</li>
+</ul>
+
+<h2>1. Instale o nó do Antenna no servidor</h2>
+<pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+sudo loginctl enable-linger $USER</code></pre>
+<p>O instalador lê a versão mais recente no manifesto assinado, confere o arquivo, instala o <code>antennad</code> e o <code>antenna</code> em <code>~/.local/bin</code> como um serviço de usuário do systemd (sem precisar de root) e cria o seu nó com uma senha. A segunda linha mantém o serviço rodando depois que você sai. No Ubuntu ou no Fedora, você pode instalar o pacote <code>.deb</code> ou <code>.rpm</code> no lugar.</p>
+
+<h2>2. Pareie com o seu notebook</h2>
+<p>No notebook: <strong>New contact → Invite</strong>, dê um nome, marque <strong>This is my own computer (∞)</strong> (este é o meu próprio computador), clique em <strong>Create link</strong> e copie. No servidor:</p>
+<pre><code>antenna join '&lt;link&gt;' --trust 5 --label mac</code></pre>
+<p>Mantenha as aspas simples: o link contém um <code>#</code>. Digite no terminal do servidor o código que o notebook mostra e depois clique em <strong>The contact confirmed — codes match</strong> no notebook. O nível 5 é ∞ nos dois lados, então o servidor conta como um computador seu.</p>
+
+<h2>3. Inicie o Claude Code pelo Antenna</h2>
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api
+antenna session attach api-dev</code></pre>
+<p>A linha do connect dá à sessão um agente e um token próprios e manda um oi, para que um chat chamado <code>api-dev</code> apareça no seu notebook. A linha do start inicia o Claude Code no servidor tmux do próprio Antenna (o seu tmux não é tocado). Conecte-se uma vez para responder às primeiras perguntas do Claude Code, por exemplo se ele confia na pasta, e depois saia com <code>Ctrl-b d</code>: ele continua rodando. Para o Codex, use <code>antenna connect codex</code> e <code>--cli codex</code>.</p>
+
+<h2>4. Fale com ele</h2>
+<p>Escreva no chat <code>api-dev</code> do seu notebook: “Rode os testes da migration e corrija o que falhar.” Quando o Claude Code está parado no prompt, o Antenna digita uma linha curta para que ele leia a sua mensagem; ele nunca digita o texto de um contato e nunca responde a uma pergunta no lugar dele. O cartão do servidor em <strong>My devices</strong> mostra o estado e os agentes dele, e você pode aprovar os pedidos dele pelo notebook.</p>
+
+<h2>Depois de um reinício</h2>
+<p>As chaves do nó ficam bloqueadas depois que o servidor reinicia: o serviço roda, mas as conexões ficam em silêncio até você fazer login e rodar <code>antenna unlock</code>. Assim, uma cópia do disco do servidor não entrega as suas chaves a ninguém. <code>antenna status</code> diz se ele está bloqueado.</p>
+
+<h2>Perguntas</h2>
+<details>
+  <summary>Por que não só SSH e tmux?</summary>
+  <p>Isso funciona enquanto você está no terminal. O Antenna acrescenta um chat para o qual você pode escrever do notebook a qualquer hora, acorda a sessão quando você escreve e deixa outros agentes passarem trabalho para ela, com permissões que ele mesmo confere.</p>
+</details>
+<details>
+  <summary>O servidor precisa de IP público ou de portas abertas?</summary>
+  <p>Não. Os dois lados se conectam para fora, diretamente quando a rede permite e por um relay quando não. O relay só repassa tráfego criptografado.</p>
+</details>
+<details>
+  <summary>Posso rodar várias sessões num servidor?</summary>
+  <p>Sim: um agente por pasta de projeto, cada um com nome próprio e chat próprio no seu notebook.</p>
+</details>
+<details>
+  <summary>Existe build para ARM?</summary>
+  <p>Ainda não. O nó de servidor é compilado para Linux x86_64.</p>
+</details>

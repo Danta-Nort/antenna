@@ -173,10 +173,12 @@ fn this_target() -> Target {
 /// The platform whose asset this installation needs (for an unsupported one, the closest guess, for reporting).
 fn platform_of(t: &Target) -> Platform {
     t.platform().unwrap_or_else(|| {
-        Platform::this(if std::env::consts::OS == "macos" {
-            "app"
-        } else {
-            "cli"
+        Platform::this(match std::env::consts::OS {
+            "macos" => "app",
+            // Until `antenna update` runs the installer itself (W4), a check on Windows still finds the release's
+            // installer, which the person runs by hand.
+            "windows" => "installer",
+            _ => "cli",
         })
     })
 }

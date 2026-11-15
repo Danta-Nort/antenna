@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo compartir archivos con Claude Code en otra computadora — Antenna</title>
+<meta name="description" content="Envía un archivo desde tu portátil a Claude Code en un servidor u otra computadora con Antenna: se comprueba al llegar y al agente se le dice dónde está.">
+<link rel="canonical" href="https://antenna.contact/es/guides/share-files-with-claude-code">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Cómo compartir archivos con Claude Code en otra computadora — Antenna">
+<meta property="og:description" content="Envía un archivo desde tu portátil a Claude Code en un servidor u otra computadora con Antenna: se comprueba al llegar y al agente se le dice dónde está.">
+<meta property="og:url" content="https://antenna.contact/es/guides/share-files-with-claude-code">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="es_ES">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/share-files-with-claude-code">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/es/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Guías",
+     "item": "https://antenna.contact/es/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Cómo compartir archivos con Claude Code en otra computadora",
+     "item": "https://antenna.contact/es/guides/share-files-with-claude-code"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Cómo compartir archivos con Claude Code en otra computadora",
+   "description": "Envía un archivo desde tu portátil a Claude Code en un servidor u otra computadora con Antenna: se comprueba al llegar y al agente se le dice dónde está.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "es",
+   "url": "https://antenna.contact/es/guides/share-files-with-claude-code",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/es/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "¿Por qué no usar scp o una carpeta compartida?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Puedes, y para árboles grandes de archivos quizá lo prefieras. Antenna es para los archivos que forman parte de una conversación con el agente: llegan donde el agente los espera, al agente se le avisa, y un archivo de cualquiera que no seas tú se comprueba antes de guardarse."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿El archivo va cifrado por el camino?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sí, de extremo a extremo, por el mismo enlace que tus mensajes. Ningún servidor intermedio lo guarda."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Puedo elegir dónde se guardan los archivos?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sí. En la ficha de contacto de la computadora, Files from this computer (archivos de esta computadora) te deja elegir una carpeta para esa computadora y otra para cada uno de sus agentes. Desde una terminal: antenna files save-to <contact> <folder>."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/es/" aria-label="Antenna — inicio"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Principal">
+      <a href="/es/#product">Producto</a>
+      <a href="/es/#security">Seguridad</a>
+      <a href="/es/guides/">Guías</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Idioma: Español"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">ES</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/share-files-with-claude-code" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/share-files-with-claude-code" hreflang="es" lang="es" aria-current="true">Español</a></li>
+        <li><a href="/pt/guides/share-files-with-claude-code" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/share-files-with-claude-code" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/share-files-with-claude-code" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/share-files-with-claude-code" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/share-files-with-claude-code" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/share-files-with-claude-code" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/share-files-with-claude-code" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/share-files-with-claude-code" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/share-files-with-claude-code" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/share-files-with-claude-code" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/share-files-with-claude-code" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/share-files-with-claude-code" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/share-files-with-claude-code" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/es/#download">Descargar</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Ruta de navegación"><a href="/es/">Antenna</a> <span aria-hidden="true">›</span> <a href="/es/guides/">Guías</a></nav>
+    <p class="eyebrow">Actualizado <time datetime="2026-11-09">9 de noviembre de 2026</time></p>
+    <h1>Cómo compartir archivos con Claude Code en otra computadora</h1>
+    <p class="lead">En la misma computadora, Claude Code lee tus archivos directamente: dale la ruta o arrastra el archivo a su terminal. En otra computadora, como un servidor, envía el archivo a través de Antenna: suéltalo en el chat con esa sesión de Claude Code, Antenna lo comprueba al llegar y lo guarda allí, en la carpeta del enlace, y el agente recibe en su bandeja de entrada el nombre, la ubicación, el tamaño y el SHA-256 del archivo. Los archivos que te devuelve el agente llegan a tu portátil por el mismo camino.</p>
+
+    <h2>Envía un archivo al agente</h2>
+    <ol>
+      <li>Empareja tu portátil con la otra computadora como tuya (∞) y conecta allí Claude Code a Antenna: consulta <a href="/es/guides/run-claude-code-on-a-vps">Claude Code en un VPS</a>.</li>
+      <li>Abre en tu portátil el chat con la sesión y suelta el archivo en él, o adjúntalo como en cualquier app de mensajería.</li>
+      <li>En la otra computadora, Antenna comprueba el tipo del archivo por su contenido, busca amenazas y secretos y lo guarda en la carpeta del enlace, <code>~/Antenna/links/&lt;folder&gt;/shared/</code>, o en la carpeta de proyecto que hayas elegido para esa computadora.</li>
+      <li>El agente se entera solo del archivo guardado la próxima vez que mira su bandeja de entrada, con su ruta y sus hashes, y puede usarlo en su siguiente paso.</li>
+    </ol>
+
+    <h2>Recibe archivos del agente</h2>
+    <p>El agente puede enviarte un archivo, una compilación, un informe o una captura de pantalla, con las mismas herramientas que usa para los mensajes. Llega a tu chat y a <strong>Files</strong>, como una tarjeta con el nombre del archivo, lo que ha detectado la comprobación y su hash. Las imágenes se muestran como una vista previa segura y comprobada, reconstruida por Antenna.</p>
+
+    <h2>Qué se comprueba y qué espera por ti</h2>
+    <ul>
+      <li><strong>Entre tus propias computadoras</strong>, los archivos normales se guardan solos. Todo lo que pueda ejecutar o instalar software, como un programa, un instalador o un archivo comprimido que contenga uno, sigue esperando tu decisión, salvo que lo permitas para esa computadora.</li>
+      <li><strong>Desde el agente de otra persona</strong> con nivel 3 o 4, los archivos se comprueban y esperan a que pulses Accept, o a que uno de tus agentes los acepte. Con los niveles 1 y 2, decides tú cada archivo.</li>
+      <li><strong>Al salir</strong>, un archivo que parece contener una clave, una contraseña o un token se retiene hasta que lo apruebes, salvo entre tus propias computadoras.</li>
+      <li><strong>No se sobrescribe nada.</strong> Un archivo cuyo nombre ya está ocupado se guarda como <code>report (2).pdf</code>, y a quien lo envía se le comunica el nombre.</li>
+    </ul>
+
+    <h2>Preguntas</h2>
+    <details>
+      <summary>¿Por qué no usar scp o una carpeta compartida?</summary>
+      <p>Puedes, y para árboles grandes de archivos quizá lo prefieras. Antenna es para los archivos que forman parte de una conversación con el agente: llegan donde el agente los espera, al agente se le avisa, y un archivo de cualquiera que no seas tú se comprueba antes de guardarse.</p>
+    </details>
+    <details>
+      <summary>¿El archivo va cifrado por el camino?</summary>
+      <p>Sí, de extremo a extremo, por el mismo enlace que tus mensajes. Ningún servidor intermedio lo guarda.</p>
+    </details>
+    <details>
+      <summary>¿Puedo elegir dónde se guardan los archivos?</summary>
+      <p>Sí. En la ficha de contacto de la computadora, <strong>Files from this computer</strong> (archivos de esta computadora) te deja elegir una carpeta para esa computadora y otra para cada uno de sus agentes. Desde una terminal: <code>antenna files save-to &lt;contact&gt; &lt;folder&gt;</code>.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna es gratis y de código abierto</strong>, para macOS y Linux. Sin cuenta y sin número de teléfono.</p>
+      <a class="btn" href="/es/#download">Descargar Antenna</a>
+    </aside>
+    <h2>Guías relacionadas</h2>
+    <ul class="related">
+      <li><a href="/es/guides/run-claude-code-on-a-vps">Claude Code en un VPS a todas horas, y hablando con él desde tu portátil</a></li>
+      <li><a href="/es/guides/message-claude-code-on-another-computer">Envía un mensaje a Claude Code en otra computadora</a></li>
+      <li><a href="/es/guides/multi-agent-prompt-injection">Prompt injection entre agentes, y cómo la contiene Antenna</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/es/" aria-label="Antenna — inicio"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/es/guides/">Guías</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Contacto: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/es/privacy">Política de privacidad</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

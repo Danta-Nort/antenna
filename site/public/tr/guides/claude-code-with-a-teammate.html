@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Code ile başka bir geliştiricinin ajanı birlikte — Antenna</title>
+<meta name="description" content="Ekip arkadaşınızın ajanı Claude Code’unuza soru sorar ya da görev verir. Kontrol herkesin kendinde: sınırları bilgisayarınızda uygulanan güven seviyeleri çizer.">
+<link rel="canonical" href="https://antenna.contact/tr/guides/claude-code-with-a-teammate">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Claude Code ile başka bir geliştiricinin ajanı birlikte — Antenna">
+<meta property="og:description" content="Ekip arkadaşınızın ajanı Claude Code’unuza soru sorar ya da görev verir. Kontrol herkesin kendinde: sınırları bilgisayarınızda uygulanan güven seviyeleri çizer.">
+<meta property="og:url" content="https://antenna.contact/tr/guides/claude-code-with-a-teammate">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="tr_TR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/claude-code-with-a-teammate">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/tr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Rehberler",
+     "item": "https://antenna.contact/tr/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Bir ekip arkadaşınızın yapay zekâ ajanı Claude Code’unuzla çalışsın",
+     "item": "https://antenna.contact/tr/guides/claude-code-with-a-teammate"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Bir ekip arkadaşınızın yapay zekâ ajanı Claude Code’unuzla çalışsın",
+   "description": "Ekip arkadaşınızın ajanı Claude Code’unuza soru sorar ya da görev verir. Kontrol herkesin kendinde: sınırları bilgisayarınızda uygulanan güven seviyeleri çizer.",
+   "datePublished": "2026-11-14",
+   "dateModified": "2026-11-14",
+   "inLanguage": "tr",
+   "url": "https://antenna.contact/tr/guides/claude-code-with-a-teammate",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/tr/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Ekip arkadaşımın ajanı bilgisayarımda komut çalıştırabilir mi?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Hayır. Yalnızca mesaj ve dosya gönderebilir; 3. ve 4. seviyede de ekip arkadaşınız için ayırdığınız shared/ klasörünü okuyabilir. İşi, seçtiğiniz seviyenin sınırları içinde kendi ajanınız yapar."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "İkimizin de Claude Code kullanması gerekiyor mu?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Hayır. Onların ajanı Codex, Gemini CLI ya da Agents → AI apps içindeki başka bir uygulama olabilir; her biri kendi aboneliğiyle, API anahtarı olmadan çalışır."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Bunu nasıl durdururum?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Ekip arkadaşınızın seviyesini düşürün, onu Takes tasks from… listesinden çıkarın ya da kişiyi silin. Her biri, onların tarafında ne olursa olsun, bilgisayarınızda hemen geçerli olur."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Windows’ta çalışıyor mu?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Henüz değil. Antenna bugün macOS ve Linux’ta çalışıyor."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">İçeriğe geç</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/tr/" aria-label="Antenna — ana sayfa"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Ana menü">
+      <a href="/tr/#product">Ürün</a>
+      <a href="/tr/#security">Güvenlik</a>
+      <a href="/tr/guides/">Rehberler</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Dil: Türkçe"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">TR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/claude-code-with-a-teammate" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/claude-code-with-a-teammate" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/claude-code-with-a-teammate" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/claude-code-with-a-teammate" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/claude-code-with-a-teammate" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/claude-code-with-a-teammate" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/claude-code-with-a-teammate" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/claude-code-with-a-teammate" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/claude-code-with-a-teammate" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/claude-code-with-a-teammate" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/claude-code-with-a-teammate" hreflang="tr" lang="tr" aria-current="true">Türkçe</a></li>
+        <li><a href="/it/guides/claude-code-with-a-teammate" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/claude-code-with-a-teammate" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/claude-code-with-a-teammate" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/claude-code-with-a-teammate" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/tr/#download">İndir</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Sayfa yolu"><a href="/tr/">Antenna</a> <span aria-hidden="true">›</span> <a href="/tr/guides/">Rehberler</a></nav>
+    <p class="eyebrow">Güncellendi <time datetime="2026-11-14">14 Kasım 2026</time></p>
+    <h1>Bir ekip arkadaşınızın yapay zekâ ajanı Claude Code’unuzla çalışsın</h1>
+    <p class="lead">Siz ve ekip arkadaşınız Antenna’yı kurar, bir davet bağlantısı ve sesli olarak karşılaştırdığınız bir kodla bir kez eşleşirsiniz. Claude Code’unuz bir ad alır ve ekip arkadaşınızın ajanı ona bu adla yazar. Ekip arkadaşınız için bir güven seviyesi seçersiniz; ajanınızı bu seviyede tutan model değil, bilgisayarınızdaki Antenna daemon’udur: neyi okuyup düzenleyebileceği, neyi çalıştırabileceği ve hangi yanıtların sizi bekleyeceği. Ekip arkadaşınız da kendi tarafında aynısını yapar.</p>
+
+    <h2>Kurulum</h2>
+    <ol>
+      <li>İki bilgisayara da <a href="/tr/#download">Antenna’yı kurun</a> (macOS ya da Linux): her birinde bir parola, hesap yok.</li>
+      <li>Biriniz <strong>New contact → Invite</strong> düğmesine basar, diğeri için bir güven seviyesi seçer ve bağlantıyı gönderir; diğeri bağlantıyı açar ya da <strong>New contact → Join</strong> kullanır. Altı rakam ya da altı hayvandan oluşan bir kod belirir: bir görüşmede yüksek sesle okuyun, diğeri de girsin. Her biriniz diğerinin seviyesini seçer.</li>
+      <li>Claude Code’unuzu <strong>Agents → AI apps → Start in Code mode</strong> ile başlatın; <strong>New agent…</strong> seçip ekip arkadaşınızın kullanacağı bir ad verin, örneğin <code>backend-claude</code>, ve ekip arkadaşınızı ajanın kişileri arasına ekleyin. Ekip arkadaşınız da kendi ajanını aynı şekilde bağlar.</li>
+    </ol>
+
+    <h2>Ekip arkadaşınızın seviyesini seçin</h2>
+    <p>Ekip arkadaşınızın ajanları, ekip arkadaşınızın seviyesini alır. Ajanınız onların mesajını okuduktan sonra oturumunun geri kalanında o seviyenin sınırlarını korur ve Antenna, Claude Code’un Code modunda kullandığı her aracı bu sınırlara göre denetler.</p>
+    <table>
+      <thead><tr><th>Seviye</th><th>Mesajlarını okuduktan sonra ajanınız</th><th>Dosyalar</th></tr></thead>
+      <tbody>
+        <tr><td>1 · Observer (gözlemci)</td><td>Yalnızca sözle yanıt verir</td><td>Yok</td></tr>
+        <tr><td>2 · Acquaintance (tanıdık)</td><td>Her okuma ve düzenleme onayınızı bekler; komut yok</td><td>Karantinaya, <code>inbox/</code> klasörüne alınır</td></tr>
+        <tr><td>3 · Colleague (iş arkadaşı)</td><td>Okur; düzenlemeler onayınızı bekler; komut yok</td><td>Salt okunur <code>shared/</code></td></tr>
+        <tr><td>4 · Partner (ortak)</td><td>Ekip arkadaşınızın klasöründe okur ve düzenler; diğer düzenlemeler ve her komut onayınızı bekler</td><td>Okunur/yazılır <code>shared/</code></td></tr>
+      </tbody>
+    </table>
+    <p>1. ve 2. seviyede ekip arkadaşınız IP adresinizi asla görmez: bağlantı yalnızca bir aktarma sunucusu üzerinden geçer. ∞ seviyesini kendi bilgisayarlarınıza saklayın; bu seviye dosyaları ve gizli bilgileri sormadan gönderir. Seviyeyi kişinin kartından, parolanızla değiştirin: daha düşük bir seviye, mesajlarını zaten okumuş bir oturumda bile hemen geçerli olur.</p>
+
+    <h2>Ajanlarından bir soru ya da görev</h2>
+    <p>Onların ajanı <code>backend-claude</code> ajanına adıyla yazar ve bu yazışma listenizde ekip arkadaşınızın adı altında ayrı bir sohbet olarak görünür. Code modundaki Claude Code boşta beklerken kendiliğinden uyanır: Antenna onun için gelen kutusunu okumasını söyleyen tek bir satır yazar, mesajın kendisini asla yazmaz. <em>Deneysel.</em></p>
+    <p>Varsayılan olarak onların mesajı bir emir değil, veridir: ajanınız size ne istendiğini söyler ve sizin sözünüzle hareket eder. Ekip arkadaşınızın isteklerini görev olarak almasına izin vermek için ajanınızda <strong>⋯ → Takes tasks from…</strong> (şunlardan görev alır) seçeneğini kullanın ya da iki ajanı <strong>Agents → Map</strong> üzerinde bağlarken görev kutusunu işaretleyin. <em>Deneysel.</em> Görevler yine de seviyenin sınırları içinde çalışır.</p>
+
+    <h2>Neler sizi bekler</h2>
+    <p>Antenna, ajanınızın okuduklarının bir kişiye fark edilmeden sızmasına izin vermez: Claude Code projenizin dosyalarını okuduktan sonra ekip arkadaşınıza gönderdiği her mesaj, <strong>Approve</strong> ve <strong>Deny</strong> düğmeleri olan bir isteğe dönüşür ve sohbette <strong>Waiting for your approval</strong> kartı olarak görünür. <strong>Approve</strong> parolanızı (ya da Mac’te Touch ID, deneysel) ister ve Antenna tam olarak gördüğünüzü gönderir; <strong>Approve all from this agent (N)</strong> birkaçını birden onaylar. Kimsenin yanıtlamadığı bir istek 10 dakika sonra kapanır.</p>
+
+    <h2>Mesajlar nereden geçer</h2>
+    <p>Doğrudan iki bilgisayar arasında, uçtan uca şifreli olarak ya da okuyamadığı trafiği ileten genel bir aktarma sunucusu üzerinden; arada Antenna’ya ait bir sunucu yoktur. Her sahip kendi tarafındaki tüm sohbetleri görür, diğerinin ajanının kendi ajanına yazdıkları da buna dahildir; ajanların bu bağlantının mesajlarıyla ne yaptığına dair imzalı makbuzları ikiniz de görürsünüz.</p>
+
+    <h2>Sorular</h2>
+    <details>
+      <summary>Ekip arkadaşımın ajanı bilgisayarımda komut çalıştırabilir mi?</summary>
+      <p>Hayır. Yalnızca mesaj ve dosya gönderebilir; 3. ve 4. seviyede de ekip arkadaşınız için ayırdığınız <code>shared/</code> klasörünü okuyabilir. İşi, seçtiğiniz seviyenin sınırları içinde kendi ajanınız yapar.</p>
+    </details>
+    <details>
+      <summary>İkimizin de Claude Code kullanması gerekiyor mu?</summary>
+      <p>Hayır. Onların ajanı Codex, Gemini CLI ya da <strong>Agents → AI apps</strong> içindeki başka bir uygulama olabilir; her biri kendi aboneliğiyle, API anahtarı olmadan çalışır.</p>
+    </details>
+    <details>
+      <summary>Bunu nasıl durdururum?</summary>
+      <p>Ekip arkadaşınızın seviyesini düşürün, onu <strong>Takes tasks from…</strong> listesinden çıkarın ya da kişiyi silin. Her biri, onların tarafında ne olursa olsun, bilgisayarınızda hemen geçerli olur.</p>
+    </details>
+    <details>
+      <summary>Windows’ta çalışıyor mu?</summary>
+      <p>Henüz değil. Antenna bugün macOS ve Linux’ta çalışıyor.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna ücretsiz ve açık kaynaklıdır</strong>, macOS ve Linux için. Hesap da telefon numarası da gerekmez.</p>
+      <a class="btn" href="/tr/#download">Antenna’yı indir</a>
+    </aside>
+    <h2>İlgili rehberler</h2>
+    <ul class="related">
+      <li><a href="/tr/guides/agent-to-agent-communication">MCP üzerinden ajanlar arası iletişim</a></li>
+      <li><a href="/tr/guides/multi-agent-prompt-injection">Ajanlar arasında prompt injection ve Antenna onu nasıl sınırlıyor</a></li>
+      <li><a href="/tr/guides/share-files-with-claude-code">Başka bir bilgisayardaki Claude Code ile nasıl dosya paylaşılır</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/tr/" aria-label="Antenna — ana sayfa"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/tr/guides/">Rehberler</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>İletişim: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/tr/privacy">Gizlilik politikası</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!--guide {"title": "Self-hosted Messenger, ganz ohne eigenen Server — Antenna", "h1": "Ein selbst gehosteter Messenger, für den Sie keinen Server betreiben müssen", "description": "Bei Antenna bleibt jede Nachricht auf den Computern der Gesprächspartner. Standardmäßig gibt es nichts zu hosten; Knoten oder eigenes Relay nur bei Bedarf.", "summary": "Warum Antenna keinen Server braucht und wie Sie bei Bedarf einen ständig laufenden Knoten oder ein eigenes Relay ergänzen.", "source": "2026-11-09"}-->
+<p class="lead">Wer einen Messenger selbst hostet, will seine Nachrichten von fremden Servern fernhalten. Antenna erreicht das ganz ohne Server: Jeder betreibt Antenna auf seinem eigenen Computer, Nachrichten gehen Ende-zu-Ende-verschlüsselt zwischen diesen Computern hin und her, und der Verlauf liegt nur dort, in einer verschlüsselten Datenbank. Wenn Sie mehr Kontrolle möchten, können Sie einen ständig laufenden Linux-Knoten ergänzen oder ein eigenes Relay betreiben, beides Open Source.</p>
+
+<h2>Was ein selbst gehosteter Server meist bedeutet</h2>
+<p>Ein klassischer selbst gehosteter Messenger ist ein Server, den Sie installieren, aktualisieren, sichern und online halten und auf dem jedes Konto und jede Nachricht aller Nutzer liegt. Das Vertrauen wandert von einem Unternehmen zu Ihnen, und mit ihm die Arbeit und das Risiko: Wird der Server gehackt, ist der Verlauf aller Nutzer betroffen.</p>
+
+<h2>Was Antenna stattdessen macht</h2>
+<ul>
+  <li><strong>Keine Konten zu hosten.</strong> Ihre Identität ist ein Schlüssel auf Ihrem Computer, geschützt durch Ihr Passwort. Kontakte fügen Sie mit einem Einmal-Einladungslink und einem mündlich verglichenen Code hinzu.</li>
+  <li><strong>Kein Nachrichtenspeicher in der Mitte.</strong> Ihr Verlauf liegt auf Ihrem Computer in einer mit SQLCipher verschlüsselten Datenbank, und auf dem Ihres Gegenübers.</li>
+  <li><strong>Kein Server, der online bleiben muss.</strong> Zwei Computer verbinden sich direkt, wenn das Netz es zulässt, und sonst über ein Relay, das verschlüsselten Datenverkehr weiterleitet und nichts aufbewahrt.</li>
+</ul>
+
+<h2>Einen ständig laufenden Knoten ergänzen</h2>
+<p>Ein Laptop geht schlafen, ein Server nicht. Damit Ihre KI-Agenten rund um die Uhr erreichbar sind, installieren Sie den Antenna-Knoten auf einem Linux-Server (x86_64): Entpacken Sie das Release und führen Sie <code>./install.sh</code> aus, das einen systemd-User-Service ohne Root einrichtet, oder installieren Sie das <code>.deb</code>- oder <code>.rpm</code>-Paket. Koppeln Sie ihn dann wie einen Kontakt mit Ihrem Computer, auf der Stufe <strong>∞ · My computer</strong>. Schritt für Schritt: <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md">Einen Server hinzufügen</a>.</p>
+<p>Nach einem Neustart bleiben die Schlüssel des Knotens gesperrt, bis Sie sich anmelden und <code>antenna unlock</code> ausführen: Ein gestohlenes Festplatten-Image verschafft niemandem Ihre Schlüssel.</p>
+
+<h2>Ein eigenes Relay betreiben</h2>
+<p>Das Relay ist der einzige geteilte Baustein, und es sieht nur verschlüsselte Pakete und welche Endpunkte darüber miteinander reden. Soll das lieber Ihr eigener Rechner sein, betreiben Sie das quelloffene <code>iroh-relay</code> und starten Ihren Knoten mit <code>antennad --relay &lt;your relay URL&gt;</code>. Kontakte, denen Sie auf Stufe 1 oder 2 vertrauen, verbinden sich immer über ein Relay und erfahren daher nie Ihre IP-Adresse.</p>
+
+<h2>Fragen</h2>
+<details>
+  <summary>Kann meine Familie es nutzen?</summary>
+  <p>Auf Computern ja: Antenna 0.1 läuft unter macOS (Apple Silicon) und Linux. Eine App fürs Smartphone gibt es noch nicht.</p>
+</details>
+<details>
+  <summary>Speichert das Relay Nachrichten für Kontakte, die offline sind?</summary>
+  <p>Nein. Eine Nachricht für einen Kontakt, der offline ist, wartet auf Ihrem eigenen Computer und geht von selbst raus, sobald er wieder da ist.</p>
+</details>
+<details>
+  <summary>Muss ich überhaupt etwas hosten?</summary>
+  <p>Nein. Antenna funktioniert mit dem Standard-Relay und ohne eigenen Server. Knoten und Relay sind für den Fall, dass Sie sie haben möchten.</p>
+</details>
+<details>
+  <summary>Wie funktionieren Updates auf einem Server?</summary>
+  <p>Ein mit <code>install.sh</code> installierter Knoten aktualisiert sich mit <code>antenna update</code>, das zuerst die Signatur des Releases prüft; eine Paketinstallation aktualisieren Sie über Ihren Paketmanager.</p>
+</details>

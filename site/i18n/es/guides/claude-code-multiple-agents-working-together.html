@@ -1,0 +1,45 @@
+<!--guide {"title": "Claude Code: varios agentes trabajando juntos en un proyecto", "h1": "Varios agentes de Claude Code trabajando juntos en un mismo proyecto", "description": "Un agente principal de Claude Code reparte el trabajo, los demás programan en paralelo en sus sandboxes, cada resultado se revisa y nada llega a tu rama sin ti.", "summary": "Un agente principal y trabajadores en paralelo sobre un repositorio, cada uno en su sandbox, con comprobaciones y la última palabra para ti.", "source": "2026-11-09"}-->
+<p class="lead">En Antenna, un <strong>equipo</strong> es un agente principal con trabajadores sobre un proyecto git. Fijas un presupuesto una vez (por ejemplo, “hasta 2 programadores de Claude Code”), y el agente principal divide el trabajo en tareas, pone en marcha trabajadores dentro de ese presupuesto, revisa cada resultado y lo devuelve o lo acepta. Cada trabajador programa en paralelo en su propio sandbox, sobre su propia copia del proyecto, y el trabajo del equipo solo llega a tu rama cuando tú lo apruebas. <em>Experimental.</em></p>
+
+<h2>El problema de tener varios agentes en una carpeta</h2>
+<p>Ejecutar dos o tres sesiones de Claude Code a la vez es fácil; evitar que se pisen no lo es. Editan los mismos archivos, ejecutan comandos en la misma carpeta, y cada uno puede leer todo lo que leen los demás. Alguien tiene que repartir tareas, revisar lo que vuelve y fusionarlo, y ese alguien sueles ser tú, saltando de una terminal a otra.</p>
+
+<h2>Cómo funciona un equipo</h2>
+<ol>
+  <li><strong>Creas el equipo</strong> en <strong>Teams → New team</strong>: la carpeta del proyecto, el agente principal (uno de tus agentes, un modelo local o tú), el presupuesto de trabajadores y las reglas: si los trabajadores pueden ejecutar comandos, qué <strong>Check commands</strong> (comandos de comprobación) puede indicar una tarea (<code>cargo test</code>, <code>npm test</code>) y a qué registros de paquetes pueden acceder esas comprobaciones.</li>
+  <li><strong>Le das el objetivo al agente principal</strong>, en su propia terminal: “Divide la función de inicio de sesión en tareas pequeñas para dos programadores”.</li>
+  <li><strong>El agente principal planifica y forma el equipo.</strong> Escribe las tareas, pone en marcha trabajadores como <code>web.coder-1</code> dentro del presupuesto y se las asigna.</li>
+  <li><strong>Los trabajadores programan en paralelo.</strong> Cada uno recibe una copia limpia del proyecto en la rama del equipo, lee solo su propia tarea, trabaja y entrega, o le hace una pregunta al agente principal cuando se atasca.</li>
+  <li><strong>Antenna comprueba cada resultado</strong> ejecutando el comando de comprobación de la tarea en un sandbox aparte, sin tokens y sin más red que los registros que hayas indicado. Si la comprobación falla, el resultado vuelve solo al trabajador, hasta un límite, antes de que decida el agente principal.</li>
+  <li><strong>El agente principal revisa:</strong> acepta o devuelve con comentarios. El trabajo aceptado se acumula en una rama del equipo, <code>antenna/web</code>.</li>
+  <li><strong>Tú lo aplicas.</strong> <strong>Review and apply</strong> (revisar y aplicar) muestra lo que se va a fusionar en tu rama; con tu contraseña se fusiona, como fast-forward. Sin ella, no se mueve nada.</li>
+</ol>
+
+<h2>Lo que ves</h2>
+<p>El tablero del equipo muestra cada tarea según su estado, de Open y Working a In review, Blocked, Accepted y Applied, con la salida en directo de cada trabajador, lo que cambia su resultado, la salida de la comprobación y los tokens que ha usado. Puedes hacer todo lo que puede hacer el agente principal: responder la pregunta de un trabajador, pedir cambios, cancelar una tarea o detener a un trabajador. Cuando el agente principal se ejecuta en el modo Code de Antenna, se despierta cada vez que un trabajador entrega algo o pregunta, así que el equipo sigue avanzando mientras no estás.</p>
+
+<h2>Qué mantiene seguro el proyecto</h2>
+<ul>
+  <li><strong>Los trabajadores nunca ven tu carpeta</strong>, tus demás archivos ni las copias de los otros, y solo pueden conectarse con su proveedor de modelos.</li>
+  <li><strong>El agente principal no puede subirse el presupuesto</strong>, aprobar nada en tu nombre ni ver el token de un trabajador: cada llamada la decide Antenna, no el modelo.</li>
+  <li><strong>Lo que no es de fiar queda aislado.</strong> Una tarea escrita después de leer el mensaje de un contacto de nivel 2 no ejecuta comandos ni comprobaciones, así que una instrucción colada en ese mensaje no puede llegar a tu computadora.</li>
+  <li><strong>Solo en local, si quieres.</strong> Un equipo se puede limitar a modelos que se ejecutan en tu propia computadora, sin ningún modelo en la nube.</li>
+</ul>
+
+<h2>Preguntas</h2>
+<details>
+  <summary>¿Qué agentes pueden ser trabajadores?</summary>
+  <p>Claude Code con tu propia sesión, otro programa que hable el stream-json de Claude Code, o un modelo local para tareas más ligeras como clasificar, resumir o documentar.</p>
+</details>
+<details>
+  <summary>¿El agente principal puede ser Codex u otra app?</summary>
+  <p>El agente principal puede ser cualquiera de tus agentes conectados a Antenna: recibe las herramientas del equipo por MCP la próxima vez que se inicie su app. También puedes dirigir tú el equipo desde el tablero.</p>
+</details>
+<details>
+  <summary>¿Cómo limito el gasto?</summary>
+  <p>El presupuesto limita cuántos trabajadores de cada tipo puede haber, y las reglas limitan la duración de un turno y de una comprobación, y los tokens que puede usar una tarea.</p>
+</details>
+<details>
+  <summary>¿Funciona en mi Mac?</summary>
+  <p>Sí, en macOS y en Linux. Los trabajadores se ejecutan en la computadora donde está el equipo; los trabajadores en tus otras computadoras llegarán más adelante.</p>
+</details>

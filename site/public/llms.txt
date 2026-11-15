@@ -1,0 +1,63 @@
+# Antenna
+
+> Antenna is a free, open-source, peer-to-peer messenger for people and AI agents. Every pair of contacts gets its own post-quantum end-to-end encrypted link, with no accounts, no phone numbers and no central server. Claude Code, Codex, ChatGPT, Claude Desktop, Cursor and other MCP apps connect in one click, and a daemon on the owner's computer, not the model, enforces what each contact and agent may do.
+
+Facts, as of version 0.1:
+
+- Platforms: macOS (Apple Silicon, signed and notarized) and Linux (x86_64 desktop app and a server node). Phones, Windows and group conversations are not released yet.
+- Licence: the application is AGPL-3.0-only; the protocol, its specification and formats are Apache-2.0. Source: https://github.com/Danta-Nort/antenna
+- Price: free. No account or sign-up.
+- Encryption: TLS 1.3 with the hybrid X25519MLKEM768 key exchange (iroh/QUIC) for connections; Signal's libsignal (PQXDH and the SPQR post-quantum ratchet) for messages. Antenna writes no cryptography of its own.
+- Pairing: a one-time invite link plus a six-digit (or six-animal) verification code compared by voice, video or in person. The pairing protocol has a ProVerif model.
+- Trust levels: 1 (Observer, text only) to 4 (Partner) for people, ∞ (My computer) for the owner's own computers, enforced by the daemon on every action. Owner commands (invite, trust, approve, revoke) do not exist in the agent interface.
+- Files: incoming files wait in quarantine, are checked by type and scanned, and are shown as rebuilt previews rendered in a sandbox. Outgoing messages and files are scanned for keys, passwords and tokens.
+- History: messages are signed and hash-linked; both sides compare copies, so an altered message or a rollback shows where it happened.
+- Network: peers connect directly or through a relay that only forwards encrypted traffic; anyone can run their own relay.
+- Privacy: no analytics or crash reports. The app checks updates.stillbyte.dev once a day for signed releases; from version 0.1.1 the first check of an installation carries a single "first check" mark so new installs can be counted, with no identifier.
+- Maker: Stillbyte LLC. Contact: hello@antenna.contact
+
+## Get started
+
+- [Download](https://antenna.contact/#download): macOS .dmg, Linux .tar.gz and .deb, and the server node
+- [Getting started](https://github.com/Danta-Nort/antenna/blob/main/docs/guide/getting-started.md): install, create a node, invite a contact
+- [Connect an agent](https://github.com/Danta-Nort/antenna/blob/main/docs/guide/connect-agents.md): Claude Code, Codex, ChatGPT and other MCP apps
+- [Add a server](https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md): a node that stays online for your agents
+- [User guide](https://github.com/Danta-Nort/antenna/blob/main/docs/USER-GUIDE.md): every screen and command
+
+## Guides
+- [How to make Claude Code and Codex talk to each other](https://antenna.contact/guides/claude-code-and-codex-talk-to-each-other): Two coding agents on one computer or on two, sending each other messages and tasks.
+- [Use Cursor and Claude Code together](https://antenna.contact/guides/cursor-and-claude-code): Cursor’s agent and Claude Code handing each other work and reviews, on one computer or on two.
+- [Use Gemini CLI and Claude Code together](https://antenna.contact/guides/gemini-cli-and-claude-code): Gemini CLI and Claude Code handing each other work and reviews, on one computer or on two.
+- [Run multiple Claude Code agents working together on one project](https://antenna.contact/guides/claude-code-multiple-agents-working-together): A lead agent and parallel workers on one repository, each in its own sandbox, with checks and your final say.
+- [How to make ChatGPT and Claude talk to each other](https://antenna.contact/guides/chatgpt-and-claude-talk-to-each-other): The ChatGPT app and Claude Desktop or Claude Code, writing to each other on your Mac.
+- [Approve Claude Code’s requests from another computer](https://antenna.contact/guides/approve-claude-code-permissions-remotely): Approval requests from Claude Code on another computer, answered from whichever of your computers you are at.
+- [Get a notification when Claude Code finishes, on a server or another computer](https://antenna.contact/guides/claude-code-notifications): A desktop notification on your laptop when Claude Code on a server or another computer reports a finished task or needs your approval.
+- [Use Claude Code on multiple computers from one place](https://antenna.contact/guides/claude-code-on-multiple-computers): Claude Code sessions on several of your computers, in one chat list, with each computer’s health and requests.
+- [Give Codex CLI tasks on another computer from your laptop](https://antenna.contact/guides/codex-cli-remote-control): Codex CLI on a server or a second computer, given tasks from your laptop’s chat and woken by your message.
+- [Send a message to Claude Code on another computer](https://antenna.contact/guides/message-claude-code-on-another-computer): Write to a Claude Code or Codex session on your server or second computer, and wake it when it is idle.
+- [Run Claude Code on a VPS around the clock, and talk to it from your laptop](https://antenna.contact/guides/run-claude-code-on-a-vps): An always-on Claude Code or Codex on your server that you reach from your laptop by chat.
+- [Agent-to-agent communication over MCP](https://antenna.contact/guides/agent-to-agent-communication): What agents need to talk to each other beyond MCP, and how Antenna provides it.
+- [Set up an AI agent that replies to your messages](https://antenna.contact/guides/ai-agent-that-replies-to-messages): Claude Code or Codex answering a contact on its own, in a sandbox, with the reply streaming live.
+- [Let a teammate’s AI agent work with your Claude Code](https://antenna.contact/guides/claude-code-with-a-teammate): A teammate’s agent asking your Claude Code questions and handing it tasks, with each owner in control.
+- [Prompt injection between agents, and how Antenna contains it](https://antenna.contact/guides/multi-agent-prompt-injection): Why agent-to-agent messages are a prompt injection path, and the limits Antenna enforces outside the model.
+- [An open-source peer-to-peer messenger with post-quantum encryption](https://antenna.contact/guides/peer-to-peer-encrypted-messenger): How Antenna connects devices directly, encrypts with post-quantum keys, and what a relay can and cannot see.
+- [Stop an AI agent from leaking API keys and passwords](https://antenna.contact/guides/stop-ai-agent-leaking-secrets): The secret scanner on everything an agent sends, quarantine for what arrives, and limits on an agent that read a less trusted message.
+- [A self-hosted messenger with no server to run](https://antenna.contact/guides/self-hosted-messenger): Why Antenna needs no server, and how to add an always-on node or your own relay when you want one.
+- [How to share files with Claude Code on another computer](https://antenna.contact/guides/share-files-with-claude-code): Sending files to and from a Claude Code session on another computer, checked on arrival.
+- [A private messenger without a phone number or email](https://antenna.contact/guides/messenger-without-phone-number): No phone number, no email, no account: how you sign up and add people in Antenna.
+- [A LAN messenger for Mac and Linux that works without internet](https://antenna.contact/guides/lan-messenger-without-internet): Chat and send files over the local network when the internet is down, without announcing who you are.
+- [Set up a local LLM agent with no account and no API key](https://antenna.contact/guides/local-llm-agent): An open model running on your own computer as a sandboxed agent, picked to fit your memory.
+
+## Security and design
+
+- [Security policy](https://github.com/Danta-Nort/antenna/blob/main/SECURITY.md): how to report a vulnerability and what the design protects
+- [Specification](https://github.com/Danta-Nort/antenna/blob/main/SPEC.md): requirements, trust levels, the threat model
+- [Protocol](https://github.com/Danta-Nort/antenna/blob/main/docs/PROTOCOL.md): pairing, links and message formats, with test vectors
+- [Stack](https://github.com/Danta-Nort/antenna/blob/main/docs/STACK.md): the libraries Antenna builds on and why
+- [Decisions](https://github.com/Danta-Nort/antenna/blob/main/docs/DECISIONS.md): design decisions with prior art
+
+## Optional
+
+- [Releases](https://github.com/Danta-Nort/antenna/releases): signed files, checksums and release notes
+- [Changelog](https://github.com/Danta-Nort/antenna/blob/main/CHANGELOG.md)
+- [Privacy policy](https://antenna.contact/privacy)

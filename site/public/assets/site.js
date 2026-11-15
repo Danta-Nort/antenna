@@ -6,6 +6,8 @@
 //    "Open in Antenna" (antenna://pair#…) and "Copy link", and makes NO network request for it.
 //    The fragment is then removed from the address bar and from this tab's history entry.
 // 2. Closed-beta form: a small proof-of-work instead of a captcha, then one POST to /api/beta.
+// 3. The hero's and the invite card's Download buttons point at the file for this computer (Mac with Apple Silicon, Linux),
+//    from what the browser already says about itself; anything else keeps the link to #download.
 //
 // The page runs under a strict CSP with Trusted Types: no HTML string sinks, only textContent and
 // properties, so nothing taken from the address can become markup or code.
@@ -13,6 +15,21 @@
 
 (() => {
   const $ = (id) => document.getElementById(id);
+
+  // The page's language: its texts come in a JSON data block (build/site.mjs; never run, so the CSP allows it).
+  const T = {
+    inviteTitle: 'You’ve been invited to connect on Antenna',
+    inviteBrokenTitle: 'This invite link looks damaged',
+    inviteBrokenBody: 'Part of the link seems to be missing or changed. Ask your contact to send it again, and copy it in full.',
+    copied: 'Copied. Paste it into Antenna where it asks for an invite link.',
+    copyFailed: 'Could not copy automatically — select the link above and copy it.',
+    downloadMac: 'Download for Mac',
+    downloadLinux: 'Download for Linux',
+  };
+  try {
+    const own = JSON.parse(($('i18n') || {}).textContent || '{}');
+    for (const k of Object.keys(T)) if (typeof own[k] === 'string') T[k] = own[k];
+  } catch (_) { /* keep English */ }
 
   // 1. Invite handler.
   // Same format as antenna_proto::invite (docs/PROTOCOL.md §3): <E_A>.<s>.<relay>[.<direct>]
@@ -51,6 +68,9 @@
     try { history.replaceState(null, '', location.pathname + location.search); } catch (_) { /* ignore */ }
 
     section.hidden = false;
+    // "Install it, then press Open in Antenna" makes sense only for a link that can be opened.
+    const get = $('invite-get');
+    if (get) get.hidden = result.kind !== 'invite';
     if (result.kind === 'invite') {
       const link = INVITE_SCHEME + result.payload;
       open.href = link;
@@ -58,15 +78,15 @@
       copy.hidden = false;
       field.value = link;
       field.parentElement.hidden = false;
-      title.textContent = 'You’ve been invited to connect on Antenna';
+      title.textContent = T.inviteTitle;
       status.textContent = '';
     } else {
       open.hidden = true;
       copy.hidden = true;
       field.value = '';
       field.parentElement.hidden = true;
-      title.textContent = 'This invite link looks damaged';
-      status.textContent = 'Part of the link seems to be missing or changed. Ask your contact to send it again, and copy it in full.';
+      title.textContent = T.inviteBrokenTitle;
+      status.textContent = T.inviteBrokenBody;
     }
     window.scrollTo(0, 0);
     title.setAttribute('tabindex', '-1');
@@ -96,8 +116,8 @@
       copy.addEventListener('click', async () => {
         const ok = await copyText($('invite-link').value);
         $('invite-copy-status').textContent = ok
-          ? 'Copied. Paste it into Antenna where it asks for an invite link.'
-          : 'Could not copy automatically — select the link above and copy it.';
+          ? T.copied
+          : T.copyFailed;
       });
     }
     checkFragment();
@@ -184,6 +204,44 @@
     });
   }
 
+  // 3. Download for this computer. The release has a Mac build for Apple Silicon and a Linux build for x86_64,
+  // so the button names a file only when the browser's own report matches one of them; Windows, phones and
+  // anything unsure keep "Download" and the section with every file.
+  function setDownload(label, href) {
+    const a = $('hero-download');
+    const text = $('hero-download-label');
+    if (a && text) {
+      a.href = href;
+      text.textContent = label;
+    }
+    // The invite card's button too: a direct file download keeps this tab, and with it the invite, open.
+    const invite = $('invite-download');
+    if (invite) {
+      invite.href = href;
+      invite.textContent = label;
+    }
+  }
+
+  function initDownload() {
+    const ua = navigator.userAgent || '';
+    if (/Android|iPhone|iPad|iPod|Mobile/i.test(ua) || (navigator.maxTouchPoints > 1 && /Macintosh/.test(ua))) return;
+    if (/Macintosh|Mac OS X/.test(ua)) {
+      const uad = navigator.userAgentData;
+      if (uad && uad.getHighEntropyValues) {
+        // Chromium reports the CPU; an Intel Mac keeps the section, where the card says Apple Silicon.
+        uad.getHighEntropyValues(['architecture'])
+          .then((v) => { if (v.architecture === 'arm') setDownload(T.downloadMac, '/download/mac'); })
+          .catch(() => { /* keep the section link */ });
+        return;
+      }
+      // Safari and Firefox report every Mac as Intel; the Mac card below says the build is for Apple Silicon.
+      setDownload(T.downloadMac, '/download/mac');
+    } else if (/Linux/.test(ua) && /x86_64|amd64/i.test(ua) && !/CrOS/.test(ua)) {
+      setDownload(T.downloadLinux, '/download/linux');
+    }
+  }
+
   initInvite();
   initForm();
+  initDownload();
 })();

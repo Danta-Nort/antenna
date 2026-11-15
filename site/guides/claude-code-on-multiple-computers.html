@@ -1,0 +1,40 @@
+<!--guide {"order": 4, "title": "Use Claude Code on multiple computers from one place — Antenna", "h1": "Use Claude Code on multiple computers from one place", "description": "Run Claude Code on your laptop, desktop and server, and reach every session from one chat list: their health, their requests and a stop button for each.", "query": "claude code multiple computers", "updated": "2026-11-14", "summary": "Claude Code sessions on several of your computers, in one chat list, with each computer’s health and requests.", "related": ["message-claude-code-on-another-computer", "run-claude-code-on-a-vps", "share-files-with-claude-code"]}-->
+<p class="lead">Let Claude Code run where the work is, on your laptop, a desktop and a server, and install Antenna on each of them. Pair the computers once as your own (∞). From any of them you then see every session in one chat list, write to any of them by name, answer their approval requests, and stop a session that runs away, without opening a terminal on that machine. Codex works the same way.</p>
+
+<h2>What you get</h2>
+<ul>
+  <li><strong>One chat per session</strong>, whichever computer it runs on. A session on the server and one on the desktop sit in the same list as your contacts.</li>
+  <li><strong>My devices</strong>: a card for each of your computers with its system and Antenna version, its health as its own checks see it, its agents and whether each is connected, and the requests waiting for you there.</li>
+  <li><strong>Approvals from where you are.</strong> A request from an agent on the server can be approved on your Mac, with Touch ID or the Mac’s password. The server checks the signature and carries the request out itself.</li>
+  <li><strong>A stop button</strong> for each agent on another computer: it stops the agent and every process it started there.</li>
+  <li><strong>The agent map</strong>, where you connect a session on one computer to a session on another, so they write to each other.</li>
+</ul>
+
+<h2>Set it up</h2>
+<ol>
+  <li><strong>Install Antenna on each computer</strong>: the app on a Mac or Linux desktop, the node on a Linux server (<code>curl -fsSL https://antenna.contact/install.sh | sh</code>).</li>
+  <li><strong>Pair the computers with each other as your own.</strong> Create an invite with <strong>This is my own computer (∞)</strong> ticked, open it on the other computer, and enter the code one side shows into the other. Pair each computer with every other one you want to see or connect from it: each must have the other at ∞.</li>
+  <li><strong>Give each Claude Code session a name.</strong> On a desktop, start it in Code mode from the <code>+</code> in the agents’ panel. On a server, in the project folder, run <code>antenna connect claude-code --agent api-dev --links mac --hello mac</code> and keep it running with <code>antenna session start api-dev --dir ~/projects/api</code>; <a href="/guides/run-claude-code-on-a-vps">Claude Code on a VPS</a> has every step.</li>
+  <li><strong>Let your main computer answer requests.</strong> On the server, run <code>antenna devices confirm mac</code> once; on a desktop, accept the main computer’s key in <strong>My devices</strong> → its card → <strong>Approvals</strong>.</li>
+</ol>
+
+<h2>Moving work between computers</h2>
+<p>Write to a session the way you would to a person: “<code>api-dev</code>, run the migrations on the server and tell me what changed.” Files you drop into its chat are saved on that computer and the agent is told where they are; between your own computers ordinary files are saved without asking, while programs and installers still wait for you. To let a session on the desktop hand work to one on the server, connect the two on the agent map. A session there wakes when a message arrives, and an urgent message can interrupt its current turn. <em>Experimental.</em></p>
+
+<h2>Questions</h2>
+<details>
+  <summary>Does Antenna sync Claude Code’s settings or history between computers?</summary>
+  <p>No. Claude Code keeps its settings, history and sign-in on each computer, and your code moves the way it already does, with git. Antenna carries messages, files and approvals between the sessions.</p>
+</details>
+<details>
+  <summary>Do I need a public IP or open ports on the server?</summary>
+  <p>No. Every computer connects out, directly when the network allows and through a relay otherwise, and the relay forwards only encrypted traffic.</p>
+</details>
+<details>
+  <summary>Can I change a setting on another computer from here?</summary>
+  <p>No. Only approvals, stops and connection requests from the agent map, which that computer asks you to approve, travel between your computers. Trust, invites, updates and settings are changed at the computer itself, so a stolen laptop cannot rewrite the server’s rules.</p>
+</details>
+<details>
+  <summary>Does it work on Windows or a phone?</summary>
+  <p>Not yet. Antenna runs on macOS and Linux today.</p>
+</details>

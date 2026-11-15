@@ -1,0 +1,40 @@
+<!--guide {"title": "कई कंप्यूटरों पर Claude Code, एक जगह से — Antenna", "h1": "कई कंप्यूटरों पर Claude Code एक ही जगह से इस्तेमाल करें", "description": "लैपटॉप, डेस्कटॉप और server पर Claude Code चलाएँ, और हर session तक एक ही चैट लिस्ट से पहुँचें: उनकी हालत, उनके requests और हर एक के लिए stop बटन।", "summary": "आपके कई कंप्यूटरों पर Claude Code sessions, एक चैट लिस्ट में, हर कंप्यूटर की हालत और requests के साथ।", "source": "2026-11-14"}-->
+<p class="lead">Claude Code को वहीं चलने दें जहाँ काम है, आपके लैपटॉप, डेस्कटॉप और server पर, और हर एक पर Antenna इंस्टॉल करें। कंप्यूटरों को एक बार अपने ख़ुद के (∞) रूप में जोड़ें। उसके बाद उनमें से किसी से भी आप हर session को एक चैट लिस्ट में देखते हैं, किसी को भी नाम से लिखते हैं, उनके approval requests का जवाब देते हैं, और बेक़ाबू हुए session को रोक देते हैं, उस मशीन पर terminal खोले बिना। Codex भी इसी तरह काम करता है।</p>
+
+<h2>आपको क्या मिलता है</h2>
+<ul>
+  <li><strong>हर session के लिए एक चैट</strong>, चाहे वह किसी भी कंप्यूटर पर चल रहा हो। Server का session और डेस्कटॉप का session आपके कॉन्टैक्ट्स के साथ एक ही लिस्ट में होते हैं।</li>
+  <li><strong>My devices</strong>: आपके हर कंप्यूटर का एक कार्ड, जिसमें उसका सिस्टम और Antenna वर्ज़न, उसकी अपनी जाँच के मुताबिक़ उसकी हालत, उसके agents और हर एक जुड़ा है या नहीं, और वहाँ आपका इंतज़ार कर रहे requests दिखते हैं।</li>
+  <li><strong>जहाँ आप हैं, वहीं से approvals।</strong> Server पर किसी agent का request आपके Mac पर Touch ID या Mac के password से मंज़ूर किया जा सकता है। Server signature जाँचता है और request ख़ुद पूरा करता है।</li>
+  <li><strong>Stop बटन</strong> दूसरे कंप्यूटर के हर agent के लिए: यह agent को और उसके वहाँ शुरू किए हर process को रोक देता है।</li>
+  <li><strong>Agent map</strong>, जहाँ आप एक कंप्यूटर के session को दूसरे कंप्यूटर के session से जोड़ते हैं, ताकि वे एक-दूसरे को लिखें।</li>
+</ul>
+
+<h2>सेट करें</h2>
+<ol>
+  <li><strong>हर कंप्यूटर पर Antenna इंस्टॉल करें</strong>: Mac या Linux डेस्कटॉप पर ऐप, Linux server पर node (<code>curl -fsSL https://antenna.contact/install.sh | sh</code>)।</li>
+  <li><strong>कंप्यूटरों को अपने ख़ुद के रूप में आपस में जोड़ें।</strong> <strong>This is my own computer (∞)</strong> पर tick करके इनवाइट बनाएँ, उसे दूसरे कंप्यूटर पर खोलें, और एक तरफ़ दिखा कोड दूसरी तरफ़ डालें। हर कंप्यूटर को उन सभी कंप्यूटरों से जोड़ें जिन्हें आप उससे देखना या जोड़ना चाहते हैं: हर एक के पास दूसरा ∞ पर होना चाहिए।</li>
+  <li><strong>हर Claude Code session को एक नाम दें।</strong> डेस्कटॉप पर उसे agents पैनल के <code>+</code> से Code mode में शुरू करें। Server पर, प्रोजेक्ट फ़ोल्डर में, <code>antenna connect claude-code --agent api-dev --links mac --hello mac</code> चलाएँ और <code>antenna session start api-dev --dir ~/projects/api</code> से उसे चालू रखें; हर कदम <a href="/guides/run-claude-code-on-a-vps">VPS पर Claude Code</a> में है।</li>
+  <li><strong>अपने मुख्य कंप्यूटर को requests का जवाब देने दें।</strong> Server पर एक बार <code>antenna devices confirm mac</code> चलाएँ; डेस्कटॉप पर मुख्य कंप्यूटर की key <strong>My devices</strong> → उसका कार्ड → <strong>Approvals</strong> में स्वीकार करें।</li>
+</ol>
+
+<h2>कंप्यूटरों के बीच काम आगे बढ़ाना</h2>
+<p>Session को वैसे ही लिखें जैसे किसी इंसान को: “<code>api-dev</code>, server पर migrations चलाओ और बताओ क्या बदला।” उसकी चैट में डाली गई फ़ाइलें उसी कंप्यूटर पर सेव होती हैं और agent को बता दिया जाता है कि वे कहाँ हैं; आपके अपने कंप्यूटरों के बीच आम फ़ाइलें बिना पूछे सेव हो जाती हैं, जबकि प्रोग्राम और installers फिर भी आपका इंतज़ार करते हैं। डेस्कटॉप के session को server के session को काम सौंपने देने के लिए, agent map पर दोनों को जोड़ दें। वहाँ का session मैसेज आने पर जागता है, और कोई urgent मैसेज उसकी मौजूदा बारी को बीच में रोक सकता है। <em>Experimental।</em></p>
+
+<h2>सवाल-जवाब</h2>
+<details>
+  <summary>क्या Antenna कंप्यूटरों के बीच Claude Code की settings या हिस्ट्री sync करता है?</summary>
+  <p>नहीं। Claude Code अपनी settings, हिस्ट्री और साइन-इन हर कंप्यूटर पर अलग रखता है, और आपका कोड वैसे ही आता-जाता है जैसे अभी, git से। Antenna sessions के बीच मैसेज, फ़ाइलें और approvals ले जाता है।</p>
+</details>
+<details>
+  <summary>क्या server पर public IP या खुले ports चाहिए?</summary>
+  <p>नहीं। हर कंप्यूटर बाहर की ओर कनेक्ट करता है, network इजाज़त दे तो सीधे, वरना relay के ज़रिए, और relay सिर्फ़ encrypted ट्रैफ़िक आगे भेजता है।</p>
+</details>
+<details>
+  <summary>क्या यहीं से दूसरे कंप्यूटर की कोई setting बदली जा सकती है?</summary>
+  <p>नहीं। आपके कंप्यूटरों के बीच सिर्फ़ approvals, stops और agent map के connection requests जाते हैं, जिन्हें वह कंप्यूटर आपसे मंज़ूर करवाता है। Trust, इनवाइट, अपडेट और settings उसी कंप्यूटर पर बदले जाते हैं, ताकि चोरी हुआ लैपटॉप server के नियम दोबारा न लिख सके।</p>
+</details>
+<details>
+  <summary>क्या यह Windows या फ़ोन पर काम करता है?</summary>
+  <p>अभी नहीं। Antenna आज macOS और Linux पर चलता है।</p>
+</details>

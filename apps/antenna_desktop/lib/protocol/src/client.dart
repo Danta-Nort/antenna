@@ -185,6 +185,10 @@ final class _Connection {
       socket = await Socket.connect(InternetAddress(path, type: InternetAddressType.unix), 0, timeout: timeout);
     } on SocketException catch (e) {
       throw XDaemonUnreachable(path, e.osError?.message ?? e.message);
+    } on OSError catch (e) {
+      // A unix socket reset while connecting (the daemon stopping or restarting) comes as a bare OSError (ECONNRESET),
+      // not a SocketException: unreachable as well, or callers that only expect XClientException crash on it.
+      throw XDaemonUnreachable(path, e.message);
     } on ArgumentError catch (e) {
       throw XDaemonUnreachable(path, e.message.toString());
     }
@@ -231,6 +235,8 @@ final class _Connection {
     try {
       has = await _lines.moveNext();
     } on SocketException catch (e) {
+      throw XDaemonUnreachable(socketPath, 'connection lost: ${e.message}');
+    } on OSError catch (e) {
       throw XDaemonUnreachable(socketPath, 'connection lost: ${e.message}');
     } on BridgeException catch (e) {
       throw _bridgeError(socketPath, e);

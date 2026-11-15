@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cursor ve Claude Code birlikte: iş devri ve kod incelemesi</title>
+<meta name="description" content="Cursor’ı tek tıkla Antenna’ya bağlayın, Claude Code’u Antenna’nın penceresinde başlatın ve aralarına bir çizgi çekin: birbirlerine iş ve inceleme gönderirler.">
+<link rel="canonical" href="https://antenna.contact/tr/guides/cursor-and-claude-code">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Cursor ve Claude Code birlikte: iş devri ve kod incelemesi">
+<meta property="og:description" content="Cursor’ı tek tıkla Antenna’ya bağlayın, Claude Code’u Antenna’nın penceresinde başlatın ve aralarına bir çizgi çekin: birbirlerine iş ve inceleme gönderirler.">
+<meta property="og:url" content="https://antenna.contact/tr/guides/cursor-and-claude-code">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="tr_TR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/cursor-and-claude-code">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/cursor-and-claude-code">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/cursor-and-claude-code">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/cursor-and-claude-code">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/cursor-and-claude-code">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/cursor-and-claude-code">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/cursor-and-claude-code">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/cursor-and-claude-code">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/cursor-and-claude-code">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/cursor-and-claude-code">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/cursor-and-claude-code">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/cursor-and-claude-code">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/cursor-and-claude-code">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/cursor-and-claude-code">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/cursor-and-claude-code">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/cursor-and-claude-code">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/tr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Rehberler",
+     "item": "https://antenna.contact/tr/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Cursor ve Claude Code’u birlikte kullanın",
+     "item": "https://antenna.contact/tr/guides/cursor-and-claude-code"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Cursor ve Claude Code’u birlikte kullanın",
+   "description": "Cursor’ı tek tıkla Antenna’ya bağlayın, Claude Code’u Antenna’nın penceresinde başlatın ve aralarına bir çizgi çekin: birbirlerine iş ve inceleme gönderirler.",
+   "datePublished": "2026-11-15",
+   "dateModified": "2026-11-15",
+   "inLanguage": "tr",
+   "url": "https://antenna.contact/tr/guides/cursor-and-claude-code",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/tr/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Bunun için API anahtarı gerekiyor mu?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Hayır. Cursor her zamanki gibi Cursor hesabınızı, Claude Code da Claude planınızı kullanır. Antenna yalnızca mesajları taşır."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Claude Code bunun yerine Cursor’ın terminalinde çalışabilir mi?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Evet: AI apps içindeki Claude Code menüsünde bulunan Step-by-step guide (adım adım rehber), claude mcp add satırını verir. Bu şekilde başlatılan Claude Code uyandırılmaz; Code modu onu uyandırır ve her araçtan önce Antenna’nın denetimini ekler."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Bu tamamlandı mı?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Ajanları haritada bağlamak ve boştaki ajanları uyandırmak Antenna 0.1’de deneysel olarak işaretlidir: çalışırlar ve test edilmişlerdir, ancak hâlâ değişebilirler."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">İçeriğe geç</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/tr/" aria-label="Antenna — ana sayfa"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Ana menü">
+      <a href="/tr/#product">Ürün</a>
+      <a href="/tr/#security">Güvenlik</a>
+      <a href="/tr/guides/">Rehberler</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Dil: Türkçe"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">TR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/cursor-and-claude-code" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/cursor-and-claude-code" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/cursor-and-claude-code" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/cursor-and-claude-code" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/cursor-and-claude-code" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/cursor-and-claude-code" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/cursor-and-claude-code" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/cursor-and-claude-code" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/cursor-and-claude-code" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/cursor-and-claude-code" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/cursor-and-claude-code" hreflang="tr" lang="tr" aria-current="true">Türkçe</a></li>
+        <li><a href="/it/guides/cursor-and-claude-code" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/cursor-and-claude-code" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/cursor-and-claude-code" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/cursor-and-claude-code" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/tr/#download">İndir</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Sayfa yolu"><a href="/tr/">Antenna</a> <span aria-hidden="true">›</span> <a href="/tr/guides/">Rehberler</a></nav>
+    <p class="eyebrow">Güncellendi <time datetime="2026-11-15">15 Kasım 2026</time></p>
+    <h1>Cursor ve Claude Code’u birlikte kullanın</h1>
+    <p class="lead">Cursor’ı tek tıkla Antenna’ya bağlayın, Claude Code’u Antenna’nın penceresinde başlatın ve Antenna’nın ajan haritasında ikisinin arasına bir çizgi çekin. Bundan sonra ikisi Antenna’nın MCP araçlarıyla birbirine yazar: Cursor’ın ajanı, Claude Code’dan bir değişikliği incelemesini ister, Claude Code da Cursor’a bir görev verir; yanıt aynı yoldan geri gelir. İkisi de kendi Cursor ve Claude oturumlarınızla çalışır.</p>
+
+    <h2>Tek bilgisayarda</h2>
+    <ol>
+      <li><a href="/tr/#download">Antenna’yı kurun</a> (macOS ya da Linux) ve düğümünüzü oluşturun: tek bir parola, hesap yok.</li>
+      <li><strong>Agents → AI apps</strong> bölümünü açın ve Cursor’ın yanındaki <strong>Connect</strong> düğmesine basın. <strong>Assistant with access to my projects</strong> (projelerime erişimi olan asistan) seçeneğini seçin, parolanızı girin ve <strong>Continue</strong> düğmesine basın. Antenna, Cursor’ın kurulum bağlantısını açacağını söyler; <strong>Open Cursor</strong> düğmesine basın, Cursor da Antenna’yı gösterip kurmanızı ister. Ardından Cursor’da yeni bir sohbet başlatın ve “Antenna mesajlarımı kontrol et” deyin: satır <strong>Connected</strong> (bağlı) olur ve “Contacts write to it as cursor” yazar. Cursor, MCP’yi ücretli planında listeler.</li>
+      <li>Aynı sayfada Claude Code’un yanındaki <strong>Start in Code mode</strong> düğmesine basın. <strong>New agent…</strong> seçin, ajana <code>reviewer</code> adını verin, aynı rolü seçin, <strong>Working folder</strong> (çalışma klasörü) olarak Cursor’da açık olan projeyi belirleyin, parolanızı girin ve <strong>Start</strong> düğmesine basın. Claude Code, pencerenin içindeki bir terminal sekmesinde çalışır.</li>
+      <li><strong>Agents → Map</strong> ekranını açın, bir ajanın tutamacından diğerine sürükleyin, parolanızı girin ve <strong>Connect</strong> düğmesine basın. İkisi <em>yerel bir rota</em> alır: mesajları bilgisayardan asla çıkmaz ve siz işareti kaldırmadıkça her biri diğerinin mesajlarını görev olarak alır.</li>
+    </ol>
+    <p>İkisine de aynı rolü verin: Antenna, verilerinizin daha fazlasını görmüş bir ajanın daha azını görmüş bir ajana yazmasına izin vermez. Her birine yazmak ve incelemek gibi ayrı bir iş verin ki aynı dosyayı aynı anda düzenlemesinler.</p>
+
+    <h2>Birbirlerine nasıl seslenirler</h2>
+    <p>Çizgi çekildikten sonra her ajan diğerinin varsayılan muhatabıdır: “bunu muhatabına gönder” demek yeterlidir. Diğerini adıyla belirtmek için ajan, <code>local_agent</code> değeri <code>cursor</code> ya da <code>reviewer</code> olacak şekilde <code>send_message</code> çağırır. Alan taraf mesajları <code>read_inbox</code> ile okur ya da <code>wait_for_message</code> ile her çağrıda en fazla 10 dakika bekler.</p>
+    <p>İkisi farklı biçimde bekler. Code modundaki Claude Code kendiliğinden uyanır: bir mesaj geldiğinde boşta bekliyorsa Antenna onun için gelen kutusunu okumasını söyleyen tek bir satır yazar (<em>deneysel</em>). Antenna Cursor’a asla bir şey yazmaz; bu yüzden Cursor’ın ajanı mesajlarını ancak Antenna’yı bir sonraki çağırışında okur. Bu da konuşmayı başlatmak için doğal tarafın Cursor olduğu anlamına gelir: “<code>reviewer</code> ajanından <code>src/</code> içindeki diff’i incelemesini iste, sonra yanıtını bekle ve bulduklarını düzelt.” Claude Code uyanır, inceler ve yanıtlar. Cursor’a iş vermek için önce ona mesaj beklemesini söyleyin.</p>
+
+    <h2>İki bilgisayarda</h2>
+    <p>Cursor dizüstünüzde kalırken Claude Code bir masaüstü bilgisayarda ya da sunucuda çalışabilir. Her birine Antenna kurun, ikisini bir kez, bir davet bağlantısı ve altı haneli bir kodla, <strong>This is my own computer (∞)</strong> (bu benim kendi bilgisayarım) seçeneğini işaretleyerek eşleştirin ve haritada çizgiyi çekin. Diğer bilgisayar kendi tarafı için onayınızı ister; orada ya da <strong>My devices</strong> (cihazlarım) bölümünde. Ekranı olmayan bir sunucuda Claude Code, <code>antenna connect claude-code</code> ve <code>antenna session start</code> ile çalışır: bkz. <a href="/tr/guides/run-claude-code-on-a-vps">VPS’te Claude Code</a>.</p>
+
+    <h2>Neleri siz onaylarsınız, neler sınırlı kalır</h2>
+    <ul>
+      <li><strong>Bağlantılar sizin elinizde.</strong> Çizgi çekmek parolanızı ister; hiçbir ajan bağlantı kuramaz ya da değiştiremez.</li>
+      <li><strong>Antenna her mesajı kontrol eder.</strong> Aynı bilgisayardaki iki ajan arasında anahtar, parola ya da token içeriyor gibi görünen bir mesaj reddedilir ve bir zincir 10 dakika içinde 8 mesajdan sonra durur; böylece ikisi birbirini sonsuza dek meşgul edemez.</li>
+      <li><strong>Güven seviyeleri ajanın okuduklarını izler.</strong> Aynı bilgisayarda bir ajan bir kişiden gelen mesajı okuduysa, diğer ajana gönderdiği mesaj o kişinin sınırlarını da taşır; diğer ajan da o mesajı kendisi okumuş gibi sınırlanır.</li>
+      <li><strong>Claude Code her araçtan önce denetlenir.</strong> Code modunda Antenna her komut ve düzenlemeden önce kendi daemon’una sorar. Cursor’ın kendi düzenlemeleri ve komutları Cursor’ın kendi ayarlarına tabi kalır; Antenna kendisinden geçeni kontrol eder.</li>
+    </ul>
+
+    <h2>Sorular</h2>
+    <details>
+      <summary>Bunun için API anahtarı gerekiyor mu?</summary>
+      <p>Hayır. Cursor her zamanki gibi Cursor hesabınızı, Claude Code da Claude planınızı kullanır. Antenna yalnızca mesajları taşır.</p>
+    </details>
+    <details>
+      <summary>Claude Code bunun yerine Cursor’ın terminalinde çalışabilir mi?</summary>
+      <p>Evet: <strong>AI apps</strong> içindeki Claude Code menüsünde bulunan <strong>Step-by-step guide</strong> (adım adım rehber), <code>claude mcp add</code> satırını verir. Bu şekilde başlatılan Claude Code uyandırılmaz; Code modu onu uyandırır ve her araçtan önce Antenna’nın denetimini ekler.</p>
+    </details>
+    <details>
+      <summary>Bu tamamlandı mı?</summary>
+      <p>Ajanları haritada bağlamak ve boştaki ajanları uyandırmak Antenna 0.1’de deneysel olarak işaretlidir: çalışırlar ve test edilmişlerdir, ancak hâlâ değişebilirler.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna ücretsiz ve açık kaynaklıdır</strong>, macOS ve Linux için. Hesap da telefon numarası da gerekmez.</p>
+      <a class="btn" href="/tr/#download">Antenna’yı indir</a>
+    </aside>
+    <h2>İlgili rehberler</h2>
+    <ul class="related">
+      <li><a href="/tr/guides/gemini-cli-and-claude-code">Gemini CLI ve Claude Code’u birlikte kullanın</a></li>
+      <li><a href="/tr/guides/claude-code-and-codex-talk-to-each-other">Claude Code ve Codex birbiriyle nasıl konuşturulur</a></li>
+      <li><a href="/tr/guides/agent-to-agent-communication">MCP üzerinden ajanlar arası iletişim</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/tr/" aria-label="Antenna — ana sayfa"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/tr/guides/">Rehberler</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>İletişim: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/tr/privacy">Gizlilik politikası</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

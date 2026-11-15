@@ -1,0 +1,35 @@
+<!--guide {"title": "Başka bilgisayardaki Claude Code ile dosya paylaşma — Antenna", "h1": "Başka bir bilgisayardaki Claude Code ile nasıl dosya paylaşılır", "description": "Dizüstünüzden sunucudaki ya da ikinci bilgisayardaki Claude Code’a Antenna ile dosya gönderin: dosya vardığında kontrol edilir, ajana da nerede olduğu söylenir.", "summary": "Başka bir bilgisayardaki Claude Code oturumuna dosya gönderip almak; vardığında kontrol edilerek.", "source": "2026-11-09"}-->
+<p class="lead">Aynı bilgisayarda Claude Code dosyalarınızı doğrudan okur: ona yolu verin ya da dosyayı terminaline sürükleyin. Sunucu gibi başka bir bilgisayardaysa dosyayı Antenna üzerinden gönderin: o Claude Code oturumuyla olan sohbete bırakın; Antenna dosyayı vardığında kontrol eder ve oradaki bağlantı klasörüne kaydeder, ajan da gelen kutusunda dosyanın adını, konumunu, boyutunu ve SHA-256 değerini alır. Ajanın geri gönderdiği dosyalar da dizüstünüze aynı yoldan gelir.</p>
+
+<h2>Ajana dosya gönderin</h2>
+<ol>
+  <li>Dizüstü bilgisayarınızı diğer bilgisayarla kendi bilgisayarınız (∞) olarak eşleştirin ve oradaki Claude Code’u Antenna’ya bağlayın: <a href="/guides/run-claude-code-on-a-vps">VPS’te Claude Code</a> rehberine bakın.</li>
+  <li>Dizüstünüzde oturumla olan sohbeti açın ve dosyayı içine bırakın ya da herhangi bir mesajlaşma uygulamasında yaptığınız gibi ekleyin.</li>
+  <li>Diğer bilgisayarda Antenna dosyanın türünü içeriğinden kontrol eder, tehditlere ve gizli bilgilere bakar ve dosyayı bağlantı klasörüne, <code>~/Antenna/links/&lt;folder&gt;/shared/</code> içine ya da o bilgisayar için seçtiğiniz bir proje klasörüne kaydeder.</li>
+  <li>Ajan kaydedilen dosyayı bir sonraki gelen kutusunda, yolu ve hash değerleriyle birlikte kendiliğinden öğrenir ve bir sonraki adımında kullanabilir.</li>
+</ol>
+
+<h2>Ajandan dosya alın</h2>
+<p>Ajan size mesajlar için kullandığı araçlarla bir dosya, bir derleme, bir rapor ya da bir ekran görüntüsü gönderebilir. Dosya sohbetinize ve <strong>Files</strong> bölümüne; dosyanın adını, kontrolün fark ettiklerini ve hash değerini gösteren bir kart olarak gelir. Resimler, Antenna’nın yeniden oluşturduğu, kontrol edilmiş güvenli bir önizleme olarak görünür.</p>
+
+<h2>Neler kontrol edilir, neler sizi bekler</h2>
+<ul>
+  <li><strong>Kendi bilgisayarlarınız arasında</strong> sıradan dosyalar kendiliğinden kaydedilir. Program, kurulum dosyası ya da bunları içeren bir arşiv gibi yazılım çalıştırabilen ya da kurabilen her şey, o bilgisayar için izin vermediğiniz sürece yine kararınızı bekler.</li>
+  <li><strong>Başka birinin 3. ve 4. seviyedeki ajanından</strong> gelen dosyalar kontrol edilir ve sizin Accept demenizi ya da ajanlarınızdan birinin kabul etmesini bekler. 1. ve 2. seviyelerde her dosyaya siz karar verirsiniz.</li>
+  <li><strong>Dışarı giderken</strong>, anahtar, parola ya da token içeriyor gibi görünen bir dosya, kendi bilgisayarlarınız arasında değilse siz onaylayana kadar bekletilir.</li>
+  <li><strong>Hiçbir şeyin üzerine yazılmaz.</strong> Adı zaten kullanılan bir dosya <code>report (2).pdf</code> olarak kaydedilir ve gönderene bu ad bildirilir.</li>
+</ul>
+
+<h2>Sorular</h2>
+<details>
+  <summary>Neden scp ya da ortak bir klasör kullanmıyoruz?</summary>
+  <p>Kullanabilirsiniz; büyük dosya ağaçları için bunu tercih de edebilirsiniz. Antenna, ajanla yapılan bir konuşmaya ait dosyalar içindir: ajanın beklediği yere ulaşırlar, ajana haber verilir ve sizden başka birinden gelen dosya yerine varmadan önce kontrol edilir.</p>
+</details>
+<details>
+  <summary>Dosya yolda şifreleniyor mu?</summary>
+  <p>Evet, mesajlarınızla aynı bağlantı üzerinden uçtan uca şifrelenir. Aradaki hiçbir sunucu onu saklamaz.</p>
+</details>
+<details>
+  <summary>Dosyaların nereye kaydedileceğini seçebilir miyim?</summary>
+  <p>Evet. Bilgisayarın kişi kartındaki <strong>Files from this computer</strong> ile o bilgisayar için ve onun her ajanı için birer klasör seçebilirsiniz. Terminalden: <code>antenna files save-to &lt;contact&gt; &lt;folder&gt;</code>.</p>
+</details>

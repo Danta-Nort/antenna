@@ -63,7 +63,8 @@ cat <<EOF
 
 ## Install
 
-**Mac.** Open the .dmg, drag **Antenna** to Applications and start it from there. The app starts its daemon itself
+**Mac.** \`brew install --cask danta-nort/tap/antenna\`, or open the .dmg, drag **Antenna** to Applications and start
+it from there. The app starts its daemon itself
 and asks you to create your node with a password. To get the \`antenna\` command in Terminal: Settings → "antenna
 command in the terminal…". \`antenna://\` invite links open the app.
 

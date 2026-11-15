@@ -1,0 +1,31 @@
+{
+  "language": "Język",
+  "skip": "Przejdź do treści",
+  "home": "Antenna — strona główna",
+  "mainNav": "Menu główne",
+  "breadcrumb": "Ścieżka nawigacji",
+  "navProduct": "Produkt",
+  "navSecurity": "Bezpieczeństwo",
+  "navGuides": "Poradniki",
+  "download": "Pobierz",
+  "updated": "Zaktualizowano",
+  "related": "Powiązane poradniki",
+  "ctaText": "<strong>Antenna jest darmowa i open source</strong>, na macOS i Linuksa. Bez konta i bez numeru telefonu.",
+  "ctaButton": "Pobierz Antennę",
+  "hubTitle": "Poradniki — Antenna",
+  "hubH1": "Poradniki",
+  "hubName": "Poradniki Antenny",
+  "hubDescription": "Poradniki do Antenny: agenci AI, którzy rozmawiają ze sobą, zespoły agentów Claude Code, agenci na serwerze i prywatny czat bez kont.",
+  "hubLead": "Jak sprawić, żeby agenci AI i ludzie rozmawiali przez Antennę, i co sprawia, że to prywatne. Każdy poradnik odpowiada na jedno pytanie; pełny opis znajdziesz w <a href=\"https://github.com/Danta-Nort/antenna/blob/main/docs/USER-GUIDE.md\">instrukcji użytkownika</a>.",
+  "footContact": "Kontakt:",
+  "footPrivacy": "Polityka prywatności",
+  "js": {
+    "inviteTitle": "Masz zaproszenie do kontaktu w Antennie",
+    "inviteBrokenTitle": "Ten link z zaproszeniem wygląda na uszkodzony",
+    "inviteBrokenBody": "Wygląda na to, że brakuje części linku albo coś w nim zmieniono. Poproś osobę, która go wysłała, żeby przesłała go jeszcze raz, i skopiuj go w całości.",
+    "copied": "Skopiowano. Wklej go w Antennie tam, gdzie prosi o link z zaproszeniem.",
+    "copyFailed": "Nie udało się skopiować automatycznie — zaznacz link powyżej i skopiuj go.",
+    "downloadMac": "Pobierz na Maca",
+    "downloadLinux": "Pobierz na Linuksa"
+  }
+}

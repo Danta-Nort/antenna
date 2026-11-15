@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>إشعار عند انتهاء Claude Code من مهمته على خادم أو حاسوب آخر — Antenna</title>
+<meta name="description" content="يرسل Claude Code على خادمك أو حاسوبك الثاني تقريره في محادثة Antenna، فيظهر إشعار على حاسوبك المحمول. وطلبات الموافقة تُشعرك أيضًا.">
+<link rel="canonical" href="https://antenna.contact/ar/guides/claude-code-notifications">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="إشعار عند انتهاء Claude Code من مهمته على خادم أو حاسوب آخر — Antenna">
+<meta property="og:description" content="يرسل Claude Code على خادمك أو حاسوبك الثاني تقريره في محادثة Antenna، فيظهر إشعار على حاسوبك المحمول. وطلبات الموافقة تُشعرك أيضًا.">
+<meta property="og:url" content="https://antenna.contact/ar/guides/claude-code-notifications">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ar_AR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/claude-code-notifications">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/claude-code-notifications">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/claude-code-notifications">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/claude-code-notifications">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/claude-code-notifications">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/claude-code-notifications">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/claude-code-notifications">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/claude-code-notifications">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/claude-code-notifications">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/claude-code-notifications">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/claude-code-notifications">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/claude-code-notifications">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/claude-code-notifications">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/claude-code-notifications">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/claude-code-notifications">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/claude-code-notifications">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ar/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "الأدلة",
+     "item": "https://antenna.contact/ar/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "تلقَّ إشعارًا حين ينهي Claude Code عمله على خادم أو حاسوب آخر",
+     "item": "https://antenna.contact/ar/guides/claude-code-notifications"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "تلقَّ إشعارًا حين ينهي Claude Code عمله على خادم أو حاسوب آخر",
+   "description": "يرسل Claude Code على خادمك أو حاسوبك الثاني تقريره في محادثة Antenna، فيظهر إشعار على حاسوبك المحمول. وطلبات الموافقة تُشعرك أيضًا.",
+   "datePublished": "2026-11-15",
+   "dateModified": "2026-11-15",
+   "inLanguage": "ar",
+   "url": "https://antenna.contact/ar/guides/claude-code-notifications",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ar/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "هل يعرض الإشعار ما كتبه Claude Code؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "لا. يقول فقط «New message in» واسم المحادثة، لأن الإشعار قد يظهر على شاشة مقفلة. افتح المحادثة لتقرأ التقرير."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "وماذا لو كان حاسوبي المحمول في وضع السكون؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "تنتظر الرسالة على الخادم، ويوصلها Antenna مع إشعارها حين يعود الحاسوب المحمول إلى الاتصال."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يمكن أن يصلني الإشعار على هاتفي؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ليس بعد. يعمل Antenna اليوم على macOS وLinux."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">انتقل إلى المحتوى</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="القائمة الرئيسية">
+      <a href="/ar/#product">المنتج</a>
+      <a href="/ar/#security">الأمان</a>
+      <a href="/ar/guides/">الأدلة</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="اللغة: العربية"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">AR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/claude-code-notifications" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/claude-code-notifications" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/claude-code-notifications" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/claude-code-notifications" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/claude-code-notifications" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/claude-code-notifications" hreflang="ar" lang="ar" aria-current="true">العربية</a></li>
+        <li><a href="/fr/guides/claude-code-notifications" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/claude-code-notifications" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/claude-code-notifications" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/claude-code-notifications" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/claude-code-notifications" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/claude-code-notifications" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/claude-code-notifications" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/claude-code-notifications" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/claude-code-notifications" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ar/#download">تنزيل</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="مسار التنقل"><a href="/ar/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ar/guides/">الأدلة</a></nav>
+    <p class="eyebrow">آخر تحديث <time datetime="2026-11-15">15 نوفمبر 2026</time></p>
+    <h1>تلقَّ إشعارًا حين ينهي Claude Code عمله على خادم أو حاسوب آخر</h1>
+    <p class="lead">أعطِ Claude Code مهمته في محادثة Antenna من حاسوبك المحمول، فيرسل النتيجة إلى تلك المحادثة حين ينتهي: إذ تطلب تعليمات Antenna من الوكيل المتصل أن يرسل نتائجه إلى جهة الاتصال التي كلّفته بالمهمة. وما دامت نافذة Antenna ليست في المقدمة، يعرض حاسوبك المحمول إشعارًا «New message in server · api-dev». وطلبات الموافقة تُشعرك أيضًا، فلا يبقى عمل توقف في منتصفه منتظرًا دون أن يلاحظه أحد. لا يراقب Antenna أدوار Claude Code بنفسه: فالتقرير رسالة يرسلها Claude Code نفسه.</p>
+
+    <h2>ما الذي يُشعرك</h2>
+    <ul>
+      <li><strong>رسالة من Claude Code إليك.</strong> يذكر الإشعار اسم المحادثة، لا نصها أبدًا، ومرة واحدة على الأكثر لكل محادثة كل 10 ثوانٍ.</li>
+      <li><strong>طلب موافقة.</strong> تظهر الخطوة التي تحتاج إلى كلمتك على أنها «Antenna: approval needed on server»، مع اسم الوكيل وما يريد فعله والوقت المتبقي («expires in 9 min»)، لكن دون نص الطلب أبدًا. ويصل إشعار ثانٍ قبل إغلاق الطلب بنحو دقيقتين؛ إذ يُغلق الطلب بعد 10 دقائق. أما الطلبات القادمة من حاسوب آخر فتصلك عبر <strong>My devices</strong> (أجهزتي؛ <em>تجريبي</em>).</li>
+      <li><strong>سؤال.</strong> <em>تجريبي.</em> يصل إشعار سؤال الوكيل على الحاسوب الذي يعمل عليه: «A question from your agent». وإذا كان الوكيل على خادم، فشغّل <code>antenna agent escalate api-dev --to mac</code> هناك، فتصل أسئلته بدلًا من ذلك إلى محادثة الوكيل على حاسوبك المحمول.</li>
+    </ul>
+    <p>تعمل الإشعارات على macOS وعلى أسطح مكتب Linux التي تعرض الإشعارات. ويجب أن يكون Antenna مفتوحًا على الحاسوب المحمول؛ وحين تكون نافذته في المقدمة، تكفي أعداد الرسائل غير المقروءة في قائمة المحادثات.</p>
+
+    <h2>الإعداد</h2>
+    <ol>
+      <li><a href="/ar/#download">ثبّت Antenna</a> على الحاسوبين واقرنهما مرة واحدة مع تحديد <strong>This is my own computer (∞)</strong>. ويشرح دليل <a href="/ar/guides/run-claude-code-on-a-vps">Claude Code على VPS</a> جانب الخادم خطوة بخطوة.</li>
+      <li>شغّل Claude Code عبر Antenna. على خادم:
+    <pre><code>cd ~/projects/api
+    antenna connect claude-code --agent api-dev --links mac --hello mac
+    antenna session start api-dev --dir ~/projects/api</code></pre>
+      وعلى حاسوب مكتبي ثانٍ: <strong>Agents → AI apps → Start in Code mode</strong>.</li>
+      <li>لا شيء تضبطه على الحاسوب المحمول. فالمحادثة مع وكيل تُشعرك منذ البداية بالرسائل الموجّهة إليك شخصيًا وبطلبات الموافقة.</li>
+    </ol>
+
+    <h2>اطلب التقرير</h2>
+    <p>اكتب المهمة في محادثة <code>api-dev</code> وقل ما تريد أن يصلك: «شغّل اختبارات الترحيل وأصلح ما يفشل منها. وحين تنتهي، ردّ هنا بما تغيّر». وإذا كان Claude Code خاملًا عند موجّهه، يكتب Antenna سطرًا واحدًا ليقرأ رسالتك (<em>تجريبي</em>)؛ فيعمل، ثم يرد في المحادثة نفسها، ويعرض حاسوبك المحمول الإشعار.</p>
+    <p>وللعمل الذي تبدؤه في طرفيته (<code>antenna session attach api-dev</code>)، اختم طلبك بعبارة «أرسل لي ملخصًا على Antenna حين تنتهي». ولتجعل ذلك عادة، أضف سطرًا إلى ملف <code>CLAUDE.md</code> في المشروع: «حين تنهي مهمة، أرسل ملخصًا قصيرًا إلى <code>mac</code> عبر <code>send_message</code> في Antenna».</p>
+    <p>يصل التقرير حين يقرر Claude Code أنه انتهى، كما هو الحال مع أي تعليمات يتبعها. وإذا توقف عند نافذة الأذونات الخاصة به في الطرفية («Do you want to proceed?»)، فلا يرى Antenna ذلك، ولا يصلك أي إشعار: اسمح بالأدوات التي تستخدمها عادةً في إعدادات Claude Code.</p>
+
+    <h2>اختر المحادثات التي تُشعرك</h2>
+    <p>افتح <strong>⋮</strong> في صف المحادثة، أو انقر عليه بالزر الأيمن، ثم اختر <strong>Notifications</strong> (الإشعارات):</p>
+    <ul>
+      <li><strong>All messages</strong> (كل الرسائل): كل رسالة جديدة في هذه المحادثة (الإعداد الافتراضي لمحادثة مع شخص).</li>
+      <li><strong>Only when it asks for me</strong> (فقط حين يطلبني): الرسائل الموجّهة إليك شخصيًا وطلبات الموافقة (الإعداد الافتراضي لمحادثة مع وكيل).</li>
+      <li><strong>Off</strong> (إيقاف): تبقى طلبات الموافقة تُشعرك.</li>
+    </ul>
+    <p>وحين يرسل Claude Code تقريره إلى أحد وكلائك الآخرين بدلًا منك، تصل تلك الرسائل بلا إشعار ما لم تفعّل <strong>Notify about messages between agents</strong> (الإشعار بالرسائل بين الوكلاء) في القائمة نفسها. وفي الطرفية: <code>antenna chats notify server --agent api-dev all</code>.</p>
+
+    <h2>على الحاسوب الذي تجلس أمامه</h2>
+    <p>حين يعمل Claude Code في وضع Code على حاسوبك المحمول نفسه، يُشعرك Antenna بطلبات الموافقة والأسئلة منه ما دامت النافذة في الخلفية، لكنه لا يُشعرك بنهاية الدور: فالوكيل لا يستطيع مراسلتك على الحاسوب الذي يعمل عليه هو. ولهذا الغرض، يمكن لخطافات Claude Code نفسه (hooks) أن تشغّل أمرًا تختاره حين يتوقف.</p>
+
+    <h2>أسئلة</h2>
+    <details>
+      <summary>هل يعرض الإشعار ما كتبه Claude Code؟</summary>
+      <p>لا. يقول فقط «New message in» واسم المحادثة، لأن الإشعار قد يظهر على شاشة مقفلة. افتح المحادثة لتقرأ التقرير.</p>
+    </details>
+    <details>
+      <summary>وماذا لو كان حاسوبي المحمول في وضع السكون؟</summary>
+      <p>تنتظر الرسالة على الخادم، ويوصلها Antenna مع إشعارها حين يعود الحاسوب المحمول إلى الاتصال.</p>
+    </details>
+    <details>
+      <summary>هل يمكن أن يصلني الإشعار على هاتفي؟</summary>
+      <p>ليس بعد. يعمل Antenna اليوم على macOS وLinux.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna مجاني ومفتوح المصدر</strong>، لنظامي macOS وLinux. بلا حساب وبلا رقم هاتف.</p>
+      <a class="btn" href="/ar/#download">نزّل Antenna</a>
+    </aside>
+    <h2>أدلة ذات صلة</h2>
+    <ul class="related">
+      <li><a href="/ar/guides/run-claude-code-on-a-vps">شغّل Claude Code على خادم VPS على مدار الساعة، وتحدّث إليه من حاسوبك المحمول</a></li>
+      <li><a href="/ar/guides/approve-claude-code-permissions-remotely">وافق على طلبات Claude Code من حاسوب آخر</a></li>
+      <li><a href="/ar/guides/message-claude-code-on-another-computer">أرسل رسالة إلى Claude Code على حاسوب آخر</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ar/guides/">الأدلة</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>للتواصل: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ar/privacy">سياسة الخصوصية</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

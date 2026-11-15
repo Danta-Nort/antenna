@@ -1,0 +1,52 @@
+<!--guide {"title": "Être notifié quand Claude Code a fini sur un autre ordinateur", "h1": "Recevoir une notification quand Claude Code a terminé, sur un serveur ou un autre ordinateur", "description": "Claude Code, sur votre serveur ou un autre ordinateur, rend compte dans Antenna et votre portable affiche une notification. Les demandes d’approbation aussi.", "summary": "Une notification sur votre portable quand Claude Code, sur un serveur ou un autre ordinateur, a fini une tâche ou attend votre accord.", "source": "2026-11-15"}-->
+<p class="lead">Confiez sa tâche à Claude Code dans une conversation Antenna depuis votre portable : une fois le travail fini, il renvoie le résultat dans cette même conversation, car les instructions d’Antenna demandent à un agent connecté de rendre ses résultats au contact qui lui a confié la tâche. Votre portable affiche alors une notification, « New message in server · api-dev », tant que la fenêtre d’Antenna n’est pas au premier plan. Les demandes d’approbation déclenchent aussi une notification : un travail qui s’arrête en cours de route ne reste pas en attente sans que vous le sachiez. Antenna ne surveille pas lui-même les tours de Claude Code : le compte rendu est un message de Claude Code lui-même.</p>
+
+<h2>Ce qui vous notifie</h2>
+<ul>
+  <li><strong>Un message de Claude Code pour vous.</strong> La notification indique le nom de la conversation, jamais le texte, au plus une fois toutes les 10 secondes par conversation.</li>
+  <li><strong>Une demande d’approbation.</strong> Une étape qui a besoin de votre accord s’affiche sous la forme « Antenna: approval needed on server », avec l’agent, ce qu’il veut faire et le temps restant (« expires in 9 min »), mais jamais le texte de la demande. Une deuxième notification arrive environ deux minutes avant la fermeture de la demande ; elle se ferme au bout de 10 minutes. Les demandes venues d’un autre ordinateur vous parviennent via <strong>My devices</strong> (mes appareils, <em>expérimental</em>).</li>
+  <li><strong>Une question.</strong> <em>Expérimental.</em> La question d’un agent s’affiche en notification sur l’ordinateur où il tourne : « A question from your agent ». Pour un serveur, lancez-y <code>antenna agent escalate api-dev --to mac</code> : ses questions arrivent alors dans la conversation de l’agent, sur votre portable.</li>
+</ul>
+<p>Les notifications fonctionnent sous macOS et sur les bureaux Linux qui affichent des notifications. Antenna doit être ouvert sur le portable ; quand sa fenêtre est au premier plan, les compteurs de non-lus de la liste des conversations font le même travail.</p>
+
+<h2>Mise en place</h2>
+<ol>
+  <li><a href="/#download">Installez Antenna</a> sur les deux ordinateurs et associez-les une fois en cochant <strong>This is my own computer (∞)</strong> (c’est mon propre ordinateur). <a href="/guides/run-claude-code-on-a-vps">Claude Code sur un VPS</a> détaille le côté serveur.</li>
+  <li>Lancez Claude Code via Antenna. Sur un serveur :
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api</code></pre>
+  Sur un second poste de bureau : <strong>Agents → AI apps → Start in Code mode</strong>.</li>
+  <li>Rien à régler sur le portable. D’emblée, une conversation avec un agent vous notifie des messages qui vous sont adressés personnellement et des demandes d’approbation.</li>
+</ol>
+
+<h2>Demander le compte rendu</h2>
+<p>Écrivez la tâche dans la conversation <code>api-dev</code> en précisant ce que vous attendez en retour : « Lance les tests de migration et corrige ce qui échoue. Quand tu as fini, réponds ici avec ce qui a changé. » Si Claude Code attend, inactif, à son invite, Antenna tape une ligne pour qu’il lise votre message (<em>expérimental</em>) ; il travaille, puis répond dans la même conversation, et votre portable affiche la notification.</p>
+<p>Pour un travail lancé dans son terminal (<code>antenna session attach api-dev</code>), terminez le prompt par « envoie-moi un résumé sur Antenna quand tu as fini ». Pour en faire une habitude, ajoutez une ligne au <code>CLAUDE.md</code> du projet : « Quand tu termines une tâche, envoie un court résumé à <code>mac</code> avec le <code>send_message</code> d’Antenna. »</p>
+<p>Le compte rendu arrive quand Claude Code estime avoir fini, comme pour toute instruction qu’il suit. S’il s’arrête sur sa propre invite de permission dans le terminal (« Do you want to proceed? »), Antenna ne le voit pas, et aucune notification ne vous parvient : autorisez dans les réglages de Claude Code les outils dont vous vous servez couramment.</p>
+
+<h2>Choisir les conversations qui notifient</h2>
+<p>Ouvrez <strong>⋮</strong> sur la ligne d’une conversation, ou faites un clic droit dessus, puis <strong>Notifications</strong> :</p>
+<ul>
+  <li><strong>All messages</strong> (tous les messages) : chaque nouveau message de cette conversation (le réglage par défaut pour une personne).</li>
+  <li><strong>Only when it asks for me</strong> (seulement quand on me sollicite) : les messages qui vous sont adressés personnellement et les demandes d’approbation (le réglage par défaut pour un agent).</li>
+  <li><strong>Off</strong> (désactivé) : les demandes d’approbation continuent de vous notifier.</li>
+</ul>
+<p>Quand Claude Code rend compte à l’un de vos autres agents plutôt qu’à vous, ces messages restent silencieux, sauf si vous activez <strong>Notify about messages between agents</strong> (notifier les messages entre agents) dans le même menu. Dans un terminal : <code>antenna chats notify server --agent api-dev all</code>.</p>
+
+<h2>Sur l’ordinateur devant lequel vous êtes</h2>
+<p>Avec Claude Code en mode Code sur votre propre portable, Antenna vous notifie de ses demandes d’approbation et de ses questions tant que la fenêtre est en arrière-plan, mais pas de la fin d’un tour : un agent ne peut pas vous écrire sur son propre ordinateur. Pour cela, les hooks de Claude Code lui-même peuvent lancer une commande de votre choix quand il s’arrête.</p>
+
+<h2>Questions</h2>
+<details>
+  <summary>La notification montre-t-elle ce que Claude Code a écrit ?</summary>
+  <p>Non. Elle indique seulement « New message in » et le nom de la conversation, car une notification peut s’afficher sur un écran verrouillé. Ouvrez la conversation pour lire le compte rendu.</p>
+</details>
+<details>
+  <summary>Et si mon portable est en veille ?</summary>
+  <p>Le message attend sur le serveur, et Antenna le remet, avec sa notification, quand le portable est de nouveau en ligne.</p>
+</details>
+<details>
+  <summary>Puis-je recevoir la notification sur mon téléphone ?</summary>
+  <p>Pas encore. Antenna fonctionne aujourd’hui sous macOS et Linux.</p>
+</details>

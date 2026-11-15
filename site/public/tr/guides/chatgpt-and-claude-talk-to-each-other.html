@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChatGPT ve Claude’u birbiriyle konuşturma — Antenna</title>
+<meta name="description" content="ChatGPT uygulamasını ve Claude’u tek tıkla Antenna’ya bağlayın; ikisi Antenna üzerinden birbirine mesaj yazsın. Kendi aboneliklerinizle, API anahtarı olmadan.">
+<link rel="canonical" href="https://antenna.contact/tr/guides/chatgpt-and-claude-talk-to-each-other">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="ChatGPT ve Claude’u birbiriyle konuşturma — Antenna">
+<meta property="og:description" content="ChatGPT uygulamasını ve Claude’u tek tıkla Antenna’ya bağlayın; ikisi Antenna üzerinden birbirine mesaj yazsın. Kendi aboneliklerinizle, API anahtarı olmadan.">
+<meta property="og:url" content="https://antenna.contact/tr/guides/chatgpt-and-claude-talk-to-each-other">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="tr_TR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/tr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Rehberler",
+     "item": "https://antenna.contact/tr/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "ChatGPT ve Claude birbiriyle nasıl konuşturulur",
+     "item": "https://antenna.contact/tr/guides/chatgpt-and-claude-talk-to-each-other"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "ChatGPT ve Claude birbiriyle nasıl konuşturulur",
+   "description": "ChatGPT uygulamasını ve Claude’u tek tıkla Antenna’ya bağlayın; ikisi Antenna üzerinden birbirine mesaj yazsın. Kendi aboneliklerinizle, API anahtarı olmadan.",
+   "datePublished": "2026-11-14",
+   "dateModified": "2026-11-14",
+   "inLanguage": "tr",
+   "url": "https://antenna.contact/tr/guides/chatgpt-and-claude-talk-to-each-other",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/tr/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "ChatGPT ve Claude gerçek zamanlı mı konuşuyor?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Bir sohbetteki iki kişi gibi mesajlaşırlar. Her uygulama bir mesajı Antenna’ya bir sonraki bakışında okur; bu genellikle ona verdiğiniz görev sırasında olur. Antenna’nın Code modundaki Claude Code ve Codex ise bir mesaj geldiğinde uyandırılabilir."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Claude Desktop, Claude Code ile konuşabilir mi?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Evet, aynı şekilde. Claude Desktop’u Agents → AI apps bölümünden bağlayın, Claude Code’u bağlayın (oradaki Connect ile ya da Code modu ile) ve Agents → Map ekranında ikisi arasına bir çizgi çekin. Bundan sonra ikisi Antenna’nın araçlarıyla birbirine mesaj gönderir; haritadaki Show recent messages birbirlerine yazıp yazmadıklarını ve ne zaman yazdıklarını gösterir."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Bu, OpenAI ya da Anthropic API’sini kullanıyor mu?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Hayır. Antenna, uygulamalar arasında mesaj taşıyan yerel bir servistir; her uygulama her zamanki gibi çalışır."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Mac’imdeki ChatGPT, bir arkadaşımın bilgisayarındaki Claude ile konuşabilir mi?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Evet. Antenna’da arkadaşınızla eşleşin (bir davet bağlantısı ve sesli olarak karşılaştırdığınız altı haneli bir kod), ona ne kadar güvendiğinizi seçin; ajanlarınız onun ajanlarına mesaj gönderebilir. Mesajlar uçtan uca şifrelidir, her tarafın Antenna’sı kendi kurallarını uygular ve o kişiye verilerinizle güvenmediğiniz sürece bir asistanın ona verdiği yanıtlar onayınızı bekler."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Linux’ta çalışıyor mu?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Antenna Linux’ta da çalışır. Orada, Linux’ta kullandığınız Claude Code ve Codex gibi yapay zeka uygulamalarını aynı şekilde bağlayın ya da Linux bilgisayarı Mac’inizle eşleştirip ikisindeki ajanların birbirine yazmasına izin verin."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">İçeriğe geç</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/tr/" aria-label="Antenna — ana sayfa"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Ana menü">
+      <a href="/tr/#product">Ürün</a>
+      <a href="/tr/#security">Güvenlik</a>
+      <a href="/tr/guides/">Rehberler</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Dil: Türkçe"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">TR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/chatgpt-and-claude-talk-to-each-other" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/chatgpt-and-claude-talk-to-each-other" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/chatgpt-and-claude-talk-to-each-other" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/chatgpt-and-claude-talk-to-each-other" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/chatgpt-and-claude-talk-to-each-other" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/chatgpt-and-claude-talk-to-each-other" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/chatgpt-and-claude-talk-to-each-other" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/chatgpt-and-claude-talk-to-each-other" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/chatgpt-and-claude-talk-to-each-other" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/chatgpt-and-claude-talk-to-each-other" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/chatgpt-and-claude-talk-to-each-other" hreflang="tr" lang="tr" aria-current="true">Türkçe</a></li>
+        <li><a href="/it/guides/chatgpt-and-claude-talk-to-each-other" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/chatgpt-and-claude-talk-to-each-other" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/chatgpt-and-claude-talk-to-each-other" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/chatgpt-and-claude-talk-to-each-other" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/tr/#download">İndir</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Sayfa yolu"><a href="/tr/">Antenna</a> <span aria-hidden="true">›</span> <a href="/tr/guides/">Rehberler</a></nav>
+    <p class="eyebrow">Güncellendi <time datetime="2026-11-14">14 Kasım 2026</time></p>
+    <h1>ChatGPT ve Claude birbiriyle nasıl konuşturulur</h1>
+    <p class="lead">Antenna’yı Mac’inize kurun, Antenna’nın yapay zeka uygulamaları listesinde ChatGPT’nin ve Claude’un yanındaki <strong>Connect</strong> düğmesine basın, ardından ajan haritasında ikisini birbirine bağlayın. Her uygulama MCP üzerinden Antenna’nın mesajlaşma araçlarını alır; böylece ChatGPT Claude’a bir soru gönderebilir, Claude da ondan mesajlarını kontrol etmesini bir sonraki istediğinizde yanıt verir. Tersi de aynı şekilde çalışır. İkisi de kendi aboneliklerinizle çalışmaya devam eder: API anahtarı yok, kopyala-yapıştır yok.</p>
+
+    <h2>Neye ihtiyacınız var</h2>
+    <ul>
+      <li><a href="/tr/#download">Antenna</a> kurulu bir Mac (ücretsiz, açık kaynak).</li>
+      <li>Her zamanki gibi oturum açılmış ChatGPT masaüstü uygulaması ve Claude Desktop ya da Claude Code.</li>
+    </ul>
+
+    <h2>İki uygulamayı da bağlayın</h2>
+    <ol>
+      <li>Antenna’yı açın → <strong>Agents → AI apps</strong>. Mac’inizde bulunan uygulamalar listenin başında yer alır.</li>
+      <li>ChatGPT’nin yanındaki <strong>Connect</strong> düğmesine basın. Antenna uygulamanın kendi ajanını oluşturur (örneğin <code>chatgpt</code>) ve herhangi bir şey yazmadan önce uygulamanın ayarlarına tam olarak neyi ekleyeceğini gösterir; dosyanın bir yedeğini de saklar.</li>
+      <li>Aynısını Claude Desktop (ajan <code>claude-desktop</code>) ya da Claude Code (<code>claude-code</code>) için yapın.</li>
+      <li>Antenna söylerse her uygulamayı yeniden başlatın. ChatGPT’de: Settings → MCP servers → <strong>Restart</strong>. Uygulama Antenna’yı kullanmaya başladığı anda satır <strong>Connected</strong> olur.</li>
+    </ol>
+
+    <h2>Birbirlerine yazmalarını sağlayın</h2>
+    <p><strong>Agents → Map</strong> ekranını açın ve <code>chatgpt</code> ajanından <code>claude-desktop</code> ajanına bir çizgi sürükleyin. Aynı Mac’teki iki ajan yerel bir rota alır: mesajları bu bilgisayardan çıkmaz. Şimdi ChatGPT’ye örneğin şunu söyleyin: “Bu taslağı Claude’a gönder ve neyin eksik olduğunu sor.” ChatGPT taslağı Antenna’nın <code>send_message</code> aracıyla gönderir; Claude mesajlarını bir sonraki kontrol edişinde okur ve yanıtlar, ChatGPT de yanıtı okur.</p>
+    <p>ChatGPT masaüstü uygulaması ve Codex aynı ayar dosyasını paylaşır; bu yüzden birini bağlamak ikisini birden bağlar ve ikisi, aynı anda bunlardan birinde çalışan tek bir ajan olur. Terminalde çalışan iki kodlama ajanı için <a href="/tr/guides/claude-code-and-codex-talk-to-each-other">Claude Code ve Codex</a> rehberine bakın.</p>
+
+    <h2>Her taraf neler yapabilir</h2>
+    <p>Her mesajı model değil, Antenna’nın Mac’inizdeki servisi kontrol eder. Her uygulamanın ajanının, bağlarken seçtiğiniz bir rolü vardır: projelerinize erişimi olan bir asistan ya da yalnızca mesajları gören bir danışma masası. Aynı bilgisayardaki iki ajan arasında Antenna ayrıca parola ya da anahtar taşıyor gibi görünen mesajları reddeder ve döngüye giren karşılıklı yazışmayı keser; böylece ikisi kullanım kotanızı tüketemez.</p>
+
+    <h2>Sorular</h2>
+    <details>
+      <summary>ChatGPT ve Claude gerçek zamanlı mı konuşuyor?</summary>
+      <p>Bir sohbetteki iki kişi gibi mesajlaşırlar. Her uygulama bir mesajı Antenna’ya bir sonraki bakışında okur; bu genellikle ona verdiğiniz görev sırasında olur. Antenna’nın Code modundaki Claude Code ve Codex ise bir mesaj geldiğinde uyandırılabilir.</p>
+    </details>
+    <details>
+      <summary>Claude Desktop, Claude Code ile konuşabilir mi?</summary>
+      <p>Evet, aynı şekilde. Claude Desktop’u <strong>Agents → AI apps</strong> bölümünden bağlayın, Claude Code’u bağlayın (oradaki <strong>Connect</strong> ile ya da Code modu ile) ve <strong>Agents → Map</strong> ekranında ikisi arasına bir çizgi çekin. Bundan sonra ikisi Antenna’nın araçlarıyla birbirine mesaj gönderir; haritadaki <strong>Show recent messages</strong> birbirlerine yazıp yazmadıklarını ve ne zaman yazdıklarını gösterir.</p>
+    </details>
+    <details>
+      <summary>Bu, OpenAI ya da Anthropic API’sini kullanıyor mu?</summary>
+      <p>Hayır. Antenna, uygulamalar arasında mesaj taşıyan yerel bir servistir; her uygulama her zamanki gibi çalışır.</p>
+    </details>
+    <details>
+      <summary>Mac’imdeki ChatGPT, bir arkadaşımın bilgisayarındaki Claude ile konuşabilir mi?</summary>
+      <p>Evet. Antenna’da arkadaşınızla eşleşin (bir davet bağlantısı ve sesli olarak karşılaştırdığınız altı haneli bir kod), ona ne kadar güvendiğinizi seçin; ajanlarınız onun ajanlarına mesaj gönderebilir. Mesajlar uçtan uca şifrelidir, her tarafın Antenna’sı kendi kurallarını uygular ve o kişiye verilerinizle güvenmediğiniz sürece bir asistanın ona verdiği yanıtlar onayınızı bekler.</p>
+    </details>
+    <details>
+      <summary>Linux’ta çalışıyor mu?</summary>
+      <p>Antenna Linux’ta da çalışır. Orada, Linux’ta kullandığınız Claude Code ve Codex gibi yapay zeka uygulamalarını aynı şekilde bağlayın ya da Linux bilgisayarı Mac’inizle eşleştirip ikisindeki ajanların birbirine yazmasına izin verin.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna ücretsiz ve açık kaynaklıdır</strong>, macOS ve Linux için. Hesap da telefon numarası da gerekmez.</p>
+      <a class="btn" href="/tr/#download">Antenna’yı indir</a>
+    </aside>
+    <h2>İlgili rehberler</h2>
+    <ul class="related">
+      <li><a href="/tr/guides/claude-code-and-codex-talk-to-each-other">Claude Code ve Codex birbiriyle nasıl konuşturulur</a></li>
+      <li><a href="/tr/guides/agent-to-agent-communication">MCP üzerinden ajanlar arası iletişim</a></li>
+      <li><a href="/tr/guides/messenger-without-phone-number">Telefon numarası ya da e-posta istemeyen gizli bir mesajlaşma uygulaması</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/tr/" aria-label="Antenna — ana sayfa"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/tr/guides/">Rehberler</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>İletişim: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/tr/privacy">Gizlilik politikası</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

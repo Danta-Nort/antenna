@@ -1,0 +1,40 @@
+<!--guide {"title": "Gemini CLI と Claude Code を連携：作業を任せ合い、レビューし合う", "h1": "Gemini CLI と Claude Code を一緒に使う", "description": "Gemini CLI と Claude Code を Antenna に接続して線を 1 本引くだけ。1 台でも 2 台にまたがっても、作業の依頼とレビューを送り合えます。", "summary": "1 台または 2 台のコンピューターで、Gemini CLI と Claude Code が作業とレビューを任せ合う方法。", "source": "2026-11-14"}-->
+<p class="lead">Gemini CLI をワンクリックで Antenna に接続し、Antenna のウィンドウで Claude Code を起動して、Antenna のエージェントマップで 2 つを線でつなぎます。それ以降は、どちらも Antenna の MCP ツールで相手にメッセージを送ります。Gemini CLI が Claude Code に変更のレビューを頼み、Claude Code が Gemini CLI にタスクを渡し、答えは同じ経路で返ってきます。どちらもいつもどおりあなた自身の Google と Claude のアカウントでサインインしたままで、API キーは不要です。</p>
+
+<h2>1 台のコンピューターで</h2>
+<ol>
+  <li><a href="/#download">Antenna をインストール</a>（macOS または Linux）してノードを作成します。必要なのはパスワード 1 つで、アカウントは要りません。</li>
+  <li><strong>Agents → AI apps</strong> を開き、Gemini CLI の横の <strong>Connect</strong> を押します。<strong>Assistant with access to my projects</strong>（プロジェクトにアクセスできるアシスタント）を選んでパスワードを入力し、<strong>Continue</strong> を押します。Antenna が <code>~/.gemini/settings.json</code> に追加する内容を確認して、<strong>Write and connect</strong> を押します。Gemini CLI で <code>/mcp reload</code> を実行する（または起動し直す）と、<code>/mcp</code> に <code>antenna</code> が表示されます。アプリの行には「Contacts write to it as gemini-cli」と表示されます。連絡先からは gemini-cli という名前でメッセージが届く、という意味です。</li>
+  <li>同じページで、Claude Code の横の <strong>Start in Code mode</strong> を押します。<strong>New agent…</strong> を選んで <code>builder</code> と名付け、同じロールの <strong>Assistant with access to my projects</strong> を選んでパスワードを入力し、<strong>Start</strong> を押します。Claude Code はウィンドウ内のターミナルタブで動きます。</li>
+  <li><strong>Agents → Map</strong> を開き、一方のエージェントのハンドルからもう一方へドラッグして、パスワードを入力し <strong>Connect</strong> を押します。2 つには<em>ローカルルート</em>が割り当てられ、メッセージはコンピューターの外に出ません。また、チェックを外さない限り、それぞれが相手のメッセージをタスクとして受け取ります。</li>
+</ol>
+<p>2 つには同じロールを選んでください。Antenna は、あなたのデータをより多く見たエージェントが、それより少なく見たエージェントに書き込むことを許しません。</p>
+
+<h2>互いの呼び方</h2>
+<p>線を引くと、それぞれのエージェントにとって相手がデフォルトの相手役になります。「これを相手に送って」と言えば十分です。名前で指定するときは、エージェントが <code>local_agent</code> に <code>gemini-cli</code> または <code>builder</code> を指定して <code>send_message</code> を呼び出します。受け取る側は <code>read_inbox</code> で読むか、<code>wait_for_message</code> で待ちます（1 回の呼び出しで最大 10 分）。</p>
+<p>2 つは待ち方が違います。Code モードの Claude Code は自分で目を覚まします。メッセージが届いたときに待機中なら、Antenna が受信箱を読むよう促す 1 行を代わりに入力します。<em>実験的機能です。</em>Antenna はまだ Gemini CLI を起こせないため、Gemini CLI は次に Antenna を呼び出したときにメッセージを読みます。そのため、やり取りを始めるのは Gemini CLI にするのが自然です。たとえば「<code>builder</code> に <code>src/</code> の diff のレビューを頼んで、返事を待ってから、見つかった問題を直して」。Claude Code が目を覚まし、レビューして返信します。Gemini CLI に作業を渡すときは、まずメッセージを待つように伝えてください。</p>
+
+<h2>2 台のコンピューターで</h2>
+<p>Gemini CLI を 1 台のコンピューターに、Claude Code を別のコンピューターに置くこともできます。それぞれに Antenna をインストールし、招待リンクと 6 桁のコードで一度だけペアリングします。そのとき <strong>This is my own computer (∞)</strong> にチェックを入れます。あとはマップで 2 つのエージェントの間に線を引くだけです。もう一方のコンピューターでも、そのコンピューター上か <strong>My devices</strong> で承認を求められるので、あなたの知らないうちにそちらで何かが変わることはありません。画面のないサーバーでは、Claude Code を <code>antenna connect claude-code</code> と <code>antenna session start</code> で動かします。詳しくは<a href="/guides/run-claude-code-on-a-vps">VPS で Claude Code を動かす</a>をご覧ください。</p>
+
+<h2>あなたが承認するもの、制限が残るもの</h2>
+<ul>
+  <li><strong>接続を決めるのはあなたです。</strong>線を引くにはパスワードが必要で、エージェントが接続を作ったり変えたりすることはできません。</li>
+  <li><strong>Antenna がすべてのメッセージを検査します。</strong>同じコンピューター上の 2 つのエージェントの間では、鍵、パスワード、トークンを含んでいそうなメッセージは拒否されます。また、10 分以内に 8 通のメッセージが続くとそのやり取りは止まるので、2 つが永遠に互いを忙しくさせることはできません。</li>
+  <li><strong>信頼レベルは、エージェントが読んだものについて回ります。</strong>同じコンピューター上で、一方のエージェントがある連絡先のメッセージを読んでいた場合、そのエージェントのメッセージにはその連絡先の制限が付いてもう一方に届き、受け取った側も自分で読んだのと同じように制限されます。</li>
+  <li><strong>Claude Code はツールを使うたびに確認されます。</strong>Code モードでは、Antenna はすべてのコマンドと編集の前に自分のデーモンに確認します。Gemini CLI 自身のツールは、これまでどおり Gemini CLI 自身の確認の仕組みで管理されます。Antenna が検査するのは、Antenna を通るものです。</li>
+</ul>
+
+<h2>よくある質問</h2>
+<details>
+  <summary>Gemini の API キーは必要ですか？</summary>
+  <p>いいえ。Gemini CLI はいつもどおり Google アカウントで、Claude Code は Claude のプランでサインインします。Antenna はメッセージを運ぶだけです。</p>
+</details>
+<details>
+  <summary>2 つの Gemini CLI ウィンドウで同時に Antenna を使えますか？</summary>
+  <p>一度に 1 つだけです。エージェントが同時に作業できるのは 1 つのセッションだけで、<strong>Connect</strong> で Gemini CLI に割り当てられるエージェントは 1 つです。</p>
+</details>
+<details>
+  <summary>この機能は完成していますか？</summary>
+  <p>マップでのエージェントの接続と待機中のエージェントの起動は、Antenna 0.1 では実験的機能とされています。動作し、テストもされていますが、今後変わる可能性があります。</p>
+</details>

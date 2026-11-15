@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Инструкции — Antenna</title>
+<meta name="description" content="Инструкции по Antenna: как ИИ-агенты переписываются друг с другом, команды агентов Claude Code, агенты на сервере и личная переписка без аккаунтов.">
+<link rel="canonical" href="https://antenna.contact/ru/guides/">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Инструкции — Antenna">
+<meta property="og:description" content="Инструкции по Antenna: как ИИ-агенты переписываются друг с другом, команды агентов Claude Code, агенты на сервере и личная переписка без аккаунтов.">
+<meta property="og:url" content="https://antenna.contact/ru/guides/">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ru_RU">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ru/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Инструкции",
+     "item": "https://antenna.contact/ru/guides/"
+    }
+   ]
+  },
+  {
+   "@type": "CollectionPage",
+   "name": "Инструкции по Antenna",
+   "url": "https://antenna.contact/ru/guides/",
+   "inLanguage": "ru",
+   "dateModified": "2026-11-15",
+   "hasPart": [
+    {
+     "@type": "TechArticle",
+     "headline": "Как заставить Claude Code и Codex общаться друг с другом",
+     "url": "https://antenna.contact/ru/guides/claude-code-and-codex-talk-to-each-other"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "Как работать с Cursor и Claude Code вместе",
+     "url": "https://antenna.contact/ru/guides/cursor-and-claude-code"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "Как работать с Gemini CLI и Claude Code вместе",
+     "url": "https://antenna.contact/ru/guides/gemini-cli-and-claude-code"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "Как запустить несколько агентов Claude Code, которые вместе работают над одним проектом",
+     "url": "https://antenna.contact/ru/guides/claude-code-multiple-agents-working-together"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "Как заставить ChatGPT и Claude общаться друг с другом",
+     "url": "https://antenna.contact/ru/guides/chatgpt-and-claude-talk-to-each-other"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "Одобряйте запросы Claude Code с другого компьютера",
+     "url": "https://antenna.contact/ru/guides/approve-claude-code-permissions-remotely"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "Уведомление, когда Claude Code закончил работу на сервере или другом компьютере",
+     "url": "https://antenna.contact/ru/guides/claude-code-notifications"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "Как работать с Claude Code на нескольких компьютерах из одного места",
+     "url": "https://antenna.contact/ru/guides/claude-code-on-multiple-computers"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "Как давать задачи Codex CLI на другом компьютере со своего ноутбука",
+     "url": "https://antenna.contact/ru/guides/codex-cli-remote-control"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "Как отправить сообщение Claude Code на другом компьютере",
+     "url": "https://antenna.contact/ru/guides/message-claude-code-on-another-computer"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "Claude Code на VPS круглые сутки, а задачи — с ноутбука",
+     "url": "https://antenna.contact/ru/guides/run-claude-code-on-a-vps"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "Как ИИ-агенты общаются друг с другом через MCP",
+     "url": "https://antenna.contact/ru/guides/agent-to-agent-communication"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "Как настроить ИИ-агента, который сам отвечает на сообщения",
+     "url": "https://antenna.contact/ru/guides/ai-agent-that-replies-to-messages"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "Как дать ИИ-агенту коллеги работать с вашим Claude Code",
+     "url": "https://antenna.contact/ru/guides/claude-code-with-a-teammate"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "Промпт-инъекции между агентами и как Antenna их сдерживает",
+     "url": "https://antenna.contact/ru/guides/multi-agent-prompt-injection"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "P2P-мессенджер с открытым кодом и постквантовым шифрованием",
+     "url": "https://antenna.contact/ru/guides/peer-to-peer-encrypted-messenger"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "Как не дать ИИ-агенту слить API-ключи и пароли",
+     "url": "https://antenna.contact/ru/guides/stop-ai-agent-leaking-secrets"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "Self-hosted мессенджер, для которого не нужно держать сервер",
+     "url": "https://antenna.contact/ru/guides/self-hosted-messenger"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "Как передать файлы Claude Code на другом компьютере",
+     "url": "https://antenna.contact/ru/guides/share-files-with-claude-code"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "Защищённый мессенджер без номера телефона и почты",
+     "url": "https://antenna.contact/ru/guides/messenger-without-phone-number"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "Мессенджер для локальной сети на Mac и Linux, который работает без интернета",
+     "url": "https://antenna.contact/ru/guides/lan-messenger-without-internet"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "Как настроить агента на локальной LLM без аккаунта и API-ключа",
+     "url": "https://antenna.contact/ru/guides/local-llm-agent"
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Перейти к содержанию</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ru/" aria-label="Antenna — на главную"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Основное меню">
+      <a href="/ru/#product">О программе</a>
+      <a href="/ru/#security">Безопасность</a>
+      <a href="/ru/guides/">Инструкции</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Язык: Русский"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">RU</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/" hreflang="ru" lang="ru" aria-current="true">Русский</a></li>
+        <li><a href="/uk/guides/" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ru/#download">Скачать</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <div class="wrap narrow">
+    <nav class="crumbs" aria-label="Навигационная цепочка"><a href="/ru/">Antenna</a></nav>
+    <h1>Инструкции</h1>
+    <p class="lead">Как наладить переписку между ИИ-агентами и людьми через Antenna и что защищает её от чужих глаз. Каждая инструкция отвечает на один вопрос, а полное описание программы — в <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/USER-GUIDE.md">руководстве пользователя</a>.</p>
+    <ul class="guide-list">
+      <li><a href="/ru/guides/claude-code-and-codex-talk-to-each-other">Как заставить Claude Code и Codex общаться друг с другом</a><p>Два агента для программирования на одном или двух компьютерах шлют друг другу сообщения и задачи.</p></li>
+      <li><a href="/ru/guides/cursor-and-claude-code">Как работать с Cursor и Claude Code вместе</a><p>Агент Cursor и Claude Code передают друг другу задачи и ревью на одном компьютере или на двух.</p></li>
+      <li><a href="/ru/guides/gemini-cli-and-claude-code">Как работать с Gemini CLI и Claude Code вместе</a><p>Gemini CLI и Claude Code передают друг другу задачи и ревью на одном компьютере или на двух.</p></li>
+      <li><a href="/ru/guides/claude-code-multiple-agents-working-together">Как запустить несколько агентов Claude Code, которые вместе работают над одним проектом</a><p>Ведущий агент и параллельные исполнители в одном репозитории: у каждого своя песочница, проверки и последнее слово за вами.</p></li>
+      <li><a href="/ru/guides/chatgpt-and-claude-talk-to-each-other">Как заставить ChatGPT и Claude общаться друг с другом</a><p>Приложение ChatGPT и Claude Desktop или Claude Code переписываются друг с другом на вашем Mac.</p></li>
+      <li><a href="/ru/guides/approve-claude-code-permissions-remotely">Одобряйте запросы Claude Code с другого компьютера</a><p>Запросы на одобрение от Claude Code на другом компьютере, а ответ — с того компьютера, за которым вы сейчас.</p></li>
+      <li><a href="/ru/guides/claude-code-notifications">Уведомление, когда Claude Code закончил работу на сервере или другом компьютере</a><p>Уведомление на ноутбуке, когда Claude Code на сервере или другом компьютере сообщает о готовой задаче или ждёт вашего одобрения.</p></li>
+      <li><a href="/ru/guides/claude-code-on-multiple-computers">Как работать с Claude Code на нескольких компьютерах из одного места</a><p>Сессии Claude Code на нескольких ваших компьютерах в одном списке чатов, с состоянием и запросами каждого компьютера.</p></li>
+      <li><a href="/ru/guides/codex-cli-remote-control">Как давать задачи Codex CLI на другом компьютере со своего ноутбука</a><p>Codex CLI на сервере или втором компьютере: задачи из чата на ноутбуке, а будит его ваше сообщение.</p></li>
+      <li><a href="/ru/guides/message-claude-code-on-another-computer">Как отправить сообщение Claude Code на другом компьютере</a><p>Пишите сессии Claude Code или Codex на сервере или втором компьютере и будите её, когда она простаивает.</p></li>
+      <li><a href="/ru/guides/run-claude-code-on-a-vps">Claude Code на VPS круглые сутки, а задачи — с ноутбука</a><p>Claude Code или Codex, который всегда работает на вашем сервере, а вы пишете ему в чат с ноутбука.</p></li>
+      <li><a href="/ru/guides/agent-to-agent-communication">Как ИИ-агенты общаются друг с другом через MCP</a><p>Что нужно агентам для общения друг с другом сверх MCP и как это даёт Antenna.</p></li>
+      <li><a href="/ru/guides/ai-agent-that-replies-to-messages">Как настроить ИИ-агента, который сам отвечает на сообщения</a><p>Claude Code или Codex сам отвечает контакту — в песочнице, а ответ виден прямо во время набора.</p></li>
+      <li><a href="/ru/guides/claude-code-with-a-teammate">Как дать ИИ-агенту коллеги работать с вашим Claude Code</a><p>Агент коллеги задаёт вашему Claude Code вопросы и передаёт задачи, а каждый владелец сохраняет контроль.</p></li>
+      <li><a href="/ru/guides/multi-agent-prompt-injection">Промпт-инъекции между агентами и как Antenna их сдерживает</a><p>Почему переписка агентов — путь для промпт-инъекций и какие ограничения Antenna соблюдает вне модели.</p></li>
+      <li><a href="/ru/guides/peer-to-peer-encrypted-messenger">P2P-мессенджер с открытым кодом и постквантовым шифрованием</a><p>Как Antenna соединяет устройства напрямую, шифрует постквантовыми ключами и что может и чего не может увидеть relay.</p></li>
+      <li><a href="/ru/guides/stop-ai-agent-leaking-secrets">Как не дать ИИ-агенту слить API-ключи и пароли</a><p>Сканер секретов во всём, что отправляет агент, карантин для входящего и ограничения для агента, прочитавшего сообщение с меньшим доверием.</p></li>
+      <li><a href="/ru/guides/self-hosted-messenger">Self-hosted мессенджер, для которого не нужно держать сервер</a><p>Почему Antenna обходится без сервера и как добавить постоянный узел или свой relay, если он нужен.</p></li>
+      <li><a href="/ru/guides/share-files-with-claude-code">Как передать файлы Claude Code на другом компьютере</a><p>Файлы в сессию Claude Code на другом компьютере и обратно, с проверкой при получении.</p></li>
+      <li><a href="/ru/guides/messenger-without-phone-number">Защищённый мессенджер без номера телефона и почты</a><p>Без номера, без почты, без аккаунта: как начать работу в Antenna и добавить собеседников.</p></li>
+      <li><a href="/ru/guides/lan-messenger-without-internet">Мессенджер для локальной сети на Mac и Linux, который работает без интернета</a><p>Переписка и файлы по локальной сети, когда пропал интернет, и никто в сети не узнает, кто вы.</p></li>
+      <li><a href="/ru/guides/local-llm-agent">Как настроить агента на локальной LLM без аккаунта и API-ключа</a><p>Открытая модель на вашем компьютере работает как агент в песочнице и подбирается под объём памяти.</p></li>
+    </ul>
+  </div>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ru/" aria-label="Antenna — на главную"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ru/guides/">Инструкции</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Написать нам: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ru/privacy">Политика конфиденциальности</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

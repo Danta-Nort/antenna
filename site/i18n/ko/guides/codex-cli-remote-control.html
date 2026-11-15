@@ -1,0 +1,48 @@
+<!--guide {"title": "Codex CLI 원격 제어: 노트북에서 서버의 Codex에 작업 맡기기 — Antenna", "h1": "노트북에서 다른 컴퓨터의 Codex CLI에 작업 맡기기", "description": "서버나 다른 컴퓨터의 Codex CLI를 Antenna로 돌리고, 노트북의 채팅에서 지시하세요. 메시지가 오면 Codex가 깨어나요. SSH 세션을 열어 둘 필요가 없어요.", "summary": "서버나 다른 컴퓨터의 Codex CLI에 노트북 채팅으로 작업을 맡기고, 메시지로 깨워요.", "source": "2026-11-14"}-->
+<p class="lead">두 컴퓨터에 Antenna를 설치하고 내 것으로 한 번 페어링하세요. Codex가 도는 컴퓨터에서 <code>antenna connect codex</code>로 Codex 세션에 이름을 붙이고, <code>antenna session start … --cli codex</code>로 시작하세요. 그러면 노트북에 그 이름의 채팅이 생겨요. 거기에 작업을 쓰면, Codex가 쉬고 있을 때 Antenna가 깨워요. Codex는 메시지를 읽고, 다른 컴퓨터에서 일하고, 채팅으로 답해요. 열어 둬야 하는 SSH 세션도, 열어야 하는 인바운드 포트도 없어요.</p>
+
+<h2>준비물</h2>
+<ul>
+  <li>일을 할 컴퓨터에 설치되고 로그인된 Codex CLI. x86_64 Linux 서버, 또는 Mac이나 Linux 데스크톱이면 돼요. Codex는 계속 내 구독을 쓰고, Antenna에는 API 키가 필요 없어요.</li>
+  <li>그 컴퓨터의 tmux. 서버라면 <code>sudo loginctl enable-linger $USER</code>도 한 번 실행해서, 로그아웃한 뒤에도 Antenna와 세션이 계속 돌게 하세요.</li>
+  <li>두 컴퓨터 모두에 <a href="/#download">Antenna</a>. 데스크톱에는 앱을, 서버에는 노드를 설치해요(<code>curl -fsSL https://antenna.contact/install.sh | sh</code>).</li>
+</ul>
+
+<h2>1. 두 컴퓨터 페어링하기</h2>
+<p>노트북에서 <strong>New contact → Invite</strong>로 가서 <strong>This is my own computer (∞)</strong>를 체크하고 링크를 만든 다음, 다른 컴퓨터에서 여세요(서버라면 <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>). 한쪽에 표시된 코드를 다른 쪽에 입력하세요. 이제 양쪽이 서로를 내 컴퓨터로 대해요. 스크린샷이 있는 단계별 설명은 <a href="/guides/run-claude-code-on-a-vps">VPS에서 Claude Code 돌리기</a>에 있고, Codex도 똑같아요.</p>
+
+<h2>2. Codex 세션에 이름 붙이기</h2>
+<p>Codex가 도는 컴퓨터의 프로젝트 폴더에서:</p>
+<pre><code>cd ~/projects/api
+antenna connect codex --agent api-codex --links mac --hello mac</code></pre>
+<p>이 명령은 자체 토큰 파일을 가진 에이전트 <code>api-codex</code>를 만들고, 노트북과 연결한 뒤(<code>mac</code>은 페어링할 때 이 컴퓨터가 노트북에 붙인 이름이에요), 인사를 보내서 노트북에 바로 <code>api-codex</code>라는 채팅이 나타나게 해요. 내 Codex 설정은 바뀌지 않아요. Antenna는 이 에이전트의 세션에만 추가돼요.</p>
+
+<h2>3. Antenna로 Codex 시작하기</h2>
+<pre><code>antenna session start api-codex --dir ~/projects/api --cli codex
+antenna session attach api-codex</code></pre>
+<p>Codex는 Antenna 전용 tmux 서버에서 시작되고, 내 tmux는 건드리지 않아요. 한 번 붙어서 Codex의 첫 질문에 답하세요. 처음에는 Codex가 Antenna의 훅을 신뢰할지 물어봐요(“Hooks need review”). “Trust all and continue”를 고르세요. 그런 다음 <code>Ctrl-b d</code>로 빠져나오면 Codex는 계속 돌아요. 재시작한 뒤에는 <code>--resume</code>으로 에이전트의 마지막 세션을 이어 갈 수 있어요.</p>
+
+<h2>4. 노트북에서 메시지 보내기</h2>
+<p><code>api-codex</code> 채팅을 열고 이렇게 쓰세요: “테스트 돌리고, 실패하는 거 고치고, 뭘 바꿨는지 알려 줘.” Codex가 프롬프트에서 쉬고 있으면 Antenna가 수신함을 읽으라는 내장 문구 한 줄을 입력해요. 내가 쓴 텍스트를 터미널에 입력하는 일은 절대 없고, Codex가 질문하고 있는 중에는 아무것도 입력하지 않아요. Codex는 Antenna를 통해 메시지를 읽고, 일하고, 채팅으로 답해요. <em>실험적 기능이에요.</em></p>
+<p>하던 일을 멈추게 해야 하나요? 보내기 전에 <strong>Urgent: interrupt now</strong>(긴급: 지금 중단)를 켜세요. Antenna가 Esc를 한 번 눌러 진행 중인 턴을 끝내고, 내 메시지를 위해 Codex를 깨워요. 에이전트와 그 에이전트가 띄운 모든 것을 멈추려면, 노트북의 <strong>My devices</strong>에서 다른 컴퓨터의 카드를 열고 <strong>Stop agent and its processes…</strong>를 누르세요. <code>api-codex</code> 옆에 있어요.</p>
+
+<h2>데스크톱이라면: Code 모드</h2>
+<p>Antenna 앱이 있는 Mac이나 Linux 데스크톱에서 Codex를 돌린다면 터미널 단계는 건너뛰어도 돼요. Code 모드에서 에이전트 패널의 <code>+</code>를 누르고 Codex와 작업 폴더를 고르면, Codex가 창 안의 탭에서 돌고 같은 방식으로 깨어나요. 그 채팅은 다른 에이전트와 마찬가지로 내 다른 컴퓨터에서도 열 수 있어요.</p>
+
+<h2>자주 묻는 질문</h2>
+<details>
+  <summary>노트북에서 Codex의 터미널이 보이나요?</summary>
+  <p>아니요. 채팅으로 Codex에게 작업을 맡기고 답을 읽어요. 터미널은 다른 컴퓨터에 그대로 있어요. 지켜보고 싶다면 그쪽에서 <code>antenna session attach</code>를 실행하세요. 원하면 SSH로 접속해서요.</p>
+</details>
+<details>
+  <summary>어떤 Codex 버전에서 되나요?</summary>
+  <p>Codex 0.160 이상은 훅으로 자기 동작을 알려 줘서, Antenna가 Codex가 쉬고 있는 때를 알 수 있어요. 더 오래된 Codex이거나 훅을 신뢰하지 않았다면, Antenna는 턴이 끝난 뒤 Codex가 빈 입력 줄을 보여 줄 때까지 기다리고, 턴이 도는 중에는 절대 입력하지 않아요.</p>
+</details>
+<details>
+  <summary>Codex가 Claude Code와도 대화할 수 있나요?</summary>
+  <p>네. 에이전트 맵에서 두 에이전트를 연결하면, 이름을 따로 지정하지 않아도 각자의 메시지가 상대에게 가요. <a href="/guides/claude-code-and-codex-talk-to-each-other">Claude Code와 Codex가 서로 대화하게 하기</a>를 참고하세요.</p>
+</details>
+<details>
+  <summary>스마트폰으로 제어할 수 있나요?</summary>
+  <p>아직은 아니에요. 지금 Antenna는 macOS와 Linux에서 돌아가요.</p>
+</details>

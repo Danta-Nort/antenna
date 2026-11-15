@@ -1,0 +1,43 @@
+<!--guide {"title": "Un agent IA qui répond automatiquement à vos messages — Antenna", "h1": "Configurer un agent IA qui répond à vos messages", "description": "Laissez Claude Code ou Codex répondre seul aux messages d’un contact : Antenna le réveille dans un bac à sable et la réponse s’affiche pendant qu’il l’écrit.", "summary": "Claude Code ou Codex qui répond seul à un contact, dans un bac à sable, en direct.", "source": "2026-11-09"}-->
+<p class="lead">Dans Antenna, vous pouvez choisir un contact et un agent (Claude Code, Codex ou votre propre commande) : dès lors, chaque message de ce contact lance l’agent, qui le lit et y répond. Antenna l’exécute dans un bac à sable, sans plus de droits que le niveau de confiance de ce contact, et la réponse apparaît chez votre interlocuteur au fur et à mesure qu’elle s’écrit. L’agent utilise votre propre connexion Claude ou ChatGPT, et une réponse qui semble contenir un secret attend votre accord.</p>
+
+<h2>Usages typiques</h2>
+<ul>
+  <li><strong>Votre propre assistant sur un serveur.</strong> Vous écrivez à votre serveur depuis votre portable, et Claude Code, là-bas, répond, compile et lance les tests de votre projet.</li>
+  <li><strong>Un accueil pour un contact.</strong> Les questions d’un collègue sur votre projet obtiennent une réponse immédiate, de la part d’un agent qui ne voit que le dossier de cette conversation.</li>
+  <li><strong>Un script qui rend compte.</strong> La sortie de n’importe quel programme peut être envoyée en flux direct : <code>my-program | antenna send --stream &lt;contact&gt;</code>.</li>
+</ul>
+
+<h2>Le configurer dans la fenêtre</h2>
+<ol>
+  <li>Sur l’ordinateur où l’agent doit tourner, ouvrez <strong>Agents → Set up for a contact…</strong> (ou, dans une conversation, <strong>Agent replies → Set up…</strong> sur la fiche du contact).</li>
+  <li>Choisissez le contact et le programme : <strong>Claude Code</strong>, <strong>Codex</strong> ou votre propre commande.</li>
+  <li>Vous pouvez coller un jeton de connexion longue durée (obtenu avec <code>claude setup-token</code>) dans <strong>Value (optional)</strong>. Il est transmis une seule fois à votre nœud et conservé dans sa base de données chiffrée. Sur Mac, c’est la méthode fiable, car le bac à sable ne peut pas ouvrir le trousseau.</li>
+  <li>Confirmez avec votre mot de passe de propriétaire. La règle, sa dernière exécution et le <strong>Run log</strong> (journal des exécutions) apparaissent dans <strong>Agents</strong>.</li>
+</ol>
+<p>Depuis un terminal, une seule ligne suffit : <code>antenna wake set &lt;contact&gt; --cmd "claude -p --output-format stream-json"</code>. <code>antenna wake list</code> affiche les règles et les exécutions récentes ; <code>antenna wake off &lt;contact&gt;</code> désactive la règle.</p>
+
+<h2>Ce que l’agent peut faire, et ce qu’il ne peut pas faire</h2>
+<ul>
+  <li><strong>Son prompt est fixe :</strong> « vous avez un nouveau message, lisez-le et répondez ». Le message lui-même ne devient jamais le prompt ; l’agent le lit comme des données, sans plus de droits que le niveau de confiance du contact.</li>
+  <li><strong>Il tourne dans un bac à sable</strong> (bubblewrap ou Landlock sous Linux, Seatbelt sous macOS) : il voit son propre dossier temporaire et le dossier de cette conversation, et ne joint que le fournisseur de son modèle. Vos projets, vos autres fichiers et les clés du nœud lui sont inaccessibles. Sans bac à sable, Antenna ne le lance pas.</li>
+  <li><strong>Chaque exécution repart de zéro</strong>, sauf si vous rendez l’agent résident (voir plus bas) : un message précédent ne peut donc pas laisser d’instructions pour une exécution suivante.</li>
+  <li><strong>Des limites :</strong> une durée maximale par exécution et un nombre d’exécutions par heure, pour qu’un contact trop bavard ne fasse pas exploser votre consommation.</li>
+</ul>
+
+<h2>Le laisser travailler dans l’un de vos projets</h2>
+<p>Pour vos propres ordinateurs uniquement (∞), l’agent peut aussi travailler dans un dossier de projet avec vos outils : <code>--project ~/code/payments</code>, plus des dossiers en lecture seule avec <code>--tool-path</code> et les registres de paquets qu’il peut joindre avec <code>--allow-host</code>. Antenna le refuse pour tout autre contact, et n’ouvre jamais votre dossier personnel, ses propres données ni les dossiers qui contiennent des secrets, comme <code>~/.ssh</code>.</p>
+
+<h2>Questions</h2>
+<details>
+  <summary>Mon interlocuteur voit-il la réponse pendant qu’elle s’écrit ?</summary>
+  <p>Oui, pour les contacts de niveau 3 et plus : une bulle en direct qui grandit à mesure que l’agent écrit et devient un message ordinaire à la fin. Les niveaux 1 et 2 reçoivent la réponse terminée.</p>
+</details>
+<details>
+  <summary>Et si l’agent écrit un mot de passe ou une clé dans sa réponse ?</summary>
+  <p>Le flux s’arrête chez votre interlocuteur et le message attend votre accord. Il ne continue que vers vos propres ordinateurs.</p>
+</details>
+<details>
+  <summary>L’agent se souvient-il des conversations précédentes ?</summary>
+  <p>Par défaut, non : chaque message lance une nouvelle exécution. Pour un travail qui dure des heures, ajoutez <code>--resident</code> : la même session Claude Code reste alors attachée à la conversation, garde ce qui a été dit et décidé, et chaque nouveau message devient son tour suivant. Les messages lui parviennent toujours comme des données venant d’un tiers.</p>
+</details>

@@ -2,7 +2,7 @@
 name: antenna_desktop
 description: "Antenna — P2P messenger for people and AI agents: desktop client of the antennad daemon (control socket)."
 publish_to: 'none'
-version: 0.1.0+12
+version: 0.1.1+13
 
 environment:
   sdk: ^3.13.5

@@ -1,0 +1,34 @@
+<!--guide {"order": 9, "title": "LAN messenger for Mac and Linux that works without internet — Antenna", "h1": "A LAN messenger for Mac and Linux that works without internet", "description": "Antenna finds your trusted contacts on the same network and keeps chatting when the internet is down, encrypted end to end, without announcing who you are.", "query": "lan messenger for mac", "updated": "2026-11-09", "summary": "Chat and send files over the local network when the internet is down, without announcing who you are.", "related": ["peer-to-peer-encrypted-messenger", "self-hosted-messenger", "messenger-without-phone-number"]}-->
+<p class="lead">Antenna can reach the people you talk to over the local network when there is no internet, as long as you are on the same router, at home or in an office. Turn on <strong>Local network (no internet)</strong> in Settings, or run <code>antenna lan on</code>, and contacts you trust at levels 3 to 4, plus your own computers, are found nearby. Messages and files stay end to end encrypted, and Antenna never broadcasts your name to the network.</p>
+
+<h2>Why most messengers stop when the internet does</h2>
+<p>A message in most messengers goes to a server first, even when the person you are writing to sits two desks away. Cut the internet and the conversation stops. Antenna already connects computers directly, so on a local network it only has to find the other computer, and that works with no internet at all.</p>
+
+<h2>Turn it on</h2>
+<ol>
+  <li><a href="/#download">Install Antenna</a> on both computers (macOS or Linux) and pair once, while you still have a connection.</li>
+  <li>Open <strong>Settings → Local network (no internet)</strong> and switch it on with your owner password. From a terminal: <code>antenna lan on</code>; <code>antenna lan</code> shows the state.</li>
+  <li>Below the switch Antenna shows “Listening on the local network” and which of your contacts it found nearby.</li>
+</ol>
+<p>It is off by default, and it is best kept for networks you trust: on a café’s or an airport’s Wi-Fi there is no need to announce that your device is there.</p>
+
+<h2>What your neighbors on the network see</h2>
+<p>Antenna does not shout about itself. It listens, and announces itself only when it has something to deliver and the other person does not answer at the known addresses. Even then it does not use your name or your key: it uses an alias that only that contact understands, and the alias changes every hour. Others on the network see that some device is looking for someone, not who you are or whom you talk to. Only local addresses go out, never your relay or VPN addresses.</p>
+<p>One honest limit: an attentive neighbor could recognize the same device on another network by its port number.</p>
+
+<h2>Who can be reached this way</h2>
+<p>Contacts at trust levels 3 and 4 and your own computers (∞). Levels 1 and 2 are for people you know less well: those links always go through a relay, so those contacts never learn your address, on the local network or anywhere else.</p>
+
+<h2>Questions</h2>
+<details>
+  <summary>Do we need to pair over the internet first?</summary>
+  <p>The first pairing is easiest with a connection: you exchange a one-time invite link and compare a code by voice. After that, the local network is enough.</p>
+</details>
+<details>
+  <summary>Can I send files over the LAN?</summary>
+  <p>Yes. Files go over the same encrypted link and are checked on arrival like any other file in Antenna.</p>
+</details>
+<details>
+  <summary>Is there a Windows or phone version?</summary>
+  <p>Not yet. Antenna 0.1 runs on macOS (Apple Silicon) and Linux.</p>
+</details>

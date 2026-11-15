@@ -16,7 +16,7 @@ Current schedule: the list is checked twice a week (Mondays and Thursdays) by `t
 web review of the non-machine items on Mondays. Each check is logged; an entry that meets an
 "adopt when…" condition or is otherwise significant is marked `ATTENTION MAINTAINER:`.
 
-Last full check: **2026-10-26**. Last machine check: **2026-10-26**. Machine checks: 48, errors: 0.
+Last full check: **2026-11-09**. Last machine check: **2026-11-12**. Machine checks: 48, errors: 0.
 
 ## Summary
 
@@ -27,14 +27,14 @@ Last full check: **2026-10-26**. Last machine check: **2026-10-26**. Machine che
 | W-03 | `iroh-blobs` 1.x | §10, §14 | `iroh-blobs 0.103` pinned, fallback `bao-tree` | 1.0 on crates.io or the "not production quality" warning removed | week (script) |
 | W-04 | iroh Tor transport on Arti, mature Arti onion services | §4 (Tor mode, v0.3) | "Relay only" mode | Arti onion services without the "testing only" caveat **and** a transport without an external `tor` | month (script) |
 | W-05 | libsignal: support outside Signal / crates.io; stable ML-KEM-1024 in PQXDH; full verification of SPQR | §7, §14, §16; D-4, D-8, Q-3 | git rev, `MLKEM1024`, the SPEC wording refined | the ML-KEM caveat removed; `lax` = 0; a publication appeared | week (script) |
-| W-06 | QUIC Multipath and NAT Traversal as RFCs | §4 | iroh 1.3's own implementation (`noq`) | Multipath — RFC (soon); NAT Traversal — not even a WG draft | month (script) |
+| W-06 | QUIC Multipath and NAT Traversal as RFCs | §4 | iroh 1.3's own implementation (`noq`) | Multipath — RFC 10069 out (2026-11-07), `noq` matches its codepoints; NAT Traversal — not even a WG draft | month (script) |
 | W-07 | PQ transport authentication (ML-DSA in TLS 1.3, PQ identity in iroh) | §4, §5, §7 | PQ signature of the link-root (Ed25519 + ML-DSA-65) under SAS at the application layer | an iroh major with PQ identity or the CRQC threat has come closer | month (script + manual) |
 | W-08 | An audited PQ PAKE for spoken codes | §6 (alternative), §14 | The code only authenticates; keys come from PQ TLS; the code is one-time | CFRG adopted a PQ PAKE **and** there is an audited Rust implementation | month (script) |
 | W-09 | MLS with PQ suites | §7 (groups in v2), §17 | No groups until v1.0 | an RFC for the PQ suites and a stable feature in openmls | month (script) |
 | W-10 | Claude Code Channels → GA, our own channel without a dev flag | §11, §17 (v0.2) | `wait_for_message` (long-poll), hooks | GA **and** our own MCP server is accepted by `--channels` without the Anthropic allowlist | week (script) |
 | W-11 | A2A 1.x and the official Rust SDK | §11 (v0.3) | — (A2A in v0.3) | `a2a-lf` ≥ 1.0 by the start of v0.3 | month (script) |
 | W-12 | Trust/sensitivity labels in MCP (SEP-1913) | §9, §11 | The "external data, not instructions" wrapper in the text | SEP accepted → we put labels on contact data | month (script) |
-| W-13 | `biscuit-auth` with ed25519-dalek 3 | §9, §14 | `biscuit-auth 6.0.0` + PoP third-party block (D-11) | a release with ed25519-dalek 3 is out | week (script) |
+| W-13 | `biscuit-auth` with ed25519-dalek 3 | §9, §14 | `biscuit-auth 6.0.0` + PoP third-party block (D-11); `7.0.0-alpha.1` (2026-11-11) has ed25519-dalek 3, prerelease only | a stable release with ed25519-dalek 3 is out | week (script) |
 | W-14 | An open embeddable CDR (disarming PDF/Office/images) | §10, §19 | Our own assembly of known parts | Dangerzone gets a library/headless mode, or another open CDR appears | month (script + manual) |
 | W-15 | vTPM on a VPS (Hetzner) | §5, §8, §13; Q-4 | Password + Argon2id, `x unlock` | the target VPS has a vTPM | quarter (script) |
 | W-16 | Usable IFC implementations for LLM agents (CaMeL, FIDES…) | §9 | Session-level taint in the daemon | a maintained library with a label format compatible with MCP | month (manual) |
@@ -105,6 +105,12 @@ Last full check: **2026-10-26**. Last machine check: **2026-10-26**. Machine che
   detected), lazy hash-seq reads, `Downloader::builder` with a custom ALPN; breaking: `Hash::fmt_short` returns
   `impl Display`, `bao-tree` 0.17, `iroh-util` 0.7; lockfile updates for RUSTSEC-2026-0346…0348, -0381…0383,
   -0385, -0386 ([compare](https://github.com/n0-computer/iroh-blobs/compare/v0.103.1...v0.104.0)). Not met.
+- **Update 2026-11-05.** `iroh-blobs 0.104.1` (2026-11-04), still 0.x: bug fixes only, mostly in the stores and
+  garbage collection (a TOCTOU in the gc mark phase, live blobs no longer swept, blobs written during a gc run
+  protected, no temp files left by an incomplete import, files of a changed entry removed), `iroh` 1.4.1, `tokio`
+  1.54.1 ([CHANGELOG](https://github.com/n0-computer/iroh-blobs/blob/main/CHANGELOG.md),
+  [compare](https://github.com/n0-computer/iroh-blobs/compare/v0.104.0...v0.104.1)). The README warning is still
+  present (script marker `w03-iroh-blobs-readme`). Not met.
 - **Takeaway for STACK.** The authors themselves do not consider 0.103 production quality. This is a bigger risk than "0.x, the API may break". The fallback `bao-tree` over our own stream (STACK b) is worth keeping alive.
 - **How we cover it:** `=0.103.0` (D-4), we transfer STREAM ciphertext, BLAKE3/bao verification.
 - **Adopt when:** 1.0 on crates.io or the warning disappears from the README.
@@ -117,6 +123,10 @@ Last full check: **2026-10-26**. Last machine check: **2026-10-26**. Machine che
   - Arti 2.7.0 (2026-10-01): vulnerabilities from low to high fixed, those running onion services are advised to upgrade immediately — [Tor blog](https://blog.torproject.org/arti_2_7_0_released/).
   - The Arti README: a full-featured client, "can run and connect to onion services".
   - But `doc/OnionService.md`: "**suitable for testing and experimentation only** … may even compromise the privacy of your other uses of the same Arti instance" — [GitLab](https://gitlab.torproject.org/tpo/core/arti/-/blob/main/doc/OnionService.md).
+- **Update 2026-11-05.** Arti 2.8.0 (2026-11-03; `arti-client 0.48.0` on crates.io 2026-11-04): relay and directory
+  authority work, fixes for several low-severity security issues; onion service operators are advised to upgrade —
+  [Tor blog](https://blog.torproject.org/arti_2_8_0_released/). The "testing and experimentation only" caveat is still in
+  `doc/OnionService.md` (script marker `w04-arti-onion-limitations`); `iroh-tor-transport` still 0.1.0. Not met.
 - **How we cover it:** Tor mode — v0.3. Until then, "relay only" for levels 1–2.
 - **Adopt when:** the "testing only" caveat is removed from Arti onion services **and** there is an iroh transport over Arti (from n0 or our own custom-transport adapter, which needs a separate review).
 - **Where:** crates.io `iroh-tor-transport`, `arti-client`; the marker in OnionService.md. Script: `w04-*`. **Frequency:** month (Arti ships monthly).
@@ -163,6 +173,17 @@ Last full check: **2026-10-26**. Last machine check: **2026-10-26**. Machine che
   `rust-version` 1.93.1 from the workspace); no API change. Still `libcrux-ml-kem` 0.0.10 and SPQR v1.6.0
   ([compare](https://github.com/signalapp/libsignal/compare/v0.106.0...v0.106.1)); `lax` = 1. Spike not rerun (no
   protocol change since v0.106.0, which passed). Not met.
+- **Update 2026-11-09.** libsignal v0.106.2 (2026-11-05), no release notes: a new `rust/provisioning` crate,
+  new chat and auth APIs, DCAP intermediate certificate checks; no file under `rust/protocol` changed, so no API change
+  for us ([compare](https://github.com/signalapp/libsignal/compare/v0.106.1...v0.106.2)). Still `libcrux-ml-kem`
+  0.0.10 and SPQR v1.6.0; the ML-KEM caveat stays in `rust/protocol/Cargo.toml`. Spike not rerun. Not met.
+- **Update 2026-11-12.** libsignal v0.107.0 (2026-11-10): backup export sanitizing, SVRB support for Nitro enclaves,
+  Java `GroupCipher`/`SessionCipher` exception types. Under `rust/protocol` only a new negative test for a tampered
+  `SenderKeyMessage` signature (`tests/groups.rs`); no API change for us
+  ([compare](https://github.com/signalapp/libsignal/compare/v0.106.2...v0.107.0),
+  [RELEASE_NOTES](https://github.com/signalapp/libsignal/blob/v0.107.0/RELEASE_NOTES.md)). Still `libcrux-ml-kem`
+  0.0.10 and SPQR v1.6.0 ([Cargo.toml](https://github.com/signalapp/libsignal/blob/v0.107.0/Cargo.toml)); the ML-KEM
+  caveat stays in `rust/protocol/Cargo.toml`. Spike not rerun. Not met.
 - **How we cover it:** git rev (D-4, Q-3a), `MLKEM1024` (D-8), the refined wording about verification (DECISIONS, deviations from §14).
 - **Adopt when:** the ML-KEM caveat is removed; `lax` = 0; Signal publishes the crates. There are no signs of the latter — do not wait, revisit decision Q-3 before v1.0.
 - **Where:** GitHub releases of libsignal, markers in `Cargo.toml` and `src/lib.rs`. Script: `w05-*`, `w01-spqr-tag`. **Frequency:** week.
@@ -185,6 +206,18 @@ Last full check: **2026-10-26**. Last machine check: **2026-10-26**. Machine che
 - **Update 2026-10-27.** iroh 1.4.1 adopted (iroh-relay 1.4.1, noq 1.4.0), with rustls 0.23.46, rustls-webpki 0.103.16
   and webpki-roots/webpki-root-certs 1.0.11: RUSTSEC-2026-0346…0349 and 0381…0383 no longer match our `Cargo.lock`.
   No code changes were needed. The condition is unchanged: not met.
+- **Update 2026-11-02.** `draft-ietf-quic-multipath-21`: on 2026-10-30 the RFC Editor state went from "Blocked" to
+  "In Progress" and the RPC status through "In Final Review" to "Awaiting Publisher": publication is the next step, no
+  RFC number yet ([history](https://datatracker.ietf.org/doc/draft-ietf-quic-multipath/history/)). Not met yet; once
+  the RFC is out, check `noq` against the final text.
+- **Update 2026-11-09.** Published as **RFC 10069** "Managing Multiple Paths for a QUIC Connection", Proposed
+  Standard (published 2026-11-07) — [rfc-editor](https://www.rfc-editor.org/info/rfc10069). Compared with draft -21 the
+  changes are editorial: the same transport parameter (`initial_max_path_id` 0x3e) and frame codepoints
+  (0x3e–0x3f, 0x3e75–0x3e7c), the same normative requirements; the provisional-registration section is removed.
+  `noq-proto` already uses these final codepoints, so `noq` is wire-compatible with the RFC; its README still links
+  the draft, and neither noq nor iroh has stated anything about the final text
+  ([noq](https://github.com/n0-computer/noq)). The check this item asked for is done: nothing to adopt. NAT
+  traversal is unchanged (individual n0 draft only).
 - **How we cover it:** iroh 1.4 (spike a was on 1.3).
 - **Adopt when:** there is nothing to adopt. When the Multipath RFC is out, check that `noq` follows the final text.
 - **Where:** datatracker API. Script: `w06-*`. **Frequency:** month.
@@ -245,6 +278,11 @@ Last full check: **2026-10-26**. Last machine check: **2026-10-26**. Machine che
   - Update 2026-10-29: `mls-rs 0.57.0` (2026-10-28): `MlsMessage::from_bytes` rejects trailing data, a `roster()`
     accessor on `GroupState`, dependency updates, `mls-rs-codec` 0.7.1; nothing on PQ suites or an audit
     ([commits](https://github.com/awslabs/mls-rs/commits/main)). Not met.
+  - Update 2026-11-02: `draft-ietf-mls-pq-ciphersuites-07` (2026-11-01) while in "Publication Requested": editorial
+    fixes plus clarifications: the first two suites are each registered twice (AES-128-GCM/SHA-256 and
+    AES-256-GCM/SHA-384), ML-DSA suites use the raw `pkEncode` public key (not SubjectPublicKeyInfo) and the raw
+    ML-DSA signature, and ML-DSA suites may use a pure or a hybrid KEM
+    ([draft -07](https://datatracker.ietf.org/doc/draft-ietf-mls-pq-ciphersuites/07/)). Not an RFC. Not met.
 - **How we cover it:** no groups until v1.0.
 - **Adopt when:** an RFC for the PQ suites and a stable openmls feature.
 - **Where:** datatracker, crates.io. Script: `w09-*`. **Frequency:** month.
@@ -276,6 +314,11 @@ Last full check: **2026-10-26**. Last machine check: **2026-10-26**. Machine che
 - **Update 2026-10-29.** `rmcp 3.8.0` (2026-10-26): body-free HTTP status errors in the transport, the client stops
   SSE reconnects on permanent GET errors ([release](https://github.com/modelcontextprotocol/rust-sdk/releases/tag/rmcp-v3.8.0)).
   HTTP client paths only, our stdio server is untouched; spike not rerun. Nothing on channels. Not met.
+- **Update 2026-11-09.** `rmcp 3.9.0` (2026-11-05): Skills extension support (SEP-2640), structured auth discovery
+  errors, the server rejects server-to-client requests on discover sessions, the child-process client transport sends
+  SIGTERM before killing ([release](https://github.com/modelcontextprotocol/rust-sdk/releases/tag/rmcp-v3.9.0)).
+  Advisory GHSA-c9f9-cp8h-jcj5 (medium): unbounded response-body buffering in Streamable HTTP *clients*, `>= 0.2.0,
+  < 3.9.0`; it does not apply to our `=3.5.0` with `server`, `transport-io` and `macros`. Nothing on channels. Not met.
 - **How we cover it:** `wait_for_message` (long-poll) and client hooks. For Claude Code in v0.2 — the dev flag or the organization allowlist.
 - **Adopt when:** Channels GA **and** our own channel without the Anthropic allowlist. The alternative is our plugin in `claude-plugins-official`, but that is external publication, only by maintainer decision.
 - **Where:** markers in `channels.md`/`mcp.md`, the `schema/` directory of the MCP specification, crates.io `rmcp`. Script: `w10-*`. **Frequency:** week.
@@ -308,8 +351,18 @@ Last full check: **2026-10-26**. Last machine check: **2026-10-26**. Machine che
   `new_with_rng`/`build_with_rng`). No release yet: crates.io still ends at 6.0.0 (2025-07-16); in the PR a maintainer
   says one datalog evaluation patch goes first, then "we want to cut a release soon". Condition not met.
   - There is **no need** to wait for holder-of-key "out of the box". The maintainers themselves described PoP through a third-party block — ["DPoP demon hunters", 2025-09-19](https://www.biscuitsec.org/blog/dpop-demon-hunters/). This is exactly our D-11.
+- **Update 2026-11-12.** `biscuit-auth 7.0.0-alpha.1` on crates.io (2026-11-11), a prerelease; no GitHub release or
+  tag yet (the last release there is 6.0.0). It depends on `ed25519-dalek ^3`, `rand`/`rand_core ^0.10`, `p256 ^0.14`
+  ([crates.io](https://crates.io/crates/biscuit-auth/7.0.0-alpha.1)). Its CHANGELOG lists breaking changes: `KeyPair`
+  is removed in favor of `PrivateKey` (`append_with_keypair` → `append_with_key`), tokens are generic over the key
+  type, scopes take `PublicKeyData`; new: a step counter that aborts datalog evaluation (#352, #357).
+  **Measured:** a scratch copy of `spikes/biscuit` on `=7.0.0-alpha.1` with `rand 0.10` builds after 7 changed lines
+  (`KeyPair` → `PrivateKey`, `OsRng` → `rand::rng()`, `&key.private()` → `&key`) and prints the same output as
+  `run.log` (issue, attenuate, offline verify, PoP via third-party block: stolen token, foreign key, replayed nonce and
+  moved block all rejected); only `ed25519-dalek 3.0.0` in its lock file (release build, Rust 1.99.0, Linux x86_64).
+  Not met: an alpha is not a release we pin for authorization; the port is mechanical when the stable 7.0.0 ships.
 - **How we cover it:** `biscuit-auth =6.0.0`, a duplicate Ed25519/curve25519 in the tree (STACK).
-- **Adopt when:** a release with ed25519-dalek 3 is out.
+- **Adopt when:** a stable (non-prerelease) release with ed25519-dalek 3 is out.
 - **Where:** crates.io, PR #349. Script: `w13-*`. **Frequency:** week.
 
 ### W-14 · An open CDR for the §10 pipeline
@@ -331,6 +384,10 @@ Last full check: **2026-10-26**. Last machine check: **2026-10-26**. Machine che
     but still a container runtime and no library; issue #215 still open. Not met.
 - **Update 2026-10-29.** YARA-X 1.22.1 (2026-10-26): two compiler panic fixes (fullword masked literals, deeply
   nested fixed repetitions) ([release](https://github.com/VirusTotal/yara-x/releases/tag/v1.22.1)). No CDR change.
+- **Update 2026-11-09.** YARA-X 1.23.0 (2026-11-05): faster regex compilation and scanner creation, half word
+  boundaries, many panic, overflow and stack-overflow fixes in the compiler, parser, scanner and modules
+  ([release](https://github.com/VirusTotal/yara-x/releases/tag/v1.23.0)). Dangerzone still v0.11.1, #215 open. No CDR
+  change. Not met.
 - **How we cover it:** our own assembly of known parts: a bubblewrap + Landlock + seccomp sandbox, rasterization, image re-encoding, YARA-X.
 - **Adopt when:** Dangerzone gets an embeddable mode without a GUI and without the docker daemon, or another open CDR with a sandbox appears.
 - **Where:** GitHub releases of Dangerzone, crates.io `yara-x`. Script: `w14-*`. **Frequency:** month.
@@ -385,6 +442,25 @@ Last full check: **2026-10-26**. Last machine check: **2026-10-26**. Machine che
   - Update 2026-10-22: `draft-ietf-lamps-pq-composite-sigs-19`: RFC Editor state "Blocked", RPC status "Final
     Approval Pending" since 2026-10-19 — the final approval step, not an RFC yet
     ([history](https://datatracker.ietf.org/doc/draft-ietf-lamps-pq-composite-sigs/history/)). Not met.
+  - Update 2026-11-05: `draft-ietf-lamps-pq-composite-sigs-19` left "Blocked" on 2026-11-03: RFC Editor state "In
+    Progress", RPC status "Awaiting Publisher", the step before publication; no RFC number yet
+    ([history](https://datatracker.ietf.org/doc/draft-ietf-lamps-pq-composite-sigs/history/)). Not met yet.
+- **Update 2026-11-09.** Published as **RFC 10073** "Composite ML-DSA for Use in X.509 Public Key
+  Infrastructure", Proposed Standard (published 2026-11-07) — [rfc-editor](https://www.rfc-editor.org/info/rfc10073).
+  Our pair is `id-MLDSA65-Ed25519-SHA512` (OID 1.3.6.1.5.5.7.6.48, label `COMPSIG-MLDSA65-Ed25519-SHA512`). Both
+  components sign one message `M' = Prefix ‖ Label ‖ len(ctx) ‖ ctx ‖ SHA-512(M)` (Prefix
+  "CompositeAlgorithmSignatures2025", ctx up to 255 bytes); ML-DSA is pure ML-DSA with the Label as its context;
+  signature = ML-DSA sig ‖ Ed25519 sig, public key = ML-DSA pk ‖ Ed25519 pk, private key = 32-byte ML-DSA seed ‖
+  Ed25519 key; both must verify. §9.3: component keys "MUST" not be reused outside the composite.
+  **Comparison with ours.** `PROTOCOL.md` does not yet fix the byte format of the hybrid (it signs joint checkpoints,
+  v0.2; §limitations item 4); today the Ed25519 link-root alone signs messages, the rekey offer, manifests and
+  announcements, each with its own domain label. Same as the RFC: the pair, AND verification, the seed form of the
+  ML-DSA key. Different: the Ed25519 link-root key is used on its own, which the RFC's key-reuse rule forbids for a
+  composite key. The RFC's X.509/CMS framing (OIDs, DER) gives a closed P2P link nothing. **Condition met (first part):
+  the RFC is out, the comparison is done; the decision is due** before the v0.2 checkpoint format is fixed: either
+  adopt the RFC 10073 combiner for checkpoints (the label as ML-DSA context gives protection against stripping one
+  signature, without inventing anything) and decide whether the hybrid needs its own Ed25519 key, or keep two
+  independent signatures and record why. `libcrux-ml-dsa` still 0.0.11 (second part not met).
 - **How we cover it:** link-root = Ed25519 + ML-DSA-65 as two signatures side by side (SPEC §7). The exact format is fixed in `PROTOCOL.md`.
 - **Adopt when:** the composite-sigs RFC is out — compare the format and decide whether to move to the composite. libcrux-ml-dsa ≥ 0.1.
 - **Where:** crates.io, datatracker. Script: `w19-*`, `w07-composite-sigs`. **Frequency:** month.
@@ -436,6 +512,13 @@ Last full check: **2026-10-26**. Last machine check: **2026-10-26**. Machine che
   optional base64 `data`, so the server sees the intended call before choosing an upload target; then "Allow gateways
   to relay any upload target" and "Propose a download shape" (2026-10-21). On 2026-10-22 a third-party MCP server
   reported a server-side implementation of the draft. Not met: still a draft extension, no app passes files through it.
+- **Status 2026-11-02.** PR 1 still open (last activity 2026-10-29): review comments only (what `maxInlineBytes: 0`
+  should mean, an HTTP method in the upload target), no new commits since 2026-10-21. Not met.
+- **Status 2026-11-09.** [PR 1](https://github.com/modelcontextprotocol/experimental-ext-file-uploads/pull/1)
+  was merged on 2026-11-07, with PR 3 (diagrams) and editorial commits; PR 4 (range requests after `expiresAt`) is
+  open. The draft is now `specification/draft/file-uploads.md`; the README still says the extension is "not part of the
+  MCP specification and has not been proposed as a SEP", and a reference implementation is promised. Not met: no SEP,
+  no app passes files through it.
 - **How we cover it:** `share_file_content` takes base64 in a tool argument (D-87); local agents send by path.
 - **Adopt when:** a SEP is accepted and the apps that run local servers (ChatGPT desktop, Claude, Cursor, VS Code) pass
   files through it: then `antenna mcp` declares the file input and the bytes take the same path as today. Not met: the
@@ -455,6 +538,8 @@ Last full check: **2026-10-26**. Last machine check: **2026-10-26**. Machine che
   both open, not merged; the default branch has had no commit since 2025-06-19.
 - **Status 2026-10-26.** Flutter stable 3.47.8 and beta 3.50.0-0.2.pre (both 2026-10-23, the release list above);
   #184571 and #191503 open, PR #190539 still a draft; `xterm` still 4.0.0, PRs #244/#245 open, unchanged since 2026-10-02.
+- **Status 2026-11-02.** Flutter stable 3.47.9 (2026-10-29, the release list above); #184571, #191503 and PR #190539
+  still open; `xterm` releases end at v4.0.0, PRs #244/#245 unchanged since 2026-10-02. Not met.
 - **Adopt when:** see the summary row. Not met on either side.
 - **Where:** the Flutter issues and PR above, pub.dev `xterm`, xterm.dart PRs #244/#245. **Frequency:** month.
 
@@ -490,6 +575,12 @@ Last full check: **2026-10-26**. Last machine check: **2026-10-26**. Machine che
   ([PR 54961](https://github.com/openai/codex/pull/54961)) that starts a new root turn when mail from Codex's own
   agents arrives in an idle session (not in interrupted sessions, Plan mode or child agents). That is Codex's internal
   agent mail, not `codex queue`; nothing says a queued message starts a turn in an idle session. Not met.
+- **Status 2026-11-02.** Codex 0.165.0 (2026-10-27): agent-message wakes respect interrupts and Plan mode. Codex
+  0.166.0 (2026-10-29, [release](https://github.com/openai/codex/releases/tag/rust-v0.166.0)): `codex queue --resume`
+  ([PR 57232](https://github.com/openai/codex/pull/57232)) resumes an *unloaded* thread after queueing so that it
+  consumes the message; "already loaded threads are left running", and nothing says a queued message starts a turn in
+  a loaded idle session such as the one in the window. A step towards the condition for sessions not open anywhere;
+  not met for ours.
 - **How we cover it:** Codex's documented hooks and `notify` say when it waits, the window and `antenna session` type
   one built-in line at its empty composer, and its Stop hook continues a running turn (D-117).
 - **Adopt when:** the documentation says a queued message starts a turn in an idle session and is kept until it runs:

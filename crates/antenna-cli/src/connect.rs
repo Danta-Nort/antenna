@@ -21,6 +21,7 @@ use clap::Args;
 
 use crate::client::{CliResult, EXIT_FAIL, EXIT_USAGE, Fail, call_owner, socket_path};
 use crate::{Cli, Pw};
+use zeroize::Zeroizing;
 
 /// `antenna connect`.
 #[derive(Debug, Args)]
@@ -67,14 +68,26 @@ struct Ready {
 
 /// Runs `antenna connect`.
 pub(crate) fn run(cli: &Cli, a: &ConnectArgs, rt: &tokio::runtime::Runtime) -> ExitCode {
-    let mut r = rt.block_on(connect(cli, a));
+    // A script (`--password-stdin`): stdin gives the password once, for the whole command. This process holds an
+    // owner session for its own requests (`client::hold_session`, gone when it exits: nothing is left for the shell
+    // that ran it), and the steps that take the password get the same one. Before, the agent list asked for a
+    // session first and a script needed `antenna login` in the same parent process.
+    let stdin_pw = if a.pw.password_stdin {
+        match crate::get_password(true, false, "") {
+            Ok(p) => Some(p),
+            Err(f) => return crate::print_fail(&f, cli.json, "connect"),
+        }
+    } else {
+        None
+    };
+    let mut r = rt.block_on(connect(cli, a, stdin_pw.as_ref()));
     // No owner session in this terminal: the password once, as for any owner command (like `sudo`)
     if let Err(f) = &r
         && f.code == "login_required"
         && std::io::stdin().is_terminal()
     {
         r = match crate::login_from_terminal(rt, cli) {
-            Ok(()) => rt.block_on(connect(cli, a)),
+            Ok(()) => rt.block_on(connect(cli, a, stdin_pw.as_ref())),
             Err(e) => Err(e),
         };
     }
@@ -84,11 +97,18 @@ pub(crate) fn run(cli: &Cli, a: &ConnectArgs, rt: &tokio::runtime::Runtime) -> E
     }
 }
 
-async fn connect(cli: &Cli, a: &ConnectArgs) -> CliResult<()> {
+async fn connect(
+    cli: &Cli,
+    a: &ConnectArgs,
+    stdin_pw: Option<&Zeroizing<String>>,
+) -> CliResult<()> {
     // Windows (D-135): the agent, its token file and Claude Code's own `mcp add` work as here; only the folder setup
     // waits for its Windows paths (phase W2), and `setup::plan` refuses it before anything is done.
     let path = socket_path(&cli.socket, &cli.data_dir);
-    let ready = agent(&path, a).await?;
+    if let Some(p) = stdin_pw {
+        crate::client::hold_session(&path, p.clone()).await?;
+    }
+    let ready = agent(&path, a, stdin_pw).await?;
     let antenna = std::env::current_exe()
         .map_err(|e| Fail::new(EXIT_FAIL, "io", format!("where is this antenna: {e}")))?;
     let antenna = antenna.to_string_lossy().to_string();
@@ -185,7 +205,16 @@ async fn connect(cli: &Cli, a: &ConnectArgs) -> CliResult<()> {
 
 /// The agent with its token file: made now (`everyone` off), the existing one with its token file as it is, or an
 /// existing one without a file with a new token written to one (its old token stops working).
-async fn agent(path: &Path, a: &ConnectArgs) -> CliResult<Ready> {
+async fn agent(
+    path: &Path,
+    a: &ConnectArgs,
+    stdin_pw: Option<&Zeroizing<String>>,
+) -> CliResult<Ready> {
+    // The password read once from stdin, or the usual way (a touch, the terminal)
+    let call_pw = async |build: &dyn Fn(String) -> Request| match stdin_pw {
+        Some(p) => call_owner(path, build(p.to_string())).await.map(|(_, r)| r),
+        None => crate::owner::touch::call_pw(path, &a.pw, build).await,
+    };
     let agents = match call_owner(path, Request::AgentList {}).await?.1 {
         Reply::Agents { agents } => agents,
         other => return Err(unexpected(&other)),
@@ -209,7 +238,7 @@ async fn agent(path: &Path, a: &ConnectArgs) -> CliResult<Ready> {
                 new_token: false,
             }),
             None => {
-                let r = crate::owner::touch::call_pw(path, &a.pw, |password| Request::AgentToken {
+                let r = call_pw(&|password| Request::AgentToken {
                     name: a.agent.clone(),
                     password,
                     token_file: true,
@@ -223,7 +252,7 @@ async fn agent(path: &Path, a: &ConnectArgs) -> CliResult<Ready> {
             }
         },
         None => {
-            let r = crate::owner::touch::call_pw(path, &a.pw, |password| Request::AgentAdd {
+            let r = call_pw(&|password| Request::AgentAdd {
                 name: a.agent.clone(),
                 links: a.links.clone(),
                 local_level: a.local_level,

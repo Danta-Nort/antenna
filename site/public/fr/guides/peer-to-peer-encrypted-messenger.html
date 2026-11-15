@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Messagerie P2P open source avec chiffrement post-quantique — Antenna</title>
+<meta name="description" content="Antenna envoie les messages directement d’un appareil à l’autre, chiffrés de bout en bout avec des clés post-quantiques, sans serveur central. Fonctionnement.">
+<link rel="canonical" href="https://antenna.contact/fr/guides/peer-to-peer-encrypted-messenger">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Messagerie P2P open source avec chiffrement post-quantique — Antenna">
+<meta property="og:description" content="Antenna envoie les messages directement d’un appareil à l’autre, chiffrés de bout en bout avec des clés post-quantiques, sans serveur central. Fonctionnement.">
+<meta property="og:url" content="https://antenna.contact/fr/guides/peer-to-peer-encrypted-messenger">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="fr_FR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/peer-to-peer-encrypted-messenger">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Guides",
+     "item": "https://antenna.contact/fr/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Une messagerie pair-à-pair open source au chiffrement post-quantique",
+     "item": "https://antenna.contact/fr/guides/peer-to-peer-encrypted-messenger"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Une messagerie pair-à-pair open source au chiffrement post-quantique",
+   "description": "Antenna envoie les messages directement d’un appareil à l’autre, chiffrés de bout en bout avec des clés post-quantiques, sans serveur central. Fonctionnement.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "fr",
+   "url": "https://antenna.contact/fr/guides/peer-to-peer-encrypted-messenger",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/fr/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Une messagerie pair-à-pair est-elle plus lente ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "En général, non : un chemin direct évite le détour par un data center, et via un relais, un message ne fait qu’un saut de plus."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Puis-je faire tourner mon propre relais ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui. Le relais est open source et ne fait que transmettre du trafic chiffré ; configurez votre nœud pour qu’il utilise votre propre relais à la place de celui par défaut."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Est-ce que ça marche pour les groupes ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Pas encore. Antenna 0.1 propose des conversations à deux : entre personnes, entre personnes et agents, et entre agents."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Quelles plateformes sont prises en charge ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "macOS sur Apple Silicon (signé et notarisé), et Linux en x86_64 : l’application de bureau et un nœud serveur."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Aller au contenu</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/fr/" aria-label="Antenna — accueil"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Menu principal">
+      <a href="/fr/#product">Produit</a>
+      <a href="/fr/#security">Sécurité</a>
+      <a href="/fr/guides/">Guides</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Langue: Français"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">FR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/peer-to-peer-encrypted-messenger" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/peer-to-peer-encrypted-messenger" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/peer-to-peer-encrypted-messenger" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/peer-to-peer-encrypted-messenger" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/peer-to-peer-encrypted-messenger" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/peer-to-peer-encrypted-messenger" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/peer-to-peer-encrypted-messenger" hreflang="fr" lang="fr" aria-current="true">Français</a></li>
+        <li><a href="/de/guides/peer-to-peer-encrypted-messenger" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/peer-to-peer-encrypted-messenger" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/peer-to-peer-encrypted-messenger" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/peer-to-peer-encrypted-messenger" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/peer-to-peer-encrypted-messenger" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/peer-to-peer-encrypted-messenger" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/peer-to-peer-encrypted-messenger" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/peer-to-peer-encrypted-messenger" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/fr/#download">Télécharger</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Fil d’Ariane"><a href="/fr/">Antenna</a> <span aria-hidden="true">›</span> <a href="/fr/guides/">Guides</a></nav>
+    <p class="eyebrow">Mis à jour le <time datetime="2026-11-09">9 novembre 2026</time></p>
+    <h1>Une messagerie pair-à-pair open source au chiffrement post-quantique</h1>
+    <p class="lead">Antenna est une messagerie pair-à-pair gratuite et open source pour macOS et Linux. Messages et fichiers vont directement d’un appareil à l’autre via QUIC, chiffrés de bout en bout avec les protocoles post-quantiques de libsignal, et la connexion elle-même repose sur un échange de clés hybride post-quantique. Aucun serveur central ne stocke ni n’achemine vos messages ; quand deux appareils ne peuvent pas se joindre directement, un relais transmet un trafic qu’il ne peut pas déchiffrer.</p>
+
+    <h2>Le pair-à-pair, en pratique</h2>
+    <p>« Pair-à-pair », cela semble simple, mais la plupart des ordinateurs se trouvent derrière des box et des pare-feu qui bloquent les connexions entrantes. Antenna utilise iroh, une bibliothèque QUIC qui trouve un chemin direct à travers ces obstacles (hole punching) et se replie sur un relais quand il n’y en a pas. Une connexion commence généralement via le relais et bascule sur le chemin direct dès qu’il est trouvé. Dans les deux cas, le relais ne voit que des paquets chiffrés, et chacun peut faire tourner son propre relais à la place de celui par défaut.</p>
+    <p>Sur un même réseau, les contacts auxquels vous faites suffisamment confiance peuvent aussi se connecter par le réseau local, même sans aucune connexion à internet.</p>
+
+    <h2>Deux couches de chiffrement</h2>
+    <table>
+      <thead><tr><th>Couche</th><th>Ce qu’elle utilise</th><th>Ce qu’elle protège</th></tr></thead>
+      <tbody>
+        <tr><td>Connexion</td><td>TLS 1.3 avec X25519MLKEM768, un hybride d’échange de clés classique et post-quantique</td><td>La liaison entre les deux appareils, y compris à travers un relais</td></tr>
+        <tr><td>Messages</td><td>libsignal : PQXDH pour ouvrir une conversation, et le ratchet post-quantique SPQR</td><td>Chaque message et chaque fichier, de bout en bout, avec confidentialité persistante</td></tr>
+      </tbody>
+    </table>
+    <p>« Post-quantique » signifie que l’échange de clés reste sûr face à quelqu’un qui enregistre le trafic aujourd’hui pour le déchiffrer plus tard avec un ordinateur quantique. Antenna n’écrit aucune cryptographie maison : les deux couches proviennent de bibliothèques auditées ou formellement vérifiées, et le protocole d’association a un modèle formel vérifié avec ProVerif.</p>
+
+    <h2>Ce que change une conception pair-à-pair</h2>
+    <ul>
+      <li><strong>Aucun compte à voler.</strong> Il n’existe aucun serveur avec une liste d’utilisateurs, de leurs contacts ou de leurs messages.</li>
+      <li><strong>Pas de numéro de téléphone.</strong> Vous ajoutez des contacts avec un lien à usage unique et un code que vous comparez de vive voix. Voir <a href="/fr/guides/messenger-without-phone-number">une messagerie sans numéro de téléphone</a>.</li>
+      <li><strong>Votre adresse IP, selon vos conditions.</strong> Une connexion directe montre votre adresse à l’autre côté. Les contacts aux niveaux de confiance 1 et 2 passent toujours par le relais : ils ne la voient donc jamais.</li>
+      <li><strong>Les deux appareils doivent être en ligne en même temps.</strong> D’ici là, un message attend dans la file de l’expéditeur et part de lui-même ; un serveur que vous laissez tourner garde vos agents joignables.</li>
+    </ul>
+
+    <h2>Open source et vérifiable</h2>
+    <p>L’application est sous AGPL-3.0 ; le protocole, ses formats et ses vecteurs de test sont sous Apache-2.0, pour que d’autres puissent développer des clients compatibles. Les versions sont signées, et le code source, la spécification et chaque décision de conception sont sur <a href="https://github.com/Danta-Nort/antenna">GitHub</a>. Les messages sont signés et chaînés par hachage, et les deux parties comparent leurs copies : un message modifié ou ramené en arrière montre où cela s’est produit.</p>
+
+    <h2>Questions</h2>
+    <details>
+      <summary>Une messagerie pair-à-pair est-elle plus lente ?</summary>
+      <p>En général, non : un chemin direct évite le détour par un data center, et via un relais, un message ne fait qu’un saut de plus.</p>
+    </details>
+    <details>
+      <summary>Puis-je faire tourner mon propre relais ?</summary>
+      <p>Oui. Le relais est open source et ne fait que transmettre du trafic chiffré ; configurez votre nœud pour qu’il utilise votre propre relais à la place de celui par défaut.</p>
+    </details>
+    <details>
+      <summary>Est-ce que ça marche pour les groupes ?</summary>
+      <p>Pas encore. Antenna 0.1 propose des conversations à deux : entre personnes, entre personnes et agents, et entre agents.</p>
+    </details>
+    <details>
+      <summary>Quelles plateformes sont prises en charge ?</summary>
+      <p>macOS sur Apple Silicon (signé et notarisé), et Linux en x86_64 : l’application de bureau et un nœud serveur.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna est gratuit et open source</strong>, pour macOS et Linux. Sans compte, sans numéro de téléphone.</p>
+      <a class="btn" href="/fr/#download">Télécharger Antenna</a>
+    </aside>
+    <h2>Guides associés</h2>
+    <ul class="related">
+      <li><a href="/fr/guides/self-hosted-messenger">Une messagerie auto-hébergée, sans serveur à gérer</a></li>
+      <li><a href="/fr/guides/messenger-without-phone-number">Une messagerie privée sans numéro de téléphone ni e-mail</a></li>
+      <li><a href="/fr/guides/agent-to-agent-communication">Faire communiquer des agents IA entre eux avec MCP</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/fr/" aria-label="Antenna — accueil"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/fr/guides/">Guides</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Contact : <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/fr/privacy">Politique de confidentialité</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

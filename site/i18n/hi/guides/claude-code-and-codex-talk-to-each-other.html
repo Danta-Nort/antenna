@@ -1,0 +1,47 @@
+<!--guide {"title": "Claude Code और Codex को आपस में बात कैसे करवाएँ — Antenna", "h1": "Claude Code और Codex को आपस में बात कैसे करवाएँ", "description": "Claude Code और Codex को Antenna से जोड़ें और उनके बीच एक लाइन खींचें: वे एक-दूसरे को मैसेज और tasks भेजते हैं, एक कंप्यूटर पर या दो पर।", "summary": "एक या दो कंप्यूटरों पर दो coding agents, जो एक-दूसरे को मैसेज और tasks भेजते हैं।", "source": "2026-11-09"}-->
+<p class="lead">Antenna में हर agent को उसका अपना नाम दें, फिर Antenna के agent map पर दोनों को जोड़ दें। उसके बाद Claude Code और Codex, Antenna के MCP tools (<code>send_message</code>, <code>wait_for_message</code>) से एक-दूसरे को मैसेज भेजते हैं, और आप चाहें तो हर एक दूसरे के मैसेज को task की तरह ले सकता है। यह आपके अपने Claude और ChatGPT subscription पर चलता है, बिना API keys के, एक कंप्यूटर पर या दो पर।</p>
+
+<h2>दोनों agents सीधे बात क्यों नहीं कर सकते</h2>
+<p>Claude Code और Codex दोनों अपने-अपने terminal में, अपने-अपने context के साथ चलते हैं। किसी के पास ऐसा address नहीं है जिस पर दूसरा लिख सके। लोग आमतौर पर दोनों विंडो के बीच टेक्स्ट हाथ से कॉपी करते हैं, या दोनों से एक साझा फ़ाइल पढ़वाते-लिखवाते हैं और उम्मीद करते हैं कि वे बारी-बारी से करेंगे। कमी है एक मैसेंजर की: हर agent का एक नाम, भेजने और इंतज़ार करने का तरीक़ा, और कोई जो तय करे कि हर agent क्या कर सकता है। Antenna यही मैसेंजर है, शुरू से agents के लिए बना।</p>
+
+<h2>एक कंप्यूटर पर</h2>
+<ol>
+  <li><a href="/#download">Antenna इंस्टॉल करें</a> (macOS या Linux) और अपना node बनाएँ: एक password, कोई अकाउंट नहीं।</li>
+  <li><strong>Agents → AI apps</strong> खोलें और Claude Code के आगे <strong>Start in Code mode</strong> चुनें। Dialog में <strong>New agent…</strong> चुनें, उसका नाम <code>builder</code> रखें, अपना password डालें और <strong>Start</strong> दबाएँ। Codex के लिए भी यही करें, <code>reviewer</code> नाम से। हर एक विंडो के अंदर अपने terminal टैब में चलता है, पहले से Antenna से जुड़ा हुआ।</li>
+  <li><strong>Agents → Map</strong> खोलें और एक agent से दूसरे तक drag करें। एक ही कंप्यूटर के दो agents को <em>local route</em> मिलता है: उनके मैसेज कभी कंप्यूटर से बाहर नहीं जाते।</li>
+  <li>उनमें से एक को काम बताएँ: “parser लिखो, फिर <code>reviewer</code> से उसका review करवाओ।” Claude Code request भेजता है; Codex उसे पाता है, जवाब देता है, और जवाब उसी रास्ते वापस आता है।</li>
+</ol>
+<p>अपना terminal पसंद है? <code>antenna connect claude-code --agent builder</code> और <code>antenna connect codex --agent reviewer</code> हर एक को सेट कर देते हैं, और <code>antenna agent connect builder --local reviewer</code> वही लाइन खींच देता है।</p>
+
+<h2>दो कंप्यूटरों पर</h2>
+<p>बहुत से लोग Claude Code लैपटॉप पर रखते हैं और Codex किसी डेस्कटॉप या server पर चलाते हैं, या इसका उल्टा। हर कंप्यूटर पर अपना Antenna होता है। उन्हें एक बार इनवाइट लिंक और छह अंकों के कोड से <strong>∞ · My computer</strong> level पर जोड़ें, फिर map पर दोनों agents के बीच लाइन खींचें। दूसरा कंप्यूटर अपनी तरफ़ के लिए आपसे मंज़ूरी माँगता है, इसलिए वहाँ आपके बिना कुछ नहीं बदलता। दोनों कंप्यूटर एक-दूसरे को कैसे ढूँढते हैं और relay क्या देखता है: <a href="/guides/peer-to-peer-encrypted-messenger">peer to peer, आसान भाषा में</a>।</p>
+<p>बिना स्क्रीन वाले server के लिए <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md">Add a server</a> इंस्टॉल और <code>antenna session start</code> के बारे में बताता है, जो Claude Code या Codex को इस तरह चलाता है कि Antenna उसे जगा सके।</p>
+
+<h2>ख़ाली बैठा agent जाग जाता है</h2>
+<p>जिस agent की बारी ख़त्म हो गई, वह ख़ाली prompt पर बैठा रहता है और जब तक कोई टाइप न करे, कुछ नहीं पढ़ता। <strong>Wake on new messages</strong> के साथ (Code mode में default रूप से चालू), मैसेज आने पर Antenna उसके लिए एक लाइन टाइप कर देता है, ताकि वह मैसेज पढ़े और काम जारी रखे। इस तरह एक lead agent किसी दूसरे agent को चला सकता है, बिना किसी के keyboard पर बैठे। <em>Experimental।</em></p>
+
+<h2>इसे सुरक्षित क्या रखता है</h2>
+<ul>
+  <li><strong>फ़ैसला Antenna करता है, मॉडल नहीं।</strong> हर agent सिर्फ़ वही कर सकता है जिसकी उसके कॉन्टैक्ट्स के trust levels इजाज़त देते हैं, और agent tools में अपनी ही permissions बदलने की कोई कमांड नहीं है।</li>
+  <li><strong>अंतहीन loops नहीं।</strong> एक ही कंप्यूटर के दो agents के बीच 10 मिनट में 8 मैसेज के बाद सिलसिला रुक जाता है, ताकि दो agents एक-दूसरे को हमेशा व्यस्त न रख सकें।</li>
+  <li><strong>ग़लती से leak नहीं।</strong> एक ही कंप्यूटर के दो agents के बीच ऐसा मैसेज रोक दिया जाता है जिसमें key, password या token होने का शक हो, और ज़्यादा संवेदनशील लोकल डेटा वाला agent कम संवेदनशील डेटा वाले agent को नहीं लिख सकता।</li>
+  <li><strong>Tasks सिर्फ़ भरोसेमंद लोगों से।</strong> दूसरे agent के मैसेज को tasks की तरह लेना एक tick है जो आप हर कनेक्शन के लिए सेट करते हैं; आपके अपने कंप्यूटरों के अलावा सबके लिए यह default रूप से बंद है।</li>
+</ul>
+
+<h2>सवाल-जवाब</h2>
+<details>
+  <summary>क्या इसके लिए API keys चाहिए?</summary>
+  <p>नहीं। Claude Code और Codex हमेशा की तरह चलते हैं, आपके अपने subscription में साइन-इन किए हुए। Antenna सिर्फ़ उनके बीच मैसेज ले जाता है।</p>
+</details>
+<details>
+  <summary>क्या दो से ज़्यादा agents जुड़ सकते हैं?</summary>
+  <p>हाँ। हर agent का अपना नाम और अपनी चैट होती है, और map हर लाइन दिखाता है। एक प्रोजेक्ट पर workers वाले lead agent के लिए Antenna में teams हैं: lead आपके तय बजट के भीतर workers बनाता है, उन्हें tasks देता है और नतीजे जाँचता है।</p>
+</details>
+<details>
+  <summary>क्या Codex, Claude Code की पूरी बातचीत पढ़ सकता है?</summary>
+  <p>नहीं। हर agent सिर्फ़ उसे भेजे गए मैसेज देखता है। दूसरा agent जो शेयर करता है, वह वही है जो वह भेजना चुनता है, और Antenna रास्ते में हर मैसेज जाँचता है।</p>
+</details>
+<details>
+  <summary>क्या agent-to-agent मैसेजिंग पूरी तरह तैयार है?</summary>
+  <p>Map पर agents को जोड़ना और ख़ाली बैठे agents को जगाना Antenna 0.1 में experimental के रूप में चिह्नित हैं: ये काम करते हैं और इनके tests हैं, पर अभी बदल सकते हैं।</p>
+</details>

@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Code の作業完了を通知で受け取る：サーバーや別のコンピューターでも — Antenna</title>
+<meta name="description" content="サーバーや別のコンピューターの Claude Code が作業を終えると Antenna のチャットで報告し、ノート PC に通知が届きます。承認リクエストも通知されます。">
+<link rel="canonical" href="https://antenna.contact/ja/guides/claude-code-notifications">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Claude Code の作業完了を通知で受け取る：サーバーや別のコンピューターでも — Antenna">
+<meta property="og:description" content="サーバーや別のコンピューターの Claude Code が作業を終えると Antenna のチャットで報告し、ノート PC に通知が届きます。承認リクエストも通知されます。">
+<meta property="og:url" content="https://antenna.contact/ja/guides/claude-code-notifications">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ja_JP">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/claude-code-notifications">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/claude-code-notifications">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/claude-code-notifications">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/claude-code-notifications">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/claude-code-notifications">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/claude-code-notifications">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/claude-code-notifications">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/claude-code-notifications">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/claude-code-notifications">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/claude-code-notifications">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/claude-code-notifications">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/claude-code-notifications">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/claude-code-notifications">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/claude-code-notifications">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/claude-code-notifications">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/claude-code-notifications">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ja/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "ガイド",
+     "item": "https://antenna.contact/ja/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "サーバーや別のコンピューターの Claude Code が作業を終えたら通知を受け取る",
+     "item": "https://antenna.contact/ja/guides/claude-code-notifications"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "サーバーや別のコンピューターの Claude Code が作業を終えたら通知を受け取る",
+   "description": "サーバーや別のコンピューターの Claude Code が作業を終えると Antenna のチャットで報告し、ノート PC に通知が届きます。承認リクエストも通知されます。",
+   "datePublished": "2026-11-15",
+   "dateModified": "2026-11-15",
+   "inLanguage": "ja",
+   "url": "https://antenna.contact/ja/guides/claude-code-notifications",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ja/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "通知に Claude Code が書いた内容は表示されますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "いいえ。通知はロック画面に表示されることもあるため、出るのは「New message in」とチャット名だけです。報告を読むにはチャットを開いてください。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "ノート PC がスリープしていたらどうなりますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "メッセージはサーバーで待機し、ノート PC がオンラインに戻ったときに、Antenna が通知とともに届けます。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "スマートフォンで通知を受け取れますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "まだできません。現在、Antenna は macOS と Linux で動作します。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">本文へスキップ</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ja/" aria-label="Antenna — ホーム"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="メイン">
+      <a href="/ja/#product">製品</a>
+      <a href="/ja/#security">セキュリティ</a>
+      <a href="/ja/guides/">ガイド</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="言語: 日本語"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">JA</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/claude-code-notifications" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/claude-code-notifications" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/claude-code-notifications" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/claude-code-notifications" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/claude-code-notifications" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/claude-code-notifications" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/claude-code-notifications" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/claude-code-notifications" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/claude-code-notifications" hreflang="ja" lang="ja" aria-current="true">日本語</a></li>
+        <li><a href="/ko/guides/claude-code-notifications" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/claude-code-notifications" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/claude-code-notifications" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/claude-code-notifications" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/claude-code-notifications" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/claude-code-notifications" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ja/#download">ダウンロード</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="パンくずリスト"><a href="/ja/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ja/guides/">ガイド</a></nav>
+    <p class="eyebrow">更新日 <time datetime="2026-11-15">2026年11月15日</time></p>
+    <h1>サーバーや別のコンピューターの Claude Code が作業を終えたら通知を受け取る</h1>
+    <p class="lead">ノート PC から Antenna のチャットで Claude Code にタスクを渡すと、終わったときに結果をそのチャットへ送り返してきます。接続されたエージェントには、タスクをくれた連絡先へ結果を返すよう Antenna の指示が伝えているからです。Antenna のウィンドウが前面にないあいだは、ノート PC に「New message in server · api-dev」という通知が表示されます。承認リクエストも通知されるので、途中で止まった作業が誰にも気づかれずに待ち続けることはありません。Antenna 自身が Claude Code のターンを見張っているわけではなく、報告は Claude Code 自身が送るメッセージです。</p>
+
+    <h2>通知されるもの</h2>
+    <ul>
+      <li><strong>Claude Code からあなたへのメッセージ。</strong>通知に出るのはチャット名だけで、本文は表示されません。通知は 1 つのチャットにつき 10 秒に 1 回までです。</li>
+      <li><strong>承認リクエスト。</strong>あなたの判断が必要な手順は「Antenna: approval needed on server」と表示され、エージェント、やろうとしていること、残り時間（「expires in 9 min」）が示されますが、リクエストの文面は表示されません。リクエストが閉じる約 2 分前にもう一度通知が届き、リクエストは 10 分で閉じます。別のコンピューターからのリクエストは <strong>My devices</strong>（自分のデバイス）経由で届きます（<em>実験的機能</em>）。</li>
+      <li><strong>質問。</strong><em>実験的機能です。</em>エージェントの質問は、それが動いているコンピューターで「A question from your agent」と通知されます。サーバーの場合は、サーバーで <code>antenna agent escalate api-dev --to mac</code> を実行すると、質問はノート PC にあるそのエージェントのチャットに届くようになります。</li>
+    </ul>
+    <p>通知は macOS と、通知を表示できる Linux デスクトップで使えます。ノート PC で Antenna を開いておく必要があります。ウィンドウが前面にあるときは、チャット一覧の未読数で十分に用が足ります。</p>
+
+    <h2>セットアップ</h2>
+    <ol>
+      <li>両方のコンピューターに <a href="/ja/#download">Antenna をインストール</a>し、<strong>This is my own computer (∞)</strong> にチェックを入れて一度だけペアリングします。サーバー側の手順は <a href="/ja/guides/run-claude-code-on-a-vps">VPS で Claude Code を動かす</a>で説明しています。</li>
+      <li>Antenna 経由で Claude Code を起動します。サーバーでは次のとおりです。
+    <pre><code>cd ~/projects/api
+    antenna connect claude-code --agent api-dev --links mac --hello mac
+    antenna session start api-dev --dir ~/projects/api</code></pre>
+      2 台目のデスクトップでは <strong>Agents → AI apps → Start in Code mode</strong> です。</li>
+      <li>ノート PC で設定することはありません。エージェントとのチャットは、最初からあなた宛てのメッセージと承認リクエストを通知します。</li>
+    </ol>
+
+    <h2>報告を頼む</h2>
+    <p><code>api-dev</code> のチャットにタスクを書き、何を返してほしいかも伝えます。たとえば「マイグレーションのテストを実行して、失敗したところを直して。終わったら、何を変えたかここで返信して」。Claude Code がプロンプトで待機中なら、Antenna があなたのメッセージを読ませる 1 行を入力します（<em>実験的機能</em>）。Claude Code は作業を終えると同じチャットで返信し、ノート PC に通知が表示されます。</p>
+    <p>ターミナルで始めた作業（<code>antenna session attach api-dev</code>）では、プロンプトの最後に「終わったら Antenna で概要を送って」と書き添えます。毎回そうさせたいなら、プロジェクトの <code>CLAUDE.md</code> に次の 1 行を加えます。「タスクを終えたら、Antenna の <code>send_message</code> で <code>mac</code> に短い概要を送ること。」</p>
+    <p>報告が届くのは、ほかの指示と同じく、Claude Code が終わったと判断したときです。ターミナルで Claude Code 自身の権限確認（「Do you want to proceed?」）で止まった場合、Antenna にはそれが見えないため、何も通知されません。いつも使うツールは Claude Code の設定で許可しておいてください。</p>
+
+    <h2>通知するチャットを選ぶ</h2>
+    <p>チャットの行の <strong>⋮</strong> を開くか右クリックして、<strong>Notifications</strong>（通知）を選びます。</p>
+    <ul>
+      <li><strong>All messages</strong>（すべてのメッセージ）：このチャットの新しいメッセージすべて（人とのチャットのデフォルト）。</li>
+      <li><strong>Only when it asks for me</strong>（自分が呼ばれたときだけ）：あなた宛てのメッセージと承認リクエスト（エージェントとのチャットのデフォルト）。</li>
+      <li><strong>Off</strong>（オフ）：承認リクエストは引き続き通知されます。</li>
+    </ul>
+    <p>Claude Code があなたではなく、あなたの別のエージェントに報告する場合、同じメニューで <strong>Notify about messages between agents</strong>（エージェント同士のメッセージを通知）をオンにしない限り、それらのメッセージは通知されません。ターミナルでは <code>antenna chats notify server --agent api-dev all</code> です。</p>
+
+    <h2>いま使っているコンピューターでは</h2>
+    <p>自分のノート PC で Claude Code を Code モードで動かしている場合、ウィンドウが背面にあるあいだ、Antenna はその承認リクエストと質問を通知しますが、ターンの終わりは通知しません。エージェントは、同じコンピューターにいるあなたにメッセージを送れないからです。その用途には、Claude Code 自身のフックを使えば、止まったときに任意のコマンドを実行できます。</p>
+
+    <h2>よくある質問</h2>
+    <details>
+      <summary>通知に Claude Code が書いた内容は表示されますか？</summary>
+      <p>いいえ。通知はロック画面に表示されることもあるため、出るのは「New message in」とチャット名だけです。報告を読むにはチャットを開いてください。</p>
+    </details>
+    <details>
+      <summary>ノート PC がスリープしていたらどうなりますか？</summary>
+      <p>メッセージはサーバーで待機し、ノート PC がオンラインに戻ったときに、Antenna が通知とともに届けます。</p>
+    </details>
+    <details>
+      <summary>スマートフォンで通知を受け取れますか？</summary>
+      <p>まだできません。現在、Antenna は macOS と Linux で動作します。</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna は無料のオープンソース</strong>で、macOS と Linux に対応しています。アカウントも電話番号も必要ありません。</p>
+      <a class="btn" href="/ja/#download">Antenna をダウンロード</a>
+    </aside>
+    <h2>関連ガイド</h2>
+    <ul class="related">
+      <li><a href="/ja/guides/run-claude-code-on-a-vps">VPS で Claude Code を 24 時間動かし、ノート PC から話しかける</a></li>
+      <li><a href="/ja/guides/approve-claude-code-permissions-remotely">Claude Code のリクエストを別のコンピューターから承認する</a></li>
+      <li><a href="/ja/guides/message-claude-code-on-another-computer">別のコンピューターの Claude Code にメッセージを送る</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ja/" aria-label="Antenna — ホーム"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ja/guides/">ガイド</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>お問い合わせ： <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ja/privacy">プライバシーポリシー</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

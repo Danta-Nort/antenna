@@ -1,0 +1,37 @@
+<!--guide {"title": "Messenger self-hosted senza server da gestire — Antenna", "h1": "Un messenger self-hosted senza nessun server da gestire", "description": "Antenna tiene ogni messaggio sui computer di chi parla. Di base non c'è nulla da ospitare; aggiungi un nodo sempre acceso o un tuo relay solo se vuoi.", "summary": "Perché Antenna non ha bisogno di un server, e come aggiungere un nodo sempre acceso o un tuo relay quando lo vuoi.", "source": "2026-11-09"}-->
+<p class="lead">Chi installa un messenger self-hosted lo fa per tenere i propri messaggi lontani dal server di qualcun altro. Antenna ci arriva senza alcun server: ogni persona usa Antenna sul proprio computer, i messaggi viaggiano tra quei computer cifrati end-to-end e la cronologia è conservata solo lì, in un database cifrato. Se vuoi più controllo, puoi aggiungere un nodo Linux sempre acceso o gestire un tuo relay, entrambi open source.</p>
+
+<h2>Che cosa significa di solito un server self-hosted</h2>
+<p>Un classico messenger self-hosted è un server che installi, aggiorni, di cui fai il backup e che tieni online, e che contiene tutti gli account e tutti i messaggi di chiunque lo usi. Sposta la fiducia da un'azienda a te, e con essa il lavoro e il rischio: se il server viene violato, lo è anche la cronologia di tutti.</p>
+
+<h2>Che cosa fa Antenna invece</h2>
+<ul>
+  <li><strong>Nessun account da ospitare.</strong> La tua identità è una chiave sul tuo computer, protetta dalla tua password. Aggiungi le persone con un link di invito monouso e un codice che confrontate a voce.</li>
+  <li><strong>Nessun archivio di messaggi nel mezzo.</strong> La tua cronologia vive sul tuo computer, in un database cifrato con SQLCipher, e su quello dell'altra persona.</li>
+  <li><strong>Nessun server da tenere online.</strong> Due computer si collegano direttamente quando la rete lo permette, altrimenti tramite un relay che inoltra traffico cifrato e non conserva nulla.</li>
+</ul>
+
+<h2>Aggiungi un nodo sempre acceso</h2>
+<p>Un portatile va in standby, un server no. Per tenere i tuoi agenti AI raggiungibili giorno e notte, installa il nodo Antenna su un server Linux (x86_64): estrai la release ed esegui <code>./install.sh</code>, che configura un servizio utente systemd senza root, oppure installa il pacchetto <code>.deb</code> o <code>.rpm</code>. Poi abbinalo al tuo computer come un contatto, con <strong>∞ · My computer</strong>. Passo per passo: <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md">Aggiungere un server</a>.</p>
+<p>Dopo un riavvio le chiavi del nodo restano bloccate finché non accedi ed esegui <code>antenna unlock</code>: un'immagine del disco rubata non dà a nessuno le tue chiavi.</p>
+
+<h2>Gestisci un tuo relay</h2>
+<p>Il relay è l'unico pezzo condiviso, e vede solo pacchetti cifrati e quali endpoint comunicano attraverso di lui. Se preferisci che sia una tua macchina, esegui <code>iroh-relay</code>, che è open source, e avvia il tuo nodo con <code>antennad --relay &lt;your relay URL&gt;</code>. I contatti con livello di fiducia 1 e 2 si collegano sempre tramite un relay, quindi non scoprono mai il tuo indirizzo IP.</p>
+
+<h2>Domande</h2>
+<details>
+  <summary>La mia famiglia può usarlo?</summary>
+  <p>Sui computer sì: Antenna 0.1 gira su macOS (Apple Silicon) e Linux. Un'app per smartphone non c'è ancora.</p>
+</details>
+<details>
+  <summary>Il relay conserva i messaggi per i contatti offline?</summary>
+  <p>No. Un messaggio per un contatto offline aspetta sul tuo computer e parte da solo appena quel contatto torna online.</p>
+</details>
+<details>
+  <summary>C'è qualcosa che devo per forza ospitare io?</summary>
+  <p>No. Antenna funziona con il relay predefinito e senza nessun tuo server. Il nodo e il relay sono lì per quando li vuoi.</p>
+</details>
+<details>
+  <summary>Come funzionano gli aggiornamenti su un server?</summary>
+  <p>Un nodo installato con <code>install.sh</code> si aggiorna con <code>antenna update</code>, che prima verifica la firma della release; un'installazione da pacchetto si aggiorna con il tuo gestore di pacchetti.</p>
+</details>

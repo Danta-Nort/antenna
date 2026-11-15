@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>تطبيق مراسلة P2P مفتوح المصدر بتشفير ما بعد الكم — Antenna</title>
+<meta name="description" content="يرسل Antenna الرسائل مباشرة بين الأجهزة، مشفّرة بين الطرفين بمفاتيح مقاومة للحوسبة الكمومية، بلا خادم مركزي. كيف يعمل وما الذي يحميه.">
+<link rel="canonical" href="https://antenna.contact/ar/guides/peer-to-peer-encrypted-messenger">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="تطبيق مراسلة P2P مفتوح المصدر بتشفير ما بعد الكم — Antenna">
+<meta property="og:description" content="يرسل Antenna الرسائل مباشرة بين الأجهزة، مشفّرة بين الطرفين بمفاتيح مقاومة للحوسبة الكمومية، بلا خادم مركزي. كيف يعمل وما الذي يحميه.">
+<meta property="og:url" content="https://antenna.contact/ar/guides/peer-to-peer-encrypted-messenger">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ar_AR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/peer-to-peer-encrypted-messenger">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ar/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "الأدلة",
+     "item": "https://antenna.contact/ar/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "تطبيق مراسلة مفتوح المصدر يعمل ند لند (P2P) بتشفير ما بعد الكم",
+     "item": "https://antenna.contact/ar/guides/peer-to-peer-encrypted-messenger"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "تطبيق مراسلة مفتوح المصدر يعمل ند لند (P2P) بتشفير ما بعد الكم",
+   "description": "يرسل Antenna الرسائل مباشرة بين الأجهزة، مشفّرة بين الطرفين بمفاتيح مقاومة للحوسبة الكمومية، بلا خادم مركزي. كيف يعمل وما الذي يحميه.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "ar",
+   "url": "https://antenna.contact/ar/guides/peer-to-peer-encrypted-messenger",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ar/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "هل تطبيق المراسلة ند لند أبطأ؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "عادة لا: فالمسار المباشر يتجاوز الرحلة إلى مركز بيانات، وعبر خادم الترحيل تأخذ الرسالة قفزة إضافية واحدة فقط."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يمكنني تشغيل خادم ترحيل خاص بي؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "نعم. خادم الترحيل مفتوح المصدر ولا يفعل سوى تمرير حركة مرور مشفرة؛ وجّه عقدتك إلى خادم الترحيل الخاص بك بدلًا من الافتراضي."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يعمل للمجموعات؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ليس بعد. يوفر Antenna 0.1 محادثات فردية، بين الناس، وبين الناس والوكلاء، وبين الوكلاء."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "ما المنصات المدعومة؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "macOS على Apple Silicon (موقّع وموثّق من Apple)، وLinux على x86_64: تطبيق سطح المكتب وعقدة للخوادم."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">انتقل إلى المحتوى</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="القائمة الرئيسية">
+      <a href="/ar/#product">المنتج</a>
+      <a href="/ar/#security">الأمان</a>
+      <a href="/ar/guides/">الأدلة</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="اللغة: العربية"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">AR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/peer-to-peer-encrypted-messenger" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/peer-to-peer-encrypted-messenger" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/peer-to-peer-encrypted-messenger" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/peer-to-peer-encrypted-messenger" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/peer-to-peer-encrypted-messenger" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/peer-to-peer-encrypted-messenger" hreflang="ar" lang="ar" aria-current="true">العربية</a></li>
+        <li><a href="/fr/guides/peer-to-peer-encrypted-messenger" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/peer-to-peer-encrypted-messenger" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/peer-to-peer-encrypted-messenger" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/peer-to-peer-encrypted-messenger" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/peer-to-peer-encrypted-messenger" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/peer-to-peer-encrypted-messenger" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/peer-to-peer-encrypted-messenger" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/peer-to-peer-encrypted-messenger" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/peer-to-peer-encrypted-messenger" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ar/#download">تنزيل</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="مسار التنقل"><a href="/ar/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ar/guides/">الأدلة</a></nav>
+    <p class="eyebrow">آخر تحديث <time datetime="2026-11-09">9 نوفمبر 2026</time></p>
+    <h1>تطبيق مراسلة مفتوح المصدر يعمل ند لند (P2P) بتشفير ما بعد الكم</h1>
+    <p class="lead">Antenna تطبيق مراسلة مجاني ومفتوح المصدر يعمل ند لند (peer-to-peer) على macOS وLinux. تنتقل الرسائل والملفات مباشرة من جهاز إلى آخر عبر QUIC، مشفّرة تشفيرًا تامًا بين الطرفين ببروتوكولات libsignal المقاومة للحوسبة الكمومية، ويستخدم الاتصال نفسه تبادل مفاتيح هجينًا مقاومًا للحوسبة الكمومية. لا يوجد خادم مركزي يخزّن رسائلك أو يوجّهها؛ وحين لا يستطيع جهازان الوصول إلى بعضهما مباشرة، يمرر خادم ترحيل (relay) حركة مرور لا يستطيع فك تشفيرها.</p>
+
+    <h2>ند لند على أرض الواقع</h2>
+    <p>تبدو عبارة «ند لند» بسيطة، لكن معظم الحواسيب تقع خلف موجّهات منزلية وجدران حماية تحجب الاتصالات الواردة. يستخدم Antenna مكتبة iroh، وهي مكتبة QUIC تجد مسارًا مباشرًا عبر هذه العوائق (hole punching) وتلجأ إلى خادم ترحيل حين لا يوجد مسار. يبدأ الاتصال عادة عبر خادم الترحيل، ثم ينتقل إلى المسار المباشر بمجرد العثور عليه. وفي الحالتين لا يرى خادم الترحيل إلا حزمًا مشفرة، ويمكن لأي أحد تشغيل خادم ترحيل خاص به بدلًا من الافتراضي.</p>
+    <p>وعلى الشبكة نفسها، يمكن لجهات الاتصال التي تثق بها بما يكفي أن تتصل أيضًا عبر الشبكة المحلية، حتى دون أي إنترنت.</p>
+
+    <h2>طبقتان من التشفير</h2>
+    <table>
+      <thead><tr><th>الطبقة</th><th>ما تستخدمه</th><th>ما تحميه</th></tr></thead>
+      <tbody>
+        <tr><td>الاتصال</td><td>TLS 1.3 مع X25519MLKEM768، وهو مزيج من تبادل المفاتيح التقليدي وتبادل المفاتيح المقاوم للحوسبة الكمومية</td><td>الاتصال بين الجهازين، بما في ذلك عبر خادم الترحيل</td></tr>
+        <tr><td>الرسائل</td><td>libsignal: ‏PQXDH لبدء المحادثة، وآلية SPQR المقاومة للحوسبة الكمومية (ratchet)</td><td>كل رسالة وكل ملف، من طرف إلى طرف، مع السرية المستقبلية (forward secrecy)</td></tr>
+      </tbody>
+    </table>
+    <p>«ما بعد الكم» تعني أن تبادل المفاتيح يبقى آمنًا أمام من يسجّل حركة المرور اليوم ليفك تشفيرها لاحقًا بحاسوب كمومي. لا يكتب Antenna أي تشفير من صنعه: فالطبقتان مأخوذتان من مكتبات مدقَّقة أو مُتحقَّق منها رسميًا، ولبروتوكول الاقتران نموذج رسمي (formal model) جرى التحقق منه بأداة ProVerif.</p>
+
+    <h2>ما الذي يغيّره التصميم ند لند</h2>
+    <ul>
+      <li><strong>لا حساب يمكن سرقته.</strong> لا يوجد خادم فيه قائمة بالمستخدمين أو جهات اتصالهم أو رسائلهم.</li>
+      <li><strong>لا رقم هاتف.</strong> تضيف الناس برابط لمرة واحدة ورمز تقارنانه صوتيًا. انظر <a href="/ar/guides/messenger-without-phone-number">تطبيق مراسلة بلا رقم هاتف</a>.</li>
+      <li><strong>عنوان IP الخاص بك، بشروطك.</strong> الاتصال المباشر يكشف عنوانك للطرف الآخر. أما جهات الاتصال في مستويي الثقة 1 و2 فتمر دائمًا عبر خادم الترحيل، فلا تراه أبدًا.</li>
+      <li><strong>يجب أن يكون الجهازان متصلين في الوقت نفسه.</strong> إلى أن يحدث ذلك تنتظر الرسالة في طابور المرسل وتُرسل تلقائيًا؛ والخادم الذي تتركه يعمل يُبقي وكلاءك في المتناول.</li>
+    </ul>
+
+    <h2>مفتوح المصدر وقابل للتحقق</h2>
+    <p>التطبيق مرخّص بـ AGPL-3.0، والبروتوكول وصيغه ومتجهات الاختبار مرخّصة بـ Apache-2.0، فيستطيع الآخرون بناء عملاء متوافقين. الإصدارات موقّعة، والشيفرة المصدرية والمواصفات وكل قرار تصميمي موجودة على <a href="https://github.com/Danta-Nort/antenna">GitHub</a>. الرسائل موقّعة ومترابطة بالتجزئة (hash)، ويقارن الطرفان نسختيهما، فتُظهر الرسالة المعدّلة أو المُرجَعة إلى نسخة قديمة موضع حدوث ذلك.</p>
+
+    <h2>أسئلة</h2>
+    <details>
+      <summary>هل تطبيق المراسلة ند لند أبطأ؟</summary>
+      <p>عادة لا: فالمسار المباشر يتجاوز الرحلة إلى مركز بيانات، وعبر خادم الترحيل تأخذ الرسالة قفزة إضافية واحدة فقط.</p>
+    </details>
+    <details>
+      <summary>هل يمكنني تشغيل خادم ترحيل خاص بي؟</summary>
+      <p>نعم. خادم الترحيل مفتوح المصدر ولا يفعل سوى تمرير حركة مرور مشفرة؛ وجّه عقدتك إلى خادم الترحيل الخاص بك بدلًا من الافتراضي.</p>
+    </details>
+    <details>
+      <summary>هل يعمل للمجموعات؟</summary>
+      <p>ليس بعد. يوفر Antenna 0.1 محادثات فردية، بين الناس، وبين الناس والوكلاء، وبين الوكلاء.</p>
+    </details>
+    <details>
+      <summary>ما المنصات المدعومة؟</summary>
+      <p>macOS على Apple Silicon (موقّع وموثّق من Apple)، وLinux على x86_64: تطبيق سطح المكتب وعقدة للخوادم.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna مجاني ومفتوح المصدر</strong>، لنظامي macOS وLinux. بلا حساب وبلا رقم هاتف.</p>
+      <a class="btn" href="/ar/#download">نزّل Antenna</a>
+    </aside>
+    <h2>أدلة ذات صلة</h2>
+    <ul class="related">
+      <li><a href="/ar/guides/self-hosted-messenger">تطبيق مراسلة مستضاف ذاتيًا دون خادم تديره</a></li>
+      <li><a href="/ar/guides/messenger-without-phone-number">تطبيق مراسلة خاص بلا رقم هاتف ولا بريد إلكتروني</a></li>
+      <li><a href="/ar/guides/agent-to-agent-communication">التواصل بين الوكلاء عبر MCP</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ar/guides/">الأدلة</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>للتواصل: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ar/privacy">سياسة الخصوصية</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

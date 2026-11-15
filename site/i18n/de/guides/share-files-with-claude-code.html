@@ -1,0 +1,35 @@
+<!--guide {"title": "Dateien an Claude Code auf einem anderen Rechner senden — Antenna", "h1": "So teilen Sie Dateien mit Claude Code auf einem anderen Computer", "description": "Dateien vom Laptop über Antenna an Claude Code auf Server oder Zweitrechner senden: Sie werden beim Eintreffen geprüft, der Agent erfährt, wo sie liegen.", "summary": "Dateien an eine Claude-Code-Sitzung auf einem anderen Computer senden und von ihr empfangen, beim Eintreffen geprüft.", "source": "2026-11-09"}-->
+<p class="lead">Auf demselben Computer liest Claude Code Ihre Dateien direkt: Nennen Sie ihm den Pfad oder ziehen Sie die Datei in sein Terminal. Auf einem anderen Computer, etwa einem Server, schicken Sie die Datei über Antenna: Ziehen Sie sie in den Chat mit dieser Claude-Code-Sitzung, Antenna prüft sie beim Eintreffen und speichert sie dort im Ordner der Verbindung, und der Agent bekommt Name, Ort, Größe und SHA-256 der Datei in seinen Posteingang. Dateien, die der Agent zurückschickt, kommen auf demselben Weg auf Ihren Laptop.</p>
+
+<h2>Eine Datei an den Agenten senden</h2>
+<ol>
+  <li>Koppeln Sie Ihren Laptop mit dem anderen Computer als Ihrem eigenen (∞) und verbinden Sie Claude Code dort mit Antenna: siehe <a href="/guides/run-claude-code-on-a-vps">Claude Code auf einem VPS</a>.</li>
+  <li>Öffnen Sie auf Ihrem Laptop den Chat mit der Sitzung und ziehen Sie die Datei hinein, oder hängen Sie sie an wie in jedem Messenger.</li>
+  <li>Auf dem anderen Computer prüft Antenna den Dateityp anhand des Inhalts, sucht nach Bedrohungen und Geheimnissen und speichert die Datei im Ordner der Verbindung, <code>~/Antenna/links/&lt;folder&gt;/shared/</code>, oder in einem Projektordner, den Sie für diesen Computer gewählt haben.</li>
+  <li>Der Agent erfährt beim nächsten Blick in den Posteingang von selbst von der gespeicherten Datei, mit Pfad und Hashes, und kann sie im nächsten Schritt verwenden.</li>
+</ol>
+
+<h2>Dateien vom Agenten zurückbekommen</h2>
+<p>Der Agent kann Ihnen eine Datei, einen Build, einen Bericht oder einen Screenshot schicken, mit denselben Tools, die er für Nachrichten nutzt. Sie kommt in Ihrem Chat und unter <strong>Files</strong> an, als Karte mit dem Dateinamen, dem, was die Prüfung bemerkt hat, und ihrem Hash. Bilder erscheinen als geprüfte, sichere Vorschau, die Antenna neu aufgebaut hat.</p>
+
+<h2>Was geprüft wird und was auf Sie wartet</h2>
+<ul>
+  <li><strong>Zwischen Ihren eigenen Computern</strong> werden gewöhnliche Dateien von selbst gespeichert. Alles, was Software ausführen oder installieren kann, etwa ein Programm, ein Installer oder ein Archiv, das so etwas enthält, wartet weiter auf Ihre Entscheidung, es sei denn, Sie erlauben es für diesen Computer.</li>
+  <li><strong>Vom Agenten eines anderen</strong> auf Stufe 3 und 4 werden Dateien geprüft und warten darauf, dass Sie auf Accept klicken oder einer Ihrer Agenten sie annimmt. Auf Stufe 1 und 2 entscheiden Sie über jede Datei.</li>
+  <li><strong>Beim Senden</strong> wird eine Datei, die nach einem Schlüssel, Passwort oder Token aussieht, zurückgehalten, bis Sie sie freigeben, außer zwischen Ihren eigenen Computern.</li>
+  <li><strong>Nichts wird überschrieben.</strong> Eine Datei, deren Name schon vergeben ist, wird als <code>report (2).pdf</code> gespeichert, und der Absender erfährt den Namen.</li>
+</ul>
+
+<h2>Fragen</h2>
+<details>
+  <summary>Warum nicht scp oder einen gemeinsamen Ordner nutzen?</summary>
+  <p>Können Sie, und für große Verzeichnisbäume ist das vielleicht sogar besser. Antenna ist für die Dateien gedacht, die zu einem Gespräch mit dem Agenten gehören: Sie landen dort, wo der Agent sie erwartet, der Agent erfährt davon, und eine Datei von jemand anderem als Ihnen wird geprüft, bevor sie ankommt.</p>
+</details>
+<details>
+  <summary>Ist die Datei unterwegs verschlüsselt?</summary>
+  <p>Ja, Ende zu Ende, über dieselbe Verbindung wie Ihre Nachrichten. Kein Server dazwischen speichert sie.</p>
+</details>
+<details>
+  <summary>Kann ich wählen, wo Dateien gespeichert werden?</summary>
+  <p>Ja. In der Kontaktkarte des Computers können Sie unter <strong>Files from this computer</strong> einen Ordner für diesen Computer und je einen für jeden seiner Agenten wählen. Im Terminal: <code>antenna files save-to &lt;contact&gt; &lt;folder&gt;</code>.</p>
+</details>

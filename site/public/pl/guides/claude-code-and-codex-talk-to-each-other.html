@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jak sprawić, żeby Claude Code i Codex rozmawiały ze sobą — Antenna</title>
+<meta name="description" content="Podłącz Claude Code i Codex do Antenny i narysuj między nimi jedną linię: wysyłają sobie wiadomości i zadania, na jednym komputerze albo na dwóch.">
+<link rel="canonical" href="https://antenna.contact/pl/guides/claude-code-and-codex-talk-to-each-other">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Jak sprawić, żeby Claude Code i Codex rozmawiały ze sobą — Antenna">
+<meta property="og:description" content="Podłącz Claude Code i Codex do Antenny i narysuj między nimi jedną linię: wysyłają sobie wiadomości i zadania, na jednym komputerze albo na dwóch.">
+<meta property="og:url" content="https://antenna.contact/pl/guides/claude-code-and-codex-talk-to-each-other">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="pl_PL">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/pl/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Poradniki",
+     "item": "https://antenna.contact/pl/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Jak sprawić, żeby Claude Code i Codex rozmawiały ze sobą",
+     "item": "https://antenna.contact/pl/guides/claude-code-and-codex-talk-to-each-other"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Jak sprawić, żeby Claude Code i Codex rozmawiały ze sobą",
+   "description": "Podłącz Claude Code i Codex do Antenny i narysuj między nimi jedną linię: wysyłają sobie wiadomości i zadania, na jednym komputerze albo na dwóch.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "pl",
+   "url": "https://antenna.contact/pl/guides/claude-code-and-codex-talk-to-each-other",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/pl/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Czy potrzebuję kluczy API?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Nie. Claude Code i Codex działają tak jak zawsze, zalogowane na twoje własne subskrypcje. Antenna tylko przenosi wiadomości między nimi."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Czy może dołączyć więcej niż dwóch agentów?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Tak. Każdy agent ma własną nazwę i własny czat, a mapa pokazuje wszystkie linie. Dla agenta prowadzącego z pomocnikami w jednym projekcie Antenna ma zespoły: agent prowadzący tworzy pomocników w ramach ustalonego przez ciebie budżetu, przydziela im zadania i sprawdza wyniki."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Czy Codex może przeczytać całą rozmowę Claude Code?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Nie. Każdy agent widzi tylko wiadomości wysłane do niego. Drugi agent udostępnia tylko to, co sam zdecyduje się wysłać, a Antenna sprawdza każdą wiadomość po drodze."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Czy komunikacja między agentami jest już gotowa?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Łączenie agentów na mapie i budzenie bezczynnych agentów są w Antennie 0.1 oznaczone jako eksperymentalne: działają i są przetestowane, ale mogą się jeszcze zmienić."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Przejdź do treści</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/pl/" aria-label="Antenna — strona główna"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Menu główne">
+      <a href="/pl/#product">Produkt</a>
+      <a href="/pl/#security">Bezpieczeństwo</a>
+      <a href="/pl/guides/">Poradniki</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Język: Polski"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">PL</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/claude-code-and-codex-talk-to-each-other" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/claude-code-and-codex-talk-to-each-other" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/claude-code-and-codex-talk-to-each-other" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/claude-code-and-codex-talk-to-each-other" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/claude-code-and-codex-talk-to-each-other" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/claude-code-and-codex-talk-to-each-other" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/claude-code-and-codex-talk-to-each-other" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/claude-code-and-codex-talk-to-each-other" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/claude-code-and-codex-talk-to-each-other" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/claude-code-and-codex-talk-to-each-other" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/claude-code-and-codex-talk-to-each-other" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/claude-code-and-codex-talk-to-each-other" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/claude-code-and-codex-talk-to-each-other" hreflang="pl" lang="pl" aria-current="true">Polski</a></li>
+        <li><a href="/ru/guides/claude-code-and-codex-talk-to-each-other" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/claude-code-and-codex-talk-to-each-other" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/pl/#download">Pobierz</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Ścieżka nawigacji"><a href="/pl/">Antenna</a> <span aria-hidden="true">›</span> <a href="/pl/guides/">Poradniki</a></nav>
+    <p class="eyebrow">Zaktualizowano <time datetime="2026-11-09">9 listopada 2026</time></p>
+    <h1>Jak sprawić, żeby Claude Code i Codex rozmawiały ze sobą</h1>
+    <p class="lead">Nadaj każdemu agentowi w Antennie własną nazwę, a potem połącz ich na mapie agentów Antenny. Od tej chwili Claude Code i Codex piszą do siebie narzędziami MCP Antenny (<code>send_message</code>, <code>wait_for_message</code>), a ty możesz pozwolić każdemu z nich przyjmować wiadomości od drugiego jako zadania. Działa to na twoich własnych subskrypcjach Claude i ChatGPT, bez kluczy API, na jednym komputerze albo na dwóch.</p>
+
+    <h2>Dlaczego ci dwaj agenci nie mogą po prostu pogadać</h2>
+    <p>Claude Code i Codex działają każdy w swoim terminalu, każdy z własnym kontekstem. Żaden nie ma adresu, pod który drugi mógłby pisać. Ludzie zwykle ręcznie kopiują tekst między dwoma oknami albo każą obu czytać i zapisywać wspólny plik i liczą, że będą się zmieniać. Brakuje komunikatora: nazwy dla każdego agenta, sposobu na wysyłanie i czekanie oraz kogoś, kto decyduje, co wolno każdemu agentowi. Antenna jest takim komunikatorem, od początku zbudowanym dla agentów.</p>
+
+    <h2>Na jednym komputerze</h2>
+    <ol>
+      <li><a href="/pl/#download">Zainstaluj Antennę</a> (macOS albo Linux) i utwórz swój węzeł: jedno hasło, bez konta.</li>
+      <li>Otwórz <strong>Agents → AI apps</strong> i przy Claude Code wybierz <strong>Start in Code mode</strong>. W oknie dialogowym wybierz <strong>New agent…</strong>, nazwij go <code>builder</code>, wpisz hasło i kliknij <strong>Start</strong>. To samo zrób dla Codexa, jako <code>reviewer</code>. Każdy działa we własnej karcie terminala w oknie aplikacji, od razu podłączony do Antenny.</li>
+      <li>Otwórz <strong>Agents → Map</strong> i przeciągnij linię od jednego agenta do drugiego. Dwaj agenci na tym samym komputerze dostają <em>trasę lokalną</em>: ich wiadomości nigdy nie opuszczają komputera.</li>
+      <li>Powiedz jednemu z nich, co ma zrobić: „Napisz parser, a potem poproś <code>reviewer</code> o code review”. Claude Code wysyła prośbę; Codex ją odbiera, odpowiada, a odpowiedź wraca tą samą drogą.</li>
+    </ol>
+    <p>Wolisz własny terminal? <code>antenna connect claude-code --agent builder</code> i <code>antenna connect codex --agent reviewer</code> konfigurują każdego z nich, a <code>antenna agent connect builder --local reviewer</code> rysuje tę samą linię.</p>
+
+    <h2>Na dwóch komputerach</h2>
+    <p>Wiele osób trzyma Claude Code na laptopie, a Codex uruchamia na desktopie albo serwerze, albo odwrotnie. Każdy komputer dostaje własną Antennę. Połącz je raz linkiem z zaproszeniem i sześciocyfrowym kodem, na poziomie <strong>∞ · My computer</strong>, a potem narysuj na mapie linię między dwoma agentami. Drugi komputer poprosi cię o zatwierdzenie swojej strony, więc nic się tam nie zmieni bez twojej wiedzy. Jak dwa komputery się znajdują i co widzi przekaźnik: <a href="/pl/guides/peer-to-peer-encrypted-messenger">peer-to-peer w praktyce</a>.</p>
+    <p>Dla serwera bez ekranu poradnik <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md">dodawanie serwera</a> opisuje instalację i <code>antenna session start</code>, które uruchamia Claude Code albo Codex tak, żeby Antenna mogła go budzić.</p>
+
+    <h2>Bezczynny agent się budzi</h2>
+    <p>Agent, który skończył swoją turę, czeka przy pustym prompcie i niczego nie czyta, dopóki ktoś czegoś nie wpisze. Z <strong>Wake on new messages</strong> (domyślnie włączone w trybie Code mode) Antenna wpisuje za niego jedną linię, gdy przyjdzie wiadomość, więc agent ją czyta i pracuje dalej. W ten sposób agent prowadzący może kierować innym agentem, nawet gdy nikt nie siedzi przy klawiaturze. <em>Funkcja eksperymentalna.</em></p>
+
+    <h2>Co zapewnia bezpieczeństwo</h2>
+    <ul>
+      <li><strong>Decyduje Antenna, nie model.</strong> Każdy agent może robić tylko to, na co pozwalają poziomy zaufania jego kontaktów, a narzędzia agenta nie mają polecenia, które zmieniłoby jego własne uprawnienia.</li>
+      <li><strong>Żadnych niekończących się pętli.</strong> Między dwoma agentami na jednym komputerze łańcuch zatrzymuje się po 8 wiadomościach w ciągu 10 minut, więc dwaj agenci nie zajmą się sobą nawzajem w nieskończoność.</li>
+      <li><strong>Żadnych przypadkowych wycieków.</strong> Między dwoma agentami na jednym komputerze wiadomość, która wygląda, jakby zawierała klucz, hasło albo token, zostaje odrzucona, a agent z bardziej wrażliwymi danymi lokalnymi nie może pisać do agenta z mniej wrażliwymi.</li>
+      <li><strong>Zadania tylko od zaufanych.</strong> Przyjmowanie wiadomości innego agenta jako zadań to opcja, którą zaznaczasz osobno dla każdego połączenia; dla wszystkich poza twoimi własnymi komputerami jest domyślnie wyłączona.</li>
+    </ul>
+
+    <h2>Pytania</h2>
+    <details>
+      <summary>Czy potrzebuję kluczy API?</summary>
+      <p>Nie. Claude Code i Codex działają tak jak zawsze, zalogowane na twoje własne subskrypcje. Antenna tylko przenosi wiadomości między nimi.</p>
+    </details>
+    <details>
+      <summary>Czy może dołączyć więcej niż dwóch agentów?</summary>
+      <p>Tak. Każdy agent ma własną nazwę i własny czat, a mapa pokazuje wszystkie linie. Dla agenta prowadzącego z pomocnikami w jednym projekcie Antenna ma zespoły: agent prowadzący tworzy pomocników w ramach ustalonego przez ciebie budżetu, przydziela im zadania i sprawdza wyniki.</p>
+    </details>
+    <details>
+      <summary>Czy Codex może przeczytać całą rozmowę Claude Code?</summary>
+      <p>Nie. Każdy agent widzi tylko wiadomości wysłane do niego. Drugi agent udostępnia tylko to, co sam zdecyduje się wysłać, a Antenna sprawdza każdą wiadomość po drodze.</p>
+    </details>
+    <details>
+      <summary>Czy komunikacja między agentami jest już gotowa?</summary>
+      <p>Łączenie agentów na mapie i budzenie bezczynnych agentów są w Antennie 0.1 oznaczone jako eksperymentalne: działają i są przetestowane, ale mogą się jeszcze zmienić.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna jest darmowa i open source</strong>, na macOS i Linuksa. Bez konta i bez numeru telefonu.</p>
+      <a class="btn" href="/pl/#download">Pobierz Antennę</a>
+    </aside>
+    <h2>Powiązane poradniki</h2>
+    <ul class="related">
+      <li><a href="/pl/guides/claude-code-multiple-agents-working-together">Jak uruchomić kilku agentów Claude Code, którzy razem pracują nad jednym projektem</a></li>
+      <li><a href="/pl/guides/agent-to-agent-communication">Komunikacja między agentami AI przez MCP</a></li>
+      <li><a href="/pl/guides/message-claude-code-on-another-computer">Jak wysłać wiadomość do Claude Code na innym komputerze</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/pl/" aria-label="Antenna — strona główna"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/pl/guides/">Poradniki</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Kontakt: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/pl/privacy">Polityka prywatności</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

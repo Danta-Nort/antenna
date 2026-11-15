@@ -1,0 +1,48 @@
+<!--guide {"title": "Controlar Codex CLI en remoto desde tu portátil — Antenna", "h1": "Dale tareas a Codex CLI en otra computadora desde tu portátil", "description": "Ejecuta Codex CLI en un servidor u otra computadora con Antenna, escríbele por chat desde tu portátil y deja que un mensaje lo despierte. Sin sesiones SSH.", "summary": "Codex CLI en un servidor u otra computadora, recibiendo tareas desde el chat de tu portátil y despertado por tu mensaje.", "source": "2026-11-14"}-->
+<p class="lead">Instala Antenna en las dos computadoras y emparéjalas una vez como tuyas. En la computadora donde se ejecuta Codex, ponle nombre a la sesión de Codex con <code>antenna connect codex</code> e iníciala con <code>antenna session start … --cli codex</code>. En tu portátil aparece un chat con ese nombre: escribe ahí una tarea, y Antenna despierta a Codex cuando está inactivo. Codex lee tu mensaje, trabaja en la otra computadora y te responde en el chat. No queda ninguna sesión SSH abierta ni hay que abrir ningún puerto de entrada.</p>
+
+<h2>Qué necesitas</h2>
+<ul>
+  <li>Codex CLI instalado y con la sesión iniciada en la computadora que hace el trabajo: un servidor Linux x86_64, o un Mac o un escritorio Linux. Codex sigue usando tu propia suscripción; Antenna no necesita ninguna clave de API.</li>
+  <li>tmux en esa computadora. En un servidor, ejecuta además una vez <code>sudo loginctl enable-linger $USER</code>, para que Antenna y la sesión sigan funcionando cuando cierres la sesión.</li>
+  <li><a href="/#download">Antenna</a> en las dos computadoras: la app en un escritorio y el nodo en un servidor (<code>curl -fsSL https://antenna.contact/install.sh | sh</code>).</li>
+</ul>
+
+<h2>1. Empareja las dos computadoras</h2>
+<p>En tu portátil: <strong>New contact → Invite</strong> (nuevo contacto → invitar), marca <strong>This is my own computer (∞)</strong>, crea el enlace y ábrelo en la otra computadora (en un servidor, <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>). Introduce en una el código que muestra la otra. Ahora cada lado trata al otro como una computadora tuya. La versión paso a paso con capturas está en <a href="/guides/run-claude-code-on-a-vps">Claude Code en un VPS</a>; con Codex es igual.</p>
+
+<h2>2. Ponle nombre a la sesión de Codex</h2>
+<p>En la computadora donde se ejecuta Codex, dentro de la carpeta del proyecto:</p>
+<pre><code>cd ~/projects/api
+antenna connect codex --agent api-codex --links mac --hello mac</code></pre>
+<p>Esto crea el agente <code>api-codex</code> con su propio archivo de token, lo vincula a tu portátil (<code>mac</code> es el nombre que esta computadora le dio a tu portátil al emparejarlos) y saluda, así que en el portátil aparece enseguida un chat llamado <code>api-codex</code>. Tu configuración de Codex no cambia: Antenna se añade solo para las sesiones de este agente.</p>
+
+<h2>3. Inicia Codex a través de Antenna</h2>
+<pre><code>antenna session start api-codex --dir ~/projects/api --cli codex
+antenna session attach api-codex</code></pre>
+<p>Codex arranca en el servidor tmux propio de Antenna; tu tmux no se toca. Conéctate una vez para responder a las primeras preguntas de Codex. La primera vez, Codex te pide que confíes en los hooks de Antenna (“Hooks need review”): elige “Trust all and continue”. Luego sal con <code>Ctrl-b d</code>, y Codex sigue en marcha. <code>--resume</code> continúa la última sesión del agente después de un reinicio.</p>
+
+<h2>4. Escríbele desde tu portátil</h2>
+<p>Abre el chat <code>api-codex</code> y escribe: “Ejecuta las pruebas, arregla lo que falle y dime qué has cambiado”. Cuando Codex está inactivo en su prompt, Antenna escribe una línea predefinida que le dice que lea su bandeja de entrada. Nunca escribe tu texto en la terminal y nunca escribe encima de una pregunta que Codex te esté haciendo. Codex lee el mensaje a través de Antenna, trabaja y responde en el chat. <em>Experimental.</em></p>
+<p>¿Necesitas que deje lo que está haciendo? Activa <strong>Urgent: interrupt now</strong> (urgente: interrumpir ya) antes de enviar. Antenna pulsa Esc una vez para terminar el turno en curso y luego despierta a Codex para tu mensaje. Para detener el agente y todo lo que haya lanzado, abre la ficha de la otra computadora en <strong>My devices</strong> en tu portátil y pulsa <strong>Stop agent and its processes…</strong> junto a <code>api-codex</code>.</p>
+
+<h2>En un escritorio: modo Code</h2>
+<p>Si Codex se ejecuta en un Mac o en un escritorio Linux con la app Antenna, puedes saltarte los pasos de terminal. En el modo Code, pulsa <code>+</code> en el panel de agentes, elige Codex y la carpeta de trabajo, y Codex se ejecuta en una pestaña dentro de la ventana y se despierta igual. Su chat está disponible desde tus otras computadoras como el de cualquier otro agente.</p>
+
+<h2>Preguntas</h2>
+<details>
+  <summary>¿Veo la terminal de Codex en el portátil?</summary>
+  <p>No. Le das tareas a Codex y lees sus respuestas en un chat; la terminal se queda en la otra computadora. Para verla, usa <code>antenna session attach</code> allí, por SSH si quieres.</p>
+</details>
+<details>
+  <summary>¿Con qué versiones de Codex funciona?</summary>
+  <p>Codex 0.160 y posteriores informan de lo que hacen mediante hooks, y así sabe Antenna cuándo está inactivo. Con un Codex más antiguo, o sin confiar en los hooks, Antenna espera a que Codex muestre su línea de entrada vacía después de un turno, y nunca escribe mientras hay un turno en marcha.</p>
+</details>
+<details>
+  <summary>¿Codex también puede hablar con Claude Code?</summary>
+  <p>Sí. Conecta los dos agentes en el mapa de agentes y los mensajes de cada uno llegarán al otro sin tener que nombrarlo: consulta <a href="/guides/claude-code-and-codex-talk-to-each-other">Claude Code y Codex hablando entre sí</a>.</p>
+</details>
+<details>
+  <summary>¿Puedo controlarlo desde el teléfono?</summary>
+  <p>Todavía no. Hoy Antenna funciona en macOS y Linux.</p>
+</details>

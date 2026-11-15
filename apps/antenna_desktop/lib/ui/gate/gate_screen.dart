@@ -564,11 +564,17 @@ class _UnreachableState extends State<_Unreachable> {
           _Hint(l.gateHintLocal, 'antennad   # ${l.gateHintThen}: antenna init / antenna unlock'),
           const SizedBox(height: 8),
         ],
-        _Hint(l.gateHintServer, 'ssh -N -L /tmp/antenna.sock:/root/.local/share/antenna/antennad.sock server'),
+        _Hint(l.gateHintServer, serverSocketForward),
       ]),
     );
   }
 }
+
+/// The hint for a daemon on a server: forward its control socket over ssh, then enter the local end above. The remote
+/// path is the server user's own (the shell would expand `~` or `$HOME` on this computer, not on the server), so it is
+/// written with placeholders rather than one account's home; docs/USER-GUIDE.md "A node on a server" says the same.
+const serverSocketForward =
+    'ssh -N -L /tmp/antenna-server.sock:/home/<user>/.local/share/antenna/antennad.sock <user>@<server>';
 
 /// What happened when starting the daemon, in the app language; technical details (path, stderr) as they are.
 String describeDaemonStart(AppLocalizations l, DaemonStartException e) => switch (e.reason) {

@@ -1,0 +1,31 @@
+{
+  "language": "Idioma",
+  "skip": "Pular para o conteúdo",
+  "home": "Antenna — página inicial",
+  "mainNav": "Principal",
+  "breadcrumb": "Trilha de navegação",
+  "navProduct": "Produto",
+  "navSecurity": "Segurança",
+  "navGuides": "Guias",
+  "download": "Baixar",
+  "updated": "Atualizado em",
+  "related": "Guias relacionados",
+  "ctaText": "<strong>O Antenna é gratuito e de código aberto</strong>, para macOS e Linux. Sem conta e sem número de telefone.",
+  "ctaButton": "Baixar o Antenna",
+  "hubTitle": "Guias — Antenna",
+  "hubH1": "Guias",
+  "hubName": "Guias do Antenna",
+  "hubDescription": "Guias práticos do Antenna: agentes de IA que conversam entre si, equipes de agentes do Claude Code, agentes em servidor e chat privado sem contas.",
+  "hubLead": "Como colocar agentes de IA e pessoas para conversar pelo Antenna, e o que torna tudo isso privado. Cada guia responde a uma pergunta; a referência completa está no <a href=\"https://github.com/Danta-Nort/antenna/blob/main/docs/USER-GUIDE.md\">guia do usuário</a>.",
+  "footContact": "Contato:",
+  "footPrivacy": "Política de privacidade",
+  "js": {
+    "inviteTitle": "Você recebeu um convite para se conectar no Antenna",
+    "inviteBrokenTitle": "Este link de convite parece estar danificado",
+    "inviteBrokenBody": "Parece que uma parte do link está faltando ou foi alterada. Peça para o seu contato enviar de novo e copie o link inteiro.",
+    "copied": "Copiado. Cole no Antenna, onde ele pede um link de convite.",
+    "copyFailed": "Não foi possível copiar automaticamente — selecione o link acima e copie.",
+    "downloadMac": "Baixar para Mac",
+    "downloadLinux": "Baixar para Linux"
+  }
+}

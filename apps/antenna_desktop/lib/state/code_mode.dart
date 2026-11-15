@@ -32,6 +32,11 @@ import 'terminal_mouse.dart';
 import 'terminal_sgr.dart';
 import 'wake.dart' show splitCommand;
 
+/// A Windows build for the hands-on check of Code mode on a Windows computer (W2, D-134):
+/// `flutter build windows --dart-define=ANTENNA_WINDOWS_CODE=true`. Off in every other build, so a release offers Code
+/// mode on Windows only after that check has passed.
+const bool windowsCodeBuild = bool.fromEnvironment('ANTENNA_WINDOWS_CODE');
+
 /// What Code mode needs from this computer. `null` in the model means there is no terminal (a test without one).
 final class AgentHost {
   /// [fileExists] stands in for the file system in tests (it then also decides which programs are installed, and no
@@ -42,6 +47,7 @@ final class AgentHost {
     String? shell,
     bool? macos,
     bool? windows,
+    this.windowsCode = windowsCodeBuild,
     bool Function(String path)? fileExists,
     bool Function(String path)? folderExists,
     ProgramLocator? programs,
@@ -102,6 +108,9 @@ final class AgentHost {
   /// checked on a Windows computer, the window does not offer Code mode there and says it is coming
   /// ([CodeMixin.codeComing]). AI app detection works.
   final bool windows;
+
+  /// On [windows]: Code mode is offered anyway, in the build for its hands-on check ([windowsCodeBuild]).
+  final bool windowsCode;
   final bool Function(String path)? _fileExists;
   final bool Function(String path) _folderExists;
 
@@ -556,13 +565,13 @@ mixin CodeMixin on ChangeNotifier {
   final Map<String, String> _tokenFiles = {};
   int _runIds = 0;
 
-  /// Code mode can start agents here (a terminal and the `antenna` CLI for the MCP server). Never on Windows yet
-  /// ([codeComing]).
-  bool get codeAvailable => agentHost != null && !agentHost!.windows && binaries?.cli != null;
+  /// Code mode can start agents here (a terminal and the `antenna` CLI for the MCP server). On Windows only in the
+  /// build for its hands-on check ([codeComing]).
+  bool get codeAvailable => agentHost != null && !codeComing && binaries?.cli != null;
 
-  /// Code mode is not built for this system yet (Windows, D-134): it is not offered,
-  /// the Code interface is turned off, and Settings says it is coming.
-  bool get codeComing => agentHost?.windows ?? false;
+  /// Code mode is not checked on this system yet (Windows, D-134): it is not offered, the Code interface is turned
+  /// off, and Settings says it is coming. Not in the Windows build for that check ([AgentHost.windowsCode]).
+  bool get codeComing => (agentHost?.windows ?? false) && !agentHost!.windowsCode;
 
   /// A start of [agent] with [cli] needs no password: the window holds its token file when the agent is to get one
   /// ([wantsTokenFile]), or its token when not.

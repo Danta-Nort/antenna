@@ -1,0 +1,45 @@
+<!--guide {"order": 2, "title": "Claude Code: multiple agents working together on one project", "h1": "Run multiple Claude Code agents working together on one project", "description": "A lead Claude Code agent splits the work, workers code in parallel in their own sandboxes, every result is checked, and nothing reaches your branch without you.", "query": "claude code multiple agents working together", "updated": "2026-11-09", "summary": "A lead agent and parallel workers on one repository, each in its own sandbox, with checks and your final say.", "related": ["claude-code-and-codex-talk-to-each-other", "message-claude-code-on-another-computer", "agent-to-agent-communication"]}-->
+<p class="lead">In Antenna, a <strong>team</strong> is a lead agent and workers on one git project. You set a budget once (for example “up to 2 Claude Code coders”), and the lead splits the work into tasks, starts workers within that budget, reviews each result and sends it back or accepts it. Every worker codes in parallel in its own sandbox, on its own copy of the project, and the team’s work reaches your branch only when you approve it. <em>Experimental.</em></p>
+
+<h2>The problem with several agents in one folder</h2>
+<p>Running two or three Claude Code sessions side by side is easy; keeping them from stepping on each other is not. They edit the same files, run commands in the same folder, and each one can read everything the others can. Someone has to hand out tasks, check what comes back and merge it, and that someone is usually you, switching between terminals.</p>
+
+<h2>How a team works</h2>
+<ol>
+  <li><strong>You create the team</strong> in <strong>Teams → New team</strong>: the project folder, the lead (one of your agents, a local model, or you), the budget of workers, and the rules: whether workers may run commands, which <strong>Check commands</strong> a task may name (<code>cargo test</code>, <code>npm test</code>), and which package registries those checks may reach.</li>
+  <li><strong>You give the lead the goal</strong>, in its own terminal: “Split the login feature into small tasks for two coders.”</li>
+  <li><strong>The lead plans and staffs.</strong> It writes tasks, starts workers such as <code>web.coder-1</code> within the budget, and assigns them.</li>
+  <li><strong>Workers code in parallel.</strong> Each gets a fresh copy of the project at the team’s branch, reads only its own task, works, and submits, or asks the lead a question when it is stuck.</li>
+  <li><strong>Antenna checks every result</strong> by running the task’s check command in a separate sandbox with no tokens and no network beyond the registries you named. A failing check goes back to the worker by itself, up to a limit, before the lead decides.</li>
+  <li><strong>The lead reviews:</strong> accept, or send back with comments. Accepted work collects on a team branch, <code>antenna/web</code>.</li>
+  <li><strong>You apply it.</strong> <strong>Review and apply</strong> shows what will be merged into your branch; with your password it is merged, as a fast-forward. Without it, nothing moves.</li>
+</ol>
+
+<h2>What you see</h2>
+<p>The team’s board shows every task by state, from Open and Working to In review, Blocked, Accepted and Applied, with each worker’s live output, what its result changes, the check’s output and the tokens it used. You can do anything the lead can: answer a worker’s question, request changes, cancel a task or stop a worker. When the lead runs in Antenna’s Code mode, it is woken whenever a worker submits or asks something, so the team keeps moving while you are away.</p>
+
+<h2>What keeps the project safe</h2>
+<ul>
+  <li><strong>Workers never see your folder</strong>, your other files or each other’s copies, and reach only their model provider.</li>
+  <li><strong>The lead cannot raise its own budget</strong>, approve anything for you or see a worker’s token: Antenna, not the model, decides every call.</li>
+  <li><strong>Untrusted input stays contained.</strong> A task written after reading a level-2 contact’s message runs no commands and no checks, so an instruction slipped into that message cannot reach your computer.</li>
+  <li><strong>Local only, if you want.</strong> A team can be limited to models running on your own computer, with no cloud model at all.</li>
+</ul>
+
+<h2>Questions</h2>
+<details>
+  <summary>Which agents can be workers?</summary>
+  <p>Claude Code with your own login, another program that speaks Claude Code’s stream-json, or a local model for lighter roles such as triage, summaries and docs.</p>
+</details>
+<details>
+  <summary>Can the lead be Codex or another app?</summary>
+  <p>The lead can be any of your agents connected to Antenna: it gets the team tools over MCP the next time its app starts. You can also lead the team yourself from the board.</p>
+</details>
+<details>
+  <summary>How do I limit cost?</summary>
+  <p>The budget caps how many workers of each kind may exist, and the rules cap the time of a turn and of a check and the tokens a task may use.</p>
+</details>
+<details>
+  <summary>Does it work on my Mac?</summary>
+  <p>Yes, on macOS and Linux. Workers run on the computer where the team lives; workers on your other computers come later.</p>
+</details>

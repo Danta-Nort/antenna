@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Code の権限リクエストを別のコンピューターからリモート承認 — Antenna</title>
+<meta name="description" content="サーバーや別のコンピューターの Claude Code が承認を求めると、Antenna がそのリクエストを手元のすべてのコンピューターに届け、パスワードか Touch ID で承認できます。">
+<link rel="canonical" href="https://antenna.contact/ja/guides/approve-claude-code-permissions-remotely">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Claude Code の権限リクエストを別のコンピューターからリモート承認 — Antenna">
+<meta property="og:description" content="サーバーや別のコンピューターの Claude Code が承認を求めると、Antenna がそのリクエストを手元のすべてのコンピューターに届け、パスワードか Touch ID で承認できます。">
+<meta property="og:url" content="https://antenna.contact/ja/guides/approve-claude-code-permissions-remotely">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ja_JP">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/approve-claude-code-permissions-remotely">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ja/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "ガイド",
+     "item": "https://antenna.contact/ja/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Claude Code のリクエストを別のコンピューターから承認する",
+     "item": "https://antenna.contact/ja/guides/approve-claude-code-permissions-remotely"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Claude Code のリクエストを別のコンピューターから承認する",
+   "description": "サーバーや別のコンピューターの Claude Code が承認を求めると、Antenna がそのリクエストを手元のすべてのコンピューターに届け、パスワードか Touch ID で承認できます。",
+   "datePublished": "2026-11-15",
+   "dateModified": "2026-11-15",
+   "inLanguage": "ja",
+   "url": "https://antenna.contact/ja/guides/approve-claude-code-permissions-remotely",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ja/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Codex でも使えますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "一部は使えます。Codex が Antenna を通して送るものは同じように確認され、そのリクエストはすべてのコンピューターに届きます。Codex 自身のコマンドは、これまでどおりターミナルでの Codex の承認に任されます。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "どのコンピューターでも承認できますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "いいえ。自分のコンピューターとしてペアリングし、依頼元のコンピューターでその鍵を受け入れたコンピューターだけが、パスワードを使って承認できます。紛失したコンピューターは、ほかの各コンピューターで Revoke this computer（このコンピューターを取り消す）を押してください。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "スマートフォンから承認できますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "まだできません。現在、Antenna は macOS と Linux で動作します。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">本文へスキップ</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ja/" aria-label="Antenna — ホーム"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="メイン">
+      <a href="/ja/#product">製品</a>
+      <a href="/ja/#security">セキュリティ</a>
+      <a href="/ja/guides/">ガイド</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="言語: 日本語"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">JA</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/approve-claude-code-permissions-remotely" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/approve-claude-code-permissions-remotely" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/approve-claude-code-permissions-remotely" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/approve-claude-code-permissions-remotely" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/approve-claude-code-permissions-remotely" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/approve-claude-code-permissions-remotely" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/approve-claude-code-permissions-remotely" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/approve-claude-code-permissions-remotely" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/approve-claude-code-permissions-remotely" hreflang="ja" lang="ja" aria-current="true">日本語</a></li>
+        <li><a href="/ko/guides/approve-claude-code-permissions-remotely" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/approve-claude-code-permissions-remotely" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/approve-claude-code-permissions-remotely" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/approve-claude-code-permissions-remotely" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/approve-claude-code-permissions-remotely" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/approve-claude-code-permissions-remotely" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ja/#download">ダウンロード</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="パンくずリスト"><a href="/ja/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ja/guides/">ガイド</a></nav>
+    <p class="eyebrow">更新日 <time datetime="2026-11-15">2026年11月15日</time></p>
+    <h1>Claude Code のリクエストを別のコンピューターから承認する</h1>
+    <p class="lead">Claude Code を Antenna 経由で起動すると（ウィンドウの Code モード、またはサーバーなら <code>antenna session</code>）、Antenna のデーモンが、Claude Code の使うすべてのツールと送るすべてのメッセージを確認します。あなたの判断が必要な手順は承認リクエストになり、自分のコンピューターとしてペアリングしたすべてのマシンの <strong>My devices</strong>（自分のデバイス）に、通知付きで表示されます。そこで、そのコンピューターのパスワードか Touch ID で承認すると、Claude Code が動いているコンピューターがあなたの返答を検証して手順を実行し、Claude Code は作業を続けます。</p>
+
+    <h2>あなたに届くもの</h2>
+    <ul>
+      <li><strong>連絡先のメッセージを読んだ後の操作。</strong>Claude Code がチームメイトのメッセージを読むと、その相手の信頼レベルで何をしてよいかが決まります。レベル 4 ではコマンドが 1 つずつあなたの承認待ちになり、レベル 2 と 3 では編集が 1 つずつ承認待ちになり、コマンドは拒否されます。</li>
+      <li><strong>自分自身の設定の変更。</strong>どの連絡先のメッセージでも、たとえ自分のノート PC からのものでも、読んだ後は、<code>CLAUDE.md</code>、<code>.claude/</code>、シェルのプロファイル、鍵、<code>package.json</code> のようなビルドファイルへの編集があなたの承認待ちになります。</li>
+      <li><strong>あなたのデータを外へ持ち出しかねないメッセージ。</strong>プロジェクトのファイルを読んだ後は、∞ より下の連絡先へのメッセージがすべて承認待ちになり、そうした連絡先に宛てた、鍵やパスワード、トークンを含んでいそうなメッセージも同じです。ある会話を読んだ後は、別の会話へのメッセージも承認待ちになります。</li>
+      <li><strong>質問。</strong><em>実験的機能です。</em>エージェントの質問は、それが動いているコンピューターの <strong>Questions from your agents</strong>（エージェントからの質問）に表示されます。ノート PC で受け取りたい場合は、そのコンピューターで <code>antenna agent escalate api-dev --to mac</code> を実行します。以後、質問はそのエージェントのチャットに届き、チャットで答えます。</li>
+    </ul>
+    <p>Claude Code 自身の権限確認（「Do you want to proceed?」）は、そのターミナルに残ります。Antenna がそこに何かを入力することはありません。いつも使うツールは Claude Code の設定で許可しておくか、<code>antenna session attach</code> で入って答えてください。</p>
+
+    <h2>セットアップ</h2>
+    <ol>
+      <li>両方のコンピューターに <a href="/ja/#download">Antenna をインストール</a>し、<strong>This is my own computer (∞)</strong> にチェックを入れて一度だけペアリングします。手順は <a href="/ja/guides/run-claude-code-on-a-vps">VPS で Claude Code を動かす</a>と同じです。</li>
+      <li>Antenna 経由で Claude Code を起動します。デスクトップでは <strong>Agents → AI apps → Start in Code mode</strong>、サーバーでは次のとおりです。
+    <pre><code>cd ~/projects/api
+    antenna connect claude-code --agent api-dev --links mac --hello mac
+    antenna session start api-dev --dir ~/projects/api</code></pre></li>
+      <li>Claude Code が動くコンピューターで、承認に使うコンピューターからの返答を受け入れます。<strong>My devices</strong> → そのコンピューターのカード → <strong>Approvals</strong> → <strong>Accept approvals signed with …</strong> を開き、パスワードを入力します。サーバーでは <code>antenna devices confirm mac</code> です。</li>
+    </ol>
+
+    <h2>どのコンピューターからでも答える</h2>
+    <p>リクエストは、<strong>My devices</strong> にある依頼元のコンピューターのカードに表示され（<em>実験的機能</em>）、「Antenna: approval needed on Mac mini」のような通知が届きます。カードには、どのエージェントが、何のために、なぜ求めているかが書かれ、その文面も引用されます。ただし秘密情報を含む文面は、依頼元のコンピューターから出ることはありません。Mac では <strong>Approve with Touch ID</strong>（<em>実験的機能</em>）、いま使っているコンピューターのパスワードで <strong>Approve with password</strong>、または <strong>Deny</strong> を押します。</p>
+    <p>依頼元のコンピューターは、そこで受け入れた鍵、自分が出した使い捨てのチャレンジ、そしてこのリクエストそのものと照らして署名を検証し、リクエストを自分で一度だけ実行します。依頼元のコンピューター上では、リクエストは <strong>Approval requests</strong>（承認リクエスト）にあり、ターミナルでは <code>antenna approvals</code> と <code>antenna approve &lt;id&gt;</code> で扱えます。</p>
+    <p>Claude Code は最大 50 秒待ち、それまでに承認された手順はすぐに実行されます。それを過ぎると、ほかの作業に移ります。あとで承認すると、Antenna がプロンプトに「Approved — continue.」と入力し、Claude Code がその手順をもう一度実行します。</p>
+
+    <h2>誰も答えなかったら</h2>
+    <p>リクエストは 10 分で閉じられます。何も実行されず、何も送られず、Claude Code には誰も承認しなかったことが伝わります。閉じる少し前に通知でお知らせします。<strong>Deny</strong> にはパスワードが要らず、押すと Claude Code にはあなたが断ったことが伝わります。</p>
+
+    <h2>代わりに承認するエージェント</h2>
+    <p><em>実験的機能です。</em><strong>Can approve for…</strong>（代わりに承認できる相手）を <strong>Agents</strong> で設定すると、信頼するエージェントが、ほかのエージェントのメッセージやファイルに関するリクエストに答えられます。その答えが有効なのは、リクエストに関わるものがすべて ∞ のときだけです。コマンドと編集は必ずあなたに届きます。</p>
+
+    <h2>よくある質問</h2>
+    <details>
+      <summary>Codex でも使えますか？</summary>
+      <p>一部は使えます。Codex が Antenna を通して送るものは同じように確認され、そのリクエストはすべてのコンピューターに届きます。Codex 自身のコマンドは、これまでどおりターミナルでの Codex の承認に任されます。</p>
+    </details>
+    <details>
+      <summary>どのコンピューターでも承認できますか？</summary>
+      <p>いいえ。自分のコンピューターとしてペアリングし、依頼元のコンピューターでその鍵を受け入れたコンピューターだけが、パスワードを使って承認できます。紛失したコンピューターは、ほかの各コンピューターで <strong>Revoke this computer</strong>（このコンピューターを取り消す）を押してください。</p>
+    </details>
+    <details>
+      <summary>スマートフォンから承認できますか？</summary>
+      <p>まだできません。現在、Antenna は macOS と Linux で動作します。</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna は無料のオープンソース</strong>で、macOS と Linux に対応しています。アカウントも電話番号も必要ありません。</p>
+      <a class="btn" href="/ja/#download">Antenna をダウンロード</a>
+    </aside>
+    <h2>関連ガイド</h2>
+    <ul class="related">
+      <li><a href="/ja/guides/claude-code-on-multiple-computers">複数のコンピューターの Claude Code を 1 か所から使う</a></li>
+      <li><a href="/ja/guides/run-claude-code-on-a-vps">VPS で Claude Code を 24 時間動かし、ノート PC から話しかける</a></li>
+      <li><a href="/ja/guides/stop-ai-agent-leaking-secrets">AI エージェントから API キーやパスワードが漏れるのを防ぐ</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ja/" aria-label="Antenna — ホーム"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ja/guides/">ガイド</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>お問い合わせ： <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ja/privacy">プライバシーポリシー</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -311,7 +311,7 @@ all screens: `apps/antenna_desktop/test/goldens/`.
 | Files | honestly: the files screen in the window is the next task; the daemon already accepts into quarantine, the commands are `antenna files …` | `ui/files/files_page.dart` |
 | Settings | theme: **System / Light / Dark** (default "System"; with a light system, light); language: **System / English / Russian** (each language name is shown in its own language, see `GLOSSARY-ru.md`); daemon details, stopping it, the antenna command in the terminal; "Lock keys". Since preview.4 in sections (General, Interface, Network, Security, Agents, Advanced), see "Code mode" | `ui/settings/settings_page.dart` |
 | Theme | `XColors.*` are getters of the current palette; `XApp` chooses the palette (the choice or the system brightness) and rebuilds the tree without losing state; the theme and language choice is stored in `window.json` as `{"theme": …, "lang": …}` (macOS: `~/Library/Application Support/Antenna/`, Linux: `$XDG_CONFIG_HOME/antenna/`); the window stores nothing else | `lib/theme/tokens.dart`, `lib/state/appearance.dart`, `lib/ui/app.dart` |
-| Language | English by default, Russian if the system is in Russian or it is chosen explicitly; strings via ARB + gen-l10n (the "Languages" subsection below) | `lib/l10n/`, `lib/state/appearance.dart`, `lib/ui/app.dart` |
+| Language | the system's language when the window has it (14 languages), otherwise English, or an explicit choice; strings via ARB + gen-l10n (the "Languages" subsection below) | `lib/l10n/`, `lib/state/appearance.dart`, `lib/ui/app.dart` |
 | Sign-in screen | a light background with a soft brand blot, the Antenna icon, a white card with a shadow | `ui/gate/gate_screen.dart` |
 | Dialogs | white, corner radius 18 and a soft shadow, an icon in an `accentSoft` circle, dimming with `scrim` | `ui/widgets/dialog_shell.dart` |
 
@@ -321,19 +321,23 @@ language by system and by choice, an old `window.json` without `lang`), `test/wi
 golden: 32 frames: English, dark `04_home_chat_dark`, `10_approvals_dark`, Russian `*_ru` (5 key ones).
 
 ### Languages (2026-10-02)
-The window speaks English by default and Russian if the system language is Russian; an explicit choice in "Settings" (**System
-/ English / Russian**) overrides the system and is stored in `window.json` next to the theme (`"lang": "system|en|ru"`;
-an old file without `lang` and a broken file → "System").
+The window speaks the system's language when it has it and English otherwise; an explicit choice in "Settings"
+(**Language**: System or one of the languages, each named in itself) overrides the system and is stored in `window.json`
+next to the theme (`"lang": "system"` or a language code; an old file without `lang`, an unknown code and a broken file
+→ "System"). Languages (2026-11-15, the product site's list in its order, without Arabic until the layout has a
+right-to-left pass): en, es, pt (Brazilian), zh (Simplified), hi, fr, de, ja, ko, tr, it, pl, ru, uk; one `app_<code>.arb`
+each, `LangChoice` in `lib/state/appearance.dart` lists them in the picker's order. The address form follows the site
+(tú, você, vous, Sie, tu, ty, siz, आप, です/ます, 해요체, 你, and the formal "you" in Russian and Ukrainian).
 
 **How it is built.**
 - Flutter's official gen-l10n: `apps/antenna_desktop/l10n.yaml`, the strings are `lib/l10n/app_en.arb` (the template: English,
-  descriptions and placeholder types) and `lib/l10n/app_ru.arb`. Generation happens by itself on `flutter pub get` / `flutter test` /
+  descriptions and placeholder types) and one `lib/l10n/app_<code>.arb` per other language. Generation happens by itself on `flutter pub get` / `flutter test` /
   `flutter run` (`flutter: generate: true`), manually with `flutter gen-l10n`. The generated `lib/l10n/app_localizations*.dart`
   **are committed**: the synthetic package `flutter_gen` was removed in Flutter 3.32+, the code goes into `lib/l10n`, and without it in the tree
   `flutter analyze` and CI without a generation step would not pass. The file of untranslated strings is `lib/l10n/untranslated.json`
   (it must be `{}`).
 - Language choice: `resolveLanguage` in `lib/state/appearance.dart`: "System" takes the first language from
-  `PlatformDispatcher.locales` (in order of preference) that the window knows (`en`, `ru`), otherwise English. `XApp`
+  `PlatformDispatcher.locales` (in order of preference) that the window knows (`windowLanguages`), otherwise English. `XApp`
   passes it to `MaterialApp.locale` and listens for system language changes (`didChangeLocales`). Switching does not lose
   state: strings come from `Localizations` (an InheritedWidget), and only the dependent widgets are rebuilt.
 - Access: in widgets, `context.l.key` (`lib/l10n/l10n.dart`). There are no strings in `lib/state`: functions that need text
@@ -343,7 +347,7 @@ an old file without `lang` and a broken file → "System").
   Outside the widget tree (tests, utilities): `l10nFor('en')`.
 - Dates: the pattern is in the ARB (`datePattern`: en `MMM d, yyyy` → Oct 2, 2026; ru `dd.MM.yyyy` → 02.10.2026), formatted with intl
   `DateFormat` in the window's language; the intl locale data is loaded by `format.dart` itself (`initializeDateFormatting`, synchronously).
-  Time is 24-hour in both languages.
+  Time is 24-hour in every language.
 - Plurals: ICU plural in the English template (`{count, plural, =1{1 contact} other{{count} contacts}}`);
   the Russian text is kept verbatim, phrased so that the word form does not depend on the number ("contacts: 5", "interrupted · 42 chars received").
 

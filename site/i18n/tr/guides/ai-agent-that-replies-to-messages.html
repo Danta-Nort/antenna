@@ -1,0 +1,43 @@
+<!--guide {"title": "Mesajlara otomatik cevap veren yapay zeka ajanı — Antenna", "h1": "Mesajlarınıza cevap veren bir yapay zeka ajanı kurun", "description": "Bir kişinin mesajlarını Claude Code ya da Codex kendisi yanıtlasın: mesaj gelince Antenna onu sandbox içinde uyandırır, cevap yazıldıkça karşıya akar.", "summary": "Bir kişiye kendi başına, sandbox içinde cevap veren ve yanıtı canlı akıtan Claude Code ya da Codex.", "source": "2026-11-09"}-->
+<p class="lead">Antenna’da bir kişi ve bir ajan (Claude Code, Codex ya da kendi komutunuz) seçebilirsiniz; o andan itibaren o kişiden gelen her mesaj ajanı başlatır, ajan da mesajı okuyup yanıt verir. Antenna ajanı bir sandbox içinde, o kişinin güven seviyesinden fazla yetki vermeden çalıştırır ve yanıt, yazıldığı sırada karşı tarafta belirir. Ajan kendi Claude ya da ChatGPT oturumunuzla çalışır; içinde bir gizli bilgi varmış gibi görünen yanıtlar ise onayınızı bekler.</p>
+
+<h2>Tipik kullanımlar</h2>
+<ul>
+  <li><strong>Sunucuda kendi asistanınız.</strong> Dizüstü bilgisayarınızdan sunucunuza yazarsınız; oradaki Claude Code yanıt verir, projenizi derler ve testleri çalıştırır.</li>
+  <li><strong>Bir kişi için danışma masası.</strong> Bir iş arkadaşınızın projenizle ilgili soruları hemen yanıt bulur; yanıtı veren ajan yalnızca o konuşmanın klasörünü görür.</li>
+  <li><strong>Sonuçları bildiren bir betik.</strong> Herhangi bir programın çıktısı canlı akış olarak gönderilebilir: <code>my-program | antenna send --stream &lt;contact&gt;</code>.</li>
+</ul>
+
+<h2>Pencereden kurulum</h2>
+<ol>
+  <li>Ajanın çalışacağı bilgisayarda <strong>Agents → Set up for a contact…</strong> menüsünü açın (ya da bir konuşmada kişi kartındaki <strong>Agent replies → Set up…</strong> seçeneğini).</li>
+  <li>Kişiyi ve programı seçin: <strong>Claude Code</strong>, <strong>Codex</strong> ya da kendi komutunuz.</li>
+  <li>İsterseniz uzun ömürlü bir oturum tokenını (<code>claude setup-token</code> komutundan) <strong>Value (optional)</strong> alanına yapıştırın. Token düğümünüze bir kez gider ve şifreli veritabanında saklanır. Mac’te güvenilir yol budur, çünkü sandbox anahtar zincirini (keychain) açamaz.</li>
+  <li>Sahip parolanızla onaylayın. Kural, son çalıştırması ve <strong>Run log</strong> (çalıştırma kaydı), <strong>Agents</strong> bölümünde görünür.</li>
+</ol>
+<p>Terminalden tek satır yeterli: <code>antenna wake set &lt;contact&gt; --cmd "claude -p --output-format stream-json"</code>. <code>antenna wake list</code> kuralları ve son çalıştırmaları gösterir; <code>antenna wake off &lt;contact&gt;</code> kapatır.</p>
+
+<h2>Ajan neyi yapabilir, neyi yapamaz</h2>
+<ul>
+  <li><strong>İstemi sabittir:</strong> “yeni bir mesajınız var, okuyun ve yanıtlayın”. Mesajın kendisi asla isteme dönüşmez; ajan onu, kişinin güven seviyesinden fazla yetki olmadan, veri olarak okur.</li>
+  <li><strong>Sandbox içinde çalışır</strong> (Linux’ta bubblewrap ya da Landlock, macOS’ta Seatbelt): yalnızca kendi geçici klasörünü ve o konuşmanın klasörünü görür, ağda yalnızca model sağlayıcısına ulaşır. Projeleriniz, diğer dosyalarınız ve düğümün anahtarları erişim dışındadır. Sandbox yoksa Antenna ajanı başlatmaz.</li>
+  <li><strong>Her çalıştırma temiz başlar</strong>, ajanı kalıcı yapmadığınız sürece (aşağıda); böylece önceki bir mesaj sonraki çalıştırmaya talimat bırakamaz.</li>
+  <li><strong>Sınırlar:</strong> çalıştırma başına süre sınırı ve saatlik çalıştırma sayısı; böylece çok konuşan bir kişi kullanım kotanızı tüketemez.</li>
+</ul>
+
+<h2>Kendi projelerinizden birinde çalıştırın</h2>
+<p>Yalnızca kendi bilgisayarlarınız (∞) için ajan, araç zincirinizle tek bir proje klasöründe de çalışabilir: <code>--project ~/code/payments</code>, ayrıca salt okunur <code>--tool-path</code> klasörleri ve <code>--allow-host</code> ile erişebileceği paket depoları. Antenna bunu başka hiçbir kişi için kabul etmez ve ev klasörünüzü, kendi verilerini ya da <code>~/.ssh</code> gibi gizli bilgi barındıran klasörleri asla açmaz.</p>
+
+<h2>Sorular</h2>
+<details>
+  <summary>Karşı taraf yanıtı yazılırken görüyor mu?</summary>
+  <p>Evet, 3. seviye ve üzerindeki kişiler için: ajan yazdıkça büyüyen canlı bir baloncuk, sonunda normal bir mesaja dönüşür. 1. ve 2. seviyeler bitmiş yanıtı alır.</p>
+</details>
+<details>
+  <summary>Ajan yanıtına bir parola ya da anahtar yazarsa ne olur?</summary>
+  <p>Karşı taraf için akış durur ve mesaj onayınızı bekler. Akış yalnızca kendi bilgisayarlarınıza devam eder.</p>
+</details>
+<details>
+  <summary>Önceki konuşmaları hatırlıyor mu?</summary>
+  <p>Varsayılan olarak hayır: her mesaj yeni bir çalıştırma başlatır. Saatler süren işler için <code>--resident</code> ekleyin: aynı Claude Code oturumu konuşmayla birlikte kalır, söylenenleri ve kararlaştırılanları hatırlar, her yeni mesaj da bir sonraki adımı olur. Mesajlar ona yine karşı taraftan gelen veri olarak ulaşır.</p>
+</details>

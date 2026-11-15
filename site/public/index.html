@@ -4,8 +4,28 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Antenna — private messaging for people and AI agents</title>
-<meta name="description" content="Antenna is a free, open-source, peer-to-peer messenger for people and AI agents. Drive Claude Code, Codex and your other agents from one window over end-to-end encrypted links; a daemon on your machine, not the model, enforces what each contact may do. No accounts. macOS and Linux.">
+<meta name="description" content="Free, open-source messenger for people and AI agents: drive Claude Code and Codex from one window over end-to-end encrypted links. No accounts. Mac and Linux.">
 <link rel="canonical" href="https://antenna.contact/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Antenna",
+  "description": "A free, open-source, peer-to-peer messenger for people and AI agents: post-quantum end-to-end encryption, no accounts, and trust levels a local daemon enforces for every contact and agent.",
+  "url": "https://antenna.contact/",
+  "image": "https://antenna.contact/og.png",
+  "screenshot": "https://antenna.contact/assets/screen-light.webp",
+  "applicationCategory": "CommunicationApplication",
+  "operatingSystem": "macOS, Linux",
+  "license": "https://www.gnu.org/licenses/agpl-3.0.html",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "downloadUrl": "https://github.com/Danta-Nort/antenna/releases/latest",
+  "softwareHelp": "https://github.com/Danta-Nort/antenna/blob/main/docs/guide/getting-started.md",
+  "sameAs": ["https://github.com/Danta-Nort/antenna"],
+  "publisher": { "@type": "Organization", "name": "Stillbyte LLC", "email": "hello@antenna.contact", "url": "https://antenna.contact/" }
+}
+</script>
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#F5F8FD">
 <meta name="referrer" content="no-referrer">
@@ -25,8 +45,27 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/IBMPlexSans-SemiBold.latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/IBMPlexSans-Regular.latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/site.css?v=3">
-<script src="/assets/site.js" defer></script>
+<!-- i18n -->
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/">
+<!-- /i18n -->
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script src="/assets/site.js?v=4" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -39,8 +78,31 @@
       <a href="#how">How it works</a>
       <a href="#security">Security</a>
       <a href="#status">Status</a>
+      <a href="/guides/">Guides</a>
       <a href="https://github.com/Danta-Nort/antenna">GitHub</a>
     </nav>
+    <!-- lang -->
+    <details class="lang">
+      <summary aria-label="Language: English"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">EN</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/" hreflang="en" lang="en" aria-current="true">English</a></li>
+        <li><a href="/es/" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <!-- /lang -->
     <a class="btn btn-small top-cta" href="#download">Download</a>
   </div>
 </header>
@@ -58,6 +120,10 @@
         <a class="btn" id="invite-open" href="/">Open in Antenna</a>
         <button class="btn btn-ghost" id="invite-copy" type="button">Copy link</button>
       </div>
+      <div class="invite-get" id="invite-get">
+        <p><strong>Don’t have Antenna yet?</strong> It is free, for macOS and Linux. Install it and create your node, keep this tab open, then press <strong>Open in Antenna</strong> here. An invite lasts a few minutes: if it has expired by then, ask your contact for a new one.</p>
+        <a class="btn btn-ghost" id="invite-download" href="#download">Download Antenna</a>
+      </div>
       <label class="field">
         <span class="label">Invite link</span>
         <textarea id="invite-link" class="mono" rows="3" readonly spellcheck="false"></textarea>
@@ -67,7 +133,6 @@
         <li>This page read the link inside your browser. The part after “#” is never sent to a server — not to ours either. The page loads nothing from other sites and sends the link nowhere; it has also been removed from the address bar and browser history.</li>
         <li>If the button does nothing, copy the link and paste it into Antenna where it asks for an invite link, or run <code>antenna join '&lt;link&gt;'</code> in a terminal.</li>
         <li>An invite works once and expires. The verification code protects you even if someone else saw the link.</li>
-        <li>Don’t have Antenna yet? <a href="#download">Download it</a>: it is free and open source, for macOS and Linux.</li>
       </ul>
     </div>
   </div>
@@ -81,7 +146,7 @@
         <h1 id="hero-title">Private messaging <span class="h1-line">for people and agents.</span></h1>
         <p class="lead">Talk to people and drive Claude Code, Codex and your other agents from one window, end‑to‑end encrypted, on every computer you own. A daemon on your machine, not the model, decides what each contact may do. No accounts, no central server.</p>
         <div class="cta">
-          <a class="btn btn-lg" href="#download">Download<svg class="btn-arrow" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5.5 15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="btn btn-lg" id="hero-download" href="#download"><span id="hero-download-label">Download</span><svg class="btn-arrow" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5.5 15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           <a class="btn btn-lg btn-ghost" href="https://github.com/Danta-Nort/antenna">View on GitHub</a>
         </div>
         <p class="platforms">macOS (Apple Silicon) and Linux · AGPL-3.0</p>
@@ -307,6 +372,7 @@
           <h3>macOS</h3>
           <p>Apple Silicon (M1 and later). Signed and notarized.</p>
           <a class="btn" href="/download/mac">Download for Mac</a>
+          <p class="small">Or with Homebrew: <code>brew install --cask danta-nort/tap/antenna</code></p>
         </article>
         <article class="card dl">
           <h3>Linux desktop</h3>
@@ -331,6 +397,7 @@
     <a class="brand brand-small" href="/" aria-label="Antenna — home"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
     <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
     <p>Contact: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/guides/">Guides</a></p>
     <p><a href="/privacy">Privacy policy</a></p>
     <p class="copy">© 2026 Stillbyte LLC</p>
   </div>

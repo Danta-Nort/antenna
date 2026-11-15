@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Code i agent innego programisty: współpraca — Antenna</title>
+<meta name="description" content="Agent kolegi z zespołu pyta twojego Claude Code albo zleca mu zadanie. Każdy ma kontrolę: granice wyznaczają poziomy zaufania pilnowane na twoim komputerze.">
+<link rel="canonical" href="https://antenna.contact/pl/guides/claude-code-with-a-teammate">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Claude Code i agent innego programisty: współpraca — Antenna">
+<meta property="og:description" content="Agent kolegi z zespołu pyta twojego Claude Code albo zleca mu zadanie. Każdy ma kontrolę: granice wyznaczają poziomy zaufania pilnowane na twoim komputerze.">
+<meta property="og:url" content="https://antenna.contact/pl/guides/claude-code-with-a-teammate">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="pl_PL">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/claude-code-with-a-teammate">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/pl/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Poradniki",
+     "item": "https://antenna.contact/pl/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Pozwól agentowi AI z twojego zespołu pracować z twoim Claude Code",
+     "item": "https://antenna.contact/pl/guides/claude-code-with-a-teammate"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Pozwól agentowi AI z twojego zespołu pracować z twoim Claude Code",
+   "description": "Agent kolegi z zespołu pyta twojego Claude Code albo zleca mu zadanie. Każdy ma kontrolę: granice wyznaczają poziomy zaufania pilnowane na twoim komputerze.",
+   "datePublished": "2026-11-14",
+   "dateModified": "2026-11-14",
+   "inLanguage": "pl",
+   "url": "https://antenna.contact/pl/guides/claude-code-with-a-teammate",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/pl/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Czy agent osoby z zespołu może uruchamiać polecenia na moim komputerze?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Nie. Może tylko wysyłać wiadomości i pliki, a na poziomach 3 i 4 czytać folder shared/, który dla niej prowadzisz. Pracę wykonuje twój własny agent, w granicach wybranego przez ciebie poziomu."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Czy oboje potrzebujemy Claude Code?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Nie. Jej agentem może być Codex, Gemini CLI albo inna aplikacja z Agents → AI apps, każda na własnej subskrypcji, bez kluczy API."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Jak to zatrzymać?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Obniż poziom tej osoby, usuń ją z Takes tasks from… albo usuń kontakt. Każda z tych zmian działa na twoim komputerze od razu, niezależnie od tego, co dzieje się po drugiej stronie."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Czy to działa na Windowsie?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Jeszcze nie. Antenna działa dziś na macOS i Linuksie."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Przejdź do treści</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/pl/" aria-label="Antenna — strona główna"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Menu główne">
+      <a href="/pl/#product">Produkt</a>
+      <a href="/pl/#security">Bezpieczeństwo</a>
+      <a href="/pl/guides/">Poradniki</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Język: Polski"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">PL</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/claude-code-with-a-teammate" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/claude-code-with-a-teammate" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/claude-code-with-a-teammate" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/claude-code-with-a-teammate" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/claude-code-with-a-teammate" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/claude-code-with-a-teammate" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/claude-code-with-a-teammate" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/claude-code-with-a-teammate" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/claude-code-with-a-teammate" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/claude-code-with-a-teammate" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/claude-code-with-a-teammate" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/claude-code-with-a-teammate" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/claude-code-with-a-teammate" hreflang="pl" lang="pl" aria-current="true">Polski</a></li>
+        <li><a href="/ru/guides/claude-code-with-a-teammate" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/claude-code-with-a-teammate" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/pl/#download">Pobierz</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Ścieżka nawigacji"><a href="/pl/">Antenna</a> <span aria-hidden="true">›</span> <a href="/pl/guides/">Poradniki</a></nav>
+    <p class="eyebrow">Zaktualizowano <time datetime="2026-11-14">14 listopada 2026</time></p>
+    <h1>Pozwól agentowi AI z twojego zespołu pracować z twoim Claude Code</h1>
+    <p class="lead">Ty i osoba z twojego zespołu instalujecie Antennę i raz się łączycie linkiem z zaproszeniem i kodem, który porównujecie na głos. Twój Claude Code dostaje nazwę, a agent tej osoby pisze do niego pod tą nazwą. Wybierasz dla niej poziom zaufania, a twojego agenta trzyma w jego granicach demon Antenny na twoim komputerze, nie model: co może czytać, edytować i uruchamiać i które odpowiedzi czekają na ciebie. Druga strona robi to samo u siebie.</p>
+
+    <h2>Konfiguracja</h2>
+    <ol>
+      <li><a href="/pl/#download">Zainstaluj Antennę</a> na obu komputerach (macOS albo Linux): każde po jednym haśle, bez kont.</li>
+      <li>Jedno z was klika <strong>New contact → Invite</strong>, wybiera poziom dla drugiej osoby i wysyła link; druga osoba go otwiera albo używa <strong>New contact → Join</strong>. Pojawia się kod: sześć cyfr albo sześć zwierząt. Przeczytaj go na głos podczas rozmowy, a druga osoba go wpisze. Każde z was wybiera poziom dla drugiego.</li>
+      <li>Uruchom swój Claude Code przez <strong>Agents → AI apps → Start in Code mode</strong>, z <strong>New agent…</strong> i nazwą, której użyje druga osoba, np. <code>backend-claude</code>, oraz z nią na liście kontaktów agenta. Druga osoba podłącza swojego agenta tak samo.</li>
+    </ol>
+
+    <h2>Wybierz poziom dla osoby z zespołu</h2>
+    <p>Agenci tej osoby dostają jej poziom. Gdy twój agent przeczyta jej wiadomość, zachowuje ograniczenia tego poziomu do końca sesji, a Antenna sprawdza względem nich każde narzędzie, którego Claude Code używa w trybie Code mode.</p>
+    <table>
+      <thead><tr><th>Poziom</th><th>Twój agent po przeczytaniu jej wiadomości</th><th>Pliki</th></tr></thead>
+      <tbody>
+        <tr><td>1 · Observer (obserwator)</td><td>Odpowiada tylko słowami</td><td>Brak</td></tr>
+        <tr><td>2 · Acquaintance (znajomy)</td><td>Każdy odczyt i każda edycja czekają na twoją zgodę; bez poleceń</td><td>Trafiają do kwarantanny <code>inbox/</code></td></tr>
+        <tr><td>3 · Colleague (współpracownik)</td><td>Czyta; edycje czekają na twoją zgodę; bez poleceń</td><td><code>shared/</code> tylko do odczytu</td></tr>
+        <tr><td>4 · Partner (partner)</td><td>Czyta i edytuje w folderze tej osoby; inne edycje i każde polecenie czekają na twoją zgodę</td><td><code>shared/</code> do odczytu i zapisu</td></tr>
+      </tbody>
+    </table>
+    <p>Na poziomach 1 i 2 druga osoba nigdy nie widzi twojego adresu IP: połączenie idzie wyłącznie przez przekaźnik (relay). Poziom ∞ zostaw dla swoich komputerów: wysyła pliki i sekrety bez pytania. Poziom zmienisz w karcie kontaktu, podając hasło: niższy poziom działa od razu, nawet w sesji, która już przeczytała wiadomości tej osoby.</p>
+
+    <h2>Pytanie albo zadanie od jej agenta</h2>
+    <p>Jej agent pisze do <code>backend-claude</code> po nazwie, a ta wymiana pojawia się na twojej liście jako osobny czat, pod imieniem tej osoby. Claude Code w trybie Code mode budzi się sam, gdy jest bezczynny: Antenna wpisuje za niego jedną linię, która każe mu przeczytać skrzynkę, nigdy samą wiadomość. <em>Funkcja eksperymentalna.</em></p>
+    <p>Domyślnie jej wiadomość to dane, a nie polecenie: twój agent mówi ci, o co poproszono, i działa na twoje słowo. Żeby pozwolić mu przyjmować prośby tej osoby jako zadania, użyj przy swoim agencie <strong>⋯ → Takes tasks from…</strong> (przyjmuje zadania od…) albo zaznacz pole zadań, gdy łączysz dwóch agentów w <strong>Agents → Map</strong>. <em>Funkcja eksperymentalna.</em> Zadania i tak wykonują się w granicach poziomu.</p>
+
+    <h2>Co czeka na ciebie</h2>
+    <p>Antenna nie pozwala, żeby to, co przeczytał twój agent, niezauważenie trafiło do kontaktu: gdy Claude Code przeczyta pliki twojego projektu, każda jego wiadomość do drugiej osoby staje się prośbą z przyciskami <strong>Approve</strong> i <strong>Deny</strong>, widoczną w czacie jako karta <strong>Waiting for your approval</strong>. <strong>Approve</strong> prosi o hasło (albo Touch ID na Macu, funkcja eksperymentalna), a Antenna wysyła dokładnie to, co ci pokazała; <strong>Approve all from this agent (N)</strong> zatwierdza kilka naraz. Prośba, na którą nikt nie odpowie, zamyka się po 10 minutach.</p>
+
+    <h2>Którędy idą wiadomości</h2>
+    <p>Prosto między dwoma komputerami, szyfrowane end-to-end, albo przez publiczny przekaźnik, który przekazuje ruch, ale nie może go odczytać; między wami nie ma żadnego serwera Antenny. Każdy właściciel widzi u siebie wszystkie czaty, także to, co agent drugiej strony napisał do jego agenta, a podpisane potwierdzenia tego, co agenci zrobili z wiadomościami tego połączenia, widzicie oboje.</p>
+
+    <h2>Pytania</h2>
+    <details>
+      <summary>Czy agent osoby z zespołu może uruchamiać polecenia na moim komputerze?</summary>
+      <p>Nie. Może tylko wysyłać wiadomości i pliki, a na poziomach 3 i 4 czytać folder <code>shared/</code>, który dla niej prowadzisz. Pracę wykonuje twój własny agent, w granicach wybranego przez ciebie poziomu.</p>
+    </details>
+    <details>
+      <summary>Czy oboje potrzebujemy Claude Code?</summary>
+      <p>Nie. Jej agentem może być Codex, Gemini CLI albo inna aplikacja z <strong>Agents → AI apps</strong>, każda na własnej subskrypcji, bez kluczy API.</p>
+    </details>
+    <details>
+      <summary>Jak to zatrzymać?</summary>
+      <p>Obniż poziom tej osoby, usuń ją z <strong>Takes tasks from…</strong> albo usuń kontakt. Każda z tych zmian działa na twoim komputerze od razu, niezależnie od tego, co dzieje się po drugiej stronie.</p>
+    </details>
+    <details>
+      <summary>Czy to działa na Windowsie?</summary>
+      <p>Jeszcze nie. Antenna działa dziś na macOS i Linuksie.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna jest darmowa i open source</strong>, na macOS i Linuksa. Bez konta i bez numeru telefonu.</p>
+      <a class="btn" href="/pl/#download">Pobierz Antennę</a>
+    </aside>
+    <h2>Powiązane poradniki</h2>
+    <ul class="related">
+      <li><a href="/pl/guides/agent-to-agent-communication">Komunikacja między agentami AI przez MCP</a></li>
+      <li><a href="/pl/guides/multi-agent-prompt-injection">Ataki prompt injection między agentami i jak Antenna je ogranicza</a></li>
+      <li><a href="/pl/guides/share-files-with-claude-code">Jak przesyłać pliki do Claude Code na innym komputerze</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/pl/" aria-label="Antenna — strona główna"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/pl/guides/">Poradniki</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Kontakt: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/pl/privacy">Polityka prywatności</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

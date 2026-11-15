@@ -1,0 +1,46 @@
+<!--guide {"title": "Claude Code の権限リクエストを別のコンピューターからリモート承認 — Antenna", "h1": "Claude Code のリクエストを別のコンピューターから承認する", "description": "サーバーや別のコンピューターの Claude Code が承認を求めると、Antenna がそのリクエストを手元のすべてのコンピューターに届け、パスワードか Touch ID で承認できます。", "summary": "別のコンピューターの Claude Code からの承認リクエストに、いま使っているコンピューターから答える方法。", "source": "2026-11-15"}-->
+<p class="lead">Claude Code を Antenna 経由で起動すると（ウィンドウの Code モード、またはサーバーなら <code>antenna session</code>）、Antenna のデーモンが、Claude Code の使うすべてのツールと送るすべてのメッセージを確認します。あなたの判断が必要な手順は承認リクエストになり、自分のコンピューターとしてペアリングしたすべてのマシンの <strong>My devices</strong>（自分のデバイス）に、通知付きで表示されます。そこで、そのコンピューターのパスワードか Touch ID で承認すると、Claude Code が動いているコンピューターがあなたの返答を検証して手順を実行し、Claude Code は作業を続けます。</p>
+
+<h2>あなたに届くもの</h2>
+<ul>
+  <li><strong>連絡先のメッセージを読んだ後の操作。</strong>Claude Code がチームメイトのメッセージを読むと、その相手の信頼レベルで何をしてよいかが決まります。レベル 4 ではコマンドが 1 つずつあなたの承認待ちになり、レベル 2 と 3 では編集が 1 つずつ承認待ちになり、コマンドは拒否されます。</li>
+  <li><strong>自分自身の設定の変更。</strong>どの連絡先のメッセージでも、たとえ自分のノート PC からのものでも、読んだ後は、<code>CLAUDE.md</code>、<code>.claude/</code>、シェルのプロファイル、鍵、<code>package.json</code> のようなビルドファイルへの編集があなたの承認待ちになります。</li>
+  <li><strong>あなたのデータを外へ持ち出しかねないメッセージ。</strong>プロジェクトのファイルを読んだ後は、∞ より下の連絡先へのメッセージがすべて承認待ちになり、そうした連絡先に宛てた、鍵やパスワード、トークンを含んでいそうなメッセージも同じです。ある会話を読んだ後は、別の会話へのメッセージも承認待ちになります。</li>
+  <li><strong>質問。</strong><em>実験的機能です。</em>エージェントの質問は、それが動いているコンピューターの <strong>Questions from your agents</strong>（エージェントからの質問）に表示されます。ノート PC で受け取りたい場合は、そのコンピューターで <code>antenna agent escalate api-dev --to mac</code> を実行します。以後、質問はそのエージェントのチャットに届き、チャットで答えます。</li>
+</ul>
+<p>Claude Code 自身の権限確認（「Do you want to proceed?」）は、そのターミナルに残ります。Antenna がそこに何かを入力することはありません。いつも使うツールは Claude Code の設定で許可しておくか、<code>antenna session attach</code> で入って答えてください。</p>
+
+<h2>セットアップ</h2>
+<ol>
+  <li>両方のコンピューターに <a href="/#download">Antenna をインストール</a>し、<strong>This is my own computer (∞)</strong> にチェックを入れて一度だけペアリングします。手順は <a href="/guides/run-claude-code-on-a-vps">VPS で Claude Code を動かす</a>と同じです。</li>
+  <li>Antenna 経由で Claude Code を起動します。デスクトップでは <strong>Agents → AI apps → Start in Code mode</strong>、サーバーでは次のとおりです。
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api</code></pre></li>
+  <li>Claude Code が動くコンピューターで、承認に使うコンピューターからの返答を受け入れます。<strong>My devices</strong> → そのコンピューターのカード → <strong>Approvals</strong> → <strong>Accept approvals signed with …</strong> を開き、パスワードを入力します。サーバーでは <code>antenna devices confirm mac</code> です。</li>
+</ol>
+
+<h2>どのコンピューターからでも答える</h2>
+<p>リクエストは、<strong>My devices</strong> にある依頼元のコンピューターのカードに表示され（<em>実験的機能</em>）、「Antenna: approval needed on Mac mini」のような通知が届きます。カードには、どのエージェントが、何のために、なぜ求めているかが書かれ、その文面も引用されます。ただし秘密情報を含む文面は、依頼元のコンピューターから出ることはありません。Mac では <strong>Approve with Touch ID</strong>（<em>実験的機能</em>）、いま使っているコンピューターのパスワードで <strong>Approve with password</strong>、または <strong>Deny</strong> を押します。</p>
+<p>依頼元のコンピューターは、そこで受け入れた鍵、自分が出した使い捨てのチャレンジ、そしてこのリクエストそのものと照らして署名を検証し、リクエストを自分で一度だけ実行します。依頼元のコンピューター上では、リクエストは <strong>Approval requests</strong>（承認リクエスト）にあり、ターミナルでは <code>antenna approvals</code> と <code>antenna approve &lt;id&gt;</code> で扱えます。</p>
+<p>Claude Code は最大 50 秒待ち、それまでに承認された手順はすぐに実行されます。それを過ぎると、ほかの作業に移ります。あとで承認すると、Antenna がプロンプトに「Approved — continue.」と入力し、Claude Code がその手順をもう一度実行します。</p>
+
+<h2>誰も答えなかったら</h2>
+<p>リクエストは 10 分で閉じられます。何も実行されず、何も送られず、Claude Code には誰も承認しなかったことが伝わります。閉じる少し前に通知でお知らせします。<strong>Deny</strong> にはパスワードが要らず、押すと Claude Code にはあなたが断ったことが伝わります。</p>
+
+<h2>代わりに承認するエージェント</h2>
+<p><em>実験的機能です。</em><strong>Can approve for…</strong>（代わりに承認できる相手）を <strong>Agents</strong> で設定すると、信頼するエージェントが、ほかのエージェントのメッセージやファイルに関するリクエストに答えられます。その答えが有効なのは、リクエストに関わるものがすべて ∞ のときだけです。コマンドと編集は必ずあなたに届きます。</p>
+
+<h2>よくある質問</h2>
+<details>
+  <summary>Codex でも使えますか？</summary>
+  <p>一部は使えます。Codex が Antenna を通して送るものは同じように確認され、そのリクエストはすべてのコンピューターに届きます。Codex 自身のコマンドは、これまでどおりターミナルでの Codex の承認に任されます。</p>
+</details>
+<details>
+  <summary>どのコンピューターでも承認できますか？</summary>
+  <p>いいえ。自分のコンピューターとしてペアリングし、依頼元のコンピューターでその鍵を受け入れたコンピューターだけが、パスワードを使って承認できます。紛失したコンピューターは、ほかの各コンピューターで <strong>Revoke this computer</strong>（このコンピューターを取り消す）を押してください。</p>
+</details>
+<details>
+  <summary>スマートフォンから承認できますか？</summary>
+  <p>まだできません。現在、Antenna は macOS と Linux で動作します。</p>
+</details>

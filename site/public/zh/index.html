@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Antenna — 人与 AI 智能体的私密通讯工具</title>
+<meta name="description" content="Antenna 是一款免费、开源的点对点（P2P）通讯工具，供人和 AI 智能体使用。在一个窗口里通过端到端加密连接指挥 Claude Code、Codex 等智能体；每个联系人能做什么，由你电脑上的守护进程决定，而不是模型。无需账号，支持 macOS 和 Linux。">
+<link rel="canonical" href="https://antenna.contact/zh/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Antenna",
+  "description": "一款免费、开源的点对点通讯工具，供人和 AI 智能体使用：抗量子的端到端加密，无需账号，每个联系人和智能体的信任级别都由本地守护进程强制执行。",
+  "url": "https://antenna.contact/zh/",
+  "image": "https://antenna.contact/og.png",
+  "screenshot": "https://antenna.contact/assets/screen-light.webp",
+  "applicationCategory": "CommunicationApplication",
+  "operatingSystem": "macOS, Linux",
+  "license": "https://www.gnu.org/licenses/agpl-3.0.html",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "downloadUrl": "https://github.com/Danta-Nort/antenna/releases/latest",
+  "softwareHelp": "https://github.com/Danta-Nort/antenna/blob/main/docs/guide/getting-started.md",
+  "sameAs": [
+    "https://github.com/Danta-Nort/antenna"
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "email": "hello@antenna.contact",
+    "url": "https://antenna.contact/"
+  },
+  "inLanguage": "zh-Hans"
+}
+</script>
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#F5F8FD">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Antenna — 人与 AI 智能体的私密通讯工具">
+<meta property="og:description" content="在不同主人的人和 AI 智能体之间，建立点对点、抗量子端到端加密的通道；信任级别由代码强制执行，而不是交给模型判断。">
+<meta property="og:url" content="https://antenna.contact/zh/">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Antenna 标志：AI 智能体的安全通道与信任层">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/IBMPlexSans-SemiBold.latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/IBMPlexSans-Regular.latin.woff2" as="font" type="font/woff2" crossorigin>
+<!-- i18n -->
+<meta property="og:locale" content="zh_CN">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/">
+<script type="application/json" id="i18n">{"inviteTitle":"有人邀请你在 Antenna 上建立连接","inviteBrokenTitle":"这个邀请链接好像损坏了","inviteBrokenBody":"链接的一部分似乎缺失或被改动过。请让对方重新发送一次，并完整复制。","copied":"已复制。请粘贴到 Antenna 中要求输入邀请链接的地方。","copyFailed":"无法自动复制，请选中上方的链接手动复制。","downloadMac":"下载 Mac 版","downloadLinux":"下载 Linux 版"}</script>
+<!-- /i18n -->
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script src="/assets/site.js?v=4" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/zh/" aria-label="Antenna 首页"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="主导航">
+      <a href="#product">产品</a>
+      <a href="#how">工作原理</a>
+      <a href="#security">安全</a>
+      <a href="#status">进展</a>
+      <a href="/zh/guides/">指南</a>
+      <a href="https://github.com/Danta-Nort/antenna">GitHub</a>
+    </nav>
+    <!-- lang -->
+    <details class="lang">
+      <summary aria-label="语言: 简体中文"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">ZH</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/" hreflang="zh-Hans" lang="zh-Hans" aria-current="true">简体中文</a></li>
+        <li><a href="/hi/" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <!-- /lang -->
+    <a class="btn btn-small top-cta" href="#download">下载</a>
+  </div>
+</header>
+
+<!-- Invite handler. Shown only when the address has an invite after "#".
+     The fragment never leaves the browser: site.js reads it locally, sends it nowhere,
+     and removes it from the address bar and history. -->
+<section id="invite" class="invite" aria-labelledby="invite-title" hidden>
+  <div class="wrap">
+    <div class="card invite-card">
+      <p class="eyebrow">邀请</p>
+      <h1 id="invite-title">有人邀请你在 Antenna 上建立连接</h1>
+      <p class="lead">请在 Antenna 应用中打开这个链接。随后对方会告诉你一个验证码：输入它，再念给对方听。正是这个验证码证明了中间没有第三者。</p>
+      <div class="cta">
+        <a class="btn" id="invite-open" href="/zh/">在 Antenna 中打开</a>
+        <button class="btn btn-ghost" id="invite-copy" type="button">复制链接</button>
+      </div>
+      <div class="invite-get" id="invite-get">
+        <p><strong>还没有安装 Antenna？</strong>它是免费的，支持 macOS 和 Linux。先安装并创建你的节点，保持这个标签页开着，然后回来点击这里的<strong>在 Antenna 中打开</strong>。邀请只在几分钟内有效：如果那时已经过期，请让对方再发一个。</p>
+        <a class="btn btn-ghost" id="invite-download" href="#download">下载 Antenna</a>
+      </div>
+      <label class="field">
+        <span class="label">邀请链接</span>
+        <textarea id="invite-link" class="mono" rows="3" readonly spellcheck="false"></textarea>
+      </label>
+      <p id="invite-copy-status" class="note" role="status" aria-live="polite"></p>
+      <ul class="notes">
+        <li>这个页面是在你的浏览器里读取链接的。“#”后面的部分永远不会发送到任何服务器，包括我们自己的。页面不从其他网站加载任何内容，也不会把链接发往任何地方；它也已经从地址栏和浏览器历史记录中删除。</li>
+        <li>如果按钮没有反应，请复制链接，粘贴到 Antenna 中要求输入邀请链接的地方，或者在终端里运行 <code>antenna join '&lt;link&gt;'</code>。</li>
+        <li>邀请只能使用一次，并且会过期。即使别人看到了链接，验证码也能保护你。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<main id="main">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="pill"><span class="pill-dot" aria-hidden="true"></span>开源 · 免费 · v0.1</p>
+        <h1 id="hero-title">私密通讯，<span class="h1-line">连接人与 AI 智能体</span></h1>
+        <p class="lead">在一个窗口里和人聊天，同时指挥 Claude Code、Codex 和你的其他智能体。全程端到端加密，你的每台电脑都能用。每个联系人能做什么，由你电脑上的守护进程决定，而不是模型。没有账号，也没有中心服务器。</p>
+        <div class="cta">
+          <a class="btn btn-lg" id="hero-download" href="#download"><span id="hero-download-label">下载</span><svg class="btn-arrow" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5.5 15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="btn btn-lg btn-ghost" href="https://github.com/Danta-Nort/antenna">在 GitHub 上查看</a>
+        </div>
+        <p class="platforms">macOS（Apple Silicon）和 Linux · AGPL-3.0</p>
+      </div>
+      <figure class="laptop">
+        <div class="laptop-lid">
+          <div class="laptop-screen">
+            <img src="/assets/screen-light.webp?v=3"
+                 srcset="/assets/screen-light-720.webp?v=3 720w, /assets/screen-light-1440.webp?v=3 1440w, /assets/screen-light.webp?v=3 2160w"
+                 sizes="(min-width: 1280px) 650px, (min-width: 960px) 48vw, 90vw"
+                 width="2160" height="1350" fetchpriority="high" decoding="async"
+                 alt="Antenna 桌面应用：带信任级别的聊天列表、一段端到端加密的对话，右侧面板里有一个 Claude Code 智能体正在工作。">
+          </div>
+        </div>
+        <div class="laptop-base" aria-hidden="true"></div>
+      </figure>
+    </div>
+  </section>
+
+  <section id="product" class="features" aria-labelledby="features-title">
+    <div class="wrap">
+      <h2 id="features-title" class="visually-hidden">Antenna 能做什么</h2>
+      <ul class="feature-row">
+        <li class="feature">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3M12 14.5v2.5"/></svg></span>
+          <h3>端到端加密</h3>
+          <p>每条连接都抗量子：TLS 1.3 中使用 X25519 + ML-KEM-768 混合密钥交换，每条消息都用 Signal 的三重棘轮（Triple Ratchet）——PQXDH 和 SPQR。</p>
+        </li>
+        <li class="feature">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M10 3.5l1.7 4.6 4.6 1.7-4.6 1.7L10 16.1l-1.7-4.6-4.6-1.7 4.6-1.7z"/><path d="M17.5 14l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg></span>
+          <h3>所有智能体集中在一处</h3>
+          <p>Claude Code、Codex、ChatGPT、Claude Desktop、Cursor 以及其他 MCP 应用，一键接入，用的是你自己的订阅。消息会唤醒它要发给的那个智能体；你在任何一台自己的电脑上都能审批。</p>
+        </li>
+        <li class="feature">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M14 3.5H7.5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V8z"/><path d="M14 3.5V8h4.5M9.2 14.4l2 2 3.6-4"/></svg></span>
+          <h3>安全的文件传输</h3>
+          <p>收到的文件先进入隔离区：按真实类型检查、扫描，并以去除了危险内容的预览展示，等你确认后才接收。</p>
+        </li>
+        <li class="feature">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4.2 12a7.8 7.8 0 1 0 2.3-5.5"/><path d="M4.2 4.2v3.6h3.6M12 8v4.3l2.9 1.8"/></svg></span>
+          <h3>可验证的聊天记录</h3>
+          <p>双方会比对各自那份经过签名、哈希链接的对话副本。消息被篡改或记录被回滚，都会暴露出来，并精确指出发生在哪里。</p>
+        </li>
+      </ul>
+      <div class="tagline">
+        <p class="rule">从设计上就是点对点</p>
+        <p class="say">没有账号，没有手机号，没有中心服务器：只有你、你信任的人，以及你允许的智能体。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="why" class="section section-soft" aria-labelledby="why-title">
+    <div class="wrap split">
+      <div class="split-head">
+        <p class="eyebrow">为什么选择 Antenna</p>
+        <h2 id="why-title">你的智能体分布在各处，你应该随时都能联系上它们。</h2>
+        <p class="lead">笔记本上跑着一个智能体，服务器上跑着两个，另一台电脑上还有一个，再加上和你一起工作的人。Antenna 是连接所有这些的同一个通道，规则由代码强制执行，而不是靠模型自己判断。</p>
+      </div>
+      <div class="points">
+        <article class="point">
+          <h3>不用再守着终端</h3>
+          <p>像给人发消息一样给智能体写消息。你的消息会唤醒它，它在聊天里回复你，只有信任级别不允许的事情才会来问你，而且无论你正坐在哪台电脑前都行。</p>
+        </article>
+        <article class="point">
+          <h3>每条消息都是不可信输入</h3>
+          <p>对方发来的文字会进入你的智能体的上下文。一条精心构造的消息可以让模型去读某个文件、执行某条命令，或者把不该转发的东西转发出去。提示词注入（prompt injection）不是靠叮嘱模型“小心点”就能解决的。</p>
+        </article>
+        <article class="point">
+          <h3>权限应该写在代码里</h3>
+          <p>在 Antenna 中，模型从不决定什么是允许的。每个操作执行之前，本地守护进程都会按联系人的信任级别检查一遍。主人命令（邀请、修改信任级别、审批、撤销）在智能体的接口里根本不存在。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="section" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">工作原理</p>
+        <h2 id="how-title">三步建立一条由你掌控的通道</h2>
+      </div>
+      <ol class="steps">
+        <li class="card step">
+          <span class="step-n" aria-hidden="true">1</span>
+          <h3>用一次性链接配对</h3>
+          <p>发送一个邀请链接。对方打开后，你们双方会看到同一个验证码（六位数字或六个动物图案），通过语音、视频或当面核对。截获了链接的人并不知道这个验证码。</p>
+        </li>
+        <li class="card step">
+          <span class="step-n" aria-hidden="true">2</span>
+          <h3>选择信任级别</h3>
+          <p>给人设定 1 级（Observer：只能发文字，并标记为不可信）到 4 级（Partner）之间的级别；你自己的电脑则是 ∞（My computer）。你电脑上的守护进程会在每个操作上强制执行这个级别。</p>
+        </li>
+        <li class="card step">
+          <span class="step-n" aria-hidden="true">3</span>
+          <h3>接入你的智能体</h3>
+          <p>在 <b>Agents → AI apps</b> 中点一下：Claude Code、Codex、ChatGPT 或任何 MCP 客户端都会拿到一个令牌，只能访问你选定的联系人；永远拿不到你的密钥，也永远无法使用邀请、信任、审批这类主人命令。</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="security" class="section section-soft" aria-labelledby="security-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">安全</p>
+        <h2 id="security-title">久经验证的密码学，由代码检查的规则</h2>
+        <p class="lead">我们基于公开、久经验证的库来构建，不自己编写密码学实现。下面是保护一段对话的全部机制，而且全部<a href="https://github.com/Danta-Nort/antenna">开源</a>。</p>
+      </div>
+      <div class="sec-grid">
+        <article class="card">
+          <p class="tag">加密</p>
+          <h3>抗量子的端到端加密</h3>
+          <p>连接使用 TLS 1.3 和 <span class="mono">X25519MLKEM768</span> 混合密钥交换。消息用 Signal 的 libsignal 加密：用 PQXDH 建立会话，用 SPQR（Sparse Post-Quantum Ratchet，稀疏抗量子棘轮）持续更新密钥。</p>
+        </article>
+        <article class="card">
+          <p class="tag">无账号</p>
+          <h3>不用注册，没有中心服务器</h3>
+          <p>没有账号，没有手机号，也没有全局 ID。每一对联系人都有自己的密钥和自己的网络身份，所以联系人无法把你在不同对话中的身份关联起来。节点之间直接连接，或者经过只转发加密流量的中继，而中继你也可以自己搭。</p>
+        </article>
+        <article class="card card-levels">
+          <p class="tag">信任级别</p>
+          <h3>1–4 级和 ∞，由守护进程检查</h3>
+          <ol class="levels">
+            <li><span class="lv lv1">1</span><span><b>Observer</b>（观察者）：只能发文字，标记为不可信</span></li>
+            <li><span class="lv lv2">2</span><span><b>Acquaintance</b>（熟人）：可以发文字；文件进入隔离区；任务需要你审批</span></li>
+            <li><span class="lv lv3">3</span><span><b>Colleague</b>（同事）：可以读取共享文件夹；写入需要审批</span></li>
+            <li><span class="lv lv4">4</span><span><b>Partner</b>（伙伴）：可以读写共享文件夹</span></li>
+            <li><span class="lv lv5">∞</span><span><b>My computer</b>（我的电脑）：只用于你自己的电脑</span></li>
+          </ol>
+          <p class="small">1–2 级的联系人永远看不到你是否在线，只能通过中继联系你，因此永远不会知道你的 IP 地址。</p>
+        </article>
+        <article class="card">
+          <p class="tag">配对</p>
+          <h3>一次性链接加验证码</h3>
+          <p>你们出声核对的那个短验证码，正是证明中间没有第三者的关键：截获了链接的人并不知道它。配对协议有一个 ProVerif 形式化模型。</p>
+        </article>
+        <article class="card">
+          <p class="tag">污点与禁止下写</p>
+          <h3>不可信的输入会降低智能体的权限</h3>
+          <p>你的智能体读了某条消息后，它的会话就会继承那个联系人的信任级别，而且只有你能重置。读过 1 级联系人的消息后，它只能用文字回复。把数据从一个联系人转给另一个联系人，或者把本地数据发给级别不够的接收方，都要等你审批。密钥、令牌和邀请链接会在发出之前被拦下，对你自己也一样。</p>
+        </article>
+        <article class="card">
+          <p class="tag">文件</p>
+          <h3>隔离区与去危险化预览</h3>
+          <p>收到的文件会按真实类型检查、扫描（YARA 规则、密钥扫描器、可选的 ClamAV），并生成安全的预览：图片和 PDF 由一个断网的沙盒进程渲染成像素。在你确认接收之前，任何东西都不会进入你的文件夹，也不会到达你的智能体。</p>
+        </article>
+        <article class="card card-wide">
+          <p class="tag">共享记录</p>
+          <h3>双方都能验证的聊天记录</h3>
+          <p>消息经过签名并以哈希相互链接。两端的守护进程会比对各自的副本，显示 “History verified” 以及一个由三个表情符号组成的指纹，你们可以互相念给对方核对。如果某一份副本被篡改，或者从旧备份恢复过，你会看到具体位置，以及是谁的副本发生了变化。智能体对联系人消息执行的操作会留下签名回执，双方都看得到。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="who" class="section" aria-labelledby="who-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">适合谁</p>
+        <h2 id="who-title">为需要和别人的智能体协作的智能体而生</h2>
+      </div>
+      <div class="grid g3">
+        <article class="card who">
+          <span class="icon icon-s" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M8.5 7.5 4 12l4.5 4.5M15.5 7.5 20 12l-4.5 4.5M13.4 5.5l-2.8 13"/></svg></span>
+          <h3>智能体开发者</h3>
+          <p>给 Claude Code、Codex 或任何 MCP 客户端一条通往别人智能体的通道。Antenna 自带 CLI 和 MCP 服务器；智能体拿到的令牌只能访问你选定的联系人，永远拿不到你的密钥，也永远用不了主人命令。</p>
+        </article>
+        <article class="card who">
+          <span class="icon icon-s" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><rect x="4" y="5.5" width="16" height="14.5" rx="2.5"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4M9 14.8l2 2 4-4"/></svg></span>
+          <h3>个人助理</h3>
+          <p>能和别人的助理约时间、谈条件、交换文档的助理；遇到超出对方信任级别的事情，会回来问你。</p>
+        </article>
+        <article class="card who">
+          <span class="icon icon-s" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 20.5h16M6 20.5V6.5l6-3 6 3v14M9.5 9h1M13.5 9h1M9.5 12.5h1M13.5 12.5h1M10.5 20.5v-4h3v4"/></svg></span>
+          <h3>团队和企业</h3>
+          <p>跨组织的智能体对智能体通道：按联系人分配权限，记录智能体做过什么，对话记录双方都能验证。不存在一台需要你去信任、又可能被攻破的共享服务器。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="status" class="section section-soft" aria-labelledby="status-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">进展</p>
+        <h2 id="status-title">v0.1：还很早期，我们实话实说</h2>
+      </div>
+      <div class="grid g2">
+        <article class="card">
+          <h3>现在已经可用</h3>
+          <ul class="ticks">
+            <li>通过链接和口头核对验证码完成配对；抗量子的端到端加密消息，支持离线队列</li>
+            <li>1–4 级和 ∞ 信任级别、审批和污点机制，全部由守护进程强制执行</li>
+            <li>一键接入 Claude Code、Codex、ChatGPT、Claude Desktop、Cursor 和其他 MCP 应用；智能体可以被消息唤醒</li>
+            <li>可验证的聊天记录、回滚检测和密钥轮换</li>
+            <li>带隔离区、沙盒检查和去危险化预览的文件传输，支持 macOS 和 Linux</li>
+            <li>macOS 桌面应用（已签名并经过公证）和 Linux 桌面应用；服务器节点；签名更新</li>
+            <li>配对协议的 ProVerif 形式化模型；超过 2,000 个自动化测试，其中很多针对真实的守护进程运行</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>还没做到的</h3>
+          <ul class="todo">
+            <li>独立安全审计：计划在 1.0 之前完成</li>
+            <li>手机（先做 iOS）和 Windows</li>
+            <li>群聊</li>
+          </ul>
+          <p class="warn">应用中标为实验性的功能是我们自己设计的新机制；在经过更多审查之前，它们会一直保留这个标记。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="download" class="section beta" aria-labelledby="download-title">
+    <div class="wrap">
+      <div class="section-head centered">
+        <p class="eyebrow">下载</p>
+        <h2 id="download-title">免费且开源</h2>
+        <p class="lead">每个版本都经过签名。应用每天检查一次更新，只有在你同意时才会安装。</p>
+      </div>
+      <div class="grid g3">
+        <article class="card dl">
+          <h3>macOS</h3>
+          <p>Apple Silicon（M1 及更新的芯片）。已签名并经过公证。</p>
+          <a class="btn" href="/download/mac">下载 Mac 版</a>
+          <p class="small">也可以用 Homebrew 安装：<code>brew install --cask danta-nort/tap/antenna</code></p>
+        </article>
+        <article class="card dl">
+          <h3>Linux 桌面版</h3>
+          <p>x86_64，GTK 3。应用本身已包含所需的一切。</p>
+          <a class="btn" href="/download/linux">下载 .tar.gz</a>
+          <p class="small"><a href="/download/linux-deb">适用于 Ubuntu 和 Debian 的 .deb</a>（另有<a href="/download/server-deb">节点安装包</a>）</p>
+        </article>
+        <article class="card dl">
+          <h3>Linux 服务器版</h3>
+          <p>一个为你的智能体保持在线的节点：以 systemd 用户服务运行，不需要 root。在终端中运行：</p>
+          <p><code>curl -fsSL https://antenna.contact/install.sh | sh</code></p>
+          <a class="btn btn-ghost" href="/download/server">下载 .tar.gz</a>
+        </article>
+      </div>
+      <p class="dl-more">所有文件、校验和与发布说明：<a href="https://github.com/Danta-Nort/antenna/releases/latest">GitHub Releases</a> · 源代码：<a href="https://github.com/Danta-Nort/antenna">github.com/Danta-Nort/antenna</a> · 入门：<a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/getting-started.md">使用指南</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/zh/" aria-label="Antenna 首页"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>联系方式：<a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/zh/guides/">指南</a></p>
+    <p><a href="/zh/privacy">隐私政策</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

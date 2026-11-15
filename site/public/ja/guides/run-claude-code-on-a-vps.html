@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VPS で Claude Code を 24 時間動かし、ノート PC から操作する — Antenna</title>
+<meta name="description" content="VPS に Antenna を入れて Claude Code や Codex を起動し、ノート PC のチャットからタスクを依頼。ポート開放も、SSH セッションの維持も不要です。">
+<link rel="canonical" href="https://antenna.contact/ja/guides/run-claude-code-on-a-vps">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="VPS で Claude Code を 24 時間動かし、ノート PC から操作する — Antenna">
+<meta property="og:description" content="VPS に Antenna を入れて Claude Code や Codex を起動し、ノート PC のチャットからタスクを依頼。ポート開放も、SSH セッションの維持も不要です。">
+<meta property="og:url" content="https://antenna.contact/ja/guides/run-claude-code-on-a-vps">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ja_JP">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/run-claude-code-on-a-vps">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ja/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "ガイド",
+     "item": "https://antenna.contact/ja/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "VPS で Claude Code を 24 時間動かし、ノート PC から話しかける",
+     "item": "https://antenna.contact/ja/guides/run-claude-code-on-a-vps"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "VPS で Claude Code を 24 時間動かし、ノート PC から話しかける",
+   "description": "VPS に Antenna を入れて Claude Code や Codex を起動し、ノート PC のチャットからタスクを依頼。ポート開放も、SSH セッションの維持も不要です。",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "ja",
+   "url": "https://antenna.contact/ja/guides/run-claude-code-on-a-vps",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ja/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "SSH と tmux だけではだめなのですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ターミナルの前に座っている間はそれで十分です。Antenna はそれに加えて、ノート PC からいつでも書き込めるチャットを用意し、書き込んだらセッションを起こし、ほかのエージェントからも仕事を渡せるようにします。権限は Antenna 自身が検査します。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "サーバーにグローバル IP やポート開放は必要ですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "いいえ。どちらの側も外向きに接続します。ネットワークが許せば直接、そうでなければリレーを経由し、リレーは暗号化された通信を転送するだけです。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "1 台のサーバーで複数のセッションを動かせますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "はい。プロジェクトフォルダーごとに 1 つのエージェントで、それぞれがノート PC 上に自分の名前と自分のチャットを持ちます。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "ARM 向けのビルドはありますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "まだありません。サーバー用のノードは x86_64 の Linux 向けにビルドされています。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">本文へスキップ</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ja/" aria-label="Antenna — ホーム"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="メイン">
+      <a href="/ja/#product">製品</a>
+      <a href="/ja/#security">セキュリティ</a>
+      <a href="/ja/guides/">ガイド</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="言語: 日本語"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">JA</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/run-claude-code-on-a-vps" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/run-claude-code-on-a-vps" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/run-claude-code-on-a-vps" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/run-claude-code-on-a-vps" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/run-claude-code-on-a-vps" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/run-claude-code-on-a-vps" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/run-claude-code-on-a-vps" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/run-claude-code-on-a-vps" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/run-claude-code-on-a-vps" hreflang="ja" lang="ja" aria-current="true">日本語</a></li>
+        <li><a href="/ko/guides/run-claude-code-on-a-vps" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/run-claude-code-on-a-vps" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/run-claude-code-on-a-vps" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/run-claude-code-on-a-vps" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/run-claude-code-on-a-vps" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/run-claude-code-on-a-vps" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ja/#download">ダウンロード</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="パンくずリスト"><a href="/ja/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ja/guides/">ガイド</a></nav>
+    <p class="eyebrow">更新日 <time datetime="2026-11-09">2026年11月9日</time></p>
+    <h1>VPS で Claude Code を 24 時間動かし、ノート PC から話しかける</h1>
+    <p class="lead">Linux の VPS に Claude Code と Antenna のノードをインストールし、サーバーとノート PC を一度だけペアリングして、プロジェクトフォルダーで Antenna 経由で Claude Code を起動します。すると Claude Code はログアウト後も専用の tmux セッションで動き続け、宛てたメッセージが届くと起きて、ノート PC のチャットで答えます。受信用のポートを開ける必要も、SSH セッションを維持する必要もありません。Codex も同じように使えます。</p>
+
+    <h2>必要なもの</h2>
+    <ul>
+      <li>x86_64 の Linux サーバー。Claude Code（または Codex）がインストール済みでサインイン済みであること、そして tmux。</li>
+      <li>ノート PC に <a href="/ja/#download">Antenna</a>。macOS または Linux。</li>
+    </ul>
+
+    <h2>1. サーバーに Antenna のノードをインストールする</h2>
+    <pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+    sudo loginctl enable-linger $USER</code></pre>
+    <p>インストーラーは署名付きマニフェストから最新のリリースを読み取ってアーカイブを検証し、<code>antennad</code> と <code>antenna</code> を systemd のユーザーサービスとして <code>~/.local/bin</code> にインストールし（root は不要）、パスワード付きでノードを作成します。2 行目は、ログアウト後もサービスを動かし続けるためのものです。Ubuntu や Fedora なら、代わりに <code>.deb</code> や <code>.rpm</code> をインストールすることもできます。</p>
+
+    <h2>2. ノート PC とペアリングする</h2>
+    <p>ノート PC で <strong>New contact → Invite</strong> を開き、名前を付け、<strong>This is my own computer (∞)</strong> にチェックを入れて <strong>Create link</strong> を押し、リンクをコピーします。サーバーで：</p>
+    <pre><code>antenna join '&lt;link&gt;' --trust 5 --label mac</code></pre>
+    <p>シングルクォートは外さないでください。リンクには <code>#</code> が含まれています。ノート PC に表示されたコードをサーバーのターミナルに入力し、ノート PC で <strong>The contact confirmed — codes match</strong> を押します。レベル 5 は双方で ∞ にあたるので、サーバーはあなた自身のコンピューターとして扱われます。</p>
+
+    <h2>3. Antenna 経由で Claude Code を起動する</h2>
+    <pre><code>cd ~/projects/api
+    antenna connect claude-code --agent api-dev --links mac --hello mac
+    antenna session start api-dev --dir ~/projects/api
+    antenna session attach api-dev</code></pre>
+    <p>connect の行はセッションに専用のエージェントとトークンを与え、あいさつを送るので、ノート PC に <code>api-dev</code> という名前のチャットが現れます。start の行は Antenna 専用の tmux サーバーで Claude Code を起動します（あなたの tmux には触れません）。一度アタッチして、フォルダーを信頼するかどうかといった Claude Code の最初の質問に答え、<code>Ctrl-b d</code> でデタッチすれば、Claude Code は動き続けます。Codex の場合は <code>antenna connect codex</code> と <code>--cli codex</code> を使います。</p>
+
+    <h2>4. 話しかける</h2>
+    <p>ノート PC の <code>api-dev</code> のチャットに書きます：「マイグレーションのテストを実行して、失敗したものを直して」。Claude Code がプロンプトで待機していると、Antenna が短い 1 行を入力してあなたのメッセージを読ませます。連絡先のテキストを入力することも、代わりに質問に答えることもありません。<strong>My devices</strong> のサーバーのカードにはその健全性とエージェントが表示され、サーバーからのリクエストをノート PC で承認できます。</p>
+
+    <h2>再起動後</h2>
+    <p>サーバーが再起動すると、ノードの鍵はロックされます。サービスは動いていますが、あなたがログインして <code>antenna unlock</code> を実行するまで、リンクは沈黙したままです。こうしておけば、サーバーのディスクのコピーを手に入れても誰もあなたの鍵を得られません。ロックされているかどうかは <code>antenna status</code> でわかります。</p>
+
+    <h2>よくある質問</h2>
+    <details>
+      <summary>SSH と tmux だけではだめなのですか？</summary>
+      <p>ターミナルの前に座っている間はそれで十分です。Antenna はそれに加えて、ノート PC からいつでも書き込めるチャットを用意し、書き込んだらセッションを起こし、ほかのエージェントからも仕事を渡せるようにします。権限は Antenna 自身が検査します。</p>
+    </details>
+    <details>
+      <summary>サーバーにグローバル IP やポート開放は必要ですか？</summary>
+      <p>いいえ。どちらの側も外向きに接続します。ネットワークが許せば直接、そうでなければリレーを経由し、リレーは暗号化された通信を転送するだけです。</p>
+    </details>
+    <details>
+      <summary>1 台のサーバーで複数のセッションを動かせますか？</summary>
+      <p>はい。プロジェクトフォルダーごとに 1 つのエージェントで、それぞれがノート PC 上に自分の名前と自分のチャットを持ちます。</p>
+    </details>
+    <details>
+      <summary>ARM 向けのビルドはありますか？</summary>
+      <p>まだありません。サーバー用のノードは x86_64 の Linux 向けにビルドされています。</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna は無料のオープンソース</strong>で、macOS と Linux に対応しています。アカウントも電話番号も必要ありません。</p>
+      <a class="btn" href="/ja/#download">Antenna をダウンロード</a>
+    </aside>
+    <h2>関連ガイド</h2>
+    <ul class="related">
+      <li><a href="/ja/guides/message-claude-code-on-another-computer">別のコンピューターの Claude Code にメッセージを送る</a></li>
+      <li><a href="/ja/guides/ai-agent-that-replies-to-messages">メッセージに返信する AI エージェントを設定する</a></li>
+      <li><a href="/ja/guides/claude-code-multiple-agents-working-together">複数の Claude Code エージェントを 1 つのプロジェクトで協働させる</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ja/" aria-label="Antenna — ホーム"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ja/guides/">ガイド</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>お問い合わせ： <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ja/privacy">プライバシーポリシー</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

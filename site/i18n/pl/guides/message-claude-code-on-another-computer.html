@@ -1,0 +1,46 @@
+<!--guide {"title": "Jak wysłać wiadomość do Claude Code na innym komputerze — Antenna", "h1": "Jak wysłać wiadomość do Claude Code na innym komputerze", "description": "Dotrzyj do sesji Claude Code na serwerze albo drugim Macu z komputera, przy którym siedzisz: połącz oba komputery w Antennie i pisz do sesji po nazwie.", "summary": "Pisz do sesji Claude Code albo Codex na serwerze lub drugim komputerze i budź ją, gdy jest bezczynna.", "source": "2026-11-14"}-->
+<p class="lead">Zainstaluj Antennę na obu komputerach, połącz je raz jako <strong>∞ · My computer</strong> i podłącz tamtejszą sesję Claude Code do Antenny pod jej własną nazwą. Potem piszesz do tej sesji z Maca jak do kontaktu na czacie albo pozwalasz pisać do niej swojemu lokalnemu Claude Code. Jeśli uruchomisz sesję przez Antennę, będzie budzona, gdy jest bezczynna, a pilna wiadomość może przerwać jej turę w połowie. Dwie sesje na tym samym komputerze? Wtedy połącz je na mapie agentów: <a href="/guides/claude-code-and-codex-talk-to-each-other">dwaj agenci w rozmowie</a>.</p>
+
+<h2>Kiedy to się przydaje</h2>
+<ul>
+  <li>Claude Code wykonuje długie zadania na serwerze albo desktopie, a ty chcesz dać mu kolejne zadanie z laptopa.</li>
+  <li>Jedna sesja planuje, a druga buduje, każda na swojej maszynie.</li>
+  <li>Korzystasz z kilku maszyn i wolisz jeden czat na sesję zamiast jednego terminala na maszynę.</li>
+</ul>
+
+<h2>1. Połącz oba komputery</h2>
+<p>Zainstaluj Antennę na obu: aplikację na Macu albo desktopie z Linuksem, węzeł serwerowy na serwerze z Linuksem (poradnik <a href="/guides/run-claude-code-on-a-vps">Claude Code na VPS</a> opisuje to krok po kroku). Na jednym z nich utwórz zaproszenie z poziomem ∞, otwórz je na drugim, a sześciocyfrowy kod, który pokaże jedna strona, wpisz po drugiej. Parowanie wygląda tak samo jak z człowiekiem i tylko ty możesz je przeprowadzić: po każdej stronie wymaga hasła właściciela.</p>
+
+<h2>2. Nadaj sesji nazwę</h2>
+<p>Na drugim komputerze, w folderze projektu:</p>
+<pre><code>antenna connect claude-code --agent api-dev --links mac --hello mac</code></pre>
+<p><code>mac</code> to nazwa, którą serwer nadał twojemu Macowi przy parowaniu. Polecenie tworzy agenta <code>api-dev</code>, dodaje Antennę do Claude Code tylko dla tego folderu (po twojej zgodzie) i wysyła powitanie do twojego Maca, więc czat <code>api-dev</code> od razu się tam pojawia. Sesja w innym folderze dostaje własną nazwę i własny czat. Codex działa tak samo, z <code>antenna connect codex</code>.</p>
+
+<h2>3. Nie pozwól jej zasnąć</h2>
+<p>Claude Code zagląda do Antenny tylko wtedy, gdy nad czymś pracuje. Żeby odebrał wiadomość, gdy czeka przy pustym prompcie, uruchom go przez Antennę:</p>
+<pre><code>antenna session start api-dev --dir ~/projects/api</code></pre>
+<p>(Serwer potrzebuje do tego tmuxa). Antenna wpisuje wtedy jedną krótką linię przy pustym prompcie, gdy przyjdzie wiadomość, a sesja czyta wiadomość jako dane i bierze się do pracy. Na desktopie to samo robi tryb Code mode Antenny, w karcie terminala w oknie aplikacji. <em>Funkcja eksperymentalna.</em></p>
+
+<h2>4. Napisz do niej</h2>
+<p>Otwórz na Macu czat <code>api-dev</code> i pisz tak, jak do człowieka. Albo zleć to swojemu lokalnemu Claude Code: „Poproś <code>api-dev</code>, żeby uruchomił testy migracji i zdał relację”. Gdy sprawa nie może czekać, przed wysłaniem włącz <strong>Urgent: interrupt now</strong> (przycisk z błyskawicą obok Send; w terminalu <code>antenna send --urgent</code>): w sesji uruchomionej przez Antennę, w trybie Code mode albo przez <code>antenna session start</code>, Antenna raz przerywa trwającą turę, jak po naciśnięciu Esc, a sesja czyta twoją wiadomość. Nigdy nie naciska Esc, gdy w terminalu jest otwarte pytanie albo prośba o uprawnienia. <em>Funkcja eksperymentalna.</em></p>
+
+<h2>Co jest przesyłane, a co nie</h2>
+<p>Wiadomość jest szyfrowana na jednym komputerze i odszyfrowywana na drugim. Żaden terminal nie jest współdzielony i nie trzeba otwierać ani przekierowywać żadnego portu: druga sesja tylko odbiera wiadomości, a jej własna Antenna decyduje, co wolno jej z nimi zrobić. Token agenta zostaje na komputerze, na którym go utworzono.</p>
+
+<h2>Pytania</h2>
+<details>
+  <summary>Czy to zdalne sterowanie terminalem?</summary>
+  <p>Nie. Nie widzisz drugiego terminala i nic w nim nie wpisujesz. Wysyłasz sesji wiadomości i zadania, a ona odpowiada na czacie. Do pełnego terminala używaj SSH, tak jak dotąd.</p>
+</details>
+<details>
+  <summary>Czy widzę, co robi sesja?</summary>
+  <p>Czat pokazuje jej odpowiedzi, a mapa agentów — kto z kim rozmawiał. W <strong>My devices</strong> widzisz też agentów na swoich pozostałych komputerach i możesz zatrzymać każdego z nich razem ze wszystkim, co uruchomił.</p>
+</details>
+<details>
+  <summary>Czy serwer potrzebuje publicznego adresu?</summary>
+  <p>Nie. Oba komputery łączą się na zewnątrz; gdy nie mogą połączyć się bezpośrednio, zaszyfrowany ruch przekazuje przekaźnik (relay).</p>
+</details>
+<details>
+  <summary>Co się dzieje po restarcie serwera?</summary>
+  <p>Po restarcie klucze są zablokowane. Zaloguj się raz i uruchom <code>antenna unlock</code>; potem sesję można znowu uruchomić.</p>
+</details>

@@ -1,0 +1,46 @@
+<!--guide {"title": "Başka bilgisayardaki Claude Code’a mesaj gönderin — Antenna", "h1": "Başka bir bilgisayardaki Claude Code’a mesaj gönderin", "description": "Sunucunuzdaki ya da ikinci Mac’inizdeki Claude Code oturumuna önünüzdekinden ulaşın: iki bilgisayarı Antenna’da eşleştirin ve oturuma adıyla yazın.", "summary": "Sunucunuzdaki ya da ikinci bilgisayarınızdaki Claude Code veya Codex oturumuna yazın, boştayken uyandırın.", "source": "2026-11-14"}-->
+<p class="lead">Antenna’yı iki bilgisayara da kurun, onları bir kez <strong>∞ · My computer</strong> olarak eşleştirin ve oradaki Claude Code oturumunu kendine ait bir adla Antenna’ya bağlayın. Ardından o oturuma Mac’inizden, sohbetteki bir kişiye yazar gibi yazarsınız ya da yerel Claude Code’unuzun ona yazmasına izin verirsiniz. Oturumu Antenna üzerinden başlatırsanız boşta beklerken uyandırılır; acil bir mesaj da onu bir adımın ortasında durdurabilir. Aynı bilgisayarda iki oturum mu var? O zaman onları ajan haritasında bağlayın: <a href="/guides/claude-code-and-codex-talk-to-each-other">birbiriyle konuşan iki ajan</a>.</p>
+
+<h2>Buna ne zaman ihtiyaç duyarsınız</h2>
+<ul>
+  <li>Claude Code uzun işler için bir sunucuda ya da masaüstü bilgisayarda çalışıyor ve bir sonraki görevi ona dizüstünüzden vermek istiyorsunuz.</li>
+  <li>Bir oturum planlıyor, diğeri inşa ediyor; her biri kendi makinesinde.</li>
+  <li>Birkaç makine kullanıyorsunuz ve makine başına bir terminal yerine oturum başına bir sohbet istiyorsunuz.</li>
+</ul>
+
+<h2>1. İki bilgisayarı eşleştirin</h2>
+<p>Antenna’yı ikisine de kurun: Mac ya da Linux masaüstüne uygulamayı, Linux sunucuya sunucu düğümünü (<a href="/guides/run-claude-code-on-a-vps">VPS’te Claude Code</a> rehberi adım adım anlatıyor). Birinde ∞ seviyesinde bir davet oluşturun, diğerinde açın ve bir tarafın gösterdiği altı haneli kodu diğerine girin. Eşleştirme bir insanla yapılanla aynıdır ve yalnızca siz yapabilirsiniz: her iki tarafta da sahip parolanızı gerektirir.</p>
+
+<h2>2. Oturuma bir ad verin</h2>
+<p>Diğer bilgisayarda, proje klasöründe:</p>
+<pre><code>antenna connect claude-code --agent api-dev --links mac --hello mac</code></pre>
+<p>Burada <code>mac</code>, eşleştirirken sunucunun Mac’inize verdiği addır. Bu komut <code>api-dev</code> ajanını oluşturur, Antenna’yı yalnızca bu klasör için Claude Code’a ekler (siz onayladıktan sonra) ve Mac’inize selam verir; böylece orada hemen <code>api-dev</code> adlı bir sohbet belirir. Başka bir klasördeki oturum kendi adını ve kendi sohbetini alır. Codex de <code>antenna connect codex</code> ile aynı şekilde çalışır.</p>
+
+<h2>3. Uyanık tutun</h2>
+<p>Claude Code, Antenna’yı yalnızca bir şey üzerinde çalışırken okur. Boş bir komut isteminde beklerken de mesajı alması için onu Antenna üzerinden başlatın:</p>
+<pre><code>antenna session start api-dev --dir ~/projects/api</code></pre>
+<p>(Bunun için sunucuda tmux gerekir.) Bundan sonra bir mesaj geldiğinde Antenna boş komut istemine kısa tek bir satır yazar; oturum mesajı veri olarak okur ve işine koyulur. Masaüstünde Antenna’nın Code modu aynı şeyi pencerenin içindeki bir terminal sekmesinde yapar. <em>Deneysel.</em></p>
+
+<h2>4. Ona yazın</h2>
+<p>Mac’inizde <code>api-dev</code> sohbetini açın ve bir insana yazar gibi yazın. Ya da bunu yerel Claude Code’unuza yaptırın: “<code>api-dev</code> ajanından migration testlerini çalıştırıp sonucu bildirmesini iste.” Bekleyemeyecek bir şeyse göndermeden önce <strong>Urgent: interrupt now</strong> seçeneğini açın (Send yanındaki şimşek düğmesi; terminalden <code>antenna send --urgent</code>): Antenna’nın çalıştırdığı bir oturumda, Code modunda ya da <code>antenna session start</code> ile, Antenna çalışan adımı bir kez, sizin Esc tuşuna basmanız gibi durdurur ve oturum mesajınızı okur. Terminalde açık bir soru ya da izin istemi varken asla Esc tuşuna basmaz. <em>Deneysel.</em></p>
+
+<h2>Ne gider, ne gitmez</h2>
+<p>Mesaj bir bilgisayarda şifrelenir ve diğerinde çözülür. Hiçbir terminal paylaşılmaz ve hiçbir portun açılması ya da yönlendirilmesi gerekmez: diğer oturum yalnızca mesaj alır ve onlarla ne yapabileceğine kendi Antenna’sı karar verir. Ajanın tokenı oluşturulduğu bilgisayarda kalır.</p>
+
+<h2>Sorular</h2>
+<details>
+  <summary>Bu, terminalin uzaktan kontrolü mü?</summary>
+  <p>Hayır. Diğer terminali görmez ve ona yazmazsınız. Oturuma mesaj ve görev gönderirsiniz, o da sohbette yanıt verir. Terminalin tamamı için eskisi gibi SSH kullanın.</p>
+</details>
+<details>
+  <summary>Oturumun ne yaptığını görebilir miyim?</summary>
+  <p>Sohbet yanıtlarını, ajan haritası da kimin kiminle konuştuğunu gösterir. <strong>My devices</strong> bölümünde diğer bilgisayarlarınızın ajanlarını da görebilir, birini başlattığı her şeyle birlikte durdurabilirsiniz.</p>
+</details>
+<details>
+  <summary>Sunucunun genel bir adrese ihtiyacı var mı?</summary>
+  <p>Hayır. İki bilgisayar da dışarıya bağlanır; birbirlerine doğrudan ulaşamadıklarında şifreli trafiği bir aktarma sunucusu (relay) iletir.</p>
+</details>
+<details>
+  <summary>Sunucu yeniden başlatıldıktan sonra ne olur?</summary>
+  <p>Yeniden başlatmadan sonra anahtarlar kilitlenir. Bir kez oturum açıp <code>antenna unlock</code> komutunu çalıştırın; ardından oturum yeniden başlatılabilir.</p>
+</details>

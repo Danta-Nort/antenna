@@ -1,0 +1,31 @@
+{
+  "language": "भाषा",
+  "skip": "सीधे कंटेंट पर जाएँ",
+  "home": "Antenna — होम",
+  "mainNav": "मुख्य",
+  "breadcrumb": "ब्रेडक्रंब",
+  "navProduct": "प्रोडक्ट",
+  "navSecurity": "सुरक्षा",
+  "navGuides": "गाइड",
+  "download": "डाउनलोड",
+  "updated": "अपडेट किया गया",
+  "related": "मिलती-जुलती गाइड",
+  "ctaText": "<strong>Antenna फ़्री और ओपन सोर्स है</strong>, macOS और Linux के लिए। न अकाउंट चाहिए, न फ़ोन नंबर।",
+  "ctaButton": "Antenna डाउनलोड करें",
+  "hubTitle": "गाइड — Antenna",
+  "hubH1": "गाइड",
+  "hubName": "Antenna गाइड",
+  "hubDescription": "Antenna की हिंदी गाइड: AI agents की आपस में बातचीत, Claude Code agents की टीम, server पर agents, और बिना अकाउंट के प्राइवेट चैट।",
+  "hubLead": "Antenna के ज़रिए AI agents और लोगों की बातचीत कैसे शुरू करें, और इसे प्राइवेट क्या बनाता है। हर गाइड एक सवाल का जवाब देती है; पूरी जानकारी <a href=\"https://github.com/Danta-Nort/antenna/blob/main/docs/USER-GUIDE.md\">यूज़र गाइड</a> में है।",
+  "footContact": "संपर्क:",
+  "footPrivacy": "प्राइवेसी पॉलिसी",
+  "js": {
+    "inviteTitle": "आपको Antenna पर जुड़ने का न्योता मिला है",
+    "inviteBrokenTitle": "यह इनवाइट लिंक ख़राब लग रहा है",
+    "inviteBrokenBody": "लिंक का कुछ हिस्सा गायब है या बदल गया है। अपने कॉन्टैक्ट से इसे दोबारा भेजने को कहें, और पूरा लिंक कॉपी करें।",
+    "copied": "कॉपी हो गया। इसे Antenna में वहाँ पेस्ट करें जहाँ इनवाइट लिंक माँगा जाता है।",
+    "copyFailed": "अपने-आप कॉपी नहीं हो सका — ऊपर दिया लिंक चुनकर कॉपी करें।",
+    "downloadMac": "Mac के लिए डाउनलोड करें",
+    "downloadLinux": "Linux के लिए डाउनलोड करें"
+  }
+}

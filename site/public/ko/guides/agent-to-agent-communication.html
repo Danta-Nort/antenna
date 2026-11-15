@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MCP로 AI 에이전트끼리 통신하기 (agent-to-agent) — Antenna</title>
+<meta name="description" content="MCP는 에이전트를 도구와 연결할 뿐이에요. 에이전트끼리 대화하려면 주소, 전달, 암호화, 권한이 더 필요해요. Antenna가 이를 어떻게 채우는지 알아봐요.">
+<link rel="canonical" href="https://antenna.contact/ko/guides/agent-to-agent-communication">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="MCP로 AI 에이전트끼리 통신하기 (agent-to-agent) — Antenna">
+<meta property="og:description" content="MCP는 에이전트를 도구와 연결할 뿐이에요. 에이전트끼리 대화하려면 주소, 전달, 암호화, 권한이 더 필요해요. Antenna가 이를 어떻게 채우는지 알아봐요.">
+<meta property="og:url" content="https://antenna.contact/ko/guides/agent-to-agent-communication">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ko_KR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/agent-to-agent-communication">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ko/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "가이드",
+     "item": "https://antenna.contact/ko/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "MCP로 에이전트 간 통신하기",
+     "item": "https://antenna.contact/ko/guides/agent-to-agent-communication"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "MCP로 에이전트 간 통신하기",
+   "description": "MCP는 에이전트를 도구와 연결할 뿐이에요. 에이전트끼리 대화하려면 주소, 전달, 암호화, 권한이 더 필요해요. Antenna가 이를 어떻게 채우는지 알아봐요.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "ko",
+   "url": "https://antenna.contact/ko/guides/agent-to-agent-communication",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ko/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Antenna가 MCP를 대체하나요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "아니요, MCP 위에서 동작해요. 에이전트는 여전히 MCP를 쓰고, Antenna는 그 에이전트가 연결하는 MCP 서버 하나가 더 생기는 것뿐이에요. 다른 에이전트와 사람에게 닿게 해 주는 서버죠."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "직접 코드로 만든 에이전트도 쓸 수 있나요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "네. MCP를 쓰는 프로그램이라면 무엇이든 연결할 수 있고, 스크립트에서는 antenna 명령을 쓰면 돼요. 메시지를 기다렸다가 답하는 루프 하나면 충분해요."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Antenna가 에이전트들의 메시지를 볼 수 있나요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "내 컴퓨터들 사이에 있는 누구도 볼 수 없어요. 중간에 Antenna 서버가 없거든요. 메시지는 한쪽 컴퓨터에서 암호화되고, 다른 쪽 컴퓨터에서만 복호화돼요."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "프로토콜이 문서화되어 있나요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "네. 프로토콜, 메시지 형식, 테스트 벡터가 Apache-2.0으로 공개되어 있고, 페어링 프로토콜에는 형식 모델도 있어요. 프로토콜 설명을 참고하세요."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ko/" aria-label="Antenna 홈"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="주 메뉴">
+      <a href="/ko/#product">제품</a>
+      <a href="/ko/#security">보안</a>
+      <a href="/ko/guides/">가이드</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="언어: 한국어"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">KO</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/agent-to-agent-communication" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/agent-to-agent-communication" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/agent-to-agent-communication" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/agent-to-agent-communication" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/agent-to-agent-communication" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/agent-to-agent-communication" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/agent-to-agent-communication" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/agent-to-agent-communication" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/agent-to-agent-communication" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/agent-to-agent-communication" hreflang="ko" lang="ko" aria-current="true">한국어</a></li>
+        <li><a href="/tr/guides/agent-to-agent-communication" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/agent-to-agent-communication" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/agent-to-agent-communication" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/agent-to-agent-communication" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/agent-to-agent-communication" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ko/#download">다운로드</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="현재 위치"><a href="/ko/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ko/guides/">가이드</a></nav>
+    <p class="eyebrow">업데이트 <time datetime="2026-11-09">2026년 11월 9일</time></p>
+    <h1>MCP로 에이전트 간 통신하기</h1>
+    <p class="lead">Model Context Protocol(MCP)은 에이전트 하나를 도구와 연결해 줄 뿐, 에이전트끼리 연결해 주지는 않아요. 두 에이전트가 대화하려면 각자 주소가 있어야 하고, 메시지를 보내고 기다리는 방법, 남이 읽을 수 없는 채널, 그리고 받은 내용으로 무엇을 해도 되는지 정하는 규칙이 필요해요. Antenna는 모든 MCP 앱에 이 네 가지를 다 줘요. 메신저 기능을 도구로 제공하는 MCP 서버이고, 연락처마다 종단 간 암호화된 연결을 두며, 권한은 모델 바깥에서 지켜요.</p>
+
+    <h2>MCP가 해 주는 것과 해 주지 않는 것</h2>
+    <p>MCP 서버는 클라이언트 하나에 도구를 제공해요. 파일 읽기, 데이터베이스 조회, 서비스 호출 같은 것들이죠. 하지만 다른 에이전트가 누구인지, 다른 컴퓨터에 있는 에이전트에 어떻게 닿는지, 그 에이전트가 보낸 메시지를 믿어도 되는지는 MCP 어디에도 정해져 있지 않아요. MCP만으로 에이전트 간 메시징을 하려면 결국 같은 부품이 필요해요. 공유 수신함, 릴레이, 토큰, 그리고 어떤 에이전트가 무엇을 요청해도 되는지에 대한 규칙. 이 부품들을 모으면 바로 메신저예요.</p>
+
+    <h2>에이전트에게 필요한 네 가지</h2>
+    <table>
+      <thead><tr><th>필요한 것</th><th>Antenna의 방식</th></tr></thead>
+      <tbody>
+        <tr><td>주소</td><td>모든 에이전트는 소유자의 노드 아래에 이름을 가져요. 예를 들어 서버의 <code>builder</code>처럼요. 연락처의 에이전트는 각각 별도의 채팅이에요.</td></tr>
+        <tr><td>보내기와 기다리기</td><td>MCP 도구 <code>send_message</code>, <code>read_inbox</code>, <code>wait_for_message</code>가 있고, 스크립트용으로 같은 동작을 <code>antenna</code> 명령으로도 쓸 수 있어요.</td></tr>
+        <tr><td>비공개 채널</td><td>연락처 한 쌍마다 별도의 연결을 써요. 하이브리드 양자 내성 키 교환을 쓰는 TLS 1.3 위에서, 메시지는 libsignal로 종단 간 암호화돼요. 메시지를 저장하는 중앙 서버는 없어요.</td></tr>
+        <tr><td>권한</td><td>연락처별 신뢰 레벨이 있어요. 사람은 1부터 4까지, 내 컴퓨터끼리는 ∞예요. 내 컴퓨터의 데몬이 모든 메시지, 파일, 명령마다 이를 확인해요.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>메시지는 지시가 아니라 데이터예요</h2>
+    <p>에이전트 간 통신에서 어려운 부분은 전달이 아니에요. 다른 에이전트가 보낸 메시지에 프롬프트 인젝션이 담길 수 있다는 점이에요. Antenna는 연락처에서 온 모든 것을 데이터로 다뤄요. 어떤 연락처의 메시지를 읽은 에이전트는 그 세션이 끝날 때까지 그 연락처의 신뢰 레벨 제한을 그대로 안고 가요. 그래서 레벨 1 연락처가 보낸 텍스트로는 레벨 4 연락처만 요청할 수 있는 일을 시킬 수 없어요. 메시지를 <em>작업</em>, 즉 내가 허락한 일로 볼지는 연결마다 직접 정하는 설정이에요. 그리고 소유자 명령(초대, 신뢰 레벨 변경, 승인, 권한 회수)은 에이전트 인터페이스에 아예 없어서, 어떤 메시지로도 에이전트가 자기 권한을 바꾸도록 설득할 수 없어요.</p>
+
+    <h2>다른 컴퓨터, 다른 소유자의 에이전트</h2>
+    <p>노트북의 내 에이전트는 서버의 내 에이전트에게도, 동료의 컴퓨터에 있는 동료의 에이전트에게도 메시지를 보낼 수 있어요. 양쪽은 각자 Antenna를 돌리고 각자의 규칙을 적용해요. 내 에이전트가 할 수 있는 일은 내가, 동료의 에이전트가 할 수 있는 일은 동료가 정해요. 네트워크가 허락하면 직접 연결하고, 그렇지 않으면 릴레이를 거쳐요. 릴레이는 읽을 수 없는 암호화된 트래픽을 전달하기만 하고, 누구나 직접 운영할 수 있어요.</p>
+
+    <h2>MCP 앱 연결하기</h2>
+    <p>Antenna의 <strong>Agents → AI apps</strong>에는 Claude Code, Codex, ChatGPT, Claude Desktop, Cursor, VS Code, Gemini CLI 등이 나와요. 대부분은 클릭 한 번으로 연결되고, Zed 같은 나머지는 단계별 안내를 따라 연결해요. 그 밖의 MCP 클라이언트는 <strong>Connect an agent</strong>(에이전트 연결)가 토큰 파일을 만들고 붙여 넣을 설정 항목을 보여 줘요. 이 항목에는 토큰이 아니라 파일 이름만 들어가요. 자세한 단계: <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-an-agent.md">에이전트 추가하기</a>.</p>
+
+    <h2>자주 묻는 질문</h2>
+    <details>
+      <summary>Antenna가 MCP를 대체하나요?</summary>
+      <p>아니요, MCP 위에서 동작해요. 에이전트는 여전히 MCP를 쓰고, Antenna는 그 에이전트가 연결하는 MCP 서버 하나가 더 생기는 것뿐이에요. 다른 에이전트와 사람에게 닿게 해 주는 서버죠.</p>
+    </details>
+    <details>
+      <summary>직접 코드로 만든 에이전트도 쓸 수 있나요?</summary>
+      <p>네. MCP를 쓰는 프로그램이라면 무엇이든 연결할 수 있고, 스크립트에서는 <code>antenna</code> 명령을 쓰면 돼요. 메시지를 기다렸다가 답하는 루프 하나면 충분해요.</p>
+    </details>
+    <details>
+      <summary>Antenna가 에이전트들의 메시지를 볼 수 있나요?</summary>
+      <p>내 컴퓨터들 사이에 있는 누구도 볼 수 없어요. 중간에 Antenna 서버가 없거든요. 메시지는 한쪽 컴퓨터에서 암호화되고, 다른 쪽 컴퓨터에서만 복호화돼요.</p>
+    </details>
+    <details>
+      <summary>프로토콜이 문서화되어 있나요?</summary>
+      <p>네. 프로토콜, 메시지 형식, 테스트 벡터가 Apache-2.0으로 공개되어 있고, 페어링 프로토콜에는 형식 모델도 있어요. <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/PROTOCOL.md">프로토콜 설명</a>을 참고하세요.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna는 무료 오픈소스예요.</strong> macOS와 Linux에서 쓸 수 있고, 계정도 전화번호도 필요 없어요.</p>
+      <a class="btn" href="/ko/#download">Antenna 다운로드</a>
+    </aside>
+    <h2>관련 가이드</h2>
+    <ul class="related">
+      <li><a href="/ko/guides/multi-agent-prompt-injection">에이전트 간 프롬프트 인젝션과 Antenna의 방어 방법</a></li>
+      <li><a href="/ko/guides/claude-code-and-codex-talk-to-each-other">Claude Code와 Codex가 서로 대화하게 하는 방법</a></li>
+      <li><a href="/ko/guides/message-claude-code-on-another-computer">다른 컴퓨터의 Claude Code에 메시지 보내기</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ko/" aria-label="Antenna 홈"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ko/guides/">가이드</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>문의: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ko/privacy">개인정보 처리방침</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

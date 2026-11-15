@@ -1,0 +1,45 @@
+<!--guide {"title": "Kuantum sonrası şifrelemeli açık kaynak P2P mesajlaşma — Antenna", "h1": "Kuantum sonrası şifrelemeli, açık kaynaklı eşler arası (P2P) mesajlaşma uygulaması", "description": "Antenna mesajları merkezi sunucu olmadan doğrudan cihazlar arasında, kuantum sonrası anahtarlarla uçtan uca şifreli gönderir. Nasıl çalışır, neyi korur?", "summary": "Antenna cihazları nasıl doğrudan bağlar, kuantum sonrası anahtarlarla nasıl şifreler ve bir aktarma sunucusu neyi görür, neyi göremez.", "source": "2026-11-09"}-->
+<p class="lead">Antenna, macOS ve Linux için ücretsiz, açık kaynaklı, eşler arası (P2P) bir mesajlaşma uygulamasıdır. Mesajlar ve dosyalar QUIC üzerinden bir cihazdan diğerine doğrudan gider, libsignal’in kuantum sonrası protokolleriyle uçtan uca şifrelenir; bağlantının kendisi de hibrit kuantum sonrası anahtar değişimi kullanır. Mesajlarınızı saklayan ya da yönlendiren merkezi bir sunucu yoktur; iki cihaz birbirine doğrudan ulaşamadığında, çözemediği trafiği ileten bir aktarma sunucusu (relay) devreye girer.</p>
+
+<h2>Pratikte eşler arası iletişim</h2>
+<p>“Eşler arası” kulağa basit gelir, ama çoğu bilgisayar gelen bağlantıları engelleyen ev modemlerinin ve güvenlik duvarlarının arkasındadır. Antenna, bunların arasından doğrudan bir yol bulan (hole punching) ve yol yoksa aktarma sunucusuna geçen bir QUIC kütüphanesi olan iroh’u kullanır. Bağlantı genellikle aktarma sunucusu üzerinden başlar ve doğrudan bir yol bulunduğunda ona geçer. Her iki durumda da aktarma sunucusu yalnızca şifreli paketleri görür ve herkes varsayılan sunucu yerine kendi aktarma sunucusunu çalıştırabilir.</p>
+<p>Aynı ağda, yeterince güvendiğiniz kişiler hiç internet olmasa bile yerel ağ üzerinden de bağlanabilir.</p>
+
+<h2>İki katmanlı şifreleme</h2>
+<table>
+  <thead><tr><th>Katman</th><th>Ne kullanır</th><th>Neyi korur</th></tr></thead>
+  <tbody>
+    <tr><td>Bağlantı</td><td>X25519MLKEM768 ile TLS 1.3: klasik ve kuantum sonrası anahtar değişiminin bir karması</td><td>İki cihaz arasındaki bağlantıyı, aktarma sunucusu üzerinden geçerken de</td></tr>
+    <tr><td>Mesajlar</td><td>libsignal: konuşmayı başlatmak için PQXDH ve kuantum sonrası SPQR ratchet’ı</td><td>Her mesajı ve dosyayı, uçtan uca ve ileriye dönük gizlilikle (forward secrecy)</td></tr>
+  </tbody>
+</table>
+<p>“Kuantum sonrası”, anahtar değişiminin, trafiği bugün kaydedip yarın bir kuantum bilgisayarla çözmeyi planlayan birine karşı da güvenli kalması demektir. Antenna kendi kriptografisini yazmaz: iki katman da denetlenmiş ya da biçimsel olarak doğrulanmış kütüphanelerden gelir ve eşleştirme protokolünün ProVerif ile kontrol edilmiş biçimsel bir modeli vardır.</p>
+
+<h2>Eşler arası tasarım neyi değiştirir</h2>
+<ul>
+  <li><strong>Çalınacak bir hesap yok.</strong> Kullanıcıların, kişilerinin ya da mesajlarının listesini tutan bir sunucu yoktur.</li>
+  <li><strong>Telefon numarası yok.</strong> İnsanları tek kullanımlık bir bağlantıyla ve sesli karşılaştırdığınız bir kodla eklersiniz. Bkz. <a href="/guides/messenger-without-phone-number">telefon numarası istemeyen mesajlaşma uygulaması</a>.</li>
+  <li><strong>IP adresiniz, sizin koşullarınızla.</strong> Doğrudan bağlantı, karşı tarafa adresinizi gösterir. 1. ve 2. güven seviyesindeki kişiler her zaman aktarma sunucusu üzerinden geçer; bu yüzden adresinizi asla görmezler.</li>
+  <li><strong>İki cihazın aynı anda çevrimiçi olması gerekir.</strong> O zamana kadar mesaj gönderenin kuyruğunda bekler ve kendiliğinden gider; sürekli açık bıraktığınız bir sunucu, ajanlarınızı erişilebilir tutar.</li>
+</ul>
+
+<h2>Açık kaynak ve denetlenebilir</h2>
+<p>Uygulama AGPL-3.0 lisanslıdır; protokol, biçimleri ve test vektörleri Apache-2.0 lisanslıdır, böylece başkaları uyumlu istemciler geliştirebilir. Sürümler imzalıdır; kaynak kod, spesifikasyon ve her tasarım kararı <a href="https://github.com/Danta-Nort/antenna">GitHub</a>’dadır. Mesajlar imzalanır ve hash zinciriyle birbirine bağlanır, iki taraf da kopyalarını karşılaştırır; böylece değiştirilmiş ya da geri alınmış bir mesaj, nerede olduğunu gösterir.</p>
+
+<h2>Sorular</h2>
+<details>
+  <summary>Eşler arası bir mesajlaşma uygulaması daha mı yavaş?</summary>
+  <p>Genellikle hayır: doğrudan yol, bir veri merkezine gidip gelmeyi atlar; aktarma sunucusu üzerinden ise mesaj yalnızca bir ek durak yapar.</p>
+</details>
+<details>
+  <summary>Kendi aktarma sunucumu çalıştırabilir miyim?</summary>
+  <p>Evet. Aktarma sunucusu açık kaynaklıdır ve yalnızca şifreli trafiği iletir; düğümünüzü varsayılan sunucu yerine kendi aktarma sunucunuza yönlendirin.</p>
+</details>
+<details>
+  <summary>Gruplar için çalışıyor mu?</summary>
+  <p>Henüz değil. Antenna 0.1’de bire bir konuşmalar var: insanlar arasında, insanlarla ajanlar arasında ve ajanlar arasında.</p>
+</details>
+<details>
+  <summary>Hangi platformlar destekleniyor?</summary>
+  <p>Apple Silicon’lı macOS (imzalı ve notarize edilmiş) ve x86_64 Linux: masaüstü uygulaması ve bir sunucu düğümü.</p>
+</details>

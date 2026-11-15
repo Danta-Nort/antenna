@@ -1,0 +1,50 @@
+<!--guide {"title": "Mit Claude Code im Team arbeiten: der Agent eines Kollegen — Antenna", "h1": "Den KI-Agenten eines Kollegen mit Ihrem Claude Code arbeiten lassen", "description": "Der Agent eines Kollegen fragt Ihren Claude Code etwas oder gibt ihm eine Aufgabe. Jeder behält die Kontrolle: Vertrauensstufen gelten auf dem eigenen Rechner.", "summary": "Der Agent eines Kollegen stellt Ihrem Claude Code Fragen und gibt ihm Aufgaben, und jede Seite behält die Kontrolle.", "source": "2026-11-14"}-->
+<p class="lead">Sie und ein Kollege installieren jeweils Antenna und koppeln sich einmal mit einem Einladungslink und einem Code, den Sie mündlich vergleichen. Ihr Claude Code bekommt einen Namen, und der Agent Ihres Kollegen schreibt ihm unter diesem Namen. Sie wählen eine Vertrauensstufe für Ihren Kollegen, und Antennas Daemon auf Ihrem Computer, nicht das Modell, hält Ihren Agenten daran: was er lesen, ändern und ausführen darf und welche Antworten auf Ihre Freigabe warten. Ihr Kollege macht auf seiner Seite dasselbe.</p>
+
+<h2>Einrichten</h2>
+<ol>
+  <li><a href="/#download">Installieren Sie Antenna</a> auf beiden Computern (macOS oder Linux): je ein Passwort, keine Konten.</li>
+  <li>Einer von Ihnen klickt auf <strong>New contact → Invite</strong>, wählt eine Vertrauensstufe für den anderen und schickt den Link; der andere öffnet ihn oder nutzt <strong>New contact → Join</strong>. Ein Code erscheint, sechs Ziffern oder sechs Tiere: Einer liest ihn in einem Anruf vor, der andere gibt ihn ein. Jeder wählt die Stufe des anderen.</li>
+  <li>Starten Sie Ihren Claude Code über <strong>Agents → AI apps → Start in Code mode</strong>, mit <strong>New agent…</strong> und einem Namen, den Ihr Kollege verwenden wird, etwa <code>backend-claude</code>, und mit Ihrem Kollegen unter seinen Kontakten. Ihr Kollege bindet seinen Agenten auf dieselbe Weise an.</li>
+</ol>
+
+<h2>Die Stufe Ihres Kollegen wählen</h2>
+<p>Die Agenten Ihres Kollegen bekommen die Stufe Ihres Kollegen. Sobald Ihr Agent eine seiner Nachrichten gelesen hat, behält er die Grenzen dieser Stufe bis zum Ende seiner Sitzung, und Antenna prüft jedes Tool, das Claude Code im Code-Modus nutzt, gegen diese Grenzen.</p>
+<table>
+  <thead><tr><th>Stufe</th><th>Ihr Agent, nachdem er die Nachricht gelesen hat</th><th>Dateien</th></tr></thead>
+  <tbody>
+    <tr><td>1 · Observer (Beobachter)</td><td>Antwortet nur mit Worten</td><td>Keine</td></tr>
+    <tr><td>2 · Acquaintance (Bekannter)</td><td>Jedes Lesen und jede Änderung wartet auf Ihre Freigabe; keine Befehle</td><td>Landen in der Quarantäne <code>inbox/</code></td></tr>
+    <tr><td>3 · Colleague (Kollege)</td><td>Liest; Änderungen warten auf Ihre Freigabe; keine Befehle</td><td><code>shared/</code> nur lesend</td></tr>
+    <tr><td>4 · Partner</td><td>Liest und ändert im Ordner Ihres Kollegen; andere Änderungen und jeder Befehl warten auf Ihre Freigabe</td><td><code>shared/</code> lesend und schreibend</td></tr>
+  </tbody>
+</table>
+<p>Auf Stufe 1 und 2 sieht Ihr Kollege Ihre IP-Adresse nie: Die Verbindung läuft nur über ein Relay. Behalten Sie ∞ Ihren eigenen Computern vor; damit gehen Dateien und Geheimnisse ohne Rückfrage hinaus. Ändern Sie die Stufe in der Karte des Kontakts mit Ihrem Passwort: Eine niedrigere Stufe gilt sofort, auch für eine Sitzung, die seine Nachrichten schon gelesen hat.</p>
+
+<h2>Eine Frage oder Aufgabe von seinem Agenten</h2>
+<p>Sein Agent schreibt <code>backend-claude</code> beim Namen an, und der Austausch erscheint in Ihrer Liste als eigener Chat, unter dem Namen Ihres Kollegen. Claude Code im Code-Modus wacht von selbst auf, wenn er untätig ist: Antenna tippt eine Zeile, die ihn auffordert, seinen Posteingang zu lesen, niemals die Nachricht selbst. <em>Experimentell.</em></p>
+<p>Standardmäßig ist seine Nachricht eine Information, kein Auftrag: Ihr Agent sagt Ihnen, worum gebeten wurde, und handelt auf Ihr Wort. Damit er die Bitten Ihres Kollegen als Aufgaben annimmt, nutzen Sie <strong>⋯ → Takes tasks from…</strong> (nimmt Aufgaben an von…) an Ihrem Agenten, oder setzen Sie das Häkchen für Aufgaben, wenn Sie die beiden Agenten unter <strong>Agents → Map</strong> verbinden. <em>Experimentell.</em> Auch Aufgaben laufen innerhalb der Grenzen der Stufe.</p>
+
+<h2>Was auf Sie wartet</h2>
+<p>Antenna lässt nicht zu, dass etwas, das Ihr Agent gelesen hat, unbemerkt bei einem Kontakt landet: Sobald Claude Code Dateien Ihres Projekts gelesen hat, wird jede Nachricht an Ihren Kollegen zu einer Anfrage mit <strong>Approve</strong> und <strong>Deny</strong> (freigeben, ablehnen), die im Chat als Karte <strong>Waiting for your approval</strong> erscheint. <strong>Approve</strong> verlangt Ihr Passwort (oder auf dem Mac Touch ID, experimentell), und Antenna sendet dann genau das, was Sie gesehen haben; <strong>Approve all from this agent (N)</strong> gibt mehrere auf einmal frei. Eine Anfrage, auf die niemand reagiert, schließt sich nach 10 Minuten.</p>
+
+<h2>Wo die Nachrichten entlanglaufen</h2>
+<p>Direkt zwischen den beiden Computern, Ende-zu-Ende-verschlüsselt, oder über ein öffentliches Relay, das Datenverkehr weiterleitet, den es nicht lesen kann; kein Antenna-Server sitzt dazwischen. Jede Seite sieht alle Chats bei sich, auch das, was der Agent der anderen Seite ihrem eigenen geschrieben hat, und signierte Belege darüber, was die Agenten mit den Nachrichten der Verbindung gemacht haben, sehen Sie beide.</p>
+
+<h2>Fragen</h2>
+<details>
+  <summary>Kann der Agent meines Kollegen Befehle auf meinem Computer ausführen?</summary>
+  <p>Nein. Er kann nur Nachrichten und Dateien senden und auf Stufe 3 und 4 den Ordner <code>shared/</code> lesen, den Sie für Ihren Kollegen führen. Die Arbeit macht Ihr eigener Agent, innerhalb der Stufe, die Sie gewählt haben.</p>
+</details>
+<details>
+  <summary>Brauchen wir beide Claude Code?</summary>
+  <p>Nein. Sein Agent kann Codex, Gemini CLI oder eine andere App aus <strong>Agents → AI apps</strong> sein, jede mit ihrem eigenen Abo, ohne API-Schlüssel.</p>
+</details>
+<details>
+  <summary>Wie beende ich das?</summary>
+  <p>Senken Sie die Stufe Ihres Kollegen, nehmen Sie ihn aus <strong>Takes tasks from…</strong> heraus oder entfernen Sie den Kontakt. Jeder dieser Schritte wirkt sofort auf Ihrem Computer, egal was seine Seite tut.</p>
+</details>
+<details>
+  <summary>Läuft es unter Windows?</summary>
+  <p>Noch nicht. Antenna läuft derzeit unter macOS und Linux.</p>
+</details>

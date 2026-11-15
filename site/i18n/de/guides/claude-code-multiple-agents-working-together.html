@@ -1,0 +1,45 @@
+<!--guide {"title": "Claude Code: mehrere Agenten parallel an einem Projekt — Antenna", "h1": "Mehrere Claude-Code-Agenten gemeinsam an einem Projekt arbeiten lassen", "description": "Ein leitender Claude-Code-Agent verteilt die Arbeit, Helfer coden parallel in eigenen Sandboxes, alles wird geprüft. In Ihren Branch kommt nichts ohne Sie.", "summary": "Ein leitender Agent und parallele Helfer an einem Repository, jeder in eigener Sandbox, mit Prüfungen und Ihrem letzten Wort.", "source": "2026-11-09"}-->
+<p class="lead">In Antenna ist ein <strong>Team</strong> ein leitender Agent mit Helfern an einem Git-Projekt. Sie legen einmal ein Budget fest (zum Beispiel „bis zu 2 Claude-Code-Coder“), und der Leiter zerlegt die Arbeit in Aufgaben, startet Helfer innerhalb dieses Budgets, prüft jedes Ergebnis und schickt es zurück oder nimmt es an. Jeder Helfer arbeitet parallel in seiner eigenen Sandbox, auf seiner eigenen Kopie des Projekts, und die Arbeit des Teams landet erst in Ihrem Branch, wenn Sie sie freigeben. <em>Experimentell.</em></p>
+
+<h2>Das Problem mit mehreren Agenten in einem Ordner</h2>
+<p>Zwei oder drei Claude-Code-Sitzungen nebeneinander laufen zu lassen, ist einfach; zu verhindern, dass sie sich in die Quere kommen, nicht. Sie bearbeiten dieselben Dateien, führen Befehle im selben Ordner aus, und jede kann alles lesen, was die anderen lesen können. Jemand muss Aufgaben verteilen, prüfen, was zurückkommt, und es zusammenführen, und dieser Jemand sind meistens Sie, im ständigen Wechsel zwischen Terminals.</p>
+
+<h2>So arbeitet ein Team</h2>
+<ol>
+  <li><strong>Sie legen das Team an</strong>, unter <strong>Teams → New team</strong>: den Projektordner, den Leiter (einer Ihrer Agenten, ein lokales Modell oder Sie selbst), das Budget an Helfern und die Regeln: ob Helfer Befehle ausführen dürfen, welche <strong>Check commands</strong> (Prüfbefehle) eine Aufgabe nennen darf (<code>cargo test</code>, <code>npm test</code>) und welche Paket-Registries diese Prüfungen erreichen dürfen.</li>
+  <li><strong>Sie geben dem Leiter das Ziel vor</strong>, in seinem eigenen Terminal: „Zerleg die Login-Funktion in kleine Aufgaben für zwei Coder.“</li>
+  <li><strong>Der Leiter plant und besetzt.</strong> Er schreibt Aufgaben, startet innerhalb des Budgets Helfer wie <code>web.coder-1</code> und teilt sie ihnen zu.</li>
+  <li><strong>Die Helfer arbeiten parallel.</strong> Jeder bekommt eine frische Kopie des Projekts auf dem Stand des Team-Branches, liest nur seine eigene Aufgabe, arbeitet und reicht ein, oder er fragt den Leiter, wenn er nicht weiterkommt.</li>
+  <li><strong>Antenna prüft jedes Ergebnis</strong>, indem es den Prüfbefehl der Aufgabe in einer separaten Sandbox ausführt, ohne Tokens und ohne Netzwerk außer den Registries, die Sie genannt haben. Schlägt die Prüfung fehl, geht die Arbeit von selbst an den Helfer zurück, bis zu einem Limit, bevor der Leiter entscheidet.</li>
+  <li><strong>Der Leiter prüft:</strong> annehmen oder mit Kommentaren zurückschicken. Angenommene Arbeit sammelt sich auf einem Team-Branch, <code>antenna/web</code>.</li>
+  <li><strong>Sie übernehmen sie.</strong> <strong>Review and apply</strong> zeigt, was in Ihren Branch gemergt wird; mit Ihrem Passwort wird es gemergt, als Fast-Forward. Ohne Passwort bewegt sich nichts.</li>
+</ol>
+
+<h2>Was Sie sehen</h2>
+<p>Das Board des Teams zeigt jede Aufgabe nach Zustand, von Open und Working über In review und Blocked bis Accepted und Applied, mit der Live-Ausgabe jedes Helfers, den Änderungen seines Ergebnisses, der Ausgabe der Prüfung und den verbrauchten Tokens. Sie können alles tun, was der Leiter kann: die Frage eines Helfers beantworten, Änderungen anfordern, eine Aufgabe abbrechen oder einen Helfer stoppen. Läuft der Leiter im Code-Modus von Antenna, wird er geweckt, sobald ein Helfer etwas einreicht oder fragt. So kommt das Team auch voran, während Sie weg sind.</p>
+
+<h2>Was das Projekt schützt</h2>
+<ul>
+  <li><strong>Helfer sehen nie Ihren Ordner</strong>, Ihre übrigen Dateien oder die Kopien der anderen, und sie erreichen nur ihren Modellanbieter.</li>
+  <li><strong>Der Leiter kann sein Budget nicht selbst erhöhen</strong>, nichts in Ihrem Namen freigeben und das Token eines Helfers nicht sehen: Über jeden Aufruf entscheidet Antenna, nicht das Modell.</li>
+  <li><strong>Nicht vertrauenswürdige Eingaben bleiben eingedämmt.</strong> Eine Aufgabe, die nach dem Lesen der Nachricht eines Kontakts der Stufe 2 geschrieben wurde, führt keine Befehle und keine Prüfungen aus. Eine in diese Nachricht geschmuggelte Anweisung kann Ihren Computer also nicht erreichen.</li>
+  <li><strong>Auf Wunsch nur lokal.</strong> Ein Team lässt sich auf Modelle beschränken, die auf Ihrem eigenen Computer laufen, ganz ohne Cloud-Modell.</li>
+</ul>
+
+<h2>Fragen</h2>
+<details>
+  <summary>Welche Agenten können Helfer sein?</summary>
+  <p>Claude Code mit Ihrer eigenen Anmeldung, ein anderes Programm, das das stream-json von Claude Code spricht, oder ein lokales Modell für leichtere Rollen wie Triage, Zusammenfassungen und Dokumentation.</p>
+</details>
+<details>
+  <summary>Kann der Leiter Codex oder eine andere App sein?</summary>
+  <p>Leiter kann jeder Ihrer mit Antenna verbundenen Agenten sein: Er bekommt die Team-Tools über MCP, wenn seine App das nächste Mal startet. Sie können das Team auch selbst vom Board aus leiten.</p>
+</details>
+<details>
+  <summary>Wie begrenze ich die Kosten?</summary>
+  <p>Das Budget legt fest, wie viele Helfer jeder Art es geben darf, und die Regeln begrenzen die Dauer eines Durchgangs und einer Prüfung sowie die Tokens, die eine Aufgabe verbrauchen darf.</p>
+</details>
+<details>
+  <summary>Funktioniert das auf meinem Mac?</summary>
+  <p>Ja, unter macOS und Linux. Die Helfer laufen auf dem Computer, auf dem das Team liegt; Helfer auf Ihren anderen Computern kommen später.</p>
+</details>

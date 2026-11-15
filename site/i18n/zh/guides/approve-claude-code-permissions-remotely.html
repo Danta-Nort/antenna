@@ -1,0 +1,46 @@
+<!--guide {"title": "在另一台电脑上远程批准 Claude Code 的权限请求 — Antenna", "h1": "在另一台电脑上批准 Claude Code 的请求", "description": "服务器或另一台电脑上的 Claude Code 需要你批准时，Antenna 会把请求送到你所有的电脑上，用密码或 Touch ID 即可批准。", "summary": "另一台电脑上的 Claude Code 发来的批准请求，你在哪台电脑前，就在哪台上回答。", "source": "2026-11-15"}-->
+<p class="lead">通过 Antenna 启动 Claude Code（在窗口里用 Code 模式，或在服务器上用 <code>antenna session</code>），Antenna 守护进程就会检查它使用的每一个工具和发出的每一条消息。某一步需要你点头时，它会变成一个批准请求，出现在你配对为自己电脑的每一台机器上，位于 <strong>My devices</strong>（我的设备）中，并弹出通知。在那里用这台电脑的密码或 Touch ID 批准：运行 Claude Code 的那台电脑会核验你的答复，执行这一步，然后 Claude Code 继续工作。</p>
+
+<h2>哪些请求会找到你</h2>
+<ul>
+  <li><strong>读过联系人消息之后的操作。</strong>Claude Code 一旦读过同事的消息，同事的信任级别就决定了它能做什么：在 4 级，每条命令都要等你批准；在 2 级和 3 级，每次编辑都要等你批准，命令则一律拒绝。</li>
+  <li><strong>修改它自身配置的操作。</strong>读过任何联系人的消息之后，哪怕消息来自你自己的笔记本，对 <code>CLAUDE.md</code>、<code>.claude/</code>、shell 配置文件、密钥以及 <code>package.json</code> 这类构建文件的编辑都要等你批准。</li>
+  <li><strong>可能把你的数据带出去的消息。</strong>它一旦读过你项目里的文件，发给 ∞ 以下联系人的每条消息都要等你批准，发给这类联系人、看起来含有密钥、密码或令牌的任何消息也一样。它一旦读过某一段对话，发往另一段对话的消息同样要等你批准。</li>
+  <li><strong>提问。</strong><em>实验性功能。</em>智能体的提问显示在它所运行的那台电脑上，位于 <strong>Questions from your agents</strong>（来自智能体的提问）下。想改在笔记本上收到，就在那台电脑上运行 <code>antenna agent escalate api-dev --to mac</code>：之后每个问题都会出现在该智能体的聊天里，你直接在聊天里回答。</li>
+</ul>
+<p>Claude Code 自己的权限提示（“Do you want to proceed?”）仍然留在它的终端里：Antenna 从不往里面输入任何内容。你可以在 Claude Code 的设置里放行日常使用的工具，或者用 <code>antenna session attach</code> 进去回答。</p>
+
+<h2>设置</h2>
+<ol>
+  <li>在两台电脑上<a href="/#download">安装 Antenna</a>，勾选 <strong>This is my own computer (∞)</strong> 配对一次，做法见<a href="/guides/run-claude-code-on-a-vps">在 VPS 上运行 Claude Code</a>。</li>
+  <li>通过 Antenna 启动 Claude Code。在桌面电脑上：<strong>Agents → AI apps → Start in Code mode</strong>。在服务器上：
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api</code></pre></li>
+  <li>在运行 Claude Code 的电脑上，接受你打算用来批准的那台电脑的答复：<strong>My devices</strong> → 那台电脑的卡片 → <strong>Approvals</strong> → <strong>Accept approvals signed with …</strong>，输入你的密码。在服务器上：<code>antenna devices confirm mac</code>。</li>
+</ol>
+
+<h2>在任意一台电脑上回答</h2>
+<p>请求显示在 <strong>My devices</strong> 中发出请求的那台电脑的卡片上（<em>实验性功能</em>），同时会弹出通知，比如“Antenna: approval needed on Mac mini”。卡片会写明是哪个智能体在请求、要做什么、为什么，并引用它的原文；但如果原文里含有机密信息，它就不会离开发出请求的那台电脑。在 Mac 上可以点 <strong>Approve with Touch ID</strong>（<em>实验性功能</em>），也可以点 <strong>Approve with password</strong> 并输入你眼前这台电脑的密码，或者点 <strong>Deny</strong>。</p>
+<p>发出请求的电脑会用你在它上面接受过的密钥核验签名，同时核对它自己生成的一次性质询和这一个具体的请求，然后由它自己执行该请求，而且只执行一次。在那台电脑本机上，请求位于 <strong>Approval requests</strong>（批准请求）中，在终端里则用 <code>antenna approvals</code> 和 <code>antenna approve &lt;id&gt;</code>。</p>
+<p>Claude Code 最多等待 50 秒，在此之前批准的步骤会立即执行。超过这个时间，它会先去做别的事；等你批准后，Antenna 会在它的提示符里输入“Approved — continue.”，它就会重新执行这一步。</p>
+
+<h2>如果没人回答</h2>
+<p>请求在 10 分钟后关闭：什么都不会执行，什么也不会发出，Claude Code 会得知没人批准。关闭前不久会有通知提醒你。点 <strong>Deny</strong> 不需要密码，Claude Code 会得知你拒绝了。</p>
+
+<h2>让智能体替你批准</h2>
+<p><em>实验性功能。</em><strong>Can approve for…</strong>（可以替谁批准）位于 <strong>Agents</strong> 中，它让你信任的某个智能体回答你其他智能体关于消息和文件的请求，而且只有当请求涉及的一切都处于 ∞ 级别时，它的回答才算数。命令和编辑始终由你亲自批准。</p>
+
+<h2>常见问题</h2>
+<details>
+  <summary>Codex 也能用吗？</summary>
+  <p>部分可以。Codex 通过 Antenna 发送的内容会接受同样的检查，这些请求也会送到你所有的电脑上；Codex 自己的命令仍由 Codex 在它终端里的批准机制处理。</p>
+</details>
+<details>
+  <summary>任何电脑都能批准吗？</summary>
+  <p>不能。只有你配对为自己电脑、并且在发出请求的那台电脑上接受过其密钥的电脑才行，而且要输入密码。如果丢了一台，就在其余每台电脑上点 <strong>Revoke this computer</strong>（吊销这台电脑）。</p>
+</details>
+<details>
+  <summary>能用手机批准吗？</summary>
+  <p>暂时还不能。Antenna 目前在 macOS 和 Linux 上运行。</p>
+</details>

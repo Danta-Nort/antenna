@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>在 VPS 服务器上 24 小时运行 Claude Code，用笔记本远程派活</title>
+<meta name="description" content="在 VPS 上安装 Antenna，通过它启动 Claude Code 或 Codex，在笔记本的聊天里给它派任务。不用开放端口，也不用一直挂着 SSH。">
+<link rel="canonical" href="https://antenna.contact/zh/guides/run-claude-code-on-a-vps">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="在 VPS 服务器上 24 小时运行 Claude Code，用笔记本远程派活">
+<meta property="og:description" content="在 VPS 上安装 Antenna，通过它启动 Claude Code 或 Codex，在笔记本的聊天里给它派任务。不用开放端口，也不用一直挂着 SSH。">
+<meta property="og:url" content="https://antenna.contact/zh/guides/run-claude-code-on-a-vps">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="zh_CN">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/run-claude-code-on-a-vps">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/zh/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "指南",
+     "item": "https://antenna.contact/zh/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "在 VPS 上全天候运行 Claude Code，在笔记本上和它对话",
+     "item": "https://antenna.contact/zh/guides/run-claude-code-on-a-vps"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "在 VPS 上全天候运行 Claude Code，在笔记本上和它对话",
+   "description": "在 VPS 上安装 Antenna，通过它启动 Claude Code 或 Codex，在笔记本的聊天里给它派任务。不用开放端口，也不用一直挂着 SSH。",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "zh-Hans",
+   "url": "https://antenna.contact/zh/guides/run-claude-code-on-a-vps",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/zh/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "为什么不直接用 SSH 加 tmux？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "你坐在终端前时，那样确实可行。Antenna 额外提供了一个聊天，你随时都能在笔记本上给它写消息，写的时候会唤醒会话，还能让其他智能体给它派活，而权限由 Antenna 自己检查。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "服务器需要公网 IP 或开放端口吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "不需要。两边都是主动向外连接，网络允许时直连，否则经过中继。中继只转发加密流量。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "一台服务器上能跑多个会话吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "能：每个项目文件夹一个智能体，各自有自己的名字，在你笔记本上也各有一个聊天。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "有 ARM 版本吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "暂时还没有。服务器节点目前只为 x86_64 Linux 构建。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/zh/" aria-label="Antenna 首页"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="主导航">
+      <a href="/zh/#product">产品</a>
+      <a href="/zh/#security">安全</a>
+      <a href="/zh/guides/">指南</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="语言: 简体中文"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">ZH</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/run-claude-code-on-a-vps" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/run-claude-code-on-a-vps" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/run-claude-code-on-a-vps" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/run-claude-code-on-a-vps" hreflang="zh-Hans" lang="zh-Hans" aria-current="true">简体中文</a></li>
+        <li><a href="/hi/guides/run-claude-code-on-a-vps" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/run-claude-code-on-a-vps" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/run-claude-code-on-a-vps" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/run-claude-code-on-a-vps" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/run-claude-code-on-a-vps" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/run-claude-code-on-a-vps" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/run-claude-code-on-a-vps" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/run-claude-code-on-a-vps" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/run-claude-code-on-a-vps" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/run-claude-code-on-a-vps" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/run-claude-code-on-a-vps" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/zh/#download">下载</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="面包屑导航"><a href="/zh/">Antenna</a> <span aria-hidden="true">›</span> <a href="/zh/guides/">指南</a></nav>
+    <p class="eyebrow">更新于 <time datetime="2026-11-09">2026年11月9日</time></p>
+    <h1>在 VPS 上全天候运行 Claude Code，在笔记本上和它对话</h1>
+    <p class="lead">在你的 Linux VPS 上安装 Claude Code 和 Antenna 节点，把服务器和笔记本配对一次，然后在项目文件夹里通过 Antenna 启动 Claude Code。之后即使你退出登录，它也会在自己的 tmux 会话里继续运行，有发给它的消息时就会被唤醒，并在你笔记本的聊天里回复。不需要开放入站端口，不需要一直挂着 SSH 会话，Codex 的用法也完全一样。</p>
+
+    <h2>你需要准备</h2>
+    <ul>
+      <li>一台 x86_64 的 Linux 服务器，装好并登录 Claude Code（或 Codex），另外装好 tmux。</li>
+      <li>笔记本上装好 <a href="/zh/#download">Antenna</a>：macOS 或 Linux。</li>
+    </ul>
+
+    <h2>1. 在服务器上安装 Antenna 节点</h2>
+    <pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+    sudo loginctl enable-linger $USER</code></pre>
+    <p>安装脚本会从签名清单中读取最新版本，校验压缩包，把 <code>antennad</code> 和 <code>antenna</code> 安装到 <code>~/.local/bin</code> 并注册为 systemd 用户服务（不需要 root），然后用一个密码创建你的节点。第二行让服务在你退出登录后继续运行。在 Ubuntu 或 Fedora 上，也可以改装 <code>.deb</code> 或 <code>.rpm</code> 包。</p>
+
+    <h2>2. 和笔记本配对</h2>
+    <p>在笔记本上：<strong>New contact → Invite</strong>，起个名字，勾选 <strong>This is my own computer (∞)</strong>，点 <strong>Create link</strong> 并复制链接。在服务器上：</p>
+    <pre><code>antenna join '&lt;link&gt;' --trust 5 --label mac</code></pre>
+    <p>别漏了单引号：链接里有一个 <code>#</code>。把笔记本上显示的验证码输入服务器的终端，然后在笔记本上点 <strong>The contact confirmed — codes match</strong>。5 级在两边都对应 ∞，所以服务器会被当作你自己的电脑。</p>
+
+    <h2>3. 通过 Antenna 启动 Claude Code</h2>
+    <pre><code>cd ~/projects/api
+    antenna connect claude-code --agent api-dev --links mac --hello mac
+    antenna session start api-dev --dir ~/projects/api
+    antenna session attach api-dev</code></pre>
+    <p>connect 这一行给会话分配专属的智能体和令牌，并打个招呼，于是你的笔记本上会出现一个名为 <code>api-dev</code> 的聊天。start 这一行在 Antenna 自己的 tmux 服务器里运行 Claude Code（不会碰你的 tmux）。先 attach 一次，回答 Claude Code 一开始的几个问题（比如是否信任这个文件夹），然后按 <code>Ctrl-b d</code> 退出：它会继续运行。如果是 Codex，就用 <code>antenna connect codex</code> 和 <code>--cli codex</code>。</p>
+
+    <h2>4. 和它对话</h2>
+    <p>在笔记本的 <code>api-dev</code> 聊天里写：“跑一下迁移测试，修好失败的。”当 Claude Code 停在提示符前闲着时，Antenna 会输入一行简短的文字，让它去读你的消息；Antenna 永远不会把联系人的原文输入进去，也永远不会替它回答问题。<strong>My devices</strong> 中的服务器卡片会显示它的运行状况和上面的智能体，你可以在笔记本上批准它的请求。</p>
+
+    <h2>重启之后</h2>
+    <p>服务器重启后，节点的密钥会被锁定：服务在运行，但它的连接保持静默，直到你登录并运行 <code>antenna unlock</code>。这样一来，即使有人拿到服务器磁盘的副本，也拿不到你的密钥。<code>antenna status</code> 会显示它是否处于锁定状态。</p>
+
+    <h2>常见问题</h2>
+    <details>
+      <summary>为什么不直接用 SSH 加 tmux？</summary>
+      <p>你坐在终端前时，那样确实可行。Antenna 额外提供了一个聊天，你随时都能在笔记本上给它写消息，写的时候会唤醒会话，还能让其他智能体给它派活，而权限由 Antenna 自己检查。</p>
+    </details>
+    <details>
+      <summary>服务器需要公网 IP 或开放端口吗？</summary>
+      <p>不需要。两边都是主动向外连接，网络允许时直连，否则经过中继。中继只转发加密流量。</p>
+    </details>
+    <details>
+      <summary>一台服务器上能跑多个会话吗？</summary>
+      <p>能：每个项目文件夹一个智能体，各自有自己的名字，在你笔记本上也各有一个聊天。</p>
+    </details>
+    <details>
+      <summary>有 ARM 版本吗？</summary>
+      <p>暂时还没有。服务器节点目前只为 x86_64 Linux 构建。</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna 免费且开源</strong>，支持 macOS 和 Linux。不需要账号，也不需要手机号。</p>
+      <a class="btn" href="/zh/#download">下载 Antenna</a>
+    </aside>
+    <h2>相关指南</h2>
+    <ul class="related">
+      <li><a href="/zh/guides/message-claude-code-on-another-computer">给另一台电脑上的 Claude Code 发消息</a></li>
+      <li><a href="/zh/guides/ai-agent-that-replies-to-messages">设置一个自动回复消息的 AI 智能体</a></li>
+      <li><a href="/zh/guides/claude-code-multiple-agents-working-together">让多个 Claude Code 智能体协作开发同一个项目</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/zh/" aria-label="Antenna 首页"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/zh/guides/">指南</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>联系方式： <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/zh/privacy">隐私政策</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!--guide {"title": "Chat en red local para Mac y Linux sin internet — Antenna", "h1": "Un chat en red local (LAN) para Mac y Linux que funciona sin internet", "description": "Antenna encuentra a tus contactos de confianza en la misma red y sigue funcionando sin internet, con cifrado de extremo a extremo y sin anunciar quién eres.", "summary": "Chatea y envía archivos por la red local cuando se cae internet, sin anunciar quién eres.", "source": "2026-11-09"}-->
+<p class="lead">Antenna puede llegar a las personas con las que hablas a través de la red local cuando no hay internet, siempre que estén conectadas al mismo router, en casa o en una oficina. Activa <strong>Local network (no internet)</strong> (red local, sin internet) en Settings, o ejecuta <code>antenna lan on</code>, y los contactos en los que confías con nivel 3 o 4, además de tus propias computadoras, se encuentran cerca. Los mensajes y los archivos siguen cifrados de extremo a extremo, y Antenna nunca anuncia tu nombre en la red.</p>
+
+<h2>Por qué la mayoría de los mensajeros se paran cuando se cae internet</h2>
+<p>En la mayoría de los mensajeros, un mensaje va primero a un servidor, aunque la persona a la que escribes esté a dos mesas de ti. Si se corta internet, la conversación se corta. Antenna ya conecta las computadoras directamente, así que en una red local solo tiene que encontrar la otra computadora, y eso funciona sin nada de internet.</p>
+
+<h2>Actívalo</h2>
+<ol>
+  <li><a href="/#download">Instala Antenna</a> en las dos computadoras (macOS o Linux) y emparéjalas una vez, mientras todavía tienes conexión.</li>
+  <li>Abre <strong>Settings → Local network (no internet)</strong> y actívalo con tu contraseña de dueño. Desde una terminal: <code>antenna lan on</code>; <code>antenna lan</code> muestra el estado.</li>
+  <li>Debajo del interruptor, Antenna muestra “Listening on the local network” y qué contactos tuyos ha encontrado cerca.</li>
+</ol>
+<p>Viene desactivado por defecto, y es mejor usarlo solo en redes de confianza: en el wifi de una cafetería o de un aeropuerto no hace falta anunciar que tu dispositivo está ahí.</p>
+
+<h2>Qué ven tus vecinos de red</h2>
+<p>Antenna no va pregonando que está ahí. Escucha, y solo se anuncia cuando tiene algo que entregar y la otra persona no responde en las direcciones conocidas. Incluso entonces no usa tu nombre ni tu clave: usa un alias que solo ese contacto entiende, y el alias cambia cada hora. Los demás en la red ven que algún dispositivo busca a alguien, no quién eres ni con quién hablas. Solo salen direcciones locales, nunca las de tu relay o tu VPN.</p>
+<p>Un límite que conviene decir: un vecino atento podría reconocer el mismo dispositivo en otra red por su número de puerto.</p>
+
+<h2>A quién se puede llegar así</h2>
+<p>A los contactos con niveles de confianza 3 y 4 y a tus propias computadoras (∞). Los niveles 1 y 2 son para personas que conoces menos: esos enlaces siempre pasan por un relay, así que esos contactos nunca conocen tu dirección, ni en la red local ni en ningún otro sitio.</p>
+
+<h2>Preguntas</h2>
+<details>
+  <summary>¿Tenemos que emparejarnos antes por internet?</summary>
+  <p>El primer emparejamiento es más fácil con conexión: se intercambia un enlace de invitación de un solo uso y se comprueba un código de viva voz. Después, basta con la red local.</p>
+</details>
+<details>
+  <summary>¿Puedo enviar archivos por la LAN?</summary>
+  <p>Sí. Los archivos viajan por el mismo enlace cifrado y se comprueban al llegar, como cualquier otro archivo en Antenna.</p>
+</details>
+<details>
+  <summary>¿Hay versión para Windows o para teléfonos?</summary>
+  <p>Todavía no. Antenna 0.1 funciona en macOS (Apple Silicon) y Linux.</p>
+</details>

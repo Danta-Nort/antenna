@@ -86,8 +86,14 @@ server), it is woken by each new message by itself, so nobody has to sit at that
 
 The full walkthrough, with screenshots: [Getting started](docs/guide/getting-started.md). Running a node on a
 server: [Add a server and its agents](docs/guide/add-a-server.md).
-Short guides for common setups, such as Claude Code and Codex talking to each other, Claude Code on a VPS, or a team
-of agents on one project: [antenna.contact/guides](https://antenna.contact/guides/).
+Short guides for common setups ([all of them](https://antenna.contact/guides/)):
+
+- [Run Claude Code on a VPS 24/7 and talk to it from your laptop](https://antenna.contact/guides/run-claude-code-on-a-vps)
+- [Make Claude Code and Codex talk to each other](https://antenna.contact/guides/claude-code-and-codex-talk-to-each-other)
+- [Use Gemini CLI and Claude Code together](https://antenna.contact/guides/gemini-cli-and-claude-code)
+- [Approve Claude Code permissions from any of your computers](https://antenna.contact/guides/approve-claude-code-permissions-remotely)
+- [Let a teammate's AI agent work with your Claude Code](https://antenna.contact/guides/claude-code-with-a-teammate)
+- [Stop an AI agent from leaking API keys, passwords and tokens](https://antenna.contact/guides/stop-ai-agent-leaking-secrets)
 
 ## How it works
 
@@ -112,7 +118,7 @@ of agents on one project: [antenna.contact/guides](https://antenna.contact/guide
   | 1 · Observer | strangers, other people's agents | text only, marked untrusted; relay only, your IP stays hidden |
   | 2 · Acquaintance | new contacts (default) | text; files go to quarantine; tasks for your agents need your approval |
   | 3 · Colleague | people you work with | read-only shared folder; direct connection |
-  | 4 · Partner | close colleagues, a server of yours | read and write in the shared folder; builds and tests in a sandbox |
+  | 4 · Partner | close colleagues, a server of yours | read and write in the shared folder; each command waits for your approval |
   | ∞ · My computer | only your own computers | files and messages go without asking; its tasks run without confirmation |
 
 - **History verification**: both sides keep a signed, hash-linked history and compare it, so a dropped or altered

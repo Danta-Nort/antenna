@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LAN-Messenger ohne Internet für Mac und Linux — Antenna</title>
+<meta name="description" content="Antenna findet vertraute Kontakte im selben Netzwerk und chattet weiter, wenn das Internet ausfällt: Ende-zu-Ende-verschlüsselt, ohne Ihren Namen zu verraten.">
+<link rel="canonical" href="https://antenna.contact/de/guides/lan-messenger-without-internet">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="LAN-Messenger ohne Internet für Mac und Linux — Antenna">
+<meta property="og:description" content="Antenna findet vertraute Kontakte im selben Netzwerk und chattet weiter, wenn das Internet ausfällt: Ende-zu-Ende-verschlüsselt, ohne Ihren Namen zu verraten.">
+<meta property="og:url" content="https://antenna.contact/de/guides/lan-messenger-without-internet">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="de_DE">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/lan-messenger-without-internet">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/lan-messenger-without-internet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/de/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Anleitungen",
+     "item": "https://antenna.contact/de/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Ein LAN-Messenger für Mac und Linux, der ohne Internet funktioniert",
+     "item": "https://antenna.contact/de/guides/lan-messenger-without-internet"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Ein LAN-Messenger für Mac und Linux, der ohne Internet funktioniert",
+   "description": "Antenna findet vertraute Kontakte im selben Netzwerk und chattet weiter, wenn das Internet ausfällt: Ende-zu-Ende-verschlüsselt, ohne Ihren Namen zu verraten.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "de",
+   "url": "https://antenna.contact/de/guides/lan-messenger-without-internet",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/de/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Müssen wir uns zuerst über das Internet koppeln?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Die erste Kopplung ist mit Verbindung am einfachsten: Sie tauschen einen Einmal-Einladungslink aus und vergleichen mündlich einen Code. Danach reicht das lokale Netzwerk."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Kann ich Dateien über das LAN senden?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Ja. Dateien laufen über dieselbe verschlüsselte Verbindung und werden beim Eintreffen geprüft wie jede andere Datei in Antenna."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Gibt es eine Version für Windows oder das Smartphone?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Noch nicht. Antenna 0.1 läuft unter macOS (Apple Silicon) und Linux."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Zum Inhalt springen</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/de/" aria-label="Antenna — Startseite"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Hauptmenü">
+      <a href="/de/#product">Produkt</a>
+      <a href="/de/#security">Sicherheit</a>
+      <a href="/de/guides/">Anleitungen</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Sprache: Deutsch"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">DE</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/lan-messenger-without-internet" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/lan-messenger-without-internet" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/lan-messenger-without-internet" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/lan-messenger-without-internet" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/lan-messenger-without-internet" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/lan-messenger-without-internet" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/lan-messenger-without-internet" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/lan-messenger-without-internet" hreflang="de" lang="de" aria-current="true">Deutsch</a></li>
+        <li><a href="/ja/guides/lan-messenger-without-internet" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/lan-messenger-without-internet" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/lan-messenger-without-internet" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/lan-messenger-without-internet" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/lan-messenger-without-internet" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/lan-messenger-without-internet" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/lan-messenger-without-internet" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/de/#download">Download</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Brotkrumennavigation"><a href="/de/">Antenna</a> <span aria-hidden="true">›</span> <a href="/de/guides/">Anleitungen</a></nav>
+    <p class="eyebrow">Aktualisiert <time datetime="2026-11-09">9. November 2026</time></p>
+    <h1>Ein LAN-Messenger für Mac und Linux, der ohne Internet funktioniert</h1>
+    <p class="lead">Antenna kann die Menschen, mit denen Sie schreiben, auch ohne Internet über das lokale Netzwerk erreichen, solange Sie am selben Router hängen, zu Hause oder im Büro. Schalten Sie in den Einstellungen <strong>Local network (no internet)</strong> (lokales Netzwerk, ohne Internet) ein oder führen Sie <code>antenna lan on</code> aus, und Kontakte, denen Sie auf Stufe 3 bis 4 vertrauen, sowie Ihre eigenen Computer werden in der Nähe gefunden. Nachrichten und Dateien bleiben Ende-zu-Ende-verschlüsselt, und Antenna gibt Ihren Namen nie im Netzwerk preis.</p>
+
+    <h2>Warum die meisten Messenger verstummen, wenn das Internet weg ist</h2>
+    <p>Bei den meisten Messengern geht eine Nachricht zuerst an einen Server, selbst wenn Ihr Gegenüber zwei Tische weiter sitzt. Fällt das Internet aus, endet das Gespräch. Antenna verbindet Computer ohnehin direkt, muss im lokalen Netzwerk also nur den anderen Computer finden, und das klappt ganz ohne Internet.</p>
+
+    <h2>Einschalten</h2>
+    <ol>
+      <li><a href="/de/#download">Installieren Sie Antenna</a> auf beiden Computern (macOS oder Linux) und koppeln Sie sie einmal, solange Sie noch eine Verbindung haben.</li>
+      <li>Öffnen Sie <strong>Settings → Local network (no internet)</strong> und schalten Sie es mit Ihrem Besitzer-Passwort ein. Im Terminal: <code>antenna lan on</code>; <code>antenna lan</code> zeigt den Zustand.</li>
+      <li>Unter dem Schalter zeigt Antenna „Listening on the local network“ und welche Ihrer Kontakte es in der Nähe gefunden hat.</li>
+    </ol>
+    <p>Standardmäßig ist es aus, und am besten nutzen Sie es nur in Netzwerken, denen Sie vertrauen: Im WLAN eines Cafés oder Flughafens muss niemand erfahren, dass Ihr Gerät da ist.</p>
+
+    <h2>Was Ihre Nachbarn im Netzwerk sehen</h2>
+    <p>Antenna macht keinen Lärm um sich. Es lauscht und meldet sich nur dann selbst, wenn es etwas zuzustellen hat und das Gegenüber unter den bekannten Adressen nicht antwortet. Selbst dann verwendet es weder Ihren Namen noch Ihren Schlüssel, sondern einen Decknamen, den nur dieser Kontakt versteht und der sich jede Stunde ändert. Andere im Netzwerk sehen, dass irgendein Gerät jemanden sucht, aber nicht, wer Sie sind oder mit wem Sie schreiben. Es gehen nur lokale Adressen hinaus, nie Ihre Relay- oder VPN-Adressen.</p>
+    <p>Eine ehrliche Einschränkung: Ein aufmerksamer Nachbar könnte dasselbe Gerät in einem anderen Netzwerk an seiner Portnummer wiedererkennen.</p>
+
+    <h2>Wer auf diesem Weg erreichbar ist</h2>
+    <p>Kontakte auf den Vertrauensstufen 3 und 4 und Ihre eigenen Computer (∞). Die Stufen 1 und 2 sind für Menschen, die Sie weniger gut kennen: Diese Verbindungen laufen immer über ein Relay, damit diese Kontakte Ihre Adresse nie erfahren, weder im lokalen Netzwerk noch anderswo.</p>
+
+    <h2>Fragen</h2>
+    <details>
+      <summary>Müssen wir uns zuerst über das Internet koppeln?</summary>
+      <p>Die erste Kopplung ist mit Verbindung am einfachsten: Sie tauschen einen Einmal-Einladungslink aus und vergleichen mündlich einen Code. Danach reicht das lokale Netzwerk.</p>
+    </details>
+    <details>
+      <summary>Kann ich Dateien über das LAN senden?</summary>
+      <p>Ja. Dateien laufen über dieselbe verschlüsselte Verbindung und werden beim Eintreffen geprüft wie jede andere Datei in Antenna.</p>
+    </details>
+    <details>
+      <summary>Gibt es eine Version für Windows oder das Smartphone?</summary>
+      <p>Noch nicht. Antenna 0.1 läuft unter macOS (Apple Silicon) und Linux.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna ist kostenlos und Open Source</strong>, für macOS und Linux. Ohne Konto, ohne Telefonnummer.</p>
+      <a class="btn" href="/de/#download">Antenna herunterladen</a>
+    </aside>
+    <h2>Weitere Anleitungen</h2>
+    <ul class="related">
+      <li><a href="/de/guides/peer-to-peer-encrypted-messenger">Ein Open-Source-Peer-to-Peer-Messenger mit Post-Quanten-Verschlüsselung</a></li>
+      <li><a href="/de/guides/self-hosted-messenger">Ein selbst gehosteter Messenger, für den Sie keinen Server betreiben müssen</a></li>
+      <li><a href="/de/guides/messenger-without-phone-number">Ein privater Messenger ohne Telefonnummer und ohne E-Mail</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/de/" aria-label="Antenna — Startseite"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/de/guides/">Anleitungen</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Kontakt: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/de/privacy">Datenschutzerklärung</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

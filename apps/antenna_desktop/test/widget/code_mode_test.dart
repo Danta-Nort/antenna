@@ -724,6 +724,23 @@ void main() {
     expect(h.withdrawContinue(), isTrue);
   });
 
+  // The Windows build for Code mode's hands-on check (ANTENNA_WINDOWS_CODE) offers it; the default build does not
+  // (the test above), and a release build is that default.
+  test('Windows, the build for the hands-on check: Code mode is offered, Settings has no "coming"', () async {
+    final (m, _, _) = await _setup(
+      agents: [const AgentInfo(name: 'jarvis', createdMs: 0, localLevel: 5)],
+      computer: FakeAgentComputer(
+        windows: true,
+        windowsCode: true,
+        env: const {'USERPROFILE': r'C:\Users\o', 'Path': r'C:\Windows\System32'},
+        installed: const {r'C:\Users\o\.local\bin\claude.exe'},
+      ),
+    );
+    expect(m.codeAvailable, isTrue);
+    expect(m.codeComing, isFalse);
+    expect(windowsCodeBuild, isFalse, reason: 'tests and releases are built without ANTENNA_WINDOWS_CODE');
+  });
+
   // T14: the start on Windows through the window's own path: `antenna agent-run` with the agent's argv, no shell.
   test('Windows: Start agent runs antenna agent-run with claude.exe; a .cmd alone is refused before any token',
       () async {

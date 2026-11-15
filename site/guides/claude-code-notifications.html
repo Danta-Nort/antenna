@@ -1,0 +1,52 @@
+<!--guide {"order": 4, "title": "Get notified when Claude Code finishes a task on another computer", "h1": "Get a notification when Claude Code finishes, on a server or another computer", "description": "Claude Code on your server or second computer reports back in an Antenna chat, and your laptop shows a notification. Approval requests notify too.", "query": "get notified when claude code finishes", "updated": "2026-11-15", "summary": "A desktop notification on your laptop when Claude Code on a server or another computer reports a finished task or needs your approval.", "related": ["run-claude-code-on-a-vps", "approve-claude-code-permissions-remotely", "message-claude-code-on-another-computer"]}-->
+<p class="lead">Give Claude Code its task in an Antenna chat from your laptop, and it sends the result back to that chat when it is done: Antenna’s instructions tell a connected agent to send its results back to the contact that gave the task. Your laptop then shows a notification, “New message in server · api-dev”, while Antenna’s window is not in front. Approval requests notify too, so a run that stops halfway does not wait unnoticed. Antenna does not watch Claude Code’s turns itself: the report is Claude Code’s own message.</p>
+
+<h2>What notifies you</h2>
+<ul>
+  <li><strong>A message from Claude Code to you.</strong> The notification names the chat, never the text, at most once per chat every 10 seconds.</li>
+  <li><strong>An approval request.</strong> A step that needs your word shows as “Antenna: approval needed on server”, with the agent, what it wants to do and the time left (“expires in 9 min”), but never the request’s text. A second notification comes about two minutes before the request closes; it closes after 10 minutes. Requests from another computer reach you through <strong>My devices</strong> (<em>experimental</em>).</li>
+  <li><strong>A question.</strong> <em>Experimental.</em> An agent’s question notifies on the computer where it runs: “A question from your agent”. For a server, run <code>antenna agent escalate api-dev --to mac</code> there, and its questions arrive in the agent’s chat on your laptop instead.</li>
+</ul>
+<p>Notifications work on macOS and on Linux desktops that show notifications. Antenna must be open on the laptop; with its window in front, the chat list’s unread counts do the job.</p>
+
+<h2>Set it up</h2>
+<ol>
+  <li><a href="/#download">Install Antenna</a> on both computers and pair them once with <strong>This is my own computer (∞)</strong> ticked. <a href="/guides/run-claude-code-on-a-vps">Claude Code on a VPS</a> walks through the server side.</li>
+  <li>Start Claude Code through Antenna. On a server:
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api</code></pre>
+  On a second desktop: <strong>Agents → AI apps → Start in Code mode</strong>.</li>
+  <li>Nothing to set on the laptop. A chat with an agent notifies about messages to you in person and about approval requests from the start.</li>
+</ol>
+
+<h2>Ask for the report</h2>
+<p>Write the task in the <code>api-dev</code> chat and say what you want back: “Run the migration tests and fix what fails. When you are done, reply here with what changed.” If Claude Code sits idle at its prompt, Antenna types one line so it reads your message (<em>experimental</em>); it works, then replies in the same chat, and your laptop shows the notification.</p>
+<p>For work you start in its terminal (<code>antenna session attach api-dev</code>), end the prompt with “send me a summary on Antenna when you finish”. To make it a habit, add a line to the project’s <code>CLAUDE.md</code>: “When you finish a task, send a short summary to <code>mac</code> with Antenna’s <code>send_message</code>.”</p>
+<p>The report comes when Claude Code decides it is done, as with any instruction it follows. If it stops at its own permission prompt in the terminal (“Do you want to proceed?”), Antenna does not see that, and nothing notifies you: allow the tools you use routinely in Claude Code’s settings.</p>
+
+<h2>Choose which chats notify</h2>
+<p>Open <strong>⋮</strong> on a chat’s row, or right-click it, then <strong>Notifications</strong>:</p>
+<ul>
+  <li><strong>All messages</strong>: every new message in this chat (the default for a person).</li>
+  <li><strong>Only when it asks for me</strong>: messages to you in person and approval requests (the default for an agent).</li>
+  <li><strong>Off</strong>: approval requests still notify.</li>
+</ul>
+<p>When Claude Code reports to one of your other agents instead of to you, those messages stay quiet unless you turn on <strong>Notify about messages between agents</strong> in the same menu. In a terminal: <code>antenna chats notify server --agent api-dev all</code>.</p>
+
+<h2>On the computer you are at</h2>
+<p>With Claude Code in Code mode on your own laptop, Antenna notifies you of its approval requests and questions while the window is in the background, but not of the end of a turn: an agent cannot message you on its own computer. For that, Claude Code’s own hooks can run a command of yours when it stops.</p>
+
+<h2>Questions</h2>
+<details>
+  <summary>Does the notification show what Claude Code wrote?</summary>
+  <p>No. It says only “New message in” and the chat’s name, because a notification can show on a locked screen. Open the chat to read the report.</p>
+</details>
+<details>
+  <summary>What if my laptop is asleep?</summary>
+  <p>The message waits on the server, and Antenna delivers it, with its notification, when the laptop is back online.</p>
+</details>
+<details>
+  <summary>Can I get the notification on my phone?</summary>
+  <p>Not yet. Antenna runs on macOS and Linux today.</p>
+</details>

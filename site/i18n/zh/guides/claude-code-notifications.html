@@ -1,0 +1,52 @@
+<!--guide {"title": "Claude Code 任务完成通知：服务器或另一台电脑跑完就提醒你 — Antenna", "h1": "Claude Code 在服务器或另一台电脑上完成任务时收到通知", "description": "服务器或另一台电脑上的 Claude Code 干完活，会在 Antenna 聊天里汇报，你的笔记本随即弹出桌面通知。需要你批准时也会通知。", "summary": "服务器或另一台电脑上的 Claude Code 汇报任务完成或需要你批准时，笔记本上弹出桌面通知。", "source": "2026-11-15"}-->
+<p class="lead">在笔记本上通过 Antenna 聊天给 Claude Code 布置任务，它做完后会把结果发回这个聊天：Antenna 给已接入的智能体的说明里写明，要把结果发回给布置任务的联系人。只要 Antenna 的窗口不在前台，你的笔记本就会弹出通知“New message in server · api-dev”。批准请求也会通知你，所以跑到一半停下来的任务不会无人察觉地干等着。Antenna 本身并不监视 Claude Code 的每一轮对话：这份汇报是 Claude Code 自己发的消息。</p>
+
+<h2>哪些情况会通知你</h2>
+<ul>
+  <li><strong>Claude Code 发给你的消息。</strong>通知只写聊天的名字，从不显示内容，同一个聊天每 10 秒最多通知一次。</li>
+  <li><strong>批准请求。</strong>需要你点头的步骤会显示为“Antenna: approval needed on server”，写明是哪个智能体、它要做什么以及剩余时间（“expires in 9 min”），但从不显示请求的原文。请求关闭前大约两分钟会再通知一次；请求在 10 分钟后关闭。来自另一台电脑的请求通过 <strong>My devices</strong>（我的设备）送到你这里（<em>实验性功能</em>）。</li>
+  <li><strong>提问。</strong><em>实验性功能。</em>智能体的提问会在它所运行的那台电脑上通知：“A question from your agent”。如果它在服务器上，就在服务器上运行 <code>antenna agent escalate api-dev --to mac</code>，它的问题就会改为出现在你笔记本上该智能体的聊天里。</li>
+</ul>
+<p>通知在 macOS 和能显示通知的 Linux 桌面上都可用。笔记本上的 Antenna 必须开着；窗口在前台时，聊天列表里的未读数就够用了。</p>
+
+<h2>设置</h2>
+<ol>
+  <li>在两台电脑上<a href="/#download">安装 Antenna</a>，勾选 <strong>This is my own computer (∞)</strong> 配对一次。服务器那一侧的做法见<a href="/guides/run-claude-code-on-a-vps">在 VPS 上运行 Claude Code</a>。</li>
+  <li>通过 Antenna 启动 Claude Code。在服务器上：
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api</code></pre>
+  在另一台桌面电脑上：<strong>Agents → AI apps → Start in Code mode</strong>。</li>
+  <li>笔记本上什么都不用设置。与智能体的聊天从一开始就会通知你发给你本人的消息和批准请求。</li>
+</ol>
+
+<h2>让它向你汇报</h2>
+<p>在 <code>api-dev</code> 聊天里写下任务，并说明你想收到什么：“运行迁移测试，把失败的地方修好。做完后在这里回复改了哪些内容。”如果 Claude Code 正停在提示符处空闲，Antenna 会替它输入一行字，让它去读你的消息（<em>实验性功能</em>）；它干完活就在同一个聊天里回复，你的笔记本随即弹出通知。</p>
+<p>如果是你在它终端里布置的工作（<code>antenna session attach api-dev</code>），就在提示词末尾加上“完成后在 Antenna 上给我发一份总结”。想让它每次都这样做，就在项目的 <code>CLAUDE.md</code> 里加一行：“完成任务后，用 Antenna 的 <code>send_message</code> 给 <code>mac</code> 发一段简短的总结。”</p>
+<p>和它遵循的任何指令一样，汇报要等 Claude Code 自己认为做完了才会发出。如果它停在终端里自己的权限提示上（“Do you want to proceed?”），Antenna 看不到，也就不会有任何通知：请在 Claude Code 的设置里放行日常使用的工具。</p>
+
+<h2>选择哪些聊天会通知</h2>
+<p>在聊天那一行点 <strong>⋮</strong>，或者右键点击它，然后选 <strong>Notifications</strong>（通知）：</p>
+<ul>
+  <li><strong>All messages</strong>（所有消息）：这个聊天里的每条新消息（与人聊天时的默认设置）。</li>
+  <li><strong>Only when it asks for me</strong>（仅在找我时）：发给你本人的消息和批准请求（与智能体聊天时的默认设置）。</li>
+  <li><strong>Off</strong>（关闭）：批准请求仍会通知。</li>
+</ul>
+<p>如果 Claude Code 不是向你汇报，而是向你的另一个智能体汇报，这些消息默认不会通知你，除非你在同一个菜单里打开 <strong>Notify about messages between agents</strong>（通知智能体之间的消息）。在终端里：<code>antenna chats notify server --agent api-dev all</code>。</p>
+
+<h2>在你眼前这台电脑上</h2>
+<p>如果 Claude Code 以 Code 模式在你自己的笔记本上运行，窗口在后台时，Antenna 会通知你它的批准请求和提问，但不会通知一轮对话的结束：智能体无法在它自己所在的电脑上给你发消息。这种情况可以用 Claude Code 自己的 hooks，在它停下时运行你指定的命令。</p>
+
+<h2>常见问题</h2>
+<details>
+  <summary>通知会显示 Claude Code 写了什么吗？</summary>
+  <p>不会。通知只写“New message in”和聊天的名字，因为通知可能显示在锁定的屏幕上。打开聊天才能看到汇报。</p>
+</details>
+<details>
+  <summary>如果我的笔记本在睡眠怎么办？</summary>
+  <p>消息会在服务器上等着，笔记本重新联网后，Antenna 会把它连同通知一起送达。</p>
+</details>
+<details>
+  <summary>能在手机上收到通知吗？</summary>
+  <p>暂时还不能。Antenna 目前在 macOS 和 Linux 上运行。</p>
+</details>

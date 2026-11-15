@@ -1,0 +1,48 @@
+<!--guide {"title": "Codex CLI remote control: लैपटॉप से Codex को tasks दें — Antenna", "h1": "लैपटॉप से दूसरे कंप्यूटर पर Codex CLI को tasks दें", "description": "Antenna के ज़रिए server या दूसरे कंप्यूटर पर Codex CLI चलाएँ, लैपटॉप से चैट में लिखें, और मैसेज से उसे जगाएँ। कोई SSH session खुला रखने की ज़रूरत नहीं।", "summary": "Server या दूसरे कंप्यूटर पर Codex CLI, जिसे आप लैपटॉप की चैट से tasks देते हैं और मैसेज से जगाते हैं।", "source": "2026-11-14"}-->
+<p class="lead">दोनों कंप्यूटरों पर Antenna इंस्टॉल करें और उन्हें एक बार अपने ख़ुद के कंप्यूटरों के रूप में जोड़ें। जिस कंप्यूटर पर Codex चलता है, वहाँ <code>antenna connect codex</code> से Codex session को एक नाम दें और <code>antenna session start … --cli codex</code> से उसे शुरू करें। आपके लैपटॉप पर उसी नाम की एक चैट आ जाती है: वहाँ task लिखें, और जब Codex ख़ाली बैठा हो, Antenna उसे जगा देता है। Codex आपका मैसेज पढ़ता है, दूसरे कंप्यूटर पर काम करता है, और चैट में जवाब देता है। कोई SSH session खुला नहीं रहता और कोई inbound port खोलने की ज़रूरत नहीं।</p>
+
+<h2>आपको क्या चाहिए</h2>
+<ul>
+  <li>काम करने वाले कंप्यूटर पर इंस्टॉल और साइन-इन किया हुआ Codex CLI: x86_64 पर Linux server, या Mac या Linux डेस्कटॉप। Codex आपका अपना subscription ही इस्तेमाल करता रहता है; Antenna को किसी API key की ज़रूरत नहीं।</li>
+  <li>उस कंप्यूटर पर tmux। Server पर एक बार <code>sudo loginctl enable-linger $USER</code> भी चलाएँ, ताकि logout के बाद भी Antenna और session चलते रहें।</li>
+  <li>दोनों कंप्यूटरों पर <a href="/#download">Antenna</a>: डेस्कटॉप पर ऐप, server पर node (<code>curl -fsSL https://antenna.contact/install.sh | sh</code>)।</li>
+</ul>
+
+<h2>1. दोनों कंप्यूटरों को जोड़ें</h2>
+<p>अपने लैपटॉप पर: <strong>New contact → Invite</strong>, <strong>This is my own computer (∞)</strong> पर tick करें, लिंक बनाएँ, और उसे दूसरे कंप्यूटर पर खोलें (server पर <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>)। एक तरफ़ दिखा कोड दूसरी तरफ़ डालें। अब दोनों तरफ़ एक-दूसरे को आपके अपने कंप्यूटर माना जाता है। Screenshots के साथ step-by-step तरीक़ा <a href="/guides/run-claude-code-on-a-vps">VPS पर Claude Code</a> में है; Codex के लिए भी यही है।</p>
+
+<h2>2. Codex session को नाम दें</h2>
+<p>जिस कंप्यूटर पर Codex चलता है, वहाँ प्रोजेक्ट फ़ोल्डर में:</p>
+<pre><code>cd ~/projects/api
+antenna connect codex --agent api-codex --links mac --hello mac</code></pre>
+<p>यह अपनी token फ़ाइल के साथ agent <code>api-codex</code> बनाता है, उसे आपके लैपटॉप से जोड़ता है (<code>mac</code> वह नाम है जो pairing के समय इस कंप्यूटर ने आपके लैपटॉप को दिया था), और hello भेजता है, ताकि लैपटॉप पर <code>api-codex</code> नाम की चैट तुरंत दिख जाए। आपकी अपनी Codex settings नहीं बदलतीं: Antenna सिर्फ़ इस agent के sessions के लिए जोड़ा जाता है।</p>
+
+<h2>3. Antenna के ज़रिए Codex शुरू करें</h2>
+<pre><code>antenna session start api-codex --dir ~/projects/api --cli codex
+antenna session attach api-codex</code></pre>
+<p>Codex, Antenna के अपने tmux server में शुरू होता है; आपके tmux को छुआ नहीं जाता। Codex के पहले सवालों का जवाब देने के लिए एक बार attach करें। पहली बार Codex आपसे Antenna के hooks पर भरोसा करने को कहता है (“Hooks need review”): “Trust all and continue” चुनें। फिर <code>Ctrl-b d</code> से बाहर निकलें, और Codex चलता रहता है। Restart के बाद <code>--resume</code> agent का पिछला session आगे बढ़ाता है।</p>
+
+<h2>4. लैपटॉप से उसे लिखें</h2>
+<p><code>api-codex</code> चैट खोलें और लिखें: “tests चलाओ, जो fail हों उन्हें ठीक करो, और बताओ क्या बदला।” जब Codex अपने prompt पर ख़ाली बैठा होता है, Antenna एक built-in लाइन टाइप करता है जो उसे अपना inbox पढ़ने को कहती है। वह आपका टेक्स्ट कभी terminal में टाइप नहीं करता, और Codex के पूछे किसी सवाल में कभी टाइप नहीं करता। Codex, Antenna के ज़रिए मैसेज पढ़ता है, काम करता है, और चैट में जवाब देता है। <em>Experimental।</em></p>
+<p>उसका मौजूदा काम रुकवाना है? भेजने से पहले <strong>Urgent: interrupt now</strong> चालू करें। Antenna एक बार Esc दबाकर चल रही बारी ख़त्म करता है और फिर आपके मैसेज के लिए Codex को जगाता है। Agent और उसके शुरू किए सब कुछ को रोकने के लिए, लैपटॉप पर <strong>My devices</strong> में दूसरे कंप्यूटर का कार्ड खोलें और <strong>Stop agent and its processes…</strong> दबाएँ, जो <code>api-codex</code> के आगे है।</p>
+
+<h2>डेस्कटॉप पर: Code mode</h2>
+<p>अगर Codex, Antenna ऐप वाले Mac या Linux डेस्कटॉप पर चलता है, तो आप terminal वाले कदम छोड़ सकते हैं। Code mode में agents पैनल का <code>+</code> दबाएँ, Codex और काम का फ़ोल्डर चुनें, और Codex विंडो के अंदर एक टैब में चलने लगता है, उसी तरह जगाया जाता है। उसकी चैट आपके दूसरे कंप्यूटरों से वैसे ही पहुँच में रहती है जैसे किसी भी दूसरे agent की।</p>
+
+<h2>सवाल-जवाब</h2>
+<details>
+  <summary>क्या इससे लैपटॉप पर Codex का terminal दिखता है?</summary>
+  <p>नहीं। आप Codex को tasks देते हैं और उसके जवाब चैट में पढ़ते हैं; terminal दूसरे कंप्यूटर पर ही रहता है। उसे देखने के लिए वहाँ <code>antenna session attach</code> करें, चाहें तो SSH से।</p>
+</details>
+<details>
+  <summary>Codex के कौन-से वर्ज़न काम करते हैं?</summary>
+  <p>Codex 0.160 और उसके बाद के वर्ज़न hooks के ज़रिए बताते हैं कि वे क्या कर रहे हैं, और इसी से Antenna को पता चलता है कि Codex कब ख़ाली है। पुराने Codex के साथ, या hooks पर भरोसा किए बिना, Antenna इंतज़ार करता है जब तक Codex बारी के बाद अपनी ख़ाली input लाइन न दिखा दे, और बारी चलते समय कभी टाइप नहीं करता।</p>
+</details>
+<details>
+  <summary>क्या Codex, Claude Code से भी बात कर सकता है?</summary>
+  <p>हाँ। Agent map पर दोनों agents को जोड़ें, और हर एक के मैसेज बिना नाम लिए दूसरे तक पहुँचते हैं: देखें <a href="/guides/claude-code-and-codex-talk-to-each-other">Claude Code और Codex की आपसी बातचीत</a>।</p>
+</details>
+<details>
+  <summary>क्या इसे फ़ोन से कंट्रोल किया जा सकता है?</summary>
+  <p>अभी नहीं। Antenna आज macOS और Linux पर चलता है।</p>
+</details>

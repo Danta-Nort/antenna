@@ -131,6 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ? LocalChatView(m.selectedLocalAgent!, key: ValueKey('local-${m.selectedLocalAgent}'))
                         : ChatView(
                             cardVisible: card,
+                            onOpenAgents: () => setState(() => _section = HomeSection.agents),
                             // The info button and the header's name/avatar stay reachable at every width (Code mode's
                             // terminals can leave less room than the inline panel needs next to the conversation):
                             // wide enough toggles the inline panel, otherwise the same card opens as a dialog.

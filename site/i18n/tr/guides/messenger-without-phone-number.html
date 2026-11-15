@@ -1,0 +1,41 @@
+<!--guide {"title": "Telefon numarası ve e-posta istemeyen gizli mesajlaşma uygulaması", "h1": "Telefon numarası ya da e-posta istemeyen gizli bir mesajlaşma uygulaması", "description": "Antenna telefon numarası, e-posta ya da hesap istemez: kimliğiniz bilgisayarınızdaki bir anahtardır, kişileri tek seferlik bağlantı ve sesli kodla eklersiniz.", "summary": "Telefon numarası yok, e-posta yok, hesap yok: Antenna’da nasıl başlar ve kişi eklersiniz.", "source": "2026-11-09"}-->
+<p class="lead">Antenna, macOS ve Linux için telefon numarası, e-posta ya da hesap istemeyen ücretsiz ve açık kaynaklı bir mesajlaşma uygulamasıdır. Kimliğiniz, kendi bilgisayarınızda oluşturulan ve yalnızca sizin bildiğiniz bir parolayla korunan bir anahtardır. Birini eklemek için tek kullanımlık bir davet bağlantısı gönderir ve altı haneli bir kodu sesli olarak ya da yüz yüze karşılaştırırsınız; böylece kimse sizi numaranızdan bulamaz ve hiçbir sunucu konuşmalarınızı okuyamaz ya da birbirine bağlayamaz.</p>
+
+<h2>Mesajlaşma uygulamaları neden numaranızı ister</h2>
+<p>Telefon numarası, kişileri bulmanın ve spam’i durdurmanın kolay bir yoludur; çoğu mesajlaşma uygulamasının numara istemesinin nedeni budur. Ama numara adınıza, operatörünüze ve çoğu zaman adresinize bağlıdır ve onu bilen herkesin sizi bulmasını sağlar. Numaranızı dağıtmak istemiyorsanız insanları başka bir yolla bulan bir mesajlaşma uygulamasına ihtiyacınız var.</p>
+
+<h2>Antenna’ya nasıl başlanır</h2>
+<ol>
+  <li><a href="/#download">Antenna’yı indirin</a> ve açın.</li>
+  <li>Bir parola seçin. Parola bu bilgisayardaki anahtarlarınızı korur ve kurtarılamaz; bu yüzden onu güvenli bir yerde saklayın.</li>
+  <li>Kaydın tamamı bu kadar. Sunucuda bir profil yoktur, çünkü profilleri tutan bir sunucu yoktur.</li>
+</ol>
+
+<h2>Kişileri nasıl eklersiniz</h2>
+<p><strong>New contact → Invite</strong> düğmesine basın, kişiye ne kadar güvendiğinizi seçin ve bağlantıyı istediğiniz yoldan gönderin. Kişi bağlantıyı açtığında ekranınızda altı haneli bir kod (ya da altı hayvan) belirir: kodu ona telefonda ya da yüz yüze okuyun, o yazsın, Antenna da kontrol etsin. Eşleşme, arada kimsenin olmadığı anlamına gelir. Bağlantı yalnızca bir kez ve yalnızca seçtiğiniz süre boyunca çalışır; bu yüzden sonradan sızan bir bağlantı işe yaramaz, onu ele geçiren biri de kodu yine bilmez.</p>
+
+<h2>Hesap yerine neler elde edersiniz</h2>
+<ul>
+  <li><strong>Her kişi için ayrı bir bağlantı.</strong> Her konuşmanın kendi anahtarları vardır; kuantum sonrası korumayla uçtan uca şifrelenir.</li>
+  <li><strong>Güven seviyeleri.</strong> Yalnızca metin olan 1’den ortaklar için 4’e kadar; kendi bilgisayarlarınız için ∞. Seviye; bir kişinin size ne gönderebileceğini, çevrimiçi olduğunuzu görüp göremeyeceğini ve IP adresinizi görüp göremeyeceğini belirler: 1. ve 2. seviyeler her zaman bir aktarma sunucusu (relay) üzerinden geçer.</li>
+  <li><strong>Kontrol edebileceğiniz bir geçmiş.</strong> Mesajlar imzalanır ve birbirine bağlanır, iki taraf da kopyaları karşılaştırır; böylece değiştirilmiş ya da kaybolmuş bir mesaj ortaya çıkar.</li>
+  <li><strong>Ajanlar da gelebilir.</strong> Claude Code ya da ChatGPT gibi yapay zeka asistanları, kendi adlarıyla ve yalnızca sizin verdiğiniz izinlerle sohbetlerinize katılabilir.</li>
+</ul>
+
+<h2>Sorular</h2>
+<details>
+  <summary>Telefon uygulaması var mı?</summary>
+  <p>Henüz yok. Antenna 0.1 bilgisayarlar içindir: Apple Silicon’lı macOS ve Linux.</p>
+</details>
+<details>
+  <summary>Parolamı kaybedersem ne olur?</summary>
+  <p>Kurtarılamaz: anahtarlarınızın bir kopyası başka kimsede yoktur, asıl amaç da budur. Düğümünüzü yeniden oluşturur ve kişilerinizi yeniden davet edersiniz.</p>
+</details>
+<details>
+  <summary>Biri beni arayarak bulabilir mi?</summary>
+  <p>Hayır. Bir rehber yoktur. İnsanlar size yalnızca birinizin diğerine verdiği bir davet bağlantısıyla ulaşır.</p>
+</details>
+<details>
+  <summary>Ücretsiz mi?</summary>
+  <p>Evet; AGPL-3.0 lisanslı açık kaynak. Protokol ise Apache-2.0 lisansıyla yayımlanmıştır.</p>
+</details>

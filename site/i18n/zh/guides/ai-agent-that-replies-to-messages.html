@@ -1,0 +1,43 @@
+<!--guide {"title": "让 AI 智能体自动回复消息：Claude Code / Codex — Antenna", "h1": "设置一个自动回复消息的 AI 智能体", "description": "让 Claude Code 或 Codex 自己回复联系人的消息：收到消息时，Antenna 在沙盒中唤醒它，回复边写边实时显示给对方。", "summary": "Claude Code 或 Codex 在沙盒中自动回复联系人，回复实时流式显示。", "source": "2026-11-09"}-->
+<p class="lead">在 Antenna 中，你可以选定一个联系人和一个智能体（Claude Code、Codex 或你自己的命令），此后这个联系人发来的每条消息都会启动这个智能体，由它读取并回复。Antenna 在沙盒中运行它，权限不超过该联系人的信任级别，回复会边写边显示给对方。它使用的是你自己的 Claude 或 ChatGPT 登录；如果某条回复看起来含有机密信息，会等你审批后才发出。</p>
+
+<h2>典型用法</h2>
+<ul>
+  <li><strong>服务器上的私人助理。</strong>你在笔记本上给服务器发消息，服务器上的 Claude Code 回复你，并在你的项目里构建、跑测试。</li>
+  <li><strong>某个联系人的专属前台。</strong>同事关于你项目的问题能立刻得到回答，回答他的智能体只能看到这段对话的文件夹。</li>
+  <li><strong>会回报结果的脚本。</strong>任何程序的输出都可以作为实时流发送：<code>my-program | antenna send --stream &lt;contact&gt;</code>。</li>
+</ul>
+
+<h2>在窗口中设置</h2>
+<ol>
+  <li>在要运行智能体的那台电脑上，打开 <strong>Agents → Set up for a contact…</strong>（或者在对话中，打开联系人卡片里的 <strong>Agent replies → Set up…</strong>）。</li>
+  <li>选择联系人和程序：<strong>Claude Code</strong>、<strong>Codex</strong> 或你自己的命令。</li>
+  <li>可选：把一个长期有效的登录令牌（由 <code>claude setup-token</code> 生成）粘贴到 <strong>Value (optional)</strong> 中。它只会发送到你的节点一次，并保存在节点的加密数据库里。在 Mac 上这是最可靠的方式，因为沙盒无法访问钥匙串。</li>
+  <li>输入主人密码确认。规则、最近一次运行和 <strong>Run log</strong>（运行日志）会出现在 <strong>Agents</strong> 中。</li>
+</ol>
+<p>在终端里只需一行：<code>antenna wake set &lt;contact&gt; --cmd "claude -p --output-format stream-json"</code>。<code>antenna wake list</code> 显示规则和最近的运行记录；<code>antenna wake off &lt;contact&gt;</code> 将其关闭。</p>
+
+<h2>智能体能做什么，不能做什么</h2>
+<ul>
+  <li><strong>它的提示词是固定的：</strong>“你有一条新消息，读一下并回复”。消息本身永远不会成为提示词；智能体把它当作数据来读，权限不超过该联系人的信任级别。</li>
+  <li><strong>它在沙盒中运行</strong>（Linux 上用 bubblewrap 或 Landlock，macOS 上用 Seatbelt）：它只能看到自己的临时文件夹和这段对话的文件夹，网络上只能访问自己的模型服务商。你的项目、你的其他文件和节点的密钥它都碰不到。没有沙盒，Antenna 就不会启动它。</li>
+  <li><strong>每次运行都从干净状态开始</strong>，除非你让智能体常驻（见下文），所以之前的消息没法给之后的运行留下指令。</li>
+  <li><strong>限额：</strong>每次运行有时间上限，每小时有次数上限，话多的联系人也没法把你的用量耗光。</li>
+</ul>
+
+<h2>让它在你的项目里工作</h2>
+<p>仅限你自己的电脑（∞）：智能体还可以在一个项目文件夹里使用你的工具链工作，参数是 <code>--project ~/code/payments</code>，另外可以用 <code>--tool-path</code> 指定只读文件夹，用 <code>--allow-host</code> 指定它可以访问的软件包仓库。对其他任何联系人，Antenna 都会拒绝这样做，而且永远不会开放你的主目录、Antenna 自己的数据，或者像 <code>~/.ssh</code> 这样存放机密的文件夹。</p>
+
+<h2>常见问题</h2>
+<details>
+  <summary>对方能看到回复正在输入的过程吗？</summary>
+  <p>可以，前提是联系人在 3 级及以上：对方会看到一个随着智能体书写而不断变长的气泡，结束时变成一条普通消息。1 级和 2 级联系人收到的是写完的回复。</p>
+</details>
+<details>
+  <summary>如果智能体在回复里写了密码或密钥怎么办？</summary>
+  <p>对方那边的流会停止，这条消息会等你审批。只有发往你自己的电脑时才会继续。</p>
+</details>
+<details>
+  <summary>它记得之前的对话吗？</summary>
+  <p>默认不记得：每条消息都会启动一次全新的运行。如果是要持续好几个小时的工作，加上 <code>--resident</code>：同一个 Claude Code 会话会一直跟着这段对话，记住说过和定下的内容，每条新消息都成为它的下一轮。消息仍然作为来自另一方的数据交给它。</p>
+</details>

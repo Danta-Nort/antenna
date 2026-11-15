@@ -91,7 +91,7 @@ void main() {
     final p = AppearanceStore('${dir.path}/window.json').load();
     expect(p.theme, ThemeChoice.system);
     expect(p.lang, LangChoice.system);
-    File('${dir.path}/window.json').writeAsStringSync('{"theme": 7, "lang": "fr"}');
+    File('${dir.path}/window.json').writeAsStringSync('{"theme": 7, "lang": "ar"}');
     final odd = AppearanceStore('${dir.path}/window.json').load();
     expect((odd.theme, odd.lang), (ThemeChoice.system, LangChoice.system), reason: 'unknown values → system');
   });
@@ -112,9 +112,10 @@ void main() {
   test('language: "system" picks the first system language the window knows, otherwise English', () {
     Locale lang(LangChoice c, List<Locale> system) => resolveLanguage(c, system);
     expect(lang(LangChoice.system, const [Locale('ru', 'RU')]), const Locale('ru'));
-    expect(lang(LangChoice.system, const [Locale('de'), Locale('ru')]), const Locale('ru'), reason: 'in order');
+    expect(lang(LangChoice.system, const [Locale('ar'), Locale('ru')]), const Locale('ru'), reason: 'in order');
     expect(lang(LangChoice.system, const [Locale('en', 'GB'), Locale('ru')]), const Locale('en'));
-    expect(lang(LangChoice.system, const [Locale('de'), Locale('fr')]), const Locale('en'));
+    expect(lang(LangChoice.system, const [Locale('de'), Locale('fr')]), const Locale('de'));
+    expect(lang(LangChoice.system, const [Locale('ar'), Locale('he')]), const Locale('en'), reason: 'none known');
     expect(lang(LangChoice.system, const []), const Locale('en'));
     expect(lang(LangChoice.en, const [Locale('ru')]), const Locale('en'), reason: 'an explicit choice beats the system');
     expect(lang(LangChoice.ru, const [Locale('en')]), const Locale('ru'));
@@ -145,19 +146,14 @@ void main() {
     await t.pump(const Duration(milliseconds: 300));
     expect(find.text('Language'), findsOneWidget);
     // Each language is named in itself.
-    expect(find.text('English'), findsOneWidget);
-    expect(find.text(_ru.langRussian), findsOneWidget);
-    await t.tap(find.byKey(const Key('lang-ru')));
-    await t.pump(const Duration(milliseconds: 300));
+    await _pickLang(t, 'ru');
     // Settings is still open (the home screen state was not reset), and the strings are Russian.
     expect(find.text(_ru.settingsLanguage), findsOneWidget);
     expect(find.text(_ru.settingsAppearance), findsOneWidget);
-    expect(find.text(_ru.langRussian), findsOneWidget);
-    expect(find.text('English'), findsOneWidget);
+    expect(find.text(_ru.langName), findsOneWidget);
     expect(json.decode(File(store.path).readAsStringSync()), {'theme': 'system', 'lang': 'ru', 'self_notice_shown': true});
     expect(m.selectedLinkId, selected);
-    await t.tap(find.byKey(const Key('lang-en')));
-    await t.pump(const Duration(milliseconds: 300));
+    await _pickLang(t, 'en');
     expect(find.text('Language'), findsOneWidget);
     expect(AppearanceStore(store.path).load().lang, LangChoice.en);
     // An explicit English choice beats a Russian system.
@@ -165,8 +161,7 @@ void main() {
     addTearDown(t.platformDispatcher.clearLocalesTestValue);
     await t.pump();
     expect(find.text('Language'), findsOneWidget);
-    await t.tap(find.byKey(const Key('lang-system')));
-    await t.pump(const Duration(milliseconds: 300));
+    await _pickLang(t, 'system');
     expect(find.text(_ru.settingsLanguage), findsOneWidget);
   });
 
@@ -202,4 +197,14 @@ void main() {
     expect(look.agentRunNames, ['claude-backend']);
     expect(File(store.path).readAsStringSync(), isNot(contains('xat_')));
   });
+}
+
+/// Opens the language menu and picks [code]; each language is named in itself in the open menu.
+Future<void> _pickLang(WidgetTester t, String code) async {
+  await t.tap(find.byKey(const Key('lang-menu')));
+  await t.pump(const Duration(milliseconds: 300));
+  expect(find.text('English'), findsWidgets);
+  expect(find.text(_ru.langName), findsWidgets);
+  await t.tap(find.byKey(Key('lang-$code')).last);
+  await t.pump(const Duration(milliseconds: 300));
 }

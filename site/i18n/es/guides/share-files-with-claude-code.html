@@ -1,0 +1,35 @@
+<!--guide {"title": "Cómo compartir archivos con Claude Code en otra computadora — Antenna", "h1": "Cómo compartir archivos con Claude Code en otra computadora", "description": "Envía un archivo desde tu portátil a Claude Code en un servidor u otra computadora con Antenna: se comprueba al llegar y al agente se le dice dónde está.", "summary": "Enviar y recibir archivos de una sesión de Claude Code en otra computadora, comprobados al llegar.", "source": "2026-11-09"}-->
+<p class="lead">En la misma computadora, Claude Code lee tus archivos directamente: dale la ruta o arrastra el archivo a su terminal. En otra computadora, como un servidor, envía el archivo a través de Antenna: suéltalo en el chat con esa sesión de Claude Code, Antenna lo comprueba al llegar y lo guarda allí, en la carpeta del enlace, y el agente recibe en su bandeja de entrada el nombre, la ubicación, el tamaño y el SHA-256 del archivo. Los archivos que te devuelve el agente llegan a tu portátil por el mismo camino.</p>
+
+<h2>Envía un archivo al agente</h2>
+<ol>
+  <li>Empareja tu portátil con la otra computadora como tuya (∞) y conecta allí Claude Code a Antenna: consulta <a href="/guides/run-claude-code-on-a-vps">Claude Code en un VPS</a>.</li>
+  <li>Abre en tu portátil el chat con la sesión y suelta el archivo en él, o adjúntalo como en cualquier app de mensajería.</li>
+  <li>En la otra computadora, Antenna comprueba el tipo del archivo por su contenido, busca amenazas y secretos y lo guarda en la carpeta del enlace, <code>~/Antenna/links/&lt;folder&gt;/shared/</code>, o en la carpeta de proyecto que hayas elegido para esa computadora.</li>
+  <li>El agente se entera solo del archivo guardado la próxima vez que mira su bandeja de entrada, con su ruta y sus hashes, y puede usarlo en su siguiente paso.</li>
+</ol>
+
+<h2>Recibe archivos del agente</h2>
+<p>El agente puede enviarte un archivo, una compilación, un informe o una captura de pantalla, con las mismas herramientas que usa para los mensajes. Llega a tu chat y a <strong>Files</strong>, como una tarjeta con el nombre del archivo, lo que ha detectado la comprobación y su hash. Las imágenes se muestran como una vista previa segura y comprobada, reconstruida por Antenna.</p>
+
+<h2>Qué se comprueba y qué espera por ti</h2>
+<ul>
+  <li><strong>Entre tus propias computadoras</strong>, los archivos normales se guardan solos. Todo lo que pueda ejecutar o instalar software, como un programa, un instalador o un archivo comprimido que contenga uno, sigue esperando tu decisión, salvo que lo permitas para esa computadora.</li>
+  <li><strong>Desde el agente de otra persona</strong> con nivel 3 o 4, los archivos se comprueban y esperan a que pulses Accept, o a que uno de tus agentes los acepte. Con los niveles 1 y 2, decides tú cada archivo.</li>
+  <li><strong>Al salir</strong>, un archivo que parece contener una clave, una contraseña o un token se retiene hasta que lo apruebes, salvo entre tus propias computadoras.</li>
+  <li><strong>No se sobrescribe nada.</strong> Un archivo cuyo nombre ya está ocupado se guarda como <code>report (2).pdf</code>, y a quien lo envía se le comunica el nombre.</li>
+</ul>
+
+<h2>Preguntas</h2>
+<details>
+  <summary>¿Por qué no usar scp o una carpeta compartida?</summary>
+  <p>Puedes, y para árboles grandes de archivos quizá lo prefieras. Antenna es para los archivos que forman parte de una conversación con el agente: llegan donde el agente los espera, al agente se le avisa, y un archivo de cualquiera que no seas tú se comprueba antes de guardarse.</p>
+</details>
+<details>
+  <summary>¿El archivo va cifrado por el camino?</summary>
+  <p>Sí, de extremo a extremo, por el mismo enlace que tus mensajes. Ningún servidor intermedio lo guarda.</p>
+</details>
+<details>
+  <summary>¿Puedo elegir dónde se guardan los archivos?</summary>
+  <p>Sí. En la ficha de contacto de la computadora, <strong>Files from this computer</strong> (archivos de esta computadora) te deja elegir una carpeta para esa computadora y otra para cada uno de sus agentes. Desde una terminal: <code>antenna files save-to &lt;contact&gt; &lt;folder&gt;</code>.</p>
+</details>

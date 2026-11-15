@@ -1,0 +1,49 @@
+<!--guide {"title": "Faire tourner Claude Code sur un VPS 24 h/24 et lui écrire — Antenna", "h1": "Faire tourner Claude Code sur un VPS jour et nuit, et lui parler depuis votre portable", "description": "Installez Antenna sur votre VPS, lancez-y Claude Code ou Codex et donnez-lui des tâches par messagerie depuis votre portable. Sans port ouvert ni session SSH.", "summary": "Un Claude Code ou un Codex toujours actif sur votre serveur, que vous joignez par messagerie depuis votre portable.", "source": "2026-11-09"}-->
+<p class="lead">Installez Claude Code et le nœud Antenna sur votre VPS Linux, associez une fois le serveur à votre portable, puis lancez Claude Code via Antenna dans le dossier de votre projet. Il tourne alors dans sa propre session tmux après votre déconnexion, se réveille quand un message lui est destiné et répond dans une conversation sur votre portable. Aucun port entrant à ouvrir, aucune session SSH à maintenir, et Codex fonctionne de la même manière.</p>
+
+<h2>Ce qu’il vous faut</h2>
+<ul>
+  <li>Un serveur Linux en x86_64, avec Claude Code (ou Codex) installé et connecté, et tmux.</li>
+  <li><a href="/#download">Antenna</a> sur votre portable : macOS ou Linux.</li>
+</ul>
+
+<h2>1. Installer le nœud Antenna sur le serveur</h2>
+<pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+sudo loginctl enable-linger $USER</code></pre>
+<p>L’installeur lit la dernière version dans le manifeste signé, vérifie l’archive, installe <code>antennad</code> et <code>antenna</code> dans <code>~/.local/bin</code> en tant que service utilisateur systemd (sans root) et crée votre nœud avec un mot de passe. La deuxième ligne maintient le service actif après votre déconnexion. Sous Ubuntu ou Fedora, vous pouvez installer à la place le paquet <code>.deb</code> ou <code>.rpm</code>.</p>
+
+<h2>2. L’associer à votre portable</h2>
+<p>Sur votre portable : <strong>New contact → Invite</strong>, donnez-lui un nom, cochez <strong>This is my own computer (∞)</strong>, cliquez sur <strong>Create link</strong> et copiez le lien. Sur le serveur :</p>
+<pre><code>antenna join '&lt;link&gt;' --trust 5 --label mac</code></pre>
+<p>Gardez les guillemets simples : le lien contient un <code>#</code>. Saisissez dans le terminal du serveur le code affiché par votre portable, puis cliquez sur <strong>The contact confirmed — codes match</strong> sur le portable. Le niveau 5 correspond à ∞ des deux côtés : le serveur compte donc comme votre propre ordinateur.</p>
+
+<h2>3. Lancer Claude Code via Antenna</h2>
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api
+antenna session attach api-dev</code></pre>
+<p>La commande connect donne à la session son propre agent et son propre jeton, et envoie un bonjour pour qu’une conversation nommée <code>api-dev</code> apparaisse sur votre portable. La commande start lance Claude Code dans le serveur tmux propre à Antenna (votre tmux n’est pas touché). Attachez-vous une fois pour répondre aux premières questions de Claude Code, par exemple s’il fait confiance au dossier, puis détachez-vous avec <code>Ctrl-b d</code> : il continue de tourner. Pour Codex, utilisez <code>antenna connect codex</code> et <code>--cli codex</code>.</p>
+
+<h2>4. Lui parler</h2>
+<p>Écrivez dans la conversation <code>api-dev</code> sur votre portable : « Lance les tests de migration et corrige ce qui échoue. » Quand Claude Code attend, inactif, devant son invite, Antenna tape une courte ligne pour qu’il lise votre message ; il ne tape jamais le texte d’un contact et ne répond jamais à une question à sa place. La fiche du serveur dans <strong>My devices</strong> affiche son état de santé et ses agents, et vous pouvez approuver ses demandes depuis le portable.</p>
+
+<h2>Après un redémarrage</h2>
+<p>Les clés du nœud sont verrouillées après un redémarrage du serveur : le service tourne, mais ses liaisons restent muettes jusqu’à ce que vous vous connectiez et lanciez <code>antenna unlock</code>. Ainsi, une copie du disque du serveur ne livre vos clés à personne. <code>antenna status</code> indique s’il est verrouillé.</p>
+
+<h2>Questions</h2>
+<details>
+  <summary>Pourquoi ne pas simplement utiliser SSH et tmux ?</summary>
+  <p>Cela fonctionne tant que vous êtes devant un terminal. Antenna ajoute une conversation à laquelle vous pouvez écrire à tout moment depuis votre portable, réveille la session quand vous le faites, et permet à d’autres agents de lui confier du travail, avec des permissions qu’il vérifie lui-même.</p>
+</details>
+<details>
+  <summary>Le serveur a-t-il besoin d’une IP publique ou de ports ouverts ?</summary>
+  <p>Non. Les deux côtés établissent des connexions sortantes, directes quand le réseau le permet et via un relais sinon. Le relais ne transmet que du trafic chiffré.</p>
+</details>
+<details>
+  <summary>Puis-je faire tourner plusieurs sessions sur un même serveur ?</summary>
+  <p>Oui : un agent par dossier de projet, chacun avec son propre nom et sa propre conversation sur votre portable.</p>
+</details>
+<details>
+  <summary>Existe-t-il une version ARM ?</summary>
+  <p>Pas encore. Le nœud serveur est compilé pour Linux x86_64.</p>
+</details>

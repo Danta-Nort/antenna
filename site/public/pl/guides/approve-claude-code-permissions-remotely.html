@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zatwierdzaj uprawnienia Claude Code zdalnie, z każdego komputera</title>
+<meta name="description" content="Claude Code na serwerze albo drugim komputerze czeka na twoją zgodę? Antenna pokaże prośbę na wszystkich twoich komputerach, a odpowiesz hasłem albo Touch ID.">
+<link rel="canonical" href="https://antenna.contact/pl/guides/approve-claude-code-permissions-remotely">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Zatwierdzaj uprawnienia Claude Code zdalnie, z każdego komputera">
+<meta property="og:description" content="Claude Code na serwerze albo drugim komputerze czeka na twoją zgodę? Antenna pokaże prośbę na wszystkich twoich komputerach, a odpowiesz hasłem albo Touch ID.">
+<meta property="og:url" content="https://antenna.contact/pl/guides/approve-claude-code-permissions-remotely">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="pl_PL">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/approve-claude-code-permissions-remotely">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/approve-claude-code-permissions-remotely">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/pl/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Poradniki",
+     "item": "https://antenna.contact/pl/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Zatwierdzaj prośby Claude Code z innego komputera",
+     "item": "https://antenna.contact/pl/guides/approve-claude-code-permissions-remotely"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Zatwierdzaj prośby Claude Code z innego komputera",
+   "description": "Claude Code na serwerze albo drugim komputerze czeka na twoją zgodę? Antenna pokaże prośbę na wszystkich twoich komputerach, a odpowiesz hasłem albo Touch ID.",
+   "datePublished": "2026-11-15",
+   "dateModified": "2026-11-15",
+   "inLanguage": "pl",
+   "url": "https://antenna.contact/pl/guides/approve-claude-code-permissions-remotely",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/pl/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Czy to działa z Codex?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Częściowo. To, co Codex wysyła przez Antennę, jest sprawdzane tak samo i te prośby trafiają na wszystkie twoje komputery; własne polecenia Codex nadal podlegają jego własnym zgodom w terminalu."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Czy każdy komputer może zatwierdzać?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Nie. Tylko komputer połączony jako twój własny, którego klucze przyjęto na pytającym komputerze, i tylko z hasłem. Gdy zgubisz komputer, na każdym z pozostałych użyj Revoke this computer (unieważnij ten komputer)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Czy mogę zatwierdzać z telefonu?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Jeszcze nie. Antenna działa dziś na macOS i Linuksie."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Przejdź do treści</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/pl/" aria-label="Antenna — strona główna"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Menu główne">
+      <a href="/pl/#product">Produkt</a>
+      <a href="/pl/#security">Bezpieczeństwo</a>
+      <a href="/pl/guides/">Poradniki</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Język: Polski"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">PL</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/approve-claude-code-permissions-remotely" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/approve-claude-code-permissions-remotely" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/approve-claude-code-permissions-remotely" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/approve-claude-code-permissions-remotely" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/approve-claude-code-permissions-remotely" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/approve-claude-code-permissions-remotely" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/approve-claude-code-permissions-remotely" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/approve-claude-code-permissions-remotely" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/approve-claude-code-permissions-remotely" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/approve-claude-code-permissions-remotely" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/approve-claude-code-permissions-remotely" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/approve-claude-code-permissions-remotely" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/approve-claude-code-permissions-remotely" hreflang="pl" lang="pl" aria-current="true">Polski</a></li>
+        <li><a href="/ru/guides/approve-claude-code-permissions-remotely" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/approve-claude-code-permissions-remotely" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/pl/#download">Pobierz</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Ścieżka nawigacji"><a href="/pl/">Antenna</a> <span aria-hidden="true">›</span> <a href="/pl/guides/">Poradniki</a></nav>
+    <p class="eyebrow">Zaktualizowano <time datetime="2026-11-15">15 listopada 2026</time></p>
+    <h1>Zatwierdzaj prośby Claude Code z innego komputera</h1>
+    <p class="lead">Uruchom Claude Code przez Antennę, w trybie Code mode w oknie albo poleceniem <code>antenna session</code> na serwerze, a demon Antenny sprawdzi każde narzędzie, którego Claude Code używa, i każdą wiadomość, którą wysyła. Gdy jakiś krok wymaga twojej decyzji, staje się prośbą o zgodę, która pojawia się z powiadomieniem w <strong>My devices</strong> (moje urządzenia) na każdym komputerze połączonym jako twój własny. Zatwierdź ją tam hasłem tego komputera albo Touch ID: komputer, na którym działa Claude Code, sprawdza twoją odpowiedź i wykonuje krok, a Claude Code pracuje dalej.</p>
+
+    <h2>Co do ciebie trafia</h2>
+    <ul>
+      <li><strong>Kroki po przeczytaniu wiadomości od kontaktu.</strong> Gdy Claude Code przeczyta wiadomość od kogoś z zespołu, poziom zaufania tej osoby wyznacza, co mu wolno: na poziomie 4 każde polecenie czeka na ciebie; na poziomach 2 i 3 czeka każda edycja, a polecenia są odrzucane.</li>
+      <li><strong>Zmiany w jego własnej konfiguracji.</strong> Po przeczytaniu wiadomości od dowolnego kontaktu, nawet z twojego własnego laptopa, edycje <code>CLAUDE.md</code>, <code>.claude/</code>, profili powłoki, kluczy i plików budowania, takich jak <code>package.json</code>, czekają na ciebie.</li>
+      <li><strong>Wiadomości, które wyniosłyby twoje dane.</strong> Gdy Claude Code przeczyta pliki twojego projektu, każda jego wiadomość do kontaktu poniżej ∞ czeka na ciebie, podobnie jak każda wiadomość do takiego kontaktu, która wygląda, jakby zawierała klucz, hasło albo token. Gdy przeczyta jedną rozmowę, wiadomość do innej też czeka.</li>
+      <li><strong>Pytania.</strong> <em>Funkcja eksperymentalna.</em> Pytania agenta pojawiają się na komputerze, na którym działa, w <strong>Questions from your agents</strong> (pytania od twoich agentów). Żeby zamiast tego dostawać je na laptopie, uruchom na tamtym komputerze <code>antenna agent escalate api-dev --to mac</code>: wtedy każde pytanie trafi do czatu agenta i odpowiesz w czacie.</li>
+    </ul>
+    <p>Własne pytanie Claude Code o zgodę („Do you want to proceed?”) zostaje w jego terminalu: Antenna nigdy niczego w nim nie wpisuje. Narzędziom, których używasz na co dzień, zezwól w ustawieniach Claude Code albo odpowiadaj na to pytanie przez <code>antenna session attach</code>.</p>
+
+    <h2>Konfiguracja</h2>
+    <ol>
+      <li><a href="/pl/#download">Zainstaluj Antennę</a> na obu komputerach i połącz je raz z zaznaczonym <strong>This is my own computer (∞)</strong> (to mój własny komputer), jak w poradniku <a href="/pl/guides/run-claude-code-on-a-vps">Claude Code na VPS</a>.</li>
+      <li>Uruchom Claude Code przez Antennę. Na desktopie: <strong>Agents → AI apps → Start in Code mode</strong>. Na serwerze:
+    <pre><code>cd ~/projects/api
+    antenna connect claude-code --agent api-dev --links mac --hello mac
+    antenna session start api-dev --dir ~/projects/api</code></pre></li>
+      <li>Na komputerze, na którym działa Claude Code, przyjmij odpowiedzi z tego, z którego będziesz zatwierdzać: <strong>My devices</strong> → karta tego komputera → <strong>Approvals</strong> (zgody) → <strong>Accept approvals signed with …</strong> (przyjmuj zgody podpisane kluczem…), z twoim hasłem. Na serwerze: <code>antenna devices confirm mac</code>.</li>
+    </ol>
+
+    <h2>Odpowiadaj z dowolnego komputera</h2>
+    <p>Prośba pojawia się na karcie pytającego komputera w <strong>My devices</strong> (<em>funkcja eksperymentalna</em>), z powiadomieniem w rodzaju „Antenna: approval needed on Mac mini”. Karta mówi, który agent pyta, o co i dlaczego, i cytuje jego tekst, chyba że w tekście jest sekret: taki tekst nigdy nie opuszcza komputera, który pyta. Naciśnij <strong>Approve with Touch ID</strong> na Macu (<em>funkcja eksperymentalna</em>), <strong>Approve with password</strong> z hasłem komputera, przy którym siedzisz, albo <strong>Deny</strong> (odrzuć).</p>
+    <p>Komputer, który pytał, sprawdza podpis względem przyjętych na nim kluczy, własnego jednorazowego wyzwania (challenge) i dokładnie tej prośby, a potem sam wykonuje prośbę, jeden raz. Na tym komputerze prośba jest też w <strong>Approval requests</strong> (prośby o zgodę), a w terminalu pod <code>antenna approvals</code> i <code>antenna approve &lt;id&gt;</code>.</p>
+    <p>Claude Code czeka do 50 sekund i krok zatwierdzony w tym czasie wykonuje się od razu. Później zajmuje się inną pracą; gdy zatwierdzisz, Antenna wpisuje w jego wiersz poleceń „Approved — continue.”, a Claude Code ponawia krok.</p>
+
+    <h2>Jeśli nikt nie odpowie</h2>
+    <p>Prośba zamyka się po 10 minutach: nic się nie wykonuje i nic nie jest wysyłane, a Claude Code dowiaduje się, że nikt jej nie zatwierdził. Krótko wcześniej ostrzeże cię powiadomienie. Po <strong>Deny</strong>, które nie wymaga hasła, Claude Code dowiaduje się, że twoja odpowiedź brzmi „nie”.</p>
+
+    <h2>Agent, który zatwierdza za ciebie</h2>
+    <p><em>Funkcja eksperymentalna.</em> <strong>Can approve for…</strong> (może zatwierdzać za…) w <strong>Agents</strong> pozwala agentowi, któremu ufasz, odpowiadać na prośby twoich pozostałych agentów dotyczące wiadomości i plików, a jego odpowiedź liczy się tylko wtedy, gdy wszystko, czego dotyczy prośba, jest na poziomie ∞. Polecenia i edycje zawsze trafiają do ciebie.</p>
+
+    <h2>Pytania</h2>
+    <details>
+      <summary>Czy to działa z Codex?</summary>
+      <p>Częściowo. To, co Codex wysyła przez Antennę, jest sprawdzane tak samo i te prośby trafiają na wszystkie twoje komputery; własne polecenia Codex nadal podlegają jego własnym zgodom w terminalu.</p>
+    </details>
+    <details>
+      <summary>Czy każdy komputer może zatwierdzać?</summary>
+      <p>Nie. Tylko komputer połączony jako twój własny, którego klucze przyjęto na pytającym komputerze, i tylko z hasłem. Gdy zgubisz komputer, na każdym z pozostałych użyj <strong>Revoke this computer</strong> (unieważnij ten komputer).</p>
+    </details>
+    <details>
+      <summary>Czy mogę zatwierdzać z telefonu?</summary>
+      <p>Jeszcze nie. Antenna działa dziś na macOS i Linuksie.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna jest darmowa i open source</strong>, na macOS i Linuksa. Bez konta i bez numeru telefonu.</p>
+      <a class="btn" href="/pl/#download">Pobierz Antennę</a>
+    </aside>
+    <h2>Powiązane poradniki</h2>
+    <ul class="related">
+      <li><a href="/pl/guides/claude-code-on-multiple-computers">Claude Code na kilku komputerach, obsługiwany z jednego miejsca</a></li>
+      <li><a href="/pl/guides/run-claude-code-on-a-vps">Claude Code na VPS przez całą dobę, z rozmową z laptopa</a></li>
+      <li><a href="/pl/guides/stop-ai-agent-leaking-secrets">Jak nie dopuścić do wycieku kluczy API i haseł przez agenta AI</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/pl/" aria-label="Antenna — strona główna"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/pl/guides/">Poradniki</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Kontakt: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/pl/privacy">Polityka prywatności</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

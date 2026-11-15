@@ -13,10 +13,12 @@ import 'package:antenna_desktop/l10n/l10n.dart';
 import 'package:antenna_desktop/protocol/x_control.dart';
 import 'package:antenna_desktop/state/agent_snippets.dart';
 import 'package:antenna_desktop/state/app_model.dart';
+import 'package:antenna_desktop/state/code_mode.dart';
 import 'package:antenna_desktop/ui/agents/agents_dialog.dart';
 import 'package:antenna_desktop/ui/agents/agents_page.dart';
 import 'package:antenna_desktop/ui/app.dart';
 import 'package:antenna_desktop/ui/cli/cli_dialog.dart';
+import 'package:antenna_desktop/ui/gate/gate_screen.dart';
 import 'package:antenna_desktop/ui/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,6 +26,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../support/fake_daemon.dart';
 import '../support/fake_host.dart';
+import '../support/fake_pty.dart';
 import '../support/fixtures.dart';
 
 const _bins = CoreBinaries(
@@ -31,7 +34,7 @@ const _bins = CoreBinaries(
   cli: '/Applications/Antenna.app/Contents/Helpers/antenna',
 );
 
-Future<AppModel> _model(FakeDaemon d, {DaemonHost? host, CliInstaller? cli}) async {
+Future<AppModel> _model(FakeDaemon d, {DaemonHost? host, CliInstaller? cli, AgentHost? agentHost}) async {
   final m = AppModel(
     connector: (_) => d,
     socketPath: d.socketPath,
@@ -39,6 +42,7 @@ Future<AppModel> _model(FakeDaemon d, {DaemonHost? host, CliInstaller? cli}) asy
     host: host,
     binaries: _bins,
     cliInstaller: cli,
+    agentHost: agentHost,
     live: false,
     clock: () => fixedNow,
   );
@@ -95,6 +99,19 @@ void main() {
     expect(find.byKey(const Key('start-daemon')), findsOneWidget);
   });
 
+  testWidgets('daemon on a server: the ssh hint names no account of ours and the socket to enter', (t) async {
+    final m = await _model(FakeDaemon(reachable: false));
+    await _app(t, m);
+    final hint = find.byWidgetPredicate((w) => w is SelectableText && (w.data ?? '').contains('ssh -N -L'));
+    expect(hint, findsOneWidget);
+    final cmd = t.widget<SelectableText>(hint).data!;
+    expect(cmd, serverSocketForward);
+    expect(cmd, isNot(contains('/root/')));
+    expect(cmd, contains('<user>@<server>'));
+    // The local end is the path the person then types into the socket field.
+    expect(cmd, startsWith('ssh -N -L /tmp/antenna-server.sock:'));
+  });
+
   testWidgets('stop the daemon from the window: no silent restart', (t) async {
     final d = FakeDaemon(contacts: demoContacts(), history: demoHistory());
     final host = FakeHost(d);
@@ -108,6 +125,20 @@ void main() {
     expect(m.phase, Phase.unreachable);
     expect(host.starts, 0, reason: 'the owner stopped it — the window does not start it again by itself');
     expect(find.byKey(const Key('start-daemon')), findsOneWidget);
+  });
+
+  testWidgets('before the first contact, the empty chat also offers the AI apps and opens Agents', (t) async {
+    final m = await _model(FakeDaemon(contacts: []), agentHost: FakeAgentComputer().host);
+    await _app(t, m);
+    expect(find.text(en.chatFirstConnectAgent), findsOneWidget);
+    await t.tap(find.byKey(const Key('first-connect-agent')));
+    await t.pump(const Duration(milliseconds: 300));
+    expect(find.byType(AgentsPage), findsOneWidget);
+
+    // With a contact, the empty chat is "Select a contact" and offers no shortcut.
+    final withContacts = await _model(FakeDaemon(contacts: demoContacts()), agentHost: FakeAgentComputer().host);
+    await _app(t, withContacts);
+    expect(find.byKey(const Key('first-connect-agent')), findsNothing);
   });
 
   testWidgets('connect an agent: mandatory label, owner password, one-time token, snippets', (t) async {

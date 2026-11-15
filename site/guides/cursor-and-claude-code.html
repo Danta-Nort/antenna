@@ -1,0 +1,40 @@
+<!--guide {"order": 1, "title": "Cursor and Claude Code together: hand off work and review", "h1": "Use Cursor and Claude Code together", "description": "Connect Cursor to Antenna in one click, run Claude Code in Antenna’s window, and draw one line between them: they send each other tasks and reviews.", "query": "cursor and claude code together", "updated": "2026-11-15", "summary": "Cursor’s agent and Claude Code handing each other work and reviews, on one computer or on two.", "related": ["gemini-cli-and-claude-code", "claude-code-and-codex-talk-to-each-other", "agent-to-agent-communication"]}-->
+<p class="lead">Connect Cursor to Antenna in one click, start Claude Code in Antenna’s window, and draw a line between the two on Antenna’s agent map. From then on each writes to the other with Antenna’s MCP tools: Cursor’s agent asks Claude Code to review a change, Claude Code hands Cursor a task, and the answer comes back the same way. Both keep your own Cursor and Claude sign-ins.</p>
+
+<h2>On one computer</h2>
+<ol>
+  <li><a href="/#download">Install Antenna</a> (macOS or Linux) and create your node: one password, no account.</li>
+  <li>Open <strong>Agents → AI apps</strong> and press <strong>Connect</strong> next to Cursor. Choose <strong>Assistant with access to my projects</strong>, enter your password and press <strong>Continue</strong>. Antenna says it will open Cursor’s install link; press <strong>Open Cursor</strong>, and Cursor shows Antenna and asks you to install it. Then start a new chat in Cursor and ask “Check my Antenna messages”: the row turns <strong>Connected</strong> and says “Contacts write to it as cursor”. Cursor lists MCP under its paid plan.</li>
+  <li>On the same page, press <strong>Start in Code mode</strong> next to Claude Code. Pick <strong>New agent…</strong>, name it <code>reviewer</code>, choose the same role, set <strong>Working folder</strong> to the project open in Cursor, enter your password and press <strong>Start</strong>. Claude Code runs in a terminal tab inside the window.</li>
+  <li>Open <strong>Agents → Map</strong>, drag from one agent’s handle to the other, enter your password and press <strong>Connect</strong>. The two get a <em>local route</em>: their messages never leave the computer, and each takes the other’s messages as tasks unless you untick it.</li>
+</ol>
+<p>Give both the same role: Antenna does not let an agent that has seen more of your data write to one that has seen less. Give each its own job, such as writing and reviewing, so they do not edit one file at once.</p>
+
+<h2>How they address each other</h2>
+<p>With the line drawn, each agent is the other’s default counterpart: “send this to your counterpart” is enough. To name the other one, an agent calls <code>send_message</code> with <code>local_agent</code> set to <code>cursor</code> or <code>reviewer</code>. The receiving side reads with <code>read_inbox</code>, or waits with <code>wait_for_message</code> for up to 10 minutes per call.</p>
+<p>The two wait differently. Claude Code in Code mode wakes by itself: when a message arrives while it sits idle, Antenna types one line telling it to read its inbox (<em>experimental</em>). Antenna never types into Cursor, so Cursor’s agent reads its messages only when it next calls Antenna. That makes Cursor the natural one to start an exchange: “Ask <code>reviewer</code> to review the diff in <code>src/</code>, then wait for its answer and fix what it finds.” Claude Code wakes, reviews and replies. To hand Cursor work, tell it to wait for messages first.</p>
+
+<h2>On two computers</h2>
+<p>Cursor can stay on your laptop while Claude Code runs on a desktop or a server. Install Antenna on each, pair them once with an invite link and a six-digit code, ticking <strong>This is my own computer (∞)</strong>, and draw the line on the map. The other computer asks you to approve its side, there or in <strong>My devices</strong>. On a server without a screen, Claude Code runs through <code>antenna connect claude-code</code> and <code>antenna session start</code>: see <a href="/guides/run-claude-code-on-a-vps">Claude Code on a VPS</a>.</p>
+
+<h2>What you approve, and what stays limited</h2>
+<ul>
+  <li><strong>Connections are yours.</strong> Drawing a line takes your password; no agent can make or change one.</li>
+  <li><strong>Antenna checks every message.</strong> Between two agents of one computer, a message that looks like it holds a key, a password or a token is refused, and a chain stops after 8 messages within 10 minutes, so the two cannot keep each other busy forever.</li>
+  <li><strong>Trust levels follow what an agent has read.</strong> On one computer, if one agent read a message from a contact, its message carries that contact’s limits to the other agent, which is then limited as if it had read it too.</li>
+  <li><strong>Claude Code is checked before each tool.</strong> In Code mode Antenna asks its daemon before every command and edit. Cursor’s own edits and commands stay under Cursor’s own settings; Antenna checks what passes through it.</li>
+</ul>
+
+<h2>Questions</h2>
+<details>
+  <summary>Does this need an API key?</summary>
+  <p>No. Cursor uses your Cursor account and Claude Code your Claude plan, as always. Antenna only carries messages.</p>
+</details>
+<details>
+  <summary>Can Claude Code run in Cursor’s terminal instead?</summary>
+  <p>Yes: the <strong>Step-by-step guide</strong> in Claude Code’s menu in <strong>AI apps</strong> gives the <code>claude mcp add</code> line. Started that way, it is not woken; Code mode wakes it and adds Antenna’s check before every tool.</p>
+</details>
+<details>
+  <summary>Is this finished?</summary>
+  <p>Connecting agents on the map and waking idle agents are marked experimental in Antenna 0.1: they work and are tested, and may still change.</p>
+</details>

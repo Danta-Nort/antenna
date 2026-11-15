@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Başka bilgisayardaki Claude Code ile dosya paylaşma — Antenna</title>
+<meta name="description" content="Dizüstünüzden sunucudaki ya da ikinci bilgisayardaki Claude Code’a Antenna ile dosya gönderin: dosya vardığında kontrol edilir, ajana da nerede olduğu söylenir.">
+<link rel="canonical" href="https://antenna.contact/tr/guides/share-files-with-claude-code">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Başka bilgisayardaki Claude Code ile dosya paylaşma — Antenna">
+<meta property="og:description" content="Dizüstünüzden sunucudaki ya da ikinci bilgisayardaki Claude Code’a Antenna ile dosya gönderin: dosya vardığında kontrol edilir, ajana da nerede olduğu söylenir.">
+<meta property="og:url" content="https://antenna.contact/tr/guides/share-files-with-claude-code">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="tr_TR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/share-files-with-claude-code">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/tr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Rehberler",
+     "item": "https://antenna.contact/tr/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Başka bir bilgisayardaki Claude Code ile nasıl dosya paylaşılır",
+     "item": "https://antenna.contact/tr/guides/share-files-with-claude-code"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Başka bir bilgisayardaki Claude Code ile nasıl dosya paylaşılır",
+   "description": "Dizüstünüzden sunucudaki ya da ikinci bilgisayardaki Claude Code’a Antenna ile dosya gönderin: dosya vardığında kontrol edilir, ajana da nerede olduğu söylenir.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "tr",
+   "url": "https://antenna.contact/tr/guides/share-files-with-claude-code",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/tr/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Neden scp ya da ortak bir klasör kullanmıyoruz?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Kullanabilirsiniz; büyük dosya ağaçları için bunu tercih de edebilirsiniz. Antenna, ajanla yapılan bir konuşmaya ait dosyalar içindir: ajanın beklediği yere ulaşırlar, ajana haber verilir ve sizden başka birinden gelen dosya yerine varmadan önce kontrol edilir."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Dosya yolda şifreleniyor mu?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Evet, mesajlarınızla aynı bağlantı üzerinden uçtan uca şifrelenir. Aradaki hiçbir sunucu onu saklamaz."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Dosyaların nereye kaydedileceğini seçebilir miyim?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Evet. Bilgisayarın kişi kartındaki Files from this computer ile o bilgisayar için ve onun her ajanı için birer klasör seçebilirsiniz. Terminalden: antenna files save-to <contact> <folder>."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">İçeriğe geç</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/tr/" aria-label="Antenna — ana sayfa"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Ana menü">
+      <a href="/tr/#product">Ürün</a>
+      <a href="/tr/#security">Güvenlik</a>
+      <a href="/tr/guides/">Rehberler</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Dil: Türkçe"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">TR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/share-files-with-claude-code" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/share-files-with-claude-code" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/share-files-with-claude-code" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/share-files-with-claude-code" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/share-files-with-claude-code" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/share-files-with-claude-code" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/share-files-with-claude-code" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/share-files-with-claude-code" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/share-files-with-claude-code" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/share-files-with-claude-code" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/share-files-with-claude-code" hreflang="tr" lang="tr" aria-current="true">Türkçe</a></li>
+        <li><a href="/it/guides/share-files-with-claude-code" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/share-files-with-claude-code" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/share-files-with-claude-code" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/share-files-with-claude-code" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/tr/#download">İndir</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Sayfa yolu"><a href="/tr/">Antenna</a> <span aria-hidden="true">›</span> <a href="/tr/guides/">Rehberler</a></nav>
+    <p class="eyebrow">Güncellendi <time datetime="2026-11-09">9 Kasım 2026</time></p>
+    <h1>Başka bir bilgisayardaki Claude Code ile nasıl dosya paylaşılır</h1>
+    <p class="lead">Aynı bilgisayarda Claude Code dosyalarınızı doğrudan okur: ona yolu verin ya da dosyayı terminaline sürükleyin. Sunucu gibi başka bir bilgisayardaysa dosyayı Antenna üzerinden gönderin: o Claude Code oturumuyla olan sohbete bırakın; Antenna dosyayı vardığında kontrol eder ve oradaki bağlantı klasörüne kaydeder, ajan da gelen kutusunda dosyanın adını, konumunu, boyutunu ve SHA-256 değerini alır. Ajanın geri gönderdiği dosyalar da dizüstünüze aynı yoldan gelir.</p>
+
+    <h2>Ajana dosya gönderin</h2>
+    <ol>
+      <li>Dizüstü bilgisayarınızı diğer bilgisayarla kendi bilgisayarınız (∞) olarak eşleştirin ve oradaki Claude Code’u Antenna’ya bağlayın: <a href="/tr/guides/run-claude-code-on-a-vps">VPS’te Claude Code</a> rehberine bakın.</li>
+      <li>Dizüstünüzde oturumla olan sohbeti açın ve dosyayı içine bırakın ya da herhangi bir mesajlaşma uygulamasında yaptığınız gibi ekleyin.</li>
+      <li>Diğer bilgisayarda Antenna dosyanın türünü içeriğinden kontrol eder, tehditlere ve gizli bilgilere bakar ve dosyayı bağlantı klasörüne, <code>~/Antenna/links/&lt;folder&gt;/shared/</code> içine ya da o bilgisayar için seçtiğiniz bir proje klasörüne kaydeder.</li>
+      <li>Ajan kaydedilen dosyayı bir sonraki gelen kutusunda, yolu ve hash değerleriyle birlikte kendiliğinden öğrenir ve bir sonraki adımında kullanabilir.</li>
+    </ol>
+
+    <h2>Ajandan dosya alın</h2>
+    <p>Ajan size mesajlar için kullandığı araçlarla bir dosya, bir derleme, bir rapor ya da bir ekran görüntüsü gönderebilir. Dosya sohbetinize ve <strong>Files</strong> bölümüne; dosyanın adını, kontrolün fark ettiklerini ve hash değerini gösteren bir kart olarak gelir. Resimler, Antenna’nın yeniden oluşturduğu, kontrol edilmiş güvenli bir önizleme olarak görünür.</p>
+
+    <h2>Neler kontrol edilir, neler sizi bekler</h2>
+    <ul>
+      <li><strong>Kendi bilgisayarlarınız arasında</strong> sıradan dosyalar kendiliğinden kaydedilir. Program, kurulum dosyası ya da bunları içeren bir arşiv gibi yazılım çalıştırabilen ya da kurabilen her şey, o bilgisayar için izin vermediğiniz sürece yine kararınızı bekler.</li>
+      <li><strong>Başka birinin 3. ve 4. seviyedeki ajanından</strong> gelen dosyalar kontrol edilir ve sizin Accept demenizi ya da ajanlarınızdan birinin kabul etmesini bekler. 1. ve 2. seviyelerde her dosyaya siz karar verirsiniz.</li>
+      <li><strong>Dışarı giderken</strong>, anahtar, parola ya da token içeriyor gibi görünen bir dosya, kendi bilgisayarlarınız arasında değilse siz onaylayana kadar bekletilir.</li>
+      <li><strong>Hiçbir şeyin üzerine yazılmaz.</strong> Adı zaten kullanılan bir dosya <code>report (2).pdf</code> olarak kaydedilir ve gönderene bu ad bildirilir.</li>
+    </ul>
+
+    <h2>Sorular</h2>
+    <details>
+      <summary>Neden scp ya da ortak bir klasör kullanmıyoruz?</summary>
+      <p>Kullanabilirsiniz; büyük dosya ağaçları için bunu tercih de edebilirsiniz. Antenna, ajanla yapılan bir konuşmaya ait dosyalar içindir: ajanın beklediği yere ulaşırlar, ajana haber verilir ve sizden başka birinden gelen dosya yerine varmadan önce kontrol edilir.</p>
+    </details>
+    <details>
+      <summary>Dosya yolda şifreleniyor mu?</summary>
+      <p>Evet, mesajlarınızla aynı bağlantı üzerinden uçtan uca şifrelenir. Aradaki hiçbir sunucu onu saklamaz.</p>
+    </details>
+    <details>
+      <summary>Dosyaların nereye kaydedileceğini seçebilir miyim?</summary>
+      <p>Evet. Bilgisayarın kişi kartındaki <strong>Files from this computer</strong> ile o bilgisayar için ve onun her ajanı için birer klasör seçebilirsiniz. Terminalden: <code>antenna files save-to &lt;contact&gt; &lt;folder&gt;</code>.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna ücretsiz ve açık kaynaklıdır</strong>, macOS ve Linux için. Hesap da telefon numarası da gerekmez.</p>
+      <a class="btn" href="/tr/#download">Antenna’yı indir</a>
+    </aside>
+    <h2>İlgili rehberler</h2>
+    <ul class="related">
+      <li><a href="/tr/guides/run-claude-code-on-a-vps">Claude Code’u VPS’te 7/24 çalıştırın ve dizüstünüzden onunla konuşun</a></li>
+      <li><a href="/tr/guides/message-claude-code-on-another-computer">Başka bir bilgisayardaki Claude Code’a mesaj gönderin</a></li>
+      <li><a href="/tr/guides/multi-agent-prompt-injection">Ajanlar arasında prompt injection ve Antenna onu nasıl sınırlıyor</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/tr/" aria-label="Antenna — ana sayfa"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/tr/guides/">Rehberler</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>İletişim: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/tr/privacy">Gizlilik politikası</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -49,10 +49,11 @@ impl Target {
             reason,
             path: Some(exe.to_path_buf()),
         };
-        // The Windows installer and its updates are not built yet (D-134, WP-28, WP-29, phase W4).
+        // The Windows installer exists (D-139), but `antenna update` does not run it yet (WP-29, phase W4).
         if os == "windows" {
             return unsupported(
-                "antenna update does not support Windows yet: install the new release by hand"
+                "antenna update does not install on Windows yet: run the new release's \
+                 Antenna-<version>-windows-x86_64-setup.exe, it updates this copy in place"
                     .into(),
             );
         }

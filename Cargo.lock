@@ -215,7 +215,7 @@ dependencies = [
 
 [[package]]
 name = "antenna-cli"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "antenna-core",
  "antenna-proto",
@@ -240,7 +240,7 @@ dependencies = [
 
 [[package]]
 name = "antenna-core"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "aead-stream",
  "antenna-files",
@@ -284,7 +284,7 @@ dependencies = [
 
 [[package]]
 name = "antenna-files"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "aead-stream",
  "antenna-proto",
@@ -324,7 +324,7 @@ dependencies = [
 
 [[package]]
 name = "antenna-proto"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "ciborium",
  "data-encoding",
@@ -336,7 +336,7 @@ dependencies = [
 
 [[package]]
 name = "antenna-release"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "antenna-proto",
  "antenna-update",
@@ -348,7 +348,7 @@ dependencies = [
 
 [[package]]
 name = "antenna-sys"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "libc",
  "tokio",
@@ -357,7 +357,7 @@ dependencies = [
 
 [[package]]
 name = "antenna-update"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "blake3",
  "data-encoding",
@@ -373,7 +373,7 @@ dependencies = [
 
 [[package]]
 name = "antennad"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "antenna-core",
  "antenna-files",

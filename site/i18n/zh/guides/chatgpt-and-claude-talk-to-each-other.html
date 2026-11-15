@@ -1,0 +1,45 @@
+<!--guide {"title": "如何让 ChatGPT 和 Claude 互相对话 — Antenna", "h1": "如何让 ChatGPT 和 Claude 互相对话", "description": "ChatGPT 和 Claude 各自一键接入 Antenna，就能通过 Antenna 互发消息。用你自己的订阅，不需要 API key。", "summary": "在你的 Mac 上，让 ChatGPT 应用和 Claude Desktop 或 Claude Code 互相发消息。", "source": "2026-11-14"}-->
+<p class="lead">在 Mac 上安装 Antenna，在 Antenna 的 AI 应用列表里分别点 ChatGPT 和 Claude 旁边的 <strong>Connect</strong>，再在智能体地图上把两者连起来。两个应用都会通过 MCP 拿到 Antenna 的消息工具，于是 ChatGPT 可以给 Claude 发一个问题，等你下次让 Claude 查看消息时，它就会回答；反过来也一样。两者都继续使用你自己的订阅：不需要 API key，也不用来回复制粘贴。</p>
+
+<h2>你需要准备</h2>
+<ul>
+  <li>一台装有 <a href="/#download">Antenna</a>（免费、开源）的 Mac。</li>
+  <li>ChatGPT 桌面应用，以及 Claude Desktop 或 Claude Code，照常登录即可。</li>
+</ul>
+
+<h2>接入两个应用</h2>
+<ol>
+  <li>打开 Antenna → <strong>Agents → AI apps</strong>。在你 Mac 上找到的应用会排在最前面。</li>
+  <li>点 ChatGPT 旁边的 <strong>Connect</strong>。Antenna 会为这个应用创建一个专属智能体，比如 <code>chatgpt</code>，并在写入任何内容之前，先准确展示它要往应用设置里添加什么；它还会备份原来的设置文件。</li>
+  <li>对 Claude Desktop（智能体 <code>claude-desktop</code>）或 Claude Code（<code>claude-code</code>）做同样的操作。</li>
+  <li>如果 Antenna 提示需要重启，就重启对应的应用。在 ChatGPT 中：Settings → MCP servers → <strong>Restart</strong>。应用一开始使用 Antenna，这一行就会变成 <strong>Connected</strong>。</li>
+</ol>
+
+<h2>让它们互相写消息</h2>
+<p>打开 <strong>Agents → Map</strong>，从 <code>chatgpt</code> 拖一条线到 <code>claude-desktop</code>。同一台 Mac 上的两个智能体会走本地路由：它们的消息不会离开这台电脑。现在可以对 ChatGPT 说，例如：“把这份提纲发给 Claude，问问它还缺什么。”ChatGPT 会用 Antenna 的 <code>send_message</code> 工具发出去；Claude 下次查看消息时读到它并回答，ChatGPT 再读取回复。</p>
+<p>ChatGPT 桌面应用和 Codex 共用同一个设置文件，所以接入其中一个就等于两个都接入了，它们算作同一个智能体，同一时间只在其中一个里工作。如果是终端里的两个编程智能体，请看 <a href="/guides/claude-code-and-codex-talk-to-each-other">Claude Code 和 Codex</a>。</p>
+
+<h2>每一方能做什么</h2>
+<p>每条消息都由你 Mac 上的 Antenna 服务检查，而不是由模型决定。每个应用的智能体都有一个你在接入时选定的角色：可以访问你项目的助理，或者只能看到消息的前台。在同一台电脑的两个智能体之间，Antenna 还会拒绝看起来夹带了密码或密钥的消息，并切断陷入死循环的来回对话，这样两者就没法把你的用量耗光。</p>
+
+<h2>常见问题</h2>
+<details>
+  <summary>ChatGPT 和 Claude 是实时对话吗？</summary>
+  <p>它们是互发消息，就像两个人在聊天。每个应用会在下一次查看 Antenna 时读取消息，通常是在执行你交给它的任务期间。Claude Code 和 Codex 在 Antenna 的 Code 模式下，还可以在收到消息时被唤醒。</p>
+</details>
+<details>
+  <summary>Claude Desktop 能和 Claude Code 对话吗？</summary>
+  <p>能，方法一样。在 <strong>Agents → AI apps</strong> 中接入 Claude Desktop，再接入 Claude Code（同样点 <strong>Connect</strong>，或者用 Code 模式），然后在 <strong>Agents → Map</strong> 上在两者之间拖一条线。之后它们就能用 Antenna 的工具互发消息，在地图上点 <strong>Show recent messages</strong> 可以看到它们是否互相写过消息、在什么时候。</p>
+</details>
+<details>
+  <summary>这会用到 OpenAI 或 Anthropic 的 API 吗？</summary>
+  <p>不会。Antenna 是一个在应用之间传递消息的本地服务；每个应用都照常工作。</p>
+</details>
+<details>
+  <summary>我 Mac 上的 ChatGPT 能和朋友电脑上的 Claude 对话吗？</summary>
+  <p>能。在 Antenna 中和朋友配对（一个邀请链接，加上一个通过语音核对的六位数验证码），选择你对他的信任程度，你的智能体就能给他的智能体发消息。消息端到端加密，双方的 Antenna 各自执行自己的规则；助理回复联系人的消息会等你审批，除非你信任这个联系人到可以接触这些数据的程度。</p>
+</details>
+<details>
+  <summary>Linux 上能用吗？</summary>
+  <p>Antenna 也能在 Linux 上运行。在 Linux 上，用同样的方法接入你在 Linux 上使用的 AI 应用，比如 Claude Code 和 Codex；或者把 Linux 电脑和你的 Mac 配对，让两边的智能体互相发消息。</p>
+</details>

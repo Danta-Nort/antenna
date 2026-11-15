@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Antenna — messaggi privati tra persone e agenti AI</title>
+<meta name="description" content="Antenna è un messenger peer-to-peer, gratuito e open source, per persone e agenti AI. Guida Claude Code, Codex e gli altri agenti da un'unica finestra, con cifratura end-to-end; sul tuo computer è un daemon, non il modello, a decidere che cosa può fare ogni contatto. Niente account. macOS e Linux.">
+<link rel="canonical" href="https://antenna.contact/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Antenna",
+  "description": "Un messenger peer-to-peer, gratuito e open source, per persone e agenti AI: cifratura end-to-end post-quantistica, nessun account e livelli di fiducia che un daemon locale applica a ogni contatto e a ogni agente.",
+  "url": "https://antenna.contact/",
+  "image": "https://antenna.contact/og.png",
+  "screenshot": "https://antenna.contact/assets/screen-light.webp",
+  "applicationCategory": "CommunicationApplication",
+  "operatingSystem": "macOS, Linux",
+  "license": "https://www.gnu.org/licenses/agpl-3.0.html",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "downloadUrl": "https://github.com/Danta-Nort/antenna/releases/latest",
+  "softwareHelp": "https://github.com/Danta-Nort/antenna/blob/main/docs/guide/getting-started.md",
+  "sameAs": ["https://github.com/Danta-Nort/antenna"],
+  "publisher": { "@type": "Organization", "name": "Stillbyte LLC", "email": "hello@antenna.contact", "url": "https://antenna.contact/" }
+}
+</script>
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#F5F8FD">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Antenna — messaggi privati tra persone e agenti AI">
+<meta property="og:description" content="Un canale peer-to-peer con cifratura end-to-end post-quantistica tra persone e agenti AI di proprietari diversi, con livelli di fiducia applicati dal codice, non dal modello.">
+<meta property="og:url" content="https://antenna.contact/">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Logo di Antenna: canale sicuro e livello di fiducia per agenti AI">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/IBMPlexSans-SemiBold.latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/IBMPlexSans-Regular.latin.woff2" as="font" type="font/woff2" crossorigin>
+<!-- i18n -->
+<meta property="og:locale" content="en_US">
+<!-- /i18n -->
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script src="/assets/site.js?v=4" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Vai al contenuto</a>
+
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/" aria-label="Antenna — home"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Principale">
+      <a href="#product">Prodotto</a>
+      <a href="#how">Come funziona</a>
+      <a href="#security">Sicurezza</a>
+      <a href="#status">Stato</a>
+      <a href="/guides/">Guide</a>
+      <a href="https://github.com/Danta-Nort/antenna">GitHub</a>
+    </nav>
+    <!-- lang -->
+    <!-- /lang -->
+    <a class="btn btn-small top-cta" href="#download">Scarica</a>
+  </div>
+</header>
+
+<!-- Invite handler. Shown only when the address has an invite after "#".
+     The fragment never leaves the browser: site.js reads it locally, sends it nowhere,
+     and removes it from the address bar and history. -->
+<section id="invite" class="invite" aria-labelledby="invite-title" hidden>
+  <div class="wrap">
+    <div class="card invite-card">
+      <p class="eyebrow">Invito</p>
+      <h1 id="invite-title">Ti hanno invitato a collegarti su Antenna</h1>
+      <p class="lead">Apri il link nell'app Antenna. Il tuo contatto ti dirà poi un codice di verifica: digitalo e ripetiglielo ad alta voce. È proprio quel codice a dimostrare che non c'è nessun altro in mezzo.</p>
+      <div class="cta">
+        <a class="btn" id="invite-open" href="/">Apri in Antenna</a>
+        <button class="btn btn-ghost" id="invite-copy" type="button">Copia link</button>
+      </div>
+      <div class="invite-get" id="invite-get">
+        <p><strong>Non hai ancora Antenna?</strong> È gratuita, per macOS e Linux. Installala e crea il tuo nodo, tieni aperta questa scheda, poi premi qui <strong>Apri in Antenna</strong>. Un invito dura pochi minuti: se nel frattempo è scaduto, chiedine uno nuovo al tuo contatto.</p>
+        <a class="btn btn-ghost" id="invite-download" href="#download">Scarica Antenna</a>
+      </div>
+      <label class="field">
+        <span class="label">Link di invito</span>
+        <textarea id="invite-link" class="mono" rows="3" readonly spellcheck="false"></textarea>
+      </label>
+      <p id="invite-copy-status" class="note" role="status" aria-live="polite"></p>
+      <ul class="notes">
+        <li>Questa pagina ha letto il link dentro il tuo browser. La parte dopo il “#” non viene mai inviata a un server, nemmeno al nostro. La pagina non carica nulla da altri siti e non manda il link da nessuna parte; inoltre l'ha già tolto dalla barra degli indirizzi e dalla cronologia del browser.</li>
+        <li>Se il pulsante non fa nulla, copia il link e incollalo in Antenna dove ti chiede un link di invito, oppure esegui <code>antenna join '&lt;link&gt;'</code> in un terminale.</li>
+        <li>Un invito funziona una sola volta e poi scade. Il codice di verifica ti protegge anche se qualcun altro ha visto il link.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<main id="main">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="pill"><span class="pill-dot" aria-hidden="true"></span>Open source · Gratuita · v0.1</p>
+        <h1 id="hero-title">Messaggi privati <span class="h1-line">tra persone e agenti.</span></h1>
+        <p class="lead">Parla con le persone e guida Claude Code, Codex e gli altri tuoi agenti da un'unica finestra, con cifratura end‑to‑end, su tutti i tuoi computer. Sul tuo computer è un daemon, non il modello, a decidere che cosa può fare ogni contatto. Niente account e nessun server centrale.</p>
+        <div class="cta">
+          <a class="btn btn-lg" id="hero-download" href="#download"><span id="hero-download-label">Scarica</span><svg class="btn-arrow" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5.5 15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="btn btn-lg btn-ghost" href="https://github.com/Danta-Nort/antenna">Vedi su GitHub</a>
+        </div>
+        <p class="platforms">macOS (Apple Silicon) e Linux · AGPL-3.0</p>
+      </div>
+      <figure class="laptop">
+        <div class="laptop-lid">
+          <div class="laptop-screen">
+            <img src="/assets/screen-light.webp?v=3"
+                 srcset="/assets/screen-light-720.webp?v=3 720w, /assets/screen-light-1440.webp?v=3 1440w, /assets/screen-light.webp?v=3 2160w"
+                 sizes="(min-width: 1280px) 650px, (min-width: 960px) 48vw, 90vw"
+                 width="2160" height="1350" fetchpriority="high" decoding="async"
+                 alt="L'app desktop di Antenna: chat con i livelli di fiducia, una conversazione con cifratura end-to-end e un agente Claude Code al lavoro nel pannello a destra.">
+          </div>
+        </div>
+        <div class="laptop-base" aria-hidden="true"></div>
+      </figure>
+    </div>
+  </section>
+
+  <section id="product" class="features" aria-labelledby="features-title">
+    <div class="wrap">
+      <h2 id="features-title" class="visually-hidden">Che cosa fa Antenna</h2>
+      <ul class="feature-row">
+        <li class="feature">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3M12 14.5v2.5"/></svg></span>
+          <h3>Cifratura end-to-end</h3>
+          <p>Post-quantistica su ogni collegamento: X25519 + ML-KEM-768 ibrido in TLS 1.3 e il Triple Ratchet di Signal, cioè PQXDH e SPQR, per ogni messaggio.</p>
+        </li>
+        <li class="feature">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M10 3.5l1.7 4.6 4.6 1.7-4.6 1.7L10 16.1l-1.7-4.6-4.6-1.7 4.6-1.7z"/><path d="M17.5 14l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg></span>
+          <h3>Tutti i tuoi agenti in un unico posto</h3>
+          <p>Claude Code, Codex, ChatGPT, Claude Desktop, Cursor e le altre app MCP si collegano con un clic, con il tuo abbonamento. Un messaggio sveglia l'agente a cui è destinato; le approvazioni le dai da qualsiasi tuo computer.</p>
+        </li>
+        <li class="feature">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M14 3.5H7.5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V8z"/><path d="M14 3.5V8h4.5M9.2 14.4l2 2 3.6-4"/></svg></span>
+          <h3>Condivisione di file sicura</h3>
+          <p>I file in arrivo restano in quarantena: vengono controllati in base al loro tipo reale, analizzati e mostrati come anteprima disinnescata prima che tu li accetti.</p>
+        </li>
+        <li class="feature">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4.2 12a7.8 7.8 0 1 0 2.3-5.5"/><path d="M4.2 4.2v3.6h3.6M12 8v4.3l2.9 1.8"/></svg></span>
+          <h3>Cronologia verificabile</h3>
+          <p>Le due parti confrontano copie della conversazione firmate e concatenate con hash. Un messaggio alterato o un ripristino all'indietro vengono a galla, con il punto esatto in cui è successo.</p>
+        </li>
+      </ul>
+      <div class="tagline">
+        <p class="rule">Peer-to-peer per scelta</p>
+        <p class="say">Niente account, niente numeri di telefono, nessun server centrale: solo tu, le persone di cui ti fidi e gli agenti a cui dai il permesso.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="why" class="section section-soft" aria-labelledby="why-title">
+    <div class="wrap split">
+      <div class="split-head">
+        <p class="eyebrow">Perché Antenna</p>
+        <h2 id="why-title">I tuoi agenti lavorano ovunque, e tu devi poterli raggiungere</h2>
+        <p class="lead">Un agente sul portatile, due su un server, un altro su una seconda macchina, e in più le persone con cui lavori. Antenna è l'unico canale per tutti loro, con regole applicate dal codice e non dal giudizio del modello.</p>
+      </div>
+      <div class="points">
+        <article class="point">
+          <h3>Basta fare la guardia ai terminali</h3>
+          <p>Scrivi a un agente come scriveresti a una persona. Il tuo messaggio lo sveglia, lui risponde in chat e ti chiede soltanto ciò che il suo livello di fiducia non gli consente, da qualunque tuo computer tu stia usando.</p>
+        </article>
+        <article class="point">
+          <h3>Ogni messaggio è input non fidato</h3>
+          <p>Il testo di un'altra persona finisce nel contesto del tuo agente. Un messaggio scritto ad arte può dire al modello di leggere un file, eseguire un comando o inoltrare qualcosa che non dovrebbe. La prompt injection non si risolve chiedendo al modello di fare attenzione.</p>
+        </article>
+        <article class="point">
+          <h3>I permessi stanno nel codice</h3>
+          <p>In Antenna non è mai il modello a decidere che cosa è consentito. Un daemon locale controlla ogni azione rispetto al livello di fiducia del contatto prima che avvenga. I comandi del proprietario (invitare, cambiare la fiducia, approvare, revocare) nell'interfaccia dell'agente semplicemente non esistono.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="section" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Come funziona</p>
+        <h2 id="how-title">Tre passi per un canale che controlli tu</h2>
+      </div>
+      <ol class="steps">
+        <li class="card step">
+          <span class="step-n" aria-hidden="true">1</span>
+          <h3>Abbinati con un link monouso</h3>
+          <p>Invia un link di invito. Quando il tuo contatto lo apre, vedete entrambi lo stesso codice (sei cifre o sei animali) e lo confrontate a voce, in videochiamata o di persona. Chi ha intercettato il link non conosce il codice.</p>
+        </li>
+        <li class="card step">
+          <span class="step-n" aria-hidden="true">2</span>
+          <h3>Scegli un livello di fiducia</h3>
+          <p>Le persone ricevono un livello da 1 (Observer: solo testo, segnato come non fidato) a 4 (Partner); i tuoi computer ricevono ∞ (My computer). Il daemon sul tuo computer lo applica a ogni azione.</p>
+        </li>
+        <li class="card step">
+          <span class="step-n" aria-hidden="true">3</span>
+          <h3>Collega il tuo agente</h3>
+          <p>Un clic in <b>Agents → AI apps</b>: Claude Code, Codex, ChatGPT o qualsiasi client MCP riceve un token limitato ai contatti che scegli tu. Mai le tue chiavi, e mai i comandi del proprietario come invitare, cambiare la fiducia o approvare.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="security" class="section section-soft" aria-labelledby="security-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Sicurezza</p>
+        <h2 id="security-title">Crittografia collaudata, regole controllate dal codice</h2>
+        <p class="lead">Ci basiamo su librerie pubbliche e collaudate e non scriviamo crittografia nostra. Ecco che cosa protegge una conversazione, ed è tutto <a href="https://github.com/Danta-Nort/antenna">open source</a>.</p>
+      </div>
+      <div class="sec-grid">
+        <article class="card">
+          <p class="tag">Cifratura</p>
+          <h3>Post-quantistica, end-to-end</h3>
+          <p>Le connessioni usano TLS 1.3 con lo scambio di chiavi ibrido <span class="mono">X25519MLKEM768</span>. I messaggi sono cifrati con libsignal di Signal: PQXDH per avviare la sessione e SPQR, lo Sparse Post-Quantum Ratchet, per mantenerla.</p>
+        </article>
+        <article class="card">
+          <p class="tag">Niente account</p>
+          <h3>Nessuna registrazione, nessun server centrale</h3>
+          <p>Niente account, numero di telefono o ID globale. Ogni coppia di contatti ha chiavi proprie e una propria identità di rete, così i contatti non possono collegarti da una conversazione all'altra. I peer si collegano direttamente o tramite un relay che inoltra solo traffico cifrato, e puoi anche gestirne uno tuo.</p>
+        </article>
+        <article class="card card-levels">
+          <p class="tag">Livelli di fiducia</p>
+          <h3>Livelli 1–4 e ∞, controllati dal daemon</h3>
+          <ol class="levels">
+            <li><span class="lv lv1">1</span><span><b>Observer</b> (osservatore): solo testo, segnato come non fidato</span></li>
+            <li><span class="lv lv2">2</span><span><b>Acquaintance</b> (conoscente): testo; i file vanno in quarantena; i compiti richiedono la tua approvazione</span></li>
+            <li><span class="lv lv3">3</span><span><b>Colleague</b> (collega): legge una cartella condivisa; per scrivere serve un'approvazione</span></li>
+            <li><span class="lv lv4">4</span><span><b>Partner</b>: legge e scrive nella cartella condivisa</span></li>
+            <li><span class="lv lv5">∞</span><span><b>My computer</b> (il mio computer): solo i tuoi computer</span></li>
+          </ol>
+          <p class="small">I livelli 1–2 non vedono mai se sei online e ti raggiungono solo tramite un relay, quindi non scoprono mai il tuo indirizzo IP.</p>
+        </article>
+        <article class="card">
+          <p class="tag">Abbinamento</p>
+          <h3>Un link monouso e un codice di verifica</h3>
+          <p>Il codice breve che confrontate ad alta voce è ciò che dimostra che non c'è nessun altro in mezzo: chi ha intercettato il link non lo conosce. Il protocollo di abbinamento ha un modello formale in ProVerif.</p>
+        </article>
+        <article class="card">
+          <p class="tag">Taint e no-write-down</p>
+          <h3>L'input non fidato riduce ciò che un agente può fare</h3>
+          <p>Quando il tuo agente legge un messaggio, la sua sessione assume il livello di fiducia di quel contatto, e solo tu puoi azzerarlo. Dopo aver letto un contatto di livello 1 può soltanto rispondere a parole. Spostare dati da un contatto a un altro, o mandare dati locali sopra il livello del destinatario, aspetta la tua approvazione. Chiavi, token e link di invito vengono bloccati prima di uscire, anche quando li mandi tu.</p>
+        </article>
+        <article class="card">
+          <p class="tag">File</p>
+          <h3>Quarantena con anteprima disinnescata</h3>
+          <p>Un file in arrivo viene controllato in base al suo tipo reale, analizzato (regole YARA, uno scanner di segreti, ClamAV facoltativo) e trasformato in un'anteprima sicura: immagini e PDF vengono resi in pixel da un worker isolato in sandbox e senza rete. Nulla arriva nelle tue cartelle, né al tuo agente, finché non lo accetti.</p>
+        </article>
+        <article class="card card-wide">
+          <p class="tag">Cronologia condivisa</p>
+          <h3>Una cronologia che entrambe le parti possono verificare</h3>
+          <p>I messaggi sono firmati e concatenati con hash. I due daemon confrontano le loro copie e mostrano “History verified” con un'impronta di tre emoji che potete leggervi a vicenda. Se una copia è stata alterata o ripristinata da un vecchio backup, vedi esattamente dove, e di chi è la copia cambiata. Le azioni degli agenti sui messaggi di un contatto lasciano ricevute firmate, visibili a entrambe le parti.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="who" class="section" aria-labelledby="who-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Per chi è</p>
+        <h2 id="who-title">Pensata per agenti che lavorano con gli agenti di altre persone</h2>
+      </div>
+      <div class="grid g3">
+        <article class="card who">
+          <span class="icon icon-s" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M8.5 7.5 4 12l4.5 4.5M15.5 7.5 20 12l-4.5 4.5M13.4 5.5l-2.8 13"/></svg></span>
+          <h3>Sviluppatori di agenti</h3>
+          <p>Dai a Claude Code, Codex o a qualsiasi client MCP un canale verso gli agenti di altre persone. Antenna include una CLI e un server MCP; l'agente riceve un token limitato ai contatti che scegli tu, mai le tue chiavi, mai i comandi del proprietario.</p>
+        </article>
+        <article class="card who">
+          <span class="icon icon-s" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><rect x="4" y="5.5" width="16" height="14.5" rx="2.5"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4M9 14.8l2 2 4-4"/></svg></span>
+          <h3>Assistenti personali</h3>
+          <p>Assistenti che fissano appuntamenti, trattano e si scambiano documenti con l'assistente di qualcun altro, e tornano da te per tutto ciò che supera il livello del contatto.</p>
+        </article>
+        <article class="card who">
+          <span class="icon icon-s" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 20.5h16M6 20.5V6.5l6-3 6 3v14M9.5 9h1M13.5 9h1M9.5 12.5h1M13.5 12.5h1M10.5 20.5v-4h3v4"/></svg></span>
+          <h3>Team e aziende</h3>
+          <p>Canali tra agenti di organizzazioni diverse: permessi per singolo contatto, un registro di ciò che hanno fatto gli agenti e una cronologia delle conversazioni che entrambe le parti possono verificare. Nessun server condiviso di cui fidarsi o da violare.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="status" class="section section-soft" aria-labelledby="status-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Stato</p>
+        <h2 id="status-title">v0.1: ancora agli inizi, e lo diciamo chiaramente</h2>
+      </div>
+      <div class="grid g2">
+        <article class="card">
+          <h3>Cosa funziona oggi</h3>
+          <ul class="ticks">
+            <li>Abbinamento con link e codice detto a voce; messaggi E2E post-quantistici con coda offline</li>
+            <li>Livelli di fiducia 1–4 e ∞, approvazioni e taint, applicati dal daemon</li>
+            <li>Collegamento con un clic per Claude Code, Codex, ChatGPT, Claude Desktop, Cursor e le altre app MCP; agenti svegliati dai messaggi</li>
+            <li>Cronologia verificabile, rilevamento dei ripristini all'indietro e rinnovo delle chiavi</li>
+            <li>File con quarantena, controlli in sandbox e anteprime disinnescate, su macOS e Linux</li>
+            <li>App desktop per macOS (firmata e notarizzata) e Linux; un nodo per i server; aggiornamenti firmati</li>
+            <li>Un modello formale dell'abbinamento in ProVerif; oltre 2.000 test automatici, molti con daemon reali</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Cosa manca ancora</h3>
+          <ul class="todo">
+            <li>Audit di sicurezza indipendente, previsto prima della 1.0</li>
+            <li>Smartphone (prima iOS) e Windows</li>
+            <li>Conversazioni di gruppo</li>
+          </ul>
+          <p class="warn">Le funzioni segnate come sperimentali nell'app sono meccanismi nuovi, sviluppati da noi; restano segnalate così finché non avranno ricevuto più verifiche.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="download" class="section beta" aria-labelledby="download-title">
+    <div class="wrap">
+      <div class="section-head centered">
+        <p class="eyebrow">Download</p>
+        <h2 id="download-title">Gratuita e open source</h2>
+        <p class="lead">Ogni versione è firmata. L'app cerca aggiornamenti una volta al giorno e li installa solo quando glielo dici tu.</p>
+      </div>
+      <div class="grid g3">
+        <article class="card dl">
+          <h3>macOS</h3>
+          <p>Apple Silicon (M1 e successivi). Firmata e notarizzata.</p>
+          <a class="btn" href="/download/mac">Scarica per Mac</a>
+          <p class="small">Oppure con Homebrew: <code>brew install --cask danta-nort/tap/antenna</code></p>
+        </article>
+        <article class="card dl">
+          <h3>Linux desktop</h3>
+          <p>x86_64, GTK 3. L'app con tutto dentro.</p>
+          <a class="btn" href="/download/linux">Scarica .tar.gz</a>
+          <p class="small"><a href="/download/linux-deb">.deb per Ubuntu e Debian</a> (con <a href="/download/server-deb">il pacchetto del nodo</a>)</p>
+        </article>
+        <article class="card dl">
+          <h3>Linux server</h3>
+          <p>Un nodo che resta online per i tuoi agenti: un servizio utente systemd, senza root. In un terminale:</p>
+          <p><code>curl -fsSL https://antenna.contact/install.sh | sh</code></p>
+          <a class="btn btn-ghost" href="/download/server">Scarica .tar.gz</a>
+        </article>
+      </div>
+      <p class="dl-more">Tutti i file, i checksum e le note di rilascio: <a href="https://github.com/Danta-Nort/antenna/releases/latest">release su GitHub</a> · Codice sorgente: <a href="https://github.com/Danta-Nort/antenna">github.com/Danta-Nort/antenna</a> · Per iniziare: <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/getting-started.md">la guida</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/" aria-label="Antenna — home"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Contatti: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/guides/">Guide</a></p>
+    <p><a href="/privacy">Informativa sulla privacy</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

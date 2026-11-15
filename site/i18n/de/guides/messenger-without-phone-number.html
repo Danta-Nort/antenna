@@ -1,0 +1,41 @@
+<!--guide {"title": "Messenger ohne Telefonnummer und ohne E-Mail — Antenna", "h1": "Ein privater Messenger ohne Telefonnummer und ohne E-Mail", "description": "Antenna braucht weder Handynummer noch E-Mail oder Konto: Sie sind ein Schlüssel auf Ihrem Computer und fügen Kontakte per Einmal-Link und Code hinzu.", "summary": "Keine Telefonnummer, keine E-Mail, kein Konto: wie Sie bei Antenna starten und Kontakte hinzufügen.", "source": "2026-11-09"}-->
+<p class="lead">Antenna ist ein kostenloser Open-Source-Messenger für macOS und Linux, der weder nach einer Telefonnummer noch nach einer E-Mail-Adresse oder einem Konto fragt. Ihre Identität ist ein Schlüssel, der auf Ihrem eigenen Computer entsteht und durch ein Passwort geschützt ist, das nur Sie kennen. Kontakte fügen Sie hinzu, indem Sie einen Einmal-Einladungslink schicken und mündlich oder persönlich einen sechsstelligen Code vergleichen. So kann niemand Sie über Ihre Nummer finden, und kein Server kann Ihre Gespräche lesen oder miteinander verknüpfen.</p>
+
+<h2>Warum Messenger nach Ihrer Nummer fragen</h2>
+<p>Eine Telefonnummer ist ein bequemer Weg, Kontakte zu finden und Spam zu bremsen, deshalb verlangen die meisten Messenger eine. Aber eine Nummer hängt an Ihrem Namen, Ihrem Mobilfunkanbieter und oft an Ihrer Adresse, und jeder, der sie hat, kann Sie damit finden. Wenn Sie sie lieber nicht herausgeben, brauchen Sie einen Messenger, der Menschen auf andere Weise zusammenbringt.</p>
+
+<h2>So starten Sie mit Antenna</h2>
+<ol>
+  <li><a href="/#download">Laden Sie Antenna herunter</a> und öffnen Sie es.</li>
+  <li>Wählen Sie ein Passwort. Es schützt Ihre Schlüssel auf diesem Computer und lässt sich nicht wiederherstellen, bewahren Sie es also gut auf.</li>
+  <li>Das ist schon die ganze Anmeldung. Es gibt kein Profil auf einem Server, weil es keinen Server gibt, der Profile speichert.</li>
+</ol>
+
+<h2>So fügen Sie Kontakte hinzu</h2>
+<p>Klicken Sie auf <strong>New contact → Invite</strong>, legen Sie fest, wie sehr Sie der Person vertrauen, und schicken Sie den Link auf einem beliebigen Weg. Öffnet sie ihn, erscheint auf Ihrem Bildschirm ein sechsstelliger Code (oder sechs Tiere): Lesen Sie ihn am Telefon oder persönlich vor, Ihr Gegenüber tippt ihn ein, und Antenna prüft ihn. Stimmt er, saß niemand dazwischen. Der Link funktioniert nur einmal und nur für die Zeit, die Sie gewählt haben. Ein Link, der später durchsickert, ist also nutzlos, und wer ihn abfängt, kennt den Code trotzdem nicht.</p>
+
+<h2>Was Sie statt eines Kontos bekommen</h2>
+<ul>
+  <li><strong>Eine eigene Verbindung pro Kontakt.</strong> Jedes Gespräch hat eigene Schlüssel, Ende-zu-Ende-verschlüsselt und gegen Quantencomputer geschützt.</li>
+  <li><strong>Vertrauensstufen.</strong> Von 1, nur Text, bis 4 für Partner, dazu ∞ für Ihre eigenen Computer. Die Stufe entscheidet, was ein Kontakt Ihnen schicken kann, ob er sieht, wann Sie online sind, und ob er Ihre IP-Adresse sehen kann: Stufen 1 und 2 laufen immer über ein Relay.</li>
+  <li><strong>Ein überprüfbarer Verlauf.</strong> Nachrichten sind signiert und miteinander verkettet, und beide Seiten vergleichen ihre Kopien. Eine veränderte oder fehlende Nachricht fällt also auf.</li>
+  <li><strong>Agenten willkommen.</strong> KI-Assistenten wie Claude Code oder ChatGPT können Ihren Chats beitreten, mit eigenem Namen und nur mit den Rechten, die Sie ihnen geben.</li>
+</ul>
+
+<h2>Fragen</h2>
+<details>
+  <summary>Gibt es eine App fürs Smartphone?</summary>
+  <p>Noch nicht. Antenna 0.1 ist für Computer: macOS auf Apple Silicon und Linux.</p>
+</details>
+<details>
+  <summary>Was, wenn ich mein Passwort verliere?</summary>
+  <p>Es lässt sich nicht wiederherstellen: Niemand sonst hat eine Kopie Ihrer Schlüssel, und genau darum geht es. Sie würden Ihren Knoten neu anlegen und Ihre Kontakte erneut einladen.</p>
+</details>
+<details>
+  <summary>Kann mich jemand über eine Suche finden?</summary>
+  <p>Nein. Es gibt kein Verzeichnis. Man erreicht Sie nur über einen Einladungslink, den einer von Ihnen beiden dem anderen gegeben hat.</p>
+</details>
+<details>
+  <summary>Ist es kostenlos?</summary>
+  <p>Ja, und Open Source unter AGPL-3.0. Das Protokoll ist unter Apache-2.0 veröffentlicht.</p>
+</details>

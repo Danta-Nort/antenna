@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>开源 P2P 聊天软件，抗量子端到端加密 — Antenna</title>
+<meta name="description" content="Antenna 让消息直接在设备之间传输，用抗量子密钥端到端加密，没有中心服务器。本文介绍它的工作原理和保护范围。">
+<link rel="canonical" href="https://antenna.contact/zh/guides/peer-to-peer-encrypted-messenger">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="开源 P2P 聊天软件，抗量子端到端加密 — Antenna">
+<meta property="og:description" content="Antenna 让消息直接在设备之间传输，用抗量子密钥端到端加密，没有中心服务器。本文介绍它的工作原理和保护范围。">
+<meta property="og:url" content="https://antenna.contact/zh/guides/peer-to-peer-encrypted-messenger">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="zh_CN">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/peer-to-peer-encrypted-messenger">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/zh/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "指南",
+     "item": "https://antenna.contact/zh/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "开源的点对点聊天软件，采用抗量子加密",
+     "item": "https://antenna.contact/zh/guides/peer-to-peer-encrypted-messenger"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "开源的点对点聊天软件，采用抗量子加密",
+   "description": "Antenna 让消息直接在设备之间传输，用抗量子密钥端到端加密，没有中心服务器。本文介绍它的工作原理和保护范围。",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "zh-Hans",
+   "url": "https://antenna.contact/zh/guides/peer-to-peer-encrypted-messenger",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/zh/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "点对点聊天软件会更慢吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "通常不会：直连省去了绕道数据中心的路程，经过中继时消息也只多一跳。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "我能自己搭中继吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "能。中继是开源的，只转发加密流量；把你的节点指向你自己的中继，代替默认中继即可。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "支持群聊吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "暂时还不支持。Antenna 0.1 只有一对一对话：人与人之间、人与智能体之间，以及智能体之间。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "支持哪些平台？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Apple Silicon 上的 macOS（已签名并经过公证），以及 x86_64 上的 Linux：桌面应用和服务器节点。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/zh/" aria-label="Antenna 首页"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="主导航">
+      <a href="/zh/#product">产品</a>
+      <a href="/zh/#security">安全</a>
+      <a href="/zh/guides/">指南</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="语言: 简体中文"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">ZH</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/peer-to-peer-encrypted-messenger" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/peer-to-peer-encrypted-messenger" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/peer-to-peer-encrypted-messenger" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/peer-to-peer-encrypted-messenger" hreflang="zh-Hans" lang="zh-Hans" aria-current="true">简体中文</a></li>
+        <li><a href="/hi/guides/peer-to-peer-encrypted-messenger" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/peer-to-peer-encrypted-messenger" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/peer-to-peer-encrypted-messenger" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/peer-to-peer-encrypted-messenger" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/peer-to-peer-encrypted-messenger" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/peer-to-peer-encrypted-messenger" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/peer-to-peer-encrypted-messenger" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/peer-to-peer-encrypted-messenger" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/peer-to-peer-encrypted-messenger" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/peer-to-peer-encrypted-messenger" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/peer-to-peer-encrypted-messenger" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/zh/#download">下载</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="面包屑导航"><a href="/zh/">Antenna</a> <span aria-hidden="true">›</span> <a href="/zh/guides/">指南</a></nav>
+    <p class="eyebrow">更新于 <time datetime="2026-11-09">2026年11月9日</time></p>
+    <h1>开源的点对点聊天软件，采用抗量子加密</h1>
+    <p class="lead">Antenna 是一款免费、开源的点对点（P2P）聊天软件，支持 macOS 和 Linux。消息和文件通过 QUIC 从一台设备直接发到另一台设备，用 libsignal 的抗量子协议端到端加密，连接本身也使用抗量子混合密钥交换。没有任何中心服务器存储或转发你的消息；两台设备无法直连时，由中继转发它无法解密的流量。</p>
+
+    <h2>点对点，实际是怎么做的</h2>
+    <p>“点对点”听起来简单，但大多数电脑都躲在家用路由器和防火墙后面，入站连接会被挡住。Antenna 使用 iroh，这是一个 QUIC 库，能穿过这些障碍找到直连路径（打洞，hole punching），找不到时就退回到中继。连接通常先经过中继建立，一旦找到直连路径就切换过去。无论哪种方式，中继都只能看到加密的数据包，而且任何人都可以用自己搭的中继代替默认中继。</p>
+    <p>在同一网络中，你足够信任的联系人还可以通过局域网连接，即使完全没有互联网也行。</p>
+
+    <h2>两层加密</h2>
+    <table>
+      <thead><tr><th>层</th><th>使用的技术</th><th>保护的对象</th></tr></thead>
+      <tbody>
+        <tr><td>连接</td><td>TLS 1.3 加 X25519MLKEM768，经典密钥交换与抗量子密钥交换的混合方案</td><td>两台设备之间的连接，包括经过中继时</td></tr>
+        <tr><td>消息</td><td>libsignal：用 PQXDH 开启对话，再用 SPQR 抗量子棘轮</td><td>每条消息和每个文件，端到端加密，并具备前向保密</td></tr>
+      </tbody>
+    </table>
+    <p>“抗量子”是指：即使有人今天录下流量、将来用量子计算机解密，密钥交换依然安全。Antenna 不自己编写任何密码学实现：两层加密都来自经过审计或形式化验证的库，配对协议还有一个用 ProVerif 检查过的形式化模型。</p>
+
+    <h2>点对点设计带来了什么不同</h2>
+    <ul>
+      <li><strong>没有可以被盗的账号。</strong>没有任何服务器保存用户列表、他们的联系人或他们的消息。</li>
+      <li><strong>不需要手机号。</strong>添加联系人只需一个一次性链接和一个通过语音核对的验证码。见<a href="/zh/guides/messenger-without-phone-number">不需要手机号的聊天软件</a>。</li>
+      <li><strong>你的 IP 地址，由你说了算。</strong>直连会让对方看到你的地址。信任级别为 1 和 2 的联系人始终经过中继，所以他们永远看不到。</li>
+      <li><strong>两台设备必须同时在线。</strong>在此之前，消息会在发送方的队列中等待，届时自动发出；一台一直开着的服务器可以让你的智能体随时联系得上。</li>
+    </ul>
+
+    <h2>开源，而且可以核查</h2>
+    <p>应用采用 AGPL-3.0 许可证；协议、格式和测试向量采用 Apache-2.0，所以其他人可以开发兼容的客户端。每个版本都经过签名，源代码、规范和每一项设计决策都公开在 <a href="https://github.com/Danta-Nort/antenna">GitHub</a> 上。消息经过签名并以哈希相互链接，双方会比对副本，所以被改动或被回滚的消息会暴露出发生的位置。</p>
+
+    <h2>常见问题</h2>
+    <details>
+      <summary>点对点聊天软件会更慢吗？</summary>
+      <p>通常不会：直连省去了绕道数据中心的路程，经过中继时消息也只多一跳。</p>
+    </details>
+    <details>
+      <summary>我能自己搭中继吗？</summary>
+      <p>能。中继是开源的，只转发加密流量；把你的节点指向你自己的中继，代替默认中继即可。</p>
+    </details>
+    <details>
+      <summary>支持群聊吗？</summary>
+      <p>暂时还不支持。Antenna 0.1 只有一对一对话：人与人之间、人与智能体之间，以及智能体之间。</p>
+    </details>
+    <details>
+      <summary>支持哪些平台？</summary>
+      <p>Apple Silicon 上的 macOS（已签名并经过公证），以及 x86_64 上的 Linux：桌面应用和服务器节点。</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna 免费且开源</strong>，支持 macOS 和 Linux。不需要账号，也不需要手机号。</p>
+      <a class="btn" href="/zh/#download">下载 Antenna</a>
+    </aside>
+    <h2>相关指南</h2>
+    <ul class="related">
+      <li><a href="/zh/guides/self-hosted-messenger">不用自己搭服务器的自托管聊天软件</a></li>
+      <li><a href="/zh/guides/messenger-without-phone-number">不需要手机号和邮箱的私密聊天软件</a></li>
+      <li><a href="/zh/guides/agent-to-agent-communication">基于 MCP 的智能体间通信</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/zh/" aria-label="Antenna 首页"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/zh/guides/">指南</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>联系方式： <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/zh/privacy">隐私政策</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!--guide {"title": "Claude Code : plusieurs agents en parallèle sur un même projet", "h1": "Faire travailler plusieurs agents Claude Code ensemble sur un projet", "description": "Un agent Claude Code principal découpe le travail, des exécutants codent en parallèle dans leur bac à sable, chaque résultat est vérifié, vous gardez la main.", "summary": "Un agent principal et des exécutants en parallèle sur un dépôt, chacun isolé, avec des vérifications et votre feu vert final.", "source": "2026-11-09"}-->
+<p class="lead">Dans Antenna, une <strong>équipe</strong> (team), c’est un agent principal et des exécutants sur un projet git. Vous fixez une fois un budget (par exemple « jusqu’à 2 codeurs Claude Code »), et l’agent principal découpe le travail en tâches, lance des exécutants dans la limite de ce budget, relit chaque résultat et le renvoie ou l’accepte. Chaque exécutant code en parallèle dans son propre bac à sable, sur sa propre copie du projet, et le travail de l’équipe n’arrive sur votre branche que lorsque vous l’approuvez. <em>Expérimental.</em></p>
+
+<h2>Le problème de plusieurs agents dans un même dossier</h2>
+<p>Lancer deux ou trois sessions Claude Code côte à côte, c’est facile ; les empêcher de se marcher sur les pieds, beaucoup moins. Elles modifient les mêmes fichiers, lancent des commandes dans le même dossier, et chacune peut lire tout ce que lisent les autres. Il faut que quelqu’un distribue les tâches, vérifie ce qui revient et fusionne le tout, et ce quelqu’un, c’est généralement vous, à jongler entre les terminaux.</p>
+
+<h2>Comment fonctionne une équipe</h2>
+<ol>
+  <li><strong>Vous créez l’équipe</strong> dans <strong>Teams → New team</strong> : le dossier du projet, l’agent principal (l’un de vos agents, un modèle local, ou vous-même), le budget d’exécutants et les règles : les exécutants peuvent-ils lancer des commandes, quelles <strong>Check commands</strong> (commandes de vérification) une tâche peut citer (<code>cargo test</code>, <code>npm test</code>), et quels registres de paquets ces vérifications peuvent joindre.</li>
+  <li><strong>Vous donnez l’objectif à l’agent principal</strong>, dans son propre terminal : « Découpe la fonction de connexion en petites tâches pour deux codeurs. »</li>
+  <li><strong>L’agent principal planifie et recrute.</strong> Il rédige les tâches, lance des exécutants comme <code>web.coder-1</code> dans la limite du budget et les leur attribue.</li>
+  <li><strong>Les exécutants codent en parallèle.</strong> Chacun reçoit une copie neuve du projet sur la branche de l’équipe, ne lit que sa propre tâche, travaille et rend son résultat, ou pose une question à l’agent principal s’il est bloqué.</li>
+  <li><strong>Antenna vérifie chaque résultat</strong> en lançant la commande de vérification de la tâche dans un bac à sable séparé, sans jeton et sans réseau au-delà des registres que vous avez indiqués. Une vérification qui échoue retourne d’elle-même à l’exécutant, jusqu’à une certaine limite, avant que l’agent principal ne tranche.</li>
+  <li><strong>L’agent principal relit :</strong> il accepte, ou renvoie avec des commentaires. Le travail accepté s’accumule sur une branche d’équipe, <code>antenna/web</code>.</li>
+  <li><strong>Vous l’appliquez.</strong> <strong>Review and apply</strong> montre ce qui va être fusionné dans votre branche ; avec votre mot de passe, la fusion se fait en fast-forward. Sans lui, rien ne bouge.</li>
+</ol>
+
+<h2>Ce que vous voyez</h2>
+<p>Le tableau de l’équipe affiche chaque tâche selon son état, de Open et Working à In review, Blocked, Accepted et Applied, avec la sortie en direct de chaque exécutant, ce que change son résultat, la sortie de la vérification et les jetons consommés. Vous pouvez faire tout ce que fait l’agent principal : répondre à la question d’un exécutant, demander des modifications, annuler une tâche ou arrêter un exécutant. Quand l’agent principal tourne dans le mode Code d’Antenna, il est réveillé dès qu’un exécutant rend son travail ou pose une question : l’équipe continue d’avancer pendant votre absence.</p>
+
+<h2>Ce qui protège le projet</h2>
+<ul>
+  <li><strong>Les exécutants ne voient jamais votre dossier</strong>, ni vos autres fichiers, ni les copies des autres, et ne joignent que le fournisseur de leur modèle.</li>
+  <li><strong>L’agent principal ne peut pas augmenter son propre budget</strong>, ni approuver quoi que ce soit à votre place, ni voir le jeton d’un exécutant : c’est Antenna, et non le modèle, qui statue sur chaque appel.</li>
+  <li><strong>Les entrées non fiables restent confinées.</strong> Une tâche rédigée après la lecture d’un message d’un contact de niveau 2 ne lance ni commande ni vérification : une instruction glissée dans ce message ne peut donc pas atteindre votre ordinateur.</li>
+  <li><strong>En local uniquement, si vous le souhaitez.</strong> Une équipe peut être limitée aux modèles qui tournent sur votre propre ordinateur, sans aucun modèle dans le cloud.</li>
+</ul>
+
+<h2>Questions</h2>
+<details>
+  <summary>Quels agents peuvent servir d’exécutants ?</summary>
+  <p>Claude Code avec votre propre connexion, un autre programme qui parle le format stream-json de Claude Code, ou un modèle local pour des rôles plus légers comme le tri, les résumés et la documentation.</p>
+</details>
+<details>
+  <summary>L’agent principal peut-il être Codex ou une autre app ?</summary>
+  <p>L’agent principal peut être n’importe lequel de vos agents connectés à Antenna : il reçoit les outils d’équipe via MCP au prochain démarrage de son app. Vous pouvez aussi diriger l’équipe vous-même depuis le tableau.</p>
+</details>
+<details>
+  <summary>Comment limiter les coûts ?</summary>
+  <p>Le budget plafonne le nombre d’exécutants de chaque type, et les règles plafonnent la durée d’un tour et d’une vérification, ainsi que les jetons qu’une tâche peut consommer.</p>
+</details>
+<details>
+  <summary>Est-ce que ça fonctionne sur mon Mac ?</summary>
+  <p>Oui, sous macOS et Linux. Les exécutants tournent sur l’ordinateur où se trouve l’équipe ; les exécutants sur vos autres ordinateurs viendront plus tard.</p>
+</details>

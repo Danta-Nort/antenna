@@ -753,3 +753,40 @@ fn a_preview3_node_gets_no_addressing_fields() {
         verified(&old, "alice")["fingerprint"]
     );
 }
+
+/// Right after pairing the link is up while the contact's features may still be on their way. A message to one of
+/// the contact's agents sent in that window keeps its address: it went to the contact's person instead when the
+/// sender's wait for the features returned at once because a connection already existed (a loaded machine,
+/// 2026-10-31). Alice holds her side of the features exchange for 2 s (a debug-only switch) and bob sends as soon as
+/// the link is connected, inside the window every time; the sender's own request answers within its 3 s wait.
+#[test]
+fn a_message_to_an_agent_right_after_pairing_keeps_its_address() {
+    let root = tempfile::tempdir().unwrap();
+    let mut a = Node::new(root.path(), "alice", Net::Local);
+    a.extra_args = vec!["--test-features-delay-ms".into(), "2000".into()];
+    let mut b = Node::new(root.path(), "bob", Net::Local);
+    for n in [&mut a, &mut b] {
+        n.start();
+        n.init();
+    }
+    let tok = a.agent_add("claude", &["--local-level", "0"]);
+    pair(&a, &b, 5);
+    // The window under test: the link is connected, alice's features have not arrived
+    wait_until("the link connected", T, || {
+        b.contact("alice")["transport"]["connected"] == true
+    });
+    assert_ne!(
+        b.contact("alice")["peer_addressing"],
+        true,
+        "bob already knows alice's features: the window was missed"
+    );
+    let s = b.send_to_agent("alice", "claude", "please build the project");
+    assert_eq!(s["addressed"], true, "{s}");
+    let v = a.agent_ok(&tok, &["inbox", "--wait", "--timeout", "10s"]);
+    assert_eq!(texts(&v), ["please build the project"], "{v}");
+    let m = history(&a, "bob")
+        .into_iter()
+        .find(|m| m["text"] == "please build the project")
+        .unwrap();
+    assert_eq!(m["to_agent"], "claude", "{m}");
+}

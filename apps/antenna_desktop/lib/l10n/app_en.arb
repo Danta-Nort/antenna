@@ -126,7 +126,7 @@
   "trust3Tasks": "Read-only tools; writes need approval",
   "trust4Tasks": "Without confirmation",
   "trust5Tasks": "Without confirmation within scope",
-  "trust4Commands": "Only from the allowlist, in a sandbox (builds, tests)",
+  "trust4Commands": "Each one waits for your approval",
   "trust5Commands": "Any, in a sandbox with no network or secrets",
   "trustLimitMessages": "{count} msgs/min",
   "@trustLimitMessages": {
@@ -465,6 +465,10 @@
   },
   "chatFirstContact": "Your first contact",
   "chatSelectContact": "Select a contact",
+  "chatFirstConnectAgent": "Or connect Claude Code, Codex or another AI app",
+  "@chatFirstConnectAgent": {
+    "description": "Under Invite and Join before the first contact: opens Agents, where the AI apps found on this computer connect in one click."
+  },
   "chatNoSelectionBody": "Each contact has its own key and its own channel: contacts can't link you to one another. The link is one-time; the contact turns on only once you have both checked the verification code.",
   "chatReadOnlyRekey": "Sending is paused until the rekey (see the banner above).",
   "chatReadOnlyMismatch": "Read-only: the history diverged — decide above what to do.",
@@ -1358,14 +1362,10 @@
   "settingsThemeLight": "Light",
   "settingsThemeDark": "Dark",
   "settingsLanguage": "Language",
-  "settingsLanguageHint": "“System”: Russian if the system is in Russian, otherwise English.",
-  "langEnglish": "English",
-  "@langEnglish": {
-    "description": "Name of the English language. The language picker shows each language's name from that language's own strings (the endonym), whatever the current UI language."
-  },
-  "langRussian": "Russian",
-  "@langRussian": {
-    "description": "Name of the Russian language. The language picker takes it from the Russian strings (the endonym), so this value is not shown in the picker."
+  "settingsLanguageHint": "“System”: the system’s language if the app has it, otherwise English.",
+  "langName": "English",
+  "@langName": {
+    "description": "This language's own name (its endonym, e.g. Deutsch, 日本語). The language picker in Settings shows each language by the langName of its own strings, whatever the current UI language."
   },
   "settingsKeys": "Keys",
   "settingsKeysHint": "Lock keys (antenna lock): contacts pause until you enter the password. The window doesn't store the password.",

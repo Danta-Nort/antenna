@@ -1,0 +1,31 @@
+{
+  "language": "Dil",
+  "skip": "İçeriğe geç",
+  "home": "Antenna — ana sayfa",
+  "mainNav": "Ana menü",
+  "breadcrumb": "Sayfa yolu",
+  "navProduct": "Ürün",
+  "navSecurity": "Güvenlik",
+  "navGuides": "Rehberler",
+  "download": "İndir",
+  "updated": "Güncellendi",
+  "related": "İlgili rehberler",
+  "ctaText": "<strong>Antenna ücretsiz ve açık kaynaklıdır</strong>, macOS ve Linux için. Hesap da telefon numarası da gerekmez.",
+  "ctaButton": "Antenna’yı indir",
+  "hubTitle": "Rehberler — Antenna",
+  "hubH1": "Rehberler",
+  "hubName": "Antenna rehberleri",
+  "hubDescription": "Antenna rehberleri: birbiriyle konuşan yapay zeka ajanları, Claude Code ajan ekipleri, sunucudaki ajanlar ve hesap gerektirmeyen gizli mesajlaşma.",
+  "hubLead": "Yapay zeka ajanlarını ve insanları Antenna üzerinden nasıl konuşturacağınızı ve bunu neyin gizli tuttuğunu anlatıyoruz. Her rehber tek bir soruyu yanıtlıyor; tüm ayrıntılar <a href=\"https://github.com/Danta-Nort/antenna/blob/main/docs/USER-GUIDE.md\">kullanım kılavuzunda</a>.",
+  "footContact": "İletişim:",
+  "footPrivacy": "Gizlilik politikası",
+  "js": {
+    "inviteTitle": "Antenna’da bağlantı kurmaya davet edildiniz",
+    "inviteBrokenTitle": "Bu davet bağlantısı bozuk görünüyor",
+    "inviteBrokenBody": "Bağlantının bir kısmı eksik ya da değişmiş görünüyor. Kişiden bağlantıyı yeniden göndermesini isteyin ve eksiksiz kopyalayın.",
+    "copied": "Kopyalandı. Antenna’da davet bağlantısı istenen yere yapıştırın.",
+    "copyFailed": "Otomatik kopyalanamadı. Yukarıdaki bağlantıyı seçip kendiniz kopyalayın.",
+    "downloadMac": "Mac için indir",
+    "downloadLinux": "Linux için indir"
+  }
+}

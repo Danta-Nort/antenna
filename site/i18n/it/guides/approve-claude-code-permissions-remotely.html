@@ -1,0 +1,46 @@
+<!--guide {"title": "Approvare i permessi di Claude Code da remoto, da ogni tuo computer", "h1": "Approva le richieste di Claude Code da un altro computer", "description": "Claude Code su un server o un altro computer ti chiede un'approvazione: Antenna porta la richiesta su tutti i tuoi computer e rispondi con password o Touch ID.", "summary": "Le richieste di approvazione di Claude Code su un altro computer, a cui rispondi dal computer dove ti trovi.", "source": "2026-11-15"}-->
+<p class="lead">Avvia Claude Code tramite Antenna, nella modalità Code dalla finestra oppure con <code>antenna session</code> su un server, e il daemon di Antenna controlla ogni strumento che usa e ogni messaggio che invia. Quando un passo ha bisogno di te, diventa una richiesta di approvazione che compare, con una notifica, su ogni computer che hai abbinato come tuo, in <strong>My devices</strong> (i miei dispositivi). Approvala lì con la password di quel computer o con Touch ID: il computer dove gira Claude Code verifica la tua risposta, esegue il passo e Claude Code va avanti.</p>
+
+<h2>Che cosa arriva a te</h2>
+<ul>
+  <li><strong>I passi dopo aver letto il messaggio di un contatto.</strong> Appena Claude Code ha letto un messaggio di un collega, il livello di fiducia di quel collega stabilisce che cosa può fare: al livello 4 ogni comando aspetta te; ai livelli 2 e 3 aspetta ogni modifica, e i comandi vengono rifiutati.</li>
+  <li><strong>Le modifiche alla sua stessa configurazione.</strong> Dopo aver letto il messaggio di un qualsiasi contatto, anche del tuo stesso portatile, le modifiche a <code>CLAUDE.md</code>, a <code>.claude/</code>, ai profili della shell, alle chiavi e ai file di build come <code>package.json</code> aspettano te.</li>
+  <li><strong>I messaggi che porterebbero fuori i tuoi dati.</strong> Appena ha letto file del tuo progetto, ogni messaggio a un contatto sotto ∞ aspetta, e così anche ogni messaggio a un contatto del genere che sembra contenere una chiave, una password o un token. Appena ha letto una conversazione, aspetta anche un messaggio verso un'altra.</li>
+  <li><strong>Le domande.</strong> <em>Sperimentale.</em> Le domande di un agente compaiono sul computer dove gira, in <strong>Questions from your agents</strong> (domande dai tuoi agenti). Per riceverle invece sul portatile, esegui <code>antenna agent escalate api-dev --to mac</code> su quel computer: da lì ogni domanda arriva nella chat dell'agente, e rispondi nella chat.</li>
+</ul>
+<p>La richiesta di permesso di Claude Code stesso (“Do you want to proceed?”) resta nel suo terminale: Antenna non ci scrive mai. Consenti nelle impostazioni di Claude Code gli strumenti che usi di solito, oppure rispondi con <code>antenna session attach</code>.</p>
+
+<h2>Come configurarlo</h2>
+<ol>
+  <li><a href="/#download">Installa Antenna</a> su entrambi i computer e abbinali una volta con la casella <strong>This is my own computer (∞)</strong> (questo è il mio computer) spuntata, come in <a href="/guides/run-claude-code-on-a-vps">Claude Code su una VPS</a>.</li>
+  <li>Avvia Claude Code tramite Antenna. Su un desktop: <strong>Agents → AI apps → Start in Code mode</strong>. Su un server:
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api</code></pre></li>
+  <li>Sul computer dove gira Claude Code, accetta le risposte del computer da cui approverai: <strong>My devices</strong> → la scheda di quel computer → <strong>Approvals</strong> → <strong>Accept approvals signed with …</strong>, con la tua password. Su un server: <code>antenna devices confirm mac</code>.</li>
+</ol>
+
+<h2>Rispondi da qualsiasi computer</h2>
+<p>La richiesta compare sulla scheda del computer che la fa, in <strong>My devices</strong> (<em>sperimentale</em>), con una notifica come “Antenna: approval needed on Mac mini”. La scheda dice quale agente chiede, che cosa e perché, e ne cita il testo, tranne quando il testo contiene un segreto: quello non lascia mai il computer che ha chiesto. Premi <strong>Approve with Touch ID</strong> su un Mac (<em>sperimentale</em>), <strong>Approve with password</strong> con la password del computer a cui sei seduto, oppure <strong>Deny</strong> (rifiuta).</p>
+<p>Il computer che ha chiesto verifica la firma con le chiavi che hai accettato lì, con la propria sfida monouso e con esattamente questa richiesta, poi la esegue da sé, una volta sola. Su quel computer stesso la richiesta si trova in <strong>Approval requests</strong>, oppure in un terminale con <code>antenna approvals</code> e <code>antenna approve &lt;id&gt;</code>.</p>
+<p>Claude Code aspetta fino a 50 secondi, e un passo approvato entro quel tempo viene eseguito subito. Dopo, passa ad altro; quando approvi, Antenna scrive “Approved — continue.” nel suo prompt e Claude Code esegue di nuovo il passo.</p>
+
+<h2>Se nessuno risponde</h2>
+<p>Una richiesta si chiude dopo 10 minuti: non viene eseguito né inviato nulla, e Claude Code viene a sapere che nessuno l'ha approvata. Poco prima una notifica ti avvisa. Dopo <strong>Deny</strong>, che non chiede la password, Claude Code viene a sapere che hai detto di no.</p>
+
+<h2>Un agente che approva al posto tuo</h2>
+<p><em>Sperimentale.</em> <strong>Can approve for…</strong> (può approvare per…) in <strong>Agents</strong> permette a un agente di cui ti fidi di rispondere alle richieste degli altri tuoi agenti su messaggi e file, e la sua risposta conta solo quando tutto ciò che la richiesta tocca è a ∞. Comandi e modifiche arrivano sempre a te.</p>
+
+<h2>Domande</h2>
+<details>
+  <summary>Funziona con Codex?</summary>
+  <p>In parte. Ciò che Codex invia tramite Antenna viene controllato allo stesso modo, e quelle richieste arrivano su tutti i tuoi computer; i comandi di Codex stesso restano affidati alle approvazioni di Codex, nel suo terminale.</p>
+</details>
+<details>
+  <summary>Può approvare qualsiasi computer?</summary>
+  <p>No. Solo un computer che hai abbinato come tuo e di cui hai accettato le chiavi, con la password, sul computer che chiede. Se ne perdi uno, usa <strong>Revoke this computer</strong> (revoca questo computer) su ciascuno degli altri.</p>
+</details>
+<details>
+  <summary>Posso approvare dal telefono?</summary>
+  <p>Non ancora. Per ora Antenna gira su macOS e Linux.</p>
+</details>

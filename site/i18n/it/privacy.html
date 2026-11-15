@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Informativa sulla privacy — Antenna</title>
+<meta name="description" content="antenna.contact non raccoglie nulla su di te: niente moduli, tracker, statistiche o risorse di terzi. L'app Antenna ci permette solo di contare le nuove installazioni.">
+<link rel="canonical" href="https://antenna.contact/privacy">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Informativa sulla privacy — Antenna">
+<meta property="og:url" content="https://antenna.contact/privacy">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- i18n -->
+<meta property="og:locale" content="en_US">
+<!-- /i18n -->
+<link rel="stylesheet" href="/assets/site.css?v=7">
+</head>
+<body>
+<a class="skip" href="#main">Vai al contenuto</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/" aria-label="Antenna — home"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <!-- lang -->
+    <!-- /lang -->
+    <a class="btn btn-small top-cta" href="/#download">Scarica</a>
+  </div>
+</header>
+<main id="main" class="doc">
+  <div class="wrap narrow">
+    <p class="eyebrow">Ultimo aggiornamento: 5 novembre 2026</p>
+    <h1>Informativa sulla privacy</h1>
+    <p class="lead">In breve: questo sito non raccoglie nulla su di te. Non ha moduli, tracker, statistiche né cookie, e non carica nulla da altri siti. L'app Antenna ci permette soltanto di contare le nuove installazioni: niente indirizzi, niente contenuti.</p>
+
+    <h2>Questo sito</h2>
+    <ul>
+      <li>Niente statistiche, niente pixel di tracciamento, niente pubblicità, niente cookie.</li>
+      <li>Niente script, font o immagini esterni: tutto viene servito da antenna.contact.</li>
+      <li>Link di invito: la parte di un indirizzo dopo il “#” resta nel tuo browser. Questo sito non la riceve mai.</li>
+      <li>I pulsanti di download ti portano al file su GitHub, dove vale l'informativa sulla privacy di GitHub.</li>
+    </ul>
+    <p>Il sito gira su Cloudflare Workers. Come qualsiasi server web, Cloudflare tratta il tuo indirizzo IP per consegnarti la pagina; noi non conserviamo log delle richieste.</p>
+
+    <h2>L'app Antenna</h2>
+    <p>Antenna non ha account e non ha server nostri da cui passano i tuoi messaggi: messaggi e file viaggiano cifrati end-to-end tra i dispositivi delle persone che parlano, direttamente o tramite un relay che inoltra solo traffico cifrato. A parte il conteggio delle nuove installazioni, l'app non invia dati di utilizzo né segnalazioni di crash; l'unica richiesta che fa a un nostro server è il controllo degli aggiornamenti descritto qui sotto.</p>
+    <p>Una volta al giorno l'app chiede a <span class="mono">updates.stillbyte.dev</span> se esiste una versione firmata più recente. La richiesta non contiene nulla su di te, sui tuoi contatti o sui tuoi messaggi; come qualsiasi richiesta web, rivela all'host l'indirizzo IP del computer. Dalla versione 0.1.1, il primo controllo dopo l'installazione di Antenna porta un solo segno, “primo controllo”, e nient'altro, così possiamo contare le nuove installazioni. Il server degli aggiornamenti conta quanti controlli riceve al giorno e quanti di questi sono il primo controllo di una nuova installazione; non memorizza indirizzi. Per disattivare i controlli, scrivi <span class="mono">off</span> in <span class="mono">~/.config/antenna/update-url</span>.</p>
+
+    <h2>Richieste per la beta chiusa</h2>
+    <p>Prima del rilascio pubblico, questo sito aveva un modulo per la beta chiusa. Gli indirizzi inviati tramite quel modulo vengono usati solo per avvisare le persone che Antenna è disponibile, e poi cancellati. Se vuoi che il tuo venga cancellato subito, scrivici.</p>
+
+    <h2>I tuoi diritti</h2>
+    <p>Scrivi a <a href="mailto:hello@antenna.contact">hello@antenna.contact</a> per sapere quali dati abbiamo su di te, per correggerli o per cancellarli. Ti risponderemo entro 30 giorni.</p>
+
+    <h2>Modifiche</h2>
+    <p>Se questa informativa cambia, cambia anche la data in alto.</p>
+
+    <p><a href="/">← Torna ad antenna.contact</a></p>
+    <p class="i18n-note" data-i18n-extra>Questa pagina è una traduzione. Se differisce dalla <a href="https://antenna.contact/privacy">versione inglese</a>, vale la versione inglese.</p>
+  </div>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/" aria-label="Antenna — home"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p>Contatti: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/guides/">Guide</a></p>
+    <p><a href="/privacy">Informativa sulla privacy</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

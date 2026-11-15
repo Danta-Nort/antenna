@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>प्राइवेसी पॉलिसी — Antenna</title>
+<meta name="description" content="antenna.contact आपके बारे में कुछ जमा नहीं करता: न फ़ॉर्म, न ट्रैकर, न एनालिटिक्स। Antenna ऐप से हम सिर्फ़ नए इंस्टॉल गिनते हैं: न पता, न कंटेंट।">
+<link rel="canonical" href="https://antenna.contact/privacy">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="प्राइवेसी पॉलिसी — Antenna">
+<meta property="og:url" content="https://antenna.contact/privacy">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- i18n -->
+<meta property="og:locale" content="en_US">
+<!-- /i18n -->
+<link rel="stylesheet" href="/assets/site.css?v=7">
+</head>
+<body>
+<a class="skip" href="#main">सीधे कंटेंट पर जाएँ</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/" aria-label="Antenna — होम"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <!-- lang -->
+    <!-- /lang -->
+    <a class="btn btn-small top-cta" href="/#download">डाउनलोड</a>
+  </div>
+</header>
+<main id="main" class="doc">
+  <div class="wrap narrow">
+    <p class="eyebrow">अंतिम अपडेट: 5 नवंबर 2026</p>
+    <h1>प्राइवेसी पॉलिसी</h1>
+    <p class="lead">संक्षेप में: यह साइट आपके बारे में कुछ भी जमा नहीं करती। इसमें न कोई फ़ॉर्म है, न ट्रैकर, न एनालिटिक्स, न कुकीज़, और यह दूसरी साइटों से कुछ भी लोड नहीं करती। Antenna ऐप से हम सिर्फ़ नए इंस्टॉल गिन पाते हैं: न कोई पता, न कोई कंटेंट।</p>
+
+    <h2>यह साइट</h2>
+    <ul>
+      <li>न एनालिटिक्स, न ट्रैकिंग पिक्सेल, न विज्ञापन, न कुकीज़।</li>
+      <li>न बाहरी स्क्रिप्ट, न फ़ॉन्ट, न तस्वीरें — सब कुछ antenna.contact से ही आता है।</li>
+      <li>इनवाइट लिंक: पते में “#” के बाद वाला हिस्सा आपके ब्राउज़र में ही रहता है। यह साइट उसे कभी नहीं पाती।</li>
+      <li>डाउनलोड बटन आपको GitHub पर फ़ाइल तक ले जाते हैं, जहाँ GitHub की प्राइवेसी नीति लागू होती है।</li>
+    </ul>
+    <p>यह साइट Cloudflare Workers पर चलती है। किसी भी वेब server की तरह, पेज आप तक पहुँचाने के लिए Cloudflare आपके IP address का इस्तेमाल करता है; हम कोई request log नहीं रखते।</p>
+
+    <h2>Antenna ऐप</h2>
+    <p>Antenna में न कोई अकाउंट है, न हमारा कोई server जो आपके मैसेज ले जाता हो: मैसेज और फ़ाइलें बातचीत करने वाले लोगों के डिवाइस के बीच end-to-end encrypted होकर जाती हैं, सीधे या किसी relay के ज़रिए, जो सिर्फ़ encrypted ट्रैफ़िक आगे भेजता है। नए इंस्टॉल गिनने के अलावा ऐप कोई usage डेटा या crash report नहीं भेजता; हमारे server को वह सिर्फ़ एक ही request भेजता है — नीचे बताया गया अपडेट चेक।</p>
+    <p>दिन में एक बार ऐप <span class="mono">updates.stillbyte.dev</span> से पूछता है कि कोई नई signed release है या नहीं। इस request में आपके, आपके कॉन्टैक्ट्स या आपके मैसेज के बारे में कुछ नहीं होता; किसी भी वेब request की तरह इससे host को कंप्यूटर का IP address दिखता है। वर्ज़न 0.1.1 से, Antenna इंस्टॉल करने के बाद पहले चेक में एक निशान होता है जो बताता है “पहला चेक”, और कुछ नहीं, ताकि हम नए इंस्टॉल गिन सकें। अपडेट server गिनता है कि उसे रोज़ कितने अपडेट चेक मिले, और उनमें से कितने किसी नए इंस्टॉल का पहला चेक थे; वह कोई address सेव नहीं करता। चेक बंद करने के लिए <span class="mono">~/.config/antenna/update-url</span> में <span class="mono">off</span> लिख दें।</p>
+
+    <h2>क्लोज़्ड बीटा के अनुरोध</h2>
+    <p>पब्लिक रिलीज़ से पहले इस साइट पर क्लोज़्ड बीटा के लिए एक फ़ॉर्म था। उसके ज़रिए भेजे गए ईमेल पते सिर्फ़ यह बताने के लिए इस्तेमाल होते हैं कि Antenna अब उपलब्ध है, और फिर डिलीट कर दिए जाते हैं। अगर आप चाहते हैं कि आपका पता अभी डिलीट हो, तो हमें लिखें।</p>
+
+    <h2>आपके अधिकार</h2>
+    <p>हमारे पास आपके बारे में क्या है, यह जानने, उसे सुधरवाने या डिलीट करवाने के लिए <a href="mailto:hello@antenna.contact">hello@antenna.contact</a> पर लिखें। हम 30 दिन के भीतर जवाब देंगे।</p>
+
+    <h2>बदलाव</h2>
+    <p>अगर यह पॉलिसी बदलती है, तो ऊपर लिखी तारीख़ भी बदल जाएगी।</p>
+
+    <p><a href="/">← antenna.contact पर वापस जाएँ</a></p>
+    <p class="i18n-note" data-i18n-extra>यह पेज एक अनुवाद है। अगर यह <a href="https://antenna.contact/privacy">अंग्रेज़ी वर्ज़न</a> से अलग हो, तो अंग्रेज़ी वर्ज़न ही मान्य होगा।</p>
+  </div>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/" aria-label="Antenna — होम"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p>संपर्क: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/guides/">गाइड</a></p>
+    <p><a href="/privacy">प्राइवेसी पॉलिसी</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Codex CLI’ı uzaktan kontrol: Codex’e dizüstünüzden görev verin</title>
+<meta name="description" content="Codex CLI’ı Antenna ile bir sunucuda ya da ikinci bilgisayarda çalıştırın, dizüstünüzden sohbetle yazın, mesajınız onu uyandırsın. Açık SSH oturumu gerekmez.">
+<link rel="canonical" href="https://antenna.contact/tr/guides/codex-cli-remote-control">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Codex CLI’ı uzaktan kontrol: Codex’e dizüstünüzden görev verin">
+<meta property="og:description" content="Codex CLI’ı Antenna ile bir sunucuda ya da ikinci bilgisayarda çalıştırın, dizüstünüzden sohbetle yazın, mesajınız onu uyandırsın. Açık SSH oturumu gerekmez.">
+<meta property="og:url" content="https://antenna.contact/tr/guides/codex-cli-remote-control">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="tr_TR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/codex-cli-remote-control">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/codex-cli-remote-control">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/codex-cli-remote-control">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/codex-cli-remote-control">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/codex-cli-remote-control">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/codex-cli-remote-control">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/codex-cli-remote-control">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/codex-cli-remote-control">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/codex-cli-remote-control">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/codex-cli-remote-control">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/codex-cli-remote-control">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/codex-cli-remote-control">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/codex-cli-remote-control">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/codex-cli-remote-control">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/codex-cli-remote-control">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/codex-cli-remote-control">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/tr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Rehberler",
+     "item": "https://antenna.contact/tr/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Başka bir bilgisayardaki Codex CLI’a dizüstünüzden görev verin",
+     "item": "https://antenna.contact/tr/guides/codex-cli-remote-control"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Başka bir bilgisayardaki Codex CLI’a dizüstünüzden görev verin",
+   "description": "Codex CLI’ı Antenna ile bir sunucuda ya da ikinci bilgisayarda çalıştırın, dizüstünüzden sohbetle yazın, mesajınız onu uyandırsın. Açık SSH oturumu gerekmez.",
+   "datePublished": "2026-11-14",
+   "dateModified": "2026-11-14",
+   "inLanguage": "tr",
+   "url": "https://antenna.contact/tr/guides/codex-cli-remote-control",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/tr/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Dizüstünde Codex’in terminalini görebiliyor muyum?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Hayır. Codex’e görevleri bir sohbette verir ve yanıtlarını orada okursunuz; terminal diğer bilgisayarda kalır. İzlemek isterseniz orada, dilerseniz SSH üzerinden, antenna session attach çalıştırın."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Hangi Codex sürümleri çalışıyor?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Codex 0.160 ve sonrası yaptıklarını hook’lar aracılığıyla bildirir; Antenna, Codex’in boşta olduğunu bu sayede anlar. Daha eski bir Codex’te ya da hook’lara güvenmediyseniz Antenna, Codex bir adımın ardından boş giriş satırını gösterene kadar bekler ve bir adım sürerken asla yazmaz."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Codex, Claude Code ile de konuşabilir mi?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Evet. İki ajanı ajan haritasında bağlayın; her birinin mesajları, adını belirtmeye gerek kalmadan diğerine gider: Claude Code ve Codex’i birbiriyle konuşturma rehberine bakın."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Telefonumdan kontrol edebilir miyim?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Henüz değil. Antenna bugün macOS ve Linux’ta çalışıyor."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">İçeriğe geç</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/tr/" aria-label="Antenna — ana sayfa"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Ana menü">
+      <a href="/tr/#product">Ürün</a>
+      <a href="/tr/#security">Güvenlik</a>
+      <a href="/tr/guides/">Rehberler</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Dil: Türkçe"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">TR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/codex-cli-remote-control" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/codex-cli-remote-control" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/codex-cli-remote-control" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/codex-cli-remote-control" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/codex-cli-remote-control" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/codex-cli-remote-control" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/codex-cli-remote-control" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/codex-cli-remote-control" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/codex-cli-remote-control" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/codex-cli-remote-control" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/codex-cli-remote-control" hreflang="tr" lang="tr" aria-current="true">Türkçe</a></li>
+        <li><a href="/it/guides/codex-cli-remote-control" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/codex-cli-remote-control" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/codex-cli-remote-control" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/codex-cli-remote-control" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/tr/#download">İndir</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Sayfa yolu"><a href="/tr/">Antenna</a> <span aria-hidden="true">›</span> <a href="/tr/guides/">Rehberler</a></nav>
+    <p class="eyebrow">Güncellendi <time datetime="2026-11-14">14 Kasım 2026</time></p>
+    <h1>Başka bir bilgisayardaki Codex CLI’a dizüstünüzden görev verin</h1>
+    <p class="lead">Antenna’yı iki bilgisayara da kurun ve onları bir kez kendi bilgisayarlarınız olarak eşleştirin. Codex’in çalıştığı bilgisayarda Codex oturumuna <code>antenna connect codex</code> ile bir ad verin ve <code>antenna session start … --cli codex</code> ile başlatın. Dizüstü bilgisayarınızda bu adla bir sohbet belirir: oraya bir görev yazın, Codex boşta beklerken Antenna onu uyandırır. Codex mesajınızı okur, diğer bilgisayarda çalışır ve sohbette yanıt verir. Açık kalan bir SSH oturumu ya da açmanız gereken gelen bağlantı portu yoktur.</p>
+
+    <h2>Neye ihtiyacınız var</h2>
+    <ul>
+      <li>İşi yapacak bilgisayarda kurulu ve oturum açılmış Codex CLI: x86_64 bir Linux sunucu ya da bir Mac veya Linux masaüstü. Codex kendi aboneliğinizi kullanmaya devam eder; Antenna’nın API anahtarına ihtiyacı yoktur.</li>
+      <li>O bilgisayarda tmux. Sunucudaysanız bir kez <code>sudo loginctl enable-linger $USER</code> komutunu da çalıştırın; böylece oturumu kapattıktan sonra Antenna ve oturum çalışmaya devam eder.</li>
+      <li>İki bilgisayarda da <a href="/tr/#download">Antenna</a>: masaüstünde uygulama, sunucuda düğüm (<code>curl -fsSL https://antenna.contact/install.sh | sh</code>).</li>
+    </ul>
+
+    <h2>1. İki bilgisayarı eşleştirin</h2>
+    <p>Dizüstü bilgisayarınızda: <strong>New contact → Invite</strong>, <strong>This is my own computer (∞)</strong> seçeneğini işaretleyin, bağlantıyı oluşturun ve diğer bilgisayarda açın (sunucuda: <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>). Bir tarafın gösterdiği kodu diğerine girin. Artık iki taraf da birbirini kendi bilgisayarınız olarak görür. Ekran görüntülü adım adım anlatım <a href="/tr/guides/run-claude-code-on-a-vps">VPS’te Claude Code</a> rehberinde; Codex için de aynısı geçerli.</p>
+
+    <h2>2. Codex oturumuna bir ad verin</h2>
+    <p>Codex’in çalıştığı bilgisayarda, proje klasöründe:</p>
+    <pre><code>cd ~/projects/api
+    antenna connect codex --agent api-codex --links mac --hello mac</code></pre>
+    <p>Bu komut kendi token dosyasıyla <code>api-codex</code> ajanını oluşturur, onu dizüstü bilgisayarınıza bağlar (<code>mac</code>, eşleştirirken bu bilgisayarın dizüstünüze verdiği addır) ve selam verir; böylece dizüstünüzde hemen <code>api-codex</code> adlı bir sohbet belirir. Kendi Codex ayarlarınız değişmez: Antenna yalnızca bu ajanın oturumlarına eklenir.</p>
+
+    <h2>3. Codex’i Antenna üzerinden başlatın</h2>
+    <pre><code>antenna session start api-codex --dir ~/projects/api --cli codex
+    antenna session attach api-codex</code></pre>
+    <p>Codex, Antenna’nın kendi tmux sunucusunda başlar; sizin tmux’ınıza dokunulmaz. Codex’in ilk sorularını yanıtlamak için bir kez bağlanın. İlk seferde Codex sizden Antenna’nın hook’larına güvenmenizi ister (“Hooks need review”): “Trust all and continue” seçeneğini seçin. Sonra <code>Ctrl-b d</code> ile ayrılın; Codex çalışmaya devam eder. <code>--resume</code>, yeniden başlatmadan sonra ajanın son oturumunu sürdürür.</p>
+
+    <h2>4. Dizüstünüzden ona yazın</h2>
+    <p><code>api-codex</code> sohbetini açın ve yazın: “Testleri çalıştır, başarısız olanları düzelt ve neyi değiştirdiğini söyle.” Codex komut isteminde boşta beklerken Antenna, gelen kutusunu okumasını söyleyen yerleşik tek bir satır yazar. Sizin metninizi terminale asla yazmaz ve Codex’in sorduğu bir soruya asla bir şey yazmaz. Codex mesajı Antenna üzerinden okur, çalışır ve sohbette yanıt verir. <em>Deneysel.</em></p>
+    <p>Yaptığı işi durdurması mı gerekiyor? Göndermeden önce <strong>Urgent: interrupt now</strong> seçeneğini açın. Antenna çalışan adımı bitirmek için bir kez Esc tuşuna basar, ardından Codex’i mesajınız için uyandırır. Ajanı ve başlattığı her şeyi durdurmak için dizüstünüzde <strong>My devices</strong> içinde diğer bilgisayarın kartını açın ve <strong>Stop agent and its processes…</strong> düğmesini <code>api-codex</code> satırında bulup basın.</p>
+
+    <h2>Masaüstünde: Code modu</h2>
+    <p>Codex, Antenna uygulamasının kurulu olduğu bir Mac ya da Linux masaüstünde çalışıyorsa terminal adımlarını atlayabilirsiniz. Code modunda ajanlar panelindeki <code>+</code> düğmesine basın, Codex’i ve çalışma klasörünü seçin; Codex pencerenin içindeki bir sekmede çalışır ve aynı şekilde uyandırılır. Sohbetine, diğer her ajanınki gibi, öteki bilgisayarlarınızdan ulaşabilirsiniz.</p>
+
+    <h2>Sorular</h2>
+    <details>
+      <summary>Dizüstünde Codex’in terminalini görebiliyor muyum?</summary>
+      <p>Hayır. Codex’e görevleri bir sohbette verir ve yanıtlarını orada okursunuz; terminal diğer bilgisayarda kalır. İzlemek isterseniz orada, dilerseniz SSH üzerinden, <code>antenna session attach</code> çalıştırın.</p>
+    </details>
+    <details>
+      <summary>Hangi Codex sürümleri çalışıyor?</summary>
+      <p>Codex 0.160 ve sonrası yaptıklarını hook’lar aracılığıyla bildirir; Antenna, Codex’in boşta olduğunu bu sayede anlar. Daha eski bir Codex’te ya da hook’lara güvenmediyseniz Antenna, Codex bir adımın ardından boş giriş satırını gösterene kadar bekler ve bir adım sürerken asla yazmaz.</p>
+    </details>
+    <details>
+      <summary>Codex, Claude Code ile de konuşabilir mi?</summary>
+      <p>Evet. İki ajanı ajan haritasında bağlayın; her birinin mesajları, adını belirtmeye gerek kalmadan diğerine gider: <a href="/tr/guides/claude-code-and-codex-talk-to-each-other">Claude Code ve Codex’i birbiriyle konuşturma</a> rehberine bakın.</p>
+    </details>
+    <details>
+      <summary>Telefonumdan kontrol edebilir miyim?</summary>
+      <p>Henüz değil. Antenna bugün macOS ve Linux’ta çalışıyor.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna ücretsiz ve açık kaynaklıdır</strong>, macOS ve Linux için. Hesap da telefon numarası da gerekmez.</p>
+      <a class="btn" href="/tr/#download">Antenna’yı indir</a>
+    </aside>
+    <h2>İlgili rehberler</h2>
+    <ul class="related">
+      <li><a href="/tr/guides/run-claude-code-on-a-vps">Claude Code’u VPS’te 7/24 çalıştırın ve dizüstünüzden onunla konuşun</a></li>
+      <li><a href="/tr/guides/message-claude-code-on-another-computer">Başka bir bilgisayardaki Claude Code’a mesaj gönderin</a></li>
+      <li><a href="/tr/guides/claude-code-and-codex-talk-to-each-other">Claude Code ve Codex birbiriyle nasıl konuşturulur</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/tr/" aria-label="Antenna — ana sayfa"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/tr/guides/">Rehberler</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>İletişim: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/tr/privacy">Gizlilik politikası</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

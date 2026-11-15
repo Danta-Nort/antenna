@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Un agente AI che risponde ai messaggi al posto tuo — Antenna</title>
+<meta name="description" content="Fai rispondere Claude Code o Codex ai messaggi di un contatto: Antenna lo avvia in una sandbox quando arriva un messaggio e la risposta appare in diretta.">
+<link rel="canonical" href="https://antenna.contact/it/guides/ai-agent-that-replies-to-messages">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Un agente AI che risponde ai messaggi al posto tuo — Antenna">
+<meta property="og:description" content="Fai rispondere Claude Code o Codex ai messaggi di un contatto: Antenna lo avvia in una sandbox quando arriva un messaggio e la risposta appare in diretta.">
+<meta property="og:url" content="https://antenna.contact/it/guides/ai-agent-that-replies-to-messages">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="it_IT">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/ai-agent-that-replies-to-messages">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/it/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Guide",
+     "item": "https://antenna.contact/it/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Configurare un agente AI che risponde ai tuoi messaggi",
+     "item": "https://antenna.contact/it/guides/ai-agent-that-replies-to-messages"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Configurare un agente AI che risponde ai tuoi messaggi",
+   "description": "Fai rispondere Claude Code o Codex ai messaggi di un contatto: Antenna lo avvia in una sandbox quando arriva un messaggio e la risposta appare in diretta.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "it",
+   "url": "https://antenna.contact/it/guides/ai-agent-that-replies-to-messages",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/it/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "L'altra persona vede la risposta mentre viene scritta?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sì, per i contatti di livello 3 e superiore: una nuvoletta in diretta che cresce mentre l'agente scrive e alla fine diventa un normale messaggio. I livelli 1 e 2 ricevono la risposta finita."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "E se l'agente scrive una password o una chiave nella risposta?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Il flusso si interrompe per l'altra persona e il messaggio aspetta la tua approvazione. Prosegue solo verso i tuoi computer."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Si ricorda delle conversazioni precedenti?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Di default no: ogni messaggio avvia un'esecuzione nuova. Per lavori che durano ore, aggiungi --resident: la stessa sessione di Claude Code resta allora legata alla conversazione, ricorda ciò che è stato detto e deciso, e ogni nuovo messaggio diventa il suo turno successivo. I messaggi gli arrivano comunque come dati da un'altra persona."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Vai al contenuto</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/it/" aria-label="Antenna — home"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Principale">
+      <a href="/it/#product">Prodotto</a>
+      <a href="/it/#security">Sicurezza</a>
+      <a href="/it/guides/">Guide</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Lingua: Italiano"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">IT</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/ai-agent-that-replies-to-messages" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/ai-agent-that-replies-to-messages" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/ai-agent-that-replies-to-messages" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/ai-agent-that-replies-to-messages" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/ai-agent-that-replies-to-messages" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/ai-agent-that-replies-to-messages" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/ai-agent-that-replies-to-messages" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/ai-agent-that-replies-to-messages" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/ai-agent-that-replies-to-messages" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/ai-agent-that-replies-to-messages" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/ai-agent-that-replies-to-messages" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/ai-agent-that-replies-to-messages" hreflang="it" lang="it" aria-current="true">Italiano</a></li>
+        <li><a href="/pl/guides/ai-agent-that-replies-to-messages" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/ai-agent-that-replies-to-messages" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/ai-agent-that-replies-to-messages" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/it/#download">Scarica</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Percorso"><a href="/it/">Antenna</a> <span aria-hidden="true">›</span> <a href="/it/guides/">Guide</a></nav>
+    <p class="eyebrow">Aggiornata <time datetime="2026-11-09">9 novembre 2026</time></p>
+    <h1>Configurare un agente AI che risponde ai tuoi messaggi</h1>
+    <p class="lead">In Antenna puoi scegliere un contatto e un agente (Claude Code, Codex o un tuo comando) e da quel momento ogni messaggio di quel contatto avvia l'agente, che lo legge e risponde. Antenna lo esegue in una sandbox, con permessi non superiori al livello di fiducia di quel contatto, e l'altra persona vede la risposta mentre viene scritta. Funziona con il tuo accesso a Claude o a ChatGPT, e una risposta che sembra contenere un segreto aspetta la tua approvazione.</p>
+
+    <h2>Usi tipici</h2>
+    <ul>
+      <li><strong>Il tuo assistente su un server.</strong> Scrivi al server dal portatile e Claude Code, lì, risponde, compila ed esegue i test del tuo progetto.</li>
+      <li><strong>Uno sportello per un contatto.</strong> Le domande di un collega sul tuo progetto ricevono subito una risposta, da un agente che vede solo la cartella di quella conversazione.</li>
+      <li><strong>Uno script che ti aggiorna.</strong> L'output di qualsiasi programma può essere inviato in diretta: <code>my-program | antenna send --stream &lt;contact&gt;</code>.</li>
+    </ul>
+
+    <h2>Configurarlo dalla finestra</h2>
+    <ol>
+      <li>Sul computer dove deve girare l'agente, apri <strong>Agents → Set up for a contact…</strong> (oppure, in una conversazione, <strong>Agent replies → Set up…</strong> nella scheda del contatto).</li>
+      <li>Scegli il contatto e il programma: <strong>Claude Code</strong>, <strong>Codex</strong> o un tuo comando.</li>
+      <li>Se vuoi, incolla un token di accesso a lunga durata (da <code>claude setup-token</code>) in <strong>Value (optional)</strong>. Va al tuo nodo una sola volta e resta nel suo database cifrato. Su Mac è il metodo affidabile, perché la sandbox non può aprire il portachiavi.</li>
+      <li>Conferma con la tua password da proprietario. La regola, la sua ultima esecuzione e il <strong>Run log</strong> compaiono in <strong>Agents</strong>.</li>
+    </ol>
+    <p>Da terminale basta una riga: <code>antenna wake set &lt;contact&gt; --cmd "claude -p --output-format stream-json"</code>. <code>antenna wake list</code> mostra le regole e le esecuzioni recenti; <code>antenna wake off &lt;contact&gt;</code> la disattiva.</p>
+
+    <h2>Che cosa può fare l'agente e che cosa no</h2>
+    <ul>
+      <li><strong>Il suo prompt è fisso:</strong> “hai un nuovo messaggio, leggilo e rispondi”. Il messaggio non diventa mai il prompt; l'agente lo legge come dati, con permessi non superiori al livello di fiducia del contatto.</li>
+      <li><strong>Gira in una sandbox</strong> (bubblewrap o Landlock su Linux, Seatbelt su macOS): vede la propria cartella temporanea e la cartella di quella conversazione, e raggiunge solo il proprio fornitore del modello. I tuoi progetti, gli altri tuoi file e le chiavi del nodo restano fuori portata. Senza sandbox, Antenna non lo avvia.</li>
+      <li><strong>Ogni esecuzione parte da zero</strong>, a meno che tu non renda l'agente residente (vedi sotto), così un messaggio precedente non può lasciare istruzioni per un'esecuzione successiva.</li>
+      <li><strong>Limiti:</strong> un tempo massimo per esecuzione e un numero massimo di esecuzioni all'ora, così un contatto chiacchierone non può farti consumare il tuo piano.</li>
+    </ul>
+
+    <h2>Farlo lavorare in un tuo progetto</h2>
+    <p>Solo per i tuoi computer (∞), l'agente può anche lavorare in una cartella di progetto con i tuoi strumenti di sviluppo: <code>--project ~/code/payments</code>, più le cartelle in sola lettura di <code>--tool-path</code> e i registri di pacchetti che può raggiungere con <code>--allow-host</code>. Antenna lo rifiuta per qualsiasi altro contatto e non apre mai la tua cartella home, i propri dati o le cartelle che contengono segreti, come <code>~/.ssh</code>.</p>
+
+    <h2>Domande</h2>
+    <details>
+      <summary>L'altra persona vede la risposta mentre viene scritta?</summary>
+      <p>Sì, per i contatti di livello 3 e superiore: una nuvoletta in diretta che cresce mentre l'agente scrive e alla fine diventa un normale messaggio. I livelli 1 e 2 ricevono la risposta finita.</p>
+    </details>
+    <details>
+      <summary>E se l'agente scrive una password o una chiave nella risposta?</summary>
+      <p>Il flusso si interrompe per l'altra persona e il messaggio aspetta la tua approvazione. Prosegue solo verso i tuoi computer.</p>
+    </details>
+    <details>
+      <summary>Si ricorda delle conversazioni precedenti?</summary>
+      <p>Di default no: ogni messaggio avvia un'esecuzione nuova. Per lavori che durano ore, aggiungi <code>--resident</code>: la stessa sessione di Claude Code resta allora legata alla conversazione, ricorda ciò che è stato detto e deciso, e ogni nuovo messaggio diventa il suo turno successivo. I messaggi gli arrivano comunque come dati da un'altra persona.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna è gratuita e open source</strong>, per macOS e Linux. Niente account, niente numero di telefono.</p>
+      <a class="btn" href="/it/#download">Scarica Antenna</a>
+    </aside>
+    <h2>Guide correlate</h2>
+    <ul class="related">
+      <li><a href="/it/guides/message-claude-code-on-another-computer">Inviare un messaggio a Claude Code su un altro computer</a></li>
+      <li><a href="/it/guides/claude-code-multiple-agents-working-together">Più agenti Claude Code che lavorano insieme sullo stesso progetto</a></li>
+      <li><a href="/it/guides/agent-to-agent-communication">Comunicazione tra agenti AI con MCP</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/it/" aria-label="Antenna — home"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/it/guides/">Guide</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Contatti: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/it/privacy">Informativa sulla privacy</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

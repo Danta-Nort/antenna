@@ -74,6 +74,9 @@ pub struct NodeConfig {
     /// Allow `antenna invite --confirm` (confirmation at A without asking the owner). Tests only: it removes the
     /// protection of SPEC §6 item 9 (PROTOCOL §9).
     pub allow_auto_confirm: bool,
+    /// Tests only (refused by release builds of `antennad`): hold this node's side of the `features` exchange this
+    /// long, as a loaded machine does right after pairing. Zero otherwise.
+    pub features_delay: Duration,
     /// Idle time of a level 1–2 link connection after which it is closed (presence, SPEC §4, Q-8).
     pub presence_idle: Duration,
     /// Files (slice 4): links folders, check worker, antivirus.
@@ -130,6 +133,7 @@ impl NodeConfig {
             retry_max: Duration::from_secs(30),
             dial_timeout: Duration::from_secs(10),
             allow_auto_confirm: false,
+            features_delay: Duration::ZERO,
             presence_idle: PRESENCE_IDLE,
             files: crate::files::FilesConfig::new(links_dir),
             daemon_version: format!("antennad {}", env!("CARGO_PKG_VERSION")),
@@ -1135,9 +1139,8 @@ impl Session {
         // The contact's features are not known yet (the link was just created, or there was no connection after an
         // update): find them out now, otherwise the agent's first message would go out on behalf of the owner
         // The same for an address: without the contact's features it would stay local only
-        if (agent.is_some() || addr.to.is_some()) && rt.shared.peer_feat.load(Ordering::SeqCst) == 0
-        {
-            let _ = tokio::time::timeout(Duration::from_secs(3), rt.shared.connect_raw()).await;
+        if agent.is_some() || addr.to.is_some() {
+            rt.shared.learn_features(Duration::from_secs(3)).await;
         }
         let addressed = rt.shared.peer_supports_addr();
         let mut delivered = rt.shared.delivered.subscribe();
@@ -2910,6 +2913,7 @@ impl LinkShared {
 
     /// Exchange features on a new connection (PROTOCOL §21). A `0.1.0-preview.1` node answers `rejected`.
     async fn exchange_features(self: &Arc<Self>, conn: &Connection) {
+        self.features_pause().await;
         let req = LinkRequest::Features {
             list: antenna_proto::link::FEATURES
                 .iter()
@@ -2926,6 +2930,31 @@ impl LinkShared {
             }
             // The service request limit, the network: we will find out on the next connection
             _ => {}
+        }
+    }
+
+    /// Find out the contact's features within `within` when they are not known yet. A connection that already exists
+    /// (right after pairing, or one the contact opened) returns from `connect_raw` at once while its own exchange may
+    /// still be on its way: then ask on it ourselves rather than act as if the contact had no features (a message to an
+    /// agent went out without its address that way on a loaded machine, 2026-10-31).
+    pub(crate) async fn learn_features(self: &Arc<Self>, within: Duration) {
+        if self.peer_feat.load(Ordering::SeqCst) != 0 {
+            return;
+        }
+        let _ = tokio::time::timeout(within, async {
+            if let Ok(conn) = self.connect_raw().await
+                && self.peer_feat.load(Ordering::SeqCst) == 0
+            {
+                self.exchange_features(&conn).await;
+            }
+        })
+        .await;
+    }
+
+    /// The test-only hold of [`NodeConfig::features_delay`].
+    async fn features_pause(&self) {
+        if !self.cfg.features_delay.is_zero() {
+            tokio::time::sleep(self.cfg.features_delay).await;
         }
     }
 
@@ -3217,6 +3246,7 @@ impl LinkShared {
                 reason: "malformed".into(),
             },
             LinkRequest::Features { list } => {
+                self.features_pause().await;
                 self.set_peer_features(&list);
                 self.spawn_picture_sync();
                 LinkResponse::Features {

@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Self-hosted Messenger, ganz ohne eigenen Server — Antenna</title>
+<meta name="description" content="Bei Antenna bleibt jede Nachricht auf den Computern der Gesprächspartner. Standardmäßig gibt es nichts zu hosten; Knoten oder eigenes Relay nur bei Bedarf.">
+<link rel="canonical" href="https://antenna.contact/de/guides/self-hosted-messenger">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Self-hosted Messenger, ganz ohne eigenen Server — Antenna">
+<meta property="og:description" content="Bei Antenna bleibt jede Nachricht auf den Computern der Gesprächspartner. Standardmäßig gibt es nichts zu hosten; Knoten oder eigenes Relay nur bei Bedarf.">
+<meta property="og:url" content="https://antenna.contact/de/guides/self-hosted-messenger">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="de_DE">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/self-hosted-messenger">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/de/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Anleitungen",
+     "item": "https://antenna.contact/de/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Ein selbst gehosteter Messenger, für den Sie keinen Server betreiben müssen",
+     "item": "https://antenna.contact/de/guides/self-hosted-messenger"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Ein selbst gehosteter Messenger, für den Sie keinen Server betreiben müssen",
+   "description": "Bei Antenna bleibt jede Nachricht auf den Computern der Gesprächspartner. Standardmäßig gibt es nichts zu hosten; Knoten oder eigenes Relay nur bei Bedarf.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "de",
+   "url": "https://antenna.contact/de/guides/self-hosted-messenger",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/de/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Kann meine Familie es nutzen?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Auf Computern ja: Antenna 0.1 läuft unter macOS (Apple Silicon) und Linux. Eine App fürs Smartphone gibt es noch nicht."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Speichert das Relay Nachrichten für Kontakte, die offline sind?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Nein. Eine Nachricht für einen Kontakt, der offline ist, wartet auf Ihrem eigenen Computer und geht von selbst raus, sobald er wieder da ist."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Muss ich überhaupt etwas hosten?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Nein. Antenna funktioniert mit dem Standard-Relay und ohne eigenen Server. Knoten und Relay sind für den Fall, dass Sie sie haben möchten."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Wie funktionieren Updates auf einem Server?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Ein mit install.sh installierter Knoten aktualisiert sich mit antenna update, das zuerst die Signatur des Releases prüft; eine Paketinstallation aktualisieren Sie über Ihren Paketmanager."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Zum Inhalt springen</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/de/" aria-label="Antenna — Startseite"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Hauptmenü">
+      <a href="/de/#product">Produkt</a>
+      <a href="/de/#security">Sicherheit</a>
+      <a href="/de/guides/">Anleitungen</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Sprache: Deutsch"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">DE</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/self-hosted-messenger" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/self-hosted-messenger" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/self-hosted-messenger" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/self-hosted-messenger" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/self-hosted-messenger" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/self-hosted-messenger" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/self-hosted-messenger" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/self-hosted-messenger" hreflang="de" lang="de" aria-current="true">Deutsch</a></li>
+        <li><a href="/ja/guides/self-hosted-messenger" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/self-hosted-messenger" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/self-hosted-messenger" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/self-hosted-messenger" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/self-hosted-messenger" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/self-hosted-messenger" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/self-hosted-messenger" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/de/#download">Download</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Brotkrumennavigation"><a href="/de/">Antenna</a> <span aria-hidden="true">›</span> <a href="/de/guides/">Anleitungen</a></nav>
+    <p class="eyebrow">Aktualisiert <time datetime="2026-11-09">9. November 2026</time></p>
+    <h1>Ein selbst gehosteter Messenger, für den Sie keinen Server betreiben müssen</h1>
+    <p class="lead">Wer einen Messenger selbst hostet, will seine Nachrichten von fremden Servern fernhalten. Antenna erreicht das ganz ohne Server: Jeder betreibt Antenna auf seinem eigenen Computer, Nachrichten gehen Ende-zu-Ende-verschlüsselt zwischen diesen Computern hin und her, und der Verlauf liegt nur dort, in einer verschlüsselten Datenbank. Wenn Sie mehr Kontrolle möchten, können Sie einen ständig laufenden Linux-Knoten ergänzen oder ein eigenes Relay betreiben, beides Open Source.</p>
+
+    <h2>Was ein selbst gehosteter Server meist bedeutet</h2>
+    <p>Ein klassischer selbst gehosteter Messenger ist ein Server, den Sie installieren, aktualisieren, sichern und online halten und auf dem jedes Konto und jede Nachricht aller Nutzer liegt. Das Vertrauen wandert von einem Unternehmen zu Ihnen, und mit ihm die Arbeit und das Risiko: Wird der Server gehackt, ist der Verlauf aller Nutzer betroffen.</p>
+
+    <h2>Was Antenna stattdessen macht</h2>
+    <ul>
+      <li><strong>Keine Konten zu hosten.</strong> Ihre Identität ist ein Schlüssel auf Ihrem Computer, geschützt durch Ihr Passwort. Kontakte fügen Sie mit einem Einmal-Einladungslink und einem mündlich verglichenen Code hinzu.</li>
+      <li><strong>Kein Nachrichtenspeicher in der Mitte.</strong> Ihr Verlauf liegt auf Ihrem Computer in einer mit SQLCipher verschlüsselten Datenbank, und auf dem Ihres Gegenübers.</li>
+      <li><strong>Kein Server, der online bleiben muss.</strong> Zwei Computer verbinden sich direkt, wenn das Netz es zulässt, und sonst über ein Relay, das verschlüsselten Datenverkehr weiterleitet und nichts aufbewahrt.</li>
+    </ul>
+
+    <h2>Einen ständig laufenden Knoten ergänzen</h2>
+    <p>Ein Laptop geht schlafen, ein Server nicht. Damit Ihre KI-Agenten rund um die Uhr erreichbar sind, installieren Sie den Antenna-Knoten auf einem Linux-Server (x86_64): Entpacken Sie das Release und führen Sie <code>./install.sh</code> aus, das einen systemd-User-Service ohne Root einrichtet, oder installieren Sie das <code>.deb</code>- oder <code>.rpm</code>-Paket. Koppeln Sie ihn dann wie einen Kontakt mit Ihrem Computer, auf der Stufe <strong>∞ · My computer</strong>. Schritt für Schritt: <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md">Einen Server hinzufügen</a>.</p>
+    <p>Nach einem Neustart bleiben die Schlüssel des Knotens gesperrt, bis Sie sich anmelden und <code>antenna unlock</code> ausführen: Ein gestohlenes Festplatten-Image verschafft niemandem Ihre Schlüssel.</p>
+
+    <h2>Ein eigenes Relay betreiben</h2>
+    <p>Das Relay ist der einzige geteilte Baustein, und es sieht nur verschlüsselte Pakete und welche Endpunkte darüber miteinander reden. Soll das lieber Ihr eigener Rechner sein, betreiben Sie das quelloffene <code>iroh-relay</code> und starten Ihren Knoten mit <code>antennad --relay &lt;your relay URL&gt;</code>. Kontakte, denen Sie auf Stufe 1 oder 2 vertrauen, verbinden sich immer über ein Relay und erfahren daher nie Ihre IP-Adresse.</p>
+
+    <h2>Fragen</h2>
+    <details>
+      <summary>Kann meine Familie es nutzen?</summary>
+      <p>Auf Computern ja: Antenna 0.1 läuft unter macOS (Apple Silicon) und Linux. Eine App fürs Smartphone gibt es noch nicht.</p>
+    </details>
+    <details>
+      <summary>Speichert das Relay Nachrichten für Kontakte, die offline sind?</summary>
+      <p>Nein. Eine Nachricht für einen Kontakt, der offline ist, wartet auf Ihrem eigenen Computer und geht von selbst raus, sobald er wieder da ist.</p>
+    </details>
+    <details>
+      <summary>Muss ich überhaupt etwas hosten?</summary>
+      <p>Nein. Antenna funktioniert mit dem Standard-Relay und ohne eigenen Server. Knoten und Relay sind für den Fall, dass Sie sie haben möchten.</p>
+    </details>
+    <details>
+      <summary>Wie funktionieren Updates auf einem Server?</summary>
+      <p>Ein mit <code>install.sh</code> installierter Knoten aktualisiert sich mit <code>antenna update</code>, das zuerst die Signatur des Releases prüft; eine Paketinstallation aktualisieren Sie über Ihren Paketmanager.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna ist kostenlos und Open Source</strong>, für macOS und Linux. Ohne Konto, ohne Telefonnummer.</p>
+      <a class="btn" href="/de/#download">Antenna herunterladen</a>
+    </aside>
+    <h2>Weitere Anleitungen</h2>
+    <ul class="related">
+      <li><a href="/de/guides/peer-to-peer-encrypted-messenger">Ein Open-Source-Peer-to-Peer-Messenger mit Post-Quanten-Verschlüsselung</a></li>
+      <li><a href="/de/guides/messenger-without-phone-number">Ein privater Messenger ohne Telefonnummer und ohne E-Mail</a></li>
+      <li><a href="/de/guides/message-claude-code-on-another-computer">Claude Code auf einem anderen Computer eine Nachricht schicken</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/de/" aria-label="Antenna — Startseite"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/de/guides/">Anleitungen</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Kontakt: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/de/privacy">Datenschutzerklärung</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

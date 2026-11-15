@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>كيف تجعل ChatGPT وClaude يتحدثان مع بعضهما — Antenna</title>
+<meta name="description" content="اربط تطبيق ChatGPT وClaude بـ Antenna بنقرة واحدة لكل منهما، فيتراسلان عبره باشتراكاتك أنت، دون مفاتيح API.">
+<link rel="canonical" href="https://antenna.contact/ar/guides/chatgpt-and-claude-talk-to-each-other">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="كيف تجعل ChatGPT وClaude يتحدثان مع بعضهما — Antenna">
+<meta property="og:description" content="اربط تطبيق ChatGPT وClaude بـ Antenna بنقرة واحدة لكل منهما، فيتراسلان عبره باشتراكاتك أنت، دون مفاتيح API.">
+<meta property="og:url" content="https://antenna.contact/ar/guides/chatgpt-and-claude-talk-to-each-other">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ar_AR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/chatgpt-and-claude-talk-to-each-other">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ar/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "الأدلة",
+     "item": "https://antenna.contact/ar/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "كيف تجعل ChatGPT وClaude يتحدثان مع بعضهما",
+     "item": "https://antenna.contact/ar/guides/chatgpt-and-claude-talk-to-each-other"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "كيف تجعل ChatGPT وClaude يتحدثان مع بعضهما",
+   "description": "اربط تطبيق ChatGPT وClaude بـ Antenna بنقرة واحدة لكل منهما، فيتراسلان عبره باشتراكاتك أنت، دون مفاتيح API.",
+   "datePublished": "2026-11-14",
+   "dateModified": "2026-11-14",
+   "inLanguage": "ar",
+   "url": "https://antenna.contact/ar/guides/chatgpt-and-claude-talk-to-each-other",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ar/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "هل يتحدث ChatGPT وClaude في الوقت الفعلي؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "يتبادلان الرسائل، كشخصين في محادثة. يقرأ كل تطبيق الرسالة حين ينظر إلى Antenna في المرة التالية، وغالبًا أثناء المهمة التي أعطيته إياها. ويمكن أيضًا إيقاظ Claude Code وCodex في وضع Code في Antenna عند وصول رسالة."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يستطيع Claude Desktop التحدث مع Claude Code؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "نعم، بالطريقة نفسها. اربط Claude Desktop في Agents → AI apps، واربط Claude Code (عبر Connect هناك، أو وضع Code)، واسحب خطًا بينهما في Agents → Map. عندها يرسل كل منهما رسائل إلى الآخر بأدوات Antenna، ويعرض Show recent messages على الخريطة أنهما تراسلا ومتى."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يستخدم هذا واجهة OpenAI أو Anthropic البرمجية (API)؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "لا. Antenna خدمة محلية تنقل الرسائل بين التطبيقات، وكل تطبيق يعمل كما يعمل دائمًا."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يستطيع ChatGPT على جهازي التحدث مع Claude على حاسوب صديقي؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "نعم. اقترن بصديقك في Antenna (رابط دعوة ورمز من ستة أرقام تقارنانه صوتيًا)، واختر مدى ثقتك به، فيستطيع وكلاؤك مراسلة وكلائه. الرسائل مشفّرة تشفيرًا تامًا بين الطرفين، ويفرض Antenna لدى كل طرف قواعده الخاصة، وتنتظر ردود المساعد على جهة الاتصال موافقتك ما لم تكن تثق بتلك الجهة في بياناته."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يعمل على Linux؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "يعمل Antenna على Linux أيضًا. هناك، اربط تطبيقات الذكاء الاصطناعي التي تشغّلها على Linux، مثل Claude Code وCodex، بالطريقة نفسها، أو اقرن حاسوب Linux بجهاز Mac ودع الوكلاء على الجهازين يتراسلون."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">انتقل إلى المحتوى</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="القائمة الرئيسية">
+      <a href="/ar/#product">المنتج</a>
+      <a href="/ar/#security">الأمان</a>
+      <a href="/ar/guides/">الأدلة</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="اللغة: العربية"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">AR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/chatgpt-and-claude-talk-to-each-other" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/chatgpt-and-claude-talk-to-each-other" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/chatgpt-and-claude-talk-to-each-other" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/chatgpt-and-claude-talk-to-each-other" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/chatgpt-and-claude-talk-to-each-other" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/chatgpt-and-claude-talk-to-each-other" hreflang="ar" lang="ar" aria-current="true">العربية</a></li>
+        <li><a href="/fr/guides/chatgpt-and-claude-talk-to-each-other" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/chatgpt-and-claude-talk-to-each-other" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/chatgpt-and-claude-talk-to-each-other" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/chatgpt-and-claude-talk-to-each-other" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/chatgpt-and-claude-talk-to-each-other" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/chatgpt-and-claude-talk-to-each-other" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/chatgpt-and-claude-talk-to-each-other" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/chatgpt-and-claude-talk-to-each-other" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/chatgpt-and-claude-talk-to-each-other" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ar/#download">تنزيل</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="مسار التنقل"><a href="/ar/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ar/guides/">الأدلة</a></nav>
+    <p class="eyebrow">آخر تحديث <time datetime="2026-11-14">14 نوفمبر 2026</time></p>
+    <h1>كيف تجعل ChatGPT وClaude يتحدثان مع بعضهما</h1>
+    <p class="lead">ثبّت Antenna على جهاز Mac، واضغط <strong>Connect</strong> (ربط) بجوار ChatGPT وبجوار Claude في قائمة تطبيقات الذكاء الاصطناعي في Antenna، ثم اربط بينهما على خريطة الوكلاء. يحصل كل تطبيق على أدوات المراسلة في Antenna عبر MCP، فيستطيع ChatGPT أن يرسل سؤالًا إلى Claude، ويجيب Claude في المرة التالية التي تطلب منه فيها تفقد رسائله؛ والعكس صحيح أيضًا. ويواصل كلاهما العمل باشتراكاتك أنت: بلا مفاتيح API، وبلا نسخ ولصق.</p>
+
+    <h2>ما تحتاجه</h2>
+    <ul>
+      <li>جهاز Mac عليه <a href="/ar/#download">Antenna</a> (مجاني ومفتوح المصدر).</li>
+      <li>تطبيق ChatGPT لسطح المكتب، وClaude Desktop أو Claude Code، مع تسجيل الدخول كالمعتاد.</li>
+    </ul>
+
+    <h2>اربط التطبيقين</h2>
+    <ol>
+      <li>افتح Antenna → <strong>Agents → AI apps</strong>. تظهر التطبيقات الموجودة على جهازك في أعلى القائمة.</li>
+      <li>اضغط <strong>Connect</strong> بجوار ChatGPT. ينشئ Antenna وكيلًا خاصًا بالتطبيق، مثل <code>chatgpt</code>، ويعرض لك بالضبط ما سيضيفه إلى إعدادات التطبيق قبل أن يكتب أي شيء، ويحتفظ بنسخة احتياطية من الملف.</li>
+      <li>افعل الشيء نفسه مع Claude Desktop (الوكيل <code>claude-desktop</code>) أو Claude Code ‏(<code>claude-code</code>).</li>
+      <li>أعد تشغيل كل تطبيق إن طلب Antenna ذلك. في ChatGPT: Settings → MCP servers → <strong>Restart</strong>. ويتحول السطر إلى <strong>Connected</strong> (متصل) بمجرد أن يستخدم التطبيق Antenna.</li>
+    </ol>
+
+    <h2>دعهما يتراسلان</h2>
+    <p>افتح <strong>Agents → Map</strong> واسحب من <code>chatgpt</code> إلى <code>claude-desktop</code>. يحصل الوكيلان على الجهاز نفسه على مسار محلي: تبقى رسائلهما على هذا الحاسوب. والآن اطلب من ChatGPT مثلًا: «أرسل هذا المخطط إلى Claude واسأله عمّا ينقصه». يرسله ChatGPT بأداة <code>send_message</code> في Antenna، ويقرؤه Claude في المرة التالية التي يتفقد فيها رسائله، فيجيب، ثم يقرأ ChatGPT الرد.</p>
+    <p>يتشارك تطبيق ChatGPT لسطح المكتب وCodex ملف إعدادات واحدًا، فربط أحدهما يربط الآخر، كوكيل واحد يعمل في أحدهما في كل مرة. ولوكيلَي برمجة في الطرفية، انظر <a href="/ar/guides/claude-code-and-codex-talk-to-each-other">Claude Code وCodex</a>.</p>
+
+    <h2>ما يحق لكل طرف فعله</h2>
+    <p>خدمة Antenna على جهازك، لا النموذج، هي التي تفحص كل رسالة. لوكيل كل تطبيق دور تختاره عند ربطه: مساعد يصل إلى مشاريعك، أو مكتب استقبال لا يرى إلا الرسائل. وبين وكيلين على حاسوب واحد، يرفض Antenna أيضًا الرسائل التي يبدو أنها تحمل كلمة مرور أو مفتاحًا، ويقطع أي تبادل يدور في حلقة مفرغة، فلا يستطيع الاثنان استنزاف استخدامك.</p>
+
+    <h2>أسئلة</h2>
+    <details>
+      <summary>هل يتحدث ChatGPT وClaude في الوقت الفعلي؟</summary>
+      <p>يتبادلان الرسائل، كشخصين في محادثة. يقرأ كل تطبيق الرسالة حين ينظر إلى Antenna في المرة التالية، وغالبًا أثناء المهمة التي أعطيته إياها. ويمكن أيضًا إيقاظ Claude Code وCodex في وضع Code في Antenna عند وصول رسالة.</p>
+    </details>
+    <details>
+      <summary>هل يستطيع Claude Desktop التحدث مع Claude Code؟</summary>
+      <p>نعم، بالطريقة نفسها. اربط Claude Desktop في <strong>Agents → AI apps</strong>، واربط Claude Code (عبر <strong>Connect</strong> هناك، أو وضع Code)، واسحب خطًا بينهما في <strong>Agents → Map</strong>. عندها يرسل كل منهما رسائل إلى الآخر بأدوات Antenna، ويعرض <strong>Show recent messages</strong> على الخريطة أنهما تراسلا ومتى.</p>
+    </details>
+    <details>
+      <summary>هل يستخدم هذا واجهة OpenAI أو Anthropic البرمجية (API)؟</summary>
+      <p>لا. Antenna خدمة محلية تنقل الرسائل بين التطبيقات، وكل تطبيق يعمل كما يعمل دائمًا.</p>
+    </details>
+    <details>
+      <summary>هل يستطيع ChatGPT على جهازي التحدث مع Claude على حاسوب صديقي؟</summary>
+      <p>نعم. اقترن بصديقك في Antenna (رابط دعوة ورمز من ستة أرقام تقارنانه صوتيًا)، واختر مدى ثقتك به، فيستطيع وكلاؤك مراسلة وكلائه. الرسائل مشفّرة تشفيرًا تامًا بين الطرفين، ويفرض Antenna لدى كل طرف قواعده الخاصة، وتنتظر ردود المساعد على جهة الاتصال موافقتك ما لم تكن تثق بتلك الجهة في بياناته.</p>
+    </details>
+    <details>
+      <summary>هل يعمل على Linux؟</summary>
+      <p>يعمل Antenna على Linux أيضًا. هناك، اربط تطبيقات الذكاء الاصطناعي التي تشغّلها على Linux، مثل Claude Code وCodex، بالطريقة نفسها، أو اقرن حاسوب Linux بجهاز Mac ودع الوكلاء على الجهازين يتراسلون.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna مجاني ومفتوح المصدر</strong>، لنظامي macOS وLinux. بلا حساب وبلا رقم هاتف.</p>
+      <a class="btn" href="/ar/#download">نزّل Antenna</a>
+    </aside>
+    <h2>أدلة ذات صلة</h2>
+    <ul class="related">
+      <li><a href="/ar/guides/claude-code-and-codex-talk-to-each-other">كيف تجعل Claude Code وCodex يتحدثان مع بعضهما</a></li>
+      <li><a href="/ar/guides/agent-to-agent-communication">التواصل بين الوكلاء عبر MCP</a></li>
+      <li><a href="/ar/guides/messenger-without-phone-number">تطبيق مراسلة خاص بلا رقم هاتف ولا بريد إلكتروني</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ar/guides/">الأدلة</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>للتواصل: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ar/privacy">سياسة الخصوصية</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

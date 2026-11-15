@@ -1,0 +1,35 @@
+<!--guide {"title": "Envoyer des fichiers à Claude Code sur un autre ordinateur — Antenna", "h1": "Comment partager des fichiers avec Claude Code sur un autre ordinateur", "description": "Envoyez un fichier de votre portable à Claude Code sur un serveur ou un autre ordinateur via Antenna : il est vérifié à l’arrivée et l’agent sait où le trouver.", "summary": "Envoyer des fichiers à une session Claude Code sur un autre ordinateur, et en recevoir, avec vérification à l’arrivée.", "source": "2026-11-09"}-->
+<p class="lead">Sur le même ordinateur, Claude Code lit vos fichiers directement : donnez-lui le chemin, ou faites glisser le fichier dans son terminal. Sur un autre ordinateur, un serveur par exemple, envoyez le fichier via Antenna : déposez-le dans la conversation avec cette session Claude Code, Antenna le vérifie à l’arrivée et l’enregistre là-bas dans le dossier de la liaison, et l’agent reçoit dans sa boîte de réception le nom du fichier, son emplacement, sa taille et son SHA-256. Les fichiers que l’agent vous renvoie arrivent sur votre portable de la même façon.</p>
+
+<h2>Envoyer un fichier à l’agent</h2>
+<ol>
+  <li>Associez votre portable à l’autre ordinateur comme étant le vôtre (∞) et connectez à Antenna le Claude Code qui y tourne : voir <a href="/guides/run-claude-code-on-a-vps">Claude Code sur un VPS</a>.</li>
+  <li>Ouvrez la conversation avec la session sur votre portable et déposez-y le fichier, ou joignez-le comme dans n’importe quelle messagerie.</li>
+  <li>Sur l’autre ordinateur, Antenna vérifie le type du fichier d’après son contenu, recherche les menaces et les secrets, et l’enregistre dans le dossier de la liaison, <code>~/Antenna/links/&lt;folder&gt;/shared/</code>, ou dans un dossier de projet que vous avez choisi pour cet ordinateur.</li>
+  <li>L’agent apprend de lui-même l’arrivée du fichier dans sa prochaine consultation de la boîte de réception, avec son chemin et ses empreintes, et peut s’en servir à l’étape suivante.</li>
+</ol>
+
+<h2>Récupérer des fichiers de l’agent</h2>
+<p>L’agent peut vous envoyer un fichier, un build, un rapport ou une capture d’écran, avec les mêmes outils que pour les messages. Il arrive dans votre conversation et dans <strong>Files</strong>, sous forme de fiche indiquant le nom du fichier, ce que la vérification a relevé et son empreinte. Les images s’affichent sous forme d’aperçu sûr et vérifié, reconstruit par Antenna.</p>
+
+<h2>Ce qui est vérifié, et ce qui attend votre décision</h2>
+<ul>
+  <li><strong>Entre vos propres ordinateurs</strong>, les fichiers ordinaires sont enregistrés automatiquement. Tout ce qui peut exécuter ou installer un logiciel, comme un programme, un installeur ou une archive qui en contient un, attend toujours votre décision, sauf si vous l’autorisez pour cet ordinateur.</li>
+  <li><strong>Venant de l’agent de quelqu’un d’autre</strong> aux niveaux 3 et 4, les fichiers sont vérifiés et attendent que vous cliquiez sur Accept, ou qu’un de vos agents les accepte. Aux niveaux 1 et 2, vous décidez pour chaque fichier.</li>
+  <li><strong>À l’envoi</strong>, un fichier qui semble contenir une clé, un mot de passe ou un jeton est retenu jusqu’à votre accord, sauf entre vos propres ordinateurs.</li>
+  <li><strong>Rien n’est écrasé.</strong> Un fichier dont le nom est déjà pris est enregistré sous <code>report (2).pdf</code>, et l’expéditeur est informé de ce nom.</li>
+</ul>
+
+<h2>Questions</h2>
+<details>
+  <summary>Pourquoi ne pas utiliser scp ou un dossier partagé ?</summary>
+  <p>Vous pouvez, et pour de grandes arborescences de fichiers, c’est peut-être préférable. Antenna sert aux fichiers qui font partie d’une conversation avec l’agent : ils arrivent là où l’agent les attend, l’agent en est informé, et un fichier venant de quelqu’un d’autre que vous est vérifié avant d’arriver.</p>
+</details>
+<details>
+  <summary>Le fichier est-il chiffré pendant le transfert ?</summary>
+  <p>Oui, de bout en bout, par la même liaison que vos messages. Aucun serveur intermédiaire ne le stocke.</p>
+</details>
+<details>
+  <summary>Puis-je choisir où les fichiers sont enregistrés ?</summary>
+  <p>Oui. Dans la fiche de contact de l’ordinateur, <strong>Files from this computer</strong> vous permet de choisir un dossier pour cet ordinateur et un pour chacun de ses agents. Depuis un terminal : <code>antenna files save-to &lt;contact&gt; &lt;folder&gt;</code>.</p>
+</details>

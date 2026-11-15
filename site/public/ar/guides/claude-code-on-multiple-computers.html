@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>استخدام Claude Code على عدة أجهزة من مكان واحد — Antenna</title>
+<meta name="description" content="شغّل Claude Code على حاسوبك المحمول والمكتبي والخادم، وصِل إلى كل جلسة من قائمة محادثات واحدة: حالتها وطلباتها وزر إيقاف لكل منها.">
+<link rel="canonical" href="https://antenna.contact/ar/guides/claude-code-on-multiple-computers">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="استخدام Claude Code على عدة أجهزة من مكان واحد — Antenna">
+<meta property="og:description" content="شغّل Claude Code على حاسوبك المحمول والمكتبي والخادم، وصِل إلى كل جلسة من قائمة محادثات واحدة: حالتها وطلباتها وزر إيقاف لكل منها.">
+<meta property="og:url" content="https://antenna.contact/ar/guides/claude-code-on-multiple-computers">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ar_AR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/claude-code-on-multiple-computers">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ar/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "الأدلة",
+     "item": "https://antenna.contact/ar/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "استخدم Claude Code على عدة حواسيب من مكان واحد",
+     "item": "https://antenna.contact/ar/guides/claude-code-on-multiple-computers"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "استخدم Claude Code على عدة حواسيب من مكان واحد",
+   "description": "شغّل Claude Code على حاسوبك المحمول والمكتبي والخادم، وصِل إلى كل جلسة من قائمة محادثات واحدة: حالتها وطلباتها وزر إيقاف لكل منها.",
+   "datePublished": "2026-11-14",
+   "dateModified": "2026-11-14",
+   "inLanguage": "ar",
+   "url": "https://antenna.contact/ar/guides/claude-code-on-multiple-computers",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ar/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "هل يزامن Antenna إعدادات Claude Code أو سجله بين الحواسيب؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "لا. يحتفظ Claude Code بإعداداته وسجله وتسجيل دخوله على كل حاسوب، وتنتقل شيفرتك كما تنتقل الآن، عبر git. أما Antenna فينقل الرسائل والملفات والموافقات بين الجلسات."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل أحتاج إلى عنوان IP عام أو منافذ مفتوحة على الخادم؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "لا. يتصل كل حاسوب نحو الخارج، مباشرة حين تسمح الشبكة وعبر خادم ترحيل (relay) في غير ذلك، وخادم الترحيل لا يمرر إلا حركة مرور مشفرة."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يمكنني تغيير إعداد على حاسوب آخر من هنا؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "لا. لا ينتقل بين حواسيبك إلا الموافقات وأوامر الإيقاف وطلبات الربط من خريطة الوكلاء، التي يطلب منك ذلك الحاسوب الموافقة عليها. أما الثقة والدعوات والتحديثات والإعدادات فتُغيَّر على الحاسوب نفسه، فلا يستطيع حاسوب محمول مسروق إعادة كتابة قواعد الخادم."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يعمل على Windows أو الهاتف؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ليس بعد. يعمل Antenna حاليًا على macOS وLinux."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">انتقل إلى المحتوى</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="القائمة الرئيسية">
+      <a href="/ar/#product">المنتج</a>
+      <a href="/ar/#security">الأمان</a>
+      <a href="/ar/guides/">الأدلة</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="اللغة: العربية"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">AR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/claude-code-on-multiple-computers" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/claude-code-on-multiple-computers" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/claude-code-on-multiple-computers" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/claude-code-on-multiple-computers" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/claude-code-on-multiple-computers" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/claude-code-on-multiple-computers" hreflang="ar" lang="ar" aria-current="true">العربية</a></li>
+        <li><a href="/fr/guides/claude-code-on-multiple-computers" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/claude-code-on-multiple-computers" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/claude-code-on-multiple-computers" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/claude-code-on-multiple-computers" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/claude-code-on-multiple-computers" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/claude-code-on-multiple-computers" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/claude-code-on-multiple-computers" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/claude-code-on-multiple-computers" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/claude-code-on-multiple-computers" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ar/#download">تنزيل</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="مسار التنقل"><a href="/ar/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ar/guides/">الأدلة</a></nav>
+    <p class="eyebrow">آخر تحديث <time datetime="2026-11-14">14 نوفمبر 2026</time></p>
+    <h1>استخدم Claude Code على عدة حواسيب من مكان واحد</h1>
+    <p class="lead">دع Claude Code يعمل حيث يكون العمل، على حاسوبك المحمول وحاسوب مكتبي وخادم، وثبّت Antenna على كل منها. اقرن الحواسيب مرة واحدة على أنها حواسيبك أنت (∞). بعدها ترى من أي منها كل الجلسات في قائمة محادثات واحدة، وتكتب إلى أي منها باسمها، وتجيب عن طلبات الموافقة، وتوقف الجلسة التي خرجت عن السيطرة، دون أن تفتح طرفية على ذلك الجهاز. ويعمل Codex بالطريقة نفسها.</p>
+
+    <h2>ما تحصل عليه</h2>
+    <ul>
+      <li><strong>محادثة لكل جلسة</strong>، أيًّا كان الحاسوب الذي تعمل عليه. فالجلسة على الخادم والجلسة على الحاسوب المكتبي تظهران في القائمة نفسها مع جهات اتصالك.</li>
+      <li><strong>My devices</strong> (أجهزتي): بطاقة لكل حاسوب من حواسيبك فيها نظامه وإصدار Antenna عليه، وحالته كما تراها فحوصه الذاتية، ووكلاؤه وهل كل منهم متصل، والطلبات التي تنتظرك هناك.</li>
+      <li><strong>الموافقات من حيث أنت.</strong> يمكن الموافقة على طلب من وكيل على الخادم من جهاز Mac، باستخدام Touch ID أو كلمة مرور الجهاز. ويتحقق الخادم من التوقيع وينفذ الطلب بنفسه.</li>
+      <li><strong>زر إيقاف</strong> لكل وكيل على حاسوب آخر: يوقف الوكيل وكل عملية شغّلها هناك.</li>
+      <li><strong>خريطة الوكلاء</strong>، حيث تربط جلسة على حاسوب بجلسة على حاسوب آخر، فتتراسلان.</li>
+    </ul>
+
+    <h2>الإعداد</h2>
+    <ol>
+      <li><strong>ثبّت Antenna على كل حاسوب</strong>: التطبيق على جهاز Mac أو حاسوب Linux مكتبي، والعقدة على خادم Linux ‏(<code>curl -fsSL https://antenna.contact/install.sh | sh</code>).</li>
+      <li><strong>اقرن الحواسيب ببعضها على أنها حواسيبك أنت.</strong> أنشئ دعوة مع تحديد <strong>This is my own computer (∞)</strong>، وافتحها على الحاسوب الآخر، وأدخل الرمز الذي يعرضه أحد الطرفين في الطرف الآخر. اقرن كل حاسوب بكل حاسوب آخر تريد أن تراه أو تربطه منه: يجب أن يكون كل منهما عند الآخر بمستوى ∞.</li>
+      <li><strong>امنح كل جلسة Claude Code اسمًا.</strong> على الحاسوب المكتبي، شغّلها في وضع Code من الزر <code>+</code> في لوحة الوكلاء. وعلى الخادم، في مجلد المشروع، شغّل <code>antenna connect claude-code --agent api-dev --links mac --hello mac</code> وأبقها تعمل بالأمر <code>antenna session start api-dev --dir ~/projects/api</code>؛ وتجد كل الخطوات في دليل <a href="/ar/guides/run-claude-code-on-a-vps">Claude Code على خادم VPS</a>.</li>
+      <li><strong>دع حاسوبك الرئيسي يجيب عن الطلبات.</strong> على الخادم، شغّل <code>antenna devices confirm mac</code> مرة واحدة؛ وعلى الحاسوب المكتبي، اقبل مفتاح الحاسوب الرئيسي في <strong>My devices</strong> → بطاقته → <strong>Approvals</strong>.</li>
+    </ol>
+
+    <h2>نقل العمل بين الحواسيب</h2>
+    <p>اكتب إلى الجلسة كما تكتب إلى شخص: «<code>api-dev</code>، شغّل عمليات الترحيل (migrations) على الخادم وأخبرني بما تغيّر». الملفات التي تسقطها في محادثتها تُحفظ على ذلك الحاسوب ويُبلَّغ الوكيل بمكانها؛ وبين حواسيبك أنت تُحفظ الملفات العادية دون سؤال، بينما تنتظرك البرامج وملفات التثبيت. ولتسمح لجلسة على الحاسوب المكتبي بتسليم عمل إلى جلسة على الخادم، اربط بينهما على خريطة الوكلاء. تستيقظ الجلسة هناك عند وصول رسالة، ويمكن لرسالة عاجلة أن تقاطع دورها الحالي. <em>تجريبي.</em></p>
+
+    <h2>أسئلة</h2>
+    <details>
+      <summary>هل يزامن Antenna إعدادات Claude Code أو سجله بين الحواسيب؟</summary>
+      <p>لا. يحتفظ Claude Code بإعداداته وسجله وتسجيل دخوله على كل حاسوب، وتنتقل شيفرتك كما تنتقل الآن، عبر git. أما Antenna فينقل الرسائل والملفات والموافقات بين الجلسات.</p>
+    </details>
+    <details>
+      <summary>هل أحتاج إلى عنوان IP عام أو منافذ مفتوحة على الخادم؟</summary>
+      <p>لا. يتصل كل حاسوب نحو الخارج، مباشرة حين تسمح الشبكة وعبر خادم ترحيل (relay) في غير ذلك، وخادم الترحيل لا يمرر إلا حركة مرور مشفرة.</p>
+    </details>
+    <details>
+      <summary>هل يمكنني تغيير إعداد على حاسوب آخر من هنا؟</summary>
+      <p>لا. لا ينتقل بين حواسيبك إلا الموافقات وأوامر الإيقاف وطلبات الربط من خريطة الوكلاء، التي يطلب منك ذلك الحاسوب الموافقة عليها. أما الثقة والدعوات والتحديثات والإعدادات فتُغيَّر على الحاسوب نفسه، فلا يستطيع حاسوب محمول مسروق إعادة كتابة قواعد الخادم.</p>
+    </details>
+    <details>
+      <summary>هل يعمل على Windows أو الهاتف؟</summary>
+      <p>ليس بعد. يعمل Antenna حاليًا على macOS وLinux.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna مجاني ومفتوح المصدر</strong>، لنظامي macOS وLinux. بلا حساب وبلا رقم هاتف.</p>
+      <a class="btn" href="/ar/#download">نزّل Antenna</a>
+    </aside>
+    <h2>أدلة ذات صلة</h2>
+    <ul class="related">
+      <li><a href="/ar/guides/message-claude-code-on-another-computer">أرسل رسالة إلى Claude Code على حاسوب آخر</a></li>
+      <li><a href="/ar/guides/run-claude-code-on-a-vps">شغّل Claude Code على خادم VPS على مدار الساعة، وتحدّث إليه من حاسوبك المحمول</a></li>
+      <li><a href="/ar/guides/share-files-with-claude-code">كيف تشارك الملفات مع Claude Code على حاسوب آخر</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ar/guides/">الأدلة</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>للتواصل: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ar/privacy">سياسة الخصوصية</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

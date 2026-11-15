@@ -1,0 +1,37 @@
+<!--guide {"title": "Messagerie auto-hébergée sans serveur à gérer — Antenna", "h1": "Une messagerie auto-hébergée, sans serveur à gérer", "description": "Antenna garde chaque message sur les ordinateurs des interlocuteurs. Rien à héberger par défaut ; ajoutez un nœud permanent ou votre relais si vous le voulez.", "summary": "Pourquoi Antenna n’a pas besoin de serveur, et comment ajouter un nœud toujours actif ou votre propre relais si vous le souhaitez.", "source": "2026-11-09"}-->
+<p class="lead">On auto-héberge une messagerie pour que ses messages ne dorment pas sur le serveur de quelqu’un d’autre. Antenna atteint ce but sans aucun serveur : chacun fait tourner Antenna sur son propre ordinateur, les messages circulent entre ces ordinateurs chiffrés de bout en bout, et l’historique n’est stocké que là, dans une base de données chiffrée. Si vous voulez plus de contrôle, vous pouvez ajouter un nœud Linux toujours actif ou héberger votre propre relais, tous deux open source.</p>
+
+<h2>Ce que signifie d’ordinaire un serveur auto-hébergé</h2>
+<p>Une messagerie auto-hébergée classique, c’est un serveur que vous installez, mettez à jour, sauvegardez et maintenez en ligne, et qui détient chaque compte et chaque message de tous ses utilisateurs. La confiance passe d’une entreprise à vous, et avec elle le travail et le risque : si le serveur est piraté, l’historique de tout le monde l’est aussi.</p>
+
+<h2>Ce que fait Antenna à la place</h2>
+<ul>
+  <li><strong>Aucun compte à héberger.</strong> Votre identité est une clé sur votre ordinateur, protégée par votre mot de passe. Vous ajoutez des contacts avec un lien d’invitation à usage unique et un code que vous comparez de vive voix.</li>
+  <li><strong>Aucun stockage de messages au milieu.</strong> Votre historique se trouve sur votre ordinateur, dans une base de données chiffrée avec SQLCipher, et sur celui de votre interlocuteur.</li>
+  <li><strong>Aucun serveur à maintenir en ligne.</strong> Deux ordinateurs se connectent directement quand le réseau le permet, et sinon via un relais qui transmet le trafic chiffré sans rien conserver.</li>
+</ul>
+
+<h2>Ajouter un nœud toujours actif</h2>
+<p>Un portable se met en veille ; un serveur, non. Pour que vos agents IA restent joignables jour et nuit, installez le nœud Antenna sur un serveur Linux (x86_64) : décompressez la version et lancez <code>./install.sh</code>, qui met en place un service utilisateur systemd sans root, ou installez le paquet <code>.deb</code> ou <code>.rpm</code>. Associez-le ensuite à votre ordinateur comme un contact, au niveau <strong>∞ · My computer</strong>. Pas à pas : <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md">Ajouter un serveur</a>.</p>
+<p>Après un redémarrage, les clés du nœud restent verrouillées jusqu’à ce que vous vous connectiez et lanciez <code>antenna unlock</code> : une image disque volée ne livre vos clés à personne.</p>
+
+<h2>Héberger votre propre relais</h2>
+<p>Le relais est la seule pièce partagée, et il ne voit que des paquets chiffrés et quels points de terminaison communiquent à travers lui. Si vous préférez que ce soit votre propre machine, faites tourner <code>iroh-relay</code>, open source, et démarrez votre nœud avec <code>antennad --relay &lt;your relay URL&gt;</code>. Les contacts auxquels vous accordez les niveaux 1 et 2 se connectent toujours via un relais : ils ne connaissent donc jamais votre adresse IP.</p>
+
+<h2>Questions</h2>
+<details>
+  <summary>Ma famille peut-elle l’utiliser ?</summary>
+  <p>Sur ordinateur, oui : Antenna 0.1 fonctionne sous macOS (Apple Silicon) et Linux. Il n’existe pas encore d’app pour téléphone.</p>
+</details>
+<details>
+  <summary>Le relais stocke-t-il les messages destinés aux contacts hors ligne ?</summary>
+  <p>Non. Un message destiné à un contact hors ligne attend sur votre propre ordinateur et part de lui-même dès que ce contact revient.</p>
+</details>
+<details>
+  <summary>Y a-t-il quelque chose que je dois héberger ?</summary>
+  <p>Non. Antenna fonctionne avec le relais par défaut et sans aucun serveur à vous. Le nœud et le relais sont là pour quand vous en avez envie.</p>
+</details>
+<details>
+  <summary>Comment se font les mises à jour sur un serveur ?</summary>
+  <p>Un nœud installé avec <code>install.sh</code> se met à jour avec <code>antenna update</code>, qui vérifie d’abord la signature de la version ; une installation par paquet se met à jour via votre gestionnaire de paquets.</p>
+</details>

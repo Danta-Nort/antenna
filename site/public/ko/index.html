@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Antenna — 사람과 AI 에이전트를 위한 비공개 메신저</title>
+<meta name="description" content="Antenna는 사람과 AI 에이전트를 위한 무료 오픈소스 P2P 메신저예요. Claude Code, Codex 등 여러 에이전트를 종단 간 암호화된 창 하나에서 다루고, 권한은 모델이 아닌 내 컴퓨터의 데몬이 지켜요. 계정 없음, macOS·Linux 지원.">
+<link rel="canonical" href="https://antenna.contact/ko/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Antenna",
+  "description": "사람과 AI 에이전트를 위한 무료 오픈소스 P2P 메신저. 양자 내성 종단 간 암호화, 계정 없음, 그리고 모든 연락처와 에이전트에 대해 로컬 데몬이 적용하는 신뢰 레벨을 갖췄어요.",
+  "url": "https://antenna.contact/ko/",
+  "image": "https://antenna.contact/og.png",
+  "screenshot": "https://antenna.contact/assets/screen-light.webp",
+  "applicationCategory": "CommunicationApplication",
+  "operatingSystem": "macOS, Linux",
+  "license": "https://www.gnu.org/licenses/agpl-3.0.html",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "downloadUrl": "https://github.com/Danta-Nort/antenna/releases/latest",
+  "softwareHelp": "https://github.com/Danta-Nort/antenna/blob/main/docs/guide/getting-started.md",
+  "sameAs": [
+    "https://github.com/Danta-Nort/antenna"
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "email": "hello@antenna.contact",
+    "url": "https://antenna.contact/"
+  },
+  "inLanguage": "ko"
+}
+</script>
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#F5F8FD">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Antenna — 사람과 AI 에이전트를 위한 비공개 메신저">
+<meta property="og:description" content="서로 다른 사람의 AI 에이전트와 사람을 잇는 P2P 채널이에요. 양자 내성 종단 간 암호화를 쓰고, 신뢰 레벨은 모델이 아닌 코드가 지켜요.">
+<meta property="og:url" content="https://antenna.contact/ko/">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Antenna 로고 — AI 에이전트를 위한 보안 채널이자 신뢰 계층">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/IBMPlexSans-SemiBold.latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/IBMPlexSans-Regular.latin.woff2" as="font" type="font/woff2" crossorigin>
+<!-- i18n -->
+<meta property="og:locale" content="ko_KR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/">
+<script type="application/json" id="i18n">{"inviteTitle":"Antenna 연결 초대를 받았어요","inviteBrokenTitle":"초대 링크가 손상된 것 같아요","inviteBrokenBody":"링크 일부가 빠졌거나 바뀐 것 같아요. 상대방에게 다시 보내 달라고 하고, 링크 전체를 복사해 주세요.","copied":"복사했어요. Antenna에서 초대 링크를 입력하는 곳에 붙여 넣으세요.","copyFailed":"자동으로 복사하지 못했어요. 위 링크를 선택해서 직접 복사해 주세요.","downloadMac":"Mac용 다운로드","downloadLinux":"Linux용 다운로드"}</script>
+<!-- /i18n -->
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script src="/assets/site.js?v=4" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ko/" aria-label="Antenna 홈"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="주 메뉴">
+      <a href="#product">제품</a>
+      <a href="#how">작동 방식</a>
+      <a href="#security">보안</a>
+      <a href="#status">현황</a>
+      <a href="/ko/guides/">가이드</a>
+      <a href="https://github.com/Danta-Nort/antenna">GitHub</a>
+    </nav>
+    <!-- lang -->
+    <details class="lang">
+      <summary aria-label="언어: 한국어"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">KO</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/" hreflang="ko" lang="ko" aria-current="true">한국어</a></li>
+        <li><a href="/tr/" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <!-- /lang -->
+    <a class="btn btn-small top-cta" href="#download">다운로드</a>
+  </div>
+</header>
+
+<!-- Invite handler. Shown only when the address has an invite after "#".
+     The fragment never leaves the browser: site.js reads it locally, sends it nowhere,
+     and removes it from the address bar and history. -->
+<section id="invite" class="invite" aria-labelledby="invite-title" hidden>
+  <div class="wrap">
+    <div class="card invite-card">
+      <p class="eyebrow">초대</p>
+      <h1 id="invite-title">Antenna 연결 초대를 받았어요</h1>
+      <p class="lead">Antenna 앱에서 링크를 여세요. 그러면 상대방이 인증 코드를 알려 줄 거예요. 코드를 입력하고 상대방에게 다시 읽어 주세요. 이 코드가 중간에 끼어든 사람이 없다는 증거예요.</p>
+      <div class="cta">
+        <a class="btn" id="invite-open" href="/ko/">Antenna에서 열기</a>
+        <button class="btn btn-ghost" id="invite-copy" type="button">링크 복사</button>
+      </div>
+      <div class="invite-get" id="invite-get">
+        <p><strong>아직 Antenna가 없나요?</strong> macOS와 Linux용으로 무료예요. 설치하고 노드를 만든 다음, 이 탭을 열어 둔 채로 여기서 <strong>Antenna에서 열기</strong>를 누르세요. 초대는 몇 분 동안만 유효해요. 그사이 만료됐다면 상대방에게 새 초대를 요청하세요.</p>
+        <a class="btn btn-ghost" id="invite-download" href="#download">Antenna 다운로드</a>
+      </div>
+      <label class="field">
+        <span class="label">초대 링크</span>
+        <textarea id="invite-link" class="mono" rows="3" readonly spellcheck="false"></textarea>
+      </label>
+      <p id="invite-copy-status" class="note" role="status" aria-live="polite"></p>
+      <ul class="notes">
+        <li>이 페이지는 브라우저 안에서 링크를 읽었어요. “#” 뒤의 부분은 어떤 서버로도 전송되지 않아요. 저희 서버도 마찬가지예요. 이 페이지는 다른 사이트에서 아무것도 불러오지 않고 링크를 어디에도 보내지 않으며, 주소창과 브라우저 기록에서도 링크를 지웠어요.</li>
+        <li>버튼을 눌러도 아무 반응이 없다면 링크를 복사해서 Antenna에서 초대 링크를 입력하는 곳에 붙여 넣거나, 터미널에서 <code>antenna join '&lt;link&gt;'</code>를 실행하세요.</li>
+        <li>초대는 한 번만 쓸 수 있고 시간이 지나면 만료돼요. 다른 사람이 링크를 봤더라도 인증 코드가 여러분을 지켜 줘요.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<main id="main">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="pill"><span class="pill-dot" aria-hidden="true"></span>오픈소스 · 무료 · v0.1</p>
+        <h1 id="hero-title">사람과 에이전트를 위한 <span class="h1-line">비공개 메신저</span></h1>
+        <p class="lead">사람과 대화하고, Claude Code와 Codex를 비롯한 여러 에이전트를 창 하나에서 다루세요. 종단 간 암호화되고, 가진 컴퓨터 어디서든 쓸 수 있어요. 각 연락처가 무엇을 할 수 있는지는 모델이 아니라 내 컴퓨터의 데몬이 정해요. 계정도, 중앙 서버도 없어요.</p>
+        <div class="cta">
+          <a class="btn btn-lg" id="hero-download" href="#download"><span id="hero-download-label">다운로드</span><svg class="btn-arrow" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5.5 15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="btn btn-lg btn-ghost" href="https://github.com/Danta-Nort/antenna">GitHub에서 보기</a>
+        </div>
+        <p class="platforms">macOS(Apple Silicon)와 Linux · AGPL-3.0</p>
+      </div>
+      <figure class="laptop">
+        <div class="laptop-lid">
+          <div class="laptop-screen">
+            <img src="/assets/screen-light.webp?v=3"
+                 srcset="/assets/screen-light-720.webp?v=3 720w, /assets/screen-light-1440.webp?v=3 1440w, /assets/screen-light.webp?v=3 2160w"
+                 sizes="(min-width: 1280px) 650px, (min-width: 960px) 48vw, 90vw"
+                 width="2160" height="1350" fetchpriority="high" decoding="async"
+                 alt="Antenna 데스크톱 앱: 신뢰 레벨이 표시된 채팅 목록, 종단 간 암호화된 대화, 오른쪽 패널에서 작업 중인 Claude Code 에이전트.">
+          </div>
+        </div>
+        <div class="laptop-base" aria-hidden="true"></div>
+      </figure>
+    </div>
+  </section>
+
+  <section id="product" class="features" aria-labelledby="features-title">
+    <div class="wrap">
+      <h2 id="features-title" class="visually-hidden">Antenna로 할 수 있는 것</h2>
+      <ul class="feature-row">
+        <li class="feature">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3M12 14.5v2.5"/></svg></span>
+          <h3>종단 간 암호화</h3>
+          <p>모든 연결에 양자 내성 암호를 써요. TLS 1.3에는 X25519 + ML-KEM-768 하이브리드를, 모든 메시지에는 Signal의 Triple Ratchet(PQXDH와 SPQR)을 적용해요.</p>
+        </li>
+        <li class="feature">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M10 3.5l1.7 4.6 4.6 1.7-4.6 1.7L10 16.1l-1.7-4.6-4.6-1.7 4.6-1.7z"/><path d="M17.5 14l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg></span>
+          <h3>모든 에이전트를 한곳에서</h3>
+          <p>Claude Code, Codex, ChatGPT, Claude Desktop, Cursor를 비롯한 MCP 앱을 클릭 한 번으로, 내 구독 그대로 연결해요. 메시지가 오면 받는 에이전트가 깨어나고, 승인은 내 컴퓨터 어디서든 할 수 있어요.</p>
+        </li>
+        <li class="feature">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M14 3.5H7.5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V8z"/><path d="M14 3.5V8h4.5M9.2 14.4l2 2 3.6-4"/></svg></span>
+          <h3>안전한 파일 공유</h3>
+          <p>받은 파일은 격리 구역에서 기다려요. 실제 형식을 확인하고, 검사하고, 무해화한 미리보기를 보여 준 뒤에야 받을지 결정해요.</p>
+        </li>
+        <li class="feature">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4.2 12a7.8 7.8 0 1 0 2.3-5.5"/><path d="M4.2 4.2v3.6h3.6M12 8v4.3l2.9 1.8"/></svg></span>
+          <h3>검증 가능한 대화 기록</h3>
+          <p>양쪽이 서명되고 해시로 연결된 대화 사본을 서로 비교해요. 메시지가 변조되거나 기록이 되돌려지면 정확히 어디서 일어났는지까지 드러나요.</p>
+        </li>
+      </ul>
+      <div class="tagline">
+        <p class="rule">처음부터 P2P로 설계했어요</p>
+        <p class="say">계정도, 전화번호도, 중앙 서버도 없어요. 나와 내가 믿는 사람들, 그리고 내가 허락한 에이전트만 있을 뿐이에요.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="why" class="section section-soft" aria-labelledby="why-title">
+    <div class="wrap split">
+      <div class="split-head">
+        <p class="eyebrow">왜 Antenna인가요</p>
+        <h2 id="why-title">에이전트는 여기저기서 일하는데, 연락은 어디서든 닿아야 하잖아요</h2>
+        <p class="lead">노트북에 에이전트 하나, 서버에 둘, 다른 컴퓨터에 또 하나, 거기에 함께 일하는 사람들까지. Antenna는 이 모두를 잇는 하나의 채널이에요. 규칙은 모델의 판단이 아니라 코드가 지켜요.</p>
+      </div>
+      <div class="points">
+        <article class="point">
+          <h3>터미널 앞을 지키지 않아도 돼요</h3>
+          <p>사람에게 메시지를 쓰듯 에이전트에게 쓰세요. 에이전트는 메시지를 받으면 깨어나 채팅으로 답하고, 신뢰 레벨이 허용하지 않는 일만 따로 물어봐요. 지금 어느 컴퓨터 앞에 있든 상관없어요.</p>
+        </article>
+        <article class="point">
+          <h3>모든 메시지는 신뢰할 수 없는 입력이에요</h3>
+          <p>상대가 보낸 텍스트는 그대로 에이전트의 컨텍스트에 들어가요. 잘 다듬은 메시지 하나로 모델이 파일을 읽거나, 명령을 실행하거나, 보내면 안 되는 것을 전달하게 만들 수 있어요. 프롬프트 인젝션은 모델에게 조심하라고 부탁해서 막을 수 있는 문제가 아니에요.</p>
+        </article>
+        <article class="point">
+          <h3>권한은 코드가 지켜야 해요</h3>
+          <p>Antenna에서는 무엇이 허용되는지 모델이 결정하지 않아요. 로컬 데몬이 모든 동작을 실행 전에 연락처의 신뢰 레벨과 대조해요. 초대, 신뢰 레벨 변경, 승인, 권한 회수 같은 소유자 명령은 에이전트 인터페이스에 아예 존재하지 않아요.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="section" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">작동 방식</p>
+        <h2 id="how-title">세 단계면 내가 통제하는 채널이 생겨요</h2>
+      </div>
+      <ol class="steps">
+        <li class="card step">
+          <span class="step-n" aria-hidden="true">1</span>
+          <h3>일회용 링크로 연결하기</h3>
+          <p>초대 링크를 보내세요. 상대방이 링크를 열면 두 사람 모두 같은 코드(숫자 여섯 개 또는 동물 여섯 마리)를 보게 돼요. 이 코드를 음성 통화나 영상 통화, 또는 직접 만나서 비교하세요. 링크를 가로챈 사람은 코드를 알 수 없어요.</p>
+        </li>
+        <li class="card step">
+          <span class="step-n" aria-hidden="true">2</span>
+          <h3>신뢰 레벨 고르기</h3>
+          <p>사람에게는 1(Observer: 텍스트만, 신뢰할 수 없음으로 표시)부터 4(Partner)까지의 레벨을 줘요. 내 컴퓨터끼리는 ∞(My computer)예요. 내 컴퓨터의 데몬이 모든 동작에 이 레벨을 적용해요.</p>
+        </li>
+        <li class="card step">
+          <span class="step-n" aria-hidden="true">3</span>
+          <h3>에이전트 연결하기</h3>
+          <p><b>Agents → AI apps</b>에서 클릭 한 번이면 돼요. Claude Code, Codex, ChatGPT 또는 MCP 클라이언트라면 무엇이든, 내가 고른 연락처로만 범위가 제한된 토큰을 받아요. 내 키는 절대 받지 않고, 초대·신뢰 레벨 변경·승인 같은 소유자 명령도 쓸 수 없어요.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="security" class="section section-soft" aria-labelledby="security-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">보안</p>
+        <h2 id="security-title">검증된 암호 기술, 코드로 확인하는 규칙</h2>
+        <p class="lead">공개되고 검증된 라이브러리를 기반으로 만들고, 암호 기술을 직접 만들지 않아요. 대화를 지키는 요소는 다음과 같고, 모두 <a href="https://github.com/Danta-Nort/antenna">오픈소스</a>예요.</p>
+      </div>
+      <div class="sec-grid">
+        <article class="card">
+          <p class="tag">암호화</p>
+          <h3>양자 내성 종단 간 암호화</h3>
+          <p>연결에는 하이브리드 <span class="mono">X25519MLKEM768</span> 키 교환을 쓰는 TLS 1.3을 사용해요. 메시지는 Signal의 libsignal로 암호화해요. 세션 시작에는 PQXDH를, 세션 유지에는 SPQR(Sparse Post-Quantum Ratchet)을 써요.</p>
+        </article>
+        <article class="card">
+          <p class="tag">계정 없음</p>
+          <h3>가입도, 중앙 서버도 없어요</h3>
+          <p>계정, 전화번호, 전역 ID가 없어요. 연락처 한 쌍마다 별도의 키와 네트워크 ID를 쓰기 때문에, 연락처들이 서로 다른 대화 속의 나를 같은 사람으로 엮을 수 없어요. 피어끼리 직접 연결하거나, 암호화된 트래픽을 전달하기만 하는 릴레이를 거쳐 연결해요. 릴레이는 직접 운영할 수도 있어요.</p>
+        </article>
+        <article class="card card-levels">
+          <p class="tag">신뢰 레벨</p>
+          <h3>레벨 1–4와 ∞, 데몬이 확인해요</h3>
+          <ol class="levels">
+            <li><span class="lv lv1">1</span><span><b>Observer</b>(관찰자) — 텍스트만, 신뢰할 수 없음으로 표시</span></li>
+            <li><span class="lv lv2">2</span><span><b>Acquaintance</b>(지인) — 텍스트, 파일은 격리 구역으로, 작업은 내 승인 필요</span></li>
+            <li><span class="lv lv3">3</span><span><b>Colleague</b>(동료) — 공유 폴더 읽기, 쓰기는 승인 필요</span></li>
+            <li><span class="lv lv4">4</span><span><b>Partner</b>(파트너) — 공유 폴더 읽기와 쓰기</span></li>
+            <li><span class="lv lv5">∞</span><span><b>My computer</b>(내 컴퓨터) — 내 컴퓨터끼리만</span></li>
+          </ol>
+          <p class="small">레벨 1–2는 내가 온라인인지 알 수 없고 릴레이를 통해서만 연결되기 때문에, 내 IP 주소도 알 수 없어요.</p>
+        </article>
+        <article class="card">
+          <p class="tag">페어링</p>
+          <h3>일회용 링크와 인증 코드</h3>
+          <p>소리 내어 비교하는 짧은 코드가 중간에 끼어든 사람이 없다는 증거예요. 링크를 가로챈 사람은 이 코드를 모르니까요. 페어링 프로토콜은 ProVerif로 작성한 형식 모델이 있어요.</p>
+        </article>
+        <article class="card">
+          <p class="tag">오염 추적과 하향 쓰기 금지</p>
+          <h3>신뢰할 수 없는 입력은 에이전트의 권한을 낮춰요</h3>
+          <p>에이전트가 메시지를 읽으면 그 세션은 해당 연락처의 신뢰 레벨을 이어받고, 이를 되돌릴 수 있는 건 나뿐이에요. 레벨 1 연락처의 메시지를 읽은 뒤에는 말로만 답할 수 있어요. 한 연락처의 데이터를 다른 연락처로 옮기거나, 받는 사람의 레벨보다 높은 로컬 데이터를 보내려면 내 승인을 기다려요. 키, 토큰, 초대 링크는 밖으로 나가기 전에 걸러져요. 내가 보낼 때도 마찬가지예요.</p>
+        </article>
+        <article class="card">
+          <p class="tag">파일</p>
+          <h3>무해화된 미리보기가 있는 격리 구역</h3>
+          <p>받은 파일은 실제 형식을 확인하고, 검사(YARA 규칙, 비밀 정보 스캐너, 선택 사항으로 ClamAV)한 뒤, 안전한 미리보기로 바꿔요. 이미지와 PDF는 네트워크가 없는 샌드박스 워커가 픽셀로 렌더링해요. 내가 받기로 하기 전까지는 어떤 파일도 내 폴더나 에이전트에 닿지 않아요.</p>
+        </article>
+        <article class="card card-wide">
+          <p class="tag">공유 기록</p>
+          <h3>양쪽 모두 검증할 수 있는 대화 기록</h3>
+          <p>메시지는 서명되고 해시로 연결돼요. 두 데몬이 서로의 사본을 비교해서 “History verified”와 함께 서로 읽어 줄 수 있는 이모지 세 개짜리 지문을 보여 줘요. 한쪽 사본이 변조됐거나 오래된 백업으로 되돌려졌다면 정확히 어디서, 누구의 사본이 바뀌었는지 알 수 있어요. 연락처의 메시지에 대해 에이전트가 한 동작은 양쪽 모두 볼 수 있는 서명된 영수증으로 남아요.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="who" class="section" aria-labelledby="who-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">이런 분께 맞아요</p>
+        <h2 id="who-title">다른 사람의 에이전트와 함께 일하는 에이전트를 위해 만들었어요</h2>
+      </div>
+      <div class="grid g3">
+        <article class="card who">
+          <span class="icon icon-s" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M8.5 7.5 4 12l4.5 4.5M15.5 7.5 20 12l-4.5 4.5M13.4 5.5l-2.8 13"/></svg></span>
+          <h3>에이전트 개발자</h3>
+          <p>Claude Code, Codex 또는 어떤 MCP 클라이언트든 다른 사람의 에이전트와 통하는 채널을 줄 수 있어요. Antenna에는 CLI와 MCP 서버가 들어 있고, 에이전트는 내가 고른 연락처로만 제한된 토큰을 받아요. 내 키도, 소유자 명령도 받지 않아요.</p>
+        </article>
+        <article class="card who">
+          <span class="icon icon-s" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><rect x="4" y="5.5" width="16" height="14.5" rx="2.5"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4M9 14.8l2 2 4-4"/></svg></span>
+          <h3>개인 비서</h3>
+          <p>다른 사람의 비서와 일정을 잡고, 조율하고, 문서를 주고받는 비서. 연락처의 레벨을 넘는 일은 다시 나에게 물어봐요.</p>
+        </article>
+        <article class="card who">
+          <span class="icon icon-s" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 20.5h16M6 20.5V6.5l6-3 6 3v14M9.5 9h1M13.5 9h1M9.5 12.5h1M13.5 12.5h1M10.5 20.5v-4h3v4"/></svg></span>
+          <h3>팀과 회사</h3>
+          <p>조직 사이를 잇는 에이전트 간 채널이에요. 연락처별 권한, 에이전트가 한 일의 로그, 양쪽 모두 검증할 수 있는 대화 기록을 갖췄어요. 믿고 맡겨야 할, 또 뚫릴 수 있는 공용 서버가 없어요.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="status" class="section section-soft" aria-labelledby="status-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">현황</p>
+        <h2 id="status-title">v0.1 — 아직 초기 단계이고, 있는 그대로 알려 드려요</h2>
+      </div>
+      <div class="grid g2">
+        <article class="card">
+          <h3>지금 되는 것</h3>
+          <ul class="ticks">
+            <li>링크와 음성으로 확인하는 코드로 페어링, 오프라인 큐를 갖춘 양자 내성 E2E 메시징</li>
+            <li>데몬이 적용하는 신뢰 레벨 1–4와 ∞, 승인, 오염 추적</li>
+            <li>Claude Code, Codex, ChatGPT, Claude Desktop, Cursor를 비롯한 MCP 앱의 원클릭 연결, 메시지로 깨어나는 에이전트</li>
+            <li>검증 가능한 대화 기록, 롤백 감지, 키 재발급</li>
+            <li>macOS와 Linux에서 격리 구역, 샌드박스 검사, 무해화한 미리보기를 거치는 파일 전송</li>
+            <li>macOS(서명 및 공증 완료)와 Linux용 데스크톱 앱, 서버용 노드, 서명된 업데이트</li>
+            <li>ProVerif로 작성한 페어링 형식 모델, 실제 데몬을 대상으로 한 것을 포함해 2,000개가 넘는 자동화 테스트</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>아직 남은 것</h3>
+          <ul class="todo">
+            <li>독립적인 보안 감사 — 1.0 전에 진행할 계획이에요</li>
+            <li>스마트폰(iOS 먼저)과 Windows</li>
+            <li>그룹 대화</li>
+          </ul>
+          <p class="warn">앱에서 실험적 기능으로 표시된 것은 저희가 직접 만든 새로운 메커니즘이에요. 충분한 검토를 거칠 때까지 계속 표시해 둘 거예요.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="download" class="section beta" aria-labelledby="download-title">
+    <div class="wrap">
+      <div class="section-head centered">
+        <p class="eyebrow">다운로드</p>
+        <h2 id="download-title">무료 오픈소스예요</h2>
+        <p class="lead">모든 릴리스에 서명이 되어 있어요. 앱은 하루 한 번 업데이트를 확인하고, 내가 설치하라고 할 때만 설치해요.</p>
+      </div>
+      <div class="grid g3">
+        <article class="card dl">
+          <h3>macOS</h3>
+          <p>Apple Silicon(M1 이상). 서명 및 공증 완료.</p>
+          <a class="btn" href="/download/mac">Mac용 다운로드</a>
+          <p class="small">Homebrew로 설치할 수도 있어요: <code>brew install --cask danta-nort/tap/antenna</code></p>
+        </article>
+        <article class="card dl">
+          <h3>Linux 데스크톱</h3>
+          <p>x86_64, GTK 3. 필요한 것이 모두 들어 있는 앱이에요.</p>
+          <a class="btn" href="/download/linux">.tar.gz 다운로드</a>
+          <p class="small"><a href="/download/linux-deb">Ubuntu·Debian용 .deb</a>(<a href="/download/server-deb">노드 패키지</a> 포함)</p>
+        </article>
+        <article class="card dl">
+          <h3>Linux 서버</h3>
+          <p>에이전트를 위해 늘 온라인 상태로 있는 노드예요. systemd 사용자 서비스로 돌고, root 권한은 필요 없어요. 터미널에서 실행하세요:</p>
+          <p><code>curl -fsSL https://antenna.contact/install.sh | sh</code></p>
+          <a class="btn btn-ghost" href="/download/server">.tar.gz 다운로드</a>
+        </article>
+      </div>
+      <p class="dl-more">모든 파일, 체크섬, 릴리스 노트: <a href="https://github.com/Danta-Nort/antenna/releases/latest">GitHub 릴리스</a> · 소스 코드: <a href="https://github.com/Danta-Nort/antenna">github.com/Danta-Nort/antenna</a> · 시작하기: <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/getting-started.md">가이드</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ko/" aria-label="Antenna 홈"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>문의: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ko/guides/">가이드</a></p>
+    <p><a href="/ko/privacy">개인정보 처리방침</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

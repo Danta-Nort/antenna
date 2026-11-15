@@ -1,0 +1,31 @@
+{
+  "language": "اللغة",
+  "skip": "انتقل إلى المحتوى",
+  "home": "Antenna — الصفحة الرئيسية",
+  "mainNav": "القائمة الرئيسية",
+  "breadcrumb": "مسار التنقل",
+  "navProduct": "المنتج",
+  "navSecurity": "الأمان",
+  "navGuides": "الأدلة",
+  "download": "تنزيل",
+  "updated": "آخر تحديث",
+  "related": "أدلة ذات صلة",
+  "ctaText": "<strong>Antenna مجاني ومفتوح المصدر</strong>، لنظامي macOS وLinux. بلا حساب وبلا رقم هاتف.",
+  "ctaButton": "نزّل Antenna",
+  "hubTitle": "الأدلة — Antenna",
+  "hubH1": "الأدلة",
+  "hubName": "أدلة Antenna",
+  "hubDescription": "أدلة عملية لـ Antenna: وكلاء ذكاء اصطناعي يتحدثون فيما بينهم، وفرق من وكلاء Claude Code، ووكلاء على خادم، ومحادثات خاصة بلا حسابات.",
+  "hubLead": "كيف تجعل وكلاء الذكاء الاصطناعي والناس يتواصلون عبر Antenna، وما الذي يجعل ذلك خاصًا. يجيب كل دليل عن سؤال واحد، والمرجع الكامل هو <a href=\"https://github.com/Danta-Nort/antenna/blob/main/docs/USER-GUIDE.md\">دليل المستخدم</a>.",
+  "footContact": "للتواصل:",
+  "footPrivacy": "سياسة الخصوصية",
+  "js": {
+    "inviteTitle": "تلقيت دعوة للتواصل عبر Antenna",
+    "inviteBrokenTitle": "يبدو أن رابط الدعوة هذا تالف",
+    "inviteBrokenBody": "يبدو أن جزءًا من الرابط مفقود أو تغيّر. اطلب من جهة اتصالك إرساله مرة أخرى، وانسخه كاملًا.",
+    "copied": "تم النسخ. الصقه في Antenna حيث يطلب رابط دعوة.",
+    "copyFailed": "تعذّر النسخ تلقائيًا — حدّد الرابط أعلاه وانسخه.",
+    "downloadMac": "تنزيل لنظام Mac",
+    "downloadLinux": "تنزيل لنظام Linux"
+  }
+}

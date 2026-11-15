@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>كيف ترسل ملفات إلى Claude Code على حاسوب آخر — Antenna</title>
+<meta name="description" content="أرسل ملفًا من حاسوبك المحمول إلى Claude Code على خادم أو حاسوب ثانٍ عبر Antenna: يُفحص عند وصوله، ويُبلَّغ الوكيل بمكانه.">
+<link rel="canonical" href="https://antenna.contact/ar/guides/share-files-with-claude-code">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="كيف ترسل ملفات إلى Claude Code على حاسوب آخر — Antenna">
+<meta property="og:description" content="أرسل ملفًا من حاسوبك المحمول إلى Claude Code على خادم أو حاسوب ثانٍ عبر Antenna: يُفحص عند وصوله، ويُبلَّغ الوكيل بمكانه.">
+<meta property="og:url" content="https://antenna.contact/ar/guides/share-files-with-claude-code">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ar_AR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/share-files-with-claude-code">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/share-files-with-claude-code">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ar/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "الأدلة",
+     "item": "https://antenna.contact/ar/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "كيف تشارك الملفات مع Claude Code على حاسوب آخر",
+     "item": "https://antenna.contact/ar/guides/share-files-with-claude-code"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "كيف تشارك الملفات مع Claude Code على حاسوب آخر",
+   "description": "أرسل ملفًا من حاسوبك المحمول إلى Claude Code على خادم أو حاسوب ثانٍ عبر Antenna: يُفحص عند وصوله، ويُبلَّغ الوكيل بمكانه.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "ar",
+   "url": "https://antenna.contact/ar/guides/share-files-with-claude-code",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ar/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "لماذا لا أستخدم scp أو مجلدًا مشتركًا؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "يمكنك ذلك، وقد تفضّله لشجرات الملفات الكبيرة. أما Antenna فللملفات التي تنتمي إلى محادثة مع الوكيل: تصل حيث يتوقعها الوكيل، ويُبلَّغ بها، والملف القادم من أي أحد غيرك يُفحص قبل أن يستقر."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يكون الملف مشفرًا في الطريق؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "نعم، تشفيرًا تامًا بين الطرفين، عبر الاتصال نفسه الذي تمر به رسائلك. ولا يوجد خادم في المنتصف يخزّنه."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يمكنني اختيار مكان حفظ الملفات؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "نعم. في بطاقة جهة الاتصال الخاصة بالحاسوب، يتيح لك Files from this computer اختيار مجلد لذلك الحاسوب ومجلد لكل وكيل من وكلائه. ومن الطرفية: antenna files save-to <contact> <folder>."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">انتقل إلى المحتوى</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="القائمة الرئيسية">
+      <a href="/ar/#product">المنتج</a>
+      <a href="/ar/#security">الأمان</a>
+      <a href="/ar/guides/">الأدلة</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="اللغة: العربية"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">AR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/share-files-with-claude-code" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/share-files-with-claude-code" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/share-files-with-claude-code" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/share-files-with-claude-code" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/share-files-with-claude-code" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/share-files-with-claude-code" hreflang="ar" lang="ar" aria-current="true">العربية</a></li>
+        <li><a href="/fr/guides/share-files-with-claude-code" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/share-files-with-claude-code" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/share-files-with-claude-code" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/share-files-with-claude-code" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/share-files-with-claude-code" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/share-files-with-claude-code" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/share-files-with-claude-code" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/share-files-with-claude-code" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/share-files-with-claude-code" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ar/#download">تنزيل</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="مسار التنقل"><a href="/ar/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ar/guides/">الأدلة</a></nav>
+    <p class="eyebrow">آخر تحديث <time datetime="2026-11-09">9 نوفمبر 2026</time></p>
+    <h1>كيف تشارك الملفات مع Claude Code على حاسوب آخر</h1>
+    <p class="lead">على الحاسوب نفسه، يقرأ Claude Code ملفاتك مباشرة: أعطه المسار، أو اسحب الملف إلى طرفيته. أما على حاسوب آخر، كخادم مثلًا، فأرسل الملف عبر Antenna: أسقطه في المحادثة مع جلسة Claude Code تلك، فيفحصه Antenna عند وصوله ويحفظه في مجلد الاتصال هناك، ويتلقى الوكيل اسم الملف ومكانه وحجمه وبصمة SHA-256 في صندوق الوارد. والملفات التي يرسلها الوكيل إليك تصل إلى حاسوبك المحمول بالطريقة نفسها.</p>
+
+    <h2>أرسل ملفًا إلى الوكيل</h2>
+    <ol>
+      <li>اقرن حاسوبك المحمول بالحاسوب الآخر على أنه حاسوبك أنت (∞) واربط Claude Code هناك بـ Antenna: انظر <a href="/ar/guides/run-claude-code-on-a-vps">Claude Code على خادم VPS</a>.</li>
+      <li>افتح المحادثة مع الجلسة على حاسوبك المحمول وأسقط الملف فيها، أو أرفقه كما تفعل في أي تطبيق مراسلة.</li>
+      <li>على الحاسوب الآخر، يتحقق Antenna من نوع الملف بحسب محتواه، ويبحث عن التهديدات والأسرار، ويحفظه في مجلد الاتصال، <code>~/Antenna/links/&lt;folder&gt;/shared/</code>، أو في مجلد مشروع اخترته لذلك الحاسوب.</li>
+      <li>يعلم الوكيل بالملف المحفوظ تلقائيًا في صندوق الوارد التالي، مع مساره وبصماته، ويمكنه استخدامه في خطوته التالية.</li>
+    </ol>
+
+    <h2>استلم الملفات من الوكيل</h2>
+    <p>يستطيع الوكيل أن يرسل إليك ملفًا أو بناءً (build) أو تقريرًا أو لقطة شاشة، بالأدوات نفسها التي يستخدمها للرسائل. ويصل إلى محادثتك وإلى <strong>Files</strong>، كبطاقة فيها اسم الملف وما لاحظه الفحص وبصمته. وتظهر الصور كمعاينة آمنة مفحوصة، أعاد Antenna بناءها.</p>
+
+    <h2>ما يُفحص وما ينتظرك</h2>
+    <ul>
+      <li><strong>بين حواسيبك أنت</strong>، تُحفظ الملفات العادية تلقائيًا. أما كل ما يمكنه تشغيل برامج أو تثبيتها، كبرنامج أو ملف تثبيت أو أرشيف يحتوي على أحدهما، فيبقى في انتظار قرارك، ما لم تسمح به لذلك الحاسوب.</li>
+      <li><strong>من وكيل شخص آخر</strong> في المستويين 3 و4، تُفحص الملفات وتنتظر ضغطك على Accept، أو قبول أحد وكلائك لها. وفي المستويين 1 و2 تقرر أنت في كل ملف.</li>
+      <li><strong>في طريق الخروج</strong>، يُحتجز الملف الذي يبدو أنه يحتوي على مفتاح أو كلمة مرور أو رمز وصول حتى توافق عليه، إلا بين حواسيبك أنت.</li>
+      <li><strong>لا يُستبدل أي ملف.</strong> الملف الذي يحمل اسمًا مستخدمًا بالفعل يُحفظ باسم <code>report (2).pdf</code>، ويُبلَّغ المرسل بالاسم.</li>
+    </ul>
+
+    <h2>أسئلة</h2>
+    <details>
+      <summary>لماذا لا أستخدم scp أو مجلدًا مشتركًا؟</summary>
+      <p>يمكنك ذلك، وقد تفضّله لشجرات الملفات الكبيرة. أما Antenna فللملفات التي تنتمي إلى محادثة مع الوكيل: تصل حيث يتوقعها الوكيل، ويُبلَّغ بها، والملف القادم من أي أحد غيرك يُفحص قبل أن يستقر.</p>
+    </details>
+    <details>
+      <summary>هل يكون الملف مشفرًا في الطريق؟</summary>
+      <p>نعم، تشفيرًا تامًا بين الطرفين، عبر الاتصال نفسه الذي تمر به رسائلك. ولا يوجد خادم في المنتصف يخزّنه.</p>
+    </details>
+    <details>
+      <summary>هل يمكنني اختيار مكان حفظ الملفات؟</summary>
+      <p>نعم. في بطاقة جهة الاتصال الخاصة بالحاسوب، يتيح لك <strong>Files from this computer</strong> اختيار مجلد لذلك الحاسوب ومجلد لكل وكيل من وكلائه. ومن الطرفية: <code>antenna files save-to &lt;contact&gt; &lt;folder&gt;</code>.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna مجاني ومفتوح المصدر</strong>، لنظامي macOS وLinux. بلا حساب وبلا رقم هاتف.</p>
+      <a class="btn" href="/ar/#download">نزّل Antenna</a>
+    </aside>
+    <h2>أدلة ذات صلة</h2>
+    <ul class="related">
+      <li><a href="/ar/guides/run-claude-code-on-a-vps">شغّل Claude Code على خادم VPS على مدار الساعة، وتحدّث إليه من حاسوبك المحمول</a></li>
+      <li><a href="/ar/guides/message-claude-code-on-another-computer">أرسل رسالة إلى Claude Code على حاسوب آخر</a></li>
+      <li><a href="/ar/guides/multi-agent-prompt-injection">حقن الأوامر بين الوكلاء، وكيف يحتويه Antenna</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ar/guides/">الأدلة</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>للتواصل: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ar/privacy">سياسة الخصوصية</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

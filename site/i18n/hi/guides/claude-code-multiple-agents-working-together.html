@@ -1,0 +1,45 @@
+<!--guide {"title": "Claude Code के कई agents एक प्रोजेक्ट पर साथ काम करें — Antenna", "h1": "एक प्रोजेक्ट पर कई Claude Code agents को साथ मिलकर चलाएँ", "description": "Lead Claude Code agent काम बाँटता है, workers अपने-अपने sandbox में साथ-साथ कोड लिखते हैं, हर नतीजा जाँचा जाता है, और आपके बिना कुछ भी आपकी branch तक नहीं जाता।", "summary": "एक repository पर lead agent और साथ-साथ चलते workers, हर एक अपने sandbox में, जाँच और आख़िरी फ़ैसला आपका।", "source": "2026-11-09"}-->
+<p class="lead">Antenna में <strong>team</strong> का मतलब है एक git प्रोजेक्ट पर एक lead agent और कुछ workers। आप एक बार बजट तय करते हैं (जैसे “ज़्यादा से ज़्यादा 2 Claude Code coders”), और lead काम को tasks में बाँटता है, उस बजट के भीतर workers शुरू करता है, हर नतीजे का review करता है और उसे वापस भेजता है या स्वीकार करता है। हर worker अपने sandbox में, प्रोजेक्ट की अपनी कॉपी पर, बाक़ियों के साथ-साथ कोड लिखता है, और team का काम आपकी branch तक सिर्फ़ आपकी मंज़ूरी से पहुँचता है। <em>Experimental।</em></p>
+
+<h2>एक फ़ोल्डर में कई agents की दिक़्क़त</h2>
+<p>दो-तीन Claude Code sessions को साथ-साथ चलाना आसान है; उन्हें एक-दूसरे के काम में दख़ल देने से रोकना आसान नहीं। वे एक ही फ़ाइलें बदलते हैं, एक ही फ़ोल्डर में कमांड चलाते हैं, और हर एक वह सब पढ़ सकता है जो बाक़ी पढ़ सकते हैं। किसी को tasks बाँटने होते हैं, जो लौटकर आए उसे जाँचना और merge करना होता है, और वह कोई आमतौर पर आप ही होते हैं, terminals के बीच भागते हुए।</p>
+
+<h2>Team कैसे काम करती है</h2>
+<ol>
+  <li><strong>आप team बनाते हैं</strong> <strong>Teams → New team</strong> में: प्रोजेक्ट फ़ोल्डर, lead (आपका कोई agent, कोई local model, या आप ख़ुद), workers का बजट, और नियम: workers कमांड चला सकते हैं या नहीं, कोई task कौन-सी <strong>Check commands</strong> बता सकता है (<code>cargo test</code>, <code>npm test</code>), और वे checks किन package registries तक पहुँच सकते हैं।</li>
+  <li><strong>आप lead को लक्ष्य बताते हैं</strong>, उसके अपने terminal में: “login फ़ीचर को दो coders के लिए छोटे tasks में बाँटो।”</li>
+  <li><strong>Lead योजना बनाता है और टीम जुटाता है।</strong> वह tasks लिखता है, बजट के भीतर <code>web.coder-1</code> जैसे workers शुरू करता है और उन्हें काम सौंपता है।</li>
+  <li><strong>Workers साथ-साथ कोड लिखते हैं।</strong> हर एक को team की branch पर प्रोजेक्ट की नई कॉपी मिलती है, वह सिर्फ़ अपना task पढ़ता है, काम करता है और नतीजा जमा करता है, या अटकने पर lead से सवाल पूछता है।</li>
+  <li><strong>Antenna हर नतीजा जाँचता है</strong>: वह task की check कमांड एक अलग sandbox में चलाता है, जिसमें न tokens होते हैं और न आपकी बताई registries के अलावा कोई network। Fail हुआ check, lead के फ़ैसले से पहले, एक सीमा तक अपने-आप worker के पास लौट जाता है।</li>
+  <li><strong>Lead review करता है:</strong> स्वीकार करता है, या टिप्पणियों के साथ वापस भेजता है। स्वीकार किया गया काम team की branch <code>antenna/web</code> पर जमा होता है।</li>
+  <li><strong>आप उसे लागू करते हैं।</strong> <strong>Review and apply</strong> दिखाता है कि आपकी branch में क्या merge होगा; आपके password से यह fast-forward के रूप में merge हो जाता है। उसके बिना कुछ भी आगे नहीं बढ़ता।</li>
+</ol>
+
+<h2>आपको क्या दिखता है</h2>
+<p>Team का board हर task को उसकी स्थिति के हिसाब से दिखाता है, Open और Working से लेकर In review, Blocked, Accepted और Applied तक, साथ में हर worker का live output, उसका नतीजा क्या बदलता है, check का output और उसने कितने tokens इस्तेमाल किए। जो कुछ lead कर सकता है, वह सब आप भी कर सकते हैं: worker के सवाल का जवाब देना, बदलाव माँगना, task रद्द करना या worker को रोकना। जब lead, Antenna के Code mode में चलता है, तो जब भी कोई worker नतीजा जमा करता है या कुछ पूछता है, वह जाग जाता है, ताकि आपकी ग़ैरमौजूदगी में भी team का काम चलता रहे।</p>
+
+<h2>प्रोजेक्ट को सुरक्षित क्या रखता है</h2>
+<ul>
+  <li><strong>Workers कभी आपका फ़ोल्डर नहीं देखते</strong>, न आपकी दूसरी फ़ाइलें, न एक-दूसरे की कॉपियाँ, और सिर्फ़ अपने model provider तक पहुँचते हैं।</li>
+  <li><strong>Lead अपना बजट ख़ुद नहीं बढ़ा सकता</strong>, आपकी जगह कुछ भी मंज़ूर नहीं कर सकता और किसी worker का token नहीं देख सकता: हर call का फ़ैसला मॉडल नहीं, Antenna करता है।</li>
+  <li><strong>Untrusted इनपुट सीमित रहता है।</strong> Level-2 कॉन्टैक्ट का मैसेज पढ़ने के बाद लिखा गया task कोई कमांड या check नहीं चलाता, ताकि उस मैसेज में छिपाया गया कोई निर्देश आपके कंप्यूटर तक न पहुँचे।</li>
+  <li><strong>चाहें तो सिर्फ़ local।</strong> Team को सिर्फ़ आपके अपने कंप्यूटर पर चलने वाले models तक सीमित किया जा सकता है, बिना किसी cloud model के।</li>
+</ul>
+
+<h2>सवाल-जवाब</h2>
+<details>
+  <summary>कौन-से agents workers बन सकते हैं?</summary>
+  <p>आपके अपने login वाला Claude Code, Claude Code का stream-json बोलने वाला कोई दूसरा प्रोग्राम, या हल्के कामों के लिए कोई local model, जैसे triage, summaries और docs।</p>
+</details>
+<details>
+  <summary>क्या lead, Codex या कोई दूसरा ऐप हो सकता है?</summary>
+  <p>Lead, Antenna से जुड़ा आपका कोई भी agent हो सकता है: उसके ऐप के अगली बार शुरू होने पर उसे MCP के ज़रिए team tools मिल जाते हैं। आप board से ख़ुद भी team को lead कर सकते हैं।</p>
+</details>
+<details>
+  <summary>ख़र्च कैसे सीमित करूँ?</summary>
+  <p>बजट तय करता है कि हर तरह के कितने workers हो सकते हैं, और नियम एक turn और एक check का समय और किसी task के tokens सीमित करते हैं।</p>
+</details>
+<details>
+  <summary>क्या यह मेरे Mac पर काम करता है?</summary>
+  <p>हाँ, macOS और Linux पर। Workers उसी कंप्यूटर पर चलते हैं जहाँ team है; आपके दूसरे कंप्यूटरों पर workers बाद में आएँगे।</p>
+</details>

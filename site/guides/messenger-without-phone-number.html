@@ -1,0 +1,41 @@
+<!--guide {"order": 8, "title": "A private messenger without a phone number or email — Antenna", "h1": "A private messenger without a phone number or email", "description": "Antenna needs no phone number, email or account: you are a key on your own computer, and you add people with a one-time link and a spoken code.", "query": "messenger without phone number", "updated": "2026-11-09", "summary": "No phone number, no email, no account: how you sign up and add people in Antenna.", "related": ["peer-to-peer-encrypted-messenger", "self-hosted-messenger", "chatgpt-and-claude-talk-to-each-other"]}-->
+<p class="lead">Antenna is a free, open-source messenger for macOS and Linux that asks for no phone number, no email and no account. Your identity is a key created on your own computer, protected by a password only you know. You add someone by sending a one-time invite link and comparing a six-digit code by voice or in person, so nobody can find you by your number and no server can read or link your conversations.</p>
+
+<h2>Why messengers ask for your number</h2>
+<p>A phone number is an easy way to find contacts and to stop spam, which is why most messengers need one. But a number is tied to your name, your carrier and often your address, and it lets anyone who has it look you up. If you would rather not hand it out, you need a messenger that finds people another way.</p>
+
+<h2>How you start in Antenna</h2>
+<ol>
+  <li><a href="/#download">Download Antenna</a> and open it.</li>
+  <li>Choose a password. It protects your keys on this computer and cannot be recovered, so keep it safe.</li>
+  <li>That is the whole sign-up. There is no profile on a server, because there is no server that holds profiles.</li>
+</ol>
+
+<h2>How you add people</h2>
+<p>Press <strong>New contact → Invite</strong>, choose how much you trust them, and send the link any way you like. When they open it, a six-digit code (or six animals) appears on your screen: read it to them on a call or in person, they type it in, and Antenna checks it. A match means nobody was in between. The link works once and only for the time you chose, so a link that leaks later is useless, and someone who intercepts it still does not know the code.</p>
+
+<h2>What you get instead of an account</h2>
+<ul>
+  <li><strong>A separate link per contact.</strong> Each conversation has its own keys, end to end encrypted with post-quantum protection.</li>
+  <li><strong>Trust levels.</strong> From 1, text only, to 4 for partners, with ∞ for your own computers. A level decides what a contact can send you, whether they see when you are online, and whether they can see your IP address: levels 1 and 2 always go through a relay.</li>
+  <li><strong>History you can check.</strong> Messages are signed and linked, and both sides compare copies, so a changed or missing message shows.</li>
+  <li><strong>Agents welcome.</strong> AI assistants like Claude Code or ChatGPT can join your chats with their own names and only the permissions you give them.</li>
+</ul>
+
+<h2>Questions</h2>
+<details>
+  <summary>Is there a phone app?</summary>
+  <p>Not yet. Antenna 0.1 is for computers: macOS on Apple Silicon, and Linux.</p>
+</details>
+<details>
+  <summary>What if I lose my password?</summary>
+  <p>It cannot be recovered: nobody else holds a copy of your keys, which is the point. You would create your node again and invite your contacts again.</p>
+</details>
+<details>
+  <summary>Can someone find me by searching?</summary>
+  <p>No. There is no directory. People reach you only through an invite link one of you gave the other.</p>
+</details>
+<details>
+  <summary>Is it free?</summary>
+  <p>Yes, and open source under AGPL-3.0. The protocol is published under Apache-2.0.</p>
+</details>

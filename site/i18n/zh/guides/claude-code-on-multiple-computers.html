@@ -1,0 +1,40 @@
+<!--guide {"title": "在多台电脑上使用 Claude Code，集中管理所有会话 — Antenna", "h1": "在一个地方管理多台电脑上的 Claude Code", "description": "在笔记本、台式机和服务器上运行 Claude Code，在一个聊天列表里管理所有会话：查看运行状况、处理请求，每个会话都有停止按钮。", "summary": "多台电脑上的 Claude Code 会话集中在一个聊天列表里，附带每台电脑的运行状况和待处理请求。", "source": "2026-11-14"}-->
+<p class="lead">让 Claude Code 在工作所在的地方运行，无论是笔记本、台式机还是服务器，并在每台电脑上都装上 Antenna。把这些电脑作为你自己的电脑（∞）配对一次。之后在其中任何一台上，你都能在一个聊天列表里看到所有会话，按名字给任意一个发消息，处理它们的审批请求，还能停掉失控的会话，而不用在那台机器上打开终端。Codex 也是一样的用法。</p>
+
+<h2>你能得到什么</h2>
+<ul>
+  <li><strong>每个会话一个聊天</strong>，不管它在哪台电脑上运行。服务器上的会话和台式机上的会话，与你的联系人出现在同一个列表里。</li>
+  <li><strong>My devices</strong>（我的设备）：你的每台电脑都有一张卡片，显示它的系统和 Antenna 版本、它自检得出的运行状况、它上面的智能体及各自是否已连接，以及在那里等你处理的请求。</li>
+  <li><strong>在你所在的地方审批。</strong>服务器上智能体发来的请求，可以在你的 Mac 上用 Touch ID 或 Mac 的密码批准。服务器会验证签名，然后自己执行这个请求。</li>
+  <li><strong>停止按钮</strong>：其他电脑上的每个智能体都有一个，它会停止这个智能体以及它在那台电脑上启动的所有进程。</li>
+  <li><strong>智能体地图</strong>：在这里把一台电脑上的会话和另一台电脑上的会话连起来，让它们互相写消息。</li>
+</ul>
+
+<h2>设置步骤</h2>
+<ol>
+  <li><strong>在每台电脑上安装 Antenna</strong>：Mac 或 Linux 桌面装应用，Linux 服务器装节点（<code>curl -fsSL https://antenna.contact/install.sh | sh</code>）。</li>
+  <li><strong>把这些电脑作为你自己的电脑互相配对。</strong>创建邀请时勾选 <strong>This is my own computer (∞)</strong>，在另一台电脑上打开它，把一边显示的验证码输入到另一边。你想从某台电脑查看或连接哪台电脑，就把这两台配对：双方都必须把对方设为 ∞。</li>
+  <li><strong>给每个 Claude Code 会话起个名字。</strong>在台式机上，从智能体面板的 <code>+</code> 以 Code 模式启动它。在服务器上，进入项目文件夹运行 <code>antenna connect claude-code --agent api-dev --links mac --hello mac</code>，再用 <code>antenna session start api-dev --dir ~/projects/api</code> 让它保持运行；完整步骤见 <a href="/guides/run-claude-code-on-a-vps">在 VPS 上运行 Claude Code</a>。</li>
+  <li><strong>让你的主力电脑来处理请求。</strong>在服务器上运行一次 <code>antenna devices confirm mac</code>；在台式机上，到 <strong>My devices</strong> → 对应卡片 → <strong>Approvals</strong> 中接受主力电脑的密钥。</li>
+</ol>
+
+<h2>在电脑之间流转工作</h2>
+<p>像给人发消息一样给会话写消息：“<code>api-dev</code>，在服务器上跑一下数据库迁移，然后告诉我改了什么。”你拖进聊天的文件会保存在那台电脑上，并告知智能体文件的位置；在你自己的电脑之间，普通文件会直接保存，而程序和安装包仍然要等你确认。想让台式机上的会话把工作交给服务器上的会话，就在智能体地图上把两者连起来。那边的会话会在收到消息时被唤醒，紧急消息还可以打断它当前这一轮。<em>实验性功能。</em></p>
+
+<h2>常见问题</h2>
+<details>
+  <summary>Antenna 会在电脑之间同步 Claude Code 的设置或历史记录吗？</summary>
+  <p>不会。Claude Code 的设置、历史记录和登录状态都保存在各自的电脑上，你的代码还是像以前一样用 git 流转。Antenna 负责在会话之间传递消息、文件和审批。</p>
+</details>
+<details>
+  <summary>服务器需要公网 IP 或开放端口吗？</summary>
+  <p>不需要。每台电脑都是主动向外连接，网络允许时直连，否则经过中继，而中继只转发加密流量。</p>
+</details>
+<details>
+  <summary>我能在这里修改另一台电脑上的设置吗？</summary>
+  <p>不能。在你的电脑之间传递的只有审批、停止操作，以及来自智能体地图的连接请求（那台电脑会请你批准）。信任级别、邀请、更新和设置都只能在那台电脑本机上修改，所以即使笔记本被偷，也改写不了服务器的规则。</p>
+</details>
+<details>
+  <summary>Windows 或手机上能用吗？</summary>
+  <p>暂时还不能。Antenna 目前支持 macOS 和 Linux。</p>
+</details>

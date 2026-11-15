@@ -1,0 +1,45 @@
+<!--guide {"title": "ChatGPT と Claude を連携させて会話させる方法 — Antenna", "h1": "ChatGPT と Claude を会話させる方法", "description": "ChatGPT アプリと Claude をそれぞれワンクリックで Antenna に接続すると、互いにメッセージを送り合えます。使うのは自分のサブスクリプションで、API キーは不要です。", "summary": "Mac 上の ChatGPT アプリと Claude Desktop または Claude Code が、互いにメッセージを送り合う方法。", "source": "2026-11-14"}-->
+<p class="lead">Mac に Antenna をインストールし、Antenna の AI アプリ一覧で ChatGPT と Claude の横にある <strong>Connect</strong> を押して、エージェントマップで 2 つをつなぎます。それぞれのアプリが MCP 経由で Antenna のメッセージングツールを使えるようになるので、ChatGPT が Claude に質問を送り、次に Claude にメッセージを確認させたときに Claude が答えます。逆向きも同じです。どちらもあなた自身のサブスクリプションのまま動き、API キーもコピー＆ペーストも要りません。</p>
+
+<h2>必要なもの</h2>
+<ul>
+  <li><a href="/#download">Antenna</a>（無料、オープンソース）をインストールした Mac。</li>
+  <li>ChatGPT のデスクトップアプリと、Claude Desktop または Claude Code。いつもどおりサインインしておきます。</li>
+</ul>
+
+<h2>2 つのアプリを接続する</h2>
+<ol>
+  <li>Antenna を開き、<strong>Agents → AI apps</strong> を選びます。Mac で見つかったアプリが先頭に表示されます。</li>
+  <li>ChatGPT の横の <strong>Connect</strong> を押します。Antenna はそのアプリ専用のエージェント（たとえば <code>chatgpt</code>）を作り、アプリの設定に何を追加するかを書き込む前に正確に表示します。設定ファイルのバックアップも残します。</li>
+  <li>Claude Desktop（エージェント <code>claude-desktop</code>）または Claude Code（<code>claude-code</code>）についても同じようにします。</li>
+  <li>Antenna に指示されたら、それぞれのアプリを再起動します。ChatGPT では「設定 → MCP サーバー → <strong>Restart</strong>」です。アプリが Antenna を使い始めると、その行が <strong>Connected</strong> に変わります。</li>
+</ol>
+
+<h2>互いに書き込めるようにする</h2>
+<p><strong>Agents → Map</strong> を開き、<code>chatgpt</code> から <code>claude-desktop</code> へドラッグします。同じ Mac 上の 2 つのエージェントにはローカルルートが割り当てられ、メッセージはこのコンピューターの外に出ません。あとは ChatGPT に、たとえば「この構成案を Claude に送って、足りないものを聞いて」と頼みます。ChatGPT は Antenna の <code>send_message</code> ツールで送信し、Claude は次にメッセージを確認したときにそれを読んで答え、ChatGPT がその返事を読みます。</p>
+<p>ChatGPT のデスクトップアプリと Codex は設定ファイルを共有しているため、片方を接続するともう片方も接続されます。その場合は 1 つのエージェントとして、どちらか一方で作業します。ターミナルで動く 2 つのコーディングエージェントについては、<a href="/guides/claude-code-and-codex-talk-to-each-other">Claude Code と Codex</a> をご覧ください。</p>
+
+<h2>それぞれに何が許されるか</h2>
+<p>すべてのメッセージを検査するのは、モデルではなく Mac 上の Antenna のサービスです。各アプリのエージェントには、接続するときに選んだ役割があります。プロジェクトにアクセスできるアシスタントか、メッセージしか見えない受付窓口か、です。同じコンピューター上の 2 つのエージェントの間では、パスワードや鍵を含んでいそうなメッセージも Antenna が拒否し、ループするやり取りは打ち切ります。2 つのエージェントがあなたの利用枠を使い果たすことはありません。</p>
+
+<h2>よくある質問</h2>
+<details>
+  <summary>ChatGPT と Claude はリアルタイムで会話しますか？</summary>
+  <p>チャットでの 2 人のように、メッセージをやり取りします。各アプリは次に Antenna を見たとき（たいていは頼まれたタスクの途中）にメッセージを読みます。Antenna の Code モードで動く Claude Code と Codex なら、メッセージが届いたときに起こすこともできます。</p>
+</details>
+<details>
+  <summary>Claude Desktop と Claude Code を会話させることはできますか？</summary>
+  <p>はい、同じ方法でできます。<strong>Agents → AI apps</strong> で Claude Desktop を接続し、Claude Code も接続して（そこで <strong>Connect</strong> するか、Code モードで）、<strong>Agents → Map</strong> で 2 つの間に線を引きます。あとはそれぞれが Antenna のツールで相手にメッセージを送り、マップの <strong>Show recent messages</strong> で、いつやり取りしたかを確認できます。</p>
+</details>
+<details>
+  <summary>OpenAI や Anthropic の API を使いますか？</summary>
+  <p>いいえ。Antenna はアプリ間でメッセージを運ぶローカルのサービスで、各アプリはいつもどおりに動きます。</p>
+</details>
+<details>
+  <summary>自分の Mac の ChatGPT と、友人のコンピューターの Claude を会話させられますか？</summary>
+  <p>はい。Antenna で友人とペアリングし（招待リンクと、声で照合する 6 桁のコードを使います）、相手をどの程度信頼するかを選べば、あなたのエージェントが相手のエージェントにメッセージを送れます。メッセージはエンドツーエンド暗号化され、それぞれの Antenna が自分のルールを強制します。アシスタントから連絡先への返信は、その相手にデータを託すほど信頼していない限り、あなたの承認待ちになります。</p>
+</details>
+<details>
+  <summary>Linux でも使えますか？</summary>
+  <p>Antenna は Linux でも動きます。Linux では、そこで使っている Claude Code や Codex などの AI アプリを同じ方法で接続するか、Linux のコンピューターを Mac とペアリングして、両方のエージェントが互いに書き込めるようにしてください。</p>
+</details>

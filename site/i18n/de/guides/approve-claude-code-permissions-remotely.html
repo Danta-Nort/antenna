@@ -1,0 +1,46 @@
+<!--guide {"title": "Claude-Code-Berechtigungen aus der Ferne freigeben — Antenna", "h1": "Anfragen von Claude Code an einem anderen Computer freigeben", "description": "Claude Code auf Server oder Zweitrechner braucht Ihre Freigabe: Antenna zeigt die Anfrage auf all Ihren Computern, Sie bestätigen per Passwort oder Touch ID.", "summary": "Freigabeanfragen von Claude Code auf einem anderen Computer, beantwortet an dem Ihrer Computer, an dem Sie gerade sitzen.", "source": "2026-11-15"}-->
+<p class="lead">Starten Sie Claude Code über Antenna, im Code-Modus des Fensters oder mit <code>antenna session</code> auf einem Server, und Antennas Daemon prüft jedes Tool, das es nutzt, und jede Nachricht, die es sendet. Wenn ein Schritt Sie braucht, wird daraus eine Freigabeanfrage, die mit einer Benachrichtigung auf jedem Computer erscheint, den Sie als Ihren eigenen gekoppelt haben, unter <strong>My devices</strong> (meine Geräte). Geben Sie sie dort mit dem Passwort dieses Computers oder mit Touch ID frei: Der Computer, auf dem Claude Code läuft, prüft Ihre Antwort, führt den Schritt aus, und Claude Code macht weiter.</p>
+
+<h2>Was bei Ihnen ankommt</h2>
+<ul>
+  <li><strong>Schritte, nachdem es die Nachricht eines Kontakts gelesen hat.</strong> Sobald Claude Code die Nachricht eines Kollegen gelesen hat, bestimmt dessen Vertrauensstufe, was es tun darf: Auf Stufe 4 wartet jeder Befehl auf Sie; auf Stufe 2 und 3 wartet jede Änderung, und Befehle werden abgelehnt.</li>
+  <li><strong>Änderungen an seiner eigenen Einrichtung.</strong> Nachdem es die Nachricht irgendeines Kontakts gelesen hat, selbst von Ihrem eigenen Laptop, warten Änderungen an <code>CLAUDE.md</code>, <code>.claude/</code>, Shell-Profilen, Schlüsseln und Build-Dateien wie <code>package.json</code> auf Sie.</li>
+  <li><strong>Nachrichten, die Ihre Daten nach außen tragen würden.</strong> Sobald es Dateien Ihres Projekts gelesen hat, wartet jede Nachricht an einen Kontakt unterhalb von ∞, ebenso jede Nachricht an einen solchen Kontakt, die so aussieht, als enthielte sie einen Schlüssel, ein Passwort oder ein Token. Sobald es eine Unterhaltung gelesen hat, wartet auch eine Nachricht in eine andere.</li>
+  <li><strong>Fragen.</strong> <em>Experimentell.</em> Die Fragen eines Agenten erscheinen auf dem Computer, auf dem er läuft, unter <strong>Questions from your agents</strong> (Fragen Ihrer Agenten). Um sie stattdessen auf Ihrem Laptop zu bekommen, führen Sie dort, wo der Agent läuft, <code>antenna agent escalate api-dev --to mac</code> aus: Dann kommt jede Frage im Chat des Agenten an, und Sie antworten im Chat.</li>
+</ul>
+<p>Die eigene Berechtigungsabfrage von Claude Code („Do you want to proceed?“) bleibt in seinem Terminal: Antenna tippt dort nie etwas ein. Erlauben Sie die Tools, die Sie regelmäßig nutzen, in den Einstellungen von Claude Code, oder beantworten Sie die Abfrage mit <code>antenna session attach</code>.</p>
+
+<h2>Einrichten</h2>
+<ol>
+  <li><a href="/#download">Installieren Sie Antenna</a> auf beiden Computern und koppeln Sie sie einmal mit gesetztem Häkchen bei <strong>This is my own computer (∞)</strong> (das ist mein eigener Computer), wie in <a href="/guides/run-claude-code-on-a-vps">Claude Code auf einem VPS</a>.</li>
+  <li>Starten Sie Claude Code über Antenna. Auf einem Desktop: <strong>Agents → AI apps → Start in Code mode</strong>. Auf einem Server:
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api</code></pre></li>
+  <li>Akzeptieren Sie auf dem Computer, auf dem Claude Code läuft, die Antworten des Computers, von dem aus Sie freigeben werden: <strong>My devices</strong> → die Karte dieses Computers → <strong>Approvals</strong> → <strong>Accept approvals signed with …</strong>, mit Ihrem Passwort. Auf einem Server: <code>antenna devices confirm mac</code>.</li>
+</ol>
+
+<h2>Von jedem Computer aus antworten</h2>
+<p>Die Anfrage erscheint auf der Karte des anfragenden Computers unter <strong>My devices</strong> (<em>experimentell</em>), mit einer Benachrichtigung wie „Antenna: approval needed on Mac mini“. Die Karte zeigt, welcher Agent fragt, wofür und warum, und zitiert seinen Text, außer einen Text mit einem Geheimnis darin: Der verlässt den anfragenden Computer nie. Klicken Sie auf einem Mac auf <strong>Approve with Touch ID</strong> (<em>experimentell</em>), auf <strong>Approve with password</strong> mit dem Passwort des Computers, an dem Sie sitzen, oder auf <strong>Deny</strong> (ablehnen).</p>
+<p>Der anfragende Computer prüft die Signatur gegen die Schlüssel, die Sie dort akzeptiert haben, gegen seine eigene Einmal-Challenge und gegen genau diese Anfrage, und führt die Anfrage dann selbst aus, ein einziges Mal. Auf diesem Computer selbst steht die Anfrage unter <strong>Approval requests</strong>, im Terminal genügen <code>antenna approvals</code> und <code>antenna approve &lt;id&gt;</code>.</p>
+<p>Claude Code wartet bis zu 50 Sekunden, und ein bis dahin freigegebener Schritt läuft sofort. Danach macht es mit anderer Arbeit weiter; sobald Sie freigeben, tippt Antenna „Approved — continue.“ in seine Eingabezeile, und es führt den Schritt erneut aus.</p>
+
+<h2>Wenn niemand antwortet</h2>
+<p>Eine Anfrage schließt sich nach 10 Minuten: Nichts läuft, nichts wird gesendet, und Claude Code erfährt, dass niemand sie freigegeben hat. Kurz vorher warnt Sie eine Benachrichtigung. Nach <strong>Deny</strong>, wofür kein Passwort nötig ist, erfährt Claude Code, dass Sie Nein gesagt haben.</p>
+
+<h2>Ein Agent, der für Sie freigibt</h2>
+<p><em>Experimentell.</em> Mit <strong>Can approve for…</strong> (darf freigeben für…) unter <strong>Agents</strong> darf ein Agent, dem Sie vertrauen, die Anfragen Ihrer anderen Agenten zu Nachrichten und Dateien beantworten, und seine Antwort zählt nur, wenn alles, was die Anfrage berührt, auf ∞ steht. Befehle und Änderungen kommen immer zu Ihnen.</p>
+
+<h2>Fragen</h2>
+<details>
+  <summary>Funktioniert das mit Codex?</summary>
+  <p>Teilweise. Was Codex über Antenna sendet, wird genauso geprüft, und diese Anfragen erreichen alle Ihre Computer; die eigenen Befehle von Codex bleiben bei den Freigaben von Codex in seinem Terminal.</p>
+</details>
+<details>
+  <summary>Kann jeder Computer freigeben?</summary>
+  <p>Nein. Nur ein Computer, den Sie als Ihren eigenen gekoppelt und dessen Schlüssel Sie mit dem Passwort auf dem anfragenden Computer akzeptiert haben. Ist einer verloren, nutzen Sie auf jedem der anderen <strong>Revoke this computer</strong> (diesen Computer widerrufen).</p>
+</details>
+<details>
+  <summary>Kann ich vom Handy aus freigeben?</summary>
+  <p>Noch nicht. Antenna läuft derzeit unter macOS und Linux.</p>
+</details>

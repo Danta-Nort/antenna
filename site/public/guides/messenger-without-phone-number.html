@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A private messenger without a phone number or email — Antenna</title>
+<meta name="description" content="Antenna needs no phone number, email or account: you are a key on your own computer, and you add people with a one-time link and a spoken code.">
+<link rel="canonical" href="https://antenna.contact/guides/messenger-without-phone-number">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="A private messenger without a phone number or email — Antenna">
+<meta property="og:description" content="Antenna needs no phone number, email or account: you are a key on your own computer, and you add people with a one-time link and a spoken code.">
+<meta property="og:url" content="https://antenna.contact/guides/messenger-without-phone-number">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/messenger-without-phone-number">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/messenger-without-phone-number">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Guides",
+     "item": "https://antenna.contact/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "A private messenger without a phone number or email",
+     "item": "https://antenna.contact/guides/messenger-without-phone-number"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "A private messenger without a phone number or email",
+   "description": "Antenna needs no phone number, email or account: you are a key on your own computer, and you add people with a one-time link and a spoken code.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "en",
+   "url": "https://antenna.contact/guides/messenger-without-phone-number",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Is there a phone app?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Not yet. Antenna 0.1 is for computers: macOS on Apple Silicon, and Linux."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "What if I lose my password?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "It cannot be recovered: nobody else holds a copy of your keys, which is the point. You would create your node again and invite your contacts again."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Can someone find me by searching?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No. There is no directory. People reach you only through an invite link one of you gave the other."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Is it free?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes, and open source under AGPL-3.0. The protocol is published under Apache-2.0."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/" aria-label="Antenna — home"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="/#product">Product</a>
+      <a href="/#security">Security</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Language: English"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">EN</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/messenger-without-phone-number" hreflang="en" lang="en" aria-current="true">English</a></li>
+        <li><a href="/es/guides/messenger-without-phone-number" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/messenger-without-phone-number" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/messenger-without-phone-number" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/messenger-without-phone-number" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/messenger-without-phone-number" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/messenger-without-phone-number" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/messenger-without-phone-number" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/messenger-without-phone-number" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/messenger-without-phone-number" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/messenger-without-phone-number" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/messenger-without-phone-number" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/messenger-without-phone-number" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/messenger-without-phone-number" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/messenger-without-phone-number" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/#download">Download</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Antenna</a> <span aria-hidden="true">›</span> <a href="/guides/">Guides</a></nav>
+    <p class="eyebrow">Updated <time datetime="2026-11-09">9 November 2026</time></p>
+    <h1>A private messenger without a phone number or email</h1>
+    <p class="lead">Antenna is a free, open-source messenger for macOS and Linux that asks for no phone number, no email and no account. Your identity is a key created on your own computer, protected by a password only you know. You add someone by sending a one-time invite link and comparing a six-digit code by voice or in person, so nobody can find you by your number and no server can read or link your conversations.</p>
+
+    <h2>Why messengers ask for your number</h2>
+    <p>A phone number is an easy way to find contacts and to stop spam, which is why most messengers need one. But a number is tied to your name, your carrier and often your address, and it lets anyone who has it look you up. If you would rather not hand it out, you need a messenger that finds people another way.</p>
+
+    <h2>How you start in Antenna</h2>
+    <ol>
+      <li><a href="/#download">Download Antenna</a> and open it.</li>
+      <li>Choose a password. It protects your keys on this computer and cannot be recovered, so keep it safe.</li>
+      <li>That is the whole sign-up. There is no profile on a server, because there is no server that holds profiles.</li>
+    </ol>
+
+    <h2>How you add people</h2>
+    <p>Press <strong>New contact → Invite</strong>, choose how much you trust them, and send the link any way you like. When they open it, a six-digit code (or six animals) appears on your screen: read it to them on a call or in person, they type it in, and Antenna checks it. A match means nobody was in between. The link works once and only for the time you chose, so a link that leaks later is useless, and someone who intercepts it still does not know the code.</p>
+
+    <h2>What you get instead of an account</h2>
+    <ul>
+      <li><strong>A separate link per contact.</strong> Each conversation has its own keys, end to end encrypted with post-quantum protection.</li>
+      <li><strong>Trust levels.</strong> From 1, text only, to 4 for partners, with ∞ for your own computers. A level decides what a contact can send you, whether they see when you are online, and whether they can see your IP address: levels 1 and 2 always go through a relay.</li>
+      <li><strong>History you can check.</strong> Messages are signed and linked, and both sides compare copies, so a changed or missing message shows.</li>
+      <li><strong>Agents welcome.</strong> AI assistants like Claude Code or ChatGPT can join your chats with their own names and only the permissions you give them.</li>
+    </ul>
+
+    <h2>Questions</h2>
+    <details>
+      <summary>Is there a phone app?</summary>
+      <p>Not yet. Antenna 0.1 is for computers: macOS on Apple Silicon, and Linux.</p>
+    </details>
+    <details>
+      <summary>What if I lose my password?</summary>
+      <p>It cannot be recovered: nobody else holds a copy of your keys, which is the point. You would create your node again and invite your contacts again.</p>
+    </details>
+    <details>
+      <summary>Can someone find me by searching?</summary>
+      <p>No. There is no directory. People reach you only through an invite link one of you gave the other.</p>
+    </details>
+    <details>
+      <summary>Is it free?</summary>
+      <p>Yes, and open source under AGPL-3.0. The protocol is published under Apache-2.0.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna is free and open source</strong>, for macOS and Linux. No account, no phone number.</p>
+      <a class="btn" href="/#download">Download Antenna</a>
+    </aside>
+    <h2>Related guides</h2>
+    <ul class="related">
+      <li><a href="/guides/peer-to-peer-encrypted-messenger">An open-source peer-to-peer messenger with post-quantum encryption</a></li>
+      <li><a href="/guides/self-hosted-messenger">A self-hosted messenger with no server to run</a></li>
+      <li><a href="/guides/chatgpt-and-claude-talk-to-each-other">How to make ChatGPT and Claude talk to each other</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/" aria-label="Antenna — home"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/guides/">Guides</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Contact: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/privacy">Privacy policy</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

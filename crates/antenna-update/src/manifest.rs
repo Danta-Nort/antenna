@@ -53,13 +53,13 @@ pub struct Manifest {
 pub struct Asset {
     /// File name, as published (no directories).
     pub name: String,
-    /// `macos` or `linux`.
+    /// `macos`, `linux` or `windows`.
     pub os: String,
     /// `arm64`, `x86_64` or `universal` (macOS only).
     pub arch: String,
     /// `app` (the window with the core inside) or `cli` (the CLI and the daemon only), installed by `antenna
     /// update`; or, installed by the system package manager instead (D-109, not a kind `antenna update` ever asks
-    /// for): `deb_app`/`deb_cli`, `rpm_app`/`rpm_cli`.
+    /// for): `deb_app`/`deb_cli`, `rpm_app`/`rpm_cli`; on Windows `installer` (the per-user setup program, D-139).
     pub kind: String,
     /// Size in bytes.
     pub size: u64,
@@ -315,6 +315,13 @@ pub fn classify_name(
         }
         return None;
     }
+    // The per-user installer of the Windows window with the core inside (W4, D-139): `antenna update` on Windows runs
+    // it, so it is a kind of its own, never `app` (which is unpacked and swapped in place).
+    if let Some(rest) = name.strip_prefix(&format!("Antenna-{version}-windows-")) {
+        return arch(rest.strip_suffix("-setup.exe")?)
+            .filter(|a| *a == "x86_64")
+            .map(|a| ("windows", a, "installer"));
+    }
     None
 }
 
@@ -536,6 +543,10 @@ pub(crate) mod tests {
             classify_name("antenna-desktop-0.1.0-preview.3-linux-x86_64.rpm", v),
             Some(("linux", "x86_64", "rpm_app"))
         );
+        assert_eq!(
+            classify_name("Antenna-0.1.0-preview.3-windows-x86_64-setup.exe", v),
+            Some(("windows", "x86_64", "installer"))
+        );
         for not_asset in [
             "SHA256SUMS.txt",
             "antenna-0.1.0-preview.3-manifest.json",
@@ -547,6 +558,9 @@ pub(crate) mod tests {
             "antenna-0.1.0-preview.3-linux-universal.deb",
             "antenna-0.1.0-preview.3-linux-riscv64.rpm",
             "antenna-0.1.0-preview.3-linux-x86_64.deb.sha256",
+            "Antenna-0.1.0-preview.3-windows-x86_64-setup.exe.sha256",
+            "Antenna-0.1.0-preview.3-windows-arm64-setup.exe",
+            "Antenna-0.1.0-preview.3-windows-x86_64.exe",
         ] {
             assert_eq!(classify_name(not_asset, v), None, "{not_asset}");
         }

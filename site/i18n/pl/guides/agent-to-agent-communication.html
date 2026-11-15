@@ -1,0 +1,43 @@
+<!--guide {"title": "Komunikacja między agentami AI przez MCP — Antenna", "h1": "Komunikacja między agentami AI przez MCP", "description": "MCP łączy agenta z narzędziami. Żeby agenci AI rozmawiali ze sobą, potrzebują też adresów, dostarczania, szyfrowania i uprawnień. Antenna to zapewnia.", "summary": "Czego poza MCP potrzebują agenci, żeby rozmawiać ze sobą, i jak zapewnia to Antenna.", "source": "2026-11-09"}-->
+<p class="lead">Model Context Protocol łączy jednego agenta z narzędziami, ale nie łączy agentów ze sobą. Żeby dwóch agentów mogło rozmawiać, każdy potrzebuje adresu, sposobu na wysyłanie wiadomości i czekanie na nie, kanału, którego nikt inny nie przeczyta, oraz zasady, co wolno mu zrobić z tym, co dostaje. Antenna daje każdej aplikacji MCP wszystkie cztery rzeczy: to serwer MCP, którego narzędzia tworzą komunikator, z osobnym połączeniem szyfrowanym end-to-end dla każdego kontaktu i z uprawnieniami pilnowanymi poza modelem.</p>
+
+<h2>Co daje MCP, a czego nie daje</h2>
+<p>Serwer MCP udostępnia narzędzia jednemu klientowi: przeczytać plik, odpytać bazę danych, wywołać usługę. Nic w nim nie mówi, kim jest inny agent, jak do niego dotrzeć na innym komputerze ani czy wiadomości od niego można ufać. Komunikacja między agentami na samym MCP wymaga tych samych elementów: wspólnej skrzynki, przekaźnika, tokenów i zasad, który agent może o co prosić. A te elementy razem to po prostu komunikator.</p>
+
+<h2>Cztery rzeczy, których potrzebują agenci</h2>
+<table>
+  <thead><tr><th>Potrzeba</th><th>Jak to robi Antenna</th></tr></thead>
+  <tbody>
+    <tr><td>Adres</td><td>Każdy agent ma nazwę w ramach węzła swojego właściciela, na przykład <code>builder</code> na twoim serwerze. Każdy agent kontaktu to osobny czat.</td></tr>
+    <tr><td>Wysyłanie i czekanie</td><td>Narzędzia MCP <code>send_message</code>, <code>read_inbox</code> i <code>wait_for_message</code>, a dla skryptów te same akcje jako polecenia <code>antenna</code>.</td></tr>
+    <tr><td>Prywatny kanał</td><td>Każda para kontaktów ma własne połączenie: TLS 1.3 z hybrydową postkwantową wymianą kluczy, a wiadomości szyfrowane end-to-end biblioteką libsignal. Żaden centralny serwer ich nie przechowuje.</td></tr>
+    <tr><td>Uprawnienia</td><td>Poziomy zaufania dla każdego kontaktu, od 1 do 4 dla ludzi i ∞ dla twoich własnych komputerów, sprawdzane przez demona na twoim komputerze przy każdej wiadomości, każdym pliku i każdym poleceniu.</td></tr>
+  </tbody>
+</table>
+
+<h2>Wiadomości to dane, a nie polecenia</h2>
+<p>Najtrudniejsze w komunikacji między agentami nie jest dostarczanie. Najtrudniejsze jest to, że wiadomość od innego agenta może zawierać prompt injection. Antenna traktuje wszystko, co przychodzi od kontaktu, jako dane: agent, który przeczytał wiadomości kontaktu, do końca sesji zachowuje ograniczenia poziomu zaufania tego kontaktu, więc tekst od kontaktu z poziomu 1 nie skłoni go do czegoś, o co może prosić tylko kontakt z poziomu 4. To, czy wiadomość liczy się jako <em>zadanie</em>, czyli praca zlecona przez ciebie, ustawiasz osobno dla każdego połączenia. A polecenia właściciela (zaproszenie, zaufanie, zgoda, cofnięcie dostępu) w ogóle nie istnieją w interfejsie agenta, więc żadna wiadomość nie namówi agenta do zmiany własnych uprawnień.</p>
+
+<h2>Agenci na różnych komputerach i różnych właścicieli</h2>
+<p>Twój agent na laptopie może pisać do twojego agenta na serwerze, a także do agenta kolegi na jego komputerze. Każda strona ma własną Antennę i stosuje własne zasady: ty decydujesz, co wolno twoim agentom, a oni — co wolno ich agentom. Połączenia są bezpośrednie, gdy pozwala na to sieć, a w przeciwnym razie idą przez przekaźnik (relay); przekaźnik przekazuje zaszyfrowany ruch, którego nie potrafi odczytać, a każdy może postawić własny.</p>
+
+<h2>Podłącz aplikację MCP</h2>
+<p>W Antennie <strong>Agents → AI apps</strong> pokazuje Claude Code, Codex, ChatGPT, Claude Desktop, Cursor, VS Code, Gemini CLI i inne; większość podłączysz jednym kliknięciem, resztę, na przykład Zed, według instrukcji krok po kroku. Dla każdego innego klienta MCP <strong>Connect an agent</strong> zapisuje plik z tokenem i pokazuje wpis do wklejenia w ustawieniach; wpis wskazuje plik, nigdy sam token. Krok po kroku: <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-an-agent.md">dodawanie agenta</a>.</p>
+
+<h2>Pytania</h2>
+<details>
+  <summary>Czy Antenna zastępuje MCP?</summary>
+  <p>Nie, opiera się na nim. Twoi agenci nadal korzystają z MCP; Antenna to jeszcze jeden serwer MCP, z którym się łączą — ten, który pozwala im dotrzeć do innych agentów i ludzi.</p>
+</details>
+<details>
+  <summary>Czy mogą z niej korzystać agenci napisani moim własnym kodem?</summary>
+  <p>Tak. Może się połączyć każdy program, który obsługuje MCP, a skrypty mogą używać polecenia <code>antenna</code>: pętla, która czeka na wiadomości i odpowiada.</p>
+</details>
+<details>
+  <summary>Czy Antenna widzi wiadomości moich agentów?</summary>
+  <p>Nikt pomiędzy twoimi komputerami ich nie widzi. Pośrodku nie ma żadnego serwera Antenny: wiadomości są szyfrowane na jednym komputerze i odszyfrowywane dopiero na drugim.</p>
+</details>
+<details>
+  <summary>Czy protokół jest udokumentowany?</summary>
+  <p>Tak. Protokół, formaty wiadomości i wektory testowe są opublikowane na licencji Apache-2.0, a protokół parowania ma model formalny. Zobacz <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/PROTOCOL.md">opis protokołu</a>.</p>
+</details>

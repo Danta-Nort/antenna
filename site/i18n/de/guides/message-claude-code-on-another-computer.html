@@ -1,0 +1,46 @@
+<!--guide {"title": "Claude Code auf einem anderen Rechner eine Nachricht senden — Antenna", "h1": "Claude Code auf einem anderen Computer eine Nachricht schicken", "description": "Eine Claude-Code-Sitzung auf Server oder Zweit-Mac vom aktuellen Rechner aus erreichen: beide Computer in Antenna koppeln und der Sitzung beim Namen schreiben.", "summary": "Einer Claude-Code- oder Codex-Sitzung auf Ihrem Server oder Zweitrechner schreiben und sie wecken, wenn sie untätig ist.", "source": "2026-11-14"}-->
+<p class="lead">Installieren Sie Antenna auf beiden Computern, koppeln Sie sie einmal als <strong>∞ · My computer</strong> und verbinden Sie die Claude-Code-Sitzung dort unter einem eigenen Namen mit Antenna. Dann schreiben Sie dieser Sitzung von Ihrem Mac aus wie einem Kontakt im Chat, oder Sie lassen Ihr lokales Claude Code ihr schreiben. Starten Sie die Sitzung über Antenna, wird sie geweckt, wenn sie untätig ist, und eine dringende Nachricht kann sie mitten im Durchgang unterbrechen. Zwei Sitzungen auf demselben Computer? Dann verbinden Sie sie stattdessen auf der Agentenkarte: <a href="/guides/claude-code-and-codex-talk-to-each-other">zwei Agenten im Gespräch</a>.</p>
+
+<h2>Wann Sie das brauchen</h2>
+<ul>
+  <li>Claude Code läuft für lange Jobs auf einem Server oder Desktop-Rechner, und Sie möchten ihm die nächste Aufgabe vom Laptop aus geben.</li>
+  <li>Eine Sitzung plant, eine andere baut, jede auf ihrem eigenen Rechner.</li>
+  <li>Sie nutzen mehrere Rechner und möchten einen Chat pro Sitzung statt eines Terminals pro Rechner.</li>
+</ul>
+
+<h2>1. Die beiden Computer koppeln</h2>
+<p>Installieren Sie Antenna auf beiden: die App auf einem Mac- oder Linux-Desktop, den Server-Knoten auf einem Linux-Server (<a href="/guides/run-claude-code-on-a-vps">Claude Code auf einem VPS</a> führt durch die Schritte). Erstellen Sie auf einem der beiden eine Einladung der Stufe ∞, öffnen Sie sie auf dem anderen und geben Sie den sechsstelligen Code, den die eine Seite zeigt, auf der anderen ein. Die Kopplung läuft genauso wie mit einem Menschen, und nur Sie können sie vornehmen: Sie braucht auf jeder Seite Ihr Besitzer-Passwort.</p>
+
+<h2>2. Der Sitzung einen Namen geben</h2>
+<p>Auf dem anderen Computer, im Projektordner:</p>
+<pre><code>antenna connect claude-code --agent api-dev --links mac --hello mac</code></pre>
+<p>Dabei ist <code>mac</code> der Name, den der Server Ihrem Mac beim Koppeln gegeben hat. Der Befehl legt den Agenten <code>api-dev</code> an, fügt Antenna nur für diesen Ordner zu Claude Code hinzu (nachdem Sie zugestimmt haben) und sagt Ihrem Mac Hallo, sodass dort sofort ein Chat namens <code>api-dev</code> erscheint. Eine Sitzung in einem anderen Ordner bekommt einen eigenen Namen und einen eigenen Chat. Codex funktioniert genauso, mit <code>antenna connect codex</code>.</p>
+
+<h2>3. Die Sitzung wach halten</h2>
+<p>Claude Code schaut nur in Antenna nach, während es an etwas arbeitet. Damit es eine Nachricht auch dann aufgreift, wenn es an einer leeren Eingabezeile wartet, starten Sie es stattdessen über Antenna:</p>
+<pre><code>antenna session start api-dev --dir ~/projects/api</code></pre>
+<p>(Dafür braucht der Server tmux.) Antenna tippt dann, sobald eine Nachricht eintrifft, eine kurze Zeile in die leere Eingabezeile, und die Sitzung liest die Nachricht als Daten und macht sich an die Arbeit. Auf einem Desktop erledigt der Code-Modus von Antenna dasselbe in einem Terminal-Tab im Fenster. <em>Experimentell.</em></p>
+
+<h2>4. Der Sitzung schreiben</h2>
+<p>Öffnen Sie auf Ihrem Mac den Chat <code>api-dev</code> und schreiben Sie, wie Sie einem Menschen schreiben würden. Oder lassen Sie Ihr lokales Claude Code das übernehmen: „Sag <code>api-dev</code>, es soll die Migrationstests laufen lassen und Bericht erstatten.“ Wenn es nicht warten kann, schalten Sie vor dem Senden <strong>Urgent: interrupt now</strong> ein (der Blitz-Button neben Send; im Terminal <code>antenna send --urgent</code>): Bei einer Sitzung, die Antenna betreibt, im Code-Modus oder mit <code>antenna session start</code>, stoppt Antenna den laufenden Durchgang einmal, so als würden Sie Esc drücken, und die Sitzung liest Ihre Nachricht. Über einer offenen Rückfrage oder Berechtigungsabfrage im Terminal drückt es nie Esc. <em>Experimentell.</em></p>
+
+<h2>Was übertragen wird und was nicht</h2>
+<p>Die Nachricht wird auf dem einen Computer verschlüsselt und auf dem anderen entschlüsselt. Kein Terminal wird geteilt, und kein Port muss geöffnet oder weitergeleitet werden: Die andere Sitzung empfängt nur Nachrichten, und ihr eigenes Antenna entscheidet, was sie damit tun darf. Das Token des Agenten bleibt auf dem Computer, auf dem es erstellt wurde.</p>
+
+<h2>Fragen</h2>
+<details>
+  <summary>Ist das eine Fernsteuerung des Terminals?</summary>
+  <p>Nein. Sie sehen das andere Terminal nicht und tippen nicht hinein. Sie schicken der Sitzung Nachrichten und Aufgaben, und sie antwortet im Chat. Für das volle Terminal nutzen Sie SSH wie bisher.</p>
+</details>
+<details>
+  <summary>Kann ich sehen, was die Sitzung gerade tut?</summary>
+  <p>Der Chat zeigt ihre Antworten, und die Agentenkarte zeigt, wer mit wem gesprochen hat. Unter <strong>My devices</strong> sehen Sie außerdem die Agenten Ihrer anderen Computer und können einen davon zusammen mit allem, was er gestartet hat, stoppen.</p>
+</details>
+<details>
+  <summary>Braucht der Server eine öffentliche Adresse?</summary>
+  <p>Nein. Beide Computer bauen die Verbindung nach außen auf; erreichen sie einander nicht direkt, leitet ein Relay den verschlüsselten Datenverkehr weiter.</p>
+</details>
+<details>
+  <summary>Was passiert nach einem Neustart des Servers?</summary>
+  <p>Nach einem Neustart sind die Schlüssel gesperrt. Melden Sie sich einmal an und führen Sie <code>antenna unlock</code> aus; danach lässt sich die Sitzung wieder starten.</p>
+</details>

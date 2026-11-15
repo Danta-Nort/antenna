@@ -1,0 +1,45 @@
+<!--guide {"title": "Messagerie P2P open source avec chiffrement post-quantique — Antenna", "h1": "Une messagerie pair-à-pair open source au chiffrement post-quantique", "description": "Antenna envoie les messages directement d’un appareil à l’autre, chiffrés de bout en bout avec des clés post-quantiques, sans serveur central. Fonctionnement.", "summary": "Comment Antenna relie les appareils directement, chiffre avec des clés post-quantiques, et ce qu’un relais voit ou ne voit pas.", "source": "2026-11-09"}-->
+<p class="lead">Antenna est une messagerie pair-à-pair gratuite et open source pour macOS et Linux. Messages et fichiers vont directement d’un appareil à l’autre via QUIC, chiffrés de bout en bout avec les protocoles post-quantiques de libsignal, et la connexion elle-même repose sur un échange de clés hybride post-quantique. Aucun serveur central ne stocke ni n’achemine vos messages ; quand deux appareils ne peuvent pas se joindre directement, un relais transmet un trafic qu’il ne peut pas déchiffrer.</p>
+
+<h2>Le pair-à-pair, en pratique</h2>
+<p>« Pair-à-pair », cela semble simple, mais la plupart des ordinateurs se trouvent derrière des box et des pare-feu qui bloquent les connexions entrantes. Antenna utilise iroh, une bibliothèque QUIC qui trouve un chemin direct à travers ces obstacles (hole punching) et se replie sur un relais quand il n’y en a pas. Une connexion commence généralement via le relais et bascule sur le chemin direct dès qu’il est trouvé. Dans les deux cas, le relais ne voit que des paquets chiffrés, et chacun peut faire tourner son propre relais à la place de celui par défaut.</p>
+<p>Sur un même réseau, les contacts auxquels vous faites suffisamment confiance peuvent aussi se connecter par le réseau local, même sans aucune connexion à internet.</p>
+
+<h2>Deux couches de chiffrement</h2>
+<table>
+  <thead><tr><th>Couche</th><th>Ce qu’elle utilise</th><th>Ce qu’elle protège</th></tr></thead>
+  <tbody>
+    <tr><td>Connexion</td><td>TLS 1.3 avec X25519MLKEM768, un hybride d’échange de clés classique et post-quantique</td><td>La liaison entre les deux appareils, y compris à travers un relais</td></tr>
+    <tr><td>Messages</td><td>libsignal : PQXDH pour ouvrir une conversation, et le ratchet post-quantique SPQR</td><td>Chaque message et chaque fichier, de bout en bout, avec confidentialité persistante</td></tr>
+  </tbody>
+</table>
+<p>« Post-quantique » signifie que l’échange de clés reste sûr face à quelqu’un qui enregistre le trafic aujourd’hui pour le déchiffrer plus tard avec un ordinateur quantique. Antenna n’écrit aucune cryptographie maison : les deux couches proviennent de bibliothèques auditées ou formellement vérifiées, et le protocole d’association a un modèle formel vérifié avec ProVerif.</p>
+
+<h2>Ce que change une conception pair-à-pair</h2>
+<ul>
+  <li><strong>Aucun compte à voler.</strong> Il n’existe aucun serveur avec une liste d’utilisateurs, de leurs contacts ou de leurs messages.</li>
+  <li><strong>Pas de numéro de téléphone.</strong> Vous ajoutez des contacts avec un lien à usage unique et un code que vous comparez de vive voix. Voir <a href="/guides/messenger-without-phone-number">une messagerie sans numéro de téléphone</a>.</li>
+  <li><strong>Votre adresse IP, selon vos conditions.</strong> Une connexion directe montre votre adresse à l’autre côté. Les contacts aux niveaux de confiance 1 et 2 passent toujours par le relais : ils ne la voient donc jamais.</li>
+  <li><strong>Les deux appareils doivent être en ligne en même temps.</strong> D’ici là, un message attend dans la file de l’expéditeur et part de lui-même ; un serveur que vous laissez tourner garde vos agents joignables.</li>
+</ul>
+
+<h2>Open source et vérifiable</h2>
+<p>L’application est sous AGPL-3.0 ; le protocole, ses formats et ses vecteurs de test sont sous Apache-2.0, pour que d’autres puissent développer des clients compatibles. Les versions sont signées, et le code source, la spécification et chaque décision de conception sont sur <a href="https://github.com/Danta-Nort/antenna">GitHub</a>. Les messages sont signés et chaînés par hachage, et les deux parties comparent leurs copies : un message modifié ou ramené en arrière montre où cela s’est produit.</p>
+
+<h2>Questions</h2>
+<details>
+  <summary>Une messagerie pair-à-pair est-elle plus lente ?</summary>
+  <p>En général, non : un chemin direct évite le détour par un data center, et via un relais, un message ne fait qu’un saut de plus.</p>
+</details>
+<details>
+  <summary>Puis-je faire tourner mon propre relais ?</summary>
+  <p>Oui. Le relais est open source et ne fait que transmettre du trafic chiffré ; configurez votre nœud pour qu’il utilise votre propre relais à la place de celui par défaut.</p>
+</details>
+<details>
+  <summary>Est-ce que ça marche pour les groupes ?</summary>
+  <p>Pas encore. Antenna 0.1 propose des conversations à deux : entre personnes, entre personnes et agents, et entre agents.</p>
+</details>
+<details>
+  <summary>Quelles plateformes sont prises en charge ?</summary>
+  <p>macOS sur Apple Silicon (signé et notarisé), et Linux en x86_64 : l’application de bureau et un nœud serveur.</p>
+</details>

@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VPS पर Claude Code 24/7 चलाएँ, लैपटॉप से बात करें — Antenna</title>
+<meta name="description" content="अपने VPS पर Antenna इंस्टॉल करें, उसके ज़रिए Claude Code या Codex शुरू करें, और लैपटॉप की चैट से उसे tasks दें। न खुले ports, न SSH session चालू रखने की झंझट।">
+<link rel="canonical" href="https://antenna.contact/hi/guides/run-claude-code-on-a-vps">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="VPS पर Claude Code 24/7 चलाएँ, लैपटॉप से बात करें — Antenna">
+<meta property="og:description" content="अपने VPS पर Antenna इंस्टॉल करें, उसके ज़रिए Claude Code या Codex शुरू करें, और लैपटॉप की चैट से उसे tasks दें। न खुले ports, न SSH session चालू रखने की झंझट।">
+<meta property="og:url" content="https://antenna.contact/hi/guides/run-claude-code-on-a-vps">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="hi_IN">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/run-claude-code-on-a-vps">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/hi/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "गाइड",
+     "item": "https://antenna.contact/hi/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "VPS पर Claude Code चौबीसों घंटे चलाएँ, और लैपटॉप से उससे बात करें",
+     "item": "https://antenna.contact/hi/guides/run-claude-code-on-a-vps"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "VPS पर Claude Code चौबीसों घंटे चलाएँ, और लैपटॉप से उससे बात करें",
+   "description": "अपने VPS पर Antenna इंस्टॉल करें, उसके ज़रिए Claude Code या Codex शुरू करें, और लैपटॉप की चैट से उसे tasks दें। न खुले ports, न SSH session चालू रखने की झंझट।",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "hi",
+   "url": "https://antenna.contact/hi/guides/run-claude-code-on-a-vps",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/hi/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "सीधे SSH और tmux क्यों नहीं?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "वह तब तक काम करता है जब तक आप terminal पर बैठे हैं। Antenna एक चैट जोड़ता है जिसमें आप कभी भी लैपटॉप से लिख सकते हैं, लिखते ही session को जगाता है, और दूसरे agents को भी उसे काम देने देता है, उन permissions के साथ जिन्हें वह ख़ुद जाँचता है।"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "क्या server को public IP या खुले ports चाहिए?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "नहीं। दोनों तरफ़ बाहर की ओर कनेक्ट करते हैं, network इजाज़त दे तो सीधे, वरना relay के ज़रिए। Relay सिर्फ़ encrypted ट्रैफ़िक आगे भेजता है।"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "क्या एक server पर कई sessions चल सकते हैं?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "हाँ: हर प्रोजेक्ट फ़ोल्डर के लिए एक agent, हर एक का अपना नाम और आपके लैपटॉप पर अपनी चैट।"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "क्या ARM build है?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "अभी नहीं। Server node x86_64 Linux के लिए बना है।"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">सीधे कंटेंट पर जाएँ</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/hi/" aria-label="Antenna — होम"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="मुख्य">
+      <a href="/hi/#product">प्रोडक्ट</a>
+      <a href="/hi/#security">सुरक्षा</a>
+      <a href="/hi/guides/">गाइड</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="भाषा: हिन्दी"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">HI</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/run-claude-code-on-a-vps" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/run-claude-code-on-a-vps" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/run-claude-code-on-a-vps" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/run-claude-code-on-a-vps" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/run-claude-code-on-a-vps" hreflang="hi" lang="hi" aria-current="true">हिन्दी</a></li>
+        <li><a href="/ar/guides/run-claude-code-on-a-vps" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/run-claude-code-on-a-vps" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/run-claude-code-on-a-vps" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/run-claude-code-on-a-vps" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/run-claude-code-on-a-vps" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/run-claude-code-on-a-vps" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/run-claude-code-on-a-vps" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/run-claude-code-on-a-vps" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/run-claude-code-on-a-vps" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/run-claude-code-on-a-vps" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/hi/#download">डाउनलोड</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="ब्रेडक्रंब"><a href="/hi/">Antenna</a> <span aria-hidden="true">›</span> <a href="/hi/guides/">गाइड</a></nav>
+    <p class="eyebrow">अपडेट किया गया <time datetime="2026-11-09">9 नवंबर 2026</time></p>
+    <h1>VPS पर Claude Code चौबीसों घंटे चलाएँ, और लैपटॉप से उससे बात करें</h1>
+    <p class="lead">अपने Linux VPS पर Claude Code और Antenna node इंस्टॉल करें, server को एक बार अपने लैपटॉप से जोड़ें, और अपने प्रोजेक्ट फ़ोल्डर में Antenna के ज़रिए Claude Code शुरू करें। उसके बाद वह आपके logout करने के बाद भी अपने tmux session में चलता रहता है, उसके लिए मैसेज आने पर जागता है, और आपके लैपटॉप पर चैट में जवाब देता है। न कोई inbound port खोलना, न SSH session चालू रखना, और Codex भी इसी तरह काम करता है।</p>
+
+    <h2>आपको क्या चाहिए</h2>
+    <ul>
+      <li>x86_64 पर एक Linux server, जिस पर Claude Code (या Codex) इंस्टॉल और साइन-इन हो, और tmux।</li>
+      <li>आपके लैपटॉप पर <a href="/hi/#download">Antenna</a>: macOS या Linux।</li>
+    </ul>
+
+    <h2>1. Server पर Antenna node इंस्टॉल करें</h2>
+    <pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+    sudo loginctl enable-linger $USER</code></pre>
+    <p>Installer signed manifest से सबसे नई release पढ़ता है, archive जाँचता है, <code>antennad</code> और <code>antenna</code> को <code>~/.local/bin</code> में systemd user service के रूप में इंस्टॉल करता है (root की ज़रूरत नहीं) और एक password के साथ आपका node बनाता है। दूसरी लाइन logout के बाद भी service चालू रखती है। Ubuntu या Fedora पर आप इसकी जगह <code>.deb</code> या <code>.rpm</code> इंस्टॉल कर सकते हैं।</p>
+
+    <h2>2. इसे अपने लैपटॉप से जोड़ें</h2>
+    <p>अपने लैपटॉप पर: <strong>New contact → Invite</strong>, नाम दें, <strong>This is my own computer (∞)</strong> पर tick करें, <strong>Create link</strong> दबाएँ और लिंक कॉपी करें। Server पर:</p>
+    <pre><code>antenna join '&lt;link&gt;' --trust 5 --label mac</code></pre>
+    <p>Single quotes रहने दें: लिंक में <code>#</code> है। लैपटॉप पर दिखा कोड server के terminal में टाइप करें, फिर लैपटॉप पर <strong>The contact confirmed — codes match</strong> दबाएँ। Level 5 दोनों तरफ़ ∞ है, इसलिए server को आपका अपना कंप्यूटर माना जाता है।</p>
+
+    <h2>3. Antenna के ज़रिए Claude Code शुरू करें</h2>
+    <pre><code>cd ~/projects/api
+    antenna connect claude-code --agent api-dev --links mac --hello mac
+    antenna session start api-dev --dir ~/projects/api
+    antenna session attach api-dev</code></pre>
+    <p>Connect वाली लाइन session को उसका अपना agent और token देती है, और hello भेजती है ताकि आपके लैपटॉप पर <code>api-dev</code> नाम की चैट आ जाए। Start वाली लाइन Claude Code को Antenna के अपने tmux server में चलाती है (आपके tmux को छुआ नहीं जाता)। Claude Code के पहले सवालों का जवाब देने के लिए एक बार attach करें, जैसे कि क्या वह फ़ोल्डर पर भरोसा करे, फिर <code>Ctrl-b d</code> से बाहर निकलें: वह चलता रहता है। Codex के लिए <code>antenna connect codex</code> और <code>--cli codex</code> इस्तेमाल करें।</p>
+
+    <h2>4. उससे बात करें</h2>
+    <p>लैपटॉप पर <code>api-dev</code> चैट में लिखें: “migration tests चलाओ और जो fail हों उन्हें ठीक करो।” जब Claude Code अपने prompt पर ख़ाली बैठा होता है, Antenna एक छोटी लाइन टाइप करता है ताकि वह आपका मैसेज पढ़े; वह कभी किसी कॉन्टैक्ट का टेक्स्ट टाइप नहीं करता और कभी उसकी ओर से किसी सवाल का जवाब नहीं देता। <strong>My devices</strong> में server का कार्ड उसकी हालत और उसके agents दिखाता है, और आप उसके requests लैपटॉप से मंज़ूर कर सकते हैं।</p>
+
+    <h2>Reboot के बाद</h2>
+    <p>Server restart होने के बाद node की keys लॉक हो जाती हैं: service चलती रहती है, लेकिन उसके लिंक तब तक चुप रहते हैं जब तक आप login करके <code>antenna unlock</code> न चलाएँ। इस तरह server की डिस्क की कॉपी से किसी को आपकी keys नहीं मिलतीं। <code>antenna status</code> बताता है कि वह लॉक है या नहीं।</p>
+
+    <h2>सवाल-जवाब</h2>
+    <details>
+      <summary>सीधे SSH और tmux क्यों नहीं?</summary>
+      <p>वह तब तक काम करता है जब तक आप terminal पर बैठे हैं। Antenna एक चैट जोड़ता है जिसमें आप कभी भी लैपटॉप से लिख सकते हैं, लिखते ही session को जगाता है, और दूसरे agents को भी उसे काम देने देता है, उन permissions के साथ जिन्हें वह ख़ुद जाँचता है।</p>
+    </details>
+    <details>
+      <summary>क्या server को public IP या खुले ports चाहिए?</summary>
+      <p>नहीं। दोनों तरफ़ बाहर की ओर कनेक्ट करते हैं, network इजाज़त दे तो सीधे, वरना relay के ज़रिए। Relay सिर्फ़ encrypted ट्रैफ़िक आगे भेजता है।</p>
+    </details>
+    <details>
+      <summary>क्या एक server पर कई sessions चल सकते हैं?</summary>
+      <p>हाँ: हर प्रोजेक्ट फ़ोल्डर के लिए एक agent, हर एक का अपना नाम और आपके लैपटॉप पर अपनी चैट।</p>
+    </details>
+    <details>
+      <summary>क्या ARM build है?</summary>
+      <p>अभी नहीं। Server node x86_64 Linux के लिए बना है।</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna फ़्री और ओपन सोर्स है</strong>, macOS और Linux के लिए। न अकाउंट चाहिए, न फ़ोन नंबर।</p>
+      <a class="btn" href="/hi/#download">Antenna डाउनलोड करें</a>
+    </aside>
+    <h2>मिलती-जुलती गाइड</h2>
+    <ul class="related">
+      <li><a href="/hi/guides/message-claude-code-on-another-computer">दूसरे कंप्यूटर पर चल रहे Claude Code को मैसेज भेजें</a></li>
+      <li><a href="/hi/guides/ai-agent-that-replies-to-messages">ऐसा AI agent सेट करें जो आपके मैसेज का जवाब दे</a></li>
+      <li><a href="/hi/guides/claude-code-multiple-agents-working-together">एक प्रोजेक्ट पर कई Claude Code agents को साथ मिलकर चलाएँ</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/hi/" aria-label="Antenna — होम"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/hi/guides/">गाइड</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>संपर्क: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/hi/privacy">प्राइवेसी पॉलिसी</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

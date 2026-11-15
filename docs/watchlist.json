@@ -2,7 +2,7 @@
   "schema": 1,
   "about": "Machine-checkable part of docs/WATCHLIST.md. Check: python3 tools/watchlist_check.py [--update]. The watch field is the item number in WATCHLIST.md; on_change says what to do if the value changed.",
   "created": "2026-10-02",
-  "last_run": "2026-10-29",
+  "last_run": "2026-11-12",
   "items": [
     {
       "id": "w01-libcrux-ml-kem",
@@ -15,7 +15,7 @@
       "last_value": "0.0.11 (2026-10-07)",
       "on_change": "Build spikes/combined option B without [patch]; if it builds — revisit Q-2 option II",
       "last_changed": "2026-10-08",
-      "last_checked": "2026-10-29",
+      "last_checked": "2026-11-12",
       "previous_value": "0.0.10 (2026-07-15)"
     },
     {
@@ -29,7 +29,7 @@
       "last_value": "0.0.10 (2026-10-07)",
       "on_change": "Check which libcrux-ml-kem it depends on and whether it builds next to spqr",
       "last_changed": "2026-10-08",
-      "last_checked": "2026-10-29",
+      "last_checked": "2026-11-12",
       "previous_value": "0.0.9 (2026-07-15)"
     },
     {
@@ -45,7 +45,7 @@
       "last_value": "0.0.10",
       "on_change": "spqr moved to a new libcrux-ml-kem — the feature conflict may go away without patches",
       "last_changed": "2026-10-02",
-      "last_checked": "2026-10-29"
+      "last_checked": "2026-11-12"
     },
     {
       "id": "w01-spqr-tag",
@@ -58,7 +58,7 @@
       "last_value": "v1.6.0",
       "on_change": "Read the diff (verification, dependencies), update the rev together with libsignal",
       "last_changed": "2026-10-02",
-      "last_checked": "2026-10-29"
+      "last_checked": "2026-11-12"
     },
     {
       "id": "w02-xwing-draft",
@@ -71,7 +71,7 @@
       "last_value": "-11 draft=active iesg=idexists ise=receive",
       "on_change": "If it became an RFC — X-Wing gets a stable format; check libcrux-kem for the final version",
       "last_changed": "2026-10-02",
-      "last_checked": "2026-10-29"
+      "last_checked": "2026-11-12"
     },
     {
       "id": "w02-hybrid-kems-draft",
@@ -84,7 +84,7 @@
       "last_value": "-12 draft=active iesg=idexists irtf=sheph-w",
       "on_change": "Compare our transcript/combiner in PROTOCOL.md with the recommendations",
       "last_changed": "2026-10-02",
-      "last_checked": "2026-10-29"
+      "last_checked": "2026-11-12"
     },
     {
       "id": "w03-iroh-blobs",
@@ -94,11 +94,11 @@
         "type": "crates",
         "name": "iroh-blobs"
       },
-      "last_value": "0.104.0 (2026-10-28)",
+      "last_value": "0.104.1 (2026-11-04)",
       "on_change": "If 1.x — move spikes/iroh-blobs and D-4 to it",
-      "last_changed": "2026-10-29",
-      "last_checked": "2026-10-29",
-      "previous_value": "0.103.1 (2026-10-06)"
+      "last_changed": "2026-11-05",
+      "last_checked": "2026-11-12",
+      "previous_value": "0.104.0 (2026-10-28)"
     },
     {
       "id": "w03-iroh-blobs-readme",
@@ -113,7 +113,7 @@
       "last_value": "present",
       "on_change": "The warning is removed — n0 considers the crate ready; recheck the API",
       "last_changed": "2026-10-02",
-      "last_checked": "2026-10-29"
+      "last_checked": "2026-11-12"
     },
     {
       "id": "w04-iroh-tor-transport",
@@ -126,7 +126,7 @@
       "last_value": "0.1.0 (2026-06-15)",
       "on_change": "Read the changelog: did Arti replace C tor, is the experimental status gone",
       "last_changed": "2026-10-02",
-      "last_checked": "2026-10-29"
+      "last_checked": "2026-11-12"
     },
     {
       "id": "w04-arti-client",
@@ -136,10 +136,11 @@
         "type": "crates",
         "name": "arti-client"
       },
-      "last_value": "0.47.0 (2026-10-01)",
+      "last_value": "0.48.0 (2026-11-04)",
       "on_change": "Read the release notes: onion services (hsservice) — security and status",
-      "last_changed": "2026-10-02",
-      "last_checked": "2026-10-29"
+      "last_changed": "2026-11-05",
+      "last_checked": "2026-11-12",
+      "previous_value": "0.47.0 (2026-10-01)"
     },
     {
       "id": "w04-arti-onion-limitations",
@@ -154,7 +155,7 @@
       "last_value": "present",
       "on_change": "The caveat is removed — Arti onion services are declared fit for use; revisit the Tor mode in v0.3",
       "last_changed": "2026-10-02",
-      "last_checked": "2026-10-29"
+      "last_checked": "2026-11-12"
     },
     {
       "id": "w05-libsignal-release",
@@ -164,11 +165,11 @@
         "type": "github_release",
         "repo": "signalapp/libsignal"
       },
-      "last_value": "v0.106.1 (2026-10-28)",
+      "last_value": "v0.107.0 (2026-11-10)",
       "on_change": "Run spikes/libsignal-tr on the new tag; read the rust/protocol diff (the API changes without warning)",
-      "last_changed": "2026-10-29",
-      "last_checked": "2026-10-29",
-      "previous_value": "v0.106.0 (2026-10-23)"
+      "last_changed": "2026-11-12",
+      "last_checked": "2026-11-12",
+      "previous_value": "v0.106.2 (2026-11-05)"
     },
     {
       "id": "w05-libsignal-mlkem-note",
@@ -183,7 +184,7 @@
       "last_value": "present",
       "on_change": "The caveat is removed — the MLKEM1024 format in PQXDH is stable; remove the risk from D-8",
       "last_changed": "2026-10-02",
-      "last_checked": "2026-10-29"
+      "last_checked": "2026-11-12"
     },
     {
       "id": "w05-crates-libsignal-protocol",
@@ -196,7 +197,7 @@
       "last_value": "0.1.0 (2019-07-21)",
       "on_change": "The name passed to Signal or a new version is out — check the owner and the repository",
       "last_changed": "2026-10-02",
-      "last_checked": "2026-10-29"
+      "last_checked": "2026-11-12"
     },
     {
       "id": "w05-spqr-lax-count",
@@ -211,7 +212,7 @@
       "last_value": "1",
       "on_change": "It became 0 — the top-level send is verified; update the wording of SPEC §14",
       "last_changed": "2026-10-02",
-      "last_checked": "2026-10-29"
+      "last_checked": "2026-11-12"
     },
     {
       "id": "w06-quic-multipath",
@@ -221,10 +222,10 @@
         "type": "ietf_draft",
         "name": "draft-ietf-quic-multipath"
       },
-      "last_value": "-21 draft=active iesg=rfcqueue ietf=sub-pub rfceditor=blocked",
+      "last_value": "RFC10069",
       "on_change": "The RFC is out — check that noq/iroh follow the final text",
-      "last_changed": "2026-10-22",
-      "last_checked": "2026-10-29",
+      "last_changed": "2026-11-09",
+      "last_checked": "2026-11-12",
       "previous_value": "-21 draft=active iesg=rfcqueue ietf=sub-pub rfceditor=in_progress"
     },
     {
@@ -238,7 +239,7 @@
       "last_value": "-00 draft=active iesg=idexists",
       "on_change": "A new revision or adoption by the QUIC WG — read it",
       "last_changed": "2026-10-02",
-      "last_checked": "2026-10-29"
+      "last_checked": "2026-11-12"
     },
     {
       "id": "w06-quic-address-discovery",
@@ -251,7 +252,7 @@
       "last_value": "-01 draft=active iesg=idexists ietf=wg-doc",
       "on_change": "Read the revision",
       "last_changed": "2026-10-02",
-      "last_checked": "2026-10-29"
+      "last_checked": "2026-11-12"
     },
     {
       "id": "w06-iroh",
@@ -264,7 +265,7 @@
       "last_value": "1.4.1 (2026-10-21)",
       "on_change": "Read the release notes; run spikes/iroh-conn; on a major — look at identity (PQ)",
       "last_changed": "2026-10-22",
-      "last_checked": "2026-10-29",
+      "last_checked": "2026-11-12",
       "previous_value": "1.3.0 (2026-09-28)"
     },
     {
@@ -278,7 +279,7 @@
       "last_value": "-06 draft=active iesg=rfcqueue ietf=sub-pub rfceditor=in_progress",
       "on_change": "The RFC is out — PQ authentication in TLS is standardized",
       "last_changed": "2026-10-08",
-      "last_checked": "2026-10-29",
+      "last_checked": "2026-11-12",
       "previous_value": "-06 draft=active iesg=rfcqueue ietf=sub-pub rfceditor=blocked"
     },
     {
@@ -293,7 +294,7 @@
       "last_value": "0.23.46 (2026-10-14)",
       "on_change": "Read the changelog: PQ signatures, raw public keys",
       "last_changed": "2026-10-15",
-      "last_checked": "2026-10-29",
+      "last_checked": "2026-11-12",
       "previous_value": "0.23.45 (2026-09-14)"
     },
     {
@@ -304,10 +305,10 @@
         "type": "ietf_draft",
         "name": "draft-ietf-lamps-pq-composite-sigs"
       },
-      "last_value": "-19 draft=active iesg=rfcqueue ietf=sub-pub rfceditor=blocked",
+      "last_value": "RFC10073",
       "on_change": "RFC — compare the hybrid signature format of the link-root (Ed25519 + ML-DSA-65)",
-      "last_changed": "2026-10-22",
-      "last_checked": "2026-10-29",
+      "last_changed": "2026-11-09",
+      "last_checked": "2026-11-12",
       "previous_value": "-19 draft=active iesg=rfcqueue ietf=sub-pub rfceditor=in_progress"
     },
     {
@@ -321,7 +322,7 @@
       "last_value": "-03 draft=active iesg=idexists",
       "on_change": "Adopted by CFRG (draft-irtf-…) — look for implementations",
       "last_changed": "2026-10-15",
-      "last_checked": "2026-10-29",
+      "last_checked": "2026-11-12",
       "previous_value": "-02 draft=active iesg=idexists"
     },
     {
@@ -335,7 +336,7 @@
       "last_value": "-21 draft=active iesg=idexists irtf=rfc-edit rfceditor=in_progress",
       "on_change": "The RFC is out — choose an audited CPace implementation",
       "last_changed": "2026-10-02",
-      "last_checked": "2026-10-29"
+      "last_checked": "2026-11-12"
     },
     {
       "id": "w08-pake-kem",
@@ -348,7 +349,7 @@
       "last_value": "0.1.0-pre.7 (2026-08-04)",
       "on_change": "0.1.0 without -pre is out or an audit is mentioned — evaluate for spoken codes",
       "last_changed": "2026-10-02",
-      "last_checked": "2026-10-29"
+      "last_checked": "2026-11-12"
     },
     {
       "id": "w09-mls-pq-ciphersuites",
@@ -358,11 +359,11 @@
         "type": "ietf_draft",
         "name": "draft-ietf-mls-pq-ciphersuites"
       },
-      "last_value": "-06 draft=active iesg=pub-req ietf=sub-pub",
+      "last_value": "-07 draft=active iesg=pub-req ietf=sub-pub",
       "on_change": "Passed WGLC/RFC — the suite code points are stable; groups in v2",
-      "last_changed": "2026-10-22",
-      "last_checked": "2026-10-29",
-      "previous_value": "-06 draft=active iesg=idexists ietf=wg-lc"
+      "last_changed": "2026-11-02",
+      "last_checked": "2026-11-12",
+      "previous_value": "-06 draft=active iesg=pub-req ietf=sub-pub"
     },
     {
       "id": "w09-mls-combiner",
@@ -375,7 +376,7 @@
       "last_value": "-02 draft=expired iesg=idexists ietf=chair-w",
       "on_change": "Read the revision",
       "last_changed": "2026-10-02",
-      "last_checked": "2026-10-29"
+      "last_checked": "2026-11-12"
     },
     {
       "id": "w09-openmls",
@@ -388,7 +389,7 @@
       "last_value": "0.9.2 (2026-10-22)",
       "on_change": "Read the CHANGELOG: PQ suites outside the feature flag?",
       "last_changed": "2026-10-26",
-      "last_checked": "2026-10-29",
+      "last_checked": "2026-11-12",
       "previous_value": "0.9.1 (2026-10-07)"
     },
     {
@@ -402,7 +403,7 @@
       "last_value": "0.57.0 (2026-10-28)",
       "on_change": "Read the CHANGELOG (PQ, audit)",
       "last_changed": "2026-10-29",
-      "last_checked": "2026-10-29",
+      "last_checked": "2026-11-12",
       "previous_value": "0.56.0 (2026-08-19)"
     },
     {
@@ -418,7 +419,7 @@
       "last_value": "5",
       "on_change": "It became 0 — probably GA; reread the section on the allowlist and the protocol",
       "last_changed": "2026-10-02",
-      "last_checked": "2026-10-29"
+      "last_checked": "2026-11-12"
     },
     {
       "id": "w10-channels-allowlist",
@@ -433,7 +434,7 @@
       "last_value": "present",
       "on_change": "The restriction is lifted — our own x mcp channel can be connected without the dev flag",
       "last_changed": "2026-10-02",
-      "last_checked": "2026-10-29"
+      "last_checked": "2026-11-12"
     },
     {
       "id": "w10-channels-mcp-revision",
@@ -448,7 +449,7 @@
       "last_value": "present",
       "on_change": "Channels appeared in the new MCP revision — no need to keep the old revision for push",
       "last_changed": "2026-10-02",
-      "last_checked": "2026-10-29"
+      "last_checked": "2026-11-12"
     },
     {
       "id": "w10-mcp-schema-latest",
@@ -463,7 +464,7 @@
       "last_value": "2026-07-28",
       "on_change": "A new revision — read the changelog, check rmcp",
       "last_changed": "2026-10-02",
-      "last_checked": "2026-10-29"
+      "last_checked": "2026-11-12"
     },
     {
       "id": "w10-rmcp",
@@ -473,11 +474,11 @@
         "type": "crates",
         "name": "rmcp"
       },
-      "last_value": "3.8.0 (2026-10-26)",
+      "last_value": "3.9.0 (2026-11-05)",
       "on_change": "Run spikes/rmcp-stdio",
-      "last_changed": "2026-10-29",
-      "last_checked": "2026-10-29",
-      "previous_value": "3.7.0 (2026-10-22)"
+      "last_changed": "2026-11-09",
+      "last_checked": "2026-11-12",
+      "previous_value": "3.8.0 (2026-10-26)"
     },
     {
       "id": "w11-a2a-release",
@@ -490,7 +491,7 @@
       "last_value": "v1.0.1 (2026-05-28)",
       "on_change": "Read the breaking changes (Agent Card, Task, Message)",
       "last_changed": "2026-10-02",
-      "last_checked": "2026-10-29"
+      "last_checked": "2026-11-12"
     },
     {
       "id": "w11-a2a-lf",
@@ -503,7 +504,7 @@
       "last_value": "0.4.2 (2026-10-16)",
       "on_change": "Evaluate for the local A2A endpoint in v0.3",
       "last_changed": "2026-10-19",
-      "last_checked": "2026-10-29",
+      "last_checked": "2026-11-12",
       "previous_value": "0.4.1 (2026-09-30)"
     },
     {
@@ -518,7 +519,7 @@
       "last_value": "open [SEP,draft,roadmap/security,security]",
       "on_change": "Accepted — put labels (openWorldHint/attribution) on contact data in x mcp",
       "last_changed": "2026-10-02",
-      "last_checked": "2026-10-29"
+      "last_checked": "2026-11-12"
     },
     {
       "id": "w13-biscuit-auth",
@@ -528,10 +529,11 @@
         "type": "crates",
         "name": "biscuit-auth"
       },
-      "last_value": "6.0.0 (2025-07-16)",
+      "last_value": "7.0.0-alpha.1 (2026-11-11)",
       "on_change": "Check ed25519-dalek/rand in the tree; run spikes/biscuit",
-      "last_changed": "2026-10-02",
-      "last_checked": "2026-10-29"
+      "last_changed": "2026-11-12",
+      "last_checked": "2026-11-12",
+      "previous_value": "6.0.0 (2025-07-16)"
     },
     {
       "id": "w13-biscuit-pr-349",
@@ -545,7 +547,7 @@
       "last_value": "merged (2026-10-08)",
       "on_change": "Merged — wait for the release; closed without merging — the Ed25519 duplicate stays for long",
       "last_changed": "2026-10-12",
-      "last_checked": "2026-10-29",
+      "last_checked": "2026-11-12",
       "previous_value": "open"
     },
     {
@@ -559,7 +561,7 @@
       "last_value": "v0.11.1 (2026-10-22)",
       "on_change": "Read the release notes: a library/CLI mode without a GUI, sandbox changes",
       "last_changed": "2026-10-26",
-      "last_checked": "2026-10-29",
+      "last_checked": "2026-11-12",
       "previous_value": "v0.11.0 (2026-07-02)"
     },
     {
@@ -570,11 +572,11 @@
         "type": "crates",
         "name": "yara-x"
       },
-      "last_value": "1.22.1 (2026-10-26)",
+      "last_value": "1.23.0 (2026-11-05)",
       "on_change": "Update when integrating the §10 pipeline",
-      "last_changed": "2026-10-29",
-      "last_checked": "2026-10-29",
-      "previous_value": "1.22.0 (2026-10-20)"
+      "last_changed": "2026-11-09",
+      "last_checked": "2026-11-12",
+      "previous_value": "1.22.1 (2026-10-26)"
     },
     {
       "id": "w15-hetzner-vtpm",
@@ -589,7 +591,7 @@
       "last_value": "present",
       "on_change": "The phrase disappeared — a vTPM may have appeared; revisit Q-4",
       "last_changed": "2026-10-02",
-      "last_checked": "2026-10-29"
+      "last_checked": "2026-11-12"
     },
     {
       "id": "w18-iroh-ffi",
@@ -602,7 +604,7 @@
       "last_value": "v1.2.0 (2026-10-22)",
       "on_change": "Read: did blobs/mDNS appear in the FFI, Dart/Flutter",
       "last_changed": "2026-10-26",
-      "last_checked": "2026-10-29",
+      "last_checked": "2026-11-12",
       "previous_value": "v1.1.0 (2026-07-16)"
     },
     {
@@ -616,7 +618,7 @@
       "last_value": "0.0.11 (2026-10-07)",
       "on_change": "Run the link-root signature from spikes/combined",
       "last_changed": "2026-10-08",
-      "last_checked": "2026-10-29",
+      "last_checked": "2026-11-12",
       "previous_value": "0.0.10 (2026-07-15)"
     },
     {
@@ -630,7 +632,7 @@
       "last_value": "active",
       "on_change": "Chartered — read the first drafts (dialog context, identity)",
       "last_changed": "2026-10-12",
-      "last_checked": "2026-10-29",
+      "last_checked": "2026-11-12",
       "previous_value": "proposed"
     },
     {
@@ -644,7 +646,7 @@
       "last_value": "bof-conc",
       "on_change": "Became a WG — read the charter: cross-owner authorization of agents",
       "last_changed": "2026-10-12",
-      "last_checked": "2026-10-29",
+      "last_checked": "2026-11-12",
       "previous_value": "bof"
     },
     {
@@ -658,7 +660,7 @@
       "last_value": "-03 draft=active iesg=idexists",
       "on_change": "A new revision or an implementation — compare with our permissions/taint scheme",
       "last_changed": "2026-10-02",
-      "last_checked": "2026-10-29"
+      "last_checked": "2026-11-12"
     },
     {
       "id": "w21-privacypass-crate",
@@ -671,7 +673,7 @@
       "last_value": "0.2.0-pre.4 (2026-10-27)",
       "on_change": "Open the README/CHANGELOG: has an independent audit appeared; if yes — revisit anonymous tokens for Antenna Cloud (MAILBOX §6)",
       "last_changed": "2026-10-29",
-      "last_checked": "2026-10-29",
+      "last_checked": "2026-11-12",
       "previous_value": "0.2.0-pre.3 (2026-08-18)"
     }
   ]

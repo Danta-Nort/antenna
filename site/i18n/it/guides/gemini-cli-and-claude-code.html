@@ -1,0 +1,40 @@
+<!--guide {"title": "Gemini CLI e Claude Code insieme: passarsi compiti e revisioni", "h1": "Usare Gemini CLI e Claude Code insieme", "description": "Collega Gemini CLI e Claude Code ad Antenna e traccia una linea tra i due: si passano compiti e revisioni, sullo stesso computer o su due diversi.", "summary": "Gemini CLI e Claude Code che si passano compiti e revisioni, su un computer o su due.", "source": "2026-11-14"}-->
+<p class="lead">Collega Gemini CLI ad Antenna con un clic, avvia Claude Code nella finestra di Antenna e traccia una linea tra i due sulla mappa degli agenti di Antenna. Da quel momento ognuno scrive all'altro con gli strumenti MCP di Antenna: Gemini CLI chiede a Claude Code di revisionare una modifica, Claude Code passa un compito a Gemini CLI, e la risposta torna indietro allo stesso modo. Entrambi restano collegati ai tuoi account Google e Claude, senza chiavi API.</p>
+
+<h2>Sullo stesso computer</h2>
+<ol>
+  <li><a href="/#download">Installa Antenna</a> (macOS o Linux) e crea il tuo nodo: una password, nessun account.</li>
+  <li>Apri <strong>Agents → AI apps</strong> e premi <strong>Connect</strong> accanto a Gemini CLI. Scegli <strong>Assistant with access to my projects</strong> (assistente con accesso ai miei progetti), inserisci la password, premi <strong>Continue</strong>, leggi che cosa Antenna aggiungerà a <code>~/.gemini/settings.json</code> e premi <strong>Write and connect</strong> (scrivi e collega). In Gemini CLI esegui <code>/mcp reload</code> (oppure riavvialo): <code>/mcp</code> elenca <code>antenna</code>. La riga dice “Contacts write to it as gemini-cli”: i contatti gli scrivono come gemini-cli.</li>
+  <li>Nella stessa pagina, premi <strong>Start in Code mode</strong> accanto a Claude Code. Scegli <strong>New agent…</strong>, chiamalo <code>builder</code>, scegli lo stesso ruolo, <strong>Assistant with access to my projects</strong>, inserisci la password e premi <strong>Start</strong>. Claude Code gira in una scheda di terminale dentro la finestra.</li>
+  <li>Apri <strong>Agents → Map</strong>, trascina dal punto di aggancio di un agente fino all'altro, inserisci la password e premi <strong>Connect</strong>. I due ricevono un <em>percorso locale</em>: i loro messaggi non lasciano mai il computer, e ognuno prende i messaggi dell'altro come compiti, a meno che tu non tolga la spunta.</li>
+</ol>
+<p>Dai a entrambi lo stesso ruolo: Antenna non lascia che un agente che ha visto più dati tuoi scriva a uno che ne ha visti meno.</p>
+
+<h2>Come si rivolgono l'uno all'altro</h2>
+<p>Una volta tracciata la linea, ogni agente è l'interlocutore predefinito dell'altro: basta dire “manda questo al tuo interlocutore”. Per indicare l'altro per nome, un agente chiama <code>send_message</code> con <code>local_agent</code> impostato su <code>gemini-cli</code> o <code>builder</code>. Chi riceve legge con <code>read_inbox</code>, oppure aspetta con <code>wait_for_message</code> fino a 10 minuti per chiamata.</p>
+<p>I due aspettano in modo diverso. Claude Code nella modalità Code si sveglia da solo: quando arriva un messaggio e lui è inattivo, Antenna scrive una riga che gli dice di leggere la sua casella. <em>Sperimentale.</em> Antenna non sveglia ancora Gemini CLI, quindi Gemini CLI legge i suoi messaggi la prossima volta che chiama Antenna. Per questo è naturale che sia Gemini CLI ad avviare lo scambio: “Chiedi a <code>builder</code> di revisionare il diff in <code>src/</code>, poi aspetta la sua risposta e correggi quello che trova.” Claude Code si sveglia, revisiona e risponde. Per passare del lavoro a Gemini CLI, prima digli di aspettare i messaggi.</p>
+
+<h2>Su due computer</h2>
+<p>Gemini CLI può restare su un computer e Claude Code su un altro. Installa Antenna su entrambi e abbinali una volta con un link di invito e un codice di sei cifre, spuntando <strong>This is my own computer (∞)</strong>. Poi traccia la linea tra i due agenti sulla mappa. L'altro computer ti chiede di approvare la sua parte, lì oppure in <strong>My devices</strong>, quindi lì non cambia nulla senza di te. Su un server senza schermo, Claude Code gira con <code>antenna connect claude-code</code> e <code>antenna session start</code>: vedi <a href="/guides/run-claude-code-on-a-vps">Claude Code su una VPS</a>.</p>
+
+<h2>Che cosa approvi tu e che cosa resta limitato</h2>
+<ul>
+  <li><strong>I collegamenti li decidi tu.</strong> Per tracciare una linea serve la tua password; nessun agente può crearne o modificarne una.</li>
+  <li><strong>Antenna controlla ogni messaggio.</strong> Tra due agenti dello stesso computer, un messaggio che sembra contenere una chiave, una password o un token viene rifiutato, e una catena si ferma dopo 8 messaggi in 10 minuti, così i due non possono tenersi occupati a vicenda all'infinito.</li>
+  <li><strong>I livelli di fiducia seguono ciò che un agente ha letto.</strong> Sullo stesso computer, se un agente ha letto il messaggio di un contatto, il suo messaggio porta i limiti di quel contatto all'altro agente, che resta limitato come se l'avesse letto anche lui.</li>
+  <li><strong>Claude Code viene controllato prima di ogni strumento.</strong> Nella modalità Code, Antenna interpella il suo daemon prima di ogni comando e di ogni modifica. Gli strumenti di Gemini CLI restano soggetti alle conferme di Gemini CLI; Antenna controlla ciò che passa da lui.</li>
+</ul>
+
+<h2>Domande</h2>
+<details>
+  <summary>Serve una chiave API di Gemini?</summary>
+  <p>No. Gemini CLI accede con il tuo account Google e Claude Code con il tuo piano Claude, come sempre. Antenna si limita a trasportare i messaggi.</p>
+</details>
+<details>
+  <summary>Due finestre di Gemini CLI possono usare Antenna contemporaneamente?</summary>
+  <p>Una alla volta: un agente lavora in una sola sessione alla volta, e <strong>Connect</strong> dà a Gemini CLI un solo agente.</p>
+</details>
+<details>
+  <summary>È una funzione completa?</summary>
+  <p>Il collegamento degli agenti sulla mappa e il risveglio degli agenti inattivi sono segnati come sperimentali in Antenna 0.1: funzionano e sono testati, ma possono ancora cambiare.</p>
+</details>

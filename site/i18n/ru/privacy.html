@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Политика конфиденциальности — Antenna</title>
+<meta name="description" content="Сайт antenna.contact ничего о вас не собирает: ни форм, ни трекеров, ни аналитики, ни чужих ресурсов. Приложение Antenna только позволяет нам считать новые установки.">
+<link rel="canonical" href="https://antenna.contact/privacy">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Политика конфиденциальности — Antenna">
+<meta property="og:url" content="https://antenna.contact/privacy">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- i18n -->
+<meta property="og:locale" content="en_US">
+<!-- /i18n -->
+<link rel="stylesheet" href="/assets/site.css?v=7">
+</head>
+<body>
+<a class="skip" href="#main">Перейти к содержанию</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/" aria-label="Antenna — на главную"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <!-- lang -->
+    <!-- /lang -->
+    <a class="btn btn-small top-cta" href="/#download">Скачать</a>
+  </div>
+</header>
+<main id="main" class="doc">
+  <div class="wrap narrow">
+    <p class="eyebrow">Обновлено 5 ноября 2026 г.</p>
+    <h1>Политика конфиденциальности</h1>
+    <p class="lead">Коротко: этот сайт ничего о вас не собирает. На нём нет форм, трекеров, аналитики и cookie, и он ничего не загружает с других сайтов. Приложение Antenna только позволяет нам посчитать новые установки — без адресов и без содержимого.</p>
+
+    <h2>Этот сайт</h2>
+    <ul>
+      <li>Никакой аналитики, пикселей отслеживания, рекламы и cookie.</li>
+      <li>Никаких внешних скриптов, шрифтов и картинок: всё отдаётся с antenna.contact.</li>
+      <li>Ссылки-приглашения: часть адреса после «#» остаётся в вашем браузере. Сайт её никогда не получает.</li>
+      <li>Кнопки скачивания ведут на файл на GitHub, а там действует заявление GitHub о конфиденциальности.</li>
+    </ul>
+    <p>Сайт работает на Cloudflare Workers. Как и любой веб-сервер, Cloudflare обрабатывает ваш IP-адрес, чтобы доставить страницу; журналов запросов мы не храним.</p>
+
+    <h2>Приложение Antenna</h2>
+    <p>В Antenna нет аккаунтов и нет наших серверов, через которые шли бы ваши сообщения. Сообщения и файлы передаются со сквозным шифрованием между устройствами собеседников — напрямую или через relay, который только пересылает зашифрованный трафик. Кроме подсчёта новых установок, приложение не отправляет ни статистику использования, ни отчёты о сбоях; единственный запрос к нашему серверу — проверка обновлений, о ней ниже.</p>
+    <p>Раз в день приложение спрашивает у <span class="mono">updates.stillbyte.dev</span>, нет ли более нового подписанного выпуска. В запросе нет ничего о вас, ваших контактах или сообщениях; как и любой веб-запрос, он показывает серверу IP-адрес компьютера. Начиная с версии 0.1.1 первая проверка после установки Antenna несёт одну отметку «первая проверка», и больше ничего, — так мы считаем новые установки. Сервер обновлений считает, сколько проверок приходит за день и сколько из них — первые проверки новых установок; адресов он не хранит. Чтобы отключить проверки, запишите <span class="mono">off</span> в файл <span class="mono">~/.config/antenna/update-url</span>.</p>
+
+    <h2>Заявки на закрытую бету</h2>
+    <p>До публичного выпуска на этом сайте была форма заявки на закрытую бету. Присланные через неё адреса нужны только для того, чтобы сообщить людям, что Antenna вышла, а потом они удаляются. Если хотите, чтобы ваш адрес удалили уже сейчас, напишите нам.</p>
+
+    <h2>Ваши права</h2>
+    <p>Напишите на <a href="mailto:hello@antenna.contact">hello@antenna.contact</a>, чтобы узнать, какие данные о вас у нас есть, исправить их или удалить. Мы ответим в течение 30 дней.</p>
+
+    <h2>Изменения</h2>
+    <p>Если политика изменится, изменится и дата вверху страницы.</p>
+
+    <p><a href="/">← Вернуться на antenna.contact</a></p>
+    <p class="i18n-note" data-i18n-extra>Это перевод. Если он расходится с <a href="https://antenna.contact/privacy">английской версией</a>, действует английская версия.</p>
+  </div>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/" aria-label="Antenna — на главную"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p>Написать нам: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/guides/">Инструкции</a></p>
+    <p><a href="/privacy">Политика конфиденциальности</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

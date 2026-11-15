@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Self-hosted мессенджер, которому не нужен сервер — Antenna</title>
+<meta name="description" content="Antenna хранит сообщения только на компьютерах собеседников. По умолчанию ничего поднимать не нужно, а постоянный узел или свой relay можно добавить по желанию.">
+<link rel="canonical" href="https://antenna.contact/ru/guides/self-hosted-messenger">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Self-hosted мессенджер, которому не нужен сервер — Antenna">
+<meta property="og:description" content="Antenna хранит сообщения только на компьютерах собеседников. По умолчанию ничего поднимать не нужно, а постоянный узел или свой relay можно добавить по желанию.">
+<meta property="og:url" content="https://antenna.contact/ru/guides/self-hosted-messenger">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ru_RU">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/self-hosted-messenger">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ru/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Инструкции",
+     "item": "https://antenna.contact/ru/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Self-hosted мессенджер, для которого не нужно держать сервер",
+     "item": "https://antenna.contact/ru/guides/self-hosted-messenger"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Self-hosted мессенджер, для которого не нужно держать сервер",
+   "description": "Antenna хранит сообщения только на компьютерах собеседников. По умолчанию ничего поднимать не нужно, а постоянный узел или свой relay можно добавить по желанию.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "ru",
+   "url": "https://antenna.contact/ru/guides/self-hosted-messenger",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ru/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Моя семья сможет им пользоваться?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "На компьютерах — да: Antenna 0.1 работает на macOS (Apple Silicon) и Linux. Приложения для телефона пока нет."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Relay хранит сообщения для тех, кто не в сети?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Нет. Сообщение для контакта, который не в сети, ждёт на вашем собственном компьютере и уходит само, как только он вернётся."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Мне обязательно что-то разворачивать у себя?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Нет. Antenna работает со стандартным relay и без вашего сервера. Узел и relay — на случай, если они вам понадобятся."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Как обновляется узел на сервере?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Узел, установленный через install.sh, обновляется командой antenna update, которая сначала проверяет подпись выпуска; если вы ставили пакет, он обновляется через менеджер пакетов."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Перейти к содержанию</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ru/" aria-label="Antenna — на главную"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Основное меню">
+      <a href="/ru/#product">О программе</a>
+      <a href="/ru/#security">Безопасность</a>
+      <a href="/ru/guides/">Инструкции</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Язык: Русский"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">RU</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/self-hosted-messenger" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/self-hosted-messenger" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/self-hosted-messenger" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/self-hosted-messenger" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/self-hosted-messenger" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/self-hosted-messenger" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/self-hosted-messenger" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/self-hosted-messenger" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/self-hosted-messenger" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/self-hosted-messenger" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/self-hosted-messenger" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/self-hosted-messenger" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/self-hosted-messenger" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/self-hosted-messenger" hreflang="ru" lang="ru" aria-current="true">Русский</a></li>
+        <li><a href="/uk/guides/self-hosted-messenger" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ru/#download">Скачать</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Навигационная цепочка"><a href="/ru/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ru/guides/">Инструкции</a></nav>
+    <p class="eyebrow">Обновлено <time datetime="2026-11-09">9 ноября 2026 г.</time></p>
+    <h1>Self-hosted мессенджер, для которого не нужно держать сервер</h1>
+    <p class="lead">Мессенджер разворачивают на своём сервере, чтобы сообщения не лежали на чужом. Antenna добивается того же вообще без сервера: каждый запускает Antenna на своём компьютере, сообщения идут между этими компьютерами со сквозным шифрованием, а история хранится только на них, в зашифрованной базе. Если хочется больше контроля, можно добавить постоянно включённый узел на Linux или поднять свой relay — оба с открытым кодом.</p>
+
+    <h2>Что обычно значит «свой сервер»</h2>
+    <p>Классический self-hosted мессенджер — это сервер, который вы устанавливаете, обновляете, бэкапите и держите в сети и на котором лежат все аккаунты и все сообщения всех его пользователей. Доверие переходит от компании к вам, а вместе с ним и работа, и риск: если сервер взломают, утечёт история всех.</p>
+
+    <h2>Как вместо этого устроена Antenna</h2>
+    <ul>
+      <li><strong>Нет аккаунтов, которые надо хранить.</strong> Ваша личность — это ключ на вашем компьютере, защищённый вашим паролем. Собеседников вы добавляете по одноразовой ссылке-приглашению и коду, который сверяете голосом.</li>
+      <li><strong>Нет хранилища сообщений посередине.</strong> Ваша история лежит на вашем компьютере, в базе, зашифрованной SQLCipher, и на компьютере собеседника.</li>
+      <li><strong>Нет сервера, который надо держать включённым.</strong> Два компьютера соединяются напрямую, если сеть позволяет, а если нет — через relay, который пересылает зашифрованный трафик и ничего не хранит.</li>
+    </ul>
+
+    <h2>Как добавить постоянно включённый узел</h2>
+    <p>Ноутбук засыпает, а сервер — нет. Чтобы ваши ИИ-агенты были на связи круглые сутки, установите узел Antenna на сервер с Linux (x86_64): распакуйте выпуск и запустите <code>./install.sh</code> — он настроит пользовательскую службу systemd без root, — или поставьте пакет <code>.deb</code> или <code>.rpm</code>. Потом свяжите узел со своим компьютером, как с контактом, с уровнем <strong>∞ · Мой компьютер</strong>. Подробно по шагам: <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md">как добавить сервер</a>.</p>
+    <p>После перезагрузки ключи узла остаются закрытыми, пока вы не войдёте на сервер и не выполните <code>antenna unlock</code>: украденный образ диска никому не даст ваших ключей.</p>
+
+    <h2>Как поднять свой relay</h2>
+    <p>Relay — единственная общая часть, и видит он только зашифрованные пакеты и то, какие узлы через него общаются. Если хотите, чтобы это была ваша машина, запустите <code>iroh-relay</code> с открытым кодом и запускайте свой узел с <code>antennad --relay &lt;your relay URL&gt;</code>. Контакты уровней доверия 1 и 2 всегда подключаются через relay, поэтому вашего IP-адреса они не узнают.</p>
+
+    <h2>Вопросы</h2>
+    <details>
+      <summary>Моя семья сможет им пользоваться?</summary>
+      <p>На компьютерах — да: Antenna 0.1 работает на macOS (Apple Silicon) и Linux. Приложения для телефона пока нет.</p>
+    </details>
+    <details>
+      <summary>Relay хранит сообщения для тех, кто не в сети?</summary>
+      <p>Нет. Сообщение для контакта, который не в сети, ждёт на вашем собственном компьютере и уходит само, как только он вернётся.</p>
+    </details>
+    <details>
+      <summary>Мне обязательно что-то разворачивать у себя?</summary>
+      <p>Нет. Antenna работает со стандартным relay и без вашего сервера. Узел и relay — на случай, если они вам понадобятся.</p>
+    </details>
+    <details>
+      <summary>Как обновляется узел на сервере?</summary>
+      <p>Узел, установленный через <code>install.sh</code>, обновляется командой <code>antenna update</code>, которая сначала проверяет подпись выпуска; если вы ставили пакет, он обновляется через менеджер пакетов.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna — бесплатная программа с открытым кодом</strong> для macOS и Linux. Регистрация и номер телефона не нужны.</p>
+      <a class="btn" href="/ru/#download">Скачать Antenna</a>
+    </aside>
+    <h2>Ещё по теме</h2>
+    <ul class="related">
+      <li><a href="/ru/guides/peer-to-peer-encrypted-messenger">P2P-мессенджер с открытым кодом и постквантовым шифрованием</a></li>
+      <li><a href="/ru/guides/messenger-without-phone-number">Защищённый мессенджер без номера телефона и почты</a></li>
+      <li><a href="/ru/guides/message-claude-code-on-another-computer">Как отправить сообщение Claude Code на другом компьютере</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ru/" aria-label="Antenna — на главную"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ru/guides/">Инструкции</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Написать нам: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ru/privacy">Политика конфиденциальности</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

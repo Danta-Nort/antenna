@@ -1,0 +1,52 @@
+<!--guide {"title": "Notificação quando o Claude Code termina em outro computador", "h1": "Receba uma notificação quando o Claude Code terminar, num servidor ou em outro computador", "description": "O Claude Code no seu servidor ou em outro computador avisa num chat do Antenna, e o seu notebook mostra uma notificação. Pedidos de aprovação também avisam.", "summary": "Uma notificação no notebook quando o Claude Code, num servidor ou em outro computador, termina uma tarefa ou precisa da sua aprovação.", "source": "2026-11-15"}-->
+<p class="lead">Passe a tarefa ao Claude Code num chat do Antenna, a partir do seu notebook, e ele manda o resultado de volta para esse chat quando terminar: as instruções do Antenna dizem a um agente conectado que envie os resultados ao contato que deu a tarefa. O notebook então mostra uma notificação, “New message in server · api-dev”, enquanto a janela do Antenna não está em primeiro plano. Pedidos de aprovação também geram notificação, então uma execução que para no meio do caminho não fica esperando sem você perceber. O Antenna não acompanha sozinho os turnos do Claude Code: o relatório é uma mensagem do próprio Claude Code.</p>
+
+<h2>O que gera notificação</h2>
+<ul>
+  <li><strong>Uma mensagem do Claude Code para você.</strong> A notificação mostra o nome do chat, nunca o texto, no máximo uma vez a cada 10 segundos por chat.</li>
+  <li><strong>Um pedido de aprovação.</strong> Um passo que precisa do seu aval aparece como “Antenna: approval needed on server”, com o agente, o que ele quer fazer e o tempo que resta (“expires in 9 min”), mas nunca com o texto do pedido. Uma segunda notificação chega uns dois minutos antes de o pedido se fechar; ele se fecha depois de 10 minutos. Pedidos de outro computador chegam a você por <strong>My devices</strong> (meus dispositivos, <em>experimental</em>).</li>
+  <li><strong>Uma pergunta.</strong> <em>Experimental.</em> A pergunta de um agente gera notificação no computador onde ele roda: “A question from your agent”. Num servidor, rode lá <code>antenna agent escalate api-dev --to mac</code>, e as perguntas dele passam a chegar no chat do agente, no seu notebook.</li>
+</ul>
+<p>As notificações funcionam no macOS e nos desktops Linux que mostram notificações. O Antenna precisa estar aberto no notebook; com a janela dele em primeiro plano, os contadores de não lidas da lista de chats fazem esse papel.</p>
+
+<h2>Como configurar</h2>
+<ol>
+  <li><a href="/#download">Instale o Antenna</a> nos dois computadores e pareie-os uma vez com <strong>This is my own computer (∞)</strong> (este é o meu próprio computador) marcado. <a href="/guides/run-claude-code-on-a-vps">Claude Code numa VPS</a> mostra o lado do servidor passo a passo.</li>
+  <li>Inicie o Claude Code pelo Antenna. Num servidor:
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api</code></pre>
+  Num segundo desktop: <strong>Agents → AI apps → Start in Code mode</strong>.</li>
+  <li>Não há nada para configurar no notebook. Desde o início, um chat com um agente notifica as mensagens dirigidas a você pessoalmente e os pedidos de aprovação.</li>
+</ol>
+
+<h2>Peça o relatório</h2>
+<p>Escreva a tarefa no chat <code>api-dev</code> e diga o que você quer de volta: “Rode os testes da migração e corrija o que falhar. Quando terminar, responda aqui com o que mudou.” Se o Claude Code estiver parado no prompt, o Antenna digita uma linha para que ele leia a sua mensagem (<em>experimental</em>); ele trabalha, depois responde no mesmo chat, e o notebook mostra a notificação.</p>
+<p>Para o trabalho que você começa no terminal dele (<code>antenna session attach api-dev</code>), termine o prompt com “me mande um resumo pelo Antenna quando terminar”. Para virar hábito, acrescente uma linha ao <code>CLAUDE.md</code> do projeto: “Quando terminar uma tarefa, mande um resumo curto para <code>mac</code> com o <code>send_message</code> do Antenna.”</p>
+<p>O relatório chega quando o Claude Code decide que terminou, como acontece com qualquer instrução que ele segue. Se ele parar no próprio aviso de permissão no terminal (“Do you want to proceed?”), o Antenna não vê isso, e nenhuma notificação chega: libere nas configurações do Claude Code as ferramentas que você usa no dia a dia.</p>
+
+<h2>Escolha quais chats notificam</h2>
+<p>Abra <strong>⋮</strong> na linha de um chat, ou clique nela com o botão direito, e depois <strong>Notifications</strong> (notificações):</p>
+<ul>
+  <li><strong>All messages</strong> (todas as mensagens): cada mensagem nova deste chat (o padrão para uma pessoa).</li>
+  <li><strong>Only when it asks for me</strong> (só quando precisar de mim): mensagens dirigidas a você pessoalmente e pedidos de aprovação (o padrão para um agente).</li>
+  <li><strong>Off</strong> (desligado): os pedidos de aprovação continuam notificando.</li>
+</ul>
+<p>Quando o Claude Code se reporta a outro dos seus agentes em vez de a você, essas mensagens ficam em silêncio, a menos que você ligue <strong>Notify about messages between agents</strong> (notificar mensagens entre agentes) no mesmo menu. Num terminal: <code>antenna chats notify server --agent api-dev all</code>.</p>
+
+<h2>No computador em que você está</h2>
+<p>Com o Claude Code no Code mode no seu próprio notebook, o Antenna notifica os pedidos de aprovação e as perguntas dele enquanto a janela está em segundo plano, mas não o fim de um turno: um agente não consegue mandar mensagem para você no próprio computador dele. Para isso, os hooks do próprio Claude Code podem rodar um comando seu quando ele para.</p>
+
+<h2>Perguntas</h2>
+<details>
+  <summary>A notificação mostra o que o Claude Code escreveu?</summary>
+  <p>Não. Ela diz só “New message in” e o nome do chat, porque uma notificação pode aparecer com a tela bloqueada. Abra o chat para ler o relatório.</p>
+</details>
+<details>
+  <summary>E se o notebook estiver em repouso?</summary>
+  <p>A mensagem espera no servidor, e o Antenna a entrega, com a notificação, quando o notebook volta a ficar online.</p>
+</details>
+<details>
+  <summary>Posso receber a notificação no celular?</summary>
+  <p>Ainda não. Hoje o Antenna roda no macOS e no Linux.</p>
+</details>

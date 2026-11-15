@@ -1,0 +1,45 @@
+<!--guide {"title": "Komunikator P2P open source z szyfrowaniem postkwantowym — Antenna", "h1": "Komunikator peer-to-peer open source z szyfrowaniem postkwantowym", "description": "Antenna wysyła wiadomości prosto między urządzeniami, z szyfrowaniem end-to-end na kluczach postkwantowych, bez centralnego serwera. Jak to działa i co chroni.", "summary": "Jak Antenna łączy urządzenia bezpośrednio, szyfruje kluczami postkwantowymi i co może, a czego nie może zobaczyć przekaźnik.", "source": "2026-11-09"}-->
+<p class="lead">Antenna to darmowy komunikator peer-to-peer open source na macOS i Linuksa. Wiadomości i pliki idą prosto z jednego urządzenia na drugie przez QUIC, szyfrowane end-to-end postkwantowymi protokołami libsignal, a samo połączenie korzysta z hybrydowej postkwantowej wymiany kluczy. Nie ma centralnego serwera, który przechowywałby albo przekazywał twoje wiadomości; gdy dwa urządzenia nie mogą się połączyć bezpośrednio, przekaźnik (relay) przekazuje ruch, którego nie potrafi odszyfrować.</p>
+
+<h2>Peer-to-peer w praktyce</h2>
+<p>„Peer-to-peer” brzmi prosto, ale większość komputerów stoi za domowymi routerami i firewallami, które blokują połączenia przychodzące. Antenna korzysta z iroh, biblioteki QUIC, która znajduje bezpośrednią drogę przez takie przeszkody (hole punching), a gdy jej nie ma, przechodzi na przekaźnik. Połączenie zwykle zaczyna się przez przekaźnik i przełącza na drogę bezpośrednią, gdy tylko ją znajdzie. Tak czy inaczej przekaźnik widzi tylko zaszyfrowane pakiety, a każdy może zamiast domyślnego postawić własny.</p>
+<p>W tej samej sieci kontakty, którym ufasz wystarczająco, mogą też łączyć się przez sieć lokalną, nawet zupełnie bez internetu.</p>
+
+<h2>Dwie warstwy szyfrowania</h2>
+<table>
+  <thead><tr><th>Warstwa</th><th>Czego używa</th><th>Co chroni</th></tr></thead>
+  <tbody>
+    <tr><td>Połączenie</td><td>TLS 1.3 z X25519MLKEM768, hybrydą klasycznej i postkwantowej wymiany kluczy</td><td>Łącze między dwoma urządzeniami, także przez przekaźnik</td></tr>
+    <tr><td>Wiadomości</td><td>libsignal: PQXDH na początek rozmowy i postkwantowy ratchet SPQR</td><td>Każdą wiadomość i każdy plik, end-to-end, z forward secrecy</td></tr>
+  </tbody>
+</table>
+<p>„Postkwantowe” oznacza, że wymiana kluczy pozostaje bezpieczna wobec kogoś, kto dziś nagrywa ruch, a później odszyfruje go komputerem kwantowym. Antenna nie pisze własnej kryptografii: obie warstwy pochodzą z audytowanych albo formalnie zweryfikowanych bibliotek, a protokół parowania ma model formalny sprawdzony w ProVerifie.</p>
+
+<h2>Co zmienia architektura peer-to-peer</h2>
+<ul>
+  <li><strong>Nie ma konta do ukradzenia.</strong> Nie ma serwera z listą użytkowników, ich kontaktów ani wiadomości.</li>
+  <li><strong>Nie ma numeru telefonu.</strong> Ludzi dodajesz jednorazowym linkiem i kodem porównywanym głosowo. Zobacz <a href="/guides/messenger-without-phone-number">komunikator bez numeru telefonu</a>.</li>
+  <li><strong>Twój adres IP na twoich warunkach.</strong> Połączenie bezpośrednie pokazuje drugiej stronie twój adres. Kontakty z poziomem zaufania 1 i 2 zawsze łączą się przez przekaźnik, więc nigdy go nie widzą.</li>
+  <li><strong>Oba urządzenia muszą być online w tym samym czasie.</strong> Do tego czasu wiadomość czeka w kolejce nadawcy i wychodzi sama; serwer, który zostawisz włączony, sprawia, że twoi agenci są zawsze osiągalni.</li>
+</ul>
+
+<h2>Open source, który można sprawdzić</h2>
+<p>Aplikacja jest na licencji AGPL-3.0; protokół, jego formaty i wektory testowe — na Apache-2.0, więc inni mogą budować zgodne klienty. Wydania są podpisane, a kod źródłowy, specyfikacja i każda decyzja projektowa są na <a href="https://github.com/Danta-Nort/antenna">GitHubie</a>. Wiadomości są podpisane i powiązane hashami, a obie strony porównują swoje kopie, więc zmieniona albo cofnięta wiadomość pokazuje, gdzie to się stało.</p>
+
+<h2>Pytania</h2>
+<details>
+  <summary>Czy komunikator peer-to-peer jest wolniejszy?</summary>
+  <p>Zwykle nie: droga bezpośrednia omija podróż do centrum danych, a przez przekaźnik wiadomość ma tylko jeden przeskok więcej.</p>
+</details>
+<details>
+  <summary>Czy mogę postawić własny przekaźnik?</summary>
+  <p>Tak. Przekaźnik jest open source i tylko przekazuje zaszyfrowany ruch; skieruj swój węzeł na własny przekaźnik zamiast domyślnego.</p>
+</details>
+<details>
+  <summary>Czy to działa w grupach?</summary>
+  <p>Jeszcze nie. Antenna 0.1 ma rozmowy jeden na jeden: między ludźmi, między ludźmi i agentami oraz między agentami.</p>
+</details>
+<details>
+  <summary>Jakie platformy są obsługiwane?</summary>
+  <p>macOS na Apple Silicon (podpisana i notaryzowana aplikacja) oraz Linux na x86_64: aplikacja na komputer i węzeł serwerowy.</p>
+</details>

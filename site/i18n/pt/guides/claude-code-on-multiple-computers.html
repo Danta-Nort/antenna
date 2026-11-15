@@ -1,0 +1,40 @@
+<!--guide {"title": "Claude Code em vários computadores, tudo num só lugar — Antenna", "h1": "Use o Claude Code em vários computadores a partir de um só lugar", "description": "Rode o Claude Code no notebook, no desktop e no servidor e acesse todas as sessões numa única lista de chats: estado, pedidos e um botão de parar para cada uma.", "summary": "Sessões do Claude Code em vários computadores seus, numa lista de chats só, com o estado e os pedidos de cada computador.", "source": "2026-11-14"}-->
+<p class="lead">Deixe o Claude Code rodar onde o trabalho está, no notebook, num desktop e num servidor, e instale o Antenna em cada um deles. Pareie os computadores uma vez como seus (∞). A partir de qualquer um deles, você vê todas as sessões numa única lista de chats, escreve para qualquer uma pelo nome, responde aos pedidos de aprovação e para uma sessão que saiu do controle, sem abrir um terminal naquela máquina. O Codex funciona do mesmo jeito.</p>
+
+<h2>O que você ganha</h2>
+<ul>
+  <li><strong>Um chat por sessão</strong>, seja qual for o computador em que ela roda. Uma sessão no servidor e outra no desktop ficam na mesma lista que os seus contatos.</li>
+  <li><strong>My devices</strong> (meus dispositivos): um cartão para cada computador seu, com o sistema e a versão do Antenna, o estado de saúde segundo as próprias verificações dele, os agentes e se cada um está conectado, e os pedidos que esperam por você lá.</li>
+  <li><strong>Aprovações de onde você estiver.</strong> Um pedido de um agente no servidor pode ser aprovado no seu Mac, com Touch ID ou com a senha do Mac. O servidor confere a assinatura e executa o pedido por conta própria.</li>
+  <li><strong>Um botão de parar</strong> para cada agente em outro computador: ele para o agente e todos os processos que ele iniciou lá.</li>
+  <li><strong>O mapa de agentes</strong>, onde você liga uma sessão de um computador a uma sessão de outro, para que elas escrevam uma para a outra.</li>
+</ul>
+
+<h2>Configure</h2>
+<ol>
+  <li><strong>Instale o Antenna em cada computador</strong>: o app num Mac ou num desktop Linux, o nó num servidor Linux (<code>curl -fsSL https://antenna.contact/install.sh | sh</code>).</li>
+  <li><strong>Pareie os computadores entre si como seus.</strong> Crie um convite com <strong>This is my own computer (∞)</strong> (este é o meu próprio computador) marcado, abra-o no outro computador e digite em um lado o código que o outro mostra. Pareie cada computador com todos os outros que você quer ver ou conectar a partir dele: cada um precisa ter o outro em ∞.</li>
+  <li><strong>Dê um nome a cada sessão do Claude Code.</strong> Num desktop, inicie-a em Code mode pelo <code>+</code> do painel de agentes. Num servidor, na pasta do projeto, rode <code>antenna connect claude-code --agent api-dev --links mac --hello mac</code> e mantenha-a rodando com <code>antenna session start api-dev --dir ~/projects/api</code>; o guia <a href="/guides/run-claude-code-on-a-vps">Claude Code numa VPS</a> tem todos os passos.</li>
+  <li><strong>Deixe o seu computador principal responder aos pedidos.</strong> No servidor, rode <code>antenna devices confirm mac</code> uma vez; num desktop, aceite a chave do computador principal em <strong>My devices</strong> → o cartão dele → <strong>Approvals</strong>.</li>
+</ol>
+
+<h2>Passando trabalho de um computador para outro</h2>
+<p>Escreva para uma sessão como escreveria para uma pessoa: “<code>api-dev</code>, rode as migrations no servidor e me diga o que mudou.” Os arquivos que você solta no chat dela são salvos naquele computador, e o agente fica sabendo onde estão; entre os seus próprios computadores, arquivos comuns são salvos sem perguntar, enquanto programas e instaladores continuam esperando por você. Para deixar uma sessão do desktop passar trabalho para uma do servidor, ligue as duas no mapa de agentes. Uma sessão lá acorda quando chega uma mensagem, e uma mensagem urgente pode interromper o turno atual. <em>Experimental.</em></p>
+
+<h2>Perguntas</h2>
+<details>
+  <summary>O Antenna sincroniza as configurações ou o histórico do Claude Code entre computadores?</summary>
+  <p>Não. O Claude Code mantém as configurações, o histórico e o login em cada computador, e o seu código circula como já circula hoje, com git. O Antenna leva mensagens, arquivos e aprovações entre as sessões.</p>
+</details>
+<details>
+  <summary>Preciso de IP público ou de portas abertas no servidor?</summary>
+  <p>Não. Todo computador se conecta para fora, diretamente quando a rede permite e por um relay quando não, e o relay só repassa tráfego criptografado.</p>
+</details>
+<details>
+  <summary>Posso mudar uma configuração de outro computador daqui?</summary>
+  <p>Não. Só aprovações, comandos de parar e pedidos de conexão vindos do mapa de agentes, que aquele computador pede para você aprovar, circulam entre os seus computadores. Confiança, convites, atualizações e configurações são alterados no próprio computador, então um notebook roubado não consegue reescrever as regras do servidor.</p>
+</details>
+<details>
+  <summary>Funciona no Windows ou no celular?</summary>
+  <p>Ainda não. Hoje o Antenna roda no macOS e no Linux.</p>
+</details>

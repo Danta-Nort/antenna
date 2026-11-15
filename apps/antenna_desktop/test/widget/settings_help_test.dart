@@ -171,7 +171,9 @@ void main() {
     expect(look.ui, InterfaceMode.code);
     await t.tap(_key('settings-general'));
     await _settle(t);
-    await t.tap(_key('lang-ru'));
+    await t.tap(_key('lang-menu'));
+    await _settle(t);
+    await t.tap(find.byKey(const Key('lang-ru')).last);
     await _settle(t);
     expect(look.lang, LangChoice.ru);
     expect(find.text(ru.settingsAppearance), findsOneWidget);

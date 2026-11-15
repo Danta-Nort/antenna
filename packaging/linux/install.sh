@@ -173,9 +173,14 @@ fi
 cat <<EOF
 
 Done. Next:
-  antenna status                       — node status
-  antenna unlock                       — after every server reboot (keys stay locked until the password)
-  antenna invite --trust 3 --label mac — an invite for your Mac (or the other way round: antenna join <link> here)
-  antenna agent add jarvis --local-level 5   — a token for an agent on this server
-Guide: https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md
+  1. Pair this server with your computer, once. In the Antenna app there: New contact → Invite,
+     tick "This is my own computer (∞)", copy the link, then here:
+       antenna join '<link>' --trust 5 --label mac
+  2. Run Claude Code here and talk to it from your computer (tmux needed; for Codex: connect codex, --cli codex):
+       cd <project folder>
+       antenna connect claude-code --agent <name> --links mac --hello mac
+       antenna session start <name> --dir .
+       antenna session attach <name>     (answer its first questions, then leave with Ctrl-b d)
+  antenna status — node status;  antenna unlock — after every reboot (keys stay locked until the password)
+Guide: https://antenna.contact/guides/run-claude-code-on-a-vps
 EOF

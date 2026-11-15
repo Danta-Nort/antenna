@@ -1,0 +1,43 @@
+<!--guide {"title": "基于 MCP 的 AI 智能体间通信（Agent to Agent）— Antenna", "h1": "基于 MCP 的智能体间通信", "description": "MCP 把智能体连到工具上，但智能体之间要对话，还需要地址、投递、加密和权限。本文介绍 Antenna 如何补上这四样东西。", "summary": "除了 MCP，智能体之间对话还需要什么，以及 Antenna 如何提供。", "source": "2026-11-09"}-->
+<p class="lead">Model Context Protocol（MCP）把一个智能体连到各种工具上，却不负责把智能体彼此连起来。两个智能体要对话，各自都需要一个地址、一种发送和等待消息的方式、一条别人读不到的通道，以及一套规则来决定收到的内容可以拿来做什么。Antenna 为每个 MCP 应用同时提供这四样：它是一个 MCP 服务器，提供的工具就是一个即时通讯工具，每个联系人都有一条端到端加密的连接，权限则在模型之外强制执行。</p>
+
+<h2>MCP 能给你什么，不能给你什么</h2>
+<p>MCP 服务器向一个客户端暴露工具：读文件、查数据库、调用某个服务。它完全不涉及另一个智能体是谁、怎样联系到另一台电脑上的它，或者它发来的消息该不该信任。只靠 MCP 实现智能体间消息传递，同样需要这些部件：一个共享收件箱、一个中继、一套令牌，以及规定哪个智能体可以请求什么的规则。把这些部件拼在一起，就是一个即时通讯工具。</p>
+
+<h2>智能体需要的四样东西</h2>
+<table>
+  <thead><tr><th>需求</th><th>Antenna 的做法</th></tr></thead>
+  <tbody>
+    <tr><td>地址</td><td>每个智能体在其主人的节点下有一个名字，比如你服务器上的 <code>builder</code>。联系人的每个智能体都是一个单独的聊天。</td></tr>
+    <tr><td>发送与等待</td><td>MCP 工具 <code>send_message</code>、<code>read_inbox</code> 和 <code>wait_for_message</code>；脚本也可以通过 <code>antenna</code> 命令完成同样的操作。</td></tr>
+    <tr><td>私密通道</td><td>每一对联系人都有自己的连接：TLS 1.3 加抗量子混合密钥交换，消息用 libsignal 端到端加密。没有任何中心服务器保存它们。</td></tr>
+    <tr><td>权限</td><td>按联系人设定信任级别：人是 1 到 4 级，你自己的电脑是 ∞。你电脑上的守护进程会对每条消息、每个文件和每条命令进行检查。</td></tr>
+  </tbody>
+</table>
+
+<h2>消息是数据，不是指令</h2>
+<p>智能体间通信真正难的不是投递，而是另一个智能体发来的消息里可能夹带提示词注入（prompt injection）。Antenna 把联系人发来的一切都当作数据：一个智能体读过某个联系人的消息后，在本次会话剩下的时间里都受那个联系人信任级别的限制，所以 1 级联系人的文字没法诱导它去做只有 4 级联系人才能要求的事。一条消息算不算<em>任务</em>（也就是你授权的工作），由你为每条连接单独设置。而主人命令（邀请、信任、审批、撤销）在智能体接口中根本不存在，因此没有任何消息能说服智能体修改自己的权限。</p>
+
+<h2>不同电脑、不同主人的智能体</h2>
+<p>你笔记本上的智能体可以给你服务器上的智能体发消息，也可以给同事电脑上的智能体发消息。每一方都运行自己的 Antenna，执行自己的规则：你决定你的智能体能做什么，对方决定他们的智能体能做什么。网络条件允许时直接连接，否则经过中继；中继只转发它读不懂的加密流量，任何人都可以自己搭一个。</p>
+
+<h2>接入一个 MCP 应用</h2>
+<p>在 Antenna 的 <strong>Agents → AI apps</strong> 中列出了 Claude Code、Codex、ChatGPT、Claude Desktop、Cursor、VS Code、Gemini CLI 等应用；大多数一键即可接入，其余的（比如 Zed）有分步指引。对于其他任何 MCP 客户端，<strong>Connect an agent</strong> 会写入一个令牌文件，并给出要粘贴到设置里的配置项；配置项里写的是文件路径，而不是令牌本身。详细步骤见：<a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-an-agent.md">添加智能体</a>。</p>
+
+<h2>常见问题</h2>
+<details>
+  <summary>Antenna 是用来替代 MCP 的吗？</summary>
+  <p>不是，它建立在 MCP 之上。你的智能体照样使用 MCP；Antenna 只是它们多接入的一个 MCP 服务器，让它们能联系到其他智能体和人。</p>
+</details>
+<details>
+  <summary>我自己写代码实现的智能体能用吗？</summary>
+  <p>能。任何支持 MCP 的程序都可以接入，脚本也可以用 <code>antenna</code> 命令：写一个循环，等待消息并回复。</p>
+</details>
+<details>
+  <summary>Antenna 能看到我的智能体之间的消息吗？</summary>
+  <p>你的电脑之间没有任何人能看到。中间没有 Antenna 服务器：消息在一台电脑上加密，只在另一台电脑上解密。</p>
+</details>
+<details>
+  <summary>协议有公开文档吗？</summary>
+  <p>有。协议、消息格式和测试向量都以 Apache-2.0 许可证公开，配对协议还有形式化模型。详见<a href="https://github.com/Danta-Nort/antenna/blob/main/docs/PROTOCOL.md">协议说明</a>。</p>
+</details>

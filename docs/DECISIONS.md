@@ -6941,3 +6941,63 @@ a comparison when the terminal work comes up).
   stable release are never moved to a preview they did not ask for. No format, key or protocol change.
 - Decided with the move to `0.1.0` (the version is a maintainer decision, 2026-10-31).
 
+
+### D-139 · Windows: a per-user Inno Setup installer, unsigned for the first tests; the release names it `installer` (2026-10-31)
+- **Question.** W4 of the Windows port (D-134) needs an installer: MSIX, an MSI (WiX), NSIS or Inno Setup? Where does
+  it install, does it need an administrator, what does uninstalling remove, and how does the update manifest name it?
+- **Prior art.**
+  - VS Code's "User Installer" (the default download) and Telegram Desktop: Inno Setup, per user, no administrator,
+    into `%LOCALAPPDATA%\Programs\…`; an uninstall entry under HKCU; updates run the next installer silently.
+  - Signal Desktop and Slack: NSIS or Squirrel, also per user under `%LOCALAPPDATA%`.
+  - MSIX installs only signed packages (or with a trusted test certificate, which needs an administrator), and an MSIX
+    app runs with a virtualized `%APPDATA%` (Claude Desktop's config lives inside its package folder, WP-17).
+  - Every one of them leaves the user's data when the program is removed (VS Code keeps `%APPDATA%\Code`, Telegram its
+    `tdata`).
+- **Decision.**
+  1. **Inno Setup 6**, `packaging/windows/antenna.iss`, built by `build-installer.ps1` from the folder of
+     `build-folder.ps1`. `PrivilegesRequired=lowest` with no override: never elevated. Files go to
+     `%LOCALAPPDATA%\Programs\Antenna` (the folder `build-folder.ps1 -Install` used, so an earlier copy is replaced in
+     place), the Start menu entry to the user's Programs, an optional desktop shortcut (off), the uninstall entry to
+     HKCU under one fixed AppId. No folder or group page: there is nothing to choose (the window, the daemon and the
+     CLI are one program). English and Russian by the system's language, no language dialog.
+  2. **Uninstalling leaves the data folder** `%LOCALAPPDATA%\Antenna` and the logs: an identity is never removed with the
+     program (removing it is a separate, explicit act, as on the other systems).
+  3. **Upgrades:** the Restart Manager closes the window (`CloseApplications`), and the daemon follows it through its
+     stdin (WP-13). The named stop event for a daemon that runs without the window comes with the Windows `antenna
+     update` (WP-29).
+  4. **The release file** is `Antenna-<version>-windows-x86_64-setup.exe`, kind `installer` in the signed manifest
+     (`classify_name`); `antenna update --check` on Windows looks for that kind. Until `antenna update` runs it (WP-29),
+     the person runs it by hand, and it updates the installed copy in place.
+  5. **Unsigned for the first hands-on tests.** SmartScreen warns before an unsigned installer runs; Authenticode
+     signing is an open question for the maintainer. Code mode stays off in a default build until its hands-on check
+     on a Windows computer passes; the test build turns it on with `-CodeMode` (`ANTENNA_WINDOWS_CODE`).
+- **Why.** Inno Setup is what the closest leaders ship for exactly this case (a per-user desktop app with its own
+  updater), needs no administrator and no signing to install, and runs on the GitHub Windows runners and on any Windows
+  build machine. MSIX would need a signature before the first test and changes where other apps' files appear. NSIS
+  would build on Linux too, but the window can only be built on Windows anyway (Flutter has no cross build), so that
+  gains nothing. The cross build of the core from Linux stays off for the reason WP-32 gives.
+- Maintainer decision (2026-10-31): "all versions for all devices", the Windows port continued W1 → W2 → W4.
+
+### D-140 · The first update check of an installation carries one "first check" mark, so new installs can be counted (2026-11-05)
+- **Question.** The maintainer needs to know how many people start using Antenna each day. The app sends no telemetry
+  and has no accounts, and GitHub's download counts miss the update path, mirrors and re-downloads. What is the least
+  an installation can say to give that number?
+- **Prior art.**
+  - Sparkle (most Mac apps): the appcast request can carry an anonymous system profile, opt-in, once a week.
+  - Homebrew: anonymous install analytics, on by default, turned off with one variable.
+  - Debian popularity-contest: opt-in, a random host ID with the list of installed packages.
+  - Signal and Telegram: store numbers and accounts; nothing of the kind is needed with an account.
+- **Decision.** The first daily check after an installation (D-103, D-137) sends the header `X-Stillbyte-First: 1`
+  with the manifest request, once; every later check is the plain request it was. The daemon records `pending`
+  before that check and `sent` once the update host answered the manifest request, so a first check that failed (no
+  network) is repeated with the mark, and an installation is counted at most once. An installation that already
+  checked before this release never sends it. Turning the update URL off (`off` in `~/.config/antenna/update-url` or
+  `ANTENNA_UPDATE_URL=off`) turns the mark off with the checks. Debug builds have no update URL and never send it.
+- **Why.** One bit with no identifier: the host learns "a new installation checked today" and nothing that tells two
+  people or two requests apart. The host counts checks and first checks per day and stores no addresses (the privacy
+  page says so). Anything more (a random ID, versions, platforms per person) would give more numbers and turn a count
+  into telemetry.
+- The privacy policy said "The Antenna app sends no telemetry"; it now says the app only lets us count new installs,
+  with no addresses and no content.
+- Maintainer decision (2026-11-05): count new installs of every product, with no identifier leaving the device; for
+  Antenna, change the privacy promise to say so.

@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Code na VPS 24/7, sterowany z laptopa — Antenna</title>
+<meta name="description" content="Zainstaluj Antennę na VPS, uruchom przez nią Claude Code albo Codex i zlecaj zadania z czatu na laptopie. Bez otwartych portów i bez podtrzymywanej sesji SSH.">
+<link rel="canonical" href="https://antenna.contact/pl/guides/run-claude-code-on-a-vps">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Claude Code na VPS 24/7, sterowany z laptopa — Antenna">
+<meta property="og:description" content="Zainstaluj Antennę na VPS, uruchom przez nią Claude Code albo Codex i zlecaj zadania z czatu na laptopie. Bez otwartych portów i bez podtrzymywanej sesji SSH.">
+<meta property="og:url" content="https://antenna.contact/pl/guides/run-claude-code-on-a-vps">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="pl_PL">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/run-claude-code-on-a-vps">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/run-claude-code-on-a-vps">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/pl/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Poradniki",
+     "item": "https://antenna.contact/pl/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Claude Code na VPS przez całą dobę, z rozmową z laptopa",
+     "item": "https://antenna.contact/pl/guides/run-claude-code-on-a-vps"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Claude Code na VPS przez całą dobę, z rozmową z laptopa",
+   "description": "Zainstaluj Antennę na VPS, uruchom przez nią Claude Code albo Codex i zlecaj zadania z czatu na laptopie. Bez otwartych portów i bez podtrzymywanej sesji SSH.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "pl",
+   "url": "https://antenna.contact/pl/guides/run-claude-code-on-a-vps",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/pl/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Czemu nie po prostu SSH i tmux?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "To działa, dopóki siedzisz przy terminalu. Antenna dodaje czat, do którego możesz napisać z laptopa w każdej chwili, budzi sesję, gdy to zrobisz, i pozwala innym agentom zlecać jej pracę, z uprawnieniami, które sama sprawdza."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Czy serwer potrzebuje publicznego IP albo otwartych portów?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Nie. Obie strony łączą się na zewnątrz, bezpośrednio, gdy pozwala na to sieć, a w przeciwnym razie przez przekaźnik (relay). Przekaźnik przekazuje wyłącznie zaszyfrowany ruch."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Czy mogę uruchomić kilka sesji na jednym serwerze?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Tak: jeden agent na folder projektu, każdy z własną nazwą i własnym czatem na laptopie."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Czy jest wersja na ARM?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Jeszcze nie. Węzeł serwerowy jest budowany na Linuksa x86_64."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Przejdź do treści</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/pl/" aria-label="Antenna — strona główna"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Menu główne">
+      <a href="/pl/#product">Produkt</a>
+      <a href="/pl/#security">Bezpieczeństwo</a>
+      <a href="/pl/guides/">Poradniki</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Język: Polski"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">PL</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/run-claude-code-on-a-vps" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/run-claude-code-on-a-vps" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/run-claude-code-on-a-vps" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/run-claude-code-on-a-vps" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/run-claude-code-on-a-vps" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/run-claude-code-on-a-vps" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/run-claude-code-on-a-vps" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/run-claude-code-on-a-vps" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/run-claude-code-on-a-vps" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/run-claude-code-on-a-vps" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/run-claude-code-on-a-vps" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/run-claude-code-on-a-vps" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/run-claude-code-on-a-vps" hreflang="pl" lang="pl" aria-current="true">Polski</a></li>
+        <li><a href="/ru/guides/run-claude-code-on-a-vps" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/run-claude-code-on-a-vps" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/pl/#download">Pobierz</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Ścieżka nawigacji"><a href="/pl/">Antenna</a> <span aria-hidden="true">›</span> <a href="/pl/guides/">Poradniki</a></nav>
+    <p class="eyebrow">Zaktualizowano <time datetime="2026-11-09">9 listopada 2026</time></p>
+    <h1>Claude Code na VPS przez całą dobę, z rozmową z laptopa</h1>
+    <p class="lead">Zainstaluj Claude Code i węzeł Antenny na swoim VPS z Linuksem, raz połącz serwer z laptopem i uruchom Claude Code przez Antennę w folderze projektu. Od tej chwili działa we własnej sesji tmux także po wylogowaniu, budzi się, gdy przyjdzie do niego wiadomość, i odpowiada na czacie na twoim laptopie. Nie trzeba otwierać portu przychodzącego ani podtrzymywać sesji SSH, a Codex działa tak samo.</p>
+
+    <h2>Czego potrzebujesz</h2>
+    <ul>
+      <li>Serwera z Linuksem na x86_64, z zainstalowanym i zalogowanym Claude Code (albo Codex) oraz tmuxem.</li>
+      <li><a href="/pl/#download">Antenny</a> na laptopie: macOS albo Linux.</li>
+    </ul>
+
+    <h2>1. Zainstaluj węzeł Antenny na serwerze</h2>
+    <pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+    sudo loginctl enable-linger $USER</code></pre>
+    <p>Instalator odczytuje najnowsze wydanie z podpisanego manifestu, sprawdza archiwum, instaluje <code>antennad</code> i <code>antenna</code> do <code>~/.local/bin</code> jako usługę użytkownika systemd (root nie jest potrzebny) i tworzy twój węzeł z hasłem. Druga linia sprawia, że usługa działa dalej po wylogowaniu. Na Ubuntu albo Fedorze możesz zamiast tego zainstalować pakiet <code>.deb</code> albo <code>.rpm</code>.</p>
+
+    <h2>2. Połącz serwer z laptopem</h2>
+    <p>Na laptopie: <strong>New contact → Invite</strong>, nadaj nazwę, zaznacz <strong>This is my own computer (∞)</strong>, kliknij <strong>Create link</strong> i skopiuj link. Na serwerze:</p>
+    <pre><code>antenna join '&lt;link&gt;' --trust 5 --label mac</code></pre>
+    <p>Zostaw pojedyncze cudzysłowy: link zawiera znak <code>#</code>. Wpisz w terminalu serwera kod pokazany na laptopie, a potem na laptopie kliknij <strong>The contact confirmed — codes match</strong>. Poziom 5 to ∞ po obu stronach, więc serwer liczy się jako twój własny komputer.</p>
+
+    <h2>3. Uruchom Claude Code przez Antennę</h2>
+    <pre><code>cd ~/projects/api
+    antenna connect claude-code --agent api-dev --links mac --hello mac
+    antenna session start api-dev --dir ~/projects/api
+    antenna session attach api-dev</code></pre>
+    <p>Linia z connect daje sesji własnego agenta i token oraz wysyła powitanie, więc na laptopie pojawia się czat <code>api-dev</code>. Linia ze start uruchamia Claude Code na własnym serwerze tmux Antenny (twojego tmuxa nic nie dotyka). Podłącz się raz, żeby odpowiedzieć na pierwsze pytania Claude Code, na przykład czy ufa temu folderowi, a potem odłącz się skrótem <code>Ctrl-b d</code>: Claude Code działa dalej. W przypadku Codexa użyj <code>antenna connect codex</code> i <code>--cli codex</code>.</p>
+
+    <h2>4. Rozmawiaj z nim</h2>
+    <p>Napisz na czacie <code>api-dev</code> na laptopie: „Uruchom testy migracji i napraw to, co nie przechodzi”. Gdy Claude Code czeka bezczynnie przy swoim prompcie, Antenna wpisuje jedną krótką linię, żeby przeczytał twoją wiadomość; nigdy nie wpisuje tekstu od kontaktu i nigdy nie odpowiada za niego na pytania. Karta serwera w <strong>My devices</strong> pokazuje jego stan i agentów, a jego prośby możesz zatwierdzać z laptopa.</p>
+
+    <h2>Po restarcie</h2>
+    <p>Po restarcie serwera klucze węzła są zablokowane: usługa działa, ale połączenia milczą, dopóki się nie zalogujesz i nie uruchomisz <code>antenna unlock</code>. Dzięki temu kopia dysku serwera nikomu nie da twoich kluczy. <code>antenna status</code> pokazuje, czy węzeł jest zablokowany.</p>
+
+    <h2>Pytania</h2>
+    <details>
+      <summary>Czemu nie po prostu SSH i tmux?</summary>
+      <p>To działa, dopóki siedzisz przy terminalu. Antenna dodaje czat, do którego możesz napisać z laptopa w każdej chwili, budzi sesję, gdy to zrobisz, i pozwala innym agentom zlecać jej pracę, z uprawnieniami, które sama sprawdza.</p>
+    </details>
+    <details>
+      <summary>Czy serwer potrzebuje publicznego IP albo otwartych portów?</summary>
+      <p>Nie. Obie strony łączą się na zewnątrz, bezpośrednio, gdy pozwala na to sieć, a w przeciwnym razie przez przekaźnik (relay). Przekaźnik przekazuje wyłącznie zaszyfrowany ruch.</p>
+    </details>
+    <details>
+      <summary>Czy mogę uruchomić kilka sesji na jednym serwerze?</summary>
+      <p>Tak: jeden agent na folder projektu, każdy z własną nazwą i własnym czatem na laptopie.</p>
+    </details>
+    <details>
+      <summary>Czy jest wersja na ARM?</summary>
+      <p>Jeszcze nie. Węzeł serwerowy jest budowany na Linuksa x86_64.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna jest darmowa i open source</strong>, na macOS i Linuksa. Bez konta i bez numeru telefonu.</p>
+      <a class="btn" href="/pl/#download">Pobierz Antennę</a>
+    </aside>
+    <h2>Powiązane poradniki</h2>
+    <ul class="related">
+      <li><a href="/pl/guides/message-claude-code-on-another-computer">Jak wysłać wiadomość do Claude Code na innym komputerze</a></li>
+      <li><a href="/pl/guides/ai-agent-that-replies-to-messages">Jak ustawić agenta AI, który odpowiada na twoje wiadomości</a></li>
+      <li><a href="/pl/guides/claude-code-multiple-agents-working-together">Jak uruchomić kilku agentów Claude Code, którzy razem pracują nad jednym projektem</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/pl/" aria-label="Antenna — strona główna"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/pl/guides/">Poradniki</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Kontakt: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/pl/privacy">Polityka prywatności</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

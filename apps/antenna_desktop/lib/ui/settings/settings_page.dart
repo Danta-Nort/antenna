@@ -508,17 +508,22 @@ class _SettingsPageState extends State<SettingsPage> {
                 title: l.settingsLanguage,
                 help: l.settingsLanguageHint,
                 // Each language is named in itself, so it can be recognized even when the current UI language
-                // cannot be read.
-                control: SegmentedButton<LangChoice>(
-                  showSelectedIcon: false,
-                  style: segmentStyle,
-                  segments: [
-                    ButtonSegment(value: LangChoice.system, label: Text(l.settingsSystem, key: const Key('lang-system'))),
-                    ButtonSegment(value: LangChoice.en, label: Text(l10nFor('en').langEnglish, key: const Key('lang-en'))),
-                    ButtonSegment(value: LangChoice.ru, label: Text(l10nFor('ru').langRussian, key: const Key('lang-ru'))),
+                // cannot be read. The button shows the choice without the items' keys, so a test finds one of each.
+                control: DropdownButton<LangChoice>(
+                  key: const Key('lang-menu'),
+                  value: look.lang,
+                  underline: Container(height: 1, color: XColors.lineStrong),
+                  items: [
+                    for (final c in LangChoice.values)
+                      DropdownMenuItem(value: c, child: Text(_langLabel(l, c), key: Key('lang-${c.name}'))),
                   ],
-                  selected: {look.lang},
-                  onSelectionChanged: (s) => look.lang = s.first,
+                  selectedItemBuilder: (_) => [
+                    for (final c in LangChoice.values)
+                      Align(alignment: Alignment.centerRight, child: Text(_langLabel(l, c))),
+                  ],
+                  onChanged: (c) {
+                    if (c != null) look.lang = c;
+                  },
                 ),
               ),
             ),
@@ -675,3 +680,7 @@ class _SectionItem extends StatelessWidget {
     );
   }
 }
+
+/// A language picker entry: "System" in the current language, every language by its own name.
+String _langLabel(AppLocalizations l, LangChoice c) =>
+    c == LangChoice.system ? l.settingsSystem : l10nFor(c.name).langName;

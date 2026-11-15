@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Notifica quando Claude Code finisce un task su un altro computer</title>
+<meta name="description" content="Claude Code sul tuo server o su un altro computer ti risponde in una chat di Antenna e il portatile mostra una notifica. Anche le richieste di approvazione.">
+<link rel="canonical" href="https://antenna.contact/it/guides/claude-code-notifications">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Notifica quando Claude Code finisce un task su un altro computer">
+<meta property="og:description" content="Claude Code sul tuo server o su un altro computer ti risponde in una chat di Antenna e il portatile mostra una notifica. Anche le richieste di approvazione.">
+<meta property="og:url" content="https://antenna.contact/it/guides/claude-code-notifications">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="it_IT">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/claude-code-notifications">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/claude-code-notifications">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/claude-code-notifications">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/claude-code-notifications">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/claude-code-notifications">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/claude-code-notifications">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/claude-code-notifications">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/claude-code-notifications">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/claude-code-notifications">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/claude-code-notifications">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/claude-code-notifications">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/claude-code-notifications">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/claude-code-notifications">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/claude-code-notifications">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/claude-code-notifications">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/claude-code-notifications">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/it/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Guide",
+     "item": "https://antenna.contact/it/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Ricevi una notifica quando Claude Code finisce, su un server o un altro computer",
+     "item": "https://antenna.contact/it/guides/claude-code-notifications"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Ricevi una notifica quando Claude Code finisce, su un server o un altro computer",
+   "description": "Claude Code sul tuo server o su un altro computer ti risponde in una chat di Antenna e il portatile mostra una notifica. Anche le richieste di approvazione.",
+   "datePublished": "2026-11-15",
+   "dateModified": "2026-11-15",
+   "inLanguage": "it",
+   "url": "https://antenna.contact/it/guides/claude-code-notifications",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/it/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "La notifica mostra che cosa ha scritto Claude Code?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No. Dice solo “New message in” e il nome della chat, perché una notifica può comparire a schermo bloccato. Apri la chat per leggere il resoconto."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "E se il portatile è in stop?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Il messaggio aspetta sul server, e Antenna lo consegna, con la sua notifica, quando il portatile torna online."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Posso ricevere la notifica sul telefono?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Non ancora. Per ora Antenna gira su macOS e Linux."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Vai al contenuto</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/it/" aria-label="Antenna — home"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Principale">
+      <a href="/it/#product">Prodotto</a>
+      <a href="/it/#security">Sicurezza</a>
+      <a href="/it/guides/">Guide</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Lingua: Italiano"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">IT</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/claude-code-notifications" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/claude-code-notifications" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/claude-code-notifications" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/claude-code-notifications" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/claude-code-notifications" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/claude-code-notifications" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/claude-code-notifications" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/claude-code-notifications" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/claude-code-notifications" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/claude-code-notifications" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/claude-code-notifications" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/claude-code-notifications" hreflang="it" lang="it" aria-current="true">Italiano</a></li>
+        <li><a href="/pl/guides/claude-code-notifications" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/claude-code-notifications" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/claude-code-notifications" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/it/#download">Scarica</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Percorso"><a href="/it/">Antenna</a> <span aria-hidden="true">›</span> <a href="/it/guides/">Guide</a></nav>
+    <p class="eyebrow">Aggiornata <time datetime="2026-11-15">15 novembre 2026</time></p>
+    <h1>Ricevi una notifica quando Claude Code finisce, su un server o un altro computer</h1>
+    <p class="lead">Dai a Claude Code il suo compito in una chat di Antenna dal tuo portatile, e quando ha finito ti rimanda il risultato in quella stessa chat: le istruzioni di Antenna dicono a un agente collegato di inviare i risultati al contatto che gli ha dato il compito. Il portatile mostra allora una notifica, “New message in server · api-dev”, mentre la finestra di Antenna non è in primo piano. Anche le richieste di approvazione mandano una notifica, così un lavoro che si ferma a metà non resta in attesa senza che te ne accorga. Antenna non osserva da sé i turni di Claude Code: il resoconto è un messaggio di Claude Code stesso.</p>
+
+    <h2>Che cosa ti manda una notifica</h2>
+    <ul>
+      <li><strong>Un messaggio di Claude Code per te.</strong> La notifica indica il nome della chat, mai il testo, al massimo una volta ogni 10 secondi per chat.</li>
+      <li><strong>Una richiesta di approvazione.</strong> Un passo che ha bisogno del tuo via libera compare come “Antenna: approval needed on server”, con l'agente, che cosa vuole fare e il tempo rimasto (“expires in 9 min”), ma mai con il testo della richiesta. Una seconda notifica arriva circa due minuti prima che la richiesta si chiuda; si chiude dopo 10 minuti. Le richieste da un altro computer ti arrivano tramite <strong>My devices</strong> (i miei dispositivi, <em>sperimentale</em>).</li>
+      <li><strong>Una domanda.</strong> <em>Sperimentale.</em> La domanda di un agente manda una notifica sul computer dove gira: “A question from your agent”. Per un server, esegui lì <code>antenna agent escalate api-dev --to mac</code>, e le sue domande arrivano invece nella chat dell'agente sul tuo portatile.</li>
+    </ul>
+    <p>Le notifiche funzionano su macOS e sui desktop Linux che mostrano notifiche. Antenna deve essere aperto sul portatile; con la sua finestra in primo piano, i contatori dei non letti nell'elenco delle chat fanno lo stesso lavoro.</p>
+
+    <h2>Come configurarlo</h2>
+    <ol>
+      <li><a href="/it/#download">Installa Antenna</a> su entrambi i computer e abbinali una volta con la casella <strong>This is my own computer (∞)</strong> (questo è il mio computer) spuntata. <a href="/it/guides/run-claude-code-on-a-vps">Claude Code su una VPS</a> spiega passo passo la parte del server.</li>
+      <li>Avvia Claude Code tramite Antenna. Su un server:
+    <pre><code>cd ~/projects/api
+    antenna connect claude-code --agent api-dev --links mac --hello mac
+    antenna session start api-dev --dir ~/projects/api</code></pre>
+      Su un secondo desktop: <strong>Agents → AI apps → Start in Code mode</strong>.</li>
+      <li>Sul portatile non c'è niente da impostare. Fin dall'inizio, una chat con un agente manda notifiche per i messaggi rivolti a te di persona e per le richieste di approvazione.</li>
+    </ol>
+
+    <h2>Chiedi il resoconto</h2>
+    <p>Scrivi il compito nella chat <code>api-dev</code> e di' che cosa vuoi in risposta: “Esegui i test della migrazione e correggi quello che fallisce. Quando hai finito, rispondi qui con che cosa è cambiato.” Se Claude Code è fermo al suo prompt, Antenna scrive una riga perché legga il tuo messaggio (<em>sperimentale</em>); lui lavora, poi risponde nella stessa chat, e il portatile mostra la notifica.</p>
+    <p>Per il lavoro che avvii nel suo terminale (<code>antenna session attach api-dev</code>), chiudi il prompt con “mandami un riepilogo su Antenna quando hai finito”. Per farlo diventare un'abitudine, aggiungi una riga al <code>CLAUDE.md</code> del progetto: “Quando finisci un compito, manda un breve riepilogo a <code>mac</code> con <code>send_message</code> di Antenna.”</p>
+    <p>Il resoconto arriva quando Claude Code decide di aver finito, come per qualsiasi istruzione che segue. Se si ferma alla sua richiesta di permesso nel terminale (“Do you want to proceed?”), Antenna non lo vede e non ti arriva nessuna notifica: consenti nelle impostazioni di Claude Code gli strumenti che usi di solito.</p>
+
+    <h2>Scegli quali chat mandano notifiche</h2>
+    <p>Apri <strong>⋮</strong> sulla riga di una chat, oppure fai clic destro su di essa, poi <strong>Notifications</strong> (notifiche):</p>
+    <ul>
+      <li><strong>All messages</strong> (tutti i messaggi): ogni nuovo messaggio in questa chat (l'impostazione predefinita per una persona).</li>
+      <li><strong>Only when it asks for me</strong> (solo quando mi cerca): i messaggi rivolti a te di persona e le richieste di approvazione (l'impostazione predefinita per un agente).</li>
+      <li><strong>Off</strong> (disattivate): le richieste di approvazione mandano comunque una notifica.</li>
+    </ul>
+    <p>Quando Claude Code fa rapporto a un altro dei tuoi agenti invece che a te, quei messaggi restano silenziosi, a meno che tu non attivi <strong>Notify about messages between agents</strong> (notifica i messaggi tra agenti) nello stesso menu. In un terminale: <code>antenna chats notify server --agent api-dev all</code>.</p>
+
+    <h2>Sul computer dove ti trovi</h2>
+    <p>Con Claude Code nella modalità Code sul tuo stesso portatile, Antenna ti notifica le sue richieste di approvazione e le sue domande mentre la finestra è in secondo piano, ma non la fine di un turno: un agente non può scriverti sul suo stesso computer. Per questo, gli hook di Claude Code possono eseguire un tuo comando quando si ferma.</p>
+
+    <h2>Domande</h2>
+    <details>
+      <summary>La notifica mostra che cosa ha scritto Claude Code?</summary>
+      <p>No. Dice solo “New message in” e il nome della chat, perché una notifica può comparire a schermo bloccato. Apri la chat per leggere il resoconto.</p>
+    </details>
+    <details>
+      <summary>E se il portatile è in stop?</summary>
+      <p>Il messaggio aspetta sul server, e Antenna lo consegna, con la sua notifica, quando il portatile torna online.</p>
+    </details>
+    <details>
+      <summary>Posso ricevere la notifica sul telefono?</summary>
+      <p>Non ancora. Per ora Antenna gira su macOS e Linux.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna è gratuita e open source</strong>, per macOS e Linux. Niente account, niente numero di telefono.</p>
+      <a class="btn" href="/it/#download">Scarica Antenna</a>
+    </aside>
+    <h2>Guide correlate</h2>
+    <ul class="related">
+      <li><a href="/it/guides/run-claude-code-on-a-vps">Claude Code su una VPS giorno e notte, e tu gli parli dal portatile</a></li>
+      <li><a href="/it/guides/approve-claude-code-permissions-remotely">Approva le richieste di Claude Code da un altro computer</a></li>
+      <li><a href="/it/guides/message-claude-code-on-another-computer">Inviare un messaggio a Claude Code su un altro computer</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/it/" aria-label="Antenna — home"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/it/guides/">Guide</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Contatti: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/it/privacy">Informativa sulla privacy</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

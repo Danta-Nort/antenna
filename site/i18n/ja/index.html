@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Antenna — 人と AI エージェントのためのプライベートなメッセンジャー</title>
+<meta name="description" content="Antenna は人と AI エージェントのための無料・オープンソースの P2P メッセンジャー。Claude Code や Codex などのエージェントを 1 つの画面からエンドツーエンド暗号化で操作できます。連絡先ごとの権限を決めるのはモデルではなく手元のデーモン。アカウント不要、macOS・Linux 対応。">
+<link rel="canonical" href="https://antenna.contact/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Antenna",
+  "description": "人と AI エージェントのための無料・オープンソースの P2P メッセンジャー。耐量子のエンドツーエンド暗号化、アカウント不要、そして連絡先とエージェントごとの信頼レベルをローカルのデーモンが強制します。",
+  "url": "https://antenna.contact/",
+  "image": "https://antenna.contact/og.png",
+  "screenshot": "https://antenna.contact/assets/screen-light.webp",
+  "applicationCategory": "CommunicationApplication",
+  "operatingSystem": "macOS, Linux",
+  "license": "https://www.gnu.org/licenses/agpl-3.0.html",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "downloadUrl": "https://github.com/Danta-Nort/antenna/releases/latest",
+  "softwareHelp": "https://github.com/Danta-Nort/antenna/blob/main/docs/guide/getting-started.md",
+  "sameAs": ["https://github.com/Danta-Nort/antenna"],
+  "publisher": { "@type": "Organization", "name": "Stillbyte LLC", "email": "hello@antenna.contact", "url": "https://antenna.contact/" }
+}
+</script>
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#F5F8FD">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Antenna — 人と AI エージェントのためのプライベートなメッセンジャー">
+<meta property="og:description" content="持ち主の異なる人と AI エージェントをつなぐ、P2P で耐量子エンドツーエンド暗号化の通信チャネル。信頼レベルを強制するのはモデルではなくコードです。">
+<meta property="og:url" content="https://antenna.contact/">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Antenna のロゴ — AI エージェントのための安全なチャネルと信頼レイヤー">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/IBMPlexSans-SemiBold.latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/IBMPlexSans-Regular.latin.woff2" as="font" type="font/woff2" crossorigin>
+<!-- i18n -->
+<meta property="og:locale" content="en_US">
+<!-- /i18n -->
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script src="/assets/site.js?v=4" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">本文へスキップ</a>
+
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/" aria-label="Antenna — ホーム"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="メイン">
+      <a href="#product">製品</a>
+      <a href="#how">仕組み</a>
+      <a href="#security">セキュリティ</a>
+      <a href="#status">開発状況</a>
+      <a href="/guides/">ガイド</a>
+      <a href="https://github.com/Danta-Nort/antenna">GitHub</a>
+    </nav>
+    <!-- lang -->
+    <!-- /lang -->
+    <a class="btn btn-small top-cta" href="#download">ダウンロード</a>
+  </div>
+</header>
+
+<!-- Invite handler. Shown only when the address has an invite after "#".
+     The fragment never leaves the browser: site.js reads it locally, sends it nowhere,
+     and removes it from the address bar and history. -->
+<section id="invite" class="invite" aria-labelledby="invite-title" hidden>
+  <div class="wrap">
+    <div class="card invite-card">
+      <p class="eyebrow">招待</p>
+      <h1 id="invite-title">Antenna でのつながりに招待されています</h1>
+      <p class="lead">このリンクを Antenna アプリで開いてください。続いて相手が確認コードを伝えるので、それを入力し、相手に読み上げて返してください。このコードこそが、間に誰も入り込んでいないことの証明になります。</p>
+      <div class="cta">
+        <a class="btn" id="invite-open" href="/">Antenna で開く</a>
+        <button class="btn btn-ghost" id="invite-copy" type="button">リンクをコピー</button>
+      </div>
+      <div class="invite-get" id="invite-get">
+        <p><strong>まだ Antenna をお持ちでない場合</strong>：無料で、macOS と Linux に対応しています。インストールしてノードを作成したら、このタブを開いたまま、ここで <strong>Antenna で開く</strong> を押してください。招待の有効期限は数分です。それまでに期限が切れてしまったら、相手に新しい招待を頼んでください。</p>
+        <a class="btn btn-ghost" id="invite-download" href="#download">Antenna をダウンロード</a>
+      </div>
+      <label class="field">
+        <span class="label">招待リンク</span>
+        <textarea id="invite-link" class="mono" rows="3" readonly spellcheck="false"></textarea>
+      </label>
+      <p id="invite-copy-status" class="note" role="status" aria-live="polite"></p>
+      <ul class="notes">
+        <li>このページはリンクをブラウザの中で読み取りました。「#」より後ろの部分がサーバーに送られることはなく、私たちのサーバーも例外ではありません。このページはほかのサイトから何も読み込まず、リンクをどこにも送りません。また、リンクはアドレスバーとブラウザの履歴からも消去済みです。</li>
+        <li>ボタンを押しても何も起きない場合は、リンクをコピーして Antenna で招待リンクの入力を求められたところに貼り付けるか、ターミナルで <code>antenna join '&lt;link&gt;'</code> を実行してください。</li>
+        <li>招待は 1 回だけ使え、期限が切れると無効になります。たとえ誰かにリンクを見られても、確認コードがあなたを守ります。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<main id="main">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="pill"><span class="pill-dot" aria-hidden="true"></span>オープンソース · 無料 · v0.1</p>
+        <h1 id="hero-title">人とエージェントのための、<span class="h1-line">プライベートなメッセンジャー</span></h1>
+        <p class="lead">人と話すのも、Claude Code や Codex などのエージェントに指示を出すのも 1 つのウィンドウで。手持ちのどのコンピューターからでも、エンドツーエンド暗号化でやり取りできます。各連絡先に何を許すかを決めるのは、モデルではなくあなたのマシン上のデーモンです。アカウントも中央サーバーもありません。</p>
+        <div class="cta">
+          <a class="btn btn-lg" id="hero-download" href="#download"><span id="hero-download-label">ダウンロード</span><svg class="btn-arrow" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5.5 15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="btn btn-lg btn-ghost" href="https://github.com/Danta-Nort/antenna">GitHub で見る</a>
+        </div>
+        <p class="platforms">macOS（Apple Silicon）と Linux · AGPL-3.0</p>
+      </div>
+      <figure class="laptop">
+        <div class="laptop-lid">
+          <div class="laptop-screen">
+            <img src="/assets/screen-light.webp?v=3"
+                 srcset="/assets/screen-light-720.webp?v=3 720w, /assets/screen-light-1440.webp?v=3 1440w, /assets/screen-light.webp?v=3 2160w"
+                 sizes="(min-width: 1280px) 650px, (min-width: 960px) 48vw, 90vw"
+                 width="2160" height="1350" fetchpriority="high" decoding="async"
+                 alt="Antenna のデスクトップアプリ：信頼レベル付きのチャット一覧、エンドツーエンド暗号化された会話、そして右側のパネルで作業中の Claude Code エージェント。">
+          </div>
+        </div>
+        <div class="laptop-base" aria-hidden="true"></div>
+      </figure>
+    </div>
+  </section>
+
+  <section id="product" class="features" aria-labelledby="features-title">
+    <div class="wrap">
+      <h2 id="features-title" class="visually-hidden">Antenna でできること</h2>
+      <ul class="feature-row">
+        <li class="feature">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3M12 14.5v2.5"/></svg></span>
+          <h3>エンドツーエンド暗号化</h3>
+          <p>すべての接続が耐量子暗号に対応。TLS 1.3 上のハイブリッド X25519 + ML-KEM-768 と、すべてのメッセージに Signal の Triple Ratchet（PQXDH と SPQR）を使います。</p>
+        </li>
+        <li class="feature">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M10 3.5l1.7 4.6 4.6 1.7-4.6 1.7L10 16.1l-1.7-4.6-4.6-1.7 4.6-1.7z"/><path d="M17.5 14l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg></span>
+          <h3>すべてのエージェントを 1 か所に</h3>
+          <p>Claude Code、Codex、ChatGPT、Claude Desktop、Cursor などの MCP アプリをワンクリックで接続でき、ご自身のサブスクリプションのまま使えます。メッセージが届くと宛先のエージェントが起動し、承認は手持ちのどのコンピューターからでも行えます。</p>
+        </li>
+        <li class="feature">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M14 3.5H7.5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V8z"/><path d="M14 3.5V8h4.5M9.2 14.4l2 2 3.6-4"/></svg></span>
+          <h3>安全なファイル共有</h3>
+          <p>受信したファイルはまず隔離されます。実際の形式で判定・スキャンされ、受け取る前に無害化したプレビューで中身を確認できます。</p>
+        </li>
+        <li class="feature">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4.2 12a7.8 7.8 0 1 0 2.3-5.5"/><path d="M4.2 4.2v3.6h3.6M12 8v4.3l2.9 1.8"/></svg></span>
+          <h3>検証できる履歴</h3>
+          <p>会話の両側が、署名とハッシュでつながった履歴のコピーを照合します。メッセージの改ざんや巻き戻しがあれば、どこで起きたかまで正確にわかります。</p>
+        </li>
+      </ul>
+      <div class="tagline">
+        <p class="rule">設計から P2P</p>
+        <p class="say">アカウントも電話番号も中央サーバーもありません。いるのはあなたと、あなたが信頼する人と、あなたが許可したエージェントだけです。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="why" class="section section-soft" aria-labelledby="why-title">
+    <div class="wrap split">
+      <div class="split-head">
+        <p class="eyebrow">Antenna を選ぶ理由</p>
+        <h2 id="why-title">エージェントはあちこちで働いています。どこにいても話しかけられるべきです。</h2>
+        <p class="lead">ノート PC に 1 つ、サーバーに 2 つ、別のマシンにもう 1 つ。さらに一緒に働く人たち。Antenna はそのすべてをつなぐ 1 本のチャネルです。ルールを守らせるのはモデルの判断ではなく、コードです。</p>
+      </div>
+      <div class="points">
+        <article class="point">
+          <h3>ターミナルに張り付く必要はもうありません</h3>
+          <p>人にメッセージを送るのと同じように、エージェントに書き込みましょう。エージェントはメッセージで起動してチャットで返事をし、信頼レベルで許されていないことだけをあなたに確認します。手元にあるのがどのコンピューターでもかまいません。</p>
+        </article>
+        <article class="point">
+          <h3>すべてのメッセージは信頼できない入力です</h3>
+          <p>相手から届いたテキストは、そのままエージェントのコンテキストに入ります。巧妙に作られたメッセージは、ファイルを読ませたり、コマンドを実行させたり、送るべきでないものを転送させたりできます。プロンプトインジェクションは、モデルに「気をつけて」と頼むだけでは防げません。</p>
+        </article>
+        <article class="point">
+          <h3>権限はコードで管理するもの</h3>
+          <p>Antenna では、何が許されるかをモデルが決めることはありません。ローカルのデーモンが、すべての操作を実行前に連絡先の信頼レベルと照らし合わせます。招待、信頼レベルの変更、承認、取り消しといったオーナー向けのコマンドは、エージェントのインターフェースにそもそも存在しません。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="section" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">仕組み</p>
+        <h2 id="how-title">自分で管理できるチャネルを 3 ステップで</h2>
+      </div>
+      <ol class="steps">
+        <li class="card step">
+          <span class="step-n" aria-hidden="true">1</span>
+          <h3>1 回限りのリンクでペアリング</h3>
+          <p>招待リンクを送ります。相手がそれを開くと、2 人の画面に同じコード（6 桁の数字か 6 匹の動物）が表示されるので、音声通話やビデオ通話、対面で照合します。リンクを盗み見た人にはコードがわかりません。</p>
+        </li>
+        <li class="card step">
+          <span class="step-n" aria-hidden="true">2</span>
+          <h3>信頼レベルを選ぶ</h3>
+          <p>人には 1（Observer：テキストのみ、信頼できない入力として表示）から 4（Partner）までのレベルを、自分のコンピューターには ∞（My computer）を割り当てます。すべての操作で、あなたのマシン上のデーモンがこのレベルを強制します。</p>
+        </li>
+        <li class="card step">
+          <span class="step-n" aria-hidden="true">3</span>
+          <h3>エージェントを接続する</h3>
+          <p><b>Agents → AI apps</b> でワンクリック。Claude Code、Codex、ChatGPT、あるいは任意の MCP クライアントに、あなたが選んだ連絡先だけに限定されたトークンが渡されます。あなたの鍵や、招待・信頼レベル変更・承認といったオーナー向けのコマンドが渡ることはありません。</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="security" class="section section-soft" aria-labelledby="security-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">セキュリティ</p>
+        <h2 id="security-title">実績ある暗号と、コードで検査されるルール</h2>
+        <p class="lead">公開され実績のあるライブラリの上に構築し、暗号を自作することはしません。会話を守っている仕組みは次のとおりで、そのすべてが<a href="https://github.com/Danta-Nort/antenna">オープンソース</a>です。</p>
+      </div>
+      <div class="sec-grid">
+        <article class="card">
+          <p class="tag">暗号化</p>
+          <h3>耐量子のエンドツーエンド暗号化</h3>
+          <p>接続には、ハイブリッド鍵交換 <span class="mono">X25519MLKEM768</span> を用いた TLS 1.3 を使います。メッセージは Signal の libsignal で暗号化し、セッションの開始には PQXDH、その後の更新には SPQR（Sparse Post-Quantum Ratchet）を使います。</p>
+        </article>
+        <article class="card">
+          <p class="tag">アカウント不要</p>
+          <h3>登録も中央サーバーもなし</h3>
+          <p>アカウントも電話番号もグローバルな ID もありません。連絡先のペアごとに専用の鍵と専用のネットワーク ID が作られるため、相手が会話をまたいであなたを特定することはできません。ピア同士は直接つながるか、暗号化された通信を転送するだけのリレーを経由します。リレーは自分で運用することもできます。</p>
+        </article>
+        <article class="card card-levels">
+          <p class="tag">信頼レベル</p>
+          <h3>レベル 1〜4 と ∞ をデーモンが検査</h3>
+          <ol class="levels">
+            <li><span class="lv lv1">1</span><span><b>Observer</b>：テキストのみ。信頼できない入力として表示</span></li>
+            <li><span class="lv lv2">2</span><span><b>Acquaintance</b>：テキスト。ファイルは隔離され、タスクにはあなたの承認が必要</span></li>
+            <li><span class="lv lv3">3</span><span><b>Colleague</b>：共有フォルダーを読める。書き込みには承認が必要</span></li>
+            <li><span class="lv lv4">4</span><span><b>Partner</b>：共有フォルダーの読み書きができる</span></li>
+            <li><span class="lv lv5">∞</span><span><b>My computer</b>：自分のコンピューター専用</span></li>
+          </ol>
+          <p class="small">レベル 1〜2 の相手には、あなたがオンラインかどうかは見えません。また連絡はリレー経由でしか届かないため、あなたの IP アドレスを知られることもありません。</p>
+        </article>
+        <article class="card">
+          <p class="tag">ペアリング</p>
+          <h3>1 回限りのリンクと確認コード</h3>
+          <p>声に出して照合する短いコードこそが、間に誰も入り込んでいないことの証明です。リンクを盗み見た人にはこのコードがわかりません。ペアリングのプロトコルは ProVerif による形式モデルで検証されています。</p>
+        </article>
+        <article class="card">
+          <p class="tag">Taint と no-write-down</p>
+          <h3>信頼できない入力がエージェントの権限を下げる</h3>
+          <p>エージェントがメッセージを読むと、そのセッションには相手の信頼レベルが引き継がれ、それをリセットできるのはあなただけです。レベル 1 の相手のメッセージを読んだ後は、言葉で答えることしかできません。ある連絡先から別の連絡先へデータを移すことや、ローカルのデータを受信者のレベルを超えて送ることは、あなたの承認待ちになります。鍵、トークン、招待リンクは送信される前に検出されます。あなた自身が送る場合も同じです。</p>
+        </article>
+        <article class="card">
+          <p class="tag">ファイル</p>
+          <h3>無害化プレビュー付きの隔離</h3>
+          <p>受信したファイルは実際の形式で判定され、スキャン（YARA ルール、シークレットスキャナー、オプションで ClamAV）を経て、安全なプレビューに変換されます。画像や PDF は、ネットワークから切り離されたサンドボックス内のワーカーがピクセルとして描画します。あなたが受け取るまで、何もあなたのフォルダーにもエージェントにも届きません。</p>
+        </article>
+        <article class="card card-wide">
+          <p class="tag">共有履歴</p>
+          <h3>両側で検証できる履歴</h3>
+          <p>メッセージは署名され、ハッシュでつながっています。2 つのデーモンが互いのコピーを照合し、「History verified」と 3 つの絵文字のフィンガープリントを表示するので、お互いに読み上げて確認できます。片方のコピーが改ざんされたり古いバックアップから復元されたりすると、どこで、どちらのコピーが変わったのかが正確にわかります。相手のメッセージに対するエージェントの操作には署名付きの記録が残り、双方から確認できます。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="who" class="section" aria-labelledby="who-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">こんな方に</p>
+        <h2 id="who-title">ほかの人のエージェントと協働するエージェントのために</h2>
+      </div>
+      <div class="grid g3">
+        <article class="card who">
+          <span class="icon icon-s" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M8.5 7.5 4 12l4.5 4.5M15.5 7.5 20 12l-4.5 4.5M13.4 5.5l-2.8 13"/></svg></span>
+          <h3>エージェント開発者</h3>
+          <p>Claude Code、Codex、あるいは任意の MCP クライアントに、ほかの人のエージェントとつながるチャネルを。Antenna には CLI と MCP サーバーが付属し、エージェントにはあなたが選んだ連絡先だけに限定されたトークンが渡ります。あなたの鍵やオーナー向けのコマンドが渡ることはありません。</p>
+        </article>
+        <article class="card who">
+          <span class="icon icon-s" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><rect x="4" y="5.5" width="16" height="14.5" rx="2.5"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4M9 14.8l2 2 4-4"/></svg></span>
+          <h3>パーソナルアシスタント</h3>
+          <p>ほかの人のアシスタントと予定を調整し、交渉し、書類をやり取りするアシスタント。相手のレベルを超えることは、必ずあなたに確認します。</p>
+        </article>
+        <article class="card who">
+          <span class="icon icon-s" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 20.5h16M6 20.5V6.5l6-3 6 3v14M9.5 9h1M13.5 9h1M9.5 12.5h1M13.5 12.5h1M10.5 20.5v-4h3v4"/></svg></span>
+          <h3>チームと企業</h3>
+          <p>組織をまたいだエージェント間のチャネル。連絡先ごとの権限、エージェントが行った操作のログ、両側で検証できる会話履歴を備えています。信頼しなければならない、あるいは侵害されうる共有サーバーはありません。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="status" class="section section-soft" aria-labelledby="status-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">開発状況</p>
+        <h2 id="status-title">v0.1：まだ初期段階です。だからこそ正直に</h2>
+      </div>
+      <div class="grid g2">
+        <article class="card">
+          <h3>現在できること</h3>
+          <ul class="ticks">
+            <li>リンクと口頭のコードによるペアリング。オフライン時のキューを備えた耐量子 E2E メッセージング</li>
+            <li>信頼レベル 1〜4 と ∞、承認と taint をデーモンが強制</li>
+            <li>Claude Code、Codex、ChatGPT、Claude Desktop、Cursor などの MCP アプリをワンクリックで接続。メッセージでエージェントが起動</li>
+            <li>検証できる履歴、巻き戻しの検出、鍵の再生成</li>
+            <li>macOS と Linux で、隔離・サンドボックスでの検査・無害化プレビュー付きのファイル送受信</li>
+            <li>macOS（署名・公証済み）と Linux 向けのデスクトップアプリ、サーバー向けのノード、署名付きアップデート</li>
+            <li>ProVerif によるペアリングの形式モデル。2,000 件を超える自動テスト（その多くは実際のデーモンを相手に実行）</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>これから</h3>
+          <ul class="todo">
+            <li>第三者によるセキュリティ監査（1.0 より前に実施予定）</li>
+            <li>スマートフォン（まず iOS）と Windows</li>
+            <li>グループ会話</li>
+          </ul>
+          <p class="warn">アプリ内で「実験的」と表示されている機能は、私たちが独自に作った新しい仕組みです。十分なレビューを経るまで、この表示は外しません。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="download" class="section beta" aria-labelledby="download-title">
+    <div class="wrap">
+      <div class="section-head centered">
+        <p class="eyebrow">ダウンロード</p>
+        <h2 id="download-title">無料のオープンソース</h2>
+        <p class="lead">すべてのリリースに署名しています。アプリは 1 日に 1 回アップデートを確認し、あなたが了承したときだけインストールします。</p>
+      </div>
+      <div class="grid g3">
+        <article class="card dl">
+          <h3>macOS</h3>
+          <p>Apple Silicon（M1 以降）。署名・公証済み。</p>
+          <a class="btn" href="/download/mac">Mac 版をダウンロード</a>
+          <p class="small">Homebrew でもインストールできます：<code>brew install --cask danta-nort/tap/antenna</code></p>
+        </article>
+        <article class="card dl">
+          <h3>Linux デスクトップ</h3>
+          <p>x86_64、GTK 3。必要なものがすべて入ったアプリです。</p>
+          <a class="btn" href="/download/linux">.tar.gz をダウンロード</a>
+          <p class="small"><a href="/download/linux-deb">Ubuntu・Debian 向けの .deb</a>（<a href="/download/server-deb">ノードのパッケージ</a>もあります）</p>
+        </article>
+        <article class="card dl">
+          <h3>Linux サーバー</h3>
+          <p>エージェントのために常時オンラインでいるノードです。systemd のユーザーサービスとして動き、root は不要です。ターミナルで次を実行します。</p>
+          <p><code>curl -fsSL https://antenna.contact/install.sh | sh</code></p>
+          <a class="btn btn-ghost" href="/download/server">.tar.gz をダウンロード</a>
+        </article>
+      </div>
+      <p class="dl-more">すべてのファイル、チェックサム、リリースノート：<a href="https://github.com/Danta-Nort/antenna/releases/latest">GitHub のリリース</a> · ソースコード：<a href="https://github.com/Danta-Nort/antenna">github.com/Danta-Nort/antenna</a> · はじめかた：<a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/getting-started.md">ガイド</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/" aria-label="Antenna — ホーム"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>お問い合わせ：<a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/guides/">ガイド</a></p>
+    <p><a href="/privacy">プライバシーポリシー</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

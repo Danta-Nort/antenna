@@ -36,6 +36,10 @@ pair as if they were your contact. **New contact → Invite** (or **Join**, if s
 in the window; the full steps, including what to do when the codes do not match, are in USER-GUIDE "Connecting with
 a person" and in this guide's [Contacts and trust](contacts.md) page.
 
+You can also start with your own agents, which need no contact: until you have one, the empty chat offers **Or
+connect Claude Code, Codex or another AI app**, which opens [Agents](agents-page.md), where the AI apps found on this
+computer connect in one click.
+
 ## If something does not work
 
 [USER-GUIDE: "If something does not work"](../USER-GUIDE.md#if-something-does-not-work) has the exact messages the

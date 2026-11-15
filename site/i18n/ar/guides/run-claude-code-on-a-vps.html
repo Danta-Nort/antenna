@@ -1,0 +1,49 @@
+<!--guide {"title": "تشغيل Claude Code على VPS على مدار الساعة والتحدث إليه من حاسوبك", "h1": "شغّل Claude Code على خادم VPS على مدار الساعة، وتحدّث إليه من حاسوبك المحمول", "description": "ثبّت Antenna على خادم VPS، وشغّل Claude Code أو Codex عبره، وأعطه المهام من محادثة على حاسوبك المحمول. بلا منافذ مفتوحة ولا جلسة SSH مفتوحة.", "summary": "Claude Code أو Codex يعمل دائمًا على خادمك، تصل إليه من حاسوبك المحمول عبر المحادثة.", "source": "2026-11-09"}-->
+<p class="lead">ثبّت Claude Code وعقدة Antenna على خادم Linux VPS الخاص بك، واقرن الخادم بحاسوبك المحمول مرة واحدة، وشغّل Claude Code عبر Antenna في مجلد مشروعك. بعدها يعمل في جلسة tmux خاصة به بعد تسجيل خروجك، ويستيقظ عند وصول رسالة موجهة إليه، ويجيب في محادثة على حاسوبك المحمول. لا منفذ وارد يلزم فتحه، ولا جلسة SSH يلزم إبقاؤها حية، ويعمل Codex بالطريقة نفسها.</p>
+
+<h2>ما تحتاجه</h2>
+<ul>
+  <li>خادم Linux بمعمارية x86_64، مثبّت عليه Claude Code (أو Codex) مع تسجيل الدخول، وtmux.</li>
+  <li><a href="/#download">Antenna</a> على حاسوبك المحمول: macOS أو Linux.</li>
+</ul>
+
+<h2>1. ثبّت عقدة Antenna على الخادم</h2>
+<pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+sudo loginctl enable-linger $USER</code></pre>
+<p>يقرأ المثبّت أحدث إصدار من البيان الموقّع (manifest)، ويتحقق من الأرشيف، ويثبّت <code>antennad</code> و<code>antenna</code> في <code>~/.local/bin</code> كخدمة systemd على مستوى المستخدم (دون الحاجة إلى root)، وينشئ عقدتك بكلمة مرور. أما السطر الثاني فيُبقي الخدمة تعمل بعد تسجيل خروجك. وعلى Ubuntu أو Fedora يمكنك تثبيت حزمة <code>.deb</code> أو <code>.rpm</code> بدلًا من ذلك.</p>
+
+<h2>2. اقرنه بحاسوبك المحمول</h2>
+<p>على حاسوبك المحمول: <strong>New contact → Invite</strong>، وسمّه، وحدّد <strong>This is my own computer (∞)</strong>، واضغط <strong>Create link</strong> وانسخه. وعلى الخادم:</p>
+<pre><code>antenna join '&lt;link&gt;' --trust 5 --label mac</code></pre>
+<p>أبقِ علامتي الاقتباس المفردتين: فالرابط يحتوي على <code>#</code>. اكتب الرمز الذي يعرضه حاسوبك المحمول في طرفية الخادم، ثم اضغط <strong>The contact confirmed — codes match</strong> على الحاسوب المحمول. المستوى 5 هو ∞ على الطرفين، فيُعدّ الخادم حاسوبك أنت.</p>
+
+<h2>3. شغّل Claude Code عبر Antenna</h2>
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api
+antenna session attach api-dev</code></pre>
+<p>يمنح سطر connect الجلسةَ وكيلها ورمز وصولها الخاصين، ويلقي التحية فتظهر محادثة باسم <code>api-dev</code> على حاسوبك المحمول. ويشغّل سطر start ‏Claude Code في خادم tmux الخاص بـ Antenna (ولا يُمَس tmux الخاص بك). اتصل بالجلسة مرة واحدة لتجيب عن أسئلة Claude Code الأولى، مثل هل يثق بالمجلد، ثم اخرج بـ <code>Ctrl-b d</code>: فيواصل العمل. ومع Codex، استخدم <code>antenna connect codex</code> و<code>--cli codex</code>.</p>
+
+<h2>4. تحدّث إليه</h2>
+<p>اكتب في محادثة <code>api-dev</code> على حاسوبك المحمول: «شغّل اختبارات الترحيل (migration) وأصلح ما يفشل». حين يكون Claude Code خاملًا أمام موجّهه، يكتب Antenna سطرًا قصيرًا واحدًا كي يقرأ رسالتك؛ ولا يكتب أبدًا نص جهة اتصال، ولا يجيب أبدًا عن سؤال نيابة عنه. تعرض بطاقة الخادم في <strong>My devices</strong> حالته ووكلاءه، ويمكنك الموافقة على طلباته من الحاسوب المحمول.</p>
+
+<h2>بعد إعادة التشغيل</h2>
+<p>تُقفل مفاتيح العقدة بعد إعادة تشغيل الخادم: تعمل الخدمة، لكن اتصالاتها تبقى صامتة حتى تسجّل الدخول وتشغّل <code>antenna unlock</code>. وبهذا لا تمنح نسخةٌ من قرص الخادم أحدًا مفاتيحك. ويخبرك <code>antenna status</code> هل العقدة مقفلة.</p>
+
+<h2>أسئلة</h2>
+<details>
+  <summary>لماذا لا أكتفي بـ SSH وtmux؟</summary>
+  <p>هذا يعمل ما دمت جالسًا أمام طرفية. يضيف Antenna محادثة يمكنك الكتابة فيها من حاسوبك المحمول في أي وقت، ويوقظ الجلسة حين تفعل، ويتيح لوكلاء آخرين إسناد العمل إليها، بصلاحيات يتحقق منها بنفسه.</p>
+</details>
+<details>
+  <summary>هل يحتاج الخادم إلى عنوان IP عام أو منافذ مفتوحة؟</summary>
+  <p>لا. يتصل الطرفان نحو الخارج، مباشرة حين تسمح الشبكة وعبر خادم ترحيل (relay) في غير ذلك. وخادم الترحيل لا يمرر إلا حركة مرور مشفرة.</p>
+</details>
+<details>
+  <summary>هل يمكنني تشغيل عدة جلسات على خادم واحد؟</summary>
+  <p>نعم: وكيل لكل مجلد مشروع، لكل منها اسمها ومحادثتها الخاصة على حاسوبك المحمول.</p>
+</details>
+<details>
+  <summary>هل توجد نسخة لمعالجات ARM؟</summary>
+  <p>ليس بعد. عقدة الخادم مبنية لـ Linux على x86_64.</p>
+</details>

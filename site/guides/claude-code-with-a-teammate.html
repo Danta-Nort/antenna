@@ -1,0 +1,50 @@
+<!--guide {"order": 5, "title": "Claude Code collaboration with another developer’s agent — Antenna", "h1": "Let a teammate’s AI agent work with your Claude Code", "description": "A teammate’s agent asks your Claude Code a question or hands it a task. Each of you keeps control: trust levels, enforced on your own computer, set the limits.", "query": "claude code collaboration with another developer", "updated": "2026-11-14", "summary": "A teammate’s agent asking your Claude Code questions and handing it tasks, with each owner in control.", "related": ["agent-to-agent-communication", "multi-agent-prompt-injection", "share-files-with-claude-code"]}-->
+<p class="lead">You and a teammate each install Antenna and pair once with an invite link and a code you compare by voice. Your Claude Code gets a name, and your teammate’s agent writes to it by that name. You choose a trust level for your teammate, and Antenna’s daemon on your computer, not the model, holds your agent to it: what it may read, edit and run, and which replies wait for you. Your teammate does the same on their side.</p>
+
+<h2>Set it up</h2>
+<ol>
+  <li><a href="/#download">Install Antenna</a> on both computers (macOS or Linux): one password each, no accounts.</li>
+  <li>One of you presses <strong>New contact → Invite</strong>, picks a trust level for the other and sends the link; the other opens it or uses <strong>New contact → Join</strong>. A code appears, six digits or six animals: read it out on a call, and the other enters it. Each of you picks the other’s level.</li>
+  <li>Start your Claude Code from <strong>Agents → AI apps → Start in Code mode</strong>, with <strong>New agent…</strong> and a name your teammate will use, such as <code>backend-claude</code>, and your teammate among its contacts. Your teammate connects their agent the same way.</li>
+</ol>
+
+<h2>Choose your teammate’s level</h2>
+<p>Your teammate’s agents get your teammate’s level. Once your agent has read their message, it keeps that level’s limits for the rest of its session, and Antenna checks every tool Claude Code uses in Code mode against them.</p>
+<table>
+  <thead><tr><th>Level</th><th>Your agent, after reading their message</th><th>Files</th></tr></thead>
+  <tbody>
+    <tr><td>1 · Observer</td><td>Answers in words only</td><td>None</td></tr>
+    <tr><td>2 · Acquaintance</td><td>Every read and edit waits for your approval; no commands</td><td>Received into quarantine <code>inbox/</code></td></tr>
+    <tr><td>3 · Colleague</td><td>Reads; edits wait for your approval; no commands</td><td>Read-only <code>shared/</code></td></tr>
+    <tr><td>4 · Partner</td><td>Reads and edits in your teammate’s folder; other edits and every command wait for your approval</td><td>Read/write <code>shared/</code></td></tr>
+  </tbody>
+</table>
+<p>At levels 1 and 2 your teammate never sees your IP address: the link goes only through a relay. Keep ∞ for your own computers; it sends files and secrets without asking. Change the level in the contact’s card with your password: a lower level applies at once, even to a session that already read their messages.</p>
+
+<h2>A question or a task from their agent</h2>
+<p>Their agent writes to <code>backend-claude</code> by name, and the exchange shows in your list as its own chat, under your teammate’s name. Claude Code in Code mode wakes by itself when it sits idle: Antenna types one line telling it to read its inbox, never the message itself. <em>Experimental.</em></p>
+<p>By default their message is data, not an order: your agent tells you what was asked and acts on your word. To let it take your teammate’s requests as tasks, use <strong>⋯ → Takes tasks from…</strong> on your agent, or tick the tasks box when you connect the two agents on <strong>Agents → Map</strong>. <em>Experimental.</em> Tasks still run inside the level’s limits.</p>
+
+<h2>What waits for you</h2>
+<p>Antenna does not let what your agent has read slip to a contact unseen: once Claude Code has read files of your project, each message it sends your teammate becomes a request with <strong>Approve</strong> and <strong>Deny</strong>, shown as a <strong>Waiting for your approval</strong> card in the chat. <strong>Approve</strong> asks for your password (or Touch ID on a Mac, experimental) and Antenna then sends exactly what you saw; <strong>Approve all from this agent (N)</strong> takes several at once. A request nobody answers closes after 10 minutes.</p>
+
+<h2>Where the messages go</h2>
+<p>Straight between the two computers, end to end encrypted, or through a public relay that forwards traffic it cannot read; no Antenna server sits in between. Each owner sees every chat on their side, including what the other’s agent wrote to theirs, and signed receipts of what the agents did with the link’s messages are visible to both of you.</p>
+
+<h2>Questions</h2>
+<details>
+  <summary>Can my teammate’s agent run commands on my computer?</summary>
+  <p>No. It can only send messages and files, and at levels 3 and 4 read the <code>shared/</code> folder you keep for your teammate. Your own agent does the work, inside the level you chose.</p>
+</details>
+<details>
+  <summary>Do we both need Claude Code?</summary>
+  <p>No. Their agent can be Codex, Gemini CLI or another app from <strong>Agents → AI apps</strong>, each on its own subscription, with no API keys.</p>
+</details>
+<details>
+  <summary>How do I stop it?</summary>
+  <p>Lower your teammate’s level, take them off <strong>Takes tasks from…</strong>, or remove the contact. Each takes effect on your computer at once, whatever their side does.</p>
+</details>
+<details>
+  <summary>Does it work on Windows?</summary>
+  <p>Not yet. Antenna runs on macOS and Linux today.</p>
+</details>

@@ -407,26 +407,18 @@ pub async fn call_owner(path: &Path, req: Request) -> CliResult<(HelloOk, Reply)
     }
 }
 
-/// The owner session this process holds for its one command (Windows, WP-10): the connection that holds it and its
-/// token, which every owner connection of this process names in its hello. Unix has none: a terminal has its own
-/// session there.
-#[cfg(windows)]
+/// The owner session this process holds for its one command (Windows, WP-10; a script's `connect --password-stdin`
+/// anywhere): the connection that holds it and its token, which every owner connection of this process names in its
+/// hello. The daemon accepts the token only from this process (its PID and start time) and drops the session with
+/// the connection.
 struct HeldSession {
     _conn: Conn,
     token: Zeroizing<String>,
 }
 
-#[cfg(windows)]
 static HELD: std::sync::Mutex<Option<HeldSession>> = std::sync::Mutex::new(None);
 
 /// The held session's token, if this process holds one.
-#[cfg(unix)]
-fn held_token() -> Option<String> {
-    None
-}
-
-/// The held session's token, if this process holds one.
-#[cfg(windows)]
 fn held_token() -> Option<String> {
     HELD.lock()
         .unwrap_or_else(std::sync::PoisonError::into_inner)
@@ -438,8 +430,8 @@ fn held_token() -> Option<String> {
 /// the daemon opens no terminal session there. An owner command that needs a session asks for the password and holds
 /// a session for itself: `login {hold: true}` on a connection kept open for the rest of this process, its token named
 /// by the command's own connections, which come from the same process (the daemon checks the holder). The session
-/// ends with the process.
-#[cfg(windows)]
+/// ends with the process. Elsewhere a command that reads the password from stdin for several requests does the same
+/// (`connect`), so a script needs no `login` and leaves no session behind.
 pub async fn hold_session(path: &Path, password: Zeroizing<String>) -> CliResult<()> {
     let mut c = Conn::open(path, &Auth::Owner).await?;
     c.send(&ClientMsg::Req(Request::Login {
@@ -959,9 +951,25 @@ mod tests {
 
     /// A socket file left by a listener that is gone: `connect` gets `ECONNREFUSED` (a plain file would give
     /// `ENOTSOCK` on macOS, which is not a full backlog).
+    ///
+    /// The refusal is confirmed before the test goes on: on a loaded Mac (load ~100–800, 2026-10-31) one `connect`
+    /// right after the listener was dropped still went through, so the client under test, not the helper, looked
+    /// wrong.
     fn stale_socket(path: &std::path::Path) {
         drop(std::os::unix::net::UnixListener::bind(path).expect("bind"));
         assert!(path.exists());
+        let t = Instant::now();
+        while std::os::unix::net::UnixStream::connect(path)
+            .map_err(|e| e.kind())
+            .err()
+            != Some(std::io::ErrorKind::ConnectionRefused)
+        {
+            assert!(
+                t.elapsed() < Duration::from_secs(5),
+                "the stale socket never refused"
+            );
+            std::thread::sleep(Duration::from_millis(20));
+        }
     }
 
     /// A socket file nobody listens on (as a full backlog, `connect` is refused: `ECONNREFUSED` on Linux and macOS)

@@ -1,0 +1,43 @@
+<!--guide {"title": "KI-Agent, der automatisch auf Nachrichten antwortet — Antenna", "h1": "Einen KI-Agenten einrichten, der auf Ihre Nachrichten antwortet", "description": "Claude Code oder Codex beantworten die Nachrichten eines Kontakts selbstständig: Antenna weckt den Agenten in einer Sandbox, die Antwort erscheint live.", "summary": "Claude Code oder Codex antworten einem Kontakt selbstständig, in einer Sandbox, die Antwort live im Chat.", "source": "2026-11-09"}-->
+<p class="lead">In Antenna können Sie einen Kontakt und einen Agenten wählen (Claude Code, Codex oder einen eigenen Befehl), und ab dann startet jede Nachricht dieses Kontakts den Agenten, der sie liest und antwortet. Antenna führt ihn in einer Sandbox aus, mit nicht mehr Rechten als die Vertrauensstufe dieses Kontakts, und die Antwort erscheint beim Gegenüber, während sie geschrieben wird. Er läuft mit Ihrer eigenen Claude- oder ChatGPT-Anmeldung, und eine Antwort, die nach einem Geheimnis aussieht, wartet auf Ihre Freigabe.</p>
+
+<h2>Typische Einsätze</h2>
+<ul>
+  <li><strong>Ihr eigener Assistent auf einem Server.</strong> Sie schreiben vom Laptop an Ihren Server, und Claude Code antwortet dort, baut Ihr Projekt und lässt die Tests laufen.</li>
+  <li><strong>Ein Empfang für einen Kontakt.</strong> Die Fragen einer Kollegin zu Ihrem Projekt werden sofort beantwortet, von einem Agenten, der nur den Ordner dieses Gesprächs sieht.</li>
+  <li><strong>Ein Skript, das Bericht erstattet.</strong> Die Ausgabe jedes Programms lässt sich als Live-Stream senden: <code>my-program | antenna send --stream &lt;contact&gt;</code>.</li>
+</ul>
+
+<h2>Im Fenster einrichten</h2>
+<ol>
+  <li>Öffnen Sie auf dem Computer, auf dem der Agent laufen soll, <strong>Agents → Set up for a contact…</strong> (oder in einem Gespräch auf der Kontaktkarte <strong>Agent replies → Set up…</strong>).</li>
+  <li>Wählen Sie den Kontakt und das Programm: <strong>Claude Code</strong>, <strong>Codex</strong> oder einen eigenen Befehl.</li>
+  <li>Fügen Sie bei Bedarf ein langlebiges Anmelde-Token (aus <code>claude setup-token</code>) in <strong>Value (optional)</strong> ein. Es geht einmal an Ihren Knoten und wird in dessen verschlüsselter Datenbank aufbewahrt. Auf dem Mac ist das der zuverlässige Weg, weil die Sandbox den Schlüsselbund nicht öffnen kann.</li>
+  <li>Bestätigen Sie mit Ihrem Besitzer-Passwort. Die Regel, ihr letzter Lauf und das <strong>Run log</strong> (Ausführungsprotokoll) erscheinen unter <strong>Agents</strong>.</li>
+</ol>
+<p>Im Terminal ist es eine Zeile: <code>antenna wake set &lt;contact&gt; --cmd "claude -p --output-format stream-json"</code>. <code>antenna wake list</code> zeigt die Regeln und die letzten Läufe; <code>antenna wake off &lt;contact&gt;</code> schaltet sie ab.</p>
+
+<h2>Was der Agent darf und was nicht</h2>
+<ul>
+  <li><strong>Sein Prompt ist fest vorgegeben:</strong> „Sie haben eine neue Nachricht, lesen Sie sie und antworten Sie“. Die Nachricht selbst wird nie zum Prompt; der Agent liest sie als Daten, mit nicht mehr Rechten als die Vertrauensstufe des Kontakts.</li>
+  <li><strong>Er läuft in einer Sandbox</strong> (bubblewrap oder Landlock unter Linux, Seatbelt unter macOS): Er sieht seinen eigenen temporären Ordner und den Ordner dieses Gesprächs und erreicht nur seinen Modellanbieter. Ihre Projekte, Ihre übrigen Dateien und die Schlüssel des Knotens bleiben außer Reichweite. Ohne Sandbox startet Antenna ihn nicht.</li>
+  <li><strong>Jeder Lauf beginnt sauber</strong>, solange Sie den Agenten nicht resident machen (siehe unten). Eine frühere Nachricht kann einem späteren Lauf also keine Anweisungen hinterlassen.</li>
+  <li><strong>Grenzen:</strong> ein Zeitlimit pro Lauf und eine Höchstzahl von Läufen pro Stunde, damit ein gesprächiger Kontakt Ihr Kontingent nicht aufbraucht.</li>
+</ul>
+
+<h2>Den Agenten in einem Ihrer Projekte arbeiten lassen</h2>
+<p>Nur für Ihre eigenen Computer (∞) darf der Agent zusätzlich in einem Projektordner mit Ihrer Toolchain arbeiten: <code>--project ~/code/payments</code>, dazu schreibgeschützte <code>--tool-path</code>-Ordner und die Paket-Registries, die er mit <code>--allow-host</code> erreichen darf. Für jeden anderen Kontakt lehnt Antenna das ab, und Ihr Home-Verzeichnis, die eigenen Daten von Antenna oder Ordner mit Geheimnissen wie <code>~/.ssh</code> öffnet es nie.</p>
+
+<h2>Fragen</h2>
+<details>
+  <summary>Sieht das Gegenüber die Antwort, während sie getippt wird?</summary>
+  <p>Ja, bei Kontakten ab Stufe 3: eine Live-Sprechblase, die wächst, während der Agent schreibt, und am Ende zu einer gewöhnlichen Nachricht wird. Stufen 1 und 2 bekommen die fertige Antwort.</p>
+</details>
+<details>
+  <summary>Was, wenn der Agent ein Passwort oder einen Schlüssel in die Antwort schreibt?</summary>
+  <p>Der Stream stoppt für das Gegenüber, und die Nachricht wartet auf Ihre Freigabe. Nur an Ihre eigenen Computer geht sie weiter.</p>
+</details>
+<details>
+  <summary>Erinnert er sich an frühere Gespräche?</summary>
+  <p>Standardmäßig nicht: Jede Nachricht startet einen neuen Lauf. Für Arbeit, die Stunden dauert, fügen Sie <code>--resident</code> hinzu: Dann bleibt dieselbe Claude-Code-Sitzung beim Gespräch, behält, was gesagt und entschieden wurde, und jede neue Nachricht wird zu ihrer nächsten Runde. Die Nachrichten erreichen sie trotzdem als Daten einer anderen Partei.</p>
+</details>

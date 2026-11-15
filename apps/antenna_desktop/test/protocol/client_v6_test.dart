@@ -336,4 +336,16 @@ void main() {
     });
     expect((old.to, old.toAgent, old.topic, old.unread), (null, null, null, false));
   });
+
+  test('a socket reset while connecting is "unreachable", not a bare OSError (the daemon stopping mid-connect)', () async {
+    final c = XControlClient('/nonexistent/antennad.sock');
+    await IOOverrides.runZoned(
+      () => expectLater(
+        c.hello(),
+        throwsA(isA<XDaemonUnreachable>().having((e) => e.message, 'message', contains('Connection reset by peer'))),
+      ),
+      socketConnect: (host, port, {sourceAddress, sourcePort = 0, timeout}) =>
+          Future<Socket>.error(const OSError('Connection reset by peer', 104)),
+    );
+  });
 }

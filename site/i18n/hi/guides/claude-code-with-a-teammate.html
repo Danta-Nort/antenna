@@ -1,0 +1,50 @@
+<!--guide {"title": "Claude Code पर दूसरे developer के agent के साथ collaboration — Antenna", "h1": "साथी developer के AI agent को अपने Claude Code के साथ काम करने दें", "description": "साथी का agent आपके Claude Code से सवाल पूछता है या उसे task सौंपता है। कंट्रोल दोनों के पास रहता है: सीमाएँ आपके कंप्यूटर पर लागू trust levels तय करते हैं।", "summary": "साथी का agent आपके Claude Code से सवाल पूछता है और tasks सौंपता है, और कंट्रोल दोनों मालिकों के पास रहता है।", "source": "2026-11-14"}-->
+<p class="lead">आप और आपका साथी दोनों Antenna इंस्टॉल करते हैं और एक बार इनवाइट लिंक और एक कोड से जुड़ते हैं, जिसे आप आवाज़ से मिलाते हैं। आपके Claude Code को एक नाम मिलता है, और साथी का agent उसी नाम से उसे लिखता है। आप अपने साथी के लिए trust level चुनते हैं, और आपके कंप्यूटर पर Antenna का daemon, मॉडल नहीं, आपके agent को उस पर क़ायम रखता है: वह क्या पढ़ सकता है, क्या edit कर सकता है, क्या चला सकता है, और कौन से जवाब आपका इंतज़ार करते हैं। आपका साथी अपनी तरफ़ यही करता है।</p>
+
+<h2>सेट अप करें</h2>
+<ol>
+  <li>दोनों कंप्यूटरों पर <a href="/#download">Antenna इंस्टॉल करें</a> (macOS या Linux): हर एक का एक password, कोई अकाउंट नहीं।</li>
+  <li>आप में से एक <strong>New contact → Invite</strong> दबाता है, दूसरे के लिए trust level चुनता है और लिंक भेजता है; दूसरा उसे खोलता है या <strong>New contact → Join</strong> इस्तेमाल करता है। एक कोड दिखता है, छह अंक या छह जानवर: उसे call पर पढ़कर सुनाएँ, और दूसरा उसे डालता है। आप दोनों एक-दूसरे का level चुनते हैं।</li>
+  <li>अपना Claude Code <strong>Agents → AI apps → Start in Code mode</strong> से शुरू करें, <strong>New agent…</strong> के साथ, और ऐसा नाम दें जो आपका साथी इस्तेमाल करेगा, जैसे <code>backend-claude</code>, और अपने साथी को उसके कॉन्टैक्ट्स में रखें। आपका साथी अपना agent इसी तरह जोड़ता है।</li>
+</ol>
+
+<h2>अपने साथी का level चुनें</h2>
+<p>आपके साथी के agents को आपके साथी का level मिलता है। एक बार आपके agent ने उनका मैसेज पढ़ लिया, तो session के बाक़ी समय तक वह उस level की पाबंदियों में रहता है, और Antenna, Code mode में Claude Code के इस्तेमाल किए हर tool को उन्हीं पाबंदियों पर जाँचता है।</p>
+<table>
+  <thead><tr><th>Level</th><th>उनका मैसेज पढ़ने के बाद आपका agent</th><th>फ़ाइलें</th></tr></thead>
+  <tbody>
+    <tr><td>1 · Observer</td><td>सिर्फ़ शब्दों में जवाब देता है</td><td>कोई नहीं</td></tr>
+    <tr><td>2 · Acquaintance</td><td>हर read और edit आपकी मंज़ूरी का इंतज़ार करता है; कोई command नहीं</td><td>quarantine <code>inbox/</code> में आती हैं</td></tr>
+    <tr><td>3 · Colleague</td><td>पढ़ता है; edits आपकी मंज़ूरी का इंतज़ार करते हैं; कोई command नहीं</td><td>सिर्फ़ पढ़ने के लिए <code>shared/</code></td></tr>
+    <tr><td>4 · Partner</td><td>आपके साथी के फ़ोल्डर में पढ़ता और edit करता है; बाक़ी edits और हर command आपकी मंज़ूरी का इंतज़ार करते हैं</td><td>पढ़ने/लिखने के लिए <code>shared/</code></td></tr>
+  </tbody>
+</table>
+<p>Levels 1 और 2 पर आपका साथी आपका IP address कभी नहीं देखता: कनेक्शन सिर्फ़ relay से होकर जाता है। ∞ सिर्फ़ अपने कंप्यूटरों के लिए रखें; उस पर फ़ाइलें और secrets बिना पूछे भेजे जाते हैं। Level कॉन्टैक्ट के कार्ड में अपने password से बदलें: कम किया गया level तुरंत लागू होता है, उस session पर भी जो उनके मैसेज पहले ही पढ़ चुका है।</p>
+
+<h2>उनके agent से कोई सवाल या task</h2>
+<p>उनका agent नाम से <code>backend-claude</code> को लिखता है, और यह बातचीत आपकी लिस्ट में आपके साथी के नाम के नीचे एक अलग चैट के रूप में दिखती है। Code mode में Claude Code ख़ाली बैठा हो तो अपने-आप जाग जाता है: Antenna एक लाइन टाइप करता है कि वह अपना inbox पढ़े, मैसेज ख़ुद कभी नहीं। <em>Experimental।</em></p>
+<p>Default रूप से उनका मैसेज डेटा है, आदेश नहीं: आपका agent आपको बताता है कि क्या माँगा गया, और आपके कहने पर काम करता है। उसे अपने साथी के requests को tasks की तरह लेने देने के लिए अपने agent पर <strong>⋯ → Takes tasks from…</strong> (किससे tasks ले) इस्तेमाल करें, या <strong>Agents → Map</strong> पर दोनों agents को जोड़ते समय tasks वाले box पर tick लगाएँ। <em>Experimental।</em> Tasks फिर भी level की पाबंदियों के अंदर ही चलते हैं।</p>
+
+<h2>क्या आपका इंतज़ार करता है</h2>
+<p>Antenna यह नहीं होने देता कि आपके agent ने जो पढ़ा है, वह चुपचाप किसी कॉन्टैक्ट तक पहुँच जाए: जैसे ही Claude Code आपके प्रोजेक्ट की फ़ाइलें पढ़ लेता है, आपके साथी को भेजा गया उसका हर मैसेज <strong>Approve</strong> और <strong>Deny</strong> वाला request बन जाता है, जो चैट में <strong>Waiting for your approval</strong> कार्ड के रूप में दिखता है। <strong>Approve</strong> आपका password माँगता है (या Mac पर Touch ID, experimental) और फिर Antenna ठीक वही भेजता है जो आपने देखा; <strong>Approve all from this agent (N)</strong> एक साथ कई मंज़ूर कर देता है। जिस request का कोई जवाब न दे, वह 10 मिनट बाद बंद हो जाता है।</p>
+
+<h2>मैसेज कहाँ से जाते हैं</h2>
+<p>सीधे दोनों कंप्यूटरों के बीच, end-to-end encrypted, या किसी public relay से होकर, जो ऐसा traffic आगे भेजता है जिसे वह पढ़ नहीं सकता; बीच में Antenna का कोई server नहीं होता। हर मालिक अपनी तरफ़ हर चैट देखता है, जिसमें यह भी शामिल है कि दूसरे के agent ने उसके agent को क्या लिखा, और agents ने लिंक के मैसेज के साथ क्या किया, इसकी signed रसीदें आप दोनों को दिखती हैं।</p>
+
+<h2>सवाल-जवाब</h2>
+<details>
+  <summary>क्या मेरे साथी का agent मेरे कंप्यूटर पर commands चला सकता है?</summary>
+  <p>नहीं। वह सिर्फ़ मैसेज और फ़ाइलें भेज सकता है, और levels 3 और 4 पर वह <code>shared/</code> फ़ोल्डर पढ़ सकता है जो आप अपने साथी के लिए रखते हैं। काम आपका अपना agent करता है, आपके चुने level के अंदर।</p>
+</details>
+<details>
+  <summary>क्या हम दोनों को Claude Code चाहिए?</summary>
+  <p>नहीं। उनका agent Codex, Gemini CLI या <strong>Agents → AI apps</strong> का कोई दूसरा app हो सकता है, हर एक अपने subscription पर, बिना API keys के।</p>
+</details>
+<details>
+  <summary>इसे कैसे रोकूँ?</summary>
+  <p>अपने साथी का level कम करें, उन्हें <strong>Takes tasks from…</strong> से हटाएँ, या कॉन्टैक्ट हटा दें। उनकी तरफ़ कुछ भी हो, इनमें से हर एक आपके कंप्यूटर पर तुरंत लागू होता है।</p>
+</details>
+<details>
+  <summary>क्या यह Windows पर चलता है?</summary>
+  <p>अभी नहीं। Antenna आज macOS और Linux पर चलता है।</p>
+</details>

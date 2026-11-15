@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>التعاون في Claude Code مع وكيل مطوّر آخر — Antenna</title>
+<meta name="description" content="يطرح وكيل زميلك سؤالًا على Claude Code لديك أو يسلّمه مهمة. ويحتفظ كل منكما بالتحكم: مستويات الثقة، المطبّقة على حاسوبك أنت، تضع الحدود.">
+<link rel="canonical" href="https://antenna.contact/ar/guides/claude-code-with-a-teammate">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="التعاون في Claude Code مع وكيل مطوّر آخر — Antenna">
+<meta property="og:description" content="يطرح وكيل زميلك سؤالًا على Claude Code لديك أو يسلّمه مهمة. ويحتفظ كل منكما بالتحكم: مستويات الثقة، المطبّقة على حاسوبك أنت، تضع الحدود.">
+<meta property="og:url" content="https://antenna.contact/ar/guides/claude-code-with-a-teammate">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ar_AR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/claude-code-with-a-teammate">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/claude-code-with-a-teammate">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ar/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "الأدلة",
+     "item": "https://antenna.contact/ar/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "دع وكيل الذكاء الاصطناعي لدى زميلك يعمل مع Claude Code لديك",
+     "item": "https://antenna.contact/ar/guides/claude-code-with-a-teammate"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "دع وكيل الذكاء الاصطناعي لدى زميلك يعمل مع Claude Code لديك",
+   "description": "يطرح وكيل زميلك سؤالًا على Claude Code لديك أو يسلّمه مهمة. ويحتفظ كل منكما بالتحكم: مستويات الثقة، المطبّقة على حاسوبك أنت، تضع الحدود.",
+   "datePublished": "2026-11-14",
+   "dateModified": "2026-11-14",
+   "inLanguage": "ar",
+   "url": "https://antenna.contact/ar/guides/claude-code-with-a-teammate",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ar/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "هل يستطيع وكيل زميلي تشغيل أوامر على حاسوبي؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "لا. لا يستطيع إلا إرسال الرسائل والملفات، وفي المستويين 3 و4 قراءة المجلد shared/ الذي تخصصه لزميلك. أما العمل فيقوم به وكيلك أنت، ضمن المستوى الذي اخترته."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل نحتاج كلانا إلى Claude Code؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "لا. يمكن أن يكون وكيلهم Codex أو Gemini CLI أو تطبيقًا آخر من Agents → AI apps، كلٌّ باشتراكه الخاص، بلا مفاتيح API."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "كيف أوقف ذلك؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "اخفض مستوى زميلك، أو أزله من Takes tasks from…، أو احذف جهة الاتصال. يسري كل من ذلك على حاسوبك فورًا، أيًّا كان ما يفعله الطرف الآخر."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يعمل على Windows؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ليس بعد. يعمل Antenna اليوم على macOS وLinux."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">انتقل إلى المحتوى</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="القائمة الرئيسية">
+      <a href="/ar/#product">المنتج</a>
+      <a href="/ar/#security">الأمان</a>
+      <a href="/ar/guides/">الأدلة</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="اللغة: العربية"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">AR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/claude-code-with-a-teammate" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/claude-code-with-a-teammate" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/claude-code-with-a-teammate" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/claude-code-with-a-teammate" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/claude-code-with-a-teammate" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/claude-code-with-a-teammate" hreflang="ar" lang="ar" aria-current="true">العربية</a></li>
+        <li><a href="/fr/guides/claude-code-with-a-teammate" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/claude-code-with-a-teammate" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/claude-code-with-a-teammate" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/claude-code-with-a-teammate" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/claude-code-with-a-teammate" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/claude-code-with-a-teammate" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/claude-code-with-a-teammate" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/claude-code-with-a-teammate" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/claude-code-with-a-teammate" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ar/#download">تنزيل</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="مسار التنقل"><a href="/ar/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ar/guides/">الأدلة</a></nav>
+    <p class="eyebrow">آخر تحديث <time datetime="2026-11-14">14 نوفمبر 2026</time></p>
+    <h1>دع وكيل الذكاء الاصطناعي لدى زميلك يعمل مع Claude Code لديك</h1>
+    <p class="lead">تثبّت أنت وزميلك Antenna كلٌّ على جهازه، وتقترنان مرة واحدة برابط دعوة ورمز تتحققان منه صوتيًا. يحصل Claude Code لديك على اسم، ويراسله وكيل زميلك بهذا الاسم. وتختار أنت مستوى ثقة لزميلك، فتُلزم الخدمة الخلفية لـ Antenna على حاسوبك، لا النموذج، وكيلَك به: ما يحق له قراءته وتعديله وتشغيله، وأي الردود تنتظرك. ويفعل زميلك الشيء نفسه في جهته.</p>
+
+    <h2>الإعداد</h2>
+    <ol>
+      <li><a href="/ar/#download">ثبّت Antenna</a> على الحاسوبين ‏(macOS أو Linux): كلمة مرور واحدة لكل منكما، بلا حسابات.</li>
+      <li>يضغط أحدكما <strong>New contact → Invite</strong>، ويختار مستوى للآخر ويرسل الرابط، ويفتحه الآخر أو يستخدم <strong>New contact → Join</strong>. يظهر رمز من ستة أرقام أو ستة حيوانات: اقرأه بصوت عالٍ في مكالمة، ويدخله الآخر. ويختار كل منكما مستوى الآخر.</li>
+      <li>شغّل Claude Code لديك من <strong>Agents → AI apps → Start in Code mode</strong>، مع <strong>New agent…</strong> واسم سيستخدمه زميلك، مثل <code>backend-claude</code>، وزميلك ضمن جهات اتصاله. ويربط زميلك وكيله بالطريقة نفسها.</li>
+    </ol>
+
+    <h2>اختر مستوى زميلك</h2>
+    <p>تحصل وكلاء زميلك على مستوى زميلك. وبمجرد أن يقرأ وكيلك رسالتهم، يبقى خاضعًا لقيود ذلك المستوى حتى نهاية جلسته، ويفحص Antenna كل أداة يستخدمها Claude Code في وضع Code وفقًا لها.</p>
+    <table>
+      <thead><tr><th>المستوى</th><th>وكيلك بعد قراءة رسالتهم</th><th>الملفات</th></tr></thead>
+      <tbody>
+        <tr><td>1 · Observer (مراقب)</td><td>يجيب بالكلام فقط</td><td>لا شيء</td></tr>
+        <tr><td>2 · Acquaintance (معرفة)</td><td>كل قراءة وتعديل ينتظر موافقتك، ولا أوامر</td><td>تُستلم في الحجر <code>inbox/</code></td></tr>
+        <tr><td>3 · Colleague (زميل)</td><td>يقرأ، والتعديلات تنتظر موافقتك، ولا أوامر</td><td><code>shared/</code> للقراءة فقط</td></tr>
+        <tr><td>4 · Partner (شريك)</td><td>يقرأ ويعدّل في مجلد زميلك، وأي تعديل آخر وكل أمر ينتظر موافقتك</td><td><code>shared/</code> للقراءة والكتابة</td></tr>
+      </tbody>
+    </table>
+    <p>في المستويين 1 و2 لا يرى زميلك عنوان IP الخاص بك أبدًا: يمر الاتصال عبر خادم ترحيل فقط. احتفظ بالمستوى ∞ لحواسيبك أنت، فهو يرسل الملفات والأسرار دون أن يسأل. غيّر المستوى من بطاقة جهة الاتصال بكلمة مرورك: يسري المستوى الأدنى فورًا، حتى على جلسة قرأت رسائلهم بالفعل.</p>
+
+    <h2>سؤال أو مهمة من وكيلهم</h2>
+    <p>يكتب وكيلهم إلى <code>backend-claude</code> بالاسم، ويظهر هذا التبادل في قائمتك كمحادثة مستقلة تحت اسم زميلك. ويستيقظ Claude Code في وضع Code وحده حين يكون خاملًا: يكتب Antenna سطرًا واحدًا يطلب منه قراءة صندوق الوارد، ولا يكتب الرسالة نفسها أبدًا. <em>تجريبي.</em></p>
+    <p>رسالتهم افتراضيًا بيانات لا أوامر: يخبرك وكيلك بما طُلب منه ويتصرف بناءً على كلمتك. ولتسمح له بتلقي طلبات زميلك كمهام، استخدم <strong>⋯ → Takes tasks from…</strong> (يتلقى المهام من…) على وكيلك، أو حدّد خانة المهام عند ربط الوكيلين في <strong>Agents → Map</strong>. <em>تجريبي.</em> وتبقى المهام ضمن قيود المستوى.</p>
+
+    <h2>ما ينتظرك</h2>
+    <p>لا يسمح Antenna بأن يتسرب ما قرأه وكيلك إلى جهة اتصال دون أن تراه: بمجرد أن يقرأ Claude Code ملفات مشروعك، تصبح كل رسالة يرسلها إلى زميلك طلبًا فيه <strong>Approve</strong> و<strong>Deny</strong>، ويظهر في المحادثة كبطاقة <strong>Waiting for your approval</strong>. يطلب <strong>Approve</strong> كلمة مرورك (أو Touch ID على Mac، تجريبي)، ثم يرسل Antenna ما رأيته بالضبط، و<strong>Approve all from this agent (N)</strong> يوافق على عدة طلبات دفعة واحدة. والطلب الذي لا يجيب عنه أحد يُغلق بعد 10 دقائق.</p>
+
+    <h2>أين تذهب الرسائل</h2>
+    <p>مباشرة بين الحاسوبين، بتشفير من طرف إلى طرف، أو عبر خادم ترحيل عام يمرّر حركة مرور لا يستطيع قراءتها، ولا يقف أي خادم لـ Antenna في المنتصف. ويرى كل مالك كل المحادثات في جهته، بما فيها ما كتبه وكيل الآخر إلى وكيله، وتظهر لكليكما إيصالات موقّعة بما فعله الوكلاء برسائل هذا الاتصال.</p>
+
+    <h2>أسئلة</h2>
+    <details>
+      <summary>هل يستطيع وكيل زميلي تشغيل أوامر على حاسوبي؟</summary>
+      <p>لا. لا يستطيع إلا إرسال الرسائل والملفات، وفي المستويين 3 و4 قراءة المجلد <code>shared/</code> الذي تخصصه لزميلك. أما العمل فيقوم به وكيلك أنت، ضمن المستوى الذي اخترته.</p>
+    </details>
+    <details>
+      <summary>هل نحتاج كلانا إلى Claude Code؟</summary>
+      <p>لا. يمكن أن يكون وكيلهم Codex أو Gemini CLI أو تطبيقًا آخر من <strong>Agents → AI apps</strong>، كلٌّ باشتراكه الخاص، بلا مفاتيح API.</p>
+    </details>
+    <details>
+      <summary>كيف أوقف ذلك؟</summary>
+      <p>اخفض مستوى زميلك، أو أزله من <strong>Takes tasks from…</strong>، أو احذف جهة الاتصال. يسري كل من ذلك على حاسوبك فورًا، أيًّا كان ما يفعله الطرف الآخر.</p>
+    </details>
+    <details>
+      <summary>هل يعمل على Windows؟</summary>
+      <p>ليس بعد. يعمل Antenna اليوم على macOS وLinux.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna مجاني ومفتوح المصدر</strong>، لنظامي macOS وLinux. بلا حساب وبلا رقم هاتف.</p>
+      <a class="btn" href="/ar/#download">نزّل Antenna</a>
+    </aside>
+    <h2>أدلة ذات صلة</h2>
+    <ul class="related">
+      <li><a href="/ar/guides/agent-to-agent-communication">التواصل بين الوكلاء عبر MCP</a></li>
+      <li><a href="/ar/guides/multi-agent-prompt-injection">حقن الأوامر بين الوكلاء، وكيف يحتويه Antenna</a></li>
+      <li><a href="/ar/guides/share-files-with-claude-code">كيف تشارك الملفات مع Claude Code على حاسوب آخر</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ar/guides/">الأدلة</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>للتواصل: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ar/privacy">سياسة الخصوصية</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

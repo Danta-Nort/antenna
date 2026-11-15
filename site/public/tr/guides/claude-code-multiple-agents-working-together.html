@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Code ile çoklu ajan: aynı projede birlikte çalışan ajanlar</title>
+<meta name="description" content="Lider Claude Code ajanı işi böler, çalışanlar kendi sandbox’larında paralel kod yazar, her sonuç kontrol edilir ve siz onaylamadan hiçbir şey dalınıza girmez.">
+<link rel="canonical" href="https://antenna.contact/tr/guides/claude-code-multiple-agents-working-together">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Claude Code ile çoklu ajan: aynı projede birlikte çalışan ajanlar">
+<meta property="og:description" content="Lider Claude Code ajanı işi böler, çalışanlar kendi sandbox’larında paralel kod yazar, her sonuç kontrol edilir ve siz onaylamadan hiçbir şey dalınıza girmez.">
+<meta property="og:url" content="https://antenna.contact/tr/guides/claude-code-multiple-agents-working-together">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="tr_TR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/claude-code-multiple-agents-working-together">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/tr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Rehberler",
+     "item": "https://antenna.contact/tr/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Aynı projede birlikte çalışan birden fazla Claude Code ajanı",
+     "item": "https://antenna.contact/tr/guides/claude-code-multiple-agents-working-together"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Aynı projede birlikte çalışan birden fazla Claude Code ajanı",
+   "description": "Lider Claude Code ajanı işi böler, çalışanlar kendi sandbox’larında paralel kod yazar, her sonuç kontrol edilir ve siz onaylamadan hiçbir şey dalınıza girmez.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "tr",
+   "url": "https://antenna.contact/tr/guides/claude-code-multiple-agents-working-together",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/tr/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Hangi ajanlar çalışan olabilir?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Kendi oturumunuzla Claude Code, Claude Code’un stream-json biçimini konuşan başka bir program ya da ön eleme, özet ve dokümantasyon gibi daha hafif roller için yerel bir model."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Lider Codex ya da başka bir uygulama olabilir mi?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Lider, Antenna’ya bağlı ajanlarınızdan herhangi biri olabilir: uygulaması bir sonraki açılışında ekip araçlarını MCP üzerinden alır. Ekibi panodan kendiniz de yönetebilirsiniz."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Maliyeti nasıl sınırlarım?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Bütçe, her türden en fazla kaç çalışan olabileceğini sınırlar; kurallar da bir adımın ve bir kontrolün süresini ve bir görevin kullanabileceği tokenları sınırlar."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Mac’imde çalışıyor mu?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Evet, macOS ve Linux’ta. Çalışanlar ekibin bulunduğu bilgisayarda çalışır; diğer bilgisayarlarınızdaki çalışanlar daha sonra gelecek."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">İçeriğe geç</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/tr/" aria-label="Antenna — ana sayfa"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Ana menü">
+      <a href="/tr/#product">Ürün</a>
+      <a href="/tr/#security">Güvenlik</a>
+      <a href="/tr/guides/">Rehberler</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Dil: Türkçe"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">TR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/claude-code-multiple-agents-working-together" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/claude-code-multiple-agents-working-together" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/claude-code-multiple-agents-working-together" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/claude-code-multiple-agents-working-together" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/claude-code-multiple-agents-working-together" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/claude-code-multiple-agents-working-together" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/claude-code-multiple-agents-working-together" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/claude-code-multiple-agents-working-together" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/claude-code-multiple-agents-working-together" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/claude-code-multiple-agents-working-together" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/claude-code-multiple-agents-working-together" hreflang="tr" lang="tr" aria-current="true">Türkçe</a></li>
+        <li><a href="/it/guides/claude-code-multiple-agents-working-together" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/claude-code-multiple-agents-working-together" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/claude-code-multiple-agents-working-together" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/claude-code-multiple-agents-working-together" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/tr/#download">İndir</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Sayfa yolu"><a href="/tr/">Antenna</a> <span aria-hidden="true">›</span> <a href="/tr/guides/">Rehberler</a></nav>
+    <p class="eyebrow">Güncellendi <time datetime="2026-11-09">9 Kasım 2026</time></p>
+    <h1>Aynı projede birlikte çalışan birden fazla Claude Code ajanı</h1>
+    <p class="lead">Antenna’da <strong>ekip</strong>, tek bir git projesi üzerinde çalışan bir lider ajan ve çalışanlardan oluşur. Bir kez bir bütçe belirlersiniz (örneğin “en fazla 2 Claude Code kodlayıcı”); lider işi görevlere böler, bu bütçe içinde çalışanları başlatır, her sonucu inceler ve ya geri gönderir ya da kabul eder. Her çalışan kendi sandbox’ında, projenin kendi kopyasında paralel olarak kod yazar; ekibin işi dalınıza ancak siz onayladığınızda girer. <em>Deneysel.</em></p>
+
+    <h2>Tek klasörde birden fazla ajanın sorunu</h2>
+    <p>İki ya da üç Claude Code oturumunu yan yana çalıştırmak kolaydır; birbirlerinin ayağına basmalarını engellemek ise kolay değildir. Aynı dosyaları düzenlerler, aynı klasörde komut çalıştırırlar ve her biri diğerlerinin okuyabildiği her şeyi okuyabilir. Birinin görevleri dağıtması, gelenleri kontrol etmesi ve birleştirmesi gerekir; o kişi de genellikle terminaller arasında gidip gelen sizsinizdir.</p>
+
+    <h2>Bir ekip nasıl çalışır</h2>
+    <ol>
+      <li><strong>Ekibi siz oluşturursunuz</strong>, <strong>Teams → New team</strong> ekranında: proje klasörü, lider (ajanlarınızdan biri, yerel bir model ya da siz), çalışan bütçesi ve kurallar: çalışanların komut çalıştırıp çalıştıramayacağı, bir görevin hangi <strong>Check commands</strong> (kontrol komutları) adını verebileceği (<code>cargo test</code>, <code>npm test</code>) ve bu kontrollerin hangi paket depolarına erişebileceği.</li>
+      <li><strong>Lidere hedefi verirsiniz</strong>, onun kendi terminalinde: “Giriş özelliğini iki kodlayıcı için küçük görevlere böl.”</li>
+      <li><strong>Lider planlar ve ekibi kurar.</strong> Görevleri yazar, bütçe içinde <code>web.coder-1</code> gibi çalışanları başlatır ve görevleri onlara atar.</li>
+      <li><strong>Çalışanlar paralel kod yazar.</strong> Her biri projenin ekip dalındaki temiz bir kopyasını alır, yalnızca kendi görevini okur, çalışır ve teslim eder; takıldığında lidere soru sorar.</li>
+      <li><strong>Antenna her sonucu kontrol eder</strong>: görevin kontrol komutunu, token içermeyen ve sizin belirlediğiniz depolar dışında ağ erişimi olmayan ayrı bir sandbox’ta çalıştırır. Başarısız bir kontrol, lider karar vermeden önce belirli bir sınıra kadar kendiliğinden çalışana geri döner.</li>
+      <li><strong>Lider inceler:</strong> kabul eder ya da yorumlarla geri gönderir. Kabul edilen işler bir ekip dalında, <code>antenna/web</code> içinde toplanır.</li>
+      <li><strong>Siz uygularsınız.</strong> <strong>Review and apply</strong> dalınıza neyin birleştirileceğini gösterir; parolanızla fast-forward olarak birleştirilir. Parolanız olmadan hiçbir şey yerinden oynamaz.</li>
+    </ol>
+
+    <h2>Neler görürsünüz</h2>
+    <p>Ekibin panosu her görevi durumuna göre gösterir: Open ve Working’den In review, Blocked, Accepted ve Applied’a kadar; her çalışanın canlı çıktısı, sonucunun neyi değiştirdiği, kontrolün çıktısı ve harcadığı tokenlarla birlikte. Liderin yapabildiği her şeyi siz de yapabilirsiniz: bir çalışanın sorusunu yanıtlamak, değişiklik istemek, bir görevi iptal etmek ya da bir çalışanı durdurmak. Lider Antenna’nın Code modunda çalıştığında, bir çalışan teslim ettiğinde ya da bir şey sorduğunda uyandırılır; böylece siz yokken de ekip ilerlemeye devam eder.</p>
+
+    <h2>Projeyi ne güvende tutuyor</h2>
+    <ul>
+      <li><strong>Çalışanlar klasörünüzü asla görmez</strong>, diğer dosyalarınızı ya da birbirlerinin kopyalarını da görmez; yalnızca model sağlayıcılarına erişirler.</li>
+      <li><strong>Lider kendi bütçesini artıramaz</strong>, sizin yerinize bir şeyi onaylayamaz ya da bir çalışanın tokenını göremez: her çağrıya model değil, Antenna karar verir.</li>
+      <li><strong>Güvenilmeyen girdi sınırlı kalır.</strong> 2. seviyedeki bir kişinin mesajı okunduktan sonra yazılan bir görev hiçbir komut ve kontrol çalıştırmaz; böylece o mesaja gizlenmiş bir talimat bilgisayarınıza ulaşamaz.</li>
+      <li><strong>İsterseniz yalnızca yerel.</strong> Bir ekip yalnızca kendi bilgisayarınızda çalışan modellerle sınırlandırılabilir; hiç bulut modeli olmadan.</li>
+    </ul>
+
+    <h2>Sorular</h2>
+    <details>
+      <summary>Hangi ajanlar çalışan olabilir?</summary>
+      <p>Kendi oturumunuzla Claude Code, Claude Code’un stream-json biçimini konuşan başka bir program ya da ön eleme, özet ve dokümantasyon gibi daha hafif roller için yerel bir model.</p>
+    </details>
+    <details>
+      <summary>Lider Codex ya da başka bir uygulama olabilir mi?</summary>
+      <p>Lider, Antenna’ya bağlı ajanlarınızdan herhangi biri olabilir: uygulaması bir sonraki açılışında ekip araçlarını MCP üzerinden alır. Ekibi panodan kendiniz de yönetebilirsiniz.</p>
+    </details>
+    <details>
+      <summary>Maliyeti nasıl sınırlarım?</summary>
+      <p>Bütçe, her türden en fazla kaç çalışan olabileceğini sınırlar; kurallar da bir adımın ve bir kontrolün süresini ve bir görevin kullanabileceği tokenları sınırlar.</p>
+    </details>
+    <details>
+      <summary>Mac’imde çalışıyor mu?</summary>
+      <p>Evet, macOS ve Linux’ta. Çalışanlar ekibin bulunduğu bilgisayarda çalışır; diğer bilgisayarlarınızdaki çalışanlar daha sonra gelecek.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna ücretsiz ve açık kaynaklıdır</strong>, macOS ve Linux için. Hesap da telefon numarası da gerekmez.</p>
+      <a class="btn" href="/tr/#download">Antenna’yı indir</a>
+    </aside>
+    <h2>İlgili rehberler</h2>
+    <ul class="related">
+      <li><a href="/tr/guides/claude-code-and-codex-talk-to-each-other">Claude Code ve Codex birbiriyle nasıl konuşturulur</a></li>
+      <li><a href="/tr/guides/message-claude-code-on-another-computer">Başka bir bilgisayardaki Claude Code’a mesaj gönderin</a></li>
+      <li><a href="/tr/guides/agent-to-agent-communication">MCP üzerinden ajanlar arası iletişim</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/tr/" aria-label="Antenna — ana sayfa"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/tr/guides/">Rehberler</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>İletişim: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/tr/privacy">Gizlilik politikası</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!--guide {"title": "Inviare un messaggio a Claude Code su un altro computer — Antenna", "h1": "Inviare un messaggio a Claude Code su un altro computer", "description": "Raggiungi una sessione di Claude Code sul server o su un altro Mac da quello che hai davanti: abbina i computer in Antenna e scrivi alla sessione per nome.", "summary": "Scrivi a una sessione di Claude Code o Codex sul server o sul secondo computer, e svegliala quando è inattiva.", "source": "2026-11-14"}-->
+<p class="lead">Installa Antenna su entrambi i computer, abbinali una volta come <strong>∞ · My computer</strong> e collega ad Antenna la sessione di Claude Code che gira lì, con un nome tutto suo. Da quel momento scrivi a quella sessione dal tuo Mac come a un contatto in chat, oppure lasci che sia il tuo Claude Code locale a scriverle. Se avvii la sessione tramite Antenna, viene svegliata quando è inattiva, e un messaggio urgente può interromperla a metà turno. Due sessioni sullo stesso computer? Allora collegale sulla mappa degli agenti: <a href="/guides/claude-code-and-codex-talk-to-each-other">due agenti che parlano</a>.</p>
+
+<h2>Quando ti serve</h2>
+<ul>
+  <li>Claude Code gira su un server o su un desktop per lavori lunghi, e vuoi dargli il compito successivo dal portatile.</li>
+  <li>Una sessione pianifica e un'altra costruisce, ognuna sulla propria macchina.</li>
+  <li>Usi più macchine e vuoi una chat per sessione invece di un terminale per macchina.</li>
+</ul>
+
+<h2>1. Abbina i due computer</h2>
+<p>Installa Antenna su entrambi: l'app su un desktop Mac o Linux, il nodo server su un server Linux (<a href="/guides/run-claude-code-on-a-vps">Claude Code su una VPS</a> ti guida passo passo). Su uno dei due crea un invito di livello ∞, aprilo sull'altro e inserisci in un lato il codice di sei cifre mostrato dall'altro. L'abbinamento è identico a quello con una persona, e puoi farlo solo tu: serve la tua password da proprietario su entrambi i lati.</p>
+
+<h2>2. Dai un nome alla sessione</h2>
+<p>Sull'altro computer, nella cartella del progetto:</p>
+<pre><code>antenna connect claude-code --agent api-dev --links mac --hello mac</code></pre>
+<p>Qui <code>mac</code> è il nome che il server ha dato al tuo Mac durante l'abbinamento. Il comando crea l'agente <code>api-dev</code>, aggiunge Antenna a Claude Code solo per questa cartella (dopo il tuo sì) e manda un saluto al tuo Mac, così lì compare subito una chat chiamata <code>api-dev</code>. Una sessione in un'altra cartella ha un nome e una chat propri. Codex funziona allo stesso modo con <code>antenna connect codex</code>.</p>
+
+<h2>3. Tienila sveglia</h2>
+<p>Claude Code legge Antenna solo mentre lavora a qualcosa. Perché raccolga un messaggio anche quando è fermo su un prompt vuoto, avvialo invece tramite Antenna:</p>
+<pre><code>antenna session start api-dev --dir ~/projects/api</code></pre>
+<p>(Per questo sul server serve tmux.) Quando arriva un messaggio, Antenna digita una breve riga nel prompt vuoto, e la sessione legge il messaggio come dati e si mette al lavoro. Su un desktop, la modalità Code di Antenna fa lo stesso in una scheda di terminale dentro la finestra. <em>Sperimentale.</em></p>
+
+<h2>4. Scrivile</h2>
+<p>Apri la chat <code>api-dev</code> sul Mac e scrivi, come faresti con una persona. Oppure fallo fare al tuo Claude Code locale: “Chiedi ad <code>api-dev</code> di eseguire i test di migrazione e di riferirmi.” Quando non può aspettare, attiva <strong>Urgent: interrupt now</strong> (il pulsante col fulmine accanto a Invia) prima di inviare (da terminale, <code>antenna send --urgent</code>): per una sessione gestita da Antenna, in modalità Code o con <code>antenna session start</code>, Antenna interrompe una volta il turno in corso, come se premessi Esc, e la sessione legge il tuo messaggio. Non preme mai Esc sopra una domanda o una richiesta di permesso aperta nel terminale. <em>Sperimentale.</em></p>
+
+<h2>Che cosa viaggia e che cosa no</h2>
+<p>Il messaggio viene cifrato su un computer e decifrato sull'altro. Nessun terminale viene condiviso e non serve aprire o inoltrare porte: l'altra sessione riceve solo messaggi, e la sua Antenna decide che cosa può farne. Il token dell'agente resta sul computer su cui è stato creato.</p>
+
+<h2>Domande</h2>
+<details>
+  <summary>È un controllo remoto del terminale?</summary>
+  <p>No. Non vedi l'altro terminale e non ci scrivi dentro. Mandi alla sessione messaggi e compiti, e lei risponde in chat. Per il terminale completo, usa SSH come prima.</p>
+</details>
+<details>
+  <summary>Posso vedere che cosa sta facendo la sessione?</summary>
+  <p>La chat mostra le sue risposte, e la mappa degli agenti mostra chi ha parlato con chi. In <strong>My devices</strong> puoi anche vedere gli agenti degli altri tuoi computer e fermarne uno insieme a tutto ciò che ha avviato.</p>
+</details>
+<details>
+  <summary>Il server ha bisogno di un indirizzo pubblico?</summary>
+  <p>No. Entrambi i computer si collegano verso l'esterno; quando non riescono a raggiungersi direttamente, un relay inoltra il traffico cifrato.</p>
+</details>
+<details>
+  <summary>Che cosa succede dopo un riavvio del server?</summary>
+  <p>Dopo un riavvio le chiavi sono bloccate. Accedi una volta ed esegui <code>antenna unlock</code>; poi la sessione si può avviare di nuovo.</p>
+</details>

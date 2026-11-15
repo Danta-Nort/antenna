@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>وكيل ذكاء اصطناعي يرد على رسائلك تلقائيًا — Antenna</title>
+<meta name="description" content="اجعل Claude Code أو Codex يرد على رسائل جهة اتصال بنفسه: يوقظه Antenna في بيئة معزولة عند وصول رسالة، ويظهر الرد مباشرة أثناء كتابته.">
+<link rel="canonical" href="https://antenna.contact/ar/guides/ai-agent-that-replies-to-messages">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="وكيل ذكاء اصطناعي يرد على رسائلك تلقائيًا — Antenna">
+<meta property="og:description" content="اجعل Claude Code أو Codex يرد على رسائل جهة اتصال بنفسه: يوقظه Antenna في بيئة معزولة عند وصول رسالة، ويظهر الرد مباشرة أثناء كتابته.">
+<meta property="og:url" content="https://antenna.contact/ar/guides/ai-agent-that-replies-to-messages">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ar_AR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/ai-agent-that-replies-to-messages">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ar/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "الأدلة",
+     "item": "https://antenna.contact/ar/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "إعداد وكيل ذكاء اصطناعي يرد على رسائلك",
+     "item": "https://antenna.contact/ar/guides/ai-agent-that-replies-to-messages"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "إعداد وكيل ذكاء اصطناعي يرد على رسائلك",
+   "description": "اجعل Claude Code أو Codex يرد على رسائل جهة اتصال بنفسه: يوقظه Antenna في بيئة معزولة عند وصول رسالة، ويظهر الرد مباشرة أثناء كتابته.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "ar",
+   "url": "https://antenna.contact/ar/guides/ai-agent-that-replies-to-messages",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ar/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "هل يرى الطرف الآخر الرد أثناء كتابته؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "نعم، لجهات الاتصال من المستوى 3 فما فوق: فقاعة حية تكبر بينما يكتب الوكيل، وتتحول في النهاية إلى رسالة عادية. أما المستويان 1 و2 فيحصلان على الرد مكتملًا."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "ماذا لو كتب الوكيل كلمة مرور أو مفتاحًا في رده؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "يتوقف البث عند الطرف الآخر، وتنتظر الرسالة موافقتك. ولا يستمر إلا إلى حواسيبك أنت."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يتذكر المحادثات السابقة؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "افتراضيًا، لا: كل رسالة تبدأ تشغيلًا جديدًا. وللعمل الذي يستمر ساعات، أضف --resident: عندها تبقى جلسة Claude Code نفسها مع المحادثة، وتحتفظ بما قيل وما تقرر، وتصبح كل رسالة جديدة دورها التالي. ومع ذلك تبقى الرسائل تصلها كبيانات من طرف آخر."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">انتقل إلى المحتوى</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="القائمة الرئيسية">
+      <a href="/ar/#product">المنتج</a>
+      <a href="/ar/#security">الأمان</a>
+      <a href="/ar/guides/">الأدلة</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="اللغة: العربية"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">AR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/ai-agent-that-replies-to-messages" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/ai-agent-that-replies-to-messages" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/ai-agent-that-replies-to-messages" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/ai-agent-that-replies-to-messages" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/ai-agent-that-replies-to-messages" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/ai-agent-that-replies-to-messages" hreflang="ar" lang="ar" aria-current="true">العربية</a></li>
+        <li><a href="/fr/guides/ai-agent-that-replies-to-messages" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/ai-agent-that-replies-to-messages" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/ai-agent-that-replies-to-messages" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/ai-agent-that-replies-to-messages" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/ai-agent-that-replies-to-messages" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/ai-agent-that-replies-to-messages" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/ai-agent-that-replies-to-messages" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/ai-agent-that-replies-to-messages" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/ai-agent-that-replies-to-messages" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ar/#download">تنزيل</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="مسار التنقل"><a href="/ar/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ar/guides/">الأدلة</a></nav>
+    <p class="eyebrow">آخر تحديث <time datetime="2026-11-09">9 نوفمبر 2026</time></p>
+    <h1>إعداد وكيل ذكاء اصطناعي يرد على رسائلك</h1>
+    <p class="lead">في Antenna يمكنك اختيار جهة اتصال ووكيل (Claude Code أو Codex أو أمرك الخاص)، ومن ثم فإن كل رسالة من جهة الاتصال تلك تشغّل الوكيل، فيقرؤها ويرد عليها. يشغّله Antenna في بيئة معزولة (sandbox)، بصلاحيات لا تتجاوز مستوى ثقة جهة الاتصال، ويظهر الرد للطرف الآخر أثناء كتابته. يعمل الوكيل بتسجيل دخولك أنت إلى Claude أو ChatGPT، وأي رد يبدو أنه يحتوي على سر ينتظر موافقتك.</p>
+
+    <h2>استخدامات شائعة</h2>
+    <ul>
+      <li><strong>مساعدك الخاص على خادم.</strong> تكتب إلى خادمك من حاسوبك المحمول، فيرد Claude Code هناك ويبني المشروع ويشغّل الاختبارات فيه.</li>
+      <li><strong>مكتب استقبال لجهة اتصال.</strong> تحصل أسئلة زميلك عن مشروعك على إجابة فورية، من وكيل لا يرى إلا مجلد تلك المحادثة.</li>
+      <li><strong>سكربت يرسل لك النتائج.</strong> يمكن إرسال مخرجات أي برنامج كبث مباشر: <code>my-program | antenna send --stream &lt;contact&gt;</code>.</li>
+    </ul>
+
+    <h2>الإعداد من النافذة</h2>
+    <ol>
+      <li>على الحاسوب الذي يجب أن يعمل عليه الوكيل، افتح <strong>Agents → Set up for a contact…</strong> (أو، داخل محادثة، <strong>Agent replies → Set up…</strong> في بطاقة جهة الاتصال).</li>
+      <li>اختر جهة الاتصال والبرنامج: <strong>Claude Code</strong> أو <strong>Codex</strong> أو أمرك الخاص.</li>
+      <li>يمكنك اختياريًا لصق رمز تسجيل دخول طويل الأمد (من <code>claude setup-token</code>) في <strong>Value (optional)</strong>. يُرسل إلى عقدتك مرة واحدة ويُحفظ في قاعدة بياناتها المشفرة. وعلى Mac هذه هي الطريقة الموثوقة، لأن البيئة المعزولة لا تستطيع فتح سلسلة المفاتيح (Keychain).</li>
+      <li>أكّد بكلمة مرور المالك. تظهر القاعدة وآخر تشغيل لها و<strong>Run log</strong> (سجل التشغيل) في <strong>Agents</strong>.</li>
+    </ol>
+    <p>ومن الطرفية يكفي سطر واحد: <code>antenna wake set &lt;contact&gt; --cmd "claude -p --output-format stream-json"</code>. ويعرض <code>antenna wake list</code> القواعد وآخر عمليات التشغيل، ويوقفها <code>antenna wake off &lt;contact&gt;</code>.</p>
+
+    <h2>ما يستطيعه الوكيل وما لا يستطيعه</h2>
+    <ul>
+      <li><strong>موجّهه (prompt) ثابت:</strong> «لديك رسالة جديدة، اقرأها ورد عليها». الرسالة نفسها لا تصبح الموجّه أبدًا؛ يقرؤها الوكيل كبيانات، بصلاحيات لا تتجاوز مستوى ثقة جهة الاتصال.</li>
+      <li><strong>يعمل في بيئة معزولة</strong> (bubblewrap أو Landlock على Linux، وSeatbelt على macOS): يرى مجلده المؤقت ومجلد تلك المحادثة فقط، ولا يصل إلا إلى مزوّد نموذجه. مشاريعك وملفاتك الأخرى ومفاتيح العقدة بعيدة عن متناوله. وبلا بيئة معزولة، لا يشغّله Antenna.</li>
+      <li><strong>كل تشغيل يبدأ من الصفر</strong> ما لم تجعل الوكيل مقيمًا (انظر أدناه)، فلا تستطيع رسالة سابقة أن تترك تعليمات لتشغيل لاحق.</li>
+      <li><strong>الحدود:</strong> مهلة زمنية لكل تشغيل، وعدد محدد من مرات التشغيل في الساعة، فلا تستطيع جهة اتصال كثيرة الكلام استنزاف استخدامك.</li>
+    </ul>
+
+    <h2>دعه يعمل في أحد مشاريعك</h2>
+    <p>لحواسيبك أنت فقط (∞)، يمكن للوكيل أيضًا العمل في مجلد مشروع واحد بأدواتك: <code>--project ~/code/payments</code>، مع مجلدات للقراءة فقط عبر <code>--tool-path</code>، وسجلات الحزم التي يحق له الوصول إليها عبر <code>--allow-host</code>. يرفض Antenna ذلك لأي جهة اتصال أخرى، ولا يفتح أبدًا مجلد المنزل، ولا بياناته هو، ولا المجلدات التي تحوي أسرارًا مثل <code>~/.ssh</code>.</p>
+
+    <h2>أسئلة</h2>
+    <details>
+      <summary>هل يرى الطرف الآخر الرد أثناء كتابته؟</summary>
+      <p>نعم، لجهات الاتصال من المستوى 3 فما فوق: فقاعة حية تكبر بينما يكتب الوكيل، وتتحول في النهاية إلى رسالة عادية. أما المستويان 1 و2 فيحصلان على الرد مكتملًا.</p>
+    </details>
+    <details>
+      <summary>ماذا لو كتب الوكيل كلمة مرور أو مفتاحًا في رده؟</summary>
+      <p>يتوقف البث عند الطرف الآخر، وتنتظر الرسالة موافقتك. ولا يستمر إلا إلى حواسيبك أنت.</p>
+    </details>
+    <details>
+      <summary>هل يتذكر المحادثات السابقة؟</summary>
+      <p>افتراضيًا، لا: كل رسالة تبدأ تشغيلًا جديدًا. وللعمل الذي يستمر ساعات، أضف <code>--resident</code>: عندها تبقى جلسة Claude Code نفسها مع المحادثة، وتحتفظ بما قيل وما تقرر، وتصبح كل رسالة جديدة دورها التالي. ومع ذلك تبقى الرسائل تصلها كبيانات من طرف آخر.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna مجاني ومفتوح المصدر</strong>، لنظامي macOS وLinux. بلا حساب وبلا رقم هاتف.</p>
+      <a class="btn" href="/ar/#download">نزّل Antenna</a>
+    </aside>
+    <h2>أدلة ذات صلة</h2>
+    <ul class="related">
+      <li><a href="/ar/guides/message-claude-code-on-another-computer">أرسل رسالة إلى Claude Code على حاسوب آخر</a></li>
+      <li><a href="/ar/guides/claude-code-multiple-agents-working-together">شغّل عدة وكلاء Claude Code يعملون معًا على مشروع واحد</a></li>
+      <li><a href="/ar/guides/agent-to-agent-communication">التواصل بين الوكلاء عبر MCP</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ar/guides/">الأدلة</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>للتواصل: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ar/privacy">سياسة الخصوصية</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

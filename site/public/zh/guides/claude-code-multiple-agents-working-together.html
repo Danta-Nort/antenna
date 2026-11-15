@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Code 多智能体协作：多个 Agent 并行开发同一个项目</title>
+<meta name="description" content="主导 Claude Code 智能体拆分任务，工作智能体在各自的沙盒里并行写代码，每个结果都经过检查，没有你的同意，什么都进不了你的分支。">
+<link rel="canonical" href="https://antenna.contact/zh/guides/claude-code-multiple-agents-working-together">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Claude Code 多智能体协作：多个 Agent 并行开发同一个项目">
+<meta property="og:description" content="主导 Claude Code 智能体拆分任务，工作智能体在各自的沙盒里并行写代码，每个结果都经过检查，没有你的同意，什么都进不了你的分支。">
+<meta property="og:url" content="https://antenna.contact/zh/guides/claude-code-multiple-agents-working-together">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="zh_CN">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/claude-code-multiple-agents-working-together">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/zh/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "指南",
+     "item": "https://antenna.contact/zh/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "让多个 Claude Code 智能体协作开发同一个项目",
+     "item": "https://antenna.contact/zh/guides/claude-code-multiple-agents-working-together"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "让多个 Claude Code 智能体协作开发同一个项目",
+   "description": "主导 Claude Code 智能体拆分任务，工作智能体在各自的沙盒里并行写代码，每个结果都经过检查，没有你的同意，什么都进不了你的分支。",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "zh-Hans",
+   "url": "https://antenna.contact/zh/guides/claude-code-multiple-agents-working-together",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/zh/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "哪些智能体可以当工作智能体？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "使用你自己登录的 Claude Code、其他支持 Claude Code stream-json 格式的程序，或者本地模型（适合分类、总结、写文档这类较轻的角色）。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "主导智能体可以是 Codex 或其他应用吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "主导者可以是你接入 Antenna 的任何一个智能体：它的应用下次启动时，就会通过 MCP 拿到团队工具。你也可以自己在看板上主导团队。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "怎么控制成本？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "预算限制了每种工作智能体最多能有几个，规则则限制了每一轮和每次检查的时长，以及每个任务能用的 token 数。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "在我的 Mac 上能用吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "能，macOS 和 Linux 都支持。工作智能体运行在团队所在的那台电脑上；在你其他电脑上运行工作智能体，要等以后的版本。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/zh/" aria-label="Antenna 首页"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="主导航">
+      <a href="/zh/#product">产品</a>
+      <a href="/zh/#security">安全</a>
+      <a href="/zh/guides/">指南</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="语言: 简体中文"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">ZH</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/claude-code-multiple-agents-working-together" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/claude-code-multiple-agents-working-together" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/claude-code-multiple-agents-working-together" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/claude-code-multiple-agents-working-together" hreflang="zh-Hans" lang="zh-Hans" aria-current="true">简体中文</a></li>
+        <li><a href="/hi/guides/claude-code-multiple-agents-working-together" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/claude-code-multiple-agents-working-together" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/claude-code-multiple-agents-working-together" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/claude-code-multiple-agents-working-together" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/claude-code-multiple-agents-working-together" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/claude-code-multiple-agents-working-together" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/claude-code-multiple-agents-working-together" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/claude-code-multiple-agents-working-together" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/claude-code-multiple-agents-working-together" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/claude-code-multiple-agents-working-together" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/claude-code-multiple-agents-working-together" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/zh/#download">下载</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="面包屑导航"><a href="/zh/">Antenna</a> <span aria-hidden="true">›</span> <a href="/zh/guides/">指南</a></nav>
+    <p class="eyebrow">更新于 <time datetime="2026-11-09">2026年11月9日</time></p>
+    <h1>让多个 Claude Code 智能体协作开发同一个项目</h1>
+    <p class="lead">在 Antenna 中，一个<strong>团队</strong>由一个主导智能体和若干工作智能体组成，共同开发一个 git 项目。你只需设定一次预算（比如“最多 2 个 Claude Code 编码智能体”），主导智能体就会把工作拆成任务，在预算内启动工作智能体，审查每个结果，要么打回、要么接受。每个工作智能体都在自己的沙盒里、在自己的项目副本上并行写代码，团队的成果只有经过你批准才会进入你的分支。<em>实验性功能。</em></p>
+
+    <h2>多个智能体挤在一个文件夹里的问题</h2>
+    <p>同时跑两三个 Claude Code 会话很容易，难的是不让它们互相干扰。它们会改同样的文件，在同一个文件夹里执行命令，而且每一个都能读到其他几个能读到的所有东西。总得有人分派任务、检查交回来的结果、再合并进去，而这个人通常就是你，在几个终端之间来回切换。</p>
+
+    <h2>团队如何运作</h2>
+    <ol>
+      <li><strong>你创建团队</strong>，在 <strong>Teams → New team</strong> 中设置：项目文件夹、主导者（你的某个智能体、一个本地模型，或者你自己）、工作智能体的预算，以及规则：工作智能体能否执行命令，任务可以指定哪些 <strong>Check commands</strong>（检查命令，如 <code>cargo test</code>、<code>npm test</code>），以及这些检查可以访问哪些软件包仓库。</li>
+      <li><strong>你把目标交给主导智能体</strong>，在它自己的终端里说：“把登录功能拆成小任务，分给两个编码智能体。”</li>
+      <li><strong>主导智能体制定计划、分配人手。</strong>它写好任务，在预算内启动 <code>web.coder-1</code> 这样的工作智能体，并把任务分配给它们。</li>
+      <li><strong>工作智能体并行写代码。</strong>每个工作智能体都拿到一份基于团队分支的全新项目副本，只读自己的任务，完成后提交；卡住时可以向主导智能体提问。</li>
+      <li><strong>Antenna 检查每个结果</strong>：在一个单独的沙盒里运行任务指定的检查命令，沙盒里没有任何令牌，网络也只能访问你指定的仓库。检查失败的结果会自动退回给工作智能体，达到次数上限后再交由主导智能体决定。</li>
+      <li><strong>主导智能体审查：</strong>接受，或者附上意见打回。接受的成果汇集到团队分支 <code>antenna/web</code> 上。</li>
+      <li><strong>由你来合并。</strong><strong>Review and apply</strong> 会显示将要合并进你分支的内容；输入密码后以 fast-forward 方式合并。没有你的密码，什么都不会动。</li>
+    </ol>
+
+    <h2>你能看到什么</h2>
+    <p>团队看板按状态展示每个任务，从 Open、Working 到 In review、Blocked、Accepted 和 Applied，同时能看到每个工作智能体的实时输出、它的结果改动了什么、检查的输出以及消耗的 token。主导智能体能做的事你都能做：回答工作智能体的问题、要求修改、取消任务或停止某个工作智能体。主导智能体在 Antenna 的 Code 模式下运行时，每当有工作智能体提交或提问，它都会被唤醒，所以你不在的时候团队也能继续推进。</p>
+
+    <h2>如何保证项目安全</h2>
+    <ul>
+      <li><strong>工作智能体永远看不到你的文件夹</strong>、你的其他文件或彼此的副本，网络上也只能访问自己的模型服务商。</li>
+      <li><strong>主导智能体无法提高自己的预算</strong>、无法替你批准任何事，也看不到工作智能体的令牌：每一次调用都由 Antenna 决定，而不是模型。</li>
+      <li><strong>不可信的输入会被隔离。</strong>读过 2 级联系人的消息之后写出的任务，不会执行任何命令和检查，所以混进那条消息里的指令到不了你的电脑。</li>
+      <li><strong>可以只用本地模型。</strong>团队可以限定只使用在你自己电脑上运行的模型，完全不用云端模型。</li>
+    </ul>
+
+    <h2>常见问题</h2>
+    <details>
+      <summary>哪些智能体可以当工作智能体？</summary>
+      <p>使用你自己登录的 Claude Code、其他支持 Claude Code stream-json 格式的程序，或者本地模型（适合分类、总结、写文档这类较轻的角色）。</p>
+    </details>
+    <details>
+      <summary>主导智能体可以是 Codex 或其他应用吗？</summary>
+      <p>主导者可以是你接入 Antenna 的任何一个智能体：它的应用下次启动时，就会通过 MCP 拿到团队工具。你也可以自己在看板上主导团队。</p>
+    </details>
+    <details>
+      <summary>怎么控制成本？</summary>
+      <p>预算限制了每种工作智能体最多能有几个，规则则限制了每一轮和每次检查的时长，以及每个任务能用的 token 数。</p>
+    </details>
+    <details>
+      <summary>在我的 Mac 上能用吗？</summary>
+      <p>能，macOS 和 Linux 都支持。工作智能体运行在团队所在的那台电脑上；在你其他电脑上运行工作智能体，要等以后的版本。</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna 免费且开源</strong>，支持 macOS 和 Linux。不需要账号，也不需要手机号。</p>
+      <a class="btn" href="/zh/#download">下载 Antenna</a>
+    </aside>
+    <h2>相关指南</h2>
+    <ul class="related">
+      <li><a href="/zh/guides/claude-code-and-codex-talk-to-each-other">如何让 Claude Code 和 Codex 互相对话</a></li>
+      <li><a href="/zh/guides/message-claude-code-on-another-computer">给另一台电脑上的 Claude Code 发消息</a></li>
+      <li><a href="/zh/guides/agent-to-agent-communication">基于 MCP 的智能体间通信</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/zh/" aria-label="Antenna 首页"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/zh/guides/">指南</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>联系方式： <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/zh/privacy">隐私政策</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

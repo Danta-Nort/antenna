@@ -1,0 +1,49 @@
+<!--guide {"title": "VPS पर Claude Code 24/7 चलाएँ, लैपटॉप से बात करें — Antenna", "h1": "VPS पर Claude Code चौबीसों घंटे चलाएँ, और लैपटॉप से उससे बात करें", "description": "अपने VPS पर Antenna इंस्टॉल करें, उसके ज़रिए Claude Code या Codex शुरू करें, और लैपटॉप की चैट से उसे tasks दें। न खुले ports, न SSH session चालू रखने की झंझट।", "summary": "आपके server पर हमेशा चालू Claude Code या Codex, जिस तक आप लैपटॉप से चैट के ज़रिए पहुँचते हैं।", "source": "2026-11-09"}-->
+<p class="lead">अपने Linux VPS पर Claude Code और Antenna node इंस्टॉल करें, server को एक बार अपने लैपटॉप से जोड़ें, और अपने प्रोजेक्ट फ़ोल्डर में Antenna के ज़रिए Claude Code शुरू करें। उसके बाद वह आपके logout करने के बाद भी अपने tmux session में चलता रहता है, उसके लिए मैसेज आने पर जागता है, और आपके लैपटॉप पर चैट में जवाब देता है। न कोई inbound port खोलना, न SSH session चालू रखना, और Codex भी इसी तरह काम करता है।</p>
+
+<h2>आपको क्या चाहिए</h2>
+<ul>
+  <li>x86_64 पर एक Linux server, जिस पर Claude Code (या Codex) इंस्टॉल और साइन-इन हो, और tmux।</li>
+  <li>आपके लैपटॉप पर <a href="/#download">Antenna</a>: macOS या Linux।</li>
+</ul>
+
+<h2>1. Server पर Antenna node इंस्टॉल करें</h2>
+<pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+sudo loginctl enable-linger $USER</code></pre>
+<p>Installer signed manifest से सबसे नई release पढ़ता है, archive जाँचता है, <code>antennad</code> और <code>antenna</code> को <code>~/.local/bin</code> में systemd user service के रूप में इंस्टॉल करता है (root की ज़रूरत नहीं) और एक password के साथ आपका node बनाता है। दूसरी लाइन logout के बाद भी service चालू रखती है। Ubuntu या Fedora पर आप इसकी जगह <code>.deb</code> या <code>.rpm</code> इंस्टॉल कर सकते हैं।</p>
+
+<h2>2. इसे अपने लैपटॉप से जोड़ें</h2>
+<p>अपने लैपटॉप पर: <strong>New contact → Invite</strong>, नाम दें, <strong>This is my own computer (∞)</strong> पर tick करें, <strong>Create link</strong> दबाएँ और लिंक कॉपी करें। Server पर:</p>
+<pre><code>antenna join '&lt;link&gt;' --trust 5 --label mac</code></pre>
+<p>Single quotes रहने दें: लिंक में <code>#</code> है। लैपटॉप पर दिखा कोड server के terminal में टाइप करें, फिर लैपटॉप पर <strong>The contact confirmed — codes match</strong> दबाएँ। Level 5 दोनों तरफ़ ∞ है, इसलिए server को आपका अपना कंप्यूटर माना जाता है।</p>
+
+<h2>3. Antenna के ज़रिए Claude Code शुरू करें</h2>
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api
+antenna session attach api-dev</code></pre>
+<p>Connect वाली लाइन session को उसका अपना agent और token देती है, और hello भेजती है ताकि आपके लैपटॉप पर <code>api-dev</code> नाम की चैट आ जाए। Start वाली लाइन Claude Code को Antenna के अपने tmux server में चलाती है (आपके tmux को छुआ नहीं जाता)। Claude Code के पहले सवालों का जवाब देने के लिए एक बार attach करें, जैसे कि क्या वह फ़ोल्डर पर भरोसा करे, फिर <code>Ctrl-b d</code> से बाहर निकलें: वह चलता रहता है। Codex के लिए <code>antenna connect codex</code> और <code>--cli codex</code> इस्तेमाल करें।</p>
+
+<h2>4. उससे बात करें</h2>
+<p>लैपटॉप पर <code>api-dev</code> चैट में लिखें: “migration tests चलाओ और जो fail हों उन्हें ठीक करो।” जब Claude Code अपने prompt पर ख़ाली बैठा होता है, Antenna एक छोटी लाइन टाइप करता है ताकि वह आपका मैसेज पढ़े; वह कभी किसी कॉन्टैक्ट का टेक्स्ट टाइप नहीं करता और कभी उसकी ओर से किसी सवाल का जवाब नहीं देता। <strong>My devices</strong> में server का कार्ड उसकी हालत और उसके agents दिखाता है, और आप उसके requests लैपटॉप से मंज़ूर कर सकते हैं।</p>
+
+<h2>Reboot के बाद</h2>
+<p>Server restart होने के बाद node की keys लॉक हो जाती हैं: service चलती रहती है, लेकिन उसके लिंक तब तक चुप रहते हैं जब तक आप login करके <code>antenna unlock</code> न चलाएँ। इस तरह server की डिस्क की कॉपी से किसी को आपकी keys नहीं मिलतीं। <code>antenna status</code> बताता है कि वह लॉक है या नहीं।</p>
+
+<h2>सवाल-जवाब</h2>
+<details>
+  <summary>सीधे SSH और tmux क्यों नहीं?</summary>
+  <p>वह तब तक काम करता है जब तक आप terminal पर बैठे हैं। Antenna एक चैट जोड़ता है जिसमें आप कभी भी लैपटॉप से लिख सकते हैं, लिखते ही session को जगाता है, और दूसरे agents को भी उसे काम देने देता है, उन permissions के साथ जिन्हें वह ख़ुद जाँचता है।</p>
+</details>
+<details>
+  <summary>क्या server को public IP या खुले ports चाहिए?</summary>
+  <p>नहीं। दोनों तरफ़ बाहर की ओर कनेक्ट करते हैं, network इजाज़त दे तो सीधे, वरना relay के ज़रिए। Relay सिर्फ़ encrypted ट्रैफ़िक आगे भेजता है।</p>
+</details>
+<details>
+  <summary>क्या एक server पर कई sessions चल सकते हैं?</summary>
+  <p>हाँ: हर प्रोजेक्ट फ़ोल्डर के लिए एक agent, हर एक का अपना नाम और आपके लैपटॉप पर अपनी चैट।</p>
+</details>
+<details>
+  <summary>क्या ARM build है?</summary>
+  <p>अभी नहीं। Server node x86_64 Linux के लिए बना है।</p>
+</details>

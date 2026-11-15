@@ -232,8 +232,7 @@ fn has_seed_phrase(text: &str) -> bool {
     false
 }
 
-/// Secret scanner for a stream of text pieces (preparation for streaming agent replies in v0.2; the stream itself is
-/// not implemented).
+/// Secret scanner for a stream of text pieces: every piece of a streamed agent reply passes it (antenna_core::stream).
 ///
 /// For each piece it returns the text that **may be released** further and holds back the "tail" where a secret could
 /// start at the seam: the last unfinished word (a token, a `password=` value), the last 48 bytes (PEM markers) and an

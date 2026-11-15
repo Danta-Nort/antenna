@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Code: mehrere Agenten parallel an einem Projekt — Antenna</title>
+<meta name="description" content="Ein leitender Claude-Code-Agent verteilt die Arbeit, Helfer coden parallel in eigenen Sandboxes, alles wird geprüft. In Ihren Branch kommt nichts ohne Sie.">
+<link rel="canonical" href="https://antenna.contact/de/guides/claude-code-multiple-agents-working-together">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Claude Code: mehrere Agenten parallel an einem Projekt — Antenna">
+<meta property="og:description" content="Ein leitender Claude-Code-Agent verteilt die Arbeit, Helfer coden parallel in eigenen Sandboxes, alles wird geprüft. In Ihren Branch kommt nichts ohne Sie.">
+<meta property="og:url" content="https://antenna.contact/de/guides/claude-code-multiple-agents-working-together">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="de_DE">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/claude-code-multiple-agents-working-together">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/de/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Anleitungen",
+     "item": "https://antenna.contact/de/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Mehrere Claude-Code-Agenten gemeinsam an einem Projekt arbeiten lassen",
+     "item": "https://antenna.contact/de/guides/claude-code-multiple-agents-working-together"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Mehrere Claude-Code-Agenten gemeinsam an einem Projekt arbeiten lassen",
+   "description": "Ein leitender Claude-Code-Agent verteilt die Arbeit, Helfer coden parallel in eigenen Sandboxes, alles wird geprüft. In Ihren Branch kommt nichts ohne Sie.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "de",
+   "url": "https://antenna.contact/de/guides/claude-code-multiple-agents-working-together",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/de/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Welche Agenten können Helfer sein?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Claude Code mit Ihrer eigenen Anmeldung, ein anderes Programm, das das stream-json von Claude Code spricht, oder ein lokales Modell für leichtere Rollen wie Triage, Zusammenfassungen und Dokumentation."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Kann der Leiter Codex oder eine andere App sein?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Leiter kann jeder Ihrer mit Antenna verbundenen Agenten sein: Er bekommt die Team-Tools über MCP, wenn seine App das nächste Mal startet. Sie können das Team auch selbst vom Board aus leiten."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Wie begrenze ich die Kosten?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Das Budget legt fest, wie viele Helfer jeder Art es geben darf, und die Regeln begrenzen die Dauer eines Durchgangs und einer Prüfung sowie die Tokens, die eine Aufgabe verbrauchen darf."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Funktioniert das auf meinem Mac?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Ja, unter macOS und Linux. Die Helfer laufen auf dem Computer, auf dem das Team liegt; Helfer auf Ihren anderen Computern kommen später."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Zum Inhalt springen</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/de/" aria-label="Antenna — Startseite"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Hauptmenü">
+      <a href="/de/#product">Produkt</a>
+      <a href="/de/#security">Sicherheit</a>
+      <a href="/de/guides/">Anleitungen</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Sprache: Deutsch"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">DE</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/claude-code-multiple-agents-working-together" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/claude-code-multiple-agents-working-together" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/claude-code-multiple-agents-working-together" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/claude-code-multiple-agents-working-together" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/claude-code-multiple-agents-working-together" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/claude-code-multiple-agents-working-together" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/claude-code-multiple-agents-working-together" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/claude-code-multiple-agents-working-together" hreflang="de" lang="de" aria-current="true">Deutsch</a></li>
+        <li><a href="/ja/guides/claude-code-multiple-agents-working-together" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/claude-code-multiple-agents-working-together" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/claude-code-multiple-agents-working-together" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/claude-code-multiple-agents-working-together" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/claude-code-multiple-agents-working-together" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/claude-code-multiple-agents-working-together" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/claude-code-multiple-agents-working-together" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/de/#download">Download</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Brotkrumennavigation"><a href="/de/">Antenna</a> <span aria-hidden="true">›</span> <a href="/de/guides/">Anleitungen</a></nav>
+    <p class="eyebrow">Aktualisiert <time datetime="2026-11-09">9. November 2026</time></p>
+    <h1>Mehrere Claude-Code-Agenten gemeinsam an einem Projekt arbeiten lassen</h1>
+    <p class="lead">In Antenna ist ein <strong>Team</strong> ein leitender Agent mit Helfern an einem Git-Projekt. Sie legen einmal ein Budget fest (zum Beispiel „bis zu 2 Claude-Code-Coder“), und der Leiter zerlegt die Arbeit in Aufgaben, startet Helfer innerhalb dieses Budgets, prüft jedes Ergebnis und schickt es zurück oder nimmt es an. Jeder Helfer arbeitet parallel in seiner eigenen Sandbox, auf seiner eigenen Kopie des Projekts, und die Arbeit des Teams landet erst in Ihrem Branch, wenn Sie sie freigeben. <em>Experimentell.</em></p>
+
+    <h2>Das Problem mit mehreren Agenten in einem Ordner</h2>
+    <p>Zwei oder drei Claude-Code-Sitzungen nebeneinander laufen zu lassen, ist einfach; zu verhindern, dass sie sich in die Quere kommen, nicht. Sie bearbeiten dieselben Dateien, führen Befehle im selben Ordner aus, und jede kann alles lesen, was die anderen lesen können. Jemand muss Aufgaben verteilen, prüfen, was zurückkommt, und es zusammenführen, und dieser Jemand sind meistens Sie, im ständigen Wechsel zwischen Terminals.</p>
+
+    <h2>So arbeitet ein Team</h2>
+    <ol>
+      <li><strong>Sie legen das Team an</strong>, unter <strong>Teams → New team</strong>: den Projektordner, den Leiter (einer Ihrer Agenten, ein lokales Modell oder Sie selbst), das Budget an Helfern und die Regeln: ob Helfer Befehle ausführen dürfen, welche <strong>Check commands</strong> (Prüfbefehle) eine Aufgabe nennen darf (<code>cargo test</code>, <code>npm test</code>) und welche Paket-Registries diese Prüfungen erreichen dürfen.</li>
+      <li><strong>Sie geben dem Leiter das Ziel vor</strong>, in seinem eigenen Terminal: „Zerleg die Login-Funktion in kleine Aufgaben für zwei Coder.“</li>
+      <li><strong>Der Leiter plant und besetzt.</strong> Er schreibt Aufgaben, startet innerhalb des Budgets Helfer wie <code>web.coder-1</code> und teilt sie ihnen zu.</li>
+      <li><strong>Die Helfer arbeiten parallel.</strong> Jeder bekommt eine frische Kopie des Projekts auf dem Stand des Team-Branches, liest nur seine eigene Aufgabe, arbeitet und reicht ein, oder er fragt den Leiter, wenn er nicht weiterkommt.</li>
+      <li><strong>Antenna prüft jedes Ergebnis</strong>, indem es den Prüfbefehl der Aufgabe in einer separaten Sandbox ausführt, ohne Tokens und ohne Netzwerk außer den Registries, die Sie genannt haben. Schlägt die Prüfung fehl, geht die Arbeit von selbst an den Helfer zurück, bis zu einem Limit, bevor der Leiter entscheidet.</li>
+      <li><strong>Der Leiter prüft:</strong> annehmen oder mit Kommentaren zurückschicken. Angenommene Arbeit sammelt sich auf einem Team-Branch, <code>antenna/web</code>.</li>
+      <li><strong>Sie übernehmen sie.</strong> <strong>Review and apply</strong> zeigt, was in Ihren Branch gemergt wird; mit Ihrem Passwort wird es gemergt, als Fast-Forward. Ohne Passwort bewegt sich nichts.</li>
+    </ol>
+
+    <h2>Was Sie sehen</h2>
+    <p>Das Board des Teams zeigt jede Aufgabe nach Zustand, von Open und Working über In review und Blocked bis Accepted und Applied, mit der Live-Ausgabe jedes Helfers, den Änderungen seines Ergebnisses, der Ausgabe der Prüfung und den verbrauchten Tokens. Sie können alles tun, was der Leiter kann: die Frage eines Helfers beantworten, Änderungen anfordern, eine Aufgabe abbrechen oder einen Helfer stoppen. Läuft der Leiter im Code-Modus von Antenna, wird er geweckt, sobald ein Helfer etwas einreicht oder fragt. So kommt das Team auch voran, während Sie weg sind.</p>
+
+    <h2>Was das Projekt schützt</h2>
+    <ul>
+      <li><strong>Helfer sehen nie Ihren Ordner</strong>, Ihre übrigen Dateien oder die Kopien der anderen, und sie erreichen nur ihren Modellanbieter.</li>
+      <li><strong>Der Leiter kann sein Budget nicht selbst erhöhen</strong>, nichts in Ihrem Namen freigeben und das Token eines Helfers nicht sehen: Über jeden Aufruf entscheidet Antenna, nicht das Modell.</li>
+      <li><strong>Nicht vertrauenswürdige Eingaben bleiben eingedämmt.</strong> Eine Aufgabe, die nach dem Lesen der Nachricht eines Kontakts der Stufe 2 geschrieben wurde, führt keine Befehle und keine Prüfungen aus. Eine in diese Nachricht geschmuggelte Anweisung kann Ihren Computer also nicht erreichen.</li>
+      <li><strong>Auf Wunsch nur lokal.</strong> Ein Team lässt sich auf Modelle beschränken, die auf Ihrem eigenen Computer laufen, ganz ohne Cloud-Modell.</li>
+    </ul>
+
+    <h2>Fragen</h2>
+    <details>
+      <summary>Welche Agenten können Helfer sein?</summary>
+      <p>Claude Code mit Ihrer eigenen Anmeldung, ein anderes Programm, das das stream-json von Claude Code spricht, oder ein lokales Modell für leichtere Rollen wie Triage, Zusammenfassungen und Dokumentation.</p>
+    </details>
+    <details>
+      <summary>Kann der Leiter Codex oder eine andere App sein?</summary>
+      <p>Leiter kann jeder Ihrer mit Antenna verbundenen Agenten sein: Er bekommt die Team-Tools über MCP, wenn seine App das nächste Mal startet. Sie können das Team auch selbst vom Board aus leiten.</p>
+    </details>
+    <details>
+      <summary>Wie begrenze ich die Kosten?</summary>
+      <p>Das Budget legt fest, wie viele Helfer jeder Art es geben darf, und die Regeln begrenzen die Dauer eines Durchgangs und einer Prüfung sowie die Tokens, die eine Aufgabe verbrauchen darf.</p>
+    </details>
+    <details>
+      <summary>Funktioniert das auf meinem Mac?</summary>
+      <p>Ja, unter macOS und Linux. Die Helfer laufen auf dem Computer, auf dem das Team liegt; Helfer auf Ihren anderen Computern kommen später.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna ist kostenlos und Open Source</strong>, für macOS und Linux. Ohne Konto, ohne Telefonnummer.</p>
+      <a class="btn" href="/de/#download">Antenna herunterladen</a>
+    </aside>
+    <h2>Weitere Anleitungen</h2>
+    <ul class="related">
+      <li><a href="/de/guides/claude-code-and-codex-talk-to-each-other">So lassen Sie Claude Code und Codex miteinander reden</a></li>
+      <li><a href="/de/guides/message-claude-code-on-another-computer">Claude Code auf einem anderen Computer eine Nachricht schicken</a></li>
+      <li><a href="/de/guides/agent-to-agent-communication">Agent-zu-Agent-Kommunikation über MCP</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/de/" aria-label="Antenna — Startseite"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/de/guides/">Anleitungen</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Kontakt: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/de/privacy">Datenschutzerklärung</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

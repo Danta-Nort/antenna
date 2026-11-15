@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>メッセージに自動返信する AI エージェントの作り方 — Antenna</title>
+<meta name="description" content="Claude Code や Codex に、連絡先からのメッセージへ自動で返信させる方法。メッセージが届くと Antenna がサンドボックス内でエージェントを起動し、返信は書かれるそばから届きます。">
+<link rel="canonical" href="https://antenna.contact/ja/guides/ai-agent-that-replies-to-messages">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="メッセージに自動返信する AI エージェントの作り方 — Antenna">
+<meta property="og:description" content="Claude Code や Codex に、連絡先からのメッセージへ自動で返信させる方法。メッセージが届くと Antenna がサンドボックス内でエージェントを起動し、返信は書かれるそばから届きます。">
+<meta property="og:url" content="https://antenna.contact/ja/guides/ai-agent-that-replies-to-messages">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ja_JP">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/ai-agent-that-replies-to-messages">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ja/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "ガイド",
+     "item": "https://antenna.contact/ja/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "メッセージに返信する AI エージェントを設定する",
+     "item": "https://antenna.contact/ja/guides/ai-agent-that-replies-to-messages"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "メッセージに返信する AI エージェントを設定する",
+   "description": "Claude Code や Codex に、連絡先からのメッセージへ自動で返信させる方法。メッセージが届くと Antenna がサンドボックス内でエージェントを起動し、返信は書かれるそばから届きます。",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "ja",
+   "url": "https://antenna.contact/ja/guides/ai-agent-that-replies-to-messages",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ja/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "相手には返信が入力されていく様子が見えますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "はい、レベル 3 以上の連絡先には見えます。エージェントが書くにつれて大きくなるライブの吹き出しが表示され、最後に通常のメッセージになります。レベル 1 と 2 の相手には完成した返信が届きます。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "エージェントが返信にパスワードや鍵を書いてしまったら？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "相手へのストリームは止まり、メッセージはあなたの承認待ちになります。そのまま送られ続けるのは、自分のコンピューター宛ての場合だけです。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "以前の会話を覚えていますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "デフォルトでは覚えていません。メッセージごとに新しい実行が始まります。何時間も続く作業には --resident を付けてください。同じ Claude Code のセッションがその会話に付き添い、話したことや決めたことを保ったまま、新しいメッセージを次のターンとして受け取ります。その場合も、メッセージは相手から届いたデータとして扱われます。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">本文へスキップ</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ja/" aria-label="Antenna — ホーム"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="メイン">
+      <a href="/ja/#product">製品</a>
+      <a href="/ja/#security">セキュリティ</a>
+      <a href="/ja/guides/">ガイド</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="言語: 日本語"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">JA</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/ai-agent-that-replies-to-messages" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/ai-agent-that-replies-to-messages" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/ai-agent-that-replies-to-messages" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/ai-agent-that-replies-to-messages" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/ai-agent-that-replies-to-messages" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/ai-agent-that-replies-to-messages" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/ai-agent-that-replies-to-messages" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/ai-agent-that-replies-to-messages" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/ai-agent-that-replies-to-messages" hreflang="ja" lang="ja" aria-current="true">日本語</a></li>
+        <li><a href="/ko/guides/ai-agent-that-replies-to-messages" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/ai-agent-that-replies-to-messages" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/ai-agent-that-replies-to-messages" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/ai-agent-that-replies-to-messages" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/ai-agent-that-replies-to-messages" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/ai-agent-that-replies-to-messages" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ja/#download">ダウンロード</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="パンくずリスト"><a href="/ja/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ja/guides/">ガイド</a></nav>
+    <p class="eyebrow">更新日 <time datetime="2026-11-09">2026年11月9日</time></p>
+    <h1>メッセージに返信する AI エージェントを設定する</h1>
+    <p class="lead">Antenna では、連絡先とエージェント（Claude Code、Codex、または自作のコマンド）を選んでおくと、それ以降その連絡先からメッセージが届くたびにエージェントが起動し、メッセージを読んで返信します。エージェントはサンドボックス内で、その連絡先の信頼レベルを超えない権限で動き、返信は書かれていくそばから相手の画面に表示されます。使うのはあなた自身の Claude や ChatGPT のサインインで、秘密情報を含んでいそうな返信はあなたの承認待ちになります。</p>
+
+    <h2>主な使い方</h2>
+    <ul>
+      <li><strong>サーバー上の自分専用アシスタント。</strong>ノート PC からサーバーにメッセージを送ると、そこで Claude Code が返事をし、プロジェクトのビルドやテストを実行します。</li>
+      <li><strong>連絡先向けの受付窓口。</strong>同僚からのプロジェクトに関する質問に、その会話のフォルダーしか見えないエージェントがすぐに答えます。</li>
+      <li><strong>結果を報告するスクリプト。</strong>どんなプログラムの出力でもライブストリームとして送れます：<code>my-program | antenna send --stream &lt;contact&gt;</code>。</li>
+    </ul>
+
+    <h2>ウィンドウで設定する</h2>
+    <ol>
+      <li>エージェントを動かしたいコンピューターで、<strong>Agents → Set up for a contact…</strong> を開きます（会話の中からなら、連絡先カードの <strong>Agent replies → Set up…</strong>）。</li>
+      <li>連絡先とプログラムを選びます：<strong>Claude Code</strong>、<strong>Codex</strong>、または自作のコマンド。</li>
+      <li>必要に応じて、長期間有効なサインイントークン（<code>claude setup-token</code> で取得）を <strong>Value (optional)</strong> に貼り付けます。トークンは一度だけノードに送られ、暗号化されたデータベースに保存されます。Mac ではサンドボックスからキーチェーンを開けないため、これが確実な方法です。</li>
+      <li>オーナーパスワードで確定します。ルール、最後の実行、<strong>Run log</strong>（実行ログ）が <strong>Agents</strong> に表示されます。</li>
+    </ol>
+    <p>ターミナルからなら 1 行です：<code>antenna wake set &lt;contact&gt; --cmd "claude -p --output-format stream-json"</code>。<code>antenna wake list</code> でルールと最近の実行を確認でき、<code>antenna wake off &lt;contact&gt;</code> で無効にできます。</p>
+
+    <h2>エージェントにできること、できないこと</h2>
+    <ul>
+      <li><strong>プロンプトは固定です：</strong>「新しいメッセージが届いています。読んで返信してください」。メッセージそのものがプロンプトになることはなく、エージェントはそれをデータとして、連絡先の信頼レベルを超えない権限で読みます。</li>
+      <li><strong>サンドボックス内で動きます</strong>（Linux では bubblewrap または Landlock、macOS では Seatbelt）。見えるのは自分用の一時フォルダーとその会話のフォルダーだけで、通信できるのはモデルのプロバイダーだけです。あなたのプロジェクト、そのほかのファイル、ノードの鍵には手が届きません。サンドボックスが使えなければ、Antenna はエージェントを起動しません。</li>
+      <li><strong>毎回まっさらな状態で始まります。</strong>エージェントを常駐させない限り（後述）、以前のメッセージが後の実行に指示を残すことはできません。</li>
+      <li><strong>制限：</strong>1 回の実行あたりの時間制限と、1 時間あたりの実行回数の上限があるため、よくしゃべる相手のせいで利用枠を使い果たすことはありません。</li>
+    </ul>
+
+    <h2>自分のプロジェクトで作業させる</h2>
+    <p>自分のコンピューター（∞）に限り、エージェントがあなたのツールチェーンを使って 1 つのプロジェクトフォルダーで作業することもできます：<code>--project ~/code/payments</code> に加え、読み取り専用の <code>--tool-path</code> フォルダーと、<code>--allow-host</code> で接続を許すパッケージレジストリを指定します。ほかの連絡先に対しては Antenna はこれを拒否し、ホームフォルダー、Antenna 自身のデータ、<code>~/.ssh</code> のような秘密情報を含むフォルダーを開くことは決してありません。</p>
+
+    <h2>よくある質問</h2>
+    <details>
+      <summary>相手には返信が入力されていく様子が見えますか？</summary>
+      <p>はい、レベル 3 以上の連絡先には見えます。エージェントが書くにつれて大きくなるライブの吹き出しが表示され、最後に通常のメッセージになります。レベル 1 と 2 の相手には完成した返信が届きます。</p>
+    </details>
+    <details>
+      <summary>エージェントが返信にパスワードや鍵を書いてしまったら？</summary>
+      <p>相手へのストリームは止まり、メッセージはあなたの承認待ちになります。そのまま送られ続けるのは、自分のコンピューター宛ての場合だけです。</p>
+    </details>
+    <details>
+      <summary>以前の会話を覚えていますか？</summary>
+      <p>デフォルトでは覚えていません。メッセージごとに新しい実行が始まります。何時間も続く作業には <code>--resident</code> を付けてください。同じ Claude Code のセッションがその会話に付き添い、話したことや決めたことを保ったまま、新しいメッセージを次のターンとして受け取ります。その場合も、メッセージは相手から届いたデータとして扱われます。</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna は無料のオープンソース</strong>で、macOS と Linux に対応しています。アカウントも電話番号も必要ありません。</p>
+      <a class="btn" href="/ja/#download">Antenna をダウンロード</a>
+    </aside>
+    <h2>関連ガイド</h2>
+    <ul class="related">
+      <li><a href="/ja/guides/message-claude-code-on-another-computer">別のコンピューターの Claude Code にメッセージを送る</a></li>
+      <li><a href="/ja/guides/claude-code-multiple-agents-working-together">複数の Claude Code エージェントを 1 つのプロジェクトで協働させる</a></li>
+      <li><a href="/ja/guides/agent-to-agent-communication">MCP によるエージェント間通信</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ja/" aria-label="Antenna — ホーム"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ja/guides/">ガイド</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>お問い合わせ： <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ja/privacy">プライバシーポリシー</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

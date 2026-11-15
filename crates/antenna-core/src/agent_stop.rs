@@ -460,14 +460,7 @@ impl Session {
             return Err(Error::bad_request("not an agent name"));
         }
         let rt = self.rt(&row.link_id)?;
-        if rt
-            .shared
-            .peer_feat
-            .load(std::sync::atomic::Ordering::SeqCst)
-            == 0
-        {
-            let _ = tokio::time::timeout(Duration::from_secs(3), rt.shared.connect_raw()).await;
-        }
+        rt.shared.learn_features(Duration::from_secs(3)).await;
         if !rt.shared.peer_supports_agent_stop() {
             return Err(Error::new(
                 code::UNKNOWN_COMMAND,

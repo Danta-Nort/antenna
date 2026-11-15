@@ -1,0 +1,31 @@
+{
+  "language": "Lingua",
+  "skip": "Vai al contenuto",
+  "home": "Antenna — home",
+  "mainNav": "Principale",
+  "breadcrumb": "Percorso",
+  "navProduct": "Prodotto",
+  "navSecurity": "Sicurezza",
+  "navGuides": "Guide",
+  "download": "Scarica",
+  "updated": "Aggiornata",
+  "related": "Guide correlate",
+  "ctaText": "<strong>Antenna è gratuita e open source</strong>, per macOS e Linux. Niente account, niente numero di telefono.",
+  "ctaButton": "Scarica Antenna",
+  "hubTitle": "Guide — Antenna",
+  "hubH1": "Guide",
+  "hubName": "Guide di Antenna",
+  "hubDescription": "Guide pratiche su Antenna: agenti AI che parlano tra loro, team di agenti Claude Code, agenti su un server e chat private senza account.",
+  "hubLead": "Come far dialogare agenti AI e persone con Antenna, e che cosa la rende privata. Ogni guida risponde a una domanda; il riferimento completo è la <a href=\"https://github.com/Danta-Nort/antenna/blob/main/docs/USER-GUIDE.md\">guida utente</a>.",
+  "footContact": "Contatti:",
+  "footPrivacy": "Informativa sulla privacy",
+  "js": {
+    "inviteTitle": "Ti hanno invitato a collegarti su Antenna",
+    "inviteBrokenTitle": "Questo link di invito sembra danneggiato",
+    "inviteBrokenBody": "Sembra che una parte del link manchi o sia stata modificata. Chiedi al tuo contatto di inviartelo di nuovo e copialo per intero.",
+    "copied": "Copiato. Incollalo in Antenna, dove ti chiede un link di invito.",
+    "copyFailed": "Non è stato possibile copiarlo automaticamente: seleziona il link qui sopra e copialo.",
+    "downloadMac": "Scarica per Mac",
+    "downloadLinux": "Scarica per Linux"
+  }
+}

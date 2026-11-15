@@ -274,8 +274,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get trust5Tasks => 'Без подтверждения в пределах scope';
 
   @override
-  String get trust4Commands =>
-      'Только из allowlist и в sandbox (сборка, тесты)';
+  String get trust4Commands => 'Каждая ждёт вашего подтверждения';
 
   @override
   String get trust5Commands => 'Любые, в sandbox без сети и секретов';
@@ -782,6 +781,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get chatSelectContact => 'Выберите связь';
+
+  @override
+  String get chatFirstConnectAgent =>
+      'Или подключите Claude Code, Codex или другое ИИ-приложение';
 
   @override
   String get chatNoSelectionBody =>
@@ -2056,13 +2059,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get settingsLanguageHint =>
-      '«Как в системе»: русский, если система на русском, иначе английский.';
+      '«Как в системе»: язык системы, если он есть в приложении, иначе английский.';
 
   @override
-  String get langEnglish => 'English';
-
-  @override
-  String get langRussian => 'Русский';
+  String get langName => 'Русский';
 
   @override
   String get settingsKeys => 'Ключи';

@@ -192,6 +192,7 @@ class FakeAgentComputer {
     this.exitOnHangup = true,
     this.macos = false,
     this.windows = false,
+    this.windowsCode = false,
     this.env = const {'HOME': '/home/owner', 'PATH': '/usr/local/bin:/usr/bin:/bin', 'LANG': 'en_US.UTF-8'},
     this.hooks = false,
     this.shots,
@@ -224,6 +225,9 @@ class FakeAgentComputer {
   /// run the same on every system.
   final bool windows;
 
+  /// On [windows]: the build for Code mode's hands-on check (`AgentHost.windowsCode`).
+  final bool windowsCode;
+
   final Set<String> installed;
   bool exitOnHangup;
   final ptys = <FakePty>[];
@@ -252,6 +256,7 @@ class FakeAgentComputer {
     shell: '/bin/bash',
     macos: macos,
     windows: windows,
+    windowsCode: windowsCode,
     fileExists: installed.contains,
     folderExists: (p) => p.endsWith('.app') ? installed.contains(p) : !p.startsWith('/missing'),
     newHooks: hooks ? () => FakeCodeHooks()..let(hookChannels.add) : null,

@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemini CLI и Claude Code вместе: передача задач и ревью</title>
+<meta name="description" content="Подключите Gemini CLI и Claude Code к Antenna и проведите между ними линию: они будут передавать друг другу задачи и ревью на одном компьютере или на двух.">
+<link rel="canonical" href="https://antenna.contact/ru/guides/gemini-cli-and-claude-code">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Gemini CLI и Claude Code вместе: передача задач и ревью">
+<meta property="og:description" content="Подключите Gemini CLI и Claude Code к Antenna и проведите между ними линию: они будут передавать друг другу задачи и ревью на одном компьютере или на двух.">
+<meta property="og:url" content="https://antenna.contact/ru/guides/gemini-cli-and-claude-code">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ru_RU">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/gemini-cli-and-claude-code">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/gemini-cli-and-claude-code">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/gemini-cli-and-claude-code">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/gemini-cli-and-claude-code">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/gemini-cli-and-claude-code">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/gemini-cli-and-claude-code">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/gemini-cli-and-claude-code">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/gemini-cli-and-claude-code">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/gemini-cli-and-claude-code">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/gemini-cli-and-claude-code">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/gemini-cli-and-claude-code">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/gemini-cli-and-claude-code">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/gemini-cli-and-claude-code">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/gemini-cli-and-claude-code">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/gemini-cli-and-claude-code">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/gemini-cli-and-claude-code">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ru/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Инструкции",
+     "item": "https://antenna.contact/ru/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Как работать с Gemini CLI и Claude Code вместе",
+     "item": "https://antenna.contact/ru/guides/gemini-cli-and-claude-code"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Как работать с Gemini CLI и Claude Code вместе",
+   "description": "Подключите Gemini CLI и Claude Code к Antenna и проведите между ними линию: они будут передавать друг другу задачи и ревью на одном компьютере или на двух.",
+   "datePublished": "2026-11-14",
+   "dateModified": "2026-11-14",
+   "inLanguage": "ru",
+   "url": "https://antenna.contact/ru/guides/gemini-cli-and-claude-code",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ru/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Нужен ли API-ключ Gemini?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Нет. Gemini CLI входит через ваш аккаунт Google, а Claude Code — через ваш тариф Claude, как обычно. Antenna только передаёт сообщения."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Могут ли два окна Gemini CLI работать с Antenna одновременно?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Только по одному: агент работает в одной сессии за раз, а Подключить даёт Gemini CLI одного агента."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Это уже готово?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Соединение агентов на карте и пробуждение простаивающих агентов в Antenna 0.1 помечены как экспериментальные: они работают и покрыты тестами, но ещё могут измениться."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Перейти к содержанию</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ru/" aria-label="Antenna — на главную"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Основное меню">
+      <a href="/ru/#product">О программе</a>
+      <a href="/ru/#security">Безопасность</a>
+      <a href="/ru/guides/">Инструкции</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Язык: Русский"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">RU</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/gemini-cli-and-claude-code" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/gemini-cli-and-claude-code" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/gemini-cli-and-claude-code" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/gemini-cli-and-claude-code" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/gemini-cli-and-claude-code" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/gemini-cli-and-claude-code" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/gemini-cli-and-claude-code" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/gemini-cli-and-claude-code" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/gemini-cli-and-claude-code" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/gemini-cli-and-claude-code" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/gemini-cli-and-claude-code" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/gemini-cli-and-claude-code" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/gemini-cli-and-claude-code" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/gemini-cli-and-claude-code" hreflang="ru" lang="ru" aria-current="true">Русский</a></li>
+        <li><a href="/uk/guides/gemini-cli-and-claude-code" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ru/#download">Скачать</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Навигационная цепочка"><a href="/ru/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ru/guides/">Инструкции</a></nav>
+    <p class="eyebrow">Обновлено <time datetime="2026-11-14">14 ноября 2026 г.</time></p>
+    <h1>Как работать с Gemini CLI и Claude Code вместе</h1>
+    <p class="lead">Подключите Gemini CLI к Antenna в один клик, запустите Claude Code в окне Antenna и проведите между ними линию на карте агентов. После этого они пишут друг другу через MCP-инструменты Antenna: Gemini CLI просит Claude Code посмотреть изменения, Claude Code передаёт Gemini CLI задачу, а ответ возвращается тем же путём. Оба работают под вашими собственными входами в Google и Claude, без API-ключей.</p>
+
+    <h2>На одном компьютере</h2>
+    <ol>
+      <li><a href="/ru/#download">Установите Antenna</a> (macOS или Linux) и создайте свой узел: один пароль, никакого аккаунта.</li>
+      <li>Откройте <strong>Агенты → ИИ-приложения</strong> и нажмите <strong>Подключить</strong> рядом с Gemini CLI. Выберите <strong>Помощник с доступом к моим проектам</strong>, введите пароль, нажмите <strong>Далее</strong>, прочитайте, что Antenna добавит в <code>~/.gemini/settings.json</code>, и нажмите <strong>Записать и подключить</strong>. В Gemini CLI выполните <code>/mcp reload</code> (или перезапустите его): <code>/mcp</code> покажет <code>antenna</code>. В строке приложения появится «Контакты пишут ему как gemini-cli».</li>
+      <li>На той же странице нажмите <strong>Запустить в режиме «Код»</strong> рядом с Claude Code. Выберите <strong>Новый агент…</strong>, назовите его <code>builder</code>, выберите ту же роль, <strong>Помощник с доступом к моим проектам</strong>, введите пароль и нажмите <strong>Запустить</strong>. Claude Code заработает во вкладке терминала прямо в окне программы.</li>
+      <li>Откройте <strong>Агенты → Карта</strong>, протяните линию от маркера одного агента к другому, введите пароль и нажмите <strong>Соединить</strong>. Два агента получат <em>локальный маршрут</em>: их сообщения никогда не покидают компьютер, и каждый принимает сообщения другого как задачи, если вы не снимете эту галочку.</li>
+    </ol>
+    <p>Дайте обоим одну и ту же роль: Antenna не позволяет агенту, который видел больше ваших данных, писать агенту, который видел меньше.</p>
+
+    <h2>Как они обращаются друг к другу</h2>
+    <p>Когда линия проведена, каждый агент становится для другого собеседником по умолчанию: достаточно сказать «отправь это своему собеседнику». Чтобы назвать другого по имени, агент вызывает <code>send_message</code> с <code>local_agent</code>, равным <code>gemini-cli</code> или <code>builder</code>. Получатель читает сообщения через <code>read_inbox</code> или ждёт их через <code>wait_for_message</code>, до 10 минут за один вызов.</p>
+    <p>Ждут они по-разному. Claude Code в режиме «Код» просыпается сам: когда приходит сообщение, а он простаивает, Antenna набирает за него одну строку с просьбой прочитать входящие. <em>Экспериментально.</em> Gemini CLI Antenna пока не будит, поэтому он читает сообщения, когда в следующий раз обращается к Antenna. Значит, начинать обмен удобнее с Gemini CLI: «Попроси <code>builder</code> проверить diff в <code>src/</code>, потом дождись ответа и исправь то, что он найдёт». Claude Code проснётся, проверит и ответит. Чтобы передать работу Gemini CLI, сначала скажите ему ждать сообщений.</p>
+
+    <h2>На двух компьютерах</h2>
+    <p>Gemini CLI может остаться на одном компьютере, а Claude Code работать на другом. Установите Antenna на каждый и один раз свяжите их ссылкой-приглашением и шестизначным кодом, отметив <strong>Это мой собственный компьютер (∞)</strong>. Потом проведите линию между двумя агентами на карте. Другой компьютер попросит вас одобрить подключение со своей стороны, там же или в разделе <strong>Мои устройства</strong>, так что без вас там ничего не изменится. На сервере без экрана Claude Code запускается командами <code>antenna connect claude-code</code> и <code>antenna session start</code>: подробнее в статье <a href="/ru/guides/run-claude-code-on-a-vps">Claude Code на VPS</a>.</p>
+
+    <h2>Что одобряете вы и что остаётся ограниченным</h2>
+    <ul>
+      <li><strong>Соединения создаёте только вы.</strong> Чтобы провести линию, нужен ваш пароль; ни один агент не может создать или изменить её.</li>
+      <li><strong>Antenna проверяет каждое сообщение.</strong> Между двумя агентами одного компьютера сообщение, в котором похоже есть ключ, пароль или токен, не пропускается, а цепочка обрывается после 8 сообщений за 10 минут, так что два агента не смогут вечно занимать друг друга.</li>
+      <li><strong>Уровень доверия следует за тем, что агент прочитал.</strong> Если на одном компьютере агент прочитал сообщение от контакта, его собственное сообщение переносит ограничения этого контакта на другого агента, и тот ограничен так, будто тоже его прочитал.</li>
+      <li><strong>Claude Code проверяется перед каждым инструментом.</strong> В режиме «Код» Antenna спрашивает свой daemon перед каждой командой и правкой. Собственные инструменты Gemini CLI остаются под подтверждениями самого Gemini CLI; Antenna проверяет то, что проходит через неё.</li>
+    </ul>
+
+    <h2>Вопросы</h2>
+    <details>
+      <summary>Нужен ли API-ключ Gemini?</summary>
+      <p>Нет. Gemini CLI входит через ваш аккаунт Google, а Claude Code — через ваш тариф Claude, как обычно. Antenna только передаёт сообщения.</p>
+    </details>
+    <details>
+      <summary>Могут ли два окна Gemini CLI работать с Antenna одновременно?</summary>
+      <p>Только по одному: агент работает в одной сессии за раз, а <strong>Подключить</strong> даёт Gemini CLI одного агента.</p>
+    </details>
+    <details>
+      <summary>Это уже готово?</summary>
+      <p>Соединение агентов на карте и пробуждение простаивающих агентов в Antenna 0.1 помечены как экспериментальные: они работают и покрыты тестами, но ещё могут измениться.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna — бесплатная программа с открытым кодом</strong> для macOS и Linux. Регистрация и номер телефона не нужны.</p>
+      <a class="btn" href="/ru/#download">Скачать Antenna</a>
+    </aside>
+    <h2>Ещё по теме</h2>
+    <ul class="related">
+      <li><a href="/ru/guides/claude-code-and-codex-talk-to-each-other">Как заставить Claude Code и Codex общаться друг с другом</a></li>
+      <li><a href="/ru/guides/agent-to-agent-communication">Как ИИ-агенты общаются друг с другом через MCP</a></li>
+      <li><a href="/ru/guides/claude-code-on-multiple-computers">Как работать с Claude Code на нескольких компьютерах из одного места</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ru/" aria-label="Antenna — на главную"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ru/guides/">Инструкции</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Написать нам: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ru/privacy">Политика конфиденциальности</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

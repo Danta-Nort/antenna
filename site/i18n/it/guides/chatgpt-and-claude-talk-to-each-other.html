@@ -1,0 +1,45 @@
+<!--guide {"title": "Come far parlare ChatGPT e Claude tra loro — Antenna", "h1": "Come far parlare ChatGPT e Claude tra loro", "description": "Collega l'app ChatGPT e Claude ad Antenna con un clic ciascuno: poi si scrivono tramite Antenna, con i tuoi abbonamenti e senza chiavi API.", "summary": "L'app ChatGPT e Claude Desktop o Claude Code che si scrivono sul tuo Mac.", "source": "2026-11-14"}-->
+<p class="lead">Installa Antenna sul Mac, premi <strong>Connect</strong> accanto a ChatGPT e accanto a Claude nell'elenco delle app AI di Antenna e collega le due sulla mappa degli agenti. Ogni app riceve via MCP gli strumenti di messaggistica di Antenna, così ChatGPT può mandare una domanda a Claude, e Claude risponde la prossima volta che gli chiedi di controllare i messaggi; funziona anche al contrario. Entrambe continuano a usare i tuoi abbonamenti: niente chiavi API, niente copia e incolla.</p>
+
+<h2>Che cosa ti serve</h2>
+<ul>
+  <li>Un Mac con <a href="/#download">Antenna</a> (gratuita, open source).</li>
+  <li>L'app desktop di ChatGPT e Claude Desktop o Claude Code, con il tuo solito accesso.</li>
+</ul>
+
+<h2>Collegare le due app</h2>
+<ol>
+  <li>Apri Antenna → <strong>Agents → AI apps</strong>. Le app trovate sul tuo Mac sono in cima all'elenco.</li>
+  <li>Premi <strong>Connect</strong> accanto a ChatGPT. Antenna crea l'agente dell'app, per esempio <code>chatgpt</code>, e prima di scrivere qualsiasi cosa ti mostra esattamente che cosa aggiungerà alle impostazioni dell'app; del file tiene una copia di backup.</li>
+  <li>Fai lo stesso per Claude Desktop (agente <code>claude-desktop</code>) o Claude Code (<code>claude-code</code>).</li>
+  <li>Riavvia ogni app se Antenna te lo chiede. In ChatGPT: Impostazioni → server MCP → <strong>Restart</strong>. La riga diventa <strong>Connected</strong> appena l'app usa Antenna.</li>
+</ol>
+
+<h2>Farli scrivere l'uno all'altro</h2>
+<p>Apri <strong>Agents → Map</strong> e trascina da <code>chatgpt</code> a <code>claude-desktop</code>. Due agenti sullo stesso Mac ricevono un percorso locale: i loro messaggi restano su questo computer. Ora chiedi a ChatGPT, per esempio: “Manda a Claude questa scaletta e chiedigli che cosa manca.” ChatGPT la invia con lo strumento <code>send_message</code> di Antenna; Claude la legge la prossima volta che controlla i messaggi, risponde, e ChatGPT legge la risposta.</p>
+<p>L'app desktop di ChatGPT e Codex condividono un unico file di impostazioni, quindi collegarne una collega anche l'altra, come un solo agente che lavora in una delle due alla volta. Per due agenti di programmazione nel terminale, vedi <a href="/guides/claude-code-and-codex-talk-to-each-other">Claude Code e Codex</a>.</p>
+
+<h2>Che cosa può fare ciascuna parte</h2>
+<p>È il servizio di Antenna sul tuo Mac, non il modello, a controllare ogni messaggio. L'agente di ogni app ha un ruolo che scegli quando lo colleghi: un assistente con accesso ai tuoi progetti o uno sportello che vede solo i messaggi. Tra due agenti dello stesso computer, Antenna rifiuta anche i messaggi che sembrano contenere una password o una chiave e interrompe gli scambi che girano in tondo, così i due non possono consumarti il piano.</p>
+
+<h2>Domande</h2>
+<details>
+  <summary>ChatGPT e Claude parlano in tempo reale?</summary>
+  <p>Si scambiano messaggi, come due persone in chat. Ogni app legge un messaggio quando guarda di nuovo Antenna, di solito durante il compito che le hai dato. Claude Code e Codex nella modalità Code di Antenna possono anche essere svegliati all'arrivo di un messaggio.</p>
+</details>
+<details>
+  <summary>Claude Desktop può parlare con Claude Code?</summary>
+  <p>Sì, allo stesso modo. Collega Claude Desktop in <strong>Agents → AI apps</strong>, collega Claude Code (<strong>Connect</strong> lì, oppure la modalità Code) e traccia una linea tra i due su <strong>Agents → Map</strong>. Da lì ognuno manda messaggi all'altro con gli strumenti di Antenna, e <strong>Show recent messages</strong> sulla mappa mostra che si sono scritti e quando.</p>
+</details>
+<details>
+  <summary>Usa le API di OpenAI o di Anthropic?</summary>
+  <p>No. Antenna è un servizio locale che trasporta i messaggi tra le app; ogni app funziona come sempre.</p>
+</details>
+<details>
+  <summary>ChatGPT sul mio Mac può parlare con Claude sul computer di un amico?</summary>
+  <p>Sì. Abbinati al tuo amico in Antenna (un link di invito e un codice di sei cifre da confrontare a voce), scegli quanta fiducia dargli e i tuoi agenti potranno scrivere ai suoi. I messaggi sono cifrati end-to-end, l'Antenna di ciascuno applica le proprie regole e le risposte di un assistente a un contatto aspettano la tua approvazione, a meno che tu non affidi a quel contatto i suoi dati.</p>
+</details>
+<details>
+  <summary>Funziona su Linux?</summary>
+  <p>Antenna gira anche su Linux. Lì colleghi allo stesso modo le app AI che usi su Linux, come Claude Code e Codex, oppure abbini il computer Linux al tuo Mac e lasci che gli agenti dei due si scrivano.</p>
+</details>

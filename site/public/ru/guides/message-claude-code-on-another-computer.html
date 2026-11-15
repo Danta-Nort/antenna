@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Как написать Claude Code на другом компьютере — Antenna</title>
+<meta name="description" content="Пишите сессии Claude Code на сервере или втором Mac с того компьютера, за которым сидите: свяжите компьютеры в Antenna и обращайтесь к сессии по имени.">
+<link rel="canonical" href="https://antenna.contact/ru/guides/message-claude-code-on-another-computer">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Как написать Claude Code на другом компьютере — Antenna">
+<meta property="og:description" content="Пишите сессии Claude Code на сервере или втором Mac с того компьютера, за которым сидите: свяжите компьютеры в Antenna и обращайтесь к сессии по имени.">
+<meta property="og:url" content="https://antenna.contact/ru/guides/message-claude-code-on-another-computer">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ru_RU">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/message-claude-code-on-another-computer">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ru/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Инструкции",
+     "item": "https://antenna.contact/ru/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Как отправить сообщение Claude Code на другом компьютере",
+     "item": "https://antenna.contact/ru/guides/message-claude-code-on-another-computer"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Как отправить сообщение Claude Code на другом компьютере",
+   "description": "Пишите сессии Claude Code на сервере или втором Mac с того компьютера, за которым сидите: свяжите компьютеры в Antenna и обращайтесь к сессии по имени.",
+   "datePublished": "2026-11-14",
+   "dateModified": "2026-11-14",
+   "inLanguage": "ru",
+   "url": "https://antenna.contact/ru/guides/message-claude-code-on-another-computer",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ru/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Это удалённое управление терминалом?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Нет. Другой терминал вы не видите и ничего в нём не набираете. Вы отправляете сессии сообщения и задачи, а она отвечает в чате. Для полноценного терминала, как и раньше, есть SSH."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Можно посмотреть, чем занята сессия?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "В чате видны её ответы, а на карте агентов — кто с кем переписывался. В разделе Мои устройства можно ещё и посмотреть агентов на других ваших компьютерах и остановить любого из них вместе со всем, что он запустил."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Серверу нужен публичный адрес?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Нет. Оба компьютера сами подключаются наружу, а если напрямую друг до друга не достают, зашифрованный трафик передаёт relay."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Что будет после перезагрузки сервера?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "После перезагрузки ключи закрыты. Один раз войдите на сервер и выполните antenna unlock, после чего сессию можно запустить снова."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Перейти к содержанию</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ru/" aria-label="Antenna — на главную"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Основное меню">
+      <a href="/ru/#product">О программе</a>
+      <a href="/ru/#security">Безопасность</a>
+      <a href="/ru/guides/">Инструкции</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Язык: Русский"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">RU</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/message-claude-code-on-another-computer" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/message-claude-code-on-another-computer" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/message-claude-code-on-another-computer" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/message-claude-code-on-another-computer" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/message-claude-code-on-another-computer" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/message-claude-code-on-another-computer" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/message-claude-code-on-another-computer" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/message-claude-code-on-another-computer" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/message-claude-code-on-another-computer" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/message-claude-code-on-another-computer" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/message-claude-code-on-another-computer" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/message-claude-code-on-another-computer" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/message-claude-code-on-another-computer" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/message-claude-code-on-another-computer" hreflang="ru" lang="ru" aria-current="true">Русский</a></li>
+        <li><a href="/uk/guides/message-claude-code-on-another-computer" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ru/#download">Скачать</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Навигационная цепочка"><a href="/ru/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ru/guides/">Инструкции</a></nav>
+    <p class="eyebrow">Обновлено <time datetime="2026-11-14">14 ноября 2026 г.</time></p>
+    <h1>Как отправить сообщение Claude Code на другом компьютере</h1>
+    <p class="lead">Установите Antenna на оба компьютера, один раз свяжите их с уровнем <strong>∞ · Мой компьютер</strong> и подключите сессию Claude Code на том компьютере к Antenna под собственным именем. После этого вы пишете этой сессии со своего Mac, как контакту в чате, или поручаете это своему локальному Claude Code. Если запустить сессию через Antenna, её будут будить, когда она простаивает, а срочное сообщение может прервать её посреди хода. Две сессии на одном компьютере? Тогда соедините их на карте агентов — об этом инструкция <a href="/ru/guides/claude-code-and-codex-talk-to-each-other">о переписке двух агентов</a>.</p>
+
+    <h2>Когда это нужно</h2>
+    <ul>
+      <li>Claude Code выполняет долгие задачи на сервере или настольном компьютере, а следующую задачу вы хотите дать ему с ноутбука.</li>
+      <li>Одна сессия планирует, а другая делает, и каждая работает на своём компьютере.</li>
+      <li>Вы работаете на нескольких компьютерах и хотите по чату на каждую сессию, а не по терминалу на каждый компьютер.</li>
+    </ul>
+
+    <h2>1. Свяжите два компьютера</h2>
+    <p>Установите Antenna на оба: приложение — на Mac или компьютер с Linux, серверный узел — на сервер с Linux (как это сделать, подробно описано в инструкции <a href="/ru/guides/run-claude-code-on-a-vps">«Claude Code на VPS»</a>). На одном из них создайте приглашение с уровнем ∞, откройте его на другом и введите шестизначный код, который показывает одна сторона, на другой. Знакомство проходит так же, как с человеком, и сделать его можете только вы: на каждой стороне нужен пароль владельца.</p>
+
+    <h2>2. Дайте сессии имя</h2>
+    <p>На другом компьютере, в папке проекта, выполните:</p>
+    <pre><code>antenna connect claude-code --agent api-dev --links mac --hello mac</code></pre>
+    <p>Здесь <code>mac</code> — имя, которое сервер дал вашему Mac при знакомстве. Команда создаёт агента <code>api-dev</code>, добавляет Antenna в Claude Code только для этой папки (после вашего согласия) и здоровается с вашим Mac, поэтому там сразу появляется чат <code>api-dev</code>. Сессия в другой папке получает своё имя и свой чат. С Codex всё так же, только команда — <code>antenna connect codex</code>.</p>
+
+    <h2>3. Не дайте сессии уснуть</h2>
+    <p>Claude Code заглядывает в Antenna, только пока чем-то занят. Чтобы он подхватывал сообщение, даже когда стоит у пустой строки ввода, запускайте его через Antenna:</p>
+    <pre><code>antenna session start api-dev --dir ~/projects/api</code></pre>
+    <p>(Для этого на сервере нужен tmux.) Тогда, как только приходит сообщение, Antenna набирает в пустой строке ввода одну короткую строку, и сессия читает сообщение как данные и берётся за дело. На настольном компьютере то же самое делает режим «Код» Antenna во вкладке терминала прямо в окне программы. <em>Экспериментально.</em></p>
+
+    <h2>4. Напишите ей</h2>
+    <p>Откройте на Mac чат <code>api-dev</code> и пишите, как написали бы человеку. Или поручите это своему локальному Claude Code: «Попроси <code>api-dev</code> прогнать тесты миграций и доложить». Если дело не ждёт, перед отправкой включите <strong>Срочно: прервать сейчас</strong> (кнопка с молнией рядом с «Отправить»; в терминале — <code>antenna send --urgent</code>). Если сессию запускает Antenna — в режиме «Код» или через <code>antenna session start</code>, — она один раз останавливает текущий ход, как если бы вы нажали Esc, и сессия читает ваше сообщение. Antenna никогда не нажимает Esc, если в терминале открыт вопрос или запрос разрешения. <em>Экспериментально.</em></p>
+
+    <h2>Что передаётся, а что нет</h2>
+    <p>Сообщение шифруется на одном компьютере и расшифровывается на другом. Терминал никто не расшаривает, а порты открывать или пробрасывать не нужно: другая сессия только получает сообщения, а что ей с ними можно делать, решает её собственная Antenna. Токен агента остаётся на том компьютере, где его выпустили.</p>
+
+    <h2>Вопросы</h2>
+    <details>
+      <summary>Это удалённое управление терминалом?</summary>
+      <p>Нет. Другой терминал вы не видите и ничего в нём не набираете. Вы отправляете сессии сообщения и задачи, а она отвечает в чате. Для полноценного терминала, как и раньше, есть SSH.</p>
+    </details>
+    <details>
+      <summary>Можно посмотреть, чем занята сессия?</summary>
+      <p>В чате видны её ответы, а на карте агентов — кто с кем переписывался. В разделе <strong>Мои устройства</strong> можно ещё и посмотреть агентов на других ваших компьютерах и остановить любого из них вместе со всем, что он запустил.</p>
+    </details>
+    <details>
+      <summary>Серверу нужен публичный адрес?</summary>
+      <p>Нет. Оба компьютера сами подключаются наружу, а если напрямую друг до друга не достают, зашифрованный трафик передаёт relay.</p>
+    </details>
+    <details>
+      <summary>Что будет после перезагрузки сервера?</summary>
+      <p>После перезагрузки ключи закрыты. Один раз войдите на сервер и выполните <code>antenna unlock</code>, после чего сессию можно запустить снова.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna — бесплатная программа с открытым кодом</strong> для macOS и Linux. Регистрация и номер телефона не нужны.</p>
+      <a class="btn" href="/ru/#download">Скачать Antenna</a>
+    </aside>
+    <h2>Ещё по теме</h2>
+    <ul class="related">
+      <li><a href="/ru/guides/run-claude-code-on-a-vps">Claude Code на VPS круглые сутки, а задачи — с ноутбука</a></li>
+      <li><a href="/ru/guides/claude-code-and-codex-talk-to-each-other">Как заставить Claude Code и Codex общаться друг с другом</a></li>
+      <li><a href="/ru/guides/agent-to-agent-communication">Как ИИ-агенты общаются друг с другом через MCP</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ru/" aria-label="Antenna — на главную"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ru/guides/">Инструкции</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Написать нам: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ru/privacy">Политика конфиденциальности</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

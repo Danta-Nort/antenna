@@ -1,0 +1,37 @@
+<!--guide {"order": 7, "title": "A self-hosted messenger with no server to run — Antenna", "h1": "A self-hosted messenger with no server to run", "description": "Antenna keeps every message on the computers of the people talking. Nothing to host by default; add an always-on node or your own relay only if you want.", "query": "self hosted messenger", "updated": "2026-11-09", "summary": "Why Antenna needs no server, and how to add an always-on node or your own relay when you want one.", "related": ["peer-to-peer-encrypted-messenger", "messenger-without-phone-number", "message-claude-code-on-another-computer"]}-->
+<p class="lead">People self-host a messenger to keep their messages off someone else’s server. Antenna gets there without a server at all: each person runs Antenna on their own computer, messages go between those computers end to end encrypted, and history is stored only there, in an encrypted database. If you want more control, you can add an always-on Linux node or run your own relay, both open source.</p>
+
+<h2>What a self-hosted server usually means</h2>
+<p>A classic self-hosted messenger is a server you install, update, back up and keep online, holding every account and every message of everyone who uses it. It moves trust from a company to you, and with it the work and the risk: if the server is breached, so is everyone’s history.</p>
+
+<h2>What Antenna does instead</h2>
+<ul>
+  <li><strong>No accounts to host.</strong> Your identity is a key on your computer, protected by your password. You add people with a one-time invite link and a code you compare by voice.</li>
+  <li><strong>No message store in the middle.</strong> Your history lives on your computer, in a SQLCipher-encrypted database, and on the other person’s.</li>
+  <li><strong>No server to keep online.</strong> Two computers connect directly when the network allows, and otherwise through a relay that forwards encrypted traffic and keeps nothing.</li>
+</ul>
+
+<h2>Add an always-on node</h2>
+<p>A laptop sleeps; a server does not. To keep your AI agents reachable around the clock, install the Antenna node on a Linux server (x86_64): unpack the release and run <code>./install.sh</code>, which sets up a systemd user service without root, or install the <code>.deb</code> or <code>.rpm</code> package. Then pair it with your computer like a contact, at <strong>∞ · My computer</strong>. Step by step: <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md">Add a server</a>.</p>
+<p>After a reboot the node’s keys stay locked until you log in and run <code>antenna unlock</code>: a stolen disk image gives nobody your keys.</p>
+
+<h2>Run your own relay</h2>
+<p>The relay is the one shared piece, and it sees only encrypted packets and which endpoints talk through it. If you would rather that be your own machine, run the open-source <code>iroh-relay</code> and start your node with <code>antennad --relay &lt;your relay URL&gt;</code>. Contacts you trust at levels 1 and 2 always connect through a relay, so they never learn your IP address.</p>
+
+<h2>Questions</h2>
+<details>
+  <summary>Can my family use it?</summary>
+  <p>On computers, yes: Antenna 0.1 runs on macOS (Apple Silicon) and Linux. There is no phone app yet.</p>
+</details>
+<details>
+  <summary>Does the relay store messages for offline contacts?</summary>
+  <p>No. A message for a contact who is offline waits on your own computer and goes by itself once they are back.</p>
+</details>
+<details>
+  <summary>Is there anything I must host?</summary>
+  <p>No. Antenna works with the default relay and no server of yours. The node and the relay are for when you want them.</p>
+</details>
+<details>
+  <summary>How do updates work on a server?</summary>
+  <p>A node installed with <code>install.sh</code> updates with <code>antenna update</code>, which checks the release signature first; a package install updates through your package manager.</p>
+</details>

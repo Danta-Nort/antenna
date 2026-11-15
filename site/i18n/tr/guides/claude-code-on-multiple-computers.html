@@ -1,0 +1,40 @@
+<!--guide {"title": "Claude Code’u birden fazla bilgisayarda tek yerden kullanın — Antenna", "h1": "Birden fazla bilgisayardaki Claude Code’u tek yerden kullanın", "description": "Claude Code’u dizüstünüzde, masaüstünüzde ve sunucunuzda çalıştırın; tüm oturumlar tek sohbet listesinde: durumları, istekleri ve durdurma düğmeleriyle.", "summary": "Birkaç bilgisayarınızdaki Claude Code oturumları tek sohbet listesinde, her bilgisayarın durumu ve istekleriyle.", "source": "2026-11-14"}-->
+<p class="lead">Claude Code iş neredeyse orada çalışsın: dizüstü bilgisayarınızda, bir masaüstü bilgisayarda ve bir sunucuda. Her birine Antenna kurun ve bilgisayarları bir kez kendi bilgisayarlarınız (∞) olarak eşleştirin. Bundan sonra herhangi birinden tüm oturumları tek bir sohbet listesinde görür, istediğinize adıyla yazar, onay isteklerini yanıtlar ve kontrolden çıkan bir oturumu o makinede terminal açmadan durdurursunuz. Codex de aynı şekilde çalışır.</p>
+
+<h2>Neler elde edersiniz</h2>
+<ul>
+  <li><strong>Her oturum için bir sohbet</strong>, hangi bilgisayarda çalışırsa çalışsın. Sunucudaki bir oturum ve masaüstündeki bir oturum, kişilerinizle aynı listede yer alır.</li>
+  <li><strong>My devices</strong>: her bilgisayarınız için bir kart; sistemi ve Antenna sürümü, kendi kontrollerine göre sağlık durumu, ajanları ve her birinin bağlı olup olmadığı, orada sizi bekleyen istekler.</li>
+  <li><strong>Bulunduğunuz yerden onay.</strong> Sunucudaki bir ajanın isteğini Mac’inizde Touch ID ya da Mac’in parolasıyla onaylayabilirsiniz. Sunucu imzayı kontrol eder ve isteği kendisi yerine getirir.</li>
+  <li><strong>Durdurma düğmesi</strong>: başka bir bilgisayardaki her ajan için; ajanı ve orada başlattığı tüm işlemleri durdurur.</li>
+  <li><strong>Ajan haritası</strong>: bir bilgisayardaki oturumu başka bir bilgisayardaki oturuma bağlarsınız, böylece birbirlerine yazarlar.</li>
+</ul>
+
+<h2>Kurulum</h2>
+<ol>
+  <li><strong>Her bilgisayara Antenna kurun</strong>: Mac’e ya da Linux masaüstüne uygulamayı, Linux sunucuya düğümü (<code>curl -fsSL https://antenna.contact/install.sh | sh</code>).</li>
+  <li><strong>Bilgisayarları birbirleriyle kendi bilgisayarlarınız olarak eşleştirin.</strong> <strong>This is my own computer (∞)</strong> işaretli bir davet oluşturun, diğer bilgisayarda açın ve bir tarafın gösterdiği kodu diğerine girin. Her bilgisayarı, oradan görmek ya da bağlanmak istediğiniz diğer her bilgisayarla eşleştirin: her biri diğerini ∞ seviyesinde tanımalıdır.</li>
+  <li><strong>Her Claude Code oturumuna bir ad verin.</strong> Masaüstünde, ajanlar panelindeki <code>+</code> ile Code modunda başlatın. Sunucuda proje klasöründe <code>antenna connect claude-code --agent api-dev --links mac --hello mac</code> komutunu çalıştırın ve oturumu <code>antenna session start api-dev --dir ~/projects/api</code> ile çalışır durumda tutun; tüm adımlar <a href="/guides/run-claude-code-on-a-vps">VPS’te Claude Code</a> rehberinde.</li>
+  <li><strong>Ana bilgisayarınızın istekleri yanıtlamasına izin verin.</strong> Sunucuda bir kez <code>antenna devices confirm mac</code> çalıştırın; masaüstünde ana bilgisayarın anahtarını <strong>My devices</strong> → onun kartı → <strong>Approvals</strong> bölümünden kabul edin.</li>
+</ol>
+
+<h2>İşi bilgisayarlar arasında taşımak</h2>
+<p>Bir oturuma bir insana yazar gibi yazın: “<code>api-dev</code>, sunucuda migration’ları çalıştır ve neyin değiştiğini söyle.” Sohbetine bıraktığınız dosyalar o bilgisayara kaydedilir ve ajana nerede oldukları söylenir; kendi bilgisayarlarınız arasında sıradan dosyalar sorulmadan kaydedilir, programlar ve kurulum dosyaları ise yine sizi bekler. Masaüstündeki bir oturumun sunucudaki bir oturuma iş devretmesi için ikisini ajan haritasında bağlayın. Oradaki oturum bir mesaj geldiğinde uyanır, acil bir mesaj da o anki adımını kesebilir. <em>Deneysel.</em></p>
+
+<h2>Sorular</h2>
+<details>
+  <summary>Antenna, Claude Code’un ayarlarını ya da geçmişini bilgisayarlar arasında eşitliyor mu?</summary>
+  <p>Hayır. Claude Code ayarlarını, geçmişini ve oturumunu her bilgisayarda ayrı tutar; kodunuz da zaten taşındığı gibi, git ile taşınır. Antenna oturumlar arasında mesajları, dosyaları ve onayları taşır.</p>
+</details>
+<details>
+  <summary>Sunucuda genel IP ya da açık port gerekiyor mu?</summary>
+  <p>Hayır. Her bilgisayar dışarıya bağlanır: ağ izin verdiğinde doğrudan, vermediğinde bir aktarma sunucusu (relay) üzerinden. Aktarma sunucusu yalnızca şifreli trafiği iletir.</p>
+</details>
+<details>
+  <summary>Buradan başka bir bilgisayarın ayarlarını değiştirebilir miyim?</summary>
+  <p>Hayır. Bilgisayarlarınız arasında yalnızca onaylar, durdurmalar ve ajan haritasından gelen, o bilgisayarın sizden onay istediği bağlantı istekleri iletilir. Güven, davetler, güncellemeler ve ayarlar bilgisayarın kendisinde değiştirilir; böylece çalınan bir dizüstü bilgisayar sunucunun kurallarını yeniden yazamaz.</p>
+</details>
+<details>
+  <summary>Windows’ta ya da telefonda çalışıyor mu?</summary>
+  <p>Henüz değil. Antenna bugün macOS ve Linux’ta çalışıyor.</p>
+</details>

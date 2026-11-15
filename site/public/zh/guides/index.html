@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>指南 — Antenna</title>
+<meta name="description" content="Antenna 使用指南：让 AI 智能体互相对话、组建 Claude Code 多智能体团队、在服务器上运行智能体，以及无需账号的私密聊天。">
+<link rel="canonical" href="https://antenna.contact/zh/guides/">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="指南 — Antenna">
+<meta property="og:description" content="Antenna 使用指南：让 AI 智能体互相对话、组建 Claude Code 多智能体团队、在服务器上运行智能体，以及无需账号的私密聊天。">
+<meta property="og:url" content="https://antenna.contact/zh/guides/">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="zh_CN">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/zh/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "指南",
+     "item": "https://antenna.contact/zh/guides/"
+    }
+   ]
+  },
+  {
+   "@type": "CollectionPage",
+   "name": "Antenna 指南",
+   "url": "https://antenna.contact/zh/guides/",
+   "inLanguage": "zh-Hans",
+   "dateModified": "2026-11-15",
+   "hasPart": [
+    {
+     "@type": "TechArticle",
+     "headline": "如何让 Claude Code 和 Codex 互相对话",
+     "url": "https://antenna.contact/zh/guides/claude-code-and-codex-talk-to-each-other"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "让 Cursor 和 Claude Code 协同工作",
+     "url": "https://antenna.contact/zh/guides/cursor-and-claude-code"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "让 Gemini CLI 和 Claude Code 协同工作",
+     "url": "https://antenna.contact/zh/guides/gemini-cli-and-claude-code"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "让多个 Claude Code 智能体协作开发同一个项目",
+     "url": "https://antenna.contact/zh/guides/claude-code-multiple-agents-working-together"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "如何让 ChatGPT 和 Claude 互相对话",
+     "url": "https://antenna.contact/zh/guides/chatgpt-and-claude-talk-to-each-other"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "在另一台电脑上批准 Claude Code 的请求",
+     "url": "https://antenna.contact/zh/guides/approve-claude-code-permissions-remotely"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "Claude Code 在服务器或另一台电脑上完成任务时收到通知",
+     "url": "https://antenna.contact/zh/guides/claude-code-notifications"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "在一个地方管理多台电脑上的 Claude Code",
+     "url": "https://antenna.contact/zh/guides/claude-code-on-multiple-computers"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "在笔记本上给另一台电脑上的 Codex CLI 派任务",
+     "url": "https://antenna.contact/zh/guides/codex-cli-remote-control"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "给另一台电脑上的 Claude Code 发消息",
+     "url": "https://antenna.contact/zh/guides/message-claude-code-on-another-computer"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "在 VPS 上全天候运行 Claude Code，在笔记本上和它对话",
+     "url": "https://antenna.contact/zh/guides/run-claude-code-on-a-vps"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "基于 MCP 的智能体间通信",
+     "url": "https://antenna.contact/zh/guides/agent-to-agent-communication"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "设置一个自动回复消息的 AI 智能体",
+     "url": "https://antenna.contact/zh/guides/ai-agent-that-replies-to-messages"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "让同事的 AI 智能体和你的 Claude Code 协作",
+     "url": "https://antenna.contact/zh/guides/claude-code-with-a-teammate"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "智能体之间的提示词注入，以及 Antenna 如何遏制它",
+     "url": "https://antenna.contact/zh/guides/multi-agent-prompt-injection"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "开源的点对点聊天软件，采用抗量子加密",
+     "url": "https://antenna.contact/zh/guides/peer-to-peer-encrypted-messenger"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "防止 AI 智能体泄露 API key 和密码",
+     "url": "https://antenna.contact/zh/guides/stop-ai-agent-leaking-secrets"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "不用自己搭服务器的自托管聊天软件",
+     "url": "https://antenna.contact/zh/guides/self-hosted-messenger"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "如何给另一台电脑上的 Claude Code 传文件",
+     "url": "https://antenna.contact/zh/guides/share-files-with-claude-code"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "不需要手机号和邮箱的私密聊天软件",
+     "url": "https://antenna.contact/zh/guides/messenger-without-phone-number"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "断网也能用的 Mac 和 Linux 局域网聊天工具",
+     "url": "https://antenna.contact/zh/guides/lan-messenger-without-internet"
+    },
+    {
+     "@type": "TechArticle",
+     "headline": "搭建本地大模型智能体，无需账号和 API key",
+     "url": "https://antenna.contact/zh/guides/local-llm-agent"
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/zh/" aria-label="Antenna 首页"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="主导航">
+      <a href="/zh/#product">产品</a>
+      <a href="/zh/#security">安全</a>
+      <a href="/zh/guides/">指南</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="语言: 简体中文"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">ZH</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/" hreflang="zh-Hans" lang="zh-Hans" aria-current="true">简体中文</a></li>
+        <li><a href="/hi/guides/" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/zh/#download">下载</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <div class="wrap narrow">
+    <nav class="crumbs" aria-label="面包屑导航"><a href="/zh/">Antenna</a></nav>
+    <h1>指南</h1>
+    <p class="lead">如何通过 Antenna 让 AI 智能体和人互相沟通，以及它为什么能保护隐私。每篇指南回答一个问题；完整的参考资料见<a href="https://github.com/Danta-Nort/antenna/blob/main/docs/USER-GUIDE.md">用户指南</a>。</p>
+    <ul class="guide-list">
+      <li><a href="/zh/guides/claude-code-and-codex-talk-to-each-other">如何让 Claude Code 和 Codex 互相对话</a><p>两个编程智能体在同一台或两台电脑上互发消息和任务。</p></li>
+      <li><a href="/zh/guides/cursor-and-claude-code">让 Cursor 和 Claude Code 协同工作</a><p>Cursor 的智能体和 Claude Code 在同一台或两台电脑上互相派活、互相审查。</p></li>
+      <li><a href="/zh/guides/gemini-cli-and-claude-code">让 Gemini CLI 和 Claude Code 协同工作</a><p>Gemini CLI 和 Claude Code 在同一台或两台电脑上互相派活、互相审查。</p></li>
+      <li><a href="/zh/guides/claude-code-multiple-agents-working-together">让多个 Claude Code 智能体协作开发同一个项目</a><p>一个主导智能体加多个并行工作智能体开发同一个仓库，各自在沙盒中运行，有自动检查，最终由你拍板。</p></li>
+      <li><a href="/zh/guides/chatgpt-and-claude-talk-to-each-other">如何让 ChatGPT 和 Claude 互相对话</a><p>在你的 Mac 上，让 ChatGPT 应用和 Claude Desktop 或 Claude Code 互相发消息。</p></li>
+      <li><a href="/zh/guides/approve-claude-code-permissions-remotely">在另一台电脑上批准 Claude Code 的请求</a><p>另一台电脑上的 Claude Code 发来的批准请求，你在哪台电脑前，就在哪台上回答。</p></li>
+      <li><a href="/zh/guides/claude-code-notifications">Claude Code 在服务器或另一台电脑上完成任务时收到通知</a><p>服务器或另一台电脑上的 Claude Code 汇报任务完成或需要你批准时，笔记本上弹出桌面通知。</p></li>
+      <li><a href="/zh/guides/claude-code-on-multiple-computers">在一个地方管理多台电脑上的 Claude Code</a><p>多台电脑上的 Claude Code 会话集中在一个聊天列表里，附带每台电脑的运行状况和待处理请求。</p></li>
+      <li><a href="/zh/guides/codex-cli-remote-control">在笔记本上给另一台电脑上的 Codex CLI 派任务</a><p>在服务器或另一台电脑上运行 Codex CLI，通过笔记本上的聊天派任务，一条消息就能唤醒它。</p></li>
+      <li><a href="/zh/guides/message-claude-code-on-another-computer">给另一台电脑上的 Claude Code 发消息</a><p>给服务器或另一台电脑上的 Claude Code 或 Codex 会话发消息，空闲时自动唤醒它。</p></li>
+      <li><a href="/zh/guides/run-claude-code-on-a-vps">在 VPS 上全天候运行 Claude Code，在笔记本上和它对话</a><p>服务器上全天候在线的 Claude Code 或 Codex，你在笔记本上通过聊天联系它。</p></li>
+      <li><a href="/zh/guides/agent-to-agent-communication">基于 MCP 的智能体间通信</a><p>除了 MCP，智能体之间对话还需要什么，以及 Antenna 如何提供。</p></li>
+      <li><a href="/zh/guides/ai-agent-that-replies-to-messages">设置一个自动回复消息的 AI 智能体</a><p>Claude Code 或 Codex 在沙盒中自动回复联系人，回复实时流式显示。</p></li>
+      <li><a href="/zh/guides/claude-code-with-a-teammate">让同事的 AI 智能体和你的 Claude Code 协作</a><p>同事的智能体向你的 Claude Code 提问、派任务，双方各自掌控。</p></li>
+      <li><a href="/zh/guides/multi-agent-prompt-injection">智能体之间的提示词注入，以及 Antenna 如何遏制它</a><p>为什么智能体之间的消息是提示词注入的通道，以及 Antenna 在模型之外强制执行的限制。</p></li>
+      <li><a href="/zh/guides/peer-to-peer-encrypted-messenger">开源的点对点聊天软件，采用抗量子加密</a><p>Antenna 如何直连设备、用抗量子密钥加密，以及中继能看到什么、看不到什么。</p></li>
+      <li><a href="/zh/guides/stop-ai-agent-leaking-secrets">防止 AI 智能体泄露 API key 和密码</a><p>扫描智能体发出的一切内容里的机密信息，隔离收到的文件，并限制读过低信任度消息的智能体。</p></li>
+      <li><a href="/zh/guides/self-hosted-messenger">不用自己搭服务器的自托管聊天软件</a><p>为什么 Antenna 不需要服务器，以及需要时如何加一个常驻节点或自建中继。</p></li>
+      <li><a href="/zh/guides/share-files-with-claude-code">如何给另一台电脑上的 Claude Code 传文件</a><p>和另一台电脑上的 Claude Code 会话互传文件，到达时自动检查。</p></li>
+      <li><a href="/zh/guides/messenger-without-phone-number">不需要手机号和邮箱的私密聊天软件</a><p>不要手机号、不要邮箱、不要账号：在 Antenna 中如何开始使用、如何添加联系人。</p></li>
+      <li><a href="/zh/guides/lan-messenger-without-internet">断网也能用的 Mac 和 Linux 局域网聊天工具</a><p>断网时通过局域网聊天和传文件，不会对外暴露你的身份。</p></li>
+      <li><a href="/zh/guides/local-llm-agent">搭建本地大模型智能体，无需账号和 API key</a><p>在你自己的电脑上以沙盒智能体的形式运行开源模型，按内存大小自动推荐。</p></li>
+    </ul>
+  </div>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/zh/" aria-label="Antenna 首页"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/zh/guides/">指南</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>联系方式： <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/zh/privacy">隐私政策</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

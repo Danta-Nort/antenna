@@ -1,0 +1,45 @@
+<!--guide {"title": "Messenger P2P open source con crittografia post-quantistica — Antenna", "h1": "Un messenger peer-to-peer open source con crittografia post-quantistica", "description": "Antenna invia i messaggi direttamente tra dispositivi, cifrati end-to-end con chiavi post-quantistiche, senza server centrale. Come funziona e cosa protegge.", "summary": "Come Antenna collega direttamente i dispositivi, cifra con chiavi post-quantistiche e che cosa vede un relay.", "source": "2026-11-09"}-->
+<p class="lead">Antenna è un messenger peer-to-peer gratuito e open source per macOS e Linux. Messaggi e file passano direttamente da un dispositivo all'altro su QUIC, cifrati end-to-end con i protocolli post-quantistici di libsignal, e la connessione stessa usa uno scambio di chiavi ibrido post-quantistico. Non c'è un server centrale che conservi o instradi i tuoi messaggi; quando due dispositivi non riescono a raggiungersi direttamente, un relay inoltra traffico che non può decifrare.</p>
+
+<h2>Il peer-to-peer, in pratica</h2>
+<p>“Peer-to-peer” sembra semplice, ma la maggior parte dei computer sta dietro router domestici e firewall che bloccano le connessioni in ingresso. Antenna usa iroh, una libreria QUIC che trova un percorso diretto attraverso questi ostacoli (hole punching) e ripiega su un relay quando non ce n'è uno. Di solito una connessione parte tramite il relay e passa al percorso diretto appena ne trova uno. In ogni caso il relay vede solo pacchetti cifrati, e chiunque può usare un proprio relay al posto di quello predefinito.</p>
+<p>Sulla stessa rete, i contatti di cui ti fidi abbastanza possono collegarsi anche tramite la rete locale, persino senza alcuna connessione a internet.</p>
+
+<h2>Due livelli di cifratura</h2>
+<table>
+  <thead><tr><th>Livello</th><th>Che cosa usa</th><th>Che cosa protegge</th></tr></thead>
+  <tbody>
+    <tr><td>Connessione</td><td>TLS 1.3 con X25519MLKEM768, un ibrido tra scambio di chiavi classico e post-quantistico</td><td>Il collegamento tra i due dispositivi, anche quando passa da un relay</td></tr>
+    <tr><td>Messaggi</td><td>libsignal: PQXDH per avviare una conversazione e il ratchet post-quantistico SPQR</td><td>Ogni messaggio e file, end-to-end, con forward secrecy</td></tr>
+  </tbody>
+</table>
+<p>“Post-quantistico” significa che lo scambio di chiavi resta sicuro anche contro chi registra il traffico oggi per decifrarlo domani con un computer quantistico. Antenna non scrive crittografia propria: entrambi i livelli vengono da librerie sottoposte ad audit o verificate formalmente, e il protocollo di abbinamento ha un modello formale verificato con ProVerif.</p>
+
+<h2>Che cosa cambia un'architettura peer-to-peer</h2>
+<ul>
+  <li><strong>Nessun account da rubare.</strong> Non esiste un server con l'elenco degli utenti, dei loro contatti o dei loro messaggi.</li>
+  <li><strong>Nessun numero di telefono.</strong> Aggiungi le persone con un link monouso e un codice che confrontate a voce. Vedi <a href="/guides/messenger-without-phone-number">un messenger senza numero di telefono</a>.</li>
+  <li><strong>Il tuo indirizzo IP, alle tue condizioni.</strong> Una connessione diretta mostra il tuo indirizzo all'altra parte. I contatti con livello di fiducia 1 e 2 passano sempre dal relay, quindi non lo vedono mai.</li>
+  <li><strong>Entrambi i dispositivi devono essere online nello stesso momento.</strong> Fino ad allora il messaggio aspetta nella coda di chi l'ha inviato e parte da solo; un server che lasci acceso mantiene raggiungibili i tuoi agenti.</li>
+</ul>
+
+<h2>Open source e verificabile</h2>
+<p>L'applicazione è AGPL-3.0; il protocollo, i suoi formati e i vettori di test sono Apache-2.0, così altri possono costruire client compatibili. Le versioni sono firmate, e il codice sorgente, la specifica e ogni decisione di progetto sono su <a href="https://github.com/Danta-Nort/antenna">GitHub</a>. I messaggi sono firmati e concatenati con hash, e le due parti confrontano le loro copie, così un messaggio modificato o riportato indietro mostra dove è successo.</p>
+
+<h2>Domande</h2>
+<details>
+  <summary>Un messenger peer-to-peer è più lento?</summary>
+  <p>Di solito no: un percorso diretto evita il giro fino a un data center, e tramite un relay un messaggio fa un solo passaggio in più.</p>
+</details>
+<details>
+  <summary>Posso usare un mio relay?</summary>
+  <p>Sì. Il relay è open source e inoltra solo traffico cifrato; basta far puntare il tuo nodo al tuo relay invece che a quello predefinito.</p>
+</details>
+<details>
+  <summary>Funziona per i gruppi?</summary>
+  <p>Non ancora. Antenna 0.1 ha conversazioni uno a uno, tra persone, tra persone e agenti e tra agenti.</p>
+</details>
+<details>
+  <summary>Quali piattaforme sono supportate?</summary>
+  <p>macOS su Apple Silicon (firmata e notarizzata) e Linux su x86_64: l'app desktop e un nodo per server.</p>
+</details>

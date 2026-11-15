@@ -1,0 +1,40 @@
+<!--guide {"title": "Cursor e Claude Code juntos: passar tarefas e revisões", "h1": "Use o Cursor e o Claude Code juntos", "description": "Conecte o Cursor ao Antenna com um clique, rode o Claude Code na janela do Antenna e trace uma linha entre eles: os dois trocam tarefas e revisões.", "summary": "O agente do Cursor e o Claude Code passando trabalho e revisões um ao outro, num computador ou em dois.", "source": "2026-11-15"}-->
+<p class="lead">Conecte o Cursor ao Antenna com um clique, inicie o Claude Code na janela do Antenna e trace uma linha entre os dois no mapa de agentes do Antenna. A partir daí, um escreve para o outro com as ferramentas MCP do Antenna: o agente do Cursor pede ao Claude Code que revise uma mudança, o Claude Code passa uma tarefa ao Cursor, e a resposta volta pelo mesmo caminho. Os dois continuam com os seus próprios logins do Cursor e do Claude.</p>
+
+<h2>No mesmo computador</h2>
+<ol>
+  <li><a href="/#download">Instale o Antenna</a> (macOS ou Linux) e crie o seu nó: uma senha, nenhuma conta.</li>
+  <li>Abra <strong>Agents → AI apps</strong> e clique em <strong>Connect</strong> ao lado do Cursor. Escolha <strong>Assistant with access to my projects</strong> (assistente com acesso aos meus projetos), digite a sua senha e clique em <strong>Continue</strong>. O Antenna avisa que vai abrir o link de instalação do Cursor; clique em <strong>Open Cursor</strong>, e o Cursor mostra o Antenna e pede que você o instale. Depois abra um chat novo no Cursor e peça “Confira as minhas mensagens do Antenna”: a linha passa para <strong>Connected</strong> (conectado) e diz “Contacts write to it as cursor”, ou seja, os contatos escrevem para ele como cursor. O Cursor inclui MCP no plano pago.</li>
+  <li>Na mesma página, clique em <strong>Start in Code mode</strong> ao lado do Claude Code. Escolha <strong>New agent…</strong>, dê o nome <code>reviewer</code>, escolha o mesmo papel, defina <strong>Working folder</strong> (pasta de trabalho) como o projeto aberto no Cursor, digite a sua senha e clique em <strong>Start</strong>. O Claude Code roda numa aba de terminal dentro da janela.</li>
+  <li>Abra <strong>Agents → Map</strong>, arraste do ponto de conexão de um agente até o outro, digite a sua senha e clique em <strong>Connect</strong>. Os dois ganham uma <em>rota local</em>: as mensagens deles nunca saem do computador, e cada um aceita as mensagens do outro como tarefas, a menos que você desmarque essa opção.</li>
+</ol>
+<p>Dê o mesmo papel aos dois: o Antenna não deixa um agente que viu mais dos seus dados escrever para um que viu menos. Dê a cada um a sua própria função, como escrever e revisar, para que não editem o mesmo arquivo ao mesmo tempo.</p>
+
+<h2>Como um chama o outro</h2>
+<p>Com a linha traçada, cada agente é o interlocutor padrão do outro: “mande isto para o seu interlocutor” já basta. Para chamar o outro pelo nome, um agente usa <code>send_message</code> com <code>local_agent</code> igual a <code>cursor</code> ou <code>reviewer</code>. Quem recebe lê com <code>read_inbox</code>, ou espera com <code>wait_for_message</code> por até 10 minutos a cada chamada.</p>
+<p>Os dois esperam de jeitos diferentes. O Claude Code no Code mode acorda sozinho: quando chega uma mensagem e ele está parado, o Antenna digita uma linha dizendo para ele ler a caixa de entrada (<em>experimental</em>). O Antenna nunca digita no Cursor, então o agente do Cursor só lê as mensagens na próxima vez que chamar o Antenna. Por isso o natural é o Cursor começar a conversa: “Peça ao <code>reviewer</code> para revisar o diff em <code>src/</code>, depois espere a resposta dele e corrija o que ele encontrar.” O Claude Code acorda, revisa e responde. Para passar trabalho ao Cursor, primeiro diga a ele para esperar mensagens.</p>
+
+<h2>Em dois computadores</h2>
+<p>O Cursor pode ficar no seu notebook enquanto o Claude Code roda num desktop ou num servidor. Instale o Antenna em cada um, pareie os dois uma vez com um link de convite e um código de seis dígitos, marcando <strong>This is my own computer (∞)</strong>, e trace a linha no mapa. O outro computador pede que você aprove o lado dele, lá mesmo ou em <strong>My devices</strong>. Num servidor sem tela, o Claude Code roda com <code>antenna connect claude-code</code> e <code>antenna session start</code>: veja <a href="/guides/run-claude-code-on-a-vps">Claude Code numa VPS</a>.</p>
+
+<h2>O que você aprova e o que continua limitado</h2>
+<ul>
+  <li><strong>As conexões são decisão sua.</strong> Traçar uma linha pede a sua senha; nenhum agente consegue criar ou mudar uma.</li>
+  <li><strong>O Antenna confere cada mensagem.</strong> Entre dois agentes do mesmo computador, uma mensagem que pareça conter uma chave, uma senha ou um token é recusada, e uma cadeia para depois de 8 mensagens em 10 minutos, para que os dois não fiquem se ocupando para sempre.</li>
+  <li><strong>Os níveis de confiança acompanham o que o agente leu.</strong> No mesmo computador, se um agente leu a mensagem de um contato, a mensagem dele leva os limites desse contato ao outro agente, que fica limitado como se também a tivesse lido.</li>
+  <li><strong>O Claude Code é verificado antes de cada ferramenta.</strong> No Code mode, o Antenna consulta o seu daemon antes de cada comando e de cada edição. As edições e os comandos do próprio Cursor continuam sob as configurações do Cursor; o Antenna confere o que passa por ele.</li>
+</ul>
+
+<h2>Perguntas</h2>
+<details>
+  <summary>Preciso de uma chave de API?</summary>
+  <p>Não. O Cursor usa a sua conta do Cursor e o Claude Code o seu plano do Claude, como sempre. O Antenna só leva as mensagens.</p>
+</details>
+<details>
+  <summary>O Claude Code pode rodar no terminal do Cursor?</summary>
+  <p>Pode: o <strong>Step-by-step guide</strong> (guia passo a passo) no menu do Claude Code em <strong>AI apps</strong> dá a linha <code>claude mcp add</code>. Iniciado assim, ele não é acordado; o Code mode o acorda e acrescenta a verificação do Antenna antes de cada ferramenta.</p>
+</details>
+<details>
+  <summary>Isso está pronto?</summary>
+  <p>Ligar agentes no mapa e acordar agentes parados estão marcados como experimentais no Antenna 0.1: funcionam e são testados, mas ainda podem mudar.</p>
+</details>

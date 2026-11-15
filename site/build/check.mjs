@@ -1,11 +1,13 @@
 // SPDX-License-Identifier: Apache-2.0
 // Static checks before every deploy:  node build/check.mjs
 //  - no external resources anywhere (scripts, styles, fonts, images): the CSP allows only 'self';
-//  - no inline scripts, inline styles or on*= handlers (they would be blocked by the CSP anyway);
+//  - no inline scripts (JSON-LD data blocks aside), inline styles or on*= handlers (the CSP would block them);
 //  - every local href/src/url() points to a file that exists;
-//  - the proof-of-work difficulty is the same in the page and in the worker.
+//  - the proof-of-work difficulty is the same in the page and in the worker;
+//  - the generated pages, in every language, are up to date and keep the English markup (build/site.mjs --check).
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, dirname, extname } from 'node:path';
+import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -31,14 +33,22 @@ for (const f of files) {
   const ext = extname(f);
   const text = ['.html', '.css', '.js'].includes(ext) ? readFileSync(f, 'utf8') : '';
   if (ext === '.html') {
-    if (/<script(?![^>]*\bsrc=)[^>]*>/i.test(text)) errors.push(`${rel(f)}: inline <script>`);
+    // A JSON-LD or JSON block (the page's texts for site.js) is data, never run, so the CSP does not apply to it; it must
+    // still be valid JSON.
+    if (/<script(?![^>]*\bsrc=)(?![^>]*\btype="application\/(ld\+)?json")[^>]*>/i.test(text)) errors.push(`${rel(f)}: inline <script>`);
+    for (const m of text.matchAll(/<script type="application\/(?:ld\+)?json"[^>]*>([\s\S]*?)<\/script>/gi)) {
+      try { JSON.parse(m[1]); } catch (e) { errors.push(`${rel(f)}: JSON-LD does not parse: ${e.message}`); }
+    }
     if (/<style[\s>]/i.test(text)) errors.push(`${rel(f)}: inline <style>`);
     if (/\sstyle\s*=/i.test(text)) errors.push(`${rel(f)}: style= attribute`);
     if (/\son[a-z]+\s*=/i.test(text)) errors.push(`${rel(f)}: on*= handler`);
     for (const m of text.matchAll(/<(script|img|link|source|iframe|video|audio|embed|object)\b[^>]*?\b(src|href)="([^"]*)"/gi)) {
       const [, tag, , ref] = m;
-      const isNavLink = tag.toLowerCase() === 'link' && /rel="canonical"/.test(m[0]);
-      if (isNavLink) continue;
+      // canonical and hreflang alternates name pages, they load nothing; an alternate must name a page that exists.
+      if (tag.toLowerCase() === 'link' && /rel="(canonical|alternate)"/.test(m[0])) {
+        if (/rel="alternate"/.test(m[0]) && !(ref.startsWith('https://antenna.contact/') && localExists(new URL(ref).pathname))) errors.push(`${rel(f)}: hreflang alternate to a missing page: ${ref}`);
+        continue;
+      }
       if (!ref.startsWith('/')) errors.push(`${rel(f)}: <${tag}> loads a non-local resource: ${ref}`);
       else if (!localExists(ref)) errors.push(`${rel(f)}: missing ${ref}`);
     }
@@ -82,6 +92,13 @@ for (const f of files) {
 const pageDiff = /const DIFFICULTY = (\d+);/.exec(readFileSync(join(pub, 'assets/site.js'), 'utf8'))?.[1];
 const workerDiff = /const POW_DIFFICULTY = (\d+);/.exec(readFileSync(join(root, 'src/worker.js'), 'utf8'))?.[1];
 if (!pageDiff || pageDiff !== workerDiff) errors.push(`PoW difficulty differs: page ${pageDiff}, worker ${workerDiff}`);
+
+// The pages of every language, the guides, sitemap.xml and the guides block of llms.txt are generated: they must match
+// their sources, and every translation must keep the markup of its English page.
+const site = spawnSync(process.execPath, [join(root, 'build/site.mjs'), '--check'], { encoding: 'utf8' });
+const siteOut = (site.stderr || '').split('\n');
+for (const l of siteOut) if (l.startsWith('site: warning')) console.warn(l);
+if (site.status !== 0) errors.push(...siteOut.filter((l) => /^  \S/.test(l)).map((l) => l.trim()));
 
 if (errors.length) {
   console.error('check: FAILED\n  ' + errors.join('\n  '));

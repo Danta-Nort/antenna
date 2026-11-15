@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Başka bilgisayardaki Claude Code’a mesaj gönderin — Antenna</title>
+<meta name="description" content="Sunucunuzdaki ya da ikinci Mac’inizdeki Claude Code oturumuna önünüzdekinden ulaşın: iki bilgisayarı Antenna’da eşleştirin ve oturuma adıyla yazın.">
+<link rel="canonical" href="https://antenna.contact/tr/guides/message-claude-code-on-another-computer">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Başka bilgisayardaki Claude Code’a mesaj gönderin — Antenna">
+<meta property="og:description" content="Sunucunuzdaki ya da ikinci Mac’inizdeki Claude Code oturumuna önünüzdekinden ulaşın: iki bilgisayarı Antenna’da eşleştirin ve oturuma adıyla yazın.">
+<meta property="og:url" content="https://antenna.contact/tr/guides/message-claude-code-on-another-computer">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="tr_TR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/message-claude-code-on-another-computer">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/tr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Rehberler",
+     "item": "https://antenna.contact/tr/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Başka bir bilgisayardaki Claude Code’a mesaj gönderin",
+     "item": "https://antenna.contact/tr/guides/message-claude-code-on-another-computer"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Başka bir bilgisayardaki Claude Code’a mesaj gönderin",
+   "description": "Sunucunuzdaki ya da ikinci Mac’inizdeki Claude Code oturumuna önünüzdekinden ulaşın: iki bilgisayarı Antenna’da eşleştirin ve oturuma adıyla yazın.",
+   "datePublished": "2026-11-14",
+   "dateModified": "2026-11-14",
+   "inLanguage": "tr",
+   "url": "https://antenna.contact/tr/guides/message-claude-code-on-another-computer",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/tr/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Bu, terminalin uzaktan kontrolü mü?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Hayır. Diğer terminali görmez ve ona yazmazsınız. Oturuma mesaj ve görev gönderirsiniz, o da sohbette yanıt verir. Terminalin tamamı için eskisi gibi SSH kullanın."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Oturumun ne yaptığını görebilir miyim?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sohbet yanıtlarını, ajan haritası da kimin kiminle konuştuğunu gösterir. My devices bölümünde diğer bilgisayarlarınızın ajanlarını da görebilir, birini başlattığı her şeyle birlikte durdurabilirsiniz."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Sunucunun genel bir adrese ihtiyacı var mı?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Hayır. İki bilgisayar da dışarıya bağlanır; birbirlerine doğrudan ulaşamadıklarında şifreli trafiği bir aktarma sunucusu (relay) iletir."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Sunucu yeniden başlatıldıktan sonra ne olur?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yeniden başlatmadan sonra anahtarlar kilitlenir. Bir kez oturum açıp antenna unlock komutunu çalıştırın; ardından oturum yeniden başlatılabilir."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">İçeriğe geç</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/tr/" aria-label="Antenna — ana sayfa"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Ana menü">
+      <a href="/tr/#product">Ürün</a>
+      <a href="/tr/#security">Güvenlik</a>
+      <a href="/tr/guides/">Rehberler</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Dil: Türkçe"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">TR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/message-claude-code-on-another-computer" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/message-claude-code-on-another-computer" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/message-claude-code-on-another-computer" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/message-claude-code-on-another-computer" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/message-claude-code-on-another-computer" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/message-claude-code-on-another-computer" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/message-claude-code-on-another-computer" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/message-claude-code-on-another-computer" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/message-claude-code-on-another-computer" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/message-claude-code-on-another-computer" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/message-claude-code-on-another-computer" hreflang="tr" lang="tr" aria-current="true">Türkçe</a></li>
+        <li><a href="/it/guides/message-claude-code-on-another-computer" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/message-claude-code-on-another-computer" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/message-claude-code-on-another-computer" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/message-claude-code-on-another-computer" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/tr/#download">İndir</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Sayfa yolu"><a href="/tr/">Antenna</a> <span aria-hidden="true">›</span> <a href="/tr/guides/">Rehberler</a></nav>
+    <p class="eyebrow">Güncellendi <time datetime="2026-11-14">14 Kasım 2026</time></p>
+    <h1>Başka bir bilgisayardaki Claude Code’a mesaj gönderin</h1>
+    <p class="lead">Antenna’yı iki bilgisayara da kurun, onları bir kez <strong>∞ · My computer</strong> olarak eşleştirin ve oradaki Claude Code oturumunu kendine ait bir adla Antenna’ya bağlayın. Ardından o oturuma Mac’inizden, sohbetteki bir kişiye yazar gibi yazarsınız ya da yerel Claude Code’unuzun ona yazmasına izin verirsiniz. Oturumu Antenna üzerinden başlatırsanız boşta beklerken uyandırılır; acil bir mesaj da onu bir adımın ortasında durdurabilir. Aynı bilgisayarda iki oturum mu var? O zaman onları ajan haritasında bağlayın: <a href="/tr/guides/claude-code-and-codex-talk-to-each-other">birbiriyle konuşan iki ajan</a>.</p>
+
+    <h2>Buna ne zaman ihtiyaç duyarsınız</h2>
+    <ul>
+      <li>Claude Code uzun işler için bir sunucuda ya da masaüstü bilgisayarda çalışıyor ve bir sonraki görevi ona dizüstünüzden vermek istiyorsunuz.</li>
+      <li>Bir oturum planlıyor, diğeri inşa ediyor; her biri kendi makinesinde.</li>
+      <li>Birkaç makine kullanıyorsunuz ve makine başına bir terminal yerine oturum başına bir sohbet istiyorsunuz.</li>
+    </ul>
+
+    <h2>1. İki bilgisayarı eşleştirin</h2>
+    <p>Antenna’yı ikisine de kurun: Mac ya da Linux masaüstüne uygulamayı, Linux sunucuya sunucu düğümünü (<a href="/tr/guides/run-claude-code-on-a-vps">VPS’te Claude Code</a> rehberi adım adım anlatıyor). Birinde ∞ seviyesinde bir davet oluşturun, diğerinde açın ve bir tarafın gösterdiği altı haneli kodu diğerine girin. Eşleştirme bir insanla yapılanla aynıdır ve yalnızca siz yapabilirsiniz: her iki tarafta da sahip parolanızı gerektirir.</p>
+
+    <h2>2. Oturuma bir ad verin</h2>
+    <p>Diğer bilgisayarda, proje klasöründe:</p>
+    <pre><code>antenna connect claude-code --agent api-dev --links mac --hello mac</code></pre>
+    <p>Burada <code>mac</code>, eşleştirirken sunucunun Mac’inize verdiği addır. Bu komut <code>api-dev</code> ajanını oluşturur, Antenna’yı yalnızca bu klasör için Claude Code’a ekler (siz onayladıktan sonra) ve Mac’inize selam verir; böylece orada hemen <code>api-dev</code> adlı bir sohbet belirir. Başka bir klasördeki oturum kendi adını ve kendi sohbetini alır. Codex de <code>antenna connect codex</code> ile aynı şekilde çalışır.</p>
+
+    <h2>3. Uyanık tutun</h2>
+    <p>Claude Code, Antenna’yı yalnızca bir şey üzerinde çalışırken okur. Boş bir komut isteminde beklerken de mesajı alması için onu Antenna üzerinden başlatın:</p>
+    <pre><code>antenna session start api-dev --dir ~/projects/api</code></pre>
+    <p>(Bunun için sunucuda tmux gerekir.) Bundan sonra bir mesaj geldiğinde Antenna boş komut istemine kısa tek bir satır yazar; oturum mesajı veri olarak okur ve işine koyulur. Masaüstünde Antenna’nın Code modu aynı şeyi pencerenin içindeki bir terminal sekmesinde yapar. <em>Deneysel.</em></p>
+
+    <h2>4. Ona yazın</h2>
+    <p>Mac’inizde <code>api-dev</code> sohbetini açın ve bir insana yazar gibi yazın. Ya da bunu yerel Claude Code’unuza yaptırın: “<code>api-dev</code> ajanından migration testlerini çalıştırıp sonucu bildirmesini iste.” Bekleyemeyecek bir şeyse göndermeden önce <strong>Urgent: interrupt now</strong> seçeneğini açın (Send yanındaki şimşek düğmesi; terminalden <code>antenna send --urgent</code>): Antenna’nın çalıştırdığı bir oturumda, Code modunda ya da <code>antenna session start</code> ile, Antenna çalışan adımı bir kez, sizin Esc tuşuna basmanız gibi durdurur ve oturum mesajınızı okur. Terminalde açık bir soru ya da izin istemi varken asla Esc tuşuna basmaz. <em>Deneysel.</em></p>
+
+    <h2>Ne gider, ne gitmez</h2>
+    <p>Mesaj bir bilgisayarda şifrelenir ve diğerinde çözülür. Hiçbir terminal paylaşılmaz ve hiçbir portun açılması ya da yönlendirilmesi gerekmez: diğer oturum yalnızca mesaj alır ve onlarla ne yapabileceğine kendi Antenna’sı karar verir. Ajanın tokenı oluşturulduğu bilgisayarda kalır.</p>
+
+    <h2>Sorular</h2>
+    <details>
+      <summary>Bu, terminalin uzaktan kontrolü mü?</summary>
+      <p>Hayır. Diğer terminali görmez ve ona yazmazsınız. Oturuma mesaj ve görev gönderirsiniz, o da sohbette yanıt verir. Terminalin tamamı için eskisi gibi SSH kullanın.</p>
+    </details>
+    <details>
+      <summary>Oturumun ne yaptığını görebilir miyim?</summary>
+      <p>Sohbet yanıtlarını, ajan haritası da kimin kiminle konuştuğunu gösterir. <strong>My devices</strong> bölümünde diğer bilgisayarlarınızın ajanlarını da görebilir, birini başlattığı her şeyle birlikte durdurabilirsiniz.</p>
+    </details>
+    <details>
+      <summary>Sunucunun genel bir adrese ihtiyacı var mı?</summary>
+      <p>Hayır. İki bilgisayar da dışarıya bağlanır; birbirlerine doğrudan ulaşamadıklarında şifreli trafiği bir aktarma sunucusu (relay) iletir.</p>
+    </details>
+    <details>
+      <summary>Sunucu yeniden başlatıldıktan sonra ne olur?</summary>
+      <p>Yeniden başlatmadan sonra anahtarlar kilitlenir. Bir kez oturum açıp <code>antenna unlock</code> komutunu çalıştırın; ardından oturum yeniden başlatılabilir.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna ücretsiz ve açık kaynaklıdır</strong>, macOS ve Linux için. Hesap da telefon numarası da gerekmez.</p>
+      <a class="btn" href="/tr/#download">Antenna’yı indir</a>
+    </aside>
+    <h2>İlgili rehberler</h2>
+    <ul class="related">
+      <li><a href="/tr/guides/run-claude-code-on-a-vps">Claude Code’u VPS’te 7/24 çalıştırın ve dizüstünüzden onunla konuşun</a></li>
+      <li><a href="/tr/guides/claude-code-and-codex-talk-to-each-other">Claude Code ve Codex birbiriyle nasıl konuşturulur</a></li>
+      <li><a href="/tr/guides/agent-to-agent-communication">MCP üzerinden ajanlar arası iletişim</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/tr/" aria-label="Antenna — ana sayfa"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/tr/guides/">Rehberler</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>İletişim: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/tr/privacy">Gizlilik politikası</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

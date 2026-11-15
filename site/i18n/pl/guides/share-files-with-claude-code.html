@@ -1,0 +1,35 @@
+<!--guide {"title": "Jak przesłać pliki do Claude Code na innym komputerze — Antenna", "h1": "Jak przesyłać pliki do Claude Code na innym komputerze", "description": "Wyślij plik z laptopa do Claude Code na serwerze albo drugim komputerze przez Antennę: plik jest sprawdzany po dotarciu, a agent dowiaduje się, gdzie leży.", "summary": "Przesyłanie plików do sesji Claude Code na innym komputerze i z powrotem, ze sprawdzaniem po dotarciu.", "source": "2026-11-09"}-->
+<p class="lead">Na tym samym komputerze Claude Code czyta twoje pliki bezpośrednio: podaj mu ścieżkę albo przeciągnij plik do jego terminala. Na innym komputerze, na przykład serwerze, wyślij plik przez Antennę: upuść go na czacie z tą sesją Claude Code, a Antenna sprawdzi go po dotarciu i zapisze tam w folderze połączenia, agent zaś dostanie w skrzynce nazwę pliku, jego lokalizację, rozmiar i SHA-256. Pliki, które agent odsyła, trafiają na twój laptop tą samą drogą.</p>
+
+<h2>Wyślij plik agentowi</h2>
+<ol>
+  <li>Połącz laptopa z drugim komputerem jako własny (∞) i podłącz tamtejszego Claude Code do Antenny: zobacz <a href="/guides/run-claude-code-on-a-vps">Claude Code na VPS</a>.</li>
+  <li>Otwórz na laptopie czat z sesją i upuść w nim plik albo załącz go jak w każdym komunikatorze.</li>
+  <li>Na drugim komputerze Antenna sprawdza typ pliku po zawartości, szuka zagrożeń i sekretów i zapisuje plik w folderze połączenia, <code>~/Antenna/links/&lt;folder&gt;/shared/</code>, albo w folderze projektu wybranym dla tego komputera.</li>
+  <li>Agent sam dowiaduje się o zapisanym pliku przy następnym sprawdzeniu skrzynki, razem ze ścieżką i hashami, i może go użyć w kolejnym kroku.</li>
+</ol>
+
+<h2>Odbierz pliki od agenta</h2>
+<p>Agent może wysłać ci plik — build, raport albo zrzut ekranu — tymi samymi narzędziami, których używa do wiadomości. Plik trafia na twój czat i do <strong>Files</strong> jako karta z nazwą pliku, tym, co zauważyło sprawdzanie, i jego hashem. Obrazy są pokazywane jako sprawdzony, bezpieczny podgląd, odtworzony przez Antennę.</p>
+
+<h2>Co jest sprawdzane, a co czeka na ciebie</h2>
+<ul>
+  <li><strong>Między twoimi własnymi komputerami</strong> zwykłe pliki zapisują się same. Wszystko, co może uruchomić albo zainstalować oprogramowanie, na przykład program, instalator albo archiwum, które go zawiera, nadal czeka na twoją decyzję, chyba że pozwolisz na to dla danego komputera.</li>
+  <li><strong>Od agenta kogoś innego</strong> na poziomach 3 i 4 pliki są sprawdzane i czekają na twoje Accept albo na przyjęcie przez jednego z twoich agentów. Na poziomach 1 i 2 o każdym pliku decydujesz ty.</li>
+  <li><strong>Przy wysyłaniu</strong> plik, który wygląda, jakby zawierał klucz, hasło albo token, jest wstrzymywany do twojej zgody, chyba że chodzi o twoje własne komputery.</li>
+  <li><strong>Nic nie zostaje nadpisane.</strong> Plik o nazwie, która jest już zajęta, zapisuje się jako <code>report (2).pdf</code>, a nadawca dostaje informację o tej nazwie.</li>
+</ul>
+
+<h2>Pytania</h2>
+<details>
+  <summary>Czemu nie scp albo wspólny folder?</summary>
+  <p>Możesz ich używać, a przy dużych drzewach plików mogą być lepsze. Antenna jest dla plików, które należą do rozmowy z agentem: trafiają tam, gdzie agent się ich spodziewa, agent dostaje o nich informację, a plik od kogokolwiek poza tobą jest sprawdzany, zanim wyląduje.</p>
+</details>
+<details>
+  <summary>Czy plik jest szyfrowany po drodze?</summary>
+  <p>Tak, end-to-end, tym samym połączeniem co twoje wiadomości. Żaden serwer pośrodku go nie przechowuje.</p>
+</details>
+<details>
+  <summary>Czy mogę wybrać, gdzie zapisują się pliki?</summary>
+  <p>Tak. Na karcie kontaktu danego komputera opcja <strong>Files from this computer</strong> pozwala wybrać folder dla tego komputera i osobny dla każdego z jego agentów. W terminalu: <code>antenna files save-to &lt;contact&gt; &lt;folder&gt;</code>.</p>
+</details>

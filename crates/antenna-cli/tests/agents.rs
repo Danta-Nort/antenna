@@ -2159,3 +2159,60 @@ fn claude_code_hook_enforces_the_session_ceiling() {
     p.stdin.take().unwrap().write_all(b"not json").unwrap();
     assert_eq!(p.wait_with_output().unwrap().status.code(), Some(2));
 }
+
+/// A script without `antenna login`: `connect … --password-stdin` reads the password once and holds an owner session
+/// for its own requests (the agent list first, then the agent and its token file), so it works where it used to stop
+/// at `login_required`, and leaves no session behind for the process that ran it. A wrong password holds nothing.
+#[test]
+fn connect_with_the_password_on_stdin_needs_no_login() {
+    let root = tempfile::tempdir().unwrap();
+    let mut a = Node::new(root.path(), "alice", Net::Local);
+    a.start();
+    a.init();
+    let out = a.x(&["logout"]);
+    assert!(out.status.success(), "{out:?}");
+    let refused = || {
+        let out = a.x(&["--json", "agent", "list"]);
+        last_json(&out.stdout)["error"].clone()
+    };
+    assert_eq!(refused(), "login_required", "the control: no session");
+    let dir = root.path().join("proj");
+    std::fs::create_dir(&dir).unwrap();
+    let connect = |pw: &str| {
+        let out = a.x_stdin(
+            &[
+                "--json",
+                "connect",
+                "claude-code",
+                "--agent",
+                "dev",
+                "--dir",
+                dir.to_str().unwrap(),
+                "--print",
+                "--password-stdin",
+            ],
+            &format!("{pw}\n"),
+        );
+        (out.status.success(), last_json(&out.stdout))
+    };
+    let (ok, v) = connect("wrong password");
+    assert_eq!(
+        (ok, v["error"].as_str()),
+        (false, Some("wrong_password")),
+        "{v}"
+    );
+    let (ok, v) = connect(&a.password.clone());
+    assert!(ok, "{v}");
+    assert_eq!(v["created"], true, "{v}");
+    let token_file = v["token_file"].as_str().unwrap().to_string();
+    assert!(std::path::Path::new(&token_file).exists(), "{v}");
+    // Again: the existing agent and its token file
+    let (ok, v) = connect(&a.password.clone());
+    assert!(ok, "{v}");
+    assert_eq!(
+        (v["created"].as_bool(), v["token_file"].as_str()),
+        (Some(false), Some(token_file.as_str())),
+        "{v}"
+    );
+    assert_eq!(refused(), "login_required", "no session left behind");
+}

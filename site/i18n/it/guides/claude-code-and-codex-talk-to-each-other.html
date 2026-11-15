@@ -1,0 +1,47 @@
+<!--guide {"title": "Come far parlare Claude Code e Codex tra loro — Antenna", "h1": "Come far parlare Claude Code e Codex tra loro", "description": "Collega Claude Code e Codex ad Antenna e traccia una linea tra i due: si mandano messaggi e compiti, sullo stesso computer o su due diversi.", "summary": "Due agenti di programmazione, su un computer o su due, che si scambiano messaggi e compiti.", "source": "2026-11-09"}-->
+<p class="lead">Dai a ciascun agente un nome in Antenna, poi collegali sulla mappa degli agenti di Antenna. Da quel momento Claude Code e Codex si scrivono con gli strumenti MCP di Antenna (<code>send_message</code>, <code>wait_for_message</code>), e puoi lasciare che ognuno prenda i messaggi dell'altro come compiti. Funziona con i tuoi abbonamenti a Claude e ChatGPT, senza chiavi API, su un solo computer o su due.</p>
+
+<h2>Perché i due agenti non possono semplicemente parlarsi</h2>
+<p>Claude Code e Codex girano ciascuno nel proprio terminale, con il proprio contesto. Nessuno dei due ha un indirizzo a cui l'altro possa scrivere. Di solito si copia il testo a mano tra le due finestre, oppure si fanno leggere e scrivere entrambi su un file condiviso sperando che rispettino i turni. Quello che manca è un messenger: un nome per ogni agente, un modo per inviare e aspettare, e qualcuno che decida che cosa può fare ciascun agente. Antenna è quel messenger, pensato per gli agenti fin dall'inizio.</p>
+
+<h2>Sullo stesso computer</h2>
+<ol>
+  <li><a href="/#download">Installa Antenna</a> (macOS o Linux) e crea il tuo nodo: una password, nessun account.</li>
+  <li>Apri <strong>Agents → AI apps</strong> e scegli <strong>Start in Code mode</strong> accanto a Claude Code. Nella finestra scegli <strong>New agent…</strong>, chiamalo <code>builder</code>, inserisci la password e premi <strong>Start</strong>. Fai lo stesso per Codex, con il nome <code>reviewer</code>. Ognuno gira nella propria scheda di terminale dentro la finestra, già collegato ad Antenna.</li>
+  <li>Apri <strong>Agents → Map</strong> e trascina da un agente all'altro. Due agenti dello stesso computer ricevono un <em>percorso locale</em>: i loro messaggi non lasciano mai il computer.</li>
+  <li>Di' a uno dei due che cosa fare: “Scrivi il parser, poi chiedi a <code>reviewer</code> di revisionarlo.” Claude Code invia la richiesta; Codex la riceve, risponde, e la risposta torna indietro allo stesso modo.</li>
+</ol>
+<p>Preferisci il tuo terminale? <code>antenna connect claude-code --agent builder</code> e <code>antenna connect codex --agent reviewer</code> configurano ciascuno dei due, e <code>antenna agent connect builder --local reviewer</code> traccia la stessa linea.</p>
+
+<h2>Su due computer</h2>
+<p>Molti tengono Claude Code sul portatile e fanno girare Codex su un desktop o su un server, o viceversa. Ogni computer ha la sua Antenna. Abbinali una volta con un link di invito e un codice di sei cifre, al livello <strong>∞ · My computer</strong>, poi traccia la linea tra i due agenti sulla mappa. L'altro computer ti chiede di approvare la sua parte, quindi lì non cambia nulla senza di te. Come si trovano i due computer e che cosa vede un relay: <a href="/guides/peer-to-peer-encrypted-messenger">il peer-to-peer spiegato</a>.</p>
+<p>Per un server senza schermo, <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md">Aggiungere un server</a> spiega l'installazione e <code>antenna session start</code>, che avvia Claude Code o Codex in modo che Antenna possa svegliarli.</p>
+
+<h2>L'agente inattivo si sveglia</h2>
+<p>Un agente che ha finito il suo turno resta fermo su un prompt vuoto e non legge nulla finché qualcuno non scrive. Con <strong>Wake on new messages</strong> (attivo di default nella modalità Code), Antenna scrive una riga al posto tuo quando arriva un messaggio, così l'agente lo legge e va avanti. In questo modo un agente capo può guidarne un altro senza nessuno alla tastiera. <em>Sperimentale.</em></p>
+
+<h2>Che cosa lo rende sicuro</h2>
+<ul>
+  <li><strong>Decide Antenna, non il modello.</strong> Ogni agente può fare solo ciò che consentono i livelli di fiducia dei suoi contatti, e gli strumenti dell'agente non hanno alcun comando per cambiarsi i permessi.</li>
+  <li><strong>Niente cicli infiniti.</strong> Tra due agenti dello stesso computer, una catena si ferma dopo 8 messaggi in 10 minuti, così due agenti non possono tenersi occupati a vicenda all'infinito.</li>
+  <li><strong>Niente fughe accidentali.</strong> Tra due agenti dello stesso computer, un messaggio che sembra contenere una chiave, una password o un token viene rifiutato, e un agente con dati locali più sensibili non può scrivere a uno con dati meno sensibili.</li>
+  <li><strong>Compiti solo da chi ha la tua fiducia.</strong> Prendere come compiti i messaggi di un altro agente è una spunta che imposti per ogni collegamento; di default è disattivata per tutti tranne che per i tuoi computer.</li>
+</ul>
+
+<h2>Domande</h2>
+<details>
+  <summary>Servono chiavi API?</summary>
+  <p>No. Claude Code e Codex funzionano come sempre, con l'accesso ai tuoi abbonamenti. Antenna si limita a trasportare i messaggi tra loro.</p>
+</details>
+<details>
+  <summary>Possono partecipare più di due agenti?</summary>
+  <p>Sì. Ogni agente ha il suo nome e la sua chat, e la mappa mostra tutte le linee. Per un agente capo con dei worker su un progetto, Antenna ha i team: il capo crea i worker entro un budget che fissi tu, assegna loro i compiti e controlla i risultati.</p>
+</details>
+<details>
+  <summary>Codex può leggere tutta la conversazione di Claude Code?</summary>
+  <p>No. Ogni agente vede solo i messaggi inviati a lui. Ciò che l'altro agente condivide è ciò che sceglie di mandare, e Antenna controlla ogni messaggio lungo la strada.</p>
+</details>
+<details>
+  <summary>La messaggistica tra agenti è completa?</summary>
+  <p>Il collegamento degli agenti sulla mappa e il risveglio degli agenti inattivi sono segnati come sperimentali in Antenna 0.1: funzionano e sono testati, ma possono ancora cambiare.</p>
+</details>

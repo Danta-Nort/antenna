@@ -93,7 +93,7 @@ count when messages are still waiting to send.
 **Settings**, eight sections down the left side of the page:
 - **Profile** — **Your picture**: **Change…** (a drawn animal or your photo, see [Profile pictures](#profile-pictures)) ·
   **Remove**.
-- **General** — Appearance (System/Light/Dark) · Language (System/English/Russian).
+- **General** — Appearance (System/Light/Dark) · Language (System, or one of the window’s languages: English, Spanish, Portuguese, Chinese, Hindi, French, German, Japanese, Korean, Turkish, Italian, Polish, Russian, Ukrainian, each listed in itself).
 - **Interface** — Interface (Chat/Code): switches the whole window between the chat layout and Code mode.
 - **Network** — the local network (LAN) card: discovered devices on the same network, **Turn on**.
 - **Security** — **Use Touch ID** (Mac only, experimental) · **Keys**: **Lock keys**.
@@ -271,7 +271,7 @@ the program enforces. You can change it in the link card (on the right), with th
 | 1 · Observer | strangers, other people's agents | text only, incoming messages marked "untrusted"; an assistant replies only in words |
 | 2 · Acquaintance | new contacts (default) | text; files go into quarantine; tasks for an assistant need your approval |
 | 3 · Colleague | work contacts | the shared folder is read-only; writing needs approval |
-| 4 · Partner | close colleagues, your own server | the shared folder is read and write; builds and tests in a sandbox |
+| 4 · Partner | close colleagues, your own server | the shared folder is read and write; each command waits for your approval |
 | ∞ · My computer (level 5) | **only your own computers** | files and messages go without asking, including ones with keys, passwords or tokens; files you receive from it are accepted by themselves (a threat still waits for you); its tasks run without confirmation. See "Your own machines" |
 
 Levels 1–2 cannot see whether you are online, and the link with them goes only through a relay (they cannot see your IP address). With 3–5,
@@ -854,9 +854,9 @@ with its own chat: it does not read the other sessions' chats.
 chat of every link, in the window and with `antenna history`; the owner of the computer on the other side sees every
 chat of theirs in the same way, including what your agents wrote to their agents.
 
-Not yet: a file you send goes to the whole link, not to one agent, so it shows in the person's chat; and a session
-that runs outside the window (for example Claude Code on a server) is not woken by a new message, it reads its chat
-when it next looks (both are planned).
+Not yet: a file you send goes to the whole link, not to one agent, so it shows in the person's chat (planned). A
+Claude Code or Codex session on a server is woken by a new message when it runs under `antenna session start`; a
+session started some other way reads its chat when it next looks.
 
 **What an agent can read.** An agent reads only messages addressed to it by name, plus messages to everyone if you
 allow it for that agent; messages to the person or to another agent never reach it, and the link's wake agent (an
@@ -994,9 +994,10 @@ Mac through an ordinary invite, just like with a person. The token of your Mac i
    processes…** on the Mac's My devices) ends the session with everything the agent started in it, a server that
    detached itself included (see [Interrupt an agent now, or stop it with everything it
    started](#interrupt-an-agent-now-or-stop-it-with-everything-it-started)).
-6. To see the server's daemon in the Mac window (optional): `ssh -N -L /tmp/antenna-server.sock:$HOME/.local/share/antenna/antennad.sock
-   user@server`, and on the "The daemon isn't responding" screen enter the socket `/tmp/antenna-server.sock` (the ssh user is the same one that
-   antennad runs as).
+6. To see the server's daemon in the Mac window (optional): `ssh -N -L /tmp/antenna-server.sock:/home/<user>/.local/share/antenna/antennad.sock
+   <user>@<server>`, and on the "The daemon isn't responding" screen enter the socket `/tmp/antenna-server.sock`. `<user>` is the server
+   account antennad runs as, and the path is that account's home on the server (`/root/…` for root): `~` or `$HOME` here would be expanded on
+   the Mac, not on the server.
 
 ## An agent that replies on its own
 
@@ -1315,7 +1316,8 @@ install ask the project's update address whether a newer signed release is out. 
 checks it, and a banner at the top of **Files** and in **Settings → Updates** says "Antenna <version> is ready to
 install". **Install** asks for your password: Antenna restarts, and because you gave the password it comes back with
 its keys unlocked. Nothing installs until you press Install, unless you turned on **Install signed updates by itself**
-(below). The check sends nothing about you: it is one request a day, from your computer's address. To turn it off,
+(below). The check sends nothing about you: it is one request a day, from your computer's address; the very first one after
+you install also says "first check", so we can count new installs. To turn it off,
 put the single word `off` into `~/.config/antenna/update-url`. A `.deb`/`.rpm` install does not check (update it with
 your package manager). In the Terminal: `antenna update --check` shows what is out, `antenna update --auto now`
 installs what Antenna has downloaded.

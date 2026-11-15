@@ -1,0 +1,48 @@
+<!--guide {"title": "Codex CLI 远程控制：在笔记本上给 Codex 派任务", "h1": "在笔记本上给另一台电脑上的 Codex CLI 派任务", "description": "通过 Antenna 在服务器或另一台电脑上运行 Codex CLI，在笔记本的聊天里给它写消息，消息一到就唤醒它。不用一直开着 SSH 会话。", "summary": "在服务器或另一台电脑上运行 Codex CLI，通过笔记本上的聊天派任务，一条消息就能唤醒它。", "source": "2026-11-14"}-->
+<p class="lead">在两台电脑上都装好 Antenna，把它们作为你自己的电脑配对一次。在运行 Codex 的那台电脑上，用 <code>antenna connect codex</code> 给 Codex 会话起个名字，再用 <code>antenna session start … --cli codex</code> 启动它。你的笔记本上就会出现一个同名的聊天：在里面写下任务，Codex 闲着时 Antenna 就会唤醒它。Codex 读取你的消息，在另一台电脑上干活，然后在聊天里回复。不需要一直开着 SSH 会话，也不需要开放任何入站端口。</p>
+
+<h2>你需要准备</h2>
+<ul>
+  <li>在干活的那台电脑上安装并登录 Codex CLI：可以是 x86_64 的 Linux 服务器，也可以是 Mac 或 Linux 台式机。Codex 继续使用你自己的订阅；Antenna 不需要任何 API key。</li>
+  <li>那台电脑上要有 tmux。如果是服务器，还要运行一次 <code>sudo loginctl enable-linger $USER</code>，这样你退出登录后 Antenna 和会话仍会继续运行。</li>
+  <li>两台电脑上都装好 <a href="/#download">Antenna</a>：台式机装应用，服务器装节点（<code>curl -fsSL https://antenna.contact/install.sh | sh</code>）。</li>
+</ul>
+
+<h2>1. 配对两台电脑</h2>
+<p>在笔记本上：<strong>New contact → Invite</strong>，勾选 <strong>This is my own computer (∞)</strong>，生成链接，在另一台电脑上打开它（服务器上用 <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>）。把一边显示的验证码输入到另一边。现在双方都把对方当作你自己的电脑。带截图的分步说明见 <a href="/guides/run-claude-code-on-a-vps">在 VPS 上运行 Claude Code</a>，对 Codex 来说步骤完全一样。</p>
+
+<h2>2. 给 Codex 会话起个名字</h2>
+<p>在运行 Codex 的电脑上，进入项目文件夹：</p>
+<pre><code>cd ~/projects/api
+antenna connect codex --agent api-codex --links mac --hello mac</code></pre>
+<p>这会创建智能体 <code>api-codex</code> 及其专属的令牌文件，把它和你的笔记本关联起来（<code>mac</code> 是配对时这台电脑给你笔记本起的名字），并打个招呼，于是笔记本上会立刻出现一个名为 <code>api-codex</code> 的聊天。你自己的 Codex 设置不会被修改：Antenna 只为这个智能体的会话添加。</p>
+
+<h2>3. 通过 Antenna 启动 Codex</h2>
+<pre><code>antenna session start api-codex --dir ~/projects/api --cli codex
+antenna session attach api-codex</code></pre>
+<p>Codex 在 Antenna 自己的 tmux 服务器里启动，不会碰你的 tmux。先 attach 一次，回答 Codex 一开始的几个问题。第一次运行时，Codex 会请你信任 Antenna 的 hooks（“Hooks need review”）：选择 “Trust all and continue”。然后按 <code>Ctrl-b d</code> 退出，Codex 会继续运行。重启后用 <code>--resume</code> 可以接着这个智能体上一次的会话继续。</p>
+
+<h2>4. 在笔记本上给它写消息</h2>
+<p>打开 <code>api-codex</code> 聊天，写下：“跑一下测试，修好失败的，然后告诉我你改了什么。”当 Codex 停在提示符前闲着时，Antenna 会输入一行内置的文字，让它去读收件箱。Antenna 永远不会把你的文字输入终端，也永远不会在 Codex 正在提问时输入任何东西。Codex 通过 Antenna 读取消息，开始干活，然后在聊天里回复。<em>实验性功能。</em></p>
+<p>需要它立刻停下手头的事？发送前打开 <strong>Urgent: interrupt now</strong>。Antenna 会按一次 Esc 结束当前这一轮，然后唤醒 Codex 处理你的消息。如果要停止这个智能体以及它启动的所有东西，在笔记本的 <strong>My devices</strong> 中打开另一台电脑的卡片，点 <strong>Stop agent and its processes…</strong>（就在 <code>api-codex</code> 旁边）。</p>
+
+<h2>在台式机上：Code 模式</h2>
+<p>如果 Codex 运行在装有 Antenna 应用的 Mac 或 Linux 台式机上，可以跳过终端里的这些步骤。在 Code 模式下，点智能体面板里的 <code>+</code>，选择 Codex 和工作文件夹，Codex 就会在窗口内的一个标签页里运行，唤醒方式相同。和其他智能体一样，你在其他电脑上也能访问它的聊天。</p>
+
+<h2>常见问题</h2>
+<details>
+  <summary>笔记本上能看到 Codex 的终端吗？</summary>
+  <p>不能。你在聊天里给 Codex 派任务、看它的回复；终端留在另一台电脑上。想看终端的话，就在那台电脑上 <code>antenna session attach</code>，愿意的话也可以通过 SSH。</p>
+</details>
+<details>
+  <summary>哪些 Codex 版本可以用？</summary>
+  <p>Codex 0.160 及以后的版本会通过 hooks 报告自己在做什么，Antenna 正是靠这个知道 Codex 是否闲着。如果 Codex 版本更旧，或者你没有信任这些 hooks，Antenna 会等到 Codex 在一轮结束后显示空的输入行，并且在一轮进行中永远不会输入任何东西。</p>
+</details>
+<details>
+  <summary>Codex 也能和 Claude Code 对话吗？</summary>
+  <p>能。在智能体地图上把两个智能体连起来，它们各自的消息就会发给对方，无需指定名字：见<a href="/guides/claude-code-and-codex-talk-to-each-other">让 Claude Code 和 Codex 互相对话</a>。</p>
+</details>
+<details>
+  <summary>能用手机控制吗？</summary>
+  <p>暂时还不能。Antenna 目前支持 macOS 和 Linux。</p>
+</details>

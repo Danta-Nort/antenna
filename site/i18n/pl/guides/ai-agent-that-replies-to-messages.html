@@ -1,0 +1,43 @@
+<!--guide {"title": "Agent AI, który sam odpowiada na wiadomości — Antenna", "h1": "Jak ustawić agenta AI, który odpowiada na twoje wiadomości", "description": "Claude Code albo Codex może sam odpowiadać na wiadomości kontaktu: Antenna budzi go w piaskownicy, gdy przyjdzie wiadomość, a odpowiedź widać na bieżąco.", "summary": "Claude Code albo Codex sam odpowiada kontaktowi, w piaskownicy, a odpowiedź płynie na żywo.", "source": "2026-11-09"}-->
+<p class="lead">W Antennie możesz wybrać kontakt i agenta (Claude Code, Codex albo własne polecenie), a od tej chwili każda wiadomość od tego kontaktu uruchamia agenta, który ją czyta i odpowiada. Antenna uruchamia go w piaskownicy (sandbox), z uprawnieniami nie większymi niż poziom zaufania tego kontaktu, a druga osoba widzi odpowiedź na bieżąco, w miarę jak powstaje. Agent działa na twoim własnym logowaniu do Claude albo ChatGPT, a odpowiedź, która wygląda, jakby zawierała sekret, czeka na twoją zgodę.</p>
+
+<h2>Typowe zastosowania</h2>
+<ul>
+  <li><strong>Twój własny asystent na serwerze.</strong> Piszesz do serwera z laptopa, a Claude Code na serwerze odpowiada, buduje projekt i uruchamia w nim testy.</li>
+  <li><strong>Recepcja dla kontaktu.</strong> Pytania kolegi o twój projekt od razu dostają odpowiedź od agenta, który widzi tylko folder tej rozmowy.</li>
+  <li><strong>Skrypt, który raportuje.</strong> Wynik dowolnego programu można wysłać jako strumień na żywo: <code>my-program | antenna send --stream &lt;contact&gt;</code>.</li>
+</ul>
+
+<h2>Ustawienie w oknie aplikacji</h2>
+<ol>
+  <li>Na komputerze, na którym ma działać agent, otwórz <strong>Agents → Set up for a contact…</strong> (albo w rozmowie, na karcie kontaktu, <strong>Agent replies → Set up…</strong>).</li>
+  <li>Wybierz kontakt i program: <strong>Claude Code</strong>, <strong>Codex</strong> albo własne polecenie.</li>
+  <li>Opcjonalnie wklej długoterminowy token logowania (z <code>claude setup-token</code>) w pole <strong>Value (optional)</strong>. Trafia on raz do twojego węzła i jest przechowywany w jego zaszyfrowanej bazie danych. Na Macu to niezawodny sposób, bo piaskownica nie ma dostępu do pęku kluczy.</li>
+  <li>Potwierdź hasłem właściciela. Reguła, jej ostatnie uruchomienie i <strong>Run log</strong> (dziennik uruchomień) pojawią się w <strong>Agents</strong>.</li>
+</ol>
+<p>W terminalu to jedna linia: <code>antenna wake set &lt;contact&gt; --cmd "claude -p --output-format stream-json"</code>. <code>antenna wake list</code> pokazuje reguły i ostatnie uruchomienia, a <code>antenna wake off &lt;contact&gt;</code> wyłącza regułę.</p>
+
+<h2>Co agent może, a czego nie</h2>
+<ul>
+  <li><strong>Jego prompt jest stały:</strong> „masz nową wiadomość, przeczytaj ją i odpowiedz”. Sama wiadomość nigdy nie staje się promptem; agent czyta ją jako dane, z uprawnieniami nie większymi niż poziom zaufania kontaktu.</li>
+  <li><strong>Działa w piaskownicy</strong> (bubblewrap albo Landlock na Linuksie, Seatbelt na macOS): widzi swój folder tymczasowy i folder tej rozmowy, a z sieci dociera tylko do dostawcy swojego modelu. Twoje projekty, pozostałe pliki i klucze węzła są poza jego zasięgiem. Bez piaskownicy Antenna go nie uruchomi.</li>
+  <li><strong>Każde uruchomienie zaczyna się od zera</strong>, chyba że ustawisz agenta jako stałego (o tym niżej), więc wcześniejsza wiadomość nie zostawi instrukcji dla późniejszego uruchomienia.</li>
+  <li><strong>Limity:</strong> limit czasu na jedno uruchomienie i limit uruchomień na godzinę, więc gadatliwy kontakt nie wyczerpie twojego limitu użycia.</li>
+</ul>
+
+<h2>Praca w twoim projekcie</h2>
+<p>Tylko dla twoich własnych komputerów (∞) agent może też pracować w jednym folderze projektu z twoimi narzędziami: <code>--project ~/code/payments</code>, do tego foldery tylko do odczytu w <code>--tool-path</code> i rejestry pakietów, do których może sięgać, w <code>--allow-host</code>. Dla każdego innego kontaktu Antenna odmówi, a twojego folderu domowego, własnych danych ani folderów z sekretami, takich jak <code>~/.ssh</code>, nie otworzy nigdy.</p>
+
+<h2>Pytania</h2>
+<details>
+  <summary>Czy druga osoba widzi odpowiedź w trakcie pisania?</summary>
+  <p>Tak, w przypadku kontaktów od poziomu 3 wzwyż: dymek rośnie na żywo, gdy agent pisze, a na końcu staje się zwykłą wiadomością. Poziomy 1 i 2 dostają gotową odpowiedź.</p>
+</details>
+<details>
+  <summary>Co, jeśli agent wpisze do odpowiedzi hasło albo klucz?</summary>
+  <p>Strumień do drugiej osoby się zatrzymuje, a wiadomość czeka na twoją zgodę. Dalej idzie tylko do twoich własnych komputerów.</p>
+</details>
+<details>
+  <summary>Czy agent pamięta wcześniejsze rozmowy?</summary>
+  <p>Domyślnie nie: każda wiadomość uruchamia go od nowa. Do pracy, która trwa godzinami, dodaj <code>--resident</code>: ta sama sesja Claude Code zostaje wtedy przy rozmowie, pamięta, co zostało powiedziane i ustalone, a każda nowa wiadomość staje się jej kolejną turą. Wiadomości nadal docierają do niej jako dane od drugiej strony.</p>
+</details>

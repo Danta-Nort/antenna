@@ -96,9 +96,36 @@ pub fn sibling(manifest_url: &str, name: &str) -> String {
     format!("{base}/{name}")
 }
 
+/// The header the first update check of an installation carries (D-140): one mark, so the update host can count new
+/// installs a day. It says nothing about the person, the computer or the installation, and only the first check of
+/// an installation carries it.
+pub const FIRST_CHECK_HEADER: &str = "X-Stillbyte-First: 1";
+
+/// The recorded state of the first check (D-140): it went out with [`FIRST_CHECK_HEADER`] and the host answered.
+pub const FIRST_CHECK_SENT: &str = "sent";
+
+/// The recorded state of the first check (D-140): it is due, and the last try did not reach the host.
+pub const FIRST_CHECK_PENDING: &str = "pending";
+
+/// Whether this check is the installation's first (D-140): `last_check_ms` is the time of the last check (0 for
+/// never) and `recorded` the state the daemon keeps. An installation that checked before this mark existed is never
+/// counted as new; a first check that failed is tried again with the mark until the host answers once.
+pub fn first_check_due(last_check_ms: u64, recorded: Option<&str>) -> bool {
+    match recorded {
+        Some(FIRST_CHECK_SENT) => false,
+        Some(FIRST_CHECK_PENDING) => true,
+        _ => last_check_ms == 0,
+    }
+}
+
 /// Fetches a URL over HTTPS (`curl --proto =https --proto-redir =https`), at most `max` bytes, into memory or into the
 /// file `to`. A non-HTTPS URL is refused before anything runs.
 pub fn https(url: &str, max: u64, to: Option<&Path>) -> Result<Vec<u8>> {
+    https_with(url, max, to, None)
+}
+
+/// [`https`] with one extra request header (`"Name: value"`), such as [`FIRST_CHECK_HEADER`].
+pub fn https_with(url: &str, max: u64, to: Option<&Path>, header: Option<&str>) -> Result<Vec<u8>> {
     if !url.starts_with("https://") {
         return Err(Error::new(
             code::BAD_REQUEST,
@@ -109,6 +136,31 @@ pub fn https(url: &str, max: u64, to: Option<&Path>) -> Result<Vec<u8>> {
         .into_iter()
         .find(|p| Path::new(p).is_file())
         .unwrap_or("curl");
+    let o = curl_command(curl, url, max, to, header)
+        .output()
+        .map_err(|e| Error::new(code::FETCH_FAILED, format!("cannot run curl: {e}")))?;
+    if !o.status.success() {
+        return Err(Error::new(
+            code::FETCH_FAILED,
+            format!("{url}: {}", String::from_utf8_lossy(&o.stderr).trim()),
+        ));
+    }
+    if o.stdout.len() as u64 > max {
+        return Err(Error::new(
+            code::FETCH_FAILED,
+            format!("{url}: larger than {max} bytes"),
+        ));
+    }
+    Ok(o.stdout)
+}
+
+fn curl_command(
+    curl: &str,
+    url: &str,
+    max: u64,
+    to: Option<&Path>,
+    header: Option<&str>,
+) -> Command {
     let mut c = Command::new(curl);
     c.args([
         "--fail",
@@ -128,23 +180,11 @@ pub fn https(url: &str, max: u64, to: Option<&Path>) -> Result<Vec<u8>> {
     if let Some(p) = to {
         c.arg("--output").arg(p);
     }
+    if let Some(h) = header {
+        c.arg("--header").arg(h);
+    }
     c.arg("--").arg(url);
-    let o = c
-        .output()
-        .map_err(|e| Error::new(code::FETCH_FAILED, format!("cannot run curl: {e}")))?;
-    if !o.status.success() {
-        return Err(Error::new(
-            code::FETCH_FAILED,
-            format!("{url}: {}", String::from_utf8_lossy(&o.stderr).trim()),
-        ));
-    }
-    if o.stdout.len() as u64 > max {
-        return Err(Error::new(
-            code::FETCH_FAILED,
-            format!("{url}: larger than {max} bytes"),
-        ));
-    }
-    Ok(o.stdout)
+    c
 }
 
 #[cfg(test)]
@@ -183,6 +223,58 @@ mod tests {
                 Some("https://example.com/m.json")
             );
         }
+    }
+
+    /// The mark goes only on the request it is given to, as one `--header` before the URL; plain fetches carry no
+    /// extra header.
+    #[test]
+    fn the_first_check_header_only_where_asked() {
+        let args = |h| {
+            curl_command("curl", "https://example.com/m.json", 10, None, h)
+                .get_args()
+                .map(|a| a.to_string_lossy().into_owned())
+                .collect::<Vec<_>>()
+        };
+        let plain = args(None);
+        assert!(
+            !plain
+                .iter()
+                .any(|a| a == "--header" || a.contains("Stillbyte")),
+            "{plain:?}"
+        );
+        let first = args(Some(FIRST_CHECK_HEADER));
+        let at = first
+            .iter()
+            .position(|a| a == "--header")
+            .expect("a header");
+        assert_eq!(first[at + 1], "X-Stillbyte-First: 1");
+        assert_eq!(
+            first[first.len() - 2..],
+            ["--", "https://example.com/m.json"]
+        );
+    }
+
+    /// A new installation is counted once; one that checked before the mark existed never; a first check that did
+    /// not reach the host is tried again.
+    #[test]
+    fn the_first_check_is_counted_once() {
+        assert!(first_check_due(0, None), "a new installation");
+        assert!(
+            !first_check_due(1_700_000_000_000, None),
+            "an installation that checked before"
+        );
+        assert!(
+            first_check_due(1_700_000_000_000, Some(FIRST_CHECK_PENDING)),
+            "the first try failed"
+        );
+        assert!(
+            !first_check_due(0, Some(FIRST_CHECK_SENT)),
+            "already counted"
+        );
+        assert!(
+            !first_check_due(1_700_000_000_000, Some(FIRST_CHECK_SENT)),
+            "already counted"
+        );
     }
 
     #[test]

@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>양자 내성 암호화를 쓰는 오픈소스 P2P 메신저 — Antenna</title>
+<meta name="description" content="Antenna는 중앙 서버 없이 기기끼리 바로 메시지를 보내고, 양자 내성 키로 종단 간 암호화해요. 작동 방식과 무엇을 보호하는지 정리했어요.">
+<link rel="canonical" href="https://antenna.contact/ko/guides/peer-to-peer-encrypted-messenger">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="양자 내성 암호화를 쓰는 오픈소스 P2P 메신저 — Antenna">
+<meta property="og:description" content="Antenna는 중앙 서버 없이 기기끼리 바로 메시지를 보내고, 양자 내성 키로 종단 간 암호화해요. 작동 방식과 무엇을 보호하는지 정리했어요.">
+<meta property="og:url" content="https://antenna.contact/ko/guides/peer-to-peer-encrypted-messenger">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ko_KR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/peer-to-peer-encrypted-messenger">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ko/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "가이드",
+     "item": "https://antenna.contact/ko/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "양자 내성 암호화를 쓰는 오픈소스 P2P 메신저",
+     "item": "https://antenna.contact/ko/guides/peer-to-peer-encrypted-messenger"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "양자 내성 암호화를 쓰는 오픈소스 P2P 메신저",
+   "description": "Antenna는 중앙 서버 없이 기기끼리 바로 메시지를 보내고, 양자 내성 키로 종단 간 암호화해요. 작동 방식과 무엇을 보호하는지 정리했어요.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "ko",
+   "url": "https://antenna.contact/ko/guides/peer-to-peer-encrypted-messenger",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ko/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "P2P 메신저는 더 느린가요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "보통은 아니에요. 직접 경로는 데이터 센터를 거쳐 가는 길을 건너뛰고, 릴레이를 거치면 메시지가 한 단계를 더 지날 뿐이에요."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "릴레이를 직접 운영할 수 있나요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "네. 릴레이는 오픈소스이고 암호화된 트래픽을 전달하기만 해요. 노드가 기본 릴레이 대신 내 릴레이를 쓰도록 지정하면 돼요."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "그룹 대화도 되나요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "아직은 안 돼요. Antenna 0.1은 일대일 대화만 지원해요. 사람끼리, 사람과 에이전트, 에이전트끼리요."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "어떤 플랫폼을 지원하나요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Apple Silicon의 macOS(서명 및 공증 완료)와 x86_64 Linux예요. 데스크톱 앱과 서버 노드가 있어요."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ko/" aria-label="Antenna 홈"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="주 메뉴">
+      <a href="/ko/#product">제품</a>
+      <a href="/ko/#security">보안</a>
+      <a href="/ko/guides/">가이드</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="언어: 한국어"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">KO</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/peer-to-peer-encrypted-messenger" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/peer-to-peer-encrypted-messenger" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/peer-to-peer-encrypted-messenger" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/peer-to-peer-encrypted-messenger" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/peer-to-peer-encrypted-messenger" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/peer-to-peer-encrypted-messenger" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/peer-to-peer-encrypted-messenger" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/peer-to-peer-encrypted-messenger" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/peer-to-peer-encrypted-messenger" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/peer-to-peer-encrypted-messenger" hreflang="ko" lang="ko" aria-current="true">한국어</a></li>
+        <li><a href="/tr/guides/peer-to-peer-encrypted-messenger" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/peer-to-peer-encrypted-messenger" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/peer-to-peer-encrypted-messenger" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/peer-to-peer-encrypted-messenger" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/peer-to-peer-encrypted-messenger" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ko/#download">다운로드</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="현재 위치"><a href="/ko/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ko/guides/">가이드</a></nav>
+    <p class="eyebrow">업데이트 <time datetime="2026-11-09">2026년 11월 9일</time></p>
+    <h1>양자 내성 암호화를 쓰는 오픈소스 P2P 메신저</h1>
+    <p class="lead">Antenna는 macOS와 Linux용 무료 오픈소스 P2P 메신저예요. 메시지와 파일은 QUIC으로 한 기기에서 다른 기기로 바로 가고, libsignal의 양자 내성 프로토콜로 종단 간 암호화돼요. 연결 자체에도 하이브리드 양자 내성 키 교환을 써요. 메시지를 저장하거나 중계하는 중앙 서버는 없어요. 두 기기가 서로 직접 닿지 못할 때는 복호화할 수 없는 트래픽을 릴레이가 전달해요.</p>
+
+    <h2>실제로 P2P가 동작하는 방식</h2>
+    <p>“P2P”는 간단하게 들리지만, 대부분의 컴퓨터는 들어오는 연결을 막는 공유기와 방화벽 뒤에 있어요. Antenna는 QUIC 라이브러리인 iroh를 써서 그 사이로 직접 경로를 찾고(홀 펀칭), 경로가 없으면 릴레이로 대신해요. 연결은 보통 릴레이로 시작했다가 직접 경로를 찾으면 그쪽으로 옮겨 가요. 어느 쪽이든 릴레이에는 암호화된 패킷만 보이고, 누구나 기본 릴레이 대신 자기 릴레이를 운영할 수 있어요.</p>
+    <p>같은 네트워크에 있다면, 충분히 신뢰하는 연락처와는 인터넷이 전혀 없어도 로컬 네트워크로 연결할 수 있어요.</p>
+
+    <h2>두 겹의 암호화</h2>
+    <table>
+      <thead><tr><th>계층</th><th>사용하는 기술</th><th>보호하는 것</th></tr></thead>
+      <tbody>
+        <tr><td>연결</td><td>X25519MLKEM768(기존 키 교환과 양자 내성 키 교환의 하이브리드)을 쓰는 TLS 1.3</td><td>릴레이를 거치는 경우를 포함해, 두 기기 사이의 연결</td></tr>
+        <tr><td>메시지</td><td>libsignal: 대화를 시작할 때 PQXDH, 이후에는 SPQR 양자 내성 래칫</td><td>모든 메시지와 파일을 종단 간, 전방 비밀성(forward secrecy)과 함께</td></tr>
+      </tbody>
+    </table>
+    <p>“양자 내성”이란, 누군가 오늘 트래픽을 기록해 두었다가 나중에 양자 컴퓨터로 복호화하려 해도 키 교환이 안전하게 유지된다는 뜻이에요. Antenna는 암호 기술을 직접 만들지 않아요. 두 계층 모두 감사를 거쳤거나 형식 검증된 라이브러리를 쓰고, 페어링 프로토콜에는 ProVerif로 검증한 형식 모델이 있어요.</p>
+
+    <h2>P2P 설계가 바꾸는 것</h2>
+    <ul>
+      <li><strong>탈취당할 계정이 없어요.</strong> 사용자 목록이나 연락처, 메시지를 가진 서버가 없어요.</li>
+      <li><strong>전화번호가 없어요.</strong> 일회용 링크와 음성으로 비교하는 코드로 사람을 추가해요. <a href="/ko/guides/messenger-without-phone-number">전화번호 없는 메신저</a>를 참고하세요.</li>
+      <li><strong>내 IP 주소는 내 조건대로.</strong> 직접 연결하면 상대에게 내 주소가 보여요. 신뢰 레벨 1과 2의 연락처는 항상 릴레이를 거치기 때문에 내 주소를 절대 볼 수 없어요.</li>
+      <li><strong>두 기기가 동시에 온라인이어야 해요.</strong> 그전까지 메시지는 보낸 쪽의 큐에서 기다렸다가 알아서 전송돼요. 계속 켜 둔 서버가 있으면 에이전트에 언제든 닿을 수 있어요.</li>
+    </ul>
+
+    <h2>오픈소스이고, 직접 확인할 수 있어요</h2>
+    <p>애플리케이션은 AGPL-3.0, 프로토콜과 형식, 테스트 벡터는 Apache-2.0이라서 다른 사람도 호환되는 클라이언트를 만들 수 있어요. 릴리스는 서명되어 있고, 소스 코드, 사양서, 모든 설계 결정이 <a href="https://github.com/Danta-Nort/antenna">GitHub</a>에 있어요. 메시지는 서명되고 해시로 연결되며, 양쪽이 사본을 비교해서 메시지가 바뀌거나 되돌려지면 어디서 일어났는지 드러나요.</p>
+
+    <h2>자주 묻는 질문</h2>
+    <details>
+      <summary>P2P 메신저는 더 느린가요?</summary>
+      <p>보통은 아니에요. 직접 경로는 데이터 센터를 거쳐 가는 길을 건너뛰고, 릴레이를 거치면 메시지가 한 단계를 더 지날 뿐이에요.</p>
+    </details>
+    <details>
+      <summary>릴레이를 직접 운영할 수 있나요?</summary>
+      <p>네. 릴레이는 오픈소스이고 암호화된 트래픽을 전달하기만 해요. 노드가 기본 릴레이 대신 내 릴레이를 쓰도록 지정하면 돼요.</p>
+    </details>
+    <details>
+      <summary>그룹 대화도 되나요?</summary>
+      <p>아직은 안 돼요. Antenna 0.1은 일대일 대화만 지원해요. 사람끼리, 사람과 에이전트, 에이전트끼리요.</p>
+    </details>
+    <details>
+      <summary>어떤 플랫폼을 지원하나요?</summary>
+      <p>Apple Silicon의 macOS(서명 및 공증 완료)와 x86_64 Linux예요. 데스크톱 앱과 서버 노드가 있어요.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna는 무료 오픈소스예요.</strong> macOS와 Linux에서 쓸 수 있고, 계정도 전화번호도 필요 없어요.</p>
+      <a class="btn" href="/ko/#download">Antenna 다운로드</a>
+    </aside>
+    <h2>관련 가이드</h2>
+    <ul class="related">
+      <li><a href="/ko/guides/self-hosted-messenger">운영할 서버가 필요 없는 셀프 호스팅 메신저</a></li>
+      <li><a href="/ko/guides/messenger-without-phone-number">전화번호도 이메일도 없이 쓰는 비공개 메신저</a></li>
+      <li><a href="/ko/guides/agent-to-agent-communication">MCP로 에이전트 간 통신하기</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ko/" aria-label="Antenna 홈"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ko/guides/">가이드</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>문의: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ko/privacy">개인정보 처리방침</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

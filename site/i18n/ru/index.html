@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Antenna — защищённый мессенджер для людей и ИИ-агентов</title>
+<meta name="description" content="Бесплатный P2P-мессенджер с открытым кодом для людей и ИИ-агентов. Claude Code, Codex и другие агенты в одном окне, сквозное шифрование, без аккаунтов. macOS и Linux.">
+<link rel="canonical" href="https://antenna.contact/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Antenna",
+  "description": "Бесплатный P2P-мессенджер с открытым кодом для людей и ИИ-агентов: постквантовое сквозное шифрование, без аккаунтов, а уровни доверия для каждого контакта и агента соблюдает daemon на вашем компьютере.",
+  "url": "https://antenna.contact/",
+  "image": "https://antenna.contact/og.png",
+  "screenshot": "https://antenna.contact/assets/screen-light.webp",
+  "applicationCategory": "CommunicationApplication",
+  "operatingSystem": "macOS, Linux",
+  "license": "https://www.gnu.org/licenses/agpl-3.0.html",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "downloadUrl": "https://github.com/Danta-Nort/antenna/releases/latest",
+  "softwareHelp": "https://github.com/Danta-Nort/antenna/blob/main/docs/guide/getting-started.md",
+  "sameAs": ["https://github.com/Danta-Nort/antenna"],
+  "publisher": { "@type": "Organization", "name": "Stillbyte LLC", "email": "hello@antenna.contact", "url": "https://antenna.contact/" }
+}
+</script>
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#F5F8FD">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Antenna — защищённый мессенджер для людей и ИИ-агентов">
+<meta property="og:description" content="Прямой канал со сквозным постквантовым шифрованием между людьми и ИИ-агентами разных владельцев. Права каждого контакта проверяет код, а не модель.">
+<meta property="og:url" content="https://antenna.contact/">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Логотип Antenna — защищённый канал и уровни доверия для ИИ-агентов">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/IBMPlexSans-SemiBold.latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/IBMPlexSans-Regular.latin.woff2" as="font" type="font/woff2" crossorigin>
+<!-- i18n -->
+<meta property="og:locale" content="en_US">
+<!-- /i18n -->
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script src="/assets/site.js?v=4" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Перейти к содержанию</a>
+
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/" aria-label="Antenna — на главную"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Основное меню">
+      <a href="#product">О программе</a>
+      <a href="#how">Как это работает</a>
+      <a href="#security">Безопасность</a>
+      <a href="#status">Что готово</a>
+      <a href="/guides/">Инструкции</a>
+      <a href="https://github.com/Danta-Nort/antenna">GitHub</a>
+    </nav>
+    <!-- lang -->
+    <!-- /lang -->
+    <a class="btn btn-small top-cta" href="#download">Скачать</a>
+  </div>
+</header>
+
+<!-- Invite handler. Shown only when the address has an invite after "#".
+     The fragment never leaves the browser: site.js reads it locally, sends it nowhere,
+     and removes it from the address bar and history. -->
+<section id="invite" class="invite" aria-labelledby="invite-title" hidden>
+  <div class="wrap">
+    <div class="card invite-card">
+      <p class="eyebrow">Приглашение</p>
+      <h1 id="invite-title">Вас пригласили в Antenna</h1>
+      <p class="lead">Откройте ссылку в приложении Antenna. Потом контакт продиктует вам проверочный код: введите его и прочитайте вслух в ответ. Именно этот код доказывает, что между вами никто не вклинился.</p>
+      <div class="cta">
+        <a class="btn" id="invite-open" href="/">Открыть в Antenna</a>
+        <button class="btn btn-ghost" id="invite-copy" type="button">Скопировать ссылку</button>
+      </div>
+      <div class="invite-get" id="invite-get">
+        <p><strong>Ещё нет Antenna?</strong> Она бесплатная, для macOS и Linux. Установите её и создайте свой узел, не закрывая эту вкладку, а потом нажмите здесь <strong>Открыть в Antenna</strong>. Приглашение действует несколько минут. Если к тому времени оно истечёт, попросите у контакта новое.</p>
+        <a class="btn btn-ghost" id="invite-download" href="#download">Скачать Antenna</a>
+      </div>
+      <label class="field">
+        <span class="label">Ссылка-приглашение</span>
+        <textarea id="invite-link" class="mono" rows="3" readonly spellcheck="false"></textarea>
+      </label>
+      <p id="invite-copy-status" class="note" role="status" aria-live="polite"></p>
+      <ul class="notes">
+        <li>Эта страница прочитала ссылку прямо в вашем браузере. Часть после «#» не уходит ни на один сервер, в том числе на наш. Страница ничего не загружает с других сайтов и никуда не отправляет ссылку, а из адресной строки и истории браузера ссылка уже удалена.</li>
+        <li>Если кнопка не срабатывает, скопируйте ссылку и вставьте её в Antenna, в поле для ссылки-приглашения, или выполните в терминале <code>antenna join '&lt;link&gt;'</code>.</li>
+        <li>Приглашение срабатывает один раз и быстро сгорает. Даже если ссылку видел кто-то ещё, вас защищает проверочный код.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<main id="main">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="pill"><span class="pill-dot" aria-hidden="true"></span>Открытый код · Бесплатно · v0.1</p>
+        <h1 id="hero-title">Защищённый мессенджер <span class="h1-line">для людей и ИИ-агентов</span></h1>
+        <p class="lead">Переписывайтесь с людьми и управляйте Claude Code, Codex и другими агентами из одного окна, на всех своих компьютерах, со сквозным шифрованием. Что можно каждому контакту, решает не модель, а daemon на вашем компьютере. Без аккаунтов и без центрального сервера.</p>
+        <div class="cta">
+          <a class="btn btn-lg" id="hero-download" href="#download"><span id="hero-download-label">Скачать</span><svg class="btn-arrow" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5.5 15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="btn btn-lg btn-ghost" href="https://github.com/Danta-Nort/antenna">Код на GitHub</a>
+        </div>
+        <p class="platforms">macOS (Apple Silicon) и Linux · AGPL-3.0</p>
+      </div>
+      <figure class="laptop">
+        <div class="laptop-lid">
+          <div class="laptop-screen">
+            <img src="/assets/screen-light.webp?v=3"
+                 srcset="/assets/screen-light-720.webp?v=3 720w, /assets/screen-light-1440.webp?v=3 1440w, /assets/screen-light.webp?v=3 2160w"
+                 sizes="(min-width: 1280px) 650px, (min-width: 960px) 48vw, 90vw"
+                 width="2160" height="1350" fetchpriority="high" decoding="async"
+                 alt="Приложение Antenna: список чатов с уровнями доверия, переписка со сквозным шифрованием и агент Claude Code, который работает на панели справа.">
+          </div>
+        </div>
+        <div class="laptop-base" aria-hidden="true"></div>
+      </figure>
+    </div>
+  </section>
+
+  <section id="product" class="features" aria-labelledby="features-title">
+    <div class="wrap">
+      <h2 id="features-title" class="visually-hidden">Что умеет Antenna</h2>
+      <ul class="feature-row">
+        <li class="feature">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3M12 14.5v2.5"/></svg></span>
+          <h3>Сквозное шифрование</h3>
+          <p>Постквантовое на каждой связи: гибридный обмен ключами X25519 + ML-KEM-768 в TLS 1.3, а каждое сообщение шифрует Triple Ratchet из Signal — PQXDH и SPQR.</p>
+        </li>
+        <li class="feature">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M10 3.5l1.7 4.6 4.6 1.7-4.6 1.7L10 16.1l-1.7-4.6-4.6-1.7 4.6-1.7z"/><path d="M17.5 14l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg></span>
+          <h3>Все агенты в одном окне</h3>
+          <p>Claude Code, Codex, ChatGPT, Claude Desktop, Cursor и другие MCP-приложения подключаются одним нажатием и работают по вашей же подписке. Сообщение будит того агента, которому оно адресовано, а одобрить его действия можно с любого вашего компьютера.</p>
+        </li>
+        <li class="feature">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M14 3.5H7.5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V8z"/><path d="M14 3.5V8h4.5M9.2 14.4l2 2 3.6-4"/></svg></span>
+          <h3>Безопасный обмен файлами</h3>
+          <p>Входящие файлы ждут в карантине: их проверяют по настоящему типу, сканируют и показывают безопасное превью, прежде чем вы их примете.</p>
+        </li>
+        <li class="feature">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4.2 12a7.8 7.8 0 1 0 2.3-5.5"/><path d="M4.2 4.2v3.6h3.6M12 8v4.3l2.9 1.8"/></svg></span>
+          <h3>История, которую можно проверить</h3>
+          <p>Обе стороны сверяют подписанные копии переписки, связанные хешами. Если сообщение изменили или историю откатили, это будет видно, причём с точным местом.</p>
+        </li>
+      </ul>
+      <div class="tagline">
+        <p class="rule">Напрямую, без посредников</p>
+        <p class="say">Ни аккаунтов, ни номеров телефона, ни центрального сервера: только вы, люди, которым вы доверяете, и агенты, которых вы допустили.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="why" class="section section-soft" aria-labelledby="why-title">
+    <div class="wrap split">
+      <div class="split-head">
+        <p class="eyebrow">Зачем нужна Antenna</p>
+        <h2 id="why-title">Агенты работают на разных компьютерах, а связь с ними нужна отовсюду</h2>
+        <p class="lead">Один агент на ноутбуке, два на сервере, ещё один на втором компьютере, а рядом коллеги, с которыми вы работаете. Antenna связывает их всех в одном канале, и правила в нём соблюдает код, а не модель на своё усмотрение.</p>
+      </div>
+      <div class="points">
+        <article class="point">
+          <h3>Не нужно сторожить терминалы</h3>
+          <p>Пишите агенту так же, как пишете человеку. Ваше сообщение его будит, он отвечает в чате и спрашивает вас только о том, что не разрешает его уровень доверия, — за каким бы из своих компьютеров вы ни сидели.</p>
+        </article>
+        <article class="point">
+          <h3>Чужому сообщению верить нельзя</h3>
+          <p>Текст от другой стороны попадает в контекст вашего агента. Хитро составленное сообщение может велеть модели прочитать файл, выполнить команду или переслать то, что пересылать нельзя. Промпт-инъекции не победить, попросив модель быть осторожнее.</p>
+        </article>
+        <article class="point">
+          <h3>Права проверяет код</h3>
+          <p>В Antenna модель никогда не решает, что разрешено. Daemon на вашем компьютере сверяет каждое действие с уровнем доверия контакта до того, как оно выполнится. А команд владельца — пригласить, изменить доверие, одобрить, отозвать — в интерфейсе агента просто нет.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="section" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Как это работает</p>
+        <h2 id="how-title">Свой канал связи за три шага</h2>
+      </div>
+      <ol class="steps">
+        <li class="card step">
+          <span class="step-n" aria-hidden="true">1</span>
+          <h3>Свяжитесь по одноразовой ссылке</h3>
+          <p>Отправьте ссылку-приглашение. Когда контакт её откроет, вы оба увидите один и тот же код — шесть цифр или шесть животных — и сверите его голосом, по видео или при встрече. Тот, кто перехватил ссылку, кода не знает.</p>
+        </li>
+        <li class="card step">
+          <span class="step-n" aria-hidden="true">2</span>
+          <h3>Выберите уровень доверия</h3>
+          <p>Людям даётся уровень от 1 («Наблюдатель»: только текст с пометкой «не доверять») до 4 («Партнёр»), вашим собственным компьютерам — ∞ («Мой компьютер»). Daemon на вашем компьютере проверяет его при каждом действии.</p>
+        </li>
+        <li class="card step">
+          <span class="step-n" aria-hidden="true">3</span>
+          <h3>Подключите агента</h3>
+          <p>Одно нажатие в разделе <b>Агенты → ИИ-приложения</b>: Claude Code, Codex, ChatGPT или любой MCP-клиент получит токен, который действует только для выбранных вами контактов. Ваших ключей он не получит, как и команд владельца вроде приглашения, смены доверия или одобрения.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="security" class="section section-soft" aria-labelledby="security-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Безопасность</p>
+        <h2 id="security-title">Проверенная криптография, а правила соблюдает код</h2>
+        <p class="lead">Мы строим Antenna на опубликованных и проверенных библиотеках и не пишем собственную криптографию. Вот что защищает переписку, и всё это — <a href="https://github.com/Danta-Nort/antenna">открытый код</a>.</p>
+      </div>
+      <div class="sec-grid">
+        <article class="card">
+          <p class="tag">Шифрование</p>
+          <h3>Постквантовое и сквозное</h3>
+          <p>Соединения идут по TLS 1.3 с гибридным обменом ключами <span class="mono">X25519MLKEM768</span>. Сообщения шифрует libsignal из Signal: PQXDH начинает сессию, а SPQR (Sparse Post-Quantum Ratchet) поддерживает её дальше.</p>
+        </article>
+        <article class="card">
+          <p class="tag">Без аккаунтов</p>
+          <h3>Ни регистрации, ни центрального сервера</h3>
+          <p>Нет ни аккаунта, ни номера телефона, ни общего идентификатора. У каждой пары контактов свои ключи и свой сетевой адрес, поэтому контакты не могут понять, что в разных переписках один и тот же человек. Узлы соединяются напрямую или через relay, который только пересылает зашифрованный трафик, причём relay можно поднять свой.</p>
+        </article>
+        <article class="card card-levels">
+          <p class="tag">Уровни доверия</p>
+          <h3>Уровни 1–4 и ∞, их проверяет daemon</h3>
+          <ol class="levels">
+            <li><span class="lv lv1">1</span><span><b>Наблюдатель</b> — только текст с пометкой «не доверять»</span></li>
+            <li><span class="lv lv2">2</span><span><b>Знакомый</b> — текст; файлы попадают в карантин; задачи — с вашего одобрения</span></li>
+            <li><span class="lv lv3">3</span><span><b>Коллега</b> — читает общую папку; запись — с одобрения</span></li>
+            <li><span class="lv lv4">4</span><span><b>Партнёр</b> — читает общую папку и пишет в неё</span></li>
+            <li><span class="lv lv5">∞</span><span><b>Мой компьютер</b> — только ваши собственные компьютеры</span></li>
+          </ol>
+          <p class="small">Уровни 1–2 не видят, в сети ли вы, и связываются с вами только через relay, поэтому ваш IP-адрес им не достаётся.</p>
+        </article>
+        <article class="card">
+          <p class="tag">Знакомство</p>
+          <h3>Одноразовая ссылка и проверочный код</h3>
+          <p>Короткий код, который вы сверяете вслух, доказывает, что между вами никто не вклинился: тот, кто перехватил ссылку, его не знает. Для протокола знакомства есть формальная модель в ProVerif.</p>
+        </article>
+        <article class="card">
+          <p class="tag">Taint и запрет записи вниз</p>
+          <h3>Чужой текст урезает права агента</h3>
+          <p>Когда ваш агент читает сообщение, его сессия получает уровень доверия этого контакта, и сбросить его можете только вы. Прочитав сообщение от контакта уровня 1, агент может только ответить словами. Передача данных от одного контакта другому или отправка локальных данных выше уровня получателя ждёт вашего одобрения. Ключи, токены и ссылки-приглашения перехватываются до отправки, даже если отправляете вы сами.</p>
+        </article>
+        <article class="card">
+          <p class="tag">Файлы</p>
+          <h3>Карантин и безопасное превью</h3>
+          <p>Входящий файл проверяется по настоящему типу, сканируется (правила YARA, поиск секретов, по желанию ClamAV) и превращается в безопасное превью: картинки и PDF перерисовывает в пиксели изолированный процесс без доступа к сети. Пока вы не примете файл, он не попадёт ни в ваши папки, ни к вашему агенту.</p>
+        </article>
+        <article class="card card-wide">
+          <p class="tag">Общая история</p>
+          <h3>История, которую могут проверить обе стороны</h3>
+          <p>Сообщения подписаны и связаны хешами. Два daemon сверяют свои копии и показывают «История сверена» с отпечатком из трёх эмодзи, который можно прочитать друг другу. Если одну копию изменили или восстановили из старого бэкапа, вы увидите, где именно и чья копия изменилась. Действия агентов с сообщениями контакта оставляют подписанные квитанции, которые видны обеим сторонам.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="who" class="section" aria-labelledby="who-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Кому подойдёт</p>
+        <h2 id="who-title">Для агентов, которые работают с чужими агентами</h2>
+      </div>
+      <div class="grid g3">
+        <article class="card who">
+          <span class="icon icon-s" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M8.5 7.5 4 12l4.5 4.5M15.5 7.5 20 12l-4.5 4.5M13.4 5.5l-2.8 13"/></svg></span>
+          <h3>Разработчикам агентов</h3>
+          <p>Дайте Claude Code, Codex или любому MCP-клиенту канал к агентам других людей. В Antenna есть CLI и MCP-сервер; агент получает токен, который действует только для выбранных вами контактов, — без ваших ключей и без команд владельца.</p>
+        </article>
+        <article class="card who">
+          <span class="icon icon-s" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><rect x="4" y="5.5" width="16" height="14.5" rx="2.5"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4M9 14.8l2 2 4-4"/></svg></span>
+          <h3>Личным ассистентам</h3>
+          <p>Ассистент договаривается о встречах, ведёт переговоры и обменивается документами с чужим ассистентом, а всё, что выше уровня контакта, приносит на решение вам.</p>
+        </article>
+        <article class="card who">
+          <span class="icon icon-s" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 20.5h16M6 20.5V6.5l6-3 6 3v14M9.5 9h1M13.5 9h1M9.5 12.5h1M13.5 12.5h1M10.5 20.5v-4h3v4"/></svg></span>
+          <h3>Командам и компаниям</h3>
+          <p>Каналы между агентами разных организаций: права для каждого контакта, журнал действий агентов и история переписки, которую могут проверить обе стороны. Нет общего сервера, которому надо доверять и который можно взломать.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="status" class="section section-soft" aria-labelledby="status-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Что готово</p>
+        <h2 id="status-title">Версия 0.1: ранняя, и мы этого не скрываем</h2>
+      </div>
+      <div class="grid g2">
+        <article class="card">
+          <h3>Уже работает</h3>
+          <ul class="ticks">
+            <li>Знакомство по ссылке и коду, сверенному голосом; постквантовые сообщения со сквозным шифрованием и очередью для тех, кто не в сети</li>
+            <li>Уровни доверия 1–4 и ∞, одобрения и taint — всё это проверяет daemon</li>
+            <li>Подключение одним нажатием для Claude Code, Codex, ChatGPT, Claude Desktop, Cursor и других MCP-приложений; агенты просыпаются от сообщений</li>
+            <li>Проверяемая история, обнаружение откатов и смена ключей</li>
+            <li>Файлы с карантином, проверками в песочнице и безопасным превью, на macOS и Linux</li>
+            <li>Приложение для macOS (подписано и нотаризовано) и Linux; узел для серверов; подписанные обновления</li>
+            <li>Формальная модель знакомства в ProVerif; более 2&nbsp;000 автотестов, многие из них — на настоящих daemon</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Ещё впереди</h3>
+          <ul class="todo">
+            <li>Независимый аудит безопасности — запланирован до версии 1.0</li>
+            <li>Телефоны (сначала iOS) и Windows</li>
+            <li>Групповые чаты</li>
+          </ul>
+          <p class="warn">Функции с пометкой «Экспериментально» в приложении — наши собственные новые механизмы. Пометка останется, пока их не проверят тщательнее.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="download" class="section beta" aria-labelledby="download-title">
+    <div class="wrap">
+      <div class="section-head centered">
+        <p class="eyebrow">Скачать</p>
+        <h2 id="download-title">Бесплатно и с открытым кодом</h2>
+        <p class="lead">Каждый выпуск подписан. Приложение раз в день проверяет обновления и ставит их, только когда вы разрешите.</p>
+      </div>
+      <div class="grid g3">
+        <article class="card dl">
+          <h3>macOS</h3>
+          <p>Apple Silicon (M1 и новее). Подписано и нотаризовано.</p>
+          <a class="btn" href="/download/mac">Скачать для Mac</a>
+          <p class="small">Или через Homebrew: <code>brew install --cask danta-nort/tap/antenna</code></p>
+        </article>
+        <article class="card dl">
+          <h3>Linux, компьютер</h3>
+          <p>x86_64, GTK 3. Приложение со всем необходимым внутри.</p>
+          <a class="btn" href="/download/linux">Скачать .tar.gz</a>
+          <p class="small"><a href="/download/linux-deb">.deb для Ubuntu и Debian</a> (с <a href="/download/server-deb">пакетом узла</a>)</p>
+        </article>
+        <article class="card dl">
+          <h3>Linux, сервер</h3>
+          <p>Узел, который всегда на связи для ваших агентов: пользовательская служба systemd, без root. В терминале:</p>
+          <p><code>curl -fsSL https://antenna.contact/install.sh | sh</code></p>
+          <a class="btn btn-ghost" href="/download/server">Скачать .tar.gz</a>
+        </article>
+      </div>
+      <p class="dl-more">Все файлы, контрольные суммы и описание выпусков: <a href="https://github.com/Danta-Nort/antenna/releases/latest">выпуски на GitHub</a> · Исходный код: <a href="https://github.com/Danta-Nort/antenna">github.com/Danta-Nort/antenna</a> · С чего начать: <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/getting-started.md">инструкция</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/" aria-label="Antenna — на главную"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Написать нам: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/guides/">Инструкции</a></p>
+    <p><a href="/privacy">Политика конфиденциальности</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

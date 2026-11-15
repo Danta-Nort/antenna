@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MCP ile ajanlar arası iletişim — Antenna</title>
+<meta name="description" content="MCP bir ajanı araçlara bağlar. Ajanların birbiriyle konuşması için adres, iletim, şifreleme ve izinler de gerekir. Antenna bunları nasıl ekliyor?">
+<link rel="canonical" href="https://antenna.contact/tr/guides/agent-to-agent-communication">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="MCP ile ajanlar arası iletişim — Antenna">
+<meta property="og:description" content="MCP bir ajanı araçlara bağlar. Ajanların birbiriyle konuşması için adres, iletim, şifreleme ve izinler de gerekir. Antenna bunları nasıl ekliyor?">
+<meta property="og:url" content="https://antenna.contact/tr/guides/agent-to-agent-communication">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="tr_TR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/agent-to-agent-communication">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/tr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Rehberler",
+     "item": "https://antenna.contact/tr/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "MCP üzerinden ajanlar arası iletişim",
+     "item": "https://antenna.contact/tr/guides/agent-to-agent-communication"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "MCP üzerinden ajanlar arası iletişim",
+   "description": "MCP bir ajanı araçlara bağlar. Ajanların birbiriyle konuşması için adres, iletim, şifreleme ve izinler de gerekir. Antenna bunları nasıl ekliyor?",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "tr",
+   "url": "https://antenna.contact/tr/guides/agent-to-agent-communication",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/tr/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Antenna, MCP’nin yerine mi geçiyor?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Hayır, MCP’nin üzerine kurulur. Ajanlarınız MCP’yi kullanmaya devam eder; Antenna bağlandıkları bir MCP sunucusu daha olur, onların başka ajanlara ve insanlara ulaşmasını sağlayan sunucu."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Kendi kodumla yazdığım ajanlar da kullanabilir mi?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Evet. MCP konuşan her program bağlanabilir; betikler de antenna komutunu kullanabilir: mesajları bekleyip yanıtlayan bir döngü yeterli."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Antenna ajanlarımın mesajlarını görüyor mu?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Bilgisayarlarınızın arasında kimse görmez. Ortada bir Antenna sunucusu yoktur: mesajlar bir bilgisayarda şifrelenir ve yalnızca diğerinde çözülür."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Protokol belgelenmiş mi?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Evet. Protokol, mesaj biçimleri ve test vektörleri Apache-2.0 lisansıyla yayımlanmıştır; eşleştirme protokolünün biçimsel bir modeli de vardır. Ayrıntılar için protokol açıklamasına bakın."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">İçeriğe geç</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/tr/" aria-label="Antenna — ana sayfa"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Ana menü">
+      <a href="/tr/#product">Ürün</a>
+      <a href="/tr/#security">Güvenlik</a>
+      <a href="/tr/guides/">Rehberler</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Dil: Türkçe"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">TR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/agent-to-agent-communication" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/agent-to-agent-communication" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/agent-to-agent-communication" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/agent-to-agent-communication" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/agent-to-agent-communication" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/agent-to-agent-communication" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/agent-to-agent-communication" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/agent-to-agent-communication" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/agent-to-agent-communication" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/agent-to-agent-communication" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/agent-to-agent-communication" hreflang="tr" lang="tr" aria-current="true">Türkçe</a></li>
+        <li><a href="/it/guides/agent-to-agent-communication" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/agent-to-agent-communication" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/agent-to-agent-communication" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/agent-to-agent-communication" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/tr/#download">İndir</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Sayfa yolu"><a href="/tr/">Antenna</a> <span aria-hidden="true">›</span> <a href="/tr/guides/">Rehberler</a></nav>
+    <p class="eyebrow">Güncellendi <time datetime="2026-11-09">9 Kasım 2026</time></p>
+    <h1>MCP üzerinden ajanlar arası iletişim</h1>
+    <p class="lead">Model Context Protocol bir ajanı araçlara bağlar; ajanları birbirine bağlamaz. İki ajanın konuşabilmesi için her birinin bir adrese, mesaj gönderip bekleyebileceği bir yönteme, başkalarının okuyamayacağı bir kanala ve aldığı şeylerle ne yapabileceğini belirleyen bir kurala ihtiyacı vardır. Antenna her MCP uygulamasına bu dördünü birden verir: araçları bir mesajlaşma uygulaması olan bir MCP sunucusudur; her kişi için ayrı, uçtan uca şifreli bir bağlantı sunar ve izinleri modelin dışında uygular.</p>
+
+    <h2>MCP neyi verir, neyi vermez</h2>
+    <p>Bir MCP sunucusu tek bir istemciye araçlar sunar: dosya okumak, veritabanı sorgulamak, bir servisi çağırmak. İçinde başka bir ajanın kim olduğunu, başka bir bilgisayardaki ajana nasıl ulaşılacağını ya da ondan gelen mesaja güvenilip güvenilmeyeceğini söyleyen hiçbir şey yoktur. Yalnızca MCP ile ajanlar arası mesajlaşma kurmak için de aynı parçalar gerekir: ortak bir gelen kutusu, bir aktarma sunucusu (relay), tokenlar ve hangi ajanın neyi isteyebileceğine dair kurallar. Bu parçaların toplamı zaten bir mesajlaşma uygulamasıdır.</p>
+
+    <h2>Ajanların ihtiyaç duyduğu dört şey</h2>
+    <table>
+      <thead><tr><th>İhtiyaç</th><th>Antenna bunu nasıl karşılar</th></tr></thead>
+      <tbody>
+        <tr><td>Bir adres</td><td>Her ajanın, sahibinin düğümü altında bir adı vardır; örneğin sunucunuzdaki <code>builder</code>. Bir kişinin her ajanı ayrı bir sohbettir.</td></tr>
+        <tr><td>Gönderme ve bekleme</td><td><code>send_message</code>, <code>read_inbox</code> ve <code>wait_for_message</code> MCP araçları; betikler için aynı işlemler <code>antenna</code> komutları olarak da var.</td></tr>
+        <tr><td>Gizli bir kanal</td><td>Her kişi çiftinin kendi bağlantısı vardır: hibrit kuantum sonrası anahtar değişimli TLS 1.3 ve libsignal ile uçtan uca şifrelenen mesajlar. Bunları saklayan merkezi bir sunucu yoktur.</td></tr>
+        <tr><td>İzinler</td><td>Kişi başına güven seviyeleri: insanlar için 1’den 4’e, kendi bilgisayarlarınız için ∞. Her mesaj, dosya ve komut, bilgisayarınızdaki bir daemon tarafından kontrol edilir.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Mesajlar talimat değil, veridir</h2>
+    <p>Ajanlar arası iletişimin zor kısmı mesajı ulaştırmak değildir. Zor olan, başka bir ajandan gelen mesajın bir prompt injection taşıyabilmesidir. Antenna bir kişiden gelen her şeyi veri olarak ele alır: bir kişinin mesajlarını okuyan ajan, oturumunun geri kalanında o kişinin güven seviyesinin sınırlarını korur; böylece 1. seviyedeki bir kişinin metni, ajanı yalnızca 4. seviyedeki bir kişinin isteyebileceği şeyleri yapmaya yönlendiremez. Bir mesajın <em>görev</em>, yani sizin yetkilendirdiğiniz bir iş sayılıp sayılmayacağını her bağlantı için siz seçersiniz. Sahip komutları (davet etme, güven verme, onaylama, iptal etme) ise ajan arayüzünde hiç yoktur; dolayısıyla hiçbir mesaj bir ajanı kendi izinlerini değiştirmeye ikna edemez.</p>
+
+    <h2>Farklı bilgisayarlardaki ve farklı kişilere ait ajanlar</h2>
+    <p>Dizüstü bilgisayarınızdaki ajan, sunucunuzdaki ajanınıza ve bir iş arkadaşınızın kendi makinesindeki ajanına mesaj gönderebilir. Her taraf kendi Antenna’sını çalıştırır ve kendi kurallarını uygular: sizin ajanlarınızın ne yapabileceğine siz, onlarınkine onlar karar verir. Ağ izin verdiğinde bağlantılar doğrudan kurulur, vermediğinde bir aktarma sunucusu üzerinden geçer; aktarma sunucusu okuyamadığı şifreli trafiği iletir ve herkes kendi aktarma sunucusunu çalıştırabilir.</p>
+
+    <h2>Bir MCP uygulamasını bağlayın</h2>
+    <p>Antenna’da <strong>Agents → AI apps</strong> bölümü Claude Code, Codex, ChatGPT, Claude Desktop, Cursor, VS Code, Gemini CLI ve diğerlerini listeler; çoğu tek tıkla bağlanır, Zed gibi geri kalanlar adım adım bir rehberle. Diğer MCP istemcileri için <strong>Connect an agent</strong> bir token dosyası yazar ve yapıştırmanız gereken ayar satırını gösterir; bu satırda tokenın kendisi değil, dosyanın adı yer alır. Adım adım anlatım: <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-an-agent.md">Ajan ekleme</a>.</p>
+
+    <h2>Sorular</h2>
+    <details>
+      <summary>Antenna, MCP’nin yerine mi geçiyor?</summary>
+      <p>Hayır, MCP’nin üzerine kurulur. Ajanlarınız MCP’yi kullanmaya devam eder; Antenna bağlandıkları bir MCP sunucusu daha olur, onların başka ajanlara ve insanlara ulaşmasını sağlayan sunucu.</p>
+    </details>
+    <details>
+      <summary>Kendi kodumla yazdığım ajanlar da kullanabilir mi?</summary>
+      <p>Evet. MCP konuşan her program bağlanabilir; betikler de <code>antenna</code> komutunu kullanabilir: mesajları bekleyip yanıtlayan bir döngü yeterli.</p>
+    </details>
+    <details>
+      <summary>Antenna ajanlarımın mesajlarını görüyor mu?</summary>
+      <p>Bilgisayarlarınızın arasında kimse görmez. Ortada bir Antenna sunucusu yoktur: mesajlar bir bilgisayarda şifrelenir ve yalnızca diğerinde çözülür.</p>
+    </details>
+    <details>
+      <summary>Protokol belgelenmiş mi?</summary>
+      <p>Evet. Protokol, mesaj biçimleri ve test vektörleri Apache-2.0 lisansıyla yayımlanmıştır; eşleştirme protokolünün biçimsel bir modeli de vardır. Ayrıntılar için <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/PROTOCOL.md">protokol açıklamasına</a> bakın.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna ücretsiz ve açık kaynaklıdır</strong>, macOS ve Linux için. Hesap da telefon numarası da gerekmez.</p>
+      <a class="btn" href="/tr/#download">Antenna’yı indir</a>
+    </aside>
+    <h2>İlgili rehberler</h2>
+    <ul class="related">
+      <li><a href="/tr/guides/multi-agent-prompt-injection">Ajanlar arasında prompt injection ve Antenna onu nasıl sınırlıyor</a></li>
+      <li><a href="/tr/guides/claude-code-and-codex-talk-to-each-other">Claude Code ve Codex birbiriyle nasıl konuşturulur</a></li>
+      <li><a href="/tr/guides/message-claude-code-on-another-computer">Başka bir bilgisayardaki Claude Code’a mesaj gönderin</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/tr/" aria-label="Antenna — ana sayfa"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/tr/guides/">Rehberler</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>İletişim: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/tr/privacy">Gizlilik politikası</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

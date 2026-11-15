@@ -1,0 +1,46 @@
+<!--guide {"title": "Aprovar permissões do Claude Code remotamente, de outro computador", "h1": "Aprove os pedidos do Claude Code a partir de outro computador", "description": "Claude Code num servidor ou outro computador precisa da sua aprovação: o Antenna leva o pedido a todos os seus computadores e você aprova com senha ou Touch ID.", "summary": "Pedidos de aprovação do Claude Code em outro computador, respondidos em qualquer computador seu em que você estiver.", "source": "2026-11-15"}-->
+<p class="lead">Inicie o Claude Code pelo Antenna, no Code mode da janela ou com <code>antenna session</code> num servidor, e o daemon do Antenna confere cada ferramenta que ele usa e cada mensagem que ele envia. Quando um passo precisa de você, ele vira um pedido de aprovação que aparece, com uma notificação, em cada computador que você pareou como seu, em <strong>My devices</strong> (meus dispositivos). Aprove ali com a senha daquele computador ou com Touch ID: o computador onde o Claude Code roda confere a sua resposta, executa o passo e o Claude Code segue em frente.</p>
+
+<h2>O que chega até você</h2>
+<ul>
+  <li><strong>Passos depois de ler a mensagem de um contato.</strong> Depois que o Claude Code leu uma mensagem de um colega, o nível de confiança desse colega define o que ele pode fazer: no nível 4, cada comando espera por você; nos níveis 2 e 3, cada edição espera, e os comandos são recusados.</li>
+  <li><strong>Mudanças na própria configuração.</strong> Depois de ler a mensagem de qualquer contato, mesmo do seu próprio notebook, edições em <code>CLAUDE.md</code>, <code>.claude/</code>, perfis do shell, chaves e arquivos de build como <code>package.json</code> esperam por você.</li>
+  <li><strong>Mensagens que levariam os seus dados para fora.</strong> Depois que ele leu arquivos do seu projeto, cada mensagem para um contato abaixo de ∞ espera, assim como qualquer mensagem para um contato desses que pareça conter uma chave, uma senha ou um token. Depois que ele leu uma conversa, uma mensagem para outra conversa também espera.</li>
+  <li><strong>Perguntas.</strong> <em>Experimental.</em> As perguntas de um agente aparecem no computador onde ele roda, em <strong>Questions from your agents</strong> (perguntas dos seus agentes). Para recebê-las no notebook, rode <code>antenna agent escalate api-dev --to mac</code> naquele computador: a partir daí, cada pergunta chega no chat do agente, e você responde no chat.</li>
+</ul>
+<p>O próprio aviso de permissão do Claude Code (“Do you want to proceed?”) fica no terminal dele: o Antenna nunca digita nele. Libere nas configurações do Claude Code as ferramentas que você usa no dia a dia, ou responda com <code>antenna session attach</code>.</p>
+
+<h2>Como configurar</h2>
+<ol>
+  <li><a href="/#download">Instale o Antenna</a> nos dois computadores e pareie-os uma vez com <strong>This is my own computer (∞)</strong> (este é o meu próprio computador) marcado, como em <a href="/guides/run-claude-code-on-a-vps">Claude Code numa VPS</a>.</li>
+  <li>Inicie o Claude Code pelo Antenna. Num desktop: <strong>Agents → AI apps → Start in Code mode</strong>. Num servidor:
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api</code></pre></li>
+  <li>No computador onde o Claude Code roda, aceite as respostas do computador de onde você vai aprovar: <strong>My devices</strong> → o cartão desse computador → <strong>Approvals</strong> → <strong>Accept approvals signed with …</strong>, com a sua senha. Num servidor: <code>antenna devices confirm mac</code>.</li>
+</ol>
+
+<h2>Responda de qualquer computador</h2>
+<p>O pedido aparece no cartão do computador que pergunta, em <strong>My devices</strong> (<em>experimental</em>), com uma notificação como “Antenna: approval needed on Mac mini”. O cartão diz qual agente pede, o quê e por quê, e cita o texto dele, exceto um texto com um segredo, que nunca sai do computador que perguntou. Clique em <strong>Approve with Touch ID</strong> num Mac (<em>experimental</em>), em <strong>Approve with password</strong> com a senha do computador em que você está, ou em <strong>Deny</strong> (recusar).</p>
+<p>O computador que perguntou confere a assinatura com as chaves que você aceitou nele, com o seu próprio desafio de uso único e com exatamente este pedido, e então executa o pedido ele mesmo, uma única vez. No próprio computador, o pedido fica em <strong>Approval requests</strong>, ou num terminal com <code>antenna approvals</code> e <code>antenna approve &lt;id&gt;</code>.</p>
+<p>O Claude Code espera até 50 segundos, e um passo aprovado nesse prazo roda na hora. Depois disso, ele segue com outro trabalho; quando você aprova, o Antenna digita “Approved — continue.” no prompt dele e ele roda o passo de novo.</p>
+
+<h2>Se ninguém responder</h2>
+<p>Um pedido se fecha depois de 10 minutos: nada roda, nada é enviado, e o Claude Code fica sabendo que ninguém aprovou. Uma notificação avisa você pouco antes. Depois de <strong>Deny</strong>, que não pede senha, o Claude Code fica sabendo que você disse não.</p>
+
+<h2>Um agente que aprova por você</h2>
+<p><em>Experimental.</em> <strong>Can approve for…</strong> (pode aprovar por…) em <strong>Agents</strong> deixa um agente de sua confiança responder aos pedidos dos seus outros agentes sobre mensagens e arquivos, e a resposta dele só vale quando tudo o que o pedido envolve está em ∞. Comandos e edições sempre chegam a você.</p>
+
+<h2>Perguntas</h2>
+<details>
+  <summary>Funciona com o Codex?</summary>
+  <p>Em parte. O que o Codex envia pelo Antenna é conferido do mesmo jeito, e esses pedidos chegam a todos os seus computadores; os comandos do próprio Codex continuam com as aprovações do Codex, no terminal dele.</p>
+</details>
+<details>
+  <summary>Qualquer computador pode aprovar?</summary>
+  <p>Não. Só um computador que você pareou como seu e cujas chaves você aceitou, com a senha, no computador que pergunta. Se perder um, use <strong>Revoke this computer</strong> (revogar este computador) em cada um dos outros.</p>
+</details>
+<details>
+  <summary>Posso aprovar pelo celular?</summary>
+  <p>Ainda não. Hoje o Antenna roda no macOS e no Linux.</p>
+</details>

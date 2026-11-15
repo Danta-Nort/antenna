@@ -1,0 +1,45 @@
+<!--guide {"title": "Claude Code ile çoklu ajan: aynı projede birlikte çalışan ajanlar", "h1": "Aynı projede birlikte çalışan birden fazla Claude Code ajanı", "description": "Lider Claude Code ajanı işi böler, çalışanlar kendi sandbox’larında paralel kod yazar, her sonuç kontrol edilir ve siz onaylamadan hiçbir şey dalınıza girmez.", "summary": "Tek bir depoda lider ajan ve paralel çalışanlar: her biri kendi sandbox’ında, kontrollü ve son söz sizde.", "source": "2026-11-09"}-->
+<p class="lead">Antenna’da <strong>ekip</strong>, tek bir git projesi üzerinde çalışan bir lider ajan ve çalışanlardan oluşur. Bir kez bir bütçe belirlersiniz (örneğin “en fazla 2 Claude Code kodlayıcı”); lider işi görevlere böler, bu bütçe içinde çalışanları başlatır, her sonucu inceler ve ya geri gönderir ya da kabul eder. Her çalışan kendi sandbox’ında, projenin kendi kopyasında paralel olarak kod yazar; ekibin işi dalınıza ancak siz onayladığınızda girer. <em>Deneysel.</em></p>
+
+<h2>Tek klasörde birden fazla ajanın sorunu</h2>
+<p>İki ya da üç Claude Code oturumunu yan yana çalıştırmak kolaydır; birbirlerinin ayağına basmalarını engellemek ise kolay değildir. Aynı dosyaları düzenlerler, aynı klasörde komut çalıştırırlar ve her biri diğerlerinin okuyabildiği her şeyi okuyabilir. Birinin görevleri dağıtması, gelenleri kontrol etmesi ve birleştirmesi gerekir; o kişi de genellikle terminaller arasında gidip gelen sizsinizdir.</p>
+
+<h2>Bir ekip nasıl çalışır</h2>
+<ol>
+  <li><strong>Ekibi siz oluşturursunuz</strong>, <strong>Teams → New team</strong> ekranında: proje klasörü, lider (ajanlarınızdan biri, yerel bir model ya da siz), çalışan bütçesi ve kurallar: çalışanların komut çalıştırıp çalıştıramayacağı, bir görevin hangi <strong>Check commands</strong> (kontrol komutları) adını verebileceği (<code>cargo test</code>, <code>npm test</code>) ve bu kontrollerin hangi paket depolarına erişebileceği.</li>
+  <li><strong>Lidere hedefi verirsiniz</strong>, onun kendi terminalinde: “Giriş özelliğini iki kodlayıcı için küçük görevlere böl.”</li>
+  <li><strong>Lider planlar ve ekibi kurar.</strong> Görevleri yazar, bütçe içinde <code>web.coder-1</code> gibi çalışanları başlatır ve görevleri onlara atar.</li>
+  <li><strong>Çalışanlar paralel kod yazar.</strong> Her biri projenin ekip dalındaki temiz bir kopyasını alır, yalnızca kendi görevini okur, çalışır ve teslim eder; takıldığında lidere soru sorar.</li>
+  <li><strong>Antenna her sonucu kontrol eder</strong>: görevin kontrol komutunu, token içermeyen ve sizin belirlediğiniz depolar dışında ağ erişimi olmayan ayrı bir sandbox’ta çalıştırır. Başarısız bir kontrol, lider karar vermeden önce belirli bir sınıra kadar kendiliğinden çalışana geri döner.</li>
+  <li><strong>Lider inceler:</strong> kabul eder ya da yorumlarla geri gönderir. Kabul edilen işler bir ekip dalında, <code>antenna/web</code> içinde toplanır.</li>
+  <li><strong>Siz uygularsınız.</strong> <strong>Review and apply</strong> dalınıza neyin birleştirileceğini gösterir; parolanızla fast-forward olarak birleştirilir. Parolanız olmadan hiçbir şey yerinden oynamaz.</li>
+</ol>
+
+<h2>Neler görürsünüz</h2>
+<p>Ekibin panosu her görevi durumuna göre gösterir: Open ve Working’den In review, Blocked, Accepted ve Applied’a kadar; her çalışanın canlı çıktısı, sonucunun neyi değiştirdiği, kontrolün çıktısı ve harcadığı tokenlarla birlikte. Liderin yapabildiği her şeyi siz de yapabilirsiniz: bir çalışanın sorusunu yanıtlamak, değişiklik istemek, bir görevi iptal etmek ya da bir çalışanı durdurmak. Lider Antenna’nın Code modunda çalıştığında, bir çalışan teslim ettiğinde ya da bir şey sorduğunda uyandırılır; böylece siz yokken de ekip ilerlemeye devam eder.</p>
+
+<h2>Projeyi ne güvende tutuyor</h2>
+<ul>
+  <li><strong>Çalışanlar klasörünüzü asla görmez</strong>, diğer dosyalarınızı ya da birbirlerinin kopyalarını da görmez; yalnızca model sağlayıcılarına erişirler.</li>
+  <li><strong>Lider kendi bütçesini artıramaz</strong>, sizin yerinize bir şeyi onaylayamaz ya da bir çalışanın tokenını göremez: her çağrıya model değil, Antenna karar verir.</li>
+  <li><strong>Güvenilmeyen girdi sınırlı kalır.</strong> 2. seviyedeki bir kişinin mesajı okunduktan sonra yazılan bir görev hiçbir komut ve kontrol çalıştırmaz; böylece o mesaja gizlenmiş bir talimat bilgisayarınıza ulaşamaz.</li>
+  <li><strong>İsterseniz yalnızca yerel.</strong> Bir ekip yalnızca kendi bilgisayarınızda çalışan modellerle sınırlandırılabilir; hiç bulut modeli olmadan.</li>
+</ul>
+
+<h2>Sorular</h2>
+<details>
+  <summary>Hangi ajanlar çalışan olabilir?</summary>
+  <p>Kendi oturumunuzla Claude Code, Claude Code’un stream-json biçimini konuşan başka bir program ya da ön eleme, özet ve dokümantasyon gibi daha hafif roller için yerel bir model.</p>
+</details>
+<details>
+  <summary>Lider Codex ya da başka bir uygulama olabilir mi?</summary>
+  <p>Lider, Antenna’ya bağlı ajanlarınızdan herhangi biri olabilir: uygulaması bir sonraki açılışında ekip araçlarını MCP üzerinden alır. Ekibi panodan kendiniz de yönetebilirsiniz.</p>
+</details>
+<details>
+  <summary>Maliyeti nasıl sınırlarım?</summary>
+  <p>Bütçe, her türden en fazla kaç çalışan olabileceğini sınırlar; kurallar da bir adımın ve bir kontrolün süresini ve bir görevin kullanabileceği tokenları sınırlar.</p>
+</details>
+<details>
+  <summary>Mac’imde çalışıyor mu?</summary>
+  <p>Evet, macOS ve Linux’ta. Çalışanlar ekibin bulunduğu bilgisayarda çalışır; diğer bilgisayarlarınızdaki çalışanlar daha sonra gelecek.</p>
+</details>

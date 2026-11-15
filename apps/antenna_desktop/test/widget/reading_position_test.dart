@@ -70,7 +70,7 @@ void main() {
     expect(find.text(en.chatNewMessagesLine), findsNothing);
   });
 
-  testWidgets("two chats of one contact keep their own places", (t) async {
+  testWidgets('two chats of one contact keep their own places', (t) async {
     final d = FakeDaemon(contacts: [jordanTeam, emily], history: demoHistory());
     d.historyMap[jordanTeam.linkId] = [
       for (var i = 1; i <= 30; i++) ...[

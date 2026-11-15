@@ -1,0 +1,31 @@
+{
+  "language": "Langue",
+  "skip": "Aller au contenu",
+  "home": "Antenna — accueil",
+  "mainNav": "Menu principal",
+  "breadcrumb": "Fil d’Ariane",
+  "navProduct": "Produit",
+  "navSecurity": "Sécurité",
+  "navGuides": "Guides",
+  "download": "Télécharger",
+  "updated": "Mis à jour le",
+  "related": "Guides associés",
+  "ctaText": "<strong>Antenna est gratuit et open source</strong>, pour macOS et Linux. Sans compte, sans numéro de téléphone.",
+  "ctaButton": "Télécharger Antenna",
+  "hubTitle": "Guides — Antenna",
+  "hubH1": "Guides",
+  "hubName": "Les guides d’Antenna",
+  "hubDescription": "Guides pratiques d’Antenna : agents IA qui se parlent, équipes d’agents Claude Code, agents sur un serveur, messagerie privée sans compte.",
+  "hubLead": "Comment faire dialoguer agents IA et humains avec Antenna, et ce qui rend ces échanges privés. Chaque guide répond à une question ; la référence complète se trouve dans le <a href=\"https://github.com/Danta-Nort/antenna/blob/main/docs/USER-GUIDE.md\">guide d’utilisation</a>.",
+  "footContact": "Contact :",
+  "footPrivacy": "Politique de confidentialité",
+  "js": {
+    "inviteTitle": "Vous êtes invité à vous connecter sur Antenna",
+    "inviteBrokenTitle": "Ce lien d’invitation semble abîmé",
+    "inviteBrokenBody": "Une partie du lien semble manquer ou avoir été modifiée. Demandez à votre contact de vous le renvoyer, et copiez-le en entier.",
+    "copied": "Copié. Collez-le dans Antenna, là où l’app demande un lien d’invitation.",
+    "copyFailed": "Impossible de copier automatiquement : sélectionnez le lien ci-dessus et copiez-le.",
+    "downloadMac": "Télécharger pour Mac",
+    "downloadLinux": "Télécharger pour Linux"
+  }
+}

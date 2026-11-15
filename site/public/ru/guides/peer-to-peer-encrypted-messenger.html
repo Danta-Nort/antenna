@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>P2P-мессенджер с открытым кодом и постквантовым шифрованием — Antenna</title>
+<meta name="description" content="Antenna передаёт сообщения напрямую между устройствами, со сквозным постквантовым шифрованием и без центрального сервера. Как это устроено и от чего защищает.">
+<link rel="canonical" href="https://antenna.contact/ru/guides/peer-to-peer-encrypted-messenger">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="P2P-мессенджер с открытым кодом и постквантовым шифрованием — Antenna">
+<meta property="og:description" content="Antenna передаёт сообщения напрямую между устройствами, со сквозным постквантовым шифрованием и без центрального сервера. Как это устроено и от чего защищает.">
+<meta property="og:url" content="https://antenna.contact/ru/guides/peer-to-peer-encrypted-messenger">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ru_RU">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/peer-to-peer-encrypted-messenger">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/peer-to-peer-encrypted-messenger">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ru/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Инструкции",
+     "item": "https://antenna.contact/ru/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "P2P-мессенджер с открытым кодом и постквантовым шифрованием",
+     "item": "https://antenna.contact/ru/guides/peer-to-peer-encrypted-messenger"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "P2P-мессенджер с открытым кодом и постквантовым шифрованием",
+   "description": "Antenna передаёт сообщения напрямую между устройствами, со сквозным постквантовым шифрованием и без центрального сервера. Как это устроено и от чего защищает.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "ru",
+   "url": "https://antenna.contact/ru/guides/peer-to-peer-encrypted-messenger",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ru/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "P2P-мессенджер работает медленнее?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Обычно нет: прямой путь обходится без поездки в дата-центр, а через relay у сообщения добавляется всего один промежуточный узел."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Можно поднять свой relay?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Да. Код relay открыт, и он только пересылает зашифрованный трафик; укажите своему узлу собственный relay вместо того, что стоит по умолчанию."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "А групповые чаты есть?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Пока нет. В Antenna 0.1 есть только переписка один на один: между людьми, между людьми и агентами и между агентами."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Какие платформы поддерживаются?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "macOS на Apple Silicon (подписано и нотаризовано) и Linux на x86_64: приложение для компьютера и узел для сервера."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Перейти к содержанию</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ru/" aria-label="Antenna — на главную"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Основное меню">
+      <a href="/ru/#product">О программе</a>
+      <a href="/ru/#security">Безопасность</a>
+      <a href="/ru/guides/">Инструкции</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Язык: Русский"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">RU</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/peer-to-peer-encrypted-messenger" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/peer-to-peer-encrypted-messenger" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/peer-to-peer-encrypted-messenger" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/peer-to-peer-encrypted-messenger" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/peer-to-peer-encrypted-messenger" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/peer-to-peer-encrypted-messenger" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/peer-to-peer-encrypted-messenger" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/peer-to-peer-encrypted-messenger" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/peer-to-peer-encrypted-messenger" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/peer-to-peer-encrypted-messenger" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/peer-to-peer-encrypted-messenger" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/peer-to-peer-encrypted-messenger" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/peer-to-peer-encrypted-messenger" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/peer-to-peer-encrypted-messenger" hreflang="ru" lang="ru" aria-current="true">Русский</a></li>
+        <li><a href="/uk/guides/peer-to-peer-encrypted-messenger" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ru/#download">Скачать</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Навигационная цепочка"><a href="/ru/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ru/guides/">Инструкции</a></nav>
+    <p class="eyebrow">Обновлено <time datetime="2026-11-09">9 ноября 2026 г.</time></p>
+    <h1>P2P-мессенджер с открытым кодом и постквантовым шифрованием</h1>
+    <p class="lead">Antenna — бесплатный P2P-мессенджер с открытым кодом для macOS и Linux. Сообщения и файлы идут напрямую с одного устройства на другое по QUIC, со сквозным шифрованием на постквантовых протоколах libsignal, а само соединение использует гибридный постквантовый обмен ключами. Центрального сервера, который хранил бы или пересылал ваши сообщения, нет; если два устройства не могут достучаться друг до друга напрямую, трафик передаёт relay, который не может его расшифровать.</p>
+
+    <h2>Как прямое соединение работает на деле</h2>
+    <p>«Напрямую» звучит просто, но большинство компьютеров стоит за домашними роутерами и файрволами, которые блокируют входящие подключения. Antenna использует iroh — библиотеку для QUIC, которая находит прямой путь сквозь них (hole punching), а если его нет, переключается на relay. Обычно соединение начинается через relay и переходит на прямой путь, как только тот найден. В любом случае relay видит только зашифрованные пакеты, а вместо relay по умолчанию любой может поднять свой.</p>
+    <p>В одной сети контакты, которым вы достаточно доверяете, могут соединяться и по локальной сети, даже совсем без интернета.</p>
+
+    <h2>Два слоя шифрования</h2>
+    <table>
+      <thead><tr><th>Слой</th><th>Что используется</th><th>Что защищает</th></tr></thead>
+      <tbody>
+        <tr><td>Соединение</td><td>TLS 1.3 с X25519MLKEM768 — гибридом классического и постквантового обмена ключами</td><td>Канал между двумя устройствами, в том числе через relay</td></tr>
+        <tr><td>Сообщения</td><td>libsignal: PQXDH для начала переписки и постквантовый ratchet SPQR</td><td>Каждое сообщение и файл из конца в конец, с прямой секретностью (forward secrecy)</td></tr>
+      </tbody>
+    </table>
+    <p>«Постквантовый» значит, что обмен ключами останется надёжным, даже если кто-то записывает трафик сегодня, чтобы расшифровать его потом на квантовом компьютере. Antenna не пишет собственную криптографию: оба слоя взяты из библиотек, прошедших аудит или формальную верификацию, а для протокола знакомства есть формальная модель, проверенная в ProVerif.</p>
+
+    <h2>Что меняет прямое соединение</h2>
+    <ul>
+      <li><strong>Аккаунта, который можно угнать, нет.</strong> Нет сервера со списком пользователей, их контактов или сообщений.</li>
+      <li><strong>Номер телефона не нужен.</strong> Собеседников вы добавляете по одноразовой ссылке и коду, который сверяете голосом. Подробнее — в инструкции <a href="/ru/guides/messenger-without-phone-number">о мессенджере без номера телефона</a>.</li>
+      <li><strong>Кому показывать IP-адрес, решаете вы.</strong> При прямом соединении другая сторона видит ваш адрес. Связь с контактами уровней доверия 1 и 2 всегда идёт через relay, поэтому они его не видят.</li>
+      <li><strong>Оба устройства должны быть в сети одновременно.</strong> До тех пор сообщение ждёт в очереди у отправителя и уходит само; сервер, который вы держите включённым, позволяет вашим агентам всегда быть на связи.</li>
+    </ul>
+
+    <h2>Открытый код, который можно проверить</h2>
+    <p>Приложение выпущено под AGPL-3.0, а протокол, его форматы и тестовые векторы — под Apache-2.0, так что другие могут писать совместимые клиенты. Выпуски подписаны, а исходный код, спецификация и все проектные решения лежат на <a href="https://github.com/Danta-Nort/antenna">GitHub</a>. Сообщения подписаны и связаны хешами, а обе стороны сверяют свои копии, поэтому изменённое или откатанное сообщение покажет, где это произошло.</p>
+
+    <h2>Вопросы</h2>
+    <details>
+      <summary>P2P-мессенджер работает медленнее?</summary>
+      <p>Обычно нет: прямой путь обходится без поездки в дата-центр, а через relay у сообщения добавляется всего один промежуточный узел.</p>
+    </details>
+    <details>
+      <summary>Можно поднять свой relay?</summary>
+      <p>Да. Код relay открыт, и он только пересылает зашифрованный трафик; укажите своему узлу собственный relay вместо того, что стоит по умолчанию.</p>
+    </details>
+    <details>
+      <summary>А групповые чаты есть?</summary>
+      <p>Пока нет. В Antenna 0.1 есть только переписка один на один: между людьми, между людьми и агентами и между агентами.</p>
+    </details>
+    <details>
+      <summary>Какие платформы поддерживаются?</summary>
+      <p>macOS на Apple Silicon (подписано и нотаризовано) и Linux на x86_64: приложение для компьютера и узел для сервера.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna — бесплатная программа с открытым кодом</strong> для macOS и Linux. Регистрация и номер телефона не нужны.</p>
+      <a class="btn" href="/ru/#download">Скачать Antenna</a>
+    </aside>
+    <h2>Ещё по теме</h2>
+    <ul class="related">
+      <li><a href="/ru/guides/self-hosted-messenger">Self-hosted мессенджер, для которого не нужно держать сервер</a></li>
+      <li><a href="/ru/guides/messenger-without-phone-number">Защищённый мессенджер без номера телефона и почты</a></li>
+      <li><a href="/ru/guides/agent-to-agent-communication">Как ИИ-агенты общаются друг с другом через MCP</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ru/" aria-label="Antenna — на главную"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ru/guides/">Инструкции</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Написать нам: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ru/privacy">Политика конфиденциальности</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

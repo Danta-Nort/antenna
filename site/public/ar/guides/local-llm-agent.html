@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>تشغيل نموذج ذكاء اصطناعي محلي (Local LLM) كوكيل بلا API — Antenna</title>
+<meta name="description" content="ينزّل Antenna نموذجًا مفتوحًا ويتحقق منه ويشغّله كوكيل خاص على جهاز Mac أو Linux، في بيئة معزولة بلا شبكة ولا وصول إلى ملفاتك.">
+<link rel="canonical" href="https://antenna.contact/ar/guides/local-llm-agent">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="تشغيل نموذج ذكاء اصطناعي محلي (Local LLM) كوكيل بلا API — Antenna">
+<meta property="og:description" content="ينزّل Antenna نموذجًا مفتوحًا ويتحقق منه ويشغّله كوكيل خاص على جهاز Mac أو Linux، في بيئة معزولة بلا شبكة ولا وصول إلى ملفاتك.">
+<meta property="og:url" content="https://antenna.contact/ar/guides/local-llm-agent">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ar_AR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/local-llm-agent">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/local-llm-agent">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/local-llm-agent">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/local-llm-agent">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/local-llm-agent">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/local-llm-agent">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/local-llm-agent">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/local-llm-agent">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/local-llm-agent">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/local-llm-agent">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/local-llm-agent">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/local-llm-agent">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/local-llm-agent">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/local-llm-agent">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/local-llm-agent">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/local-llm-agent">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ar/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "الأدلة",
+     "item": "https://antenna.contact/ar/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "إعداد وكيل بنموذج لغوي محلي بلا حساب وبلا مفتاح API",
+     "item": "https://antenna.contact/ar/guides/local-llm-agent"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "إعداد وكيل بنموذج لغوي محلي بلا حساب وبلا مفتاح API",
+   "description": "ينزّل Antenna نموذجًا مفتوحًا ويتحقق منه ويشغّله كوكيل خاص على جهاز Mac أو Linux، في بيئة معزولة بلا شبكة ولا وصول إلى ملفاتك.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "ar",
+   "url": "https://antenna.contact/ar/guides/local-llm-agent",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ar/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "هل يستخدم معالج الرسوميات (GPU)؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "على جهاز Mac، صُمّم النموذج ليستخدم GPU عبر Metal. وعلى Linux يعمل على المعالج المركزي (CPU)، بإصدارات مبنية لمجموعات تعليمات ذلك المعالج."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يستطيع وكلائي الآخرون التحدث مع النموذج المحلي؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ليس بعد. في هذا الإصدار يتحدث الوكيل المحلي معك في محادثته، ومع قائد فريقك حين يعمل ضمن فريق."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يغادر أي شيء حاسوبي؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "تنزيل النموذج فقط، من Hugging Face. بعد ذلك يعمل النموذج دون اتصال، وبيئته المعزولة بلا شبكة إطلاقًا."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">انتقل إلى المحتوى</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="القائمة الرئيسية">
+      <a href="/ar/#product">المنتج</a>
+      <a href="/ar/#security">الأمان</a>
+      <a href="/ar/guides/">الأدلة</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="اللغة: العربية"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">AR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/local-llm-agent" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/local-llm-agent" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/local-llm-agent" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/local-llm-agent" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/local-llm-agent" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/local-llm-agent" hreflang="ar" lang="ar" aria-current="true">العربية</a></li>
+        <li><a href="/fr/guides/local-llm-agent" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/local-llm-agent" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/local-llm-agent" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/local-llm-agent" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/local-llm-agent" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/local-llm-agent" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/local-llm-agent" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/local-llm-agent" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/local-llm-agent" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ar/#download">تنزيل</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="مسار التنقل"><a href="/ar/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ar/guides/">الأدلة</a></nav>
+    <p class="eyebrow">آخر تحديث <time datetime="2026-11-09">9 نوفمبر 2026</time></p>
+    <h1>إعداد وكيل بنموذج لغوي محلي بلا حساب وبلا مفتاح API</h1>
+    <p class="lead">في Antenna، افتح <strong>Agents → Local models</strong>، ونزّل النموذج الذي يوصي به لحاسوبك، واضغط <strong>Create agent</strong>. يعمل النموذج على جهازك أنت عبر llama.cpp، بلا حساب ولا مفتاح API ولا إنترنت بعد تنزيله، داخل بيئة معزولة (sandbox) لا تستطيع الوصول إلى الشبكة ولا قراءة ملفاتك. يحصل الوكيل على محادثته الخاصة، ويمكنه في الفريق تولي أدوار خفيفة مثل الفرز والملخصات والتوثيق. <em>تجريبي.</em></p>
+
+    <h2>أي نموذج لأي حاسوب</h2>
+    <p>ينظر Antenna إلى ذاكرة جهازك ومساحته الفارغة ويوصي بأحد نماذج Qwen3.5:</p>
+    <table>
+      <thead><tr><th>الحاسوب</th><th>الموصى به</th><th>على القرص</th><th>الذاكرة أثناء التحميل</th></tr></thead>
+      <tbody>
+        <tr><td>ذاكرة 8 GB</td><td>Qwen3.5 2B</td><td>1.3 GB</td><td>نحو 2 GB</td></tr>
+        <tr><td>16 GB بمعالج Intel أو AMD، أو جهاز Mac بشريحة M1</td><td>Qwen3.5 4B</td><td>2.7 GB</td><td>نحو 4.7 GB</td></tr>
+        <tr><td>جهاز Mac بشريحة M2 أو أحدث وذاكرة 16 GB أو أكثر</td><td>Qwen3.5 9B</td><td>5.7 GB</td><td>أقل من 9 GB</td></tr>
+      </tbody>
+    </table>
+    <p>وتظهر نماذج أخرى أيضًا، ولكل منها وسم <strong>Fits this computer</strong> (يناسب هذا الحاسوب) أو <strong>Slow on this computer</strong> (بطيء على هذا الحاسوب) أو <strong>Not for this computer</strong> (لا يناسب هذا الحاسوب)، فلا تنزّل أبدًا نموذجًا لن يعمل.</p>
+
+    <h2>الإعداد</h2>
+    <ol>
+      <li>افتح <strong>Agents → Local models</strong> واضغط <strong>Download</strong> بجوار النموذج الموصى به. يأتي من Hugging Face بإصدار ثابت؛ وإغلاق النافذة لا يوقف التنزيل، والتنزيل المنقطع يُستأنف.</li>
+      <li>يتحقق Antenna من الملف مقابل الحجم وبصمة SHA-256 المضمّنين في هذا الإصدار قبل أن يحمّله أصلًا. والملف الذي لا يطابق يُحذف.</li>
+      <li>اضغط <strong>Create agent</strong> وأعطه اسمًا. تظهر محادثته تحت <strong>On this computer</strong> في المحادثات.</li>
+      <li>اكتب إليه. يتأخر الرد الأول بضع ثوانٍ ريثما يُحمَّل النموذج.</li>
+    </ol>
+    <p>ومن الطرفية: <code>antenna local install qwen3.5-2b --wait</code> (أو <code>--from-file</code> لنسخة لديك بالفعل)، ثم <code>antenna local add helper --model qwen3.5-2b</code> و<code>antenna local say helper "hello"</code>.</p>
+
+    <h2>بيئتان معزولتان</h2>
+    <p>يعمل النموذج في بيئته المعزولة الخاصة: لا يقرأ إلا ملف النموذج، ولا يستطيع الاتصال بأي مكان، لا بالإنترنت ولا بـ Antenna ولا ببرامج أخرى. أما برنامج الوكيل نفسه فيعمل في بيئة معزولة ثانية لا تصل إلا إلى النموذج. وتُحفظ المحادثة في قاعدة بيانات Antenna المشفرة. ليس للوكيل المحلي في هذا الإصدار أي اتصالات ولا أدوات، فلا يستطيع إرسال أي شيء إلى أي أحد، ولا يطلب منك Antenna أبدًا لصق أمر من إجاباته.</p>
+
+    <h2>الذاكرة، ندبّرها عنك</h2>
+    <p>يمكن لعدة وكلاء أن يتشاركوا نموذجًا واحدًا، ويمكن لنماذج بأحجام مختلفة أن تعمل جنبًا إلى جنب. وحين يشغل نموذج آخر الذاكرة التي يحتاجها رد ما، ينتظر الرد (“Waiting for memory…”) بدلًا من أن يدفع الحاسوب إلى استخدام ذاكرة التبديل (swap)، ويُفرَّغ النموذج الذي لم يستخدمه أحد مدة 30 دقيقة.</p>
+
+    <h2>النماذج المحلية في فريق</h2>
+    <p>عند إنشاء فريق من الوكلاء، يمكن لنموذج محلي أن يكون عاملًا في الأدوار التي تناسب حجمه: النماذج الصغيرة للفرز والملخصات، والأكبر للتوثيق والمسودات والترجمة أيضًا. ومع <strong>Local only</strong> (محلي فقط)، يعمل الفريق كله، بما فيه القائد، دون أي نموذج سحابي. ولا تكتب النماذج المحلية الشيفرة في الفريق بعد.</p>
+
+    <h2>أسئلة</h2>
+    <details>
+      <summary>هل يستخدم معالج الرسوميات (GPU)؟</summary>
+      <p>على جهاز Mac، صُمّم النموذج ليستخدم GPU عبر Metal. وعلى Linux يعمل على المعالج المركزي (CPU)، بإصدارات مبنية لمجموعات تعليمات ذلك المعالج.</p>
+    </details>
+    <details>
+      <summary>هل يستطيع وكلائي الآخرون التحدث مع النموذج المحلي؟</summary>
+      <p>ليس بعد. في هذا الإصدار يتحدث الوكيل المحلي معك في محادثته، ومع قائد فريقك حين يعمل ضمن فريق.</p>
+    </details>
+    <details>
+      <summary>هل يغادر أي شيء حاسوبي؟</summary>
+      <p>تنزيل النموذج فقط، من Hugging Face. بعد ذلك يعمل النموذج دون اتصال، وبيئته المعزولة بلا شبكة إطلاقًا.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna مجاني ومفتوح المصدر</strong>، لنظامي macOS وLinux. بلا حساب وبلا رقم هاتف.</p>
+      <a class="btn" href="/ar/#download">نزّل Antenna</a>
+    </aside>
+    <h2>أدلة ذات صلة</h2>
+    <ul class="related">
+      <li><a href="/ar/guides/claude-code-multiple-agents-working-together">شغّل عدة وكلاء Claude Code يعملون معًا على مشروع واحد</a></li>
+      <li><a href="/ar/guides/multi-agent-prompt-injection">حقن الأوامر بين الوكلاء، وكيف يحتويه Antenna</a></li>
+      <li><a href="/ar/guides/self-hosted-messenger">تطبيق مراسلة مستضاف ذاتيًا دون خادم تديره</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ar/guides/">الأدلة</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>للتواصل: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ar/privacy">سياسة الخصوصية</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

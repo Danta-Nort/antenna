@@ -1,0 +1,45 @@
+<!--guide {"title": "Claude Code: kilku agentów pracuje razem nad jednym projektem", "h1": "Jak uruchomić kilku agentów Claude Code, którzy razem pracują nad jednym projektem", "description": "Agent prowadzący Claude Code dzieli pracę, pomocnicy kodują równolegle w piaskownicach, każdy wynik jest sprawdzany i nic nie trafi do twojej gałęzi bez ciebie.", "summary": "Agent prowadzący i równolegli pomocnicy w jednym repozytorium, każdy we własnej piaskownicy, ze sprawdzaniem wyników i twoim ostatnim słowem.", "source": "2026-11-09"}-->
+<p class="lead">W Antennie <strong>zespół</strong> to agent prowadzący i pomocnicy pracujący nad jednym projektem w gicie. Raz ustalasz budżet (na przykład „najwyżej 2 programistów Claude Code”), a agent prowadzący dzieli pracę na zadania, uruchamia pomocników w ramach tego budżetu, przegląda każdy wynik i odsyła go do poprawki albo przyjmuje. Każdy pomocnik koduje równolegle we własnej piaskownicy (sandbox), na własnej kopii projektu, a praca zespołu trafia do twojej gałęzi dopiero wtedy, gdy ją zatwierdzisz. <em>Funkcja eksperymentalna.</em></p>
+
+<h2>Problem z kilkoma agentami w jednym folderze</h2>
+<p>Uruchomienie obok siebie dwóch czy trzech sesji Claude Code jest proste; trudniej sprawić, żeby sobie nie przeszkadzały. Edytują te same pliki, uruchamiają polecenia w tym samym folderze i każda może przeczytać wszystko, co pozostałe. Ktoś musi rozdzielać zadania, sprawdzać, co wraca, i to scalać — i zwykle robisz to ty, skacząc między terminalami.</p>
+
+<h2>Jak działa zespół</h2>
+<ol>
+  <li><strong>Tworzysz zespół</strong> w <strong>Teams → New team</strong>: folder projektu, agent prowadzący (jeden z twoich agentów, lokalny model albo ty), budżet pomocników i zasady: czy pomocnicy mogą uruchamiać polecenia, jakie <strong>Check commands</strong> (polecenia sprawdzające) może wskazać zadanie (<code>cargo test</code>, <code>npm test</code>) i do jakich rejestrów pakietów te sprawdzenia mogą sięgać.</li>
+  <li><strong>Dajesz agentowi prowadzącemu cel</strong>, w jego własnym terminalu: „Podziel funkcję logowania na małe zadania dla dwóch programistów”.</li>
+  <li><strong>Agent prowadzący planuje i kompletuje zespół.</strong> Pisze zadania, w ramach budżetu uruchamia pomocników, na przykład <code>web.coder-1</code>, i przydziela im pracę.</li>
+  <li><strong>Pomocnicy kodują równolegle.</strong> Każdy dostaje świeżą kopię projektu z gałęzi zespołu, czyta tylko swoje zadanie, pracuje i oddaje wynik albo, gdy utknie, zadaje pytanie agentowi prowadzącemu.</li>
+  <li><strong>Antenna sprawdza każdy wynik</strong>, uruchamiając polecenie sprawdzające zadania w osobnej piaskownicy, bez tokenów i bez sieci poza wskazanymi przez ciebie rejestrami. Wynik, który nie przejdzie sprawdzenia, sam wraca do pomocnika, do określonego limitu, zanim zdecyduje agent prowadzący.</li>
+  <li><strong>Agent prowadzący przegląda wynik:</strong> przyjmuje go albo odsyła z uwagami. Przyjęta praca zbiera się w gałęzi zespołu, <code>antenna/web</code>.</li>
+  <li><strong>Ty ją wprowadzasz.</strong> <strong>Review and apply</strong> pokazuje, co zostanie scalone z twoją gałęzią; po podaniu hasła zmiany są scalane jako fast-forward. Bez hasła nic się nie rusza.</li>
+</ol>
+
+<h2>Co widzisz</h2>
+<p>Tablica zespołu pokazuje każde zadanie według stanu, od Open i Working, przez In review i Blocked, po Accepted i Applied, razem z wyjściem każdego pomocnika na żywo, zmianami, które wprowadza jego wynik, wynikiem sprawdzenia i zużytymi tokenami. Możesz zrobić wszystko, co agent prowadzący: odpowiedzieć na pytanie pomocnika, poprosić o zmiany, anulować zadanie albo zatrzymać pomocnika. Gdy agent prowadzący działa w trybie Code mode Antenny, budzi się za każdym razem, gdy pomocnik odda wynik albo o coś zapyta, więc zespół pracuje dalej, kiedy ciebie nie ma.</p>
+
+<h2>Co chroni projekt</h2>
+<ul>
+  <li><strong>Pomocnicy nigdy nie widzą twojego folderu</strong>, twoich pozostałych plików ani kopii innych pomocników, a z sieci docierają tylko do dostawcy swojego modelu.</li>
+  <li><strong>Agent prowadzący nie może podnieść sobie budżetu</strong>, niczego za ciebie zatwierdzić ani zobaczyć tokenu pomocnika: o każdym wywołaniu decyduje Antenna, nie model.</li>
+  <li><strong>Niezaufane dane nie wychodzą poza swoje granice.</strong> Zadanie napisane po przeczytaniu wiadomości od kontaktu z poziomu 2 nie uruchamia żadnych poleceń ani sprawdzeń, więc instrukcja przemycona w tej wiadomości nie dosięgnie twojego komputera.</li>
+  <li><strong>Jeśli chcesz, tylko lokalnie.</strong> Zespół można ograniczyć do modeli działających na twoim komputerze, bez żadnego modelu w chmurze.</li>
+</ul>
+
+<h2>Pytania</h2>
+<details>
+  <summary>Którzy agenci mogą być pomocnikami?</summary>
+  <p>Claude Code z twoim własnym logowaniem, inny program, który obsługuje format stream-json Claude Code, albo lokalny model do lżejszych ról, takich jak wstępna selekcja, podsumowania i dokumentacja.</p>
+</details>
+<details>
+  <summary>Czy agentem prowadzącym może być Codex albo inna aplikacja?</summary>
+  <p>Agentem prowadzącym może być każdy z twoich agentów podłączonych do Antenny: dostaje narzędzia zespołu przez MCP przy następnym uruchomieniu swojej aplikacji. Zespół możesz też prowadzić osobiście, z tablicy.</p>
+</details>
+<details>
+  <summary>Jak ograniczyć koszty?</summary>
+  <p>Budżet określa, ilu pomocników każdego rodzaju może istnieć, a zasady ograniczają czas jednej tury i jednego sprawdzenia oraz liczbę tokenów, jaką może zużyć zadanie.</p>
+</details>
+<details>
+  <summary>Czy to działa na moim Macu?</summary>
+  <p>Tak, na macOS i Linuksie. Pomocnicy działają na komputerze, na którym jest zespół; pomocnicy na twoich pozostałych komputerach pojawią się później.</p>
+</details>

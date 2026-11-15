@@ -1,0 +1,35 @@
+<!--guide {"order": 7, "title": "How to share files with Claude Code on another computer — Antenna", "h1": "How to share files with Claude Code on another computer", "description": "Send a file from your laptop to Claude Code on a server or a second computer through Antenna: it is checked on arrival, and the agent is told where it is.", "query": "how to share files with claude code", "updated": "2026-11-09", "summary": "Sending files to and from a Claude Code session on another computer, checked on arrival.", "related": ["run-claude-code-on-a-vps", "message-claude-code-on-another-computer", "multi-agent-prompt-injection"]}-->
+<p class="lead">On the same computer, Claude Code reads your files directly: give it the path, or drag the file into its terminal. On another computer, such as a server, send the file through Antenna: drop it into the chat with that Claude Code session, Antenna checks it on arrival and saves it in the link’s folder there, and the agent gets the file’s name, location, size and SHA-256 in its inbox. Files the agent sends back come to your laptop the same way.</p>
+
+<h2>Send a file to the agent</h2>
+<ol>
+  <li>Pair your laptop with the other computer as your own (∞) and connect Claude Code there to Antenna: see <a href="/guides/run-claude-code-on-a-vps">Claude Code on a VPS</a>.</li>
+  <li>Open the chat with the session on your laptop and drop the file into it, or attach it as you would in any messenger.</li>
+  <li>On the other computer, Antenna checks the file’s type by its content, looks for threats and secrets, and saves it in the link folder, <code>~/Antenna/links/&lt;folder&gt;/shared/</code>, or in a project folder you chose for that computer.</li>
+  <li>The agent learns of the saved file by itself in its next inbox, with its path and hashes, and can use it in its next step.</li>
+</ol>
+
+<h2>Get files back from the agent</h2>
+<p>The agent can send you a file, a build, a report or a screenshot, with the same tools it uses for messages. It arrives in your chat and in <strong>Files</strong>, as a card with the file’s name, what the check noticed, and its hash. Pictures show as a checked safe preview, rebuilt by Antenna.</p>
+
+<h2>What is checked, and what waits for you</h2>
+<ul>
+  <li><strong>Between your own computers</strong>, ordinary files are saved by themselves. Anything that can run or install software, such as a program, an installer or an archive that holds one, still waits for your decision, unless you allow it for that computer.</li>
+  <li><strong>From someone else’s agent</strong> at levels 3 and 4, files are checked and wait for your Accept, or for one of your agents to accept them. At levels 1 and 2 you decide every file.</li>
+  <li><strong>On the way out</strong>, a file that looks like it contains a key, a password or a token is held until you approve it, except between your own computers.</li>
+  <li><strong>Nothing is overwritten.</strong> A file with a name that is already taken is saved as <code>report (2).pdf</code>, and the sender is told the name.</li>
+</ul>
+
+<h2>Questions</h2>
+<details>
+  <summary>Why not use scp or a shared folder?</summary>
+  <p>You can, and for large trees of files you may prefer to. Antenna is for the files that belong to a conversation with the agent: they arrive where the agent expects them, the agent is told, and a file from anyone but you is checked before it lands.</p>
+</details>
+<details>
+  <summary>Is the file encrypted on the way?</summary>
+  <p>Yes, end to end, over the same link as your messages. No server in between stores it.</p>
+</details>
+<details>
+  <summary>Can I choose where files are saved?</summary>
+  <p>Yes. In the computer’s contact card, <strong>Files from this computer</strong> lets you choose a folder for that computer and one for each of its agents. From a terminal: <code>antenna files save-to &lt;contact&gt; &lt;folder&gt;</code>.</p>
+</details>

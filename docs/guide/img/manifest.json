@@ -52,7 +52,7 @@
     "src": "docs/design/screens/21_agents.png"
   },
   "22_settings.png": {
-    "sha256": "c1f28aa5851a3b5e02b2f7398428c8077a3c6acb433a44c3426e292a91256431",
+    "sha256": "a42e6b96ee3be13880d0bdf18f1e4e21b770cf6bcbd84671727450e6d9b327bf",
     "src": "docs/design/screens/22_settings.png"
   },
   "23_card.png": {
@@ -172,7 +172,7 @@
     "src": "docs/design/screens/60_update_ready.png"
   },
   "61_update_auto.png": {
-    "sha256": "2974e2d138bfd8b3adeec311a1c41d4f6b89320e27a1a8828ec7c385a1e414a2",
+    "sha256": "d97f58ba532edce61b2d5b1227ef711ce8d4b5df831843e109654002bc536f4e",
     "src": "docs/design/screens/61_update_auto.png"
   },
   "62_file_rename.png": {

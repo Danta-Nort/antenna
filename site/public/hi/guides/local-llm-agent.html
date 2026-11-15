@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Local LLM agent सेटअप: बिना अकाउंट, बिना API key — Antenna</title>
+<meta name="description" content="Antenna एक open model डाउनलोड करता है, उसे जाँचता है, और आपके Mac या Linux पर प्राइवेट agent की तरह चलाता है: sandbox में, बिना network और बिना आपकी फ़ाइलों के।">
+<link rel="canonical" href="https://antenna.contact/hi/guides/local-llm-agent">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Local LLM agent सेटअप: बिना अकाउंट, बिना API key — Antenna">
+<meta property="og:description" content="Antenna एक open model डाउनलोड करता है, उसे जाँचता है, और आपके Mac या Linux पर प्राइवेट agent की तरह चलाता है: sandbox में, बिना network और बिना आपकी फ़ाइलों के।">
+<meta property="og:url" content="https://antenna.contact/hi/guides/local-llm-agent">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="hi_IN">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/local-llm-agent">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/local-llm-agent">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/local-llm-agent">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/local-llm-agent">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/local-llm-agent">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/local-llm-agent">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/local-llm-agent">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/local-llm-agent">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/local-llm-agent">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/local-llm-agent">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/local-llm-agent">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/local-llm-agent">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/local-llm-agent">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/local-llm-agent">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/local-llm-agent">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/local-llm-agent">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/hi/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "गाइड",
+     "item": "https://antenna.contact/hi/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "बिना अकाउंट और बिना API key के local LLM agent सेट करें",
+     "item": "https://antenna.contact/hi/guides/local-llm-agent"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "बिना अकाउंट और बिना API key के local LLM agent सेट करें",
+   "description": "Antenna एक open model डाउनलोड करता है, उसे जाँचता है, और आपके Mac या Linux पर प्राइवेट agent की तरह चलाता है: sandbox में, बिना network और बिना आपकी फ़ाइलों के।",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "hi",
+   "url": "https://antenna.contact/hi/guides/local-llm-agent",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/hi/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "क्या यह GPU इस्तेमाल करता है?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Mac पर model, Metal के ज़रिए GPU इस्तेमाल करने के लिए बना है। Linux पर यह CPU पर चलता है, CPU के अपने instruction sets के लिए बने builds के साथ।"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "क्या मेरे दूसरे agents local model से बात कर सकते हैं?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "अभी नहीं। इस वर्ज़न में local agent अपनी चैट में आपसे बात करता है, और team में काम करते समय team के lead से।"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "क्या मेरे कंप्यूटर से कुछ बाहर जाता है?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "सिर्फ़ model का डाउनलोड, Hugging Face से। उसके बाद model offline चलता है, और उसके sandbox में network है ही नहीं।"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">सीधे कंटेंट पर जाएँ</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/hi/" aria-label="Antenna — होम"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="मुख्य">
+      <a href="/hi/#product">प्रोडक्ट</a>
+      <a href="/hi/#security">सुरक्षा</a>
+      <a href="/hi/guides/">गाइड</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="भाषा: हिन्दी"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">HI</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/local-llm-agent" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/local-llm-agent" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/local-llm-agent" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/local-llm-agent" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/local-llm-agent" hreflang="hi" lang="hi" aria-current="true">हिन्दी</a></li>
+        <li><a href="/ar/guides/local-llm-agent" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/local-llm-agent" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/local-llm-agent" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/local-llm-agent" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/local-llm-agent" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/local-llm-agent" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/local-llm-agent" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/local-llm-agent" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/local-llm-agent" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/local-llm-agent" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/hi/#download">डाउनलोड</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="ब्रेडक्रंब"><a href="/hi/">Antenna</a> <span aria-hidden="true">›</span> <a href="/hi/guides/">गाइड</a></nav>
+    <p class="eyebrow">अपडेट किया गया <time datetime="2026-11-09">9 नवंबर 2026</time></p>
+    <h1>बिना अकाउंट और बिना API key के local LLM agent सेट करें</h1>
+    <p class="lead">Antenna में <strong>Agents → Local models</strong> खोलें, आपके कंप्यूटर के लिए सुझाया गया model डाउनलोड करें, और <strong>Create agent</strong> दबाएँ। Model आपकी अपनी मशीन पर llama.cpp से चलता है, डाउनलोड होने के बाद बिना अकाउंट, बिना API key और बिना इंटरनेट के, एक ऐसे sandbox के अंदर जो न network तक पहुँच सकता है, न आपकी फ़ाइलें पढ़ सकता है। Agent को अपनी चैट मिलती है, और team में वह triage, summaries और docs जैसे हल्के role ले सकता है। <em>Experimental।</em></p>
+
+    <h2>कौन-सा model, किस कंप्यूटर के लिए</h2>
+    <p>Antenna आपकी memory और ख़ाली जगह देखकर Qwen3.5 models में से एक सुझाता है:</p>
+    <table>
+      <thead><tr><th>कंप्यूटर</th><th>सुझाया गया</th><th>डिस्क पर</th><th>लोड होने पर memory</th></tr></thead>
+      <tbody>
+        <tr><td>8 GB memory</td><td>Qwen3.5 2B</td><td>1.3 GB</td><td>लगभग 2 GB</td></tr>
+        <tr><td>16 GB, Intel या AMD, या M1 Mac</td><td>Qwen3.5 4B</td><td>2.7 GB</td><td>लगभग 4.7 GB</td></tr>
+        <tr><td>16 GB या ज़्यादा वाला M2 या नया Mac</td><td>Qwen3.5 9B</td><td>5.7 GB</td><td>9 GB से कम</td></tr>
+      </tbody>
+    </table>
+    <p>दूसरे models भी लिस्ट में होते हैं, हर एक पर <strong>Fits this computer</strong>, <strong>Slow on this computer</strong> या <strong>Not for this computer</strong> लिखा होता है, ताकि आप कभी ऐसा model डाउनलोड न करें जो चलेगा ही नहीं।</p>
+
+    <h2>सेट करें</h2>
+    <ol>
+      <li><strong>Agents → Local models</strong> खोलें और सुझाए गए model के आगे <strong>Download</strong> दबाएँ। यह Hugging Face से एक तय वर्ज़न में आता है; विंडो बंद करने से डाउनलोड नहीं रुकता, और बीच में रुका डाउनलोड वहीं से फिर शुरू होता है।</li>
+      <li>लोड करने से पहले Antenna फ़ाइल को इस release में दर्ज साइज़ और SHA-256 से मिलाता है। जो फ़ाइल मेल न खाए, वह डिलीट कर दी जाती है।</li>
+      <li><strong>Create agent</strong> दबाएँ और उसे एक नाम दें। उसकी चैट Chats में <strong>On this computer</strong> के नीचे दिखती है।</li>
+      <li>उसे लिखें। पहला जवाब model लोड होने तक कुछ सेकंड रुकता है।</li>
+    </ol>
+    <p>Terminal से: <code>antenna local install qwen3.5-2b --wait</code> (या आपके पास पहले से मौजूद कॉपी के लिए <code>--from-file</code>), फिर <code>antenna local add helper --model qwen3.5-2b</code> और <code>antenna local say helper "hello"</code>।</p>
+
+    <h2>दो sandboxes</h2>
+    <p>Model अपने sandbox में चलता है: वह सिर्फ़ अपनी model फ़ाइल पढ़ता है और कहीं कनेक्ट नहीं कर सकता, न इंटरनेट से, न Antenna से, न दूसरे प्रोग्रामों से। Agent का अपना प्रोग्राम एक दूसरे sandbox में चलता है जो सिर्फ़ model तक पहुँच सकता है। बातचीत Antenna के encrypted database में रखी जाती है। इस वर्ज़न में local agent के पास न लिंक हैं न tools, इसलिए वह किसी को कुछ नहीं भेज सकता, और Antenna कभी आपसे उसके जवाबों से कोई कमांड पेस्ट करने को नहीं कहता।</p>
+
+    <h2>Memory की फ़िक्र Antenna करता है</h2>
+    <p>कई agents एक model शेयर कर सकते हैं, और अलग-अलग साइज़ के models साथ-साथ चल सकते हैं। जब जवाब के लिए ज़रूरी memory किसी दूसरे model ने घेर रखी हो, तो जवाब इंतज़ार करता है (“Waiting for memory…”), कंप्यूटर को swap में धकेलने के बजाय, और जिस model को 30 मिनट तक किसी ने इस्तेमाल न किया हो, उसे unload कर दिया जाता है।</p>
+
+    <h2>Team में local models</h2>
+    <p>जब आप agents की team बनाते हैं, तो local model उन roles के लिए worker बन सकता है जो उसके साइज़ के हिसाब से ठीक हों: छोटे models triage और summaries के लिए, बड़े models docs, drafts और अनुवाद के लिए भी। <strong>Local only</strong> के साथ पूरी team, lead समेत, बिना किसी cloud model के चलती है। Team में local models अभी कोड नहीं लिखते।</p>
+
+    <h2>सवाल-जवाब</h2>
+    <details>
+      <summary>क्या यह GPU इस्तेमाल करता है?</summary>
+      <p>Mac पर model, Metal के ज़रिए GPU इस्तेमाल करने के लिए बना है। Linux पर यह CPU पर चलता है, CPU के अपने instruction sets के लिए बने builds के साथ।</p>
+    </details>
+    <details>
+      <summary>क्या मेरे दूसरे agents local model से बात कर सकते हैं?</summary>
+      <p>अभी नहीं। इस वर्ज़न में local agent अपनी चैट में आपसे बात करता है, और team में काम करते समय team के lead से।</p>
+    </details>
+    <details>
+      <summary>क्या मेरे कंप्यूटर से कुछ बाहर जाता है?</summary>
+      <p>सिर्फ़ model का डाउनलोड, Hugging Face से। उसके बाद model offline चलता है, और उसके sandbox में network है ही नहीं।</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna फ़्री और ओपन सोर्स है</strong>, macOS और Linux के लिए। न अकाउंट चाहिए, न फ़ोन नंबर।</p>
+      <a class="btn" href="/hi/#download">Antenna डाउनलोड करें</a>
+    </aside>
+    <h2>मिलती-जुलती गाइड</h2>
+    <ul class="related">
+      <li><a href="/hi/guides/claude-code-multiple-agents-working-together">एक प्रोजेक्ट पर कई Claude Code agents को साथ मिलकर चलाएँ</a></li>
+      <li><a href="/hi/guides/multi-agent-prompt-injection">Agents के बीच prompt injection, और Antenna उसे कैसे क़ाबू में रखता है</a></li>
+      <li><a href="/hi/guides/self-hosted-messenger">ऐसा self-hosted मैसेंजर, जिसके लिए server चलाना ज़रूरी नहीं</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/hi/" aria-label="Antenna — होम"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/hi/guides/">गाइड</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>संपर्क: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/hi/privacy">प्राइवेसी पॉलिसी</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

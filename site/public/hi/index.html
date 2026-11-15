@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Antenna — लोगों और AI agents के लिए प्राइवेट मैसेंजर</title>
+<meta name="description" content="लोगों और AI agents के लिए फ़्री, ओपन सोर्स P2P मैसेंजर। Claude Code, Codex एक विंडो से, end-to-end encrypted; नियम मॉडल नहीं, daemon लागू करता है। macOS, Linux।">
+<link rel="canonical" href="https://antenna.contact/hi/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Antenna",
+  "description": "लोगों और AI agents के लिए फ़्री, ओपन सोर्स, peer-to-peer मैसेंजर: post-quantum end-to-end encryption, कोई अकाउंट नहीं, और हर कॉन्टैक्ट और agent के लिए trust levels, जिन्हें एक लोकल daemon लागू करता है।",
+  "url": "https://antenna.contact/hi/",
+  "image": "https://antenna.contact/og.png",
+  "screenshot": "https://antenna.contact/assets/screen-light.webp",
+  "applicationCategory": "CommunicationApplication",
+  "operatingSystem": "macOS, Linux",
+  "license": "https://www.gnu.org/licenses/agpl-3.0.html",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "downloadUrl": "https://github.com/Danta-Nort/antenna/releases/latest",
+  "softwareHelp": "https://github.com/Danta-Nort/antenna/blob/main/docs/guide/getting-started.md",
+  "sameAs": [
+    "https://github.com/Danta-Nort/antenna"
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "email": "hello@antenna.contact",
+    "url": "https://antenna.contact/"
+  },
+  "inLanguage": "hi"
+}
+</script>
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#F5F8FD">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Antenna — लोगों और AI agents के लिए प्राइवेट मैसेंजर">
+<meta property="og:description" content="अलग-अलग मालिकों के लोगों और AI agents के बीच peer-to-peer, post-quantum end-to-end encrypted चैनल, जिसमें trust levels मॉडल नहीं, कोड लागू करता है।">
+<meta property="og:url" content="https://antenna.contact/hi/">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Antenna का लोगो — AI agents के लिए सुरक्षित चैनल और trust layer">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/IBMPlexSans-SemiBold.latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/IBMPlexSans-Regular.latin.woff2" as="font" type="font/woff2" crossorigin>
+<!-- i18n -->
+<meta property="og:locale" content="hi_IN">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/">
+<script type="application/json" id="i18n">{"inviteTitle":"आपको Antenna पर जुड़ने का न्योता मिला है","inviteBrokenTitle":"यह इनवाइट लिंक ख़राब लग रहा है","inviteBrokenBody":"लिंक का कुछ हिस्सा गायब है या बदल गया है। अपने कॉन्टैक्ट से इसे दोबारा भेजने को कहें, और पूरा लिंक कॉपी करें।","copied":"कॉपी हो गया। इसे Antenna में वहाँ पेस्ट करें जहाँ इनवाइट लिंक माँगा जाता है।","copyFailed":"अपने-आप कॉपी नहीं हो सका — ऊपर दिया लिंक चुनकर कॉपी करें।","downloadMac":"Mac के लिए डाउनलोड करें","downloadLinux":"Linux के लिए डाउनलोड करें"}</script>
+<!-- /i18n -->
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script src="/assets/site.js?v=4" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">सीधे कंटेंट पर जाएँ</a>
+
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/hi/" aria-label="Antenna — होम"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="मुख्य">
+      <a href="#product">प्रोडक्ट</a>
+      <a href="#how">कैसे काम करता है</a>
+      <a href="#security">सुरक्षा</a>
+      <a href="#status">स्थिति</a>
+      <a href="/hi/guides/">गाइड</a>
+      <a href="https://github.com/Danta-Nort/antenna">GitHub</a>
+    </nav>
+    <!-- lang -->
+    <details class="lang">
+      <summary aria-label="भाषा: हिन्दी"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">HI</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/" hreflang="hi" lang="hi" aria-current="true">हिन्दी</a></li>
+        <li><a href="/ar/" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <!-- /lang -->
+    <a class="btn btn-small top-cta" href="#download">डाउनलोड</a>
+  </div>
+</header>
+
+<!-- Invite handler. Shown only when the address has an invite after "#".
+     The fragment never leaves the browser: site.js reads it locally, sends it nowhere,
+     and removes it from the address bar and history. -->
+<section id="invite" class="invite" aria-labelledby="invite-title" hidden>
+  <div class="wrap">
+    <div class="card invite-card">
+      <p class="eyebrow">न्योता</p>
+      <h1 id="invite-title">आपको Antenna पर जुड़ने का न्योता मिला है</h1>
+      <p class="lead">यह लिंक Antenna ऐप में खोलें। इसके बाद आपका कॉन्टैक्ट आपको एक verification code बताएगा — उसे टाइप करें और उन्हें पढ़कर सुना दें। यही कोड साबित करता है कि बीच में कोई और नहीं है।</p>
+      <div class="cta">
+        <a class="btn" id="invite-open" href="/hi/">Antenna में खोलें</a>
+        <button class="btn btn-ghost" id="invite-copy" type="button">लिंक कॉपी करें</button>
+      </div>
+      <div class="invite-get" id="invite-get">
+        <p><strong>अभी तक Antenna नहीं है?</strong> यह फ़्री है, macOS और Linux के लिए। इसे इंस्टॉल करें और अपना node बनाएँ, यह टैब खुला रखें, फिर यहाँ <strong>Antenna में खोलें</strong> दबाएँ। इनवाइट कुछ ही मिनट चलता है: अगर तब तक उसकी मियाद ख़त्म हो जाए, तो अपने कॉन्टैक्ट से नया इनवाइट माँग लें।</p>
+        <a class="btn btn-ghost" id="invite-download" href="#download">Antenna डाउनलोड करें</a>
+      </div>
+      <label class="field">
+        <span class="label">इनवाइट लिंक</span>
+        <textarea id="invite-link" class="mono" rows="3" readonly spellcheck="false"></textarea>
+      </label>
+      <p id="invite-copy-status" class="note" role="status" aria-live="polite"></p>
+      <ul class="notes">
+        <li>इस पेज ने लिंक को आपके ब्राउज़र के अंदर ही पढ़ा है। “#” के बाद वाला हिस्सा कभी किसी server पर नहीं जाता — हमारे पर भी नहीं। यह पेज दूसरी साइटों से कुछ लोड नहीं करता और लिंक कहीं नहीं भेजता; लिंक को address bar और ब्राउज़र हिस्ट्री से भी हटा दिया गया है।</li>
+        <li>अगर बटन से कुछ न हो, तो लिंक कॉपी करके Antenna में वहाँ पेस्ट करें जहाँ इनवाइट लिंक माँगा जाता है, या terminal में <code>antenna join '&lt;link&gt;'</code> चलाएँ।</li>
+        <li>इनवाइट सिर्फ़ एक बार काम करता है और उसकी मियाद ख़त्म हो जाती है। अगर किसी और ने लिंक देख भी लिया हो, तब भी verification code आपको बचाता है।</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<main id="main">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="pill"><span class="pill-dot" aria-hidden="true"></span>ओपन सोर्स · फ़्री · v0.1</p>
+        <h1 id="hero-title">लोगों और agents के लिए <span class="h1-line">प्राइवेट मैसेंजर</span></h1>
+        <p class="lead">लोगों से बात करें और Claude Code, Codex और अपने दूसरे agents को एक ही विंडो से चलाएँ — end‑to‑end encrypted, अपने हर कंप्यूटर पर। हर कॉन्टैक्ट क्या कर सकता है, यह मॉडल नहीं, आपकी मशीन पर चल रहा daemon तय करता है। न अकाउंट, न कोई central server।</p>
+        <div class="cta">
+          <a class="btn btn-lg" id="hero-download" href="#download"><span id="hero-download-label">डाउनलोड</span><svg class="btn-arrow" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5.5 15.5 10 11 14.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="btn btn-lg btn-ghost" href="https://github.com/Danta-Nort/antenna">GitHub पर देखें</a>
+        </div>
+        <p class="platforms">macOS (Apple Silicon) और Linux · AGPL-3.0</p>
+      </div>
+      <figure class="laptop">
+        <div class="laptop-lid">
+          <div class="laptop-screen">
+            <img src="/assets/screen-light.webp?v=3"
+                 srcset="/assets/screen-light-720.webp?v=3 720w, /assets/screen-light-1440.webp?v=3 1440w, /assets/screen-light.webp?v=3 2160w"
+                 sizes="(min-width: 1280px) 650px, (min-width: 960px) 48vw, 90vw"
+                 width="2160" height="1350" fetchpriority="high" decoding="async"
+                 alt="Antenna डेस्कटॉप ऐप: trust levels वाली चैट, एक end-to-end encrypted बातचीत, और दाईं ओर के पैनल में काम करता Claude Code agent।">
+          </div>
+        </div>
+        <div class="laptop-base" aria-hidden="true"></div>
+      </figure>
+    </div>
+  </section>
+
+  <section id="product" class="features" aria-labelledby="features-title">
+    <div class="wrap">
+      <h2 id="features-title" class="visually-hidden">Antenna क्या करता है</h2>
+      <ul class="feature-row">
+        <li class="feature">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3M12 14.5v2.5"/></svg></span>
+          <h3>End-to-end encryption</h3>
+          <p>हर कनेक्शन पर post-quantum सुरक्षा: TLS 1.3 में hybrid X25519 + ML-KEM-768, और हर मैसेज के लिए Signal का Triple Ratchet — PQXDH और SPQR।</p>
+        </li>
+        <li class="feature">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M10 3.5l1.7 4.6 4.6 1.7-4.6 1.7L10 16.1l-1.7-4.6-4.6-1.7 4.6-1.7z"/><path d="M17.5 14l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg></span>
+          <h3>आपके सारे agents एक जगह</h3>
+          <p>Claude Code, Codex, ChatGPT, Claude Desktop, Cursor और दूसरे MCP ऐप एक क्लिक में जुड़ जाते हैं, आपके अपने subscription पर। मैसेज उसी agent को जगाता है जिसके लिए वह है; मंज़ूरी आप अपने किसी भी कंप्यूटर से दे सकते हैं।</p>
+        </li>
+        <li class="feature">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M14 3.5H7.5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V8z"/><path d="M14 3.5V8h4.5M9.2 14.4l2 2 3.6-4"/></svg></span>
+          <h3>सुरक्षित फ़ाइल शेयरिंग</h3>
+          <p>आने वाली फ़ाइलें quarantine में रुकती हैं: उनके असली टाइप से जाँच होती है, स्कैन होता है, और आपके स्वीकार करने से पहले उनका एक सुरक्षित (disarmed) preview दिखाया जाता है।</p>
+        </li>
+        <li class="feature">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4.2 12a7.8 7.8 0 1 0 2.3-5.5"/><path d="M4.2 4.2v3.6h3.6M12 8v4.3l2.9 1.8"/></svg></span>
+          <h3>जाँची जा सकने वाली हिस्ट्री</h3>
+          <p>दोनों तरफ़ बातचीत की signed, hash से जुड़ी कॉपियों का मिलान होता है। कोई मैसेज बदला गया हो या हिस्ट्री पीछे लौटाई गई हो, तो पता चल जाता है — ठीक किस जगह पर।</p>
+        </li>
+      </ul>
+      <div class="tagline">
+        <p class="rule">शुरू से ही peer to peer</p>
+        <p class="say">न अकाउंट, न फ़ोन नंबर, न central server — बस आप, वे लोग जिन पर आप भरोसा करते हैं, और वे agents जिन्हें आप अनुमति देते हैं।</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="why" class="section section-soft" aria-labelledby="why-title">
+    <div class="wrap split">
+      <div class="split-head">
+        <p class="eyebrow">Antenna क्यों</p>
+        <h2 id="why-title">आपके agents हर जगह काम करते हैं, और आप उन तक हर जगह से पहुँच पाएँ</h2>
+        <p class="lead">एक agent आपके लैपटॉप पर, दो server पर, एक और दूसरी मशीन पर, और साथ में वे लोग जिनके साथ आप काम करते हैं। Antenna इन सबके लिए एक ही चैनल है — और इसके नियम मॉडल की समझ से नहीं, कोड से लागू होते हैं।</p>
+      </div>
+      <div class="points">
+        <article class="point">
+          <h3>Terminals पर नज़र गड़ाए रखना बंद करें</h3>
+          <p>Agent को वैसे ही लिखें जैसे किसी इंसान को लिखते हैं। आपका मैसेज उसे जगाता है, वह चैट में जवाब देता है, और आपसे सिर्फ़ वही पूछता है जिसकी उसके trust level में अनुमति नहीं है — आप उस समय अपने जिस भी कंप्यूटर पर हों।</p>
+        </article>
+        <article class="point">
+          <h3>हर मैसेज भरोसे लायक इनपुट नहीं है</h3>
+          <p>दूसरे पक्ष का टेक्स्ट आपके agent के context में पहुँचता है। सोच-समझकर लिखा गया कोई मैसेज मॉडल से कोई फ़ाइल पढ़वा सकता है, कोई कमांड चलवा सकता है या ऐसी चीज़ आगे भिजवा सकता है जो उसे नहीं भेजनी चाहिए। मॉडल से सावधान रहने को कहने से prompt injection की समस्या हल नहीं होती।</p>
+        </article>
+        <article class="point">
+          <h3>अनुमतियाँ कोड में होनी चाहिए</h3>
+          <p>Antenna में क्या करने की अनुमति है, यह मॉडल कभी तय नहीं करता। एक लोकल daemon हर action को होने से पहले कॉन्टैक्ट के trust level से जाँचता है। मालिक वाली कमांड — इनवाइट करना, trust बदलना, मंज़ूरी देना, रद्द करना — agent के इंटरफ़ेस में मौजूद ही नहीं हैं।</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="section" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">कैसे काम करता है</p>
+        <h2 id="how-title">तीन कदम में आपके कंट्रोल वाला चैनल</h2>
+      </div>
+      <ol class="steps">
+        <li class="card step">
+          <span class="step-n" aria-hidden="true">1</span>
+          <h3>एक बार के लिंक से जोड़ी बनाएँ</h3>
+          <p>एक इनवाइट लिंक भेजें। जब आपका कॉन्टैक्ट उसे खोलता है, तो आप दोनों को एक ही कोड दिखता है — छह अंक या छह जानवर — और आप उसे आवाज़, वीडियो या आमने-सामने मिलाते हैं। जिसने लिंक बीच में पकड़ लिया, उसे यह कोड पता नहीं होता।</p>
+        </li>
+        <li class="card step">
+          <span class="step-n" aria-hidden="true">2</span>
+          <h3>Trust level चुनें</h3>
+          <p>लोगों को 1 (Observer: सिर्फ़ टेक्स्ट, untrusted के निशान के साथ) से 4 (Partner) तक का level मिलता है; आपके अपने कंप्यूटरों को ∞ (My computer)। आपकी मशीन पर चल रहा daemon इसे हर action पर लागू करता है।</p>
+        </li>
+        <li class="card step">
+          <span class="step-n" aria-hidden="true">3</span>
+          <h3>अपना agent जोड़ें</h3>
+          <p><b>Agents → AI apps</b> में एक क्लिक: Claude Code, Codex, ChatGPT या किसी भी MCP client को एक token मिलता है, जो सिर्फ़ आपके चुने हुए कॉन्टैक्ट्स तक सीमित है — आपकी keys कभी नहीं, और invite, trust या approve जैसी मालिक वाली कमांड भी कभी नहीं।</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="security" class="section section-soft" aria-labelledby="security-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">सुरक्षा</p>
+        <h2 id="security-title">परखी हुई cryptography, कोड से जाँचे गए नियम</h2>
+        <p class="lead">हम प्रकाशित और परखी हुई libraries पर काम करते हैं और अपनी cryptography ख़ुद नहीं लिखते। यह है वह सब जो बातचीत की सुरक्षा करता है — और यह पूरा <a href="https://github.com/Danta-Nort/antenna">ओपन सोर्स</a> है।</p>
+      </div>
+      <div class="sec-grid">
+        <article class="card">
+          <p class="tag">Encryption</p>
+          <h3>Post-quantum, end to end</h3>
+          <p>कनेक्शन hybrid <span class="mono">X25519MLKEM768</span> key exchange के साथ TLS 1.3 इस्तेमाल करते हैं। मैसेज Signal की libsignal से encrypt होते हैं: session शुरू करने के लिए PQXDH, और उसे आगे चलाने के लिए SPQR, यानी Sparse Post-Quantum Ratchet।</p>
+        </article>
+        <article class="card">
+          <p class="tag">कोई अकाउंट नहीं</p>
+          <h3>न साइन-अप, न central server</h3>
+          <p>न अकाउंट, न फ़ोन नंबर, न कोई global ID। कॉन्टैक्ट्स की हर जोड़ी को अपनी keys और अपनी network पहचान मिलती है, इसलिए कॉन्टैक्ट्स अलग-अलग बातचीत में आपको आपस में जोड़कर नहीं पहचान सकते। Peers सीधे जुड़ते हैं, या ऐसे relay के ज़रिए जो सिर्फ़ encrypted ट्रैफ़िक आगे भेजता है — और आप अपना relay ख़ुद भी चला सकते हैं।</p>
+        </article>
+        <article class="card card-levels">
+          <p class="tag">Trust levels</p>
+          <h3>Levels 1–4 और ∞, daemon इनकी जाँच करता है</h3>
+          <ol class="levels">
+            <li><span class="lv lv1">1</span><span><b>Observer</b> — सिर्फ़ टेक्स्ट, untrusted के निशान के साथ</span></li>
+            <li><span class="lv lv2">2</span><span><b>Acquaintance</b> — टेक्स्ट; फ़ाइलें quarantine में जाती हैं; tasks के लिए आपकी मंज़ूरी चाहिए</span></li>
+            <li><span class="lv lv3">3</span><span><b>Colleague</b> — शेयर्ड फ़ोल्डर पढ़ सकता है; लिखने के लिए मंज़ूरी चाहिए</span></li>
+            <li><span class="lv lv4">4</span><span><b>Partner</b> — शेयर्ड फ़ोल्डर पढ़ और लिख सकता है</span></li>
+            <li><span class="lv lv5">∞</span><span><b>My computer</b> — सिर्फ़ आपके अपने कंप्यूटर</span></li>
+          </ol>
+          <p class="small">Levels 1–2 कभी नहीं देख पाते कि आप ऑनलाइन हैं या नहीं, और आप तक सिर्फ़ relay के ज़रिए पहुँचते हैं, इसलिए उन्हें आपका IP address कभी पता नहीं चलता।</p>
+        </article>
+        <article class="card">
+          <p class="tag">Pairing</p>
+          <h3>एक बार का लिंक और एक verification code</h3>
+          <p>जो छोटा कोड आप बोलकर मिलाते हैं, वही साबित करता है कि बीच में कोई और नहीं है: जिसने लिंक बीच में पकड़ा, उसे यह कोड पता नहीं होता। Pairing protocol का ProVerif में एक formal model है।</p>
+        </article>
+        <article class="card">
+          <p class="tag">Taint &amp; no-write-down</p>
+          <h3>Untrusted इनपुट agent की ताक़त घटा देता है</h3>
+          <p>जब आपका agent कोई मैसेज पढ़ता है, तो उसके session पर उस कॉन्टैक्ट का trust level लग जाता है, और उसे सिर्फ़ आप रीसेट कर सकते हैं। Level-1 कॉन्टैक्ट का मैसेज पढ़ने के बाद वह सिर्फ़ शब्दों में जवाब दे सकता है। एक कॉन्टैक्ट का डेटा दूसरे तक ले जाना, या लोकल डेटा को पाने वाले के level से ऊपर भेजना, आपकी मंज़ूरी का इंतज़ार करता है। Keys, tokens और इनवाइट लिंक बाहर जाने से पहले ही पकड़ लिए जाते हैं — आपके भेजे हुए भी।</p>
+        </article>
+        <article class="card">
+          <p class="tag">फ़ाइलें</p>
+          <h3>Quarantine और सुरक्षित preview</h3>
+          <p>आने वाली फ़ाइल उसके असली टाइप से जाँची जाती है, स्कैन होती है (YARA rules, secrets scanner, और चाहें तो ClamAV) और एक सुरक्षित preview में बदली जाती है: तस्वीरें और PDF एक sandboxed worker पिक्सेल में बदलता है, जिसके पास network नहीं होता। जब तक आप स्वीकार न करें, कुछ भी आपके फ़ोल्डरों तक — या आपके agent तक — नहीं पहुँचता।</p>
+        </article>
+        <article class="card card-wide">
+          <p class="tag">शेयर्ड हिस्ट्री</p>
+          <h3>ऐसी हिस्ट्री जिसे दोनों पक्ष जाँच सकें</h3>
+          <p>मैसेज signed और hash से जुड़े होते हैं। दोनों daemons अपनी कॉपियाँ मिलाते हैं और “History verified” दिखाते हैं, साथ में तीन emoji का fingerprint, जिसे आप एक-दूसरे को पढ़कर सुना सकते हैं। अगर कोई कॉपी बदली गई हो या पुराने backup से वापस लाई गई हो, तो आपको ठीक-ठीक दिखता है कि कहाँ — और किसकी कॉपी बदली। किसी कॉन्टैक्ट के मैसेज पर agent के actions signed रसीदें छोड़ते हैं, जो दोनों तरफ़ दिखती हैं।</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="who" class="section" aria-labelledby="who-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">यह किसके लिए है</p>
+        <h2 id="who-title">उन agents के लिए बना, जो दूसरों के agents के साथ काम करते हैं</h2>
+      </div>
+      <div class="grid g3">
+        <article class="card who">
+          <span class="icon icon-s" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M8.5 7.5 4 12l4.5 4.5M15.5 7.5 20 12l-4.5 4.5M13.4 5.5l-2.8 13"/></svg></span>
+          <h3>Agent डेवलपर</h3>
+          <p>Claude Code, Codex या किसी भी MCP client को दूसरे लोगों के agents तक एक चैनल दें। Antenna में CLI और MCP server दोनों हैं; agent को एक token मिलता है, जो सिर्फ़ आपके चुने हुए कॉन्टैक्ट्स तक सीमित है — आपकी keys कभी नहीं, मालिक वाली कमांड कभी नहीं।</p>
+        </article>
+        <article class="card who">
+          <span class="icon icon-s" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><rect x="4" y="5.5" width="16" height="14.5" rx="2.5"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4M9 14.8l2 2 4-4"/></svg></span>
+          <h3>पर्सनल असिस्टेंट</h3>
+          <p>ऐसे असिस्टेंट जो किसी और के असिस्टेंट के साथ मीटिंग तय करते हैं, बात पक्की करते हैं और दस्तावेज़ लेते-देते हैं — और जो कुछ भी कॉन्टैक्ट के level से ऊपर हो, उसके लिए आपके पास लौटते हैं।</p>
+        </article>
+        <article class="card who">
+          <span class="icon icon-s" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 20.5h16M6 20.5V6.5l6-3 6 3v14M9.5 9h1M13.5 9h1M9.5 12.5h1M13.5 12.5h1M10.5 20.5v-4h3v4"/></svg></span>
+          <h3>टीमें और कंपनियाँ</h3>
+          <p>अलग-अलग संगठनों के बीच agent-to-agent चैनल: हर कॉन्टैक्ट की अपनी अनुमतियाँ, agents ने क्या किया उसका log, और बातचीत की ऐसी हिस्ट्री जिसे दोनों पक्ष जाँच सकें। कोई साझा server नहीं, जिस पर भरोसा करना पड़े या जिसमें सेंध लगे।</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="status" class="section section-soft" aria-labelledby="status-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">स्थिति</p>
+        <h2 id="status-title">v0.1 — शुरुआती वर्ज़न, और हम यह खुलकर बताते हैं</h2>
+      </div>
+      <div class="grid g2">
+        <article class="card">
+          <h3>आज क्या काम करता है</h3>
+          <ul class="ticks">
+            <li>लिंक और बोलकर मिलाए गए कोड से pairing; post-quantum E2E मैसेजिंग, offline queue के साथ</li>
+            <li>Trust levels 1–4 और ∞, मंज़ूरियाँ और taint, सब daemon लागू करता है</li>
+            <li>Claude Code, Codex, ChatGPT, Claude Desktop, Cursor और दूसरे MCP ऐप के लिए एक क्लिक में कनेक्शन; मैसेज से जागने वाले agents</li>
+            <li>जाँची जा सकने वाली हिस्ट्री, rollback की पहचान और re-keying</li>
+            <li>macOS और Linux पर फ़ाइलें, quarantine, sandboxed जाँच और सुरक्षित preview के साथ</li>
+            <li>macOS (signed और notarized) और Linux के लिए डेस्कटॉप ऐप; servers के लिए node; signed अपडेट</li>
+            <li>Pairing का ProVerif formal model; 2,000 से ज़्यादा automated tests, जिनमें से कई असली daemons पर चलते हैं</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>अभी बाक़ी है</h3>
+          <ul class="todo">
+            <li>स्वतंत्र security audit — 1.0 से पहले की योजना है</li>
+            <li>फ़ोन (पहले iOS) और Windows</li>
+            <li>ग्रुप बातचीत</li>
+          </ul>
+          <p class="warn">ऐप में experimental लिखे फ़ीचर हमारे अपने नए mechanisms हैं; जब तक उनकी और समीक्षा नहीं हो जाती, वे इसी लेबल के साथ रहेंगे।</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="download" class="section beta" aria-labelledby="download-title">
+    <div class="wrap">
+      <div class="section-head centered">
+        <p class="eyebrow">डाउनलोड</p>
+        <h2 id="download-title">फ़्री और ओपन सोर्स</h2>
+        <p class="lead">हर release signed है। ऐप दिन में एक बार अपडेट चेक करता है और उन्हें तभी इंस्टॉल करता है जब आप कहें।</p>
+      </div>
+      <div class="grid g3">
+        <article class="card dl">
+          <h3>macOS</h3>
+          <p>Apple Silicon (M1 और उसके बाद के)। Signed और notarized।</p>
+          <a class="btn" href="/download/mac">Mac के लिए डाउनलोड करें</a>
+          <p class="small">या Homebrew से: <code>brew install --cask danta-nort/tap/antenna</code></p>
+        </article>
+        <article class="card dl">
+          <h3>Linux डेस्कटॉप</h3>
+          <p>x86_64, GTK 3। ऐप, जिसके अंदर सब कुछ है।</p>
+          <a class="btn" href="/download/linux">.tar.gz डाउनलोड करें</a>
+          <p class="small"><a href="/download/linux-deb">Ubuntu और Debian के लिए .deb</a> (<a href="/download/server-deb">node पैकेज</a> के साथ)</p>
+        </article>
+        <article class="card dl">
+          <h3>Linux server</h3>
+          <p>आपके agents के लिए हमेशा ऑनलाइन रहने वाला node: एक systemd user service, root की ज़रूरत नहीं। Terminal में:</p>
+          <p><code>curl -fsSL https://antenna.contact/install.sh | sh</code></p>
+          <a class="btn btn-ghost" href="/download/server">.tar.gz डाउनलोड करें</a>
+        </article>
+      </div>
+      <p class="dl-more">सारी फ़ाइलें, checksums और release notes: <a href="https://github.com/Danta-Nort/antenna/releases/latest">GitHub releases</a> · सोर्स कोड: <a href="https://github.com/Danta-Nort/antenna">github.com/Danta-Nort/antenna</a> · शुरुआत कैसे करें: <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/getting-started.md">गाइड</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/hi/" aria-label="Antenna — होम"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>संपर्क: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/hi/guides/">गाइड</a></p>
+    <p><a href="/hi/privacy">प्राइवेसी पॉलिसी</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

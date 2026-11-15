@@ -10,10 +10,11 @@ use std::{
 };
 
 use antenna_proto::control::{FileInfo, UpdateAutoEvent, UpdateRecord};
+use antenna_update::fetch;
 use tokio::io::{AsyncBufReadExt, AsyncWriteExt, BufReader};
 
 use super::{
-    Attempt, META_ATTEMPT, META_LAST_CHECK, META_STAGED, Staged,
+    Attempt, META_ATTEMPT, META_FIRST_CHECK, META_LAST_CHECK, META_STAGED, Staged,
     release::{self, Found},
 };
 use antenna_files::quarantine::State as FileState;
@@ -217,18 +218,26 @@ impl Session {
         if now.saturating_sub(last) < self.cfg.update.check_every.as_millis() as u64 {
             return;
         }
+        let recorded: Option<String> = self.meta_json(META_FIRST_CHECK);
+        let first = fetch::first_check_due(last, recorded.as_deref());
+        if first {
+            self.meta_put(META_FIRST_CHECK, Some(&fetch::FIRST_CHECK_PENDING));
+        }
         self.meta_put(META_LAST_CHECK, Some(&now));
         let _one = self.auto.verifying.lock().await;
         let (data, cfg) = (self.cfg.data_dir.clone(), self.cfg.update.clone());
         let r = tokio::task::spawn_blocking(move || {
             let dir = release::fresh_dir(&data, "download")
                 .map_err(|e| antenna_update::Error::io("updates folder", e))?;
-            let found = release::fetch_into(&url, &dir, &cfg);
-            Ok::<_, antenna_update::Error>((found, dir))
+            let (found, answered) = release::fetch_into(&url, &dir, &cfg, first);
+            Ok::<_, antenna_update::Error>((found, dir, answered))
         })
         .await;
         match r {
-            Ok(Ok((found, dir))) => {
+            Ok(Ok((found, dir, answered))) => {
+                if first && answered {
+                    self.meta_put(META_FIRST_CHECK, Some(&fetch::FIRST_CHECK_SENT));
+                }
                 self.auto_found(found, "url", None, None).await;
                 release::remove_stage(&self.cfg.data_dir, &dir);
             }

@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sunucu kurmadan self-hosted mesajlaşma uygulaması — Antenna</title>
+<meta name="description" content="Antenna her mesajı konuşanların bilgisayarlarında tutar. Barındıracak bir şey yok; isterseniz sürekli açık bir düğüm ya da kendi relay sunucunuzu ekleyin.">
+<link rel="canonical" href="https://antenna.contact/tr/guides/self-hosted-messenger">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Sunucu kurmadan self-hosted mesajlaşma uygulaması — Antenna">
+<meta property="og:description" content="Antenna her mesajı konuşanların bilgisayarlarında tutar. Barındıracak bir şey yok; isterseniz sürekli açık bir düğüm ya da kendi relay sunucunuzu ekleyin.">
+<meta property="og:url" content="https://antenna.contact/tr/guides/self-hosted-messenger">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="tr_TR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/self-hosted-messenger">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/tr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Rehberler",
+     "item": "https://antenna.contact/tr/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Sunucu çalıştırmanız gerekmeyen self-hosted bir mesajlaşma uygulaması",
+     "item": "https://antenna.contact/tr/guides/self-hosted-messenger"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Sunucu çalıştırmanız gerekmeyen self-hosted bir mesajlaşma uygulaması",
+   "description": "Antenna her mesajı konuşanların bilgisayarlarında tutar. Barındıracak bir şey yok; isterseniz sürekli açık bir düğüm ya da kendi relay sunucunuzu ekleyin.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "tr",
+   "url": "https://antenna.contact/tr/guides/self-hosted-messenger",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/tr/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Ailem kullanabilir mi?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Bilgisayarlarda evet: Antenna 0.1, macOS (Apple Silicon) ve Linux’ta çalışır. Henüz telefon uygulaması yok."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Aktarma sunucusu çevrimdışı kişiler için mesaj saklıyor mu?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Hayır. Çevrimdışı bir kişiye giden mesaj kendi bilgisayarınızda bekler ve kişi geri geldiğinde kendiliğinden gider."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Barındırmam gereken bir şey var mı?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Hayır. Antenna varsayılan aktarma sunucusuyla ve size ait hiçbir sunucu olmadan çalışır. Düğüm ve aktarma sunucusu, istediğiniz zaman içindir."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Sunucuda güncellemeler nasıl yapılır?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "install.sh ile kurulan bir düğüm, önce sürüm imzasını kontrol eden antenna update ile güncellenir; paketle kurulan bir düğüm ise paket yöneticiniz üzerinden güncellenir."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">İçeriğe geç</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/tr/" aria-label="Antenna — ana sayfa"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Ana menü">
+      <a href="/tr/#product">Ürün</a>
+      <a href="/tr/#security">Güvenlik</a>
+      <a href="/tr/guides/">Rehberler</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Dil: Türkçe"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">TR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/self-hosted-messenger" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/self-hosted-messenger" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/self-hosted-messenger" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/self-hosted-messenger" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/self-hosted-messenger" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/self-hosted-messenger" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/self-hosted-messenger" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/self-hosted-messenger" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/self-hosted-messenger" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/self-hosted-messenger" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/self-hosted-messenger" hreflang="tr" lang="tr" aria-current="true">Türkçe</a></li>
+        <li><a href="/it/guides/self-hosted-messenger" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/self-hosted-messenger" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/self-hosted-messenger" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/self-hosted-messenger" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/tr/#download">İndir</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Sayfa yolu"><a href="/tr/">Antenna</a> <span aria-hidden="true">›</span> <a href="/tr/guides/">Rehberler</a></nav>
+    <p class="eyebrow">Güncellendi <time datetime="2026-11-09">9 Kasım 2026</time></p>
+    <h1>Sunucu çalıştırmanız gerekmeyen self-hosted bir mesajlaşma uygulaması</h1>
+    <p class="lead">İnsanlar mesajlarını başkasının sunucusunda tutmamak için mesajlaşma uygulamasını kendileri barındırır (self-hosting). Antenna aynı sonuca hiç sunucu olmadan ulaşır: herkes Antenna’yı kendi bilgisayarında çalıştırır, mesajlar bu bilgisayarlar arasında uçtan uca şifreli gider ve geçmiş yalnızca orada, şifreli bir veritabanında saklanır. Daha fazla kontrol isterseniz sürekli açık bir Linux düğümü ekleyebilir ya da kendi aktarma sunucunuzu (relay) çalıştırabilirsiniz; ikisi de açık kaynaktır.</p>
+
+    <h2>Self-hosted sunucu genellikle ne demektir</h2>
+    <p>Klasik bir self-hosted mesajlaşma uygulaması; kurduğunuz, güncellediğiniz, yedeklediğiniz ve çevrimiçi tuttuğunuz, onu kullanan herkesin her hesabını ve her mesajını barındıran bir sunucudur. Güveni bir şirketten size taşır, onunla birlikte işi ve riski de: sunucu ele geçirilirse herkesin geçmişi de ele geçirilir.</p>
+
+    <h2>Antenna bunun yerine ne yapar</h2>
+    <ul>
+      <li><strong>Barındırılacak hesap yok.</strong> Kimliğiniz, bilgisayarınızda parolanızla korunan bir anahtardır. İnsanları tek kullanımlık bir davet bağlantısıyla ve sesli karşılaştırdığınız bir kodla eklersiniz.</li>
+      <li><strong>Ortada mesaj deposu yok.</strong> Geçmişiniz kendi bilgisayarınızda, SQLCipher ile şifrelenmiş bir veritabanında ve karşı tarafın bilgisayarında durur.</li>
+      <li><strong>Çevrimiçi tutulacak sunucu yok.</strong> İki bilgisayar, ağ izin verdiğinde doğrudan, vermediğinde şifreli trafiği ileten ve hiçbir şey saklamayan bir aktarma sunucusu üzerinden bağlanır.</li>
+    </ul>
+
+    <h2>Sürekli açık bir düğüm ekleyin</h2>
+    <p>Dizüstü bilgisayar uyur; sunucu uyumaz. Yapay zeka ajanlarınızı günün her saati erişilebilir tutmak için Antenna düğümünü bir Linux sunucuya (x86_64) kurun: sürüm arşivini açın ve root gerektirmeden bir systemd kullanıcı servisi kuran <code>./install.sh</code> betiğini çalıştırın ya da <code>.deb</code> veya <code>.rpm</code> paketini kurun. Ardından onu bilgisayarınızla bir kişi gibi, <strong>∞ · My computer</strong> seviyesinde eşleştirin. Adım adım: <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md">Sunucu ekleme</a>.</p>
+    <p>Yeniden başlatmadan sonra düğümün anahtarları, siz oturum açıp <code>antenna unlock</code> çalıştırana kadar kilitli kalır: çalınan bir disk imajı kimseye anahtarlarınızı vermez.</p>
+
+    <h2>Kendi aktarma sunucunuzu çalıştırın</h2>
+    <p>Aktarma sunucusu tek ortak parçadır ve yalnızca şifreli paketleri ve hangi uç noktaların onun üzerinden konuştuğunu görür. Bunun kendi makineniz olmasını tercih ederseniz açık kaynaklı <code>iroh-relay</code> çalıştırın ve düğümünüzü <code>antennad --relay &lt;your relay URL&gt;</code> ile başlatın. 1. ve 2. seviyede güvendiğiniz kişiler her zaman bir aktarma sunucusu üzerinden bağlanır; bu yüzden IP adresinizi asla öğrenemezler.</p>
+
+    <h2>Sorular</h2>
+    <details>
+      <summary>Ailem kullanabilir mi?</summary>
+      <p>Bilgisayarlarda evet: Antenna 0.1, macOS (Apple Silicon) ve Linux’ta çalışır. Henüz telefon uygulaması yok.</p>
+    </details>
+    <details>
+      <summary>Aktarma sunucusu çevrimdışı kişiler için mesaj saklıyor mu?</summary>
+      <p>Hayır. Çevrimdışı bir kişiye giden mesaj kendi bilgisayarınızda bekler ve kişi geri geldiğinde kendiliğinden gider.</p>
+    </details>
+    <details>
+      <summary>Barındırmam gereken bir şey var mı?</summary>
+      <p>Hayır. Antenna varsayılan aktarma sunucusuyla ve size ait hiçbir sunucu olmadan çalışır. Düğüm ve aktarma sunucusu, istediğiniz zaman içindir.</p>
+    </details>
+    <details>
+      <summary>Sunucuda güncellemeler nasıl yapılır?</summary>
+      <p><code>install.sh</code> ile kurulan bir düğüm, önce sürüm imzasını kontrol eden <code>antenna update</code> ile güncellenir; paketle kurulan bir düğüm ise paket yöneticiniz üzerinden güncellenir.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna ücretsiz ve açık kaynaklıdır</strong>, macOS ve Linux için. Hesap da telefon numarası da gerekmez.</p>
+      <a class="btn" href="/tr/#download">Antenna’yı indir</a>
+    </aside>
+    <h2>İlgili rehberler</h2>
+    <ul class="related">
+      <li><a href="/tr/guides/peer-to-peer-encrypted-messenger">Kuantum sonrası şifrelemeli, açık kaynaklı eşler arası (P2P) mesajlaşma uygulaması</a></li>
+      <li><a href="/tr/guides/messenger-without-phone-number">Telefon numarası ya da e-posta istemeyen gizli bir mesajlaşma uygulaması</a></li>
+      <li><a href="/tr/guides/message-claude-code-on-another-computer">Başka bir bilgisayardaki Claude Code’a mesaj gönderin</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/tr/" aria-label="Antenna — ana sayfa"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/tr/guides/">Rehberler</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>İletişim: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/tr/privacy">Gizlilik politikası</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

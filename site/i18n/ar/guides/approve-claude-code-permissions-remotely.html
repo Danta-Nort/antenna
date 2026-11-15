@@ -1,0 +1,46 @@
+<!--guide {"title": "الموافقة على أذونات Claude Code عن بُعد من حاسوب آخر — Antenna", "h1": "وافق على طلبات Claude Code من حاسوب آخر", "description": "يحتاج Claude Code على خادم أو حاسوب ثانٍ إلى موافقتك؟ يوصل Antenna الطلب إلى كل حواسيبك، فتوافق بكلمة المرور أو Touch ID.", "summary": "طلبات الموافقة من Claude Code على حاسوب آخر، تجيب عنها من أي حاسوب من حواسيبك تجلس أمامه.", "source": "2026-11-15"}-->
+<p class="lead">شغّل Claude Code عبر Antenna، في وضع Code من النافذة أو بالأمر <code>antenna session</code> على خادم، فتفحص الخدمة الخلفية لـ Antenna كل أداة يستخدمها وكل رسالة يرسلها. وحين تحتاج خطوة ما إليك، تصبح طلب موافقة يظهر على كل حاسوب اقترنت به على أنه حاسوبك، في <strong>My devices</strong> (أجهزتي)، مع إشعار. وافق عليه هناك بكلمة مرور ذلك الحاسوب أو Touch ID: فيتحقق الحاسوب الذي يعمل عليه Claude Code من إجابتك، وينفّذ الخطوة، ويواصل Claude Code عمله.</p>
+
+<h2>ما يصل إليك</h2>
+<ul>
+  <li><strong>الخطوات بعد قراءة رسالة من جهة اتصال.</strong> بمجرد أن يقرأ Claude Code رسالة زميل، يحدد مستوى ثقة الزميل ما يحق له فعله: في المستوى 4 ينتظرك كل أمر، وفي المستويين 2 و3 ينتظرك كل تعديل وتُرفض الأوامر.</li>
+  <li><strong>التغييرات في إعداداته هو.</strong> بعد قراءة رسالة من أي جهة اتصال، حتى لو كانت من حاسوبك المحمول، تنتظرك التعديلات على <code>CLAUDE.md</code> و<code>.claude/</code> وملفات تعريف الصدفة (shell) والمفاتيح وملفات البناء مثل <code>package.json</code>.</li>
+  <li><strong>الرسائل التي قد تُخرج بياناتك.</strong> بمجرد أن يقرأ ملفات مشروعك، تنتظر كل رسالة إلى جهة اتصال أدنى من ∞، وكذلك أي رسالة إلى جهة كهذه يبدو أنها تحمل مفتاحًا أو كلمة مرور أو رمز وصول. وبمجرد أن يقرأ محادثة واحدة، تنتظر أيضًا أي رسالة إلى محادثة أخرى.</li>
+  <li><strong>الأسئلة.</strong> <em>تجريبي.</em> تظهر أسئلة الوكيل على الحاسوب الذي يعمل عليه، تحت <strong>Questions from your agents</strong> (أسئلة وكلائك). ولتصلك على حاسوبك المحمول بدلًا من ذلك، شغّل <code>antenna agent escalate api-dev --to mac</code> هناك: فيصل كل سؤال بعدها إلى محادثة الوكيل، وتجيب في المحادثة.</li>
+</ul>
+<p>أما نافذة الأذونات الخاصة بـ Claude Code نفسه («Do you want to proceed?») فتبقى في طرفيته: لا يكتب Antenna فيها شيئًا أبدًا. اسمح بالأدوات التي تستخدمها عادةً في إعدادات Claude Code، أو أجب عنها عبر <code>antenna session attach</code>.</p>
+
+<h2>الإعداد</h2>
+<ol>
+  <li><a href="/#download">ثبّت Antenna</a> على الحاسوبين واقرنهما مرة واحدة مع تحديد <strong>This is my own computer (∞)</strong>، كما في <a href="/guides/run-claude-code-on-a-vps">Claude Code على VPS</a>.</li>
+  <li>شغّل Claude Code عبر Antenna. على حاسوب مكتبي: <strong>Agents → AI apps → Start in Code mode</strong>. وعلى خادم:
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api</code></pre></li>
+  <li>على الحاسوب الذي يعمل عليه Claude Code، اقبل الإجابات من الحاسوب الذي ستوافق منه: <strong>My devices</strong> → بطاقة ذلك الحاسوب → <strong>Approvals</strong> → <strong>Accept approvals signed with …</strong>، بكلمة مرورك. وعلى خادم: <code>antenna devices confirm mac</code>.</li>
+</ol>
+
+<h2>أجب من أي حاسوب</h2>
+<p>يظهر الطلب على بطاقة الحاسوب الذي طلبه في <strong>My devices</strong> ‏(<em>تجريبي</em>)، مع إشعار مثل «Antenna: approval needed on Mac mini». تذكر البطاقة أي وكيل يطلب، ولماذا، والغرض من الطلب، وتقتبس نصه، إلا النص الذي فيه سرّ، فهذا لا يغادر الحاسوب الذي طلبه أبدًا. اضغط <strong>Approve with Touch ID</strong> على Mac ‏(<em>تجريبي</em>)، أو <strong>Approve with password</strong> بكلمة مرور الحاسوب الذي تجلس أمامه، أو <strong>Deny</strong>.</p>
+<p>يتحقق الحاسوب الذي طلب من التوقيع بالمفاتيح التي قبلتها عليه، وبالتحدي الخاص به لمرة واحدة، وبهذا الطلب بعينه، ثم ينفّذ الطلب بنفسه مرة واحدة. وعلى ذلك الحاسوب نفسه، تجد الطلب في <strong>Approval requests</strong> (طلبات الموافقة)، أو عبر <code>antenna approvals</code> و<code>antenna approve &lt;id&gt;</code> في الطرفية.</p>
+<p>ينتظر Claude Code حتى 50 ثانية، وتُنفَّذ فورًا أي خطوة وافقت عليها خلالها. وبعد ذلك ينتقل إلى عمل آخر؛ وحين توافق، يكتب Antenna «Approved — continue.» في موجّهه فيعيد تنفيذ الخطوة.</p>
+
+<h2>إذا لم يُجب أحد</h2>
+<p>يُغلق الطلب بعد 10 دقائق: لا يُنفَّذ شيء ولا يُرسل شيء، ويعرف Claude Code أن أحدًا لم يوافق. ويُنبّهك إشعار قبل ذلك بقليل. وبعد <strong>Deny</strong>، الذي لا يحتاج إلى كلمة مرور، يعرف Claude Code أنك رفضت.</p>
+
+<h2>وكيل يوافق نيابة عنك</h2>
+<p><em>تجريبي.</em> يتيح <strong>Can approve for…</strong> (يوافق نيابة عن…) في <strong>Agents</strong> لوكيل تثق به أن يجيب عن طلبات وكلائك الآخرين المتعلقة بالرسائل والملفات، ولا تُحتسب إجابته إلا إذا كان كل ما يمسّه الطلب في المستوى ∞. أما الأوامر والتعديلات فتصلك أنت دائمًا.</p>
+
+<h2>أسئلة</h2>
+<details>
+  <summary>هل يعمل هذا مع Codex؟</summary>
+  <p>جزئيًا. ما يرسله Codex عبر Antenna يُفحص بالطريقة نفسها، وتصل تلك الطلبات إلى كل حواسيبك؛ أما أوامر Codex نفسه فتبقى خاضعة لموافقات Codex في طرفيته.</p>
+</details>
+<details>
+  <summary>هل يستطيع أي حاسوب الموافقة؟</summary>
+  <p>لا. فقط حاسوب اقترنت به على أنه حاسوبك وقبلت مفاتيحه، بكلمة المرور، على الحاسوب الذي يطلب. وإذا فُقد حاسوب، فاضغط <strong>Revoke this computer</strong> (إلغاء هذا الحاسوب) على كل حاسوب من الحواسيب الأخرى.</p>
+</details>
+<details>
+  <summary>هل أستطيع الموافقة من هاتفي؟</summary>
+  <p>ليس بعد. يعمل Antenna اليوم على macOS وLinux.</p>
+</details>

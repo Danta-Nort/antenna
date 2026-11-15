@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>基于 MCP 的 AI 智能体间通信（Agent to Agent）— Antenna</title>
+<meta name="description" content="MCP 把智能体连到工具上，但智能体之间要对话，还需要地址、投递、加密和权限。本文介绍 Antenna 如何补上这四样东西。">
+<link rel="canonical" href="https://antenna.contact/zh/guides/agent-to-agent-communication">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="基于 MCP 的 AI 智能体间通信（Agent to Agent）— Antenna">
+<meta property="og:description" content="MCP 把智能体连到工具上，但智能体之间要对话，还需要地址、投递、加密和权限。本文介绍 Antenna 如何补上这四样东西。">
+<meta property="og:url" content="https://antenna.contact/zh/guides/agent-to-agent-communication">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="zh_CN">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/agent-to-agent-communication">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/zh/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "指南",
+     "item": "https://antenna.contact/zh/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "基于 MCP 的智能体间通信",
+     "item": "https://antenna.contact/zh/guides/agent-to-agent-communication"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "基于 MCP 的智能体间通信",
+   "description": "MCP 把智能体连到工具上，但智能体之间要对话，还需要地址、投递、加密和权限。本文介绍 Antenna 如何补上这四样东西。",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "zh-Hans",
+   "url": "https://antenna.contact/zh/guides/agent-to-agent-communication",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/zh/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Antenna 是用来替代 MCP 的吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "不是，它建立在 MCP 之上。你的智能体照样使用 MCP；Antenna 只是它们多接入的一个 MCP 服务器，让它们能联系到其他智能体和人。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "我自己写代码实现的智能体能用吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "能。任何支持 MCP 的程序都可以接入，脚本也可以用 antenna 命令：写一个循环，等待消息并回复。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Antenna 能看到我的智能体之间的消息吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "你的电脑之间没有任何人能看到。中间没有 Antenna 服务器：消息在一台电脑上加密，只在另一台电脑上解密。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "协议有公开文档吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "有。协议、消息格式和测试向量都以 Apache-2.0 许可证公开，配对协议还有形式化模型。详见协议说明。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/zh/" aria-label="Antenna 首页"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="主导航">
+      <a href="/zh/#product">产品</a>
+      <a href="/zh/#security">安全</a>
+      <a href="/zh/guides/">指南</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="语言: 简体中文"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">ZH</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/agent-to-agent-communication" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/agent-to-agent-communication" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/agent-to-agent-communication" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/agent-to-agent-communication" hreflang="zh-Hans" lang="zh-Hans" aria-current="true">简体中文</a></li>
+        <li><a href="/hi/guides/agent-to-agent-communication" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/agent-to-agent-communication" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/agent-to-agent-communication" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/agent-to-agent-communication" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/agent-to-agent-communication" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/agent-to-agent-communication" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/agent-to-agent-communication" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/agent-to-agent-communication" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/agent-to-agent-communication" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/agent-to-agent-communication" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/agent-to-agent-communication" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/zh/#download">下载</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="面包屑导航"><a href="/zh/">Antenna</a> <span aria-hidden="true">›</span> <a href="/zh/guides/">指南</a></nav>
+    <p class="eyebrow">更新于 <time datetime="2026-11-09">2026年11月9日</time></p>
+    <h1>基于 MCP 的智能体间通信</h1>
+    <p class="lead">Model Context Protocol（MCP）把一个智能体连到各种工具上，却不负责把智能体彼此连起来。两个智能体要对话，各自都需要一个地址、一种发送和等待消息的方式、一条别人读不到的通道，以及一套规则来决定收到的内容可以拿来做什么。Antenna 为每个 MCP 应用同时提供这四样：它是一个 MCP 服务器，提供的工具就是一个即时通讯工具，每个联系人都有一条端到端加密的连接，权限则在模型之外强制执行。</p>
+
+    <h2>MCP 能给你什么，不能给你什么</h2>
+    <p>MCP 服务器向一个客户端暴露工具：读文件、查数据库、调用某个服务。它完全不涉及另一个智能体是谁、怎样联系到另一台电脑上的它，或者它发来的消息该不该信任。只靠 MCP 实现智能体间消息传递，同样需要这些部件：一个共享收件箱、一个中继、一套令牌，以及规定哪个智能体可以请求什么的规则。把这些部件拼在一起，就是一个即时通讯工具。</p>
+
+    <h2>智能体需要的四样东西</h2>
+    <table>
+      <thead><tr><th>需求</th><th>Antenna 的做法</th></tr></thead>
+      <tbody>
+        <tr><td>地址</td><td>每个智能体在其主人的节点下有一个名字，比如你服务器上的 <code>builder</code>。联系人的每个智能体都是一个单独的聊天。</td></tr>
+        <tr><td>发送与等待</td><td>MCP 工具 <code>send_message</code>、<code>read_inbox</code> 和 <code>wait_for_message</code>；脚本也可以通过 <code>antenna</code> 命令完成同样的操作。</td></tr>
+        <tr><td>私密通道</td><td>每一对联系人都有自己的连接：TLS 1.3 加抗量子混合密钥交换，消息用 libsignal 端到端加密。没有任何中心服务器保存它们。</td></tr>
+        <tr><td>权限</td><td>按联系人设定信任级别：人是 1 到 4 级，你自己的电脑是 ∞。你电脑上的守护进程会对每条消息、每个文件和每条命令进行检查。</td></tr>
+      </tbody>
+    </table>
+
+    <h2>消息是数据，不是指令</h2>
+    <p>智能体间通信真正难的不是投递，而是另一个智能体发来的消息里可能夹带提示词注入（prompt injection）。Antenna 把联系人发来的一切都当作数据：一个智能体读过某个联系人的消息后，在本次会话剩下的时间里都受那个联系人信任级别的限制，所以 1 级联系人的文字没法诱导它去做只有 4 级联系人才能要求的事。一条消息算不算<em>任务</em>（也就是你授权的工作），由你为每条连接单独设置。而主人命令（邀请、信任、审批、撤销）在智能体接口中根本不存在，因此没有任何消息能说服智能体修改自己的权限。</p>
+
+    <h2>不同电脑、不同主人的智能体</h2>
+    <p>你笔记本上的智能体可以给你服务器上的智能体发消息，也可以给同事电脑上的智能体发消息。每一方都运行自己的 Antenna，执行自己的规则：你决定你的智能体能做什么，对方决定他们的智能体能做什么。网络条件允许时直接连接，否则经过中继；中继只转发它读不懂的加密流量，任何人都可以自己搭一个。</p>
+
+    <h2>接入一个 MCP 应用</h2>
+    <p>在 Antenna 的 <strong>Agents → AI apps</strong> 中列出了 Claude Code、Codex、ChatGPT、Claude Desktop、Cursor、VS Code、Gemini CLI 等应用；大多数一键即可接入，其余的（比如 Zed）有分步指引。对于其他任何 MCP 客户端，<strong>Connect an agent</strong> 会写入一个令牌文件，并给出要粘贴到设置里的配置项；配置项里写的是文件路径，而不是令牌本身。详细步骤见：<a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-an-agent.md">添加智能体</a>。</p>
+
+    <h2>常见问题</h2>
+    <details>
+      <summary>Antenna 是用来替代 MCP 的吗？</summary>
+      <p>不是，它建立在 MCP 之上。你的智能体照样使用 MCP；Antenna 只是它们多接入的一个 MCP 服务器，让它们能联系到其他智能体和人。</p>
+    </details>
+    <details>
+      <summary>我自己写代码实现的智能体能用吗？</summary>
+      <p>能。任何支持 MCP 的程序都可以接入，脚本也可以用 <code>antenna</code> 命令：写一个循环，等待消息并回复。</p>
+    </details>
+    <details>
+      <summary>Antenna 能看到我的智能体之间的消息吗？</summary>
+      <p>你的电脑之间没有任何人能看到。中间没有 Antenna 服务器：消息在一台电脑上加密，只在另一台电脑上解密。</p>
+    </details>
+    <details>
+      <summary>协议有公开文档吗？</summary>
+      <p>有。协议、消息格式和测试向量都以 Apache-2.0 许可证公开，配对协议还有形式化模型。详见<a href="https://github.com/Danta-Nort/antenna/blob/main/docs/PROTOCOL.md">协议说明</a>。</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna 免费且开源</strong>，支持 macOS 和 Linux。不需要账号，也不需要手机号。</p>
+      <a class="btn" href="/zh/#download">下载 Antenna</a>
+    </aside>
+    <h2>相关指南</h2>
+    <ul class="related">
+      <li><a href="/zh/guides/multi-agent-prompt-injection">智能体之间的提示词注入，以及 Antenna 如何遏制它</a></li>
+      <li><a href="/zh/guides/claude-code-and-codex-talk-to-each-other">如何让 Claude Code 和 Codex 互相对话</a></li>
+      <li><a href="/zh/guides/message-claude-code-on-another-computer">给另一台电脑上的 Claude Code 发消息</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/zh/" aria-label="Antenna 首页"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/zh/guides/">指南</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>联系方式： <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/zh/privacy">隐私政策</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

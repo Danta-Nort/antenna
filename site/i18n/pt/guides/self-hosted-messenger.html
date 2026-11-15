@@ -1,0 +1,37 @@
+<!--guide {"title": "Mensageiro self-hosted sem servidor para administrar — Antenna", "h1": "Um mensageiro self-hosted sem servidor para administrar", "description": "O Antenna guarda cada mensagem nos computadores de quem conversa. Por padrão, não há nada para hospedar; nó sempre ligado ou relay próprio, só se você quiser.", "summary": "Por que o Antenna não precisa de servidor e como adicionar um nó sempre ligado ou o seu próprio relay quando quiser.", "source": "2026-11-09"}-->
+<p class="lead">As pessoas hospedam o próprio mensageiro para manter as mensagens fora do servidor de outra pessoa. O Antenna chega lá sem servidor nenhum: cada pessoa roda o Antenna no próprio computador, as mensagens trafegam entre esses computadores com criptografia de ponta a ponta, e o histórico fica guardado só neles, num banco de dados criptografado. Se você quiser mais controle, pode adicionar um nó Linux sempre ligado ou rodar o seu próprio relay, ambos de código aberto.</p>
+
+<h2>O que um servidor self-hosted costuma significar</h2>
+<p>Um mensageiro self-hosted clássico é um servidor que você instala, atualiza, faz backup e mantém online, guardando todas as contas e todas as mensagens de todo mundo que o usa. Ele transfere a confiança de uma empresa para você, e com ela o trabalho e o risco: se o servidor for invadido, o histórico de todos vai junto.</p>
+
+<h2>O que o Antenna faz no lugar disso</h2>
+<ul>
+  <li><strong>Nenhuma conta para hospedar.</strong> A sua identidade é uma chave no seu computador, protegida pela sua senha. Você adiciona pessoas com um link de convite de uso único e um código que vocês comparam por voz.</li>
+  <li><strong>Nenhum armazenamento de mensagens no meio.</strong> O seu histórico fica no seu computador, num banco de dados criptografado com SQLCipher, e no da outra pessoa.</li>
+  <li><strong>Nenhum servidor para manter online.</strong> Dois computadores se conectam diretamente quando a rede permite e, quando não, por um relay que repassa tráfego criptografado e não guarda nada.</li>
+</ul>
+
+<h2>Adicione um nó sempre ligado</h2>
+<p>Um notebook dorme; um servidor, não. Para manter os seus agentes de IA acessíveis o tempo todo, instale o nó do Antenna num servidor Linux (x86_64): descompacte a versão e rode <code>./install.sh</code>, que configura um serviço de usuário do systemd sem root, ou instale o pacote <code>.deb</code> ou <code>.rpm</code>. Depois, pareie-o com o seu computador como um contato, no nível <strong>∞ · My computer</strong>. Passo a passo: <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md">Adicionar um servidor</a>.</p>
+<p>Depois de um reinício, as chaves do nó ficam bloqueadas até você fazer login e rodar <code>antenna unlock</code>: uma imagem de disco roubada não entrega as suas chaves a ninguém.</p>
+
+<h2>Rode o seu próprio relay</h2>
+<p>O relay é a única peça compartilhada, e ele só vê pacotes criptografados e quais pontas conversam através dele. Se você prefere que essa seja uma máquina sua, rode o <code>iroh-relay</code>, de código aberto, e inicie o seu nó com <code>antennad --relay &lt;your relay URL&gt;</code>. Os contatos em quem você confia nos níveis 1 e 2 sempre se conectam por um relay, então nunca descobrem o seu endereço IP.</p>
+
+<h2>Perguntas</h2>
+<details>
+  <summary>A minha família pode usar?</summary>
+  <p>Em computadores, sim: o Antenna 0.1 roda no macOS (Apple Silicon) e no Linux. Ainda não existe app para celular.</p>
+</details>
+<details>
+  <summary>O relay guarda mensagens para contatos offline?</summary>
+  <p>Não. Uma mensagem para um contato offline espera no seu próprio computador e segue sozinha assim que ele volta.</p>
+</details>
+<details>
+  <summary>Tenho que hospedar alguma coisa?</summary>
+  <p>Não. O Antenna funciona com o relay padrão e sem nenhum servidor seu. O nó e o relay são para quando você quiser.</p>
+</details>
+<details>
+  <summary>Como funcionam as atualizações num servidor?</summary>
+  <p>Um nó instalado com <code>install.sh</code> se atualiza com <code>antenna update</code>, que confere primeiro a assinatura da versão; uma instalação por pacote se atualiza pelo seu gerenciador de pacotes.</p>
+</details>

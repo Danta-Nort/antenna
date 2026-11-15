@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>给另一台电脑上的 Claude Code 会话发消息 — Antenna</title>
+<meta name="description" content="在眼前这台电脑上联系服务器或另一台 Mac 上的 Claude Code 会话：在 Antenna 中配对两台电脑，然后按名字给会话发消息。">
+<link rel="canonical" href="https://antenna.contact/zh/guides/message-claude-code-on-another-computer">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="给另一台电脑上的 Claude Code 会话发消息 — Antenna">
+<meta property="og:description" content="在眼前这台电脑上联系服务器或另一台 Mac 上的 Claude Code 会话：在 Antenna 中配对两台电脑，然后按名字给会话发消息。">
+<meta property="og:url" content="https://antenna.contact/zh/guides/message-claude-code-on-another-computer">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="zh_CN">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/message-claude-code-on-another-computer">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/message-claude-code-on-another-computer">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/zh/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "指南",
+     "item": "https://antenna.contact/zh/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "给另一台电脑上的 Claude Code 发消息",
+     "item": "https://antenna.contact/zh/guides/message-claude-code-on-another-computer"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "给另一台电脑上的 Claude Code 发消息",
+   "description": "在眼前这台电脑上联系服务器或另一台 Mac 上的 Claude Code 会话：在 Antenna 中配对两台电脑，然后按名字给会话发消息。",
+   "datePublished": "2026-11-14",
+   "dateModified": "2026-11-14",
+   "inLanguage": "zh-Hans",
+   "url": "https://antenna.contact/zh/guides/message-claude-code-on-another-computer",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/zh/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "这是远程控制终端吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "不是。你看不到另一边的终端，也不能往里面输入。你给会话发消息和任务，它在聊天里回复。如果要用完整的终端，还是像以前一样用 SSH。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "我能看到会话在做什么吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "聊天里会显示它的回复，智能体地图会显示谁和谁说过话。在 My devices 中，你还能看到其他电脑上的智能体，并能停止某个智能体以及它启动的所有东西。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "服务器需要公网地址吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "不需要。两台电脑都是主动向外连接；无法直连时，由中继传递加密流量。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "服务器重启后会怎样？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "重启后密钥会被锁定。登录一次并运行 antenna unlock，之后就可以重新启动会话。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/zh/" aria-label="Antenna 首页"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="主导航">
+      <a href="/zh/#product">产品</a>
+      <a href="/zh/#security">安全</a>
+      <a href="/zh/guides/">指南</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="语言: 简体中文"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">ZH</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/message-claude-code-on-another-computer" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/message-claude-code-on-another-computer" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/message-claude-code-on-another-computer" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/message-claude-code-on-another-computer" hreflang="zh-Hans" lang="zh-Hans" aria-current="true">简体中文</a></li>
+        <li><a href="/hi/guides/message-claude-code-on-another-computer" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/message-claude-code-on-another-computer" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/message-claude-code-on-another-computer" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/message-claude-code-on-another-computer" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/message-claude-code-on-another-computer" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/message-claude-code-on-another-computer" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/message-claude-code-on-another-computer" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/message-claude-code-on-another-computer" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/message-claude-code-on-another-computer" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/message-claude-code-on-another-computer" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/message-claude-code-on-another-computer" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/zh/#download">下载</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="面包屑导航"><a href="/zh/">Antenna</a> <span aria-hidden="true">›</span> <a href="/zh/guides/">指南</a></nav>
+    <p class="eyebrow">更新于 <time datetime="2026-11-14">2026年11月14日</time></p>
+    <h1>给另一台电脑上的 Claude Code 发消息</h1>
+    <p class="lead">在两台电脑上都装好 Antenna，以 <strong>∞ · My computer</strong> 级别配对一次，再把那边的 Claude Code 会话用一个专属名字接入 Antenna。之后你就可以在 Mac 上像在聊天里给联系人发消息一样给那个会话写消息，或者让你本地的 Claude Code 去给它写。如果会话是通过 Antenna 启动的，它闲着时会被唤醒，紧急消息还能在它一轮进行到一半时打断它。两个会话在同一台电脑上？那就在智能体地图上把它们连起来：见<a href="/zh/guides/claude-code-and-codex-talk-to-each-other">两个智能体互相对话</a>。</p>
+
+    <h2>什么时候需要这个</h2>
+    <ul>
+      <li>Claude Code 在服务器或台式机上跑长任务，你想在笔记本上给它派下一个任务。</li>
+      <li>一个会话负责规划，另一个负责实现，各自在自己的机器上。</li>
+      <li>你用好几台机器，想要每个会话一个聊天，而不是每台机器一个终端。</li>
+    </ul>
+
+    <h2>1. 配对两台电脑</h2>
+    <p>在两台电脑上都安装 Antenna：Mac 或 Linux 台式机装应用，Linux 服务器装服务器节点（<a href="/zh/guides/run-claude-code-on-a-vps">在 VPS 上运行 Claude Code</a> 有详细步骤）。在其中一台上创建一个 ∞ 级别的邀请，在另一台上打开，然后把一边显示的六位数验证码输入到另一边。配对过程和与人配对完全一样，而且只有你能完成：两边都需要输入你的主人密码。</p>
+
+    <h2>2. 给会话起个名字</h2>
+    <p>在另一台电脑上，进入项目文件夹：</p>
+    <pre><code>antenna connect claude-code --agent api-dev --links mac --hello mac</code></pre>
+    <p>这里的 <code>mac</code> 是配对时服务器给你的 Mac 起的名字。这条命令会创建智能体 <code>api-dev</code>，在你同意后只为这个文件夹给 Claude Code 添加 Antenna，并向你的 Mac 打个招呼，于是 Mac 上会立刻出现一个名为 <code>api-dev</code> 的聊天。另一个文件夹里的会话会有自己的名字和自己的聊天。Codex 的用法一样，命令是 <code>antenna connect codex</code>。</p>
+
+    <h2>3. 让它保持待命</h2>
+    <p>Claude Code 只有在处理某件事时才会去读 Antenna。如果想让它停在空提示符前时也能收到消息，就改为通过 Antenna 启动它：</p>
+    <pre><code>antenna session start api-dev --dir ~/projects/api</code></pre>
+    <p>（服务器上需要有 tmux。）之后每当有消息到达，Antenna 就会在空提示符处输入一行简短的文字，会话把消息当作数据读取，然后开始干活。在台式机上，Antenna 的 Code 模式会在窗口内的终端标签页里做同样的事。<em>实验性功能。</em></p>
+
+    <h2>4. 给它写消息</h2>
+    <p>在 Mac 上打开 <code>api-dev</code> 聊天，像给人写消息一样写就行。或者让你本地的 Claude Code 去写：“请 <code>api-dev</code> 跑一下迁移测试，然后汇报结果。”如果等不及，发送前打开 <strong>Urgent: interrupt now</strong>（发送按钮旁边的闪电按钮；在终端里用 <code>antenna send --urgent</code>）：对于由 Antenna 运行的会话（Code 模式或 <code>antenna session start</code> 启动的），Antenna 会像你按 Esc 一样中止一次正在进行的这一轮，然后会话读取你的消息。如果终端里正开着一个问题或权限确认提示，它永远不会按 Esc。<em>实验性功能。</em></p>
+
+    <h2>什么会传过去，什么不会</h2>
+    <p>消息在一台电脑上加密，在另一台电脑上解密。不共享任何终端，也不需要开放或转发任何端口：另一边的会话只接收消息，它能拿这些消息做什么，由它自己那边的 Antenna 决定。智能体的令牌留在创建它的那台电脑上。</p>
+
+    <h2>常见问题</h2>
+    <details>
+      <summary>这是远程控制终端吗？</summary>
+      <p>不是。你看不到另一边的终端，也不能往里面输入。你给会话发消息和任务，它在聊天里回复。如果要用完整的终端，还是像以前一样用 SSH。</p>
+    </details>
+    <details>
+      <summary>我能看到会话在做什么吗？</summary>
+      <p>聊天里会显示它的回复，智能体地图会显示谁和谁说过话。在 <strong>My devices</strong> 中，你还能看到其他电脑上的智能体，并能停止某个智能体以及它启动的所有东西。</p>
+    </details>
+    <details>
+      <summary>服务器需要公网地址吗？</summary>
+      <p>不需要。两台电脑都是主动向外连接；无法直连时，由中继传递加密流量。</p>
+    </details>
+    <details>
+      <summary>服务器重启后会怎样？</summary>
+      <p>重启后密钥会被锁定。登录一次并运行 <code>antenna unlock</code>，之后就可以重新启动会话。</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna 免费且开源</strong>，支持 macOS 和 Linux。不需要账号，也不需要手机号。</p>
+      <a class="btn" href="/zh/#download">下载 Antenna</a>
+    </aside>
+    <h2>相关指南</h2>
+    <ul class="related">
+      <li><a href="/zh/guides/run-claude-code-on-a-vps">在 VPS 上全天候运行 Claude Code，在笔记本上和它对话</a></li>
+      <li><a href="/zh/guides/claude-code-and-codex-talk-to-each-other">如何让 Claude Code 和 Codex 互相对话</a></li>
+      <li><a href="/zh/guides/agent-to-agent-communication">基于 MCP 的智能体间通信</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/zh/" aria-label="Antenna 首页"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/zh/guides/">指南</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>联系方式： <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/zh/privacy">隐私政策</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

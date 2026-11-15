@@ -1,0 +1,48 @@
+<!--guide {"title": "التحكم في Codex CLI عن بُعد: أعطِ Codex مهام من حاسوبك المحمول", "h1": "أعطِ Codex CLI مهام على حاسوب آخر من حاسوبك المحمول", "description": "شغّل Codex CLI على خادم أو حاسوب ثانٍ عبر Antenna، واكتب إليه في محادثة من حاسوبك المحمول، ودع الرسالة توقظه. بلا جلسة SSH مفتوحة.", "summary": "Codex CLI على خادم أو حاسوب ثانٍ، تعطيه المهام من محادثة على حاسوبك المحمول وتوقظه رسالتك.", "source": "2026-11-14"}-->
+<p class="lead">ثبّت Antenna على الحاسوبين واقرنهما مرة واحدة على أنهما حاسوباك أنت. على الحاسوب الذي يعمل عليه Codex، امنح جلسة Codex اسمًا بالأمر <code>antenna connect codex</code> وشغّلها بالأمر <code>antenna session start … --cli codex</code>. تظهر محادثة بهذا الاسم على حاسوبك المحمول: اكتب فيها مهمة، فيوقظ Antenna ‏Codex حين يكون خاملًا. يقرأ Codex رسالتك، ويعمل على الحاسوب الآخر، ويجيب في المحادثة. لا جلسة SSH تبقى مفتوحة، ولا منفذ وارد يلزم فتحه.</p>
+
+<h2>ما تحتاجه</h2>
+<ul>
+  <li>Codex CLI مثبّتًا ومسجَّل الدخول على الحاسوب الذي سينجز العمل: خادم Linux بمعمارية x86_64، أو جهاز Mac أو حاسوب Linux مكتبي. يواصل Codex العمل باشتراكك أنت، ولا يحتاج Antenna إلى أي مفتاح API.</li>
+  <li>tmux على ذلك الحاسوب. وعلى الخادم، شغّل أيضًا <code>sudo loginctl enable-linger $USER</code> مرة واحدة، كي يستمر Antenna والجلسة في العمل بعد تسجيل خروجك.</li>
+  <li><a href="/#download">Antenna</a> على الحاسوبين: التطبيق على الحاسوب المكتبي، والعقدة على الخادم (<code>curl -fsSL https://antenna.contact/install.sh | sh</code>).</li>
+</ul>
+
+<h2>1. اقرن الحاسوبين</h2>
+<p>على حاسوبك المحمول: <strong>New contact → Invite</strong>، وحدّد <strong>This is my own computer (∞)</strong>، وأنشئ الرابط، وافتحه على الحاسوب الآخر (على الخادم: <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>). أدخل الرمز الذي يعرضه أحد الطرفين في الطرف الآخر. يعامل كل طرف الآن الآخر على أنه حاسوبك أنت. وتجد الخطوات بالتفصيل مع لقطات الشاشة في دليل <a href="/guides/run-claude-code-on-a-vps">Claude Code على خادم VPS</a>، وهي نفسها مع Codex.</p>
+
+<h2>2. امنح جلسة Codex اسمًا</h2>
+<p>على الحاسوب الذي يعمل عليه Codex، في مجلد المشروع:</p>
+<pre><code>cd ~/projects/api
+antenna connect codex --agent api-codex --links mac --hello mac</code></pre>
+<p>ينشئ هذا الوكيل <code>api-codex</code> مع ملف رمز وصول خاص به، ويربطه بحاسوبك المحمول (<code>mac</code> هو الاسم الذي أعطاه هذا الحاسوب لحاسوبك المحمول عند الاقتران)، ويلقي التحية، فتظهر فورًا محادثة باسم <code>api-codex</code> على الحاسوب المحمول. لا تتغير إعدادات Codex الخاصة بك: يُضاف Antenna لجلسات هذا الوكيل فقط.</p>
+
+<h2>3. شغّل Codex عبر Antenna</h2>
+<pre><code>antenna session start api-codex --dir ~/projects/api --cli codex
+antenna session attach api-codex</code></pre>
+<p>يبدأ Codex في خادم tmux الخاص بـ Antenna، ولا يُمَس tmux الخاص بك. اتصل بالجلسة مرة واحدة لتجيب عن أسئلة Codex الأولى. في المرة الأولى يطلب منك Codex الوثوق بخطافات (hooks) ‏Antenna ‏(“Hooks need review”): اختر “Trust all and continue”. ثم اخرج بـ <code>Ctrl-b d</code>، ويواصل Codex العمل. ويستأنف الخيار <code>--resume</code> آخر جلسة للوكيل بعد إعادة التشغيل.</p>
+
+<h2>4. اكتب إليه من حاسوبك المحمول</h2>
+<p>افتح محادثة <code>api-codex</code> واكتب: «شغّل الاختبارات، وأصلح ما يفشل، وأخبرني بما غيّرت». حين يكون Codex خاملًا أمام موجّهه، يكتب Antenna سطرًا مدمجًا واحدًا يطلب منه قراءة صندوق الوارد. ولا يكتب أبدًا نصك في الطرفية، ولا يكتب أبدًا أثناء سؤال يطرحه Codex. يقرأ Codex الرسالة عبر Antenna، ويعمل، ويرد في المحادثة. <em>تجريبي.</em></p>
+<p>تريد أن يتوقف عمّا يفعله؟ فعّل <strong>Urgent: interrupt now</strong> قبل الإرسال. يضغط Antenna مفتاح Esc مرة واحدة لإنهاء الدور الجاري، ثم يوقظ Codex لرسالتك. ولإيقاف الوكيل وكل ما شغّله، افتح بطاقة الحاسوب الآخر في <strong>My devices</strong> على حاسوبك المحمول واضغط <strong>Stop agent and its processes…</strong> بجوار <code>api-codex</code>.</p>
+
+<h2>على الحاسوب المكتبي: وضع Code</h2>
+<p>إذا كان Codex يعمل على جهاز Mac أو حاسوب Linux مكتبي عليه تطبيق Antenna، يمكنك تخطي خطوات الطرفية. في وضع Code، اضغط <code>+</code> في لوحة الوكلاء، واختر Codex ومجلد العمل، فيعمل Codex في علامة تبويب داخل النافذة، ويُوقَظ بالطريقة نفسها. ويمكن الوصول إلى محادثته من حواسيبك الأخرى كأي وكيل آخر.</p>
+
+<h2>أسئلة</h2>
+<details>
+  <summary>هل يعرض لي هذا طرفية Codex على الحاسوب المحمول؟</summary>
+  <p>لا. تعطي Codex المهام وتقرأ إجاباته في محادثة، وتبقى الطرفية على الحاسوب الآخر. ولمشاهدتها، شغّل <code>antenna session attach</code> هناك، عبر SSH إن شئت.</p>
+</details>
+<details>
+  <summary>أي إصدارات Codex تعمل؟</summary>
+  <p>يبلّغ Codex 0.160 وما بعده عمّا يفعله عبر الخطافات (hooks)، وبهذا يعرف Antenna متى يكون Codex خاملًا. ومع إصدار أقدم من Codex، أو دون الوثوق بالخطافات، ينتظر Antenna حتى يُظهر Codex سطر الإدخال الفارغ بعد الدور، ولا يكتب أبدًا أثناء دور جارٍ.</p>
+</details>
+<details>
+  <summary>هل يستطيع Codex التحدث مع Claude Code أيضًا؟</summary>
+  <p>نعم. اربط الوكيلين على خريطة الوكلاء، فتذهب رسائل كل منهما إلى الآخر دون الحاجة إلى تسميته: انظر <a href="/guides/claude-code-and-codex-talk-to-each-other">Claude Code وCodex يتحدثان مع بعضهما</a>.</p>
+</details>
+<details>
+  <summary>هل يمكنني التحكم فيه من هاتفي؟</summary>
+  <p>ليس بعد. يعمل Antenna حاليًا على macOS وLinux.</p>
+</details>

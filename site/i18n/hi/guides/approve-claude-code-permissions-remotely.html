@@ -1,0 +1,46 @@
+<!--guide {"title": "दूसरे कंप्यूटर से Claude Code permissions approve करें — Antenna", "h1": "दूसरे कंप्यूटर से Claude Code के requests मंज़ूर करें", "description": "Server या दूसरे कंप्यूटर पर Claude Code को आपकी मंज़ूरी चाहिए? Antenna request आपके हर कंप्यूटर पर लाता है, और आप password या Touch ID से जवाब देते हैं।", "summary": "दूसरे कंप्यूटर पर चल रहे Claude Code के approval requests, जिनका जवाब आप उसी कंप्यूटर से देते हैं जिस पर आप बैठे हैं।", "source": "2026-11-15"}-->
+<p class="lead">Claude Code को Antenna के ज़रिए शुरू करें, window में Code mode में या server पर <code>antenna session</code> से, और Antenna का daemon उसके इस्तेमाल किए हर tool और भेजे गए हर मैसेज को जाँचता है। जब किसी कदम के लिए आपकी ज़रूरत होती है, तो वह एक approval request बन जाता है, जो हर उस कंप्यूटर पर, जिसे आपने अपने कंप्यूटर के रूप में जोड़ा है, <strong>My devices</strong> में notification के साथ दिखता है। वहीं उस कंप्यूटर के password या Touch ID से उसे मंज़ूर करें: जिस कंप्यूटर पर Claude Code चल रहा है, वह आपका जवाब जाँचता है, कदम पूरा करता है, और Claude Code आगे बढ़ता है।</p>
+
+<h2>आप तक क्या पहुँचता है</h2>
+<ul>
+  <li><strong>किसी कॉन्टैक्ट का मैसेज पढ़ने के बाद के कदम।</strong> जैसे ही Claude Code किसी साथी का मैसेज पढ़ लेता है, उसका trust level तय करता है कि वह क्या कर सकता है: level 4 पर हर command आपका इंतज़ार करती है; levels 2 और 3 पर हर edit आपका इंतज़ार करता है, और commands मना हो जाती हैं।</li>
+  <li><strong>उसके अपने setup में बदलाव।</strong> किसी भी कॉन्टैक्ट का मैसेज पढ़ने के बाद, चाहे वह आपके अपने लैपटॉप से ही क्यों न हो, <code>CLAUDE.md</code>, <code>.claude/</code>, shell profiles, keys और <code>package.json</code> जैसी build files में edits आपका इंतज़ार करते हैं।</li>
+  <li><strong>ऐसे मैसेज जो आपका डेटा बाहर ले जा सकते हैं।</strong> जैसे ही वह आपके प्रोजेक्ट की फ़ाइलें पढ़ लेता है, ∞ से नीचे के किसी कॉन्टैक्ट को भेजा गया हर मैसेज इंतज़ार करता है, और ऐसे कॉन्टैक्ट को भेजा गया वह हर मैसेज भी जिसमें key, password या token होने का शक हो। एक बातचीत पढ़ लेने के बाद, किसी दूसरी बातचीत में भेजा गया मैसेज भी इंतज़ार करता है।</li>
+  <li><strong>सवाल।</strong> <em>Experimental।</em> Agent के सवाल उसी कंप्यूटर पर दिखते हैं जहाँ वह चलता है, <strong>Questions from your agents</strong> (आपके agents के सवाल) में। उन्हें अपने लैपटॉप पर पाने के लिए वहाँ <code>antenna agent escalate api-dev --to mac</code> चलाएँ: फिर हर सवाल agent की चैट में आता है, और आप चैट में जवाब देते हैं।</li>
+</ul>
+<p>Claude Code का अपना permission prompt (“Do you want to proceed?”) उसके terminal में ही रहता है: Antenna उसमें कभी कुछ टाइप नहीं करता। जो tools आप रोज़ इस्तेमाल करते हैं, उन्हें Claude Code की settings में allow कर दें, या <code>antenna session attach</code> से उसका जवाब दें।</p>
+
+<h2>सेट अप करें</h2>
+<ol>
+  <li>दोनों कंप्यूटरों पर <a href="/#download">Antenna इंस्टॉल करें</a> और उन्हें एक बार <strong>This is my own computer (∞)</strong> पर tick लगाकर जोड़ें, जैसा <a href="/guides/run-claude-code-on-a-vps">VPS पर Claude Code</a> में बताया है।</li>
+  <li>Claude Code को Antenna के ज़रिए शुरू करें। डेस्कटॉप पर: <strong>Agents → AI apps → Start in Code mode</strong>। Server पर:
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api</code></pre></li>
+  <li>जिस कंप्यूटर पर Claude Code चलता है, वहाँ उस कंप्यूटर के जवाब स्वीकार करें जिससे आप मंज़ूरी देंगे: <strong>My devices</strong> → उस कंप्यूटर का कार्ड → <strong>Approvals</strong> → <strong>Accept approvals signed with …</strong>, अपने password के साथ। Server पर: <code>antenna devices confirm mac</code>।</li>
+</ol>
+
+<h2>किसी भी कंप्यूटर से जवाब दें</h2>
+<p>Request पूछने वाले कंप्यूटर के कार्ड पर <strong>My devices</strong> में दिखता है (<em>experimental</em>), “Antenna: approval needed on Mac mini” जैसे notification के साथ। कार्ड बताता है कि कौन सा agent पूछ रहा है, किस लिए, क्यों, और उसका टेक्स्ट दिखाता है, सिवाय ऐसे टेक्स्ट के जिसमें कोई secret हो: वह पूछने वाले कंप्यूटर से कभी बाहर नहीं जाता। Mac पर <strong>Approve with Touch ID</strong> (<em>experimental</em>) दबाएँ, जिस कंप्यूटर पर आप हैं उसके password से <strong>Approve with password</strong>, या <strong>Deny</strong>।</p>
+<p>पूछने वाला कंप्यूटर signature को उन keys से जाँचता है जिन्हें आपने वहाँ स्वीकार किया है, साथ ही अपने one-time challenge और ठीक इसी request से, फिर request को ख़ुद, एक बार, पूरा करता है। उसी कंप्यूटर पर request <strong>Approval requests</strong> में होता है, या terminal में <code>antenna approvals</code> और <code>antenna approve &lt;id&gt;</code> से।</p>
+<p>Claude Code 50 सेकंड तक इंतज़ार करता है, और तब तक मंज़ूर हुआ कदम तुरंत चलता है। उसके बाद वह दूसरे काम में लग जाता है; जब आप मंज़ूरी देते हैं, Antenna उसके prompt में “Approved — continue.” टाइप करता है और वह कदम फिर से चलाता है।</p>
+
+<h2>अगर कोई जवाब न दे</h2>
+<p>Request 10 मिनट बाद बंद हो जाता है: कुछ नहीं चलता, कुछ नहीं भेजा जाता, और Claude Code को पता चलता है कि किसी ने मंज़ूरी नहीं दी। उससे थोड़ा पहले एक notification आपको याद दिलाता है। <strong>Deny</strong> के बाद, जिसके लिए password नहीं चाहिए, Claude Code को पता चलता है कि आपने मना किया।</p>
+
+<h2>आपकी ओर से मंज़ूरी देने वाला agent</h2>
+<p><em>Experimental।</em> <strong>Agents</strong> में <strong>Can approve for…</strong> (किसकी ओर से मंज़ूरी दे) आपके भरोसे वाले agent को आपके दूसरे agents के मैसेज और फ़ाइलों से जुड़े requests का जवाब देने देता है, और उसका जवाब तभी गिना जाता है जब request से जुड़ी हर चीज़ ∞ पर हो। Commands और edits हमेशा आपके पास आते हैं।</p>
+
+<h2>सवाल-जवाब</h2>
+<details>
+  <summary>क्या यह Codex के साथ काम करता है?</summary>
+  <p>कुछ हद तक। Codex जो कुछ Antenna से भेजता है, वह इसी तरह जाँचा जाता है, और वे requests आपके सभी कंप्यूटरों तक पहुँचते हैं; Codex की अपनी commands उसके terminal में Codex की approvals के पास ही रहती हैं।</p>
+</details>
+<details>
+  <summary>क्या कोई भी कंप्यूटर मंज़ूरी दे सकता है?</summary>
+  <p>नहीं। सिर्फ़ वही कंप्यूटर, जिसे आपने अपने कंप्यूटर के रूप में जोड़ा है और जिसकी keys आपने पूछने वाले कंप्यूटर पर स्वीकार की हैं, और वह भी password के साथ। खोए हुए कंप्यूटर के लिए बाक़ी हर कंप्यूटर पर <strong>Revoke this computer</strong> दबाएँ।</p>
+</details>
+<details>
+  <summary>क्या मैं फ़ोन से मंज़ूरी दे सकता हूँ?</summary>
+  <p>अभी नहीं। Antenna आज macOS और Linux पर चलता है।</p>
+</details>

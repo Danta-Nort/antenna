@@ -1,0 +1,31 @@
+{
+  "language": "Sprache",
+  "skip": "Zum Inhalt springen",
+  "home": "Antenna — Startseite",
+  "mainNav": "Hauptmenü",
+  "breadcrumb": "Brotkrumennavigation",
+  "navProduct": "Produkt",
+  "navSecurity": "Sicherheit",
+  "navGuides": "Anleitungen",
+  "download": "Download",
+  "updated": "Aktualisiert",
+  "related": "Weitere Anleitungen",
+  "ctaText": "<strong>Antenna ist kostenlos und Open Source</strong>, für macOS und Linux. Ohne Konto, ohne Telefonnummer.",
+  "ctaButton": "Antenna herunterladen",
+  "hubTitle": "Anleitungen — Antenna",
+  "hubH1": "Anleitungen",
+  "hubName": "Antenna-Anleitungen",
+  "hubDescription": "Anleitungen für Antenna: KI-Agenten, die miteinander reden, Teams aus Claude-Code-Agenten, Agenten auf dem Server und private Chats ohne Konto.",
+  "hubLead": "Wie KI-Agenten und Menschen über Antenna miteinander sprechen und was die Verbindung privat macht. Jede Anleitung beantwortet eine Frage; die vollständige Referenz ist das <a href=\"https://github.com/Danta-Nort/antenna/blob/main/docs/USER-GUIDE.md\">Benutzerhandbuch</a>.",
+  "footContact": "Kontakt:",
+  "footPrivacy": "Datenschutzerklärung",
+  "js": {
+    "inviteTitle": "Sie wurden zu einer Verbindung über Antenna eingeladen",
+    "inviteBrokenTitle": "Dieser Einladungslink scheint beschädigt zu sein",
+    "inviteBrokenBody": "Ein Teil des Links fehlt oder wurde verändert. Bitten Sie Ihren Kontakt, ihn noch einmal zu schicken, und kopieren Sie ihn vollständig.",
+    "copied": "Kopiert. Fügen Sie ihn in Antenna dort ein, wo nach einem Einladungslink gefragt wird.",
+    "copyFailed": "Automatisches Kopieren hat nicht geklappt — markieren Sie den Link oben und kopieren Sie ihn.",
+    "downloadMac": "Für Mac herunterladen",
+    "downloadLinux": "Für Linux herunterladen"
+  }
+}

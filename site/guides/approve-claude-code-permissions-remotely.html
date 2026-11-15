@@ -1,0 +1,46 @@
+<!--guide {"order": 4, "title": "Approve Claude Code permissions remotely, from any of your computers", "h1": "Approve Claude Code’s requests from another computer", "description": "Claude Code on a server or a second computer needs your approval: Antenna brings the request to all your computers, and you answer with a password or Touch ID.", "query": "approve claude code permissions remotely", "updated": "2026-11-15", "summary": "Approval requests from Claude Code on another computer, answered from whichever of your computers you are at.", "related": ["claude-code-on-multiple-computers", "run-claude-code-on-a-vps", "stop-ai-agent-leaking-secrets"]}-->
+<p class="lead">Start Claude Code through Antenna, in Code mode in the window or with <code>antenna session</code> on a server, and Antenna’s daemon checks every tool it uses and every message it sends. When a step needs you, it becomes an approval request that shows on each computer you paired as your own, in <strong>My devices</strong>, with a notification. Approve it there with that computer’s password or Touch ID: the computer where Claude Code runs checks your answer, carries the step out, and Claude Code continues.</p>
+
+<h2>What reaches you</h2>
+<ul>
+  <li><strong>Steps after reading a contact’s message.</strong> Once Claude Code has read a teammate’s message, their trust level sets what it may do: at level 4 each command waits for you; at levels 2 and 3 each edit does, and commands are refused.</li>
+  <li><strong>Changes to its own setup.</strong> After reading any contact’s message, even from your own laptop, edits to <code>CLAUDE.md</code>, <code>.claude/</code>, shell profiles, keys and build files such as <code>package.json</code> wait for you.</li>
+  <li><strong>Messages that would carry your data out.</strong> Once it has read files of your project, each message to a contact below ∞ waits, and so does any message to such a contact that looks like it holds a key, a password or a token. Once it has read one conversation, a message into another waits too.</li>
+  <li><strong>Questions.</strong> <em>Experimental.</em> An agent’s questions show on the computer where it runs, under <strong>Questions from your agents</strong>. To get them on your laptop instead, run <code>antenna agent escalate api-dev --to mac</code> on the computer where it runs: each question then arrives in the agent’s chat, and you answer in the chat.</li>
+</ul>
+<p>Claude Code’s own permission prompt (“Do you want to proceed?”) stays in its terminal: Antenna never types into it. Allow the tools you use routinely in Claude Code’s settings, or answer it with <code>antenna session attach</code>.</p>
+
+<h2>Set it up</h2>
+<ol>
+  <li><a href="/#download">Install Antenna</a> on both computers and pair them once with <strong>This is my own computer (∞)</strong> ticked, as in <a href="/guides/run-claude-code-on-a-vps">Claude Code on a VPS</a>.</li>
+  <li>Start Claude Code through Antenna. On a desktop: <strong>Agents → AI apps → Start in Code mode</strong>. On a server:
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api</code></pre></li>
+  <li>On the computer where Claude Code runs, accept answers from the one you will approve from: <strong>My devices</strong> → that computer’s card → <strong>Approvals</strong> → <strong>Accept approvals signed with …</strong>, with your password. On a server: <code>antenna devices confirm mac</code>.</li>
+</ol>
+
+<h2>Answer from any computer</h2>
+<p>The request shows on the asking computer’s card in <strong>My devices</strong> (<em>experimental</em>), with a notification such as “Antenna: approval needed on Mac mini”. The card says which agent asks, what for, why, and quotes its text, except a text with a secret in it, which never leaves the computer that asked. Press <strong>Approve with Touch ID</strong> on a Mac (<em>experimental</em>), <strong>Approve with password</strong> with the password of the computer you are at, or <strong>Deny</strong>.</p>
+<p>The computer that asked checks the signature against the keys you accepted there, its own one-time challenge and this exact request, then carries the request out itself, once. On that computer itself, the request is in <strong>Approval requests</strong>, or <code>antenna approvals</code> and <code>antenna approve &lt;id&gt;</code> in a terminal.</p>
+<p>Claude Code waits up to 50 seconds, and a step approved by then runs at once. Later, it goes on with other work; when you approve, Antenna types “Approved — continue.” into its prompt and it runs the step again.</p>
+
+<h2>If nobody answers</h2>
+<p>A request closes after 10 minutes: nothing runs and nothing is sent, and Claude Code learns that nobody approved it. A notification warns you shortly before. After <strong>Deny</strong>, which needs no password, Claude Code learns that you said no.</p>
+
+<h2>An agent that approves for you</h2>
+<p><em>Experimental.</em> <strong>Can approve for…</strong> in <strong>Agents</strong> lets an agent you trust answer your other agents’ requests about messages and files, and its answer counts only when everything the request touches is at ∞. Commands and edits always come to you.</p>
+
+<h2>Questions</h2>
+<details>
+  <summary>Does this work with Codex?</summary>
+  <p>Partly. What Codex sends through Antenna is checked the same way, and those requests reach all your computers; Codex’s own commands stay with Codex’s approvals in its terminal.</p>
+</details>
+<details>
+  <summary>Can any computer approve?</summary>
+  <p>No. Only a computer you paired as your own and whose keys you accepted, with the password, on the computer that asks. For a lost one, <strong>Revoke this computer</strong> on each of the others.</p>
+</details>
+<details>
+  <summary>Can I approve from my phone?</summary>
+  <p>Not yet. Antenna runs on macOS and Linux today.</p>
+</details>

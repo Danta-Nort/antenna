@@ -1306,9 +1306,14 @@ pass on that Mac (13 of 13, 11 of 11 with 1 ignored, 12 of 12).
   with a second client, and points the notifier at that address. The `Notify` call is checked as it arrives
   (signature `susssasa{sv}i`, the texts, the `desktop-entry` hint), with no `dbus-daemon` and no notification server.
   With no session bus or no service, `show` returns without an exception (`lastResult: "not shown: …"`).
-- **Seen once, not reproduced: `daemon_host_test.dart` "first run" failed with `Connection reset by peer` (errno 104)**
-  while the whole widget and host suite ran in parallel; it passed on its own and in the next full runs. If it comes
-  back, look at the moment between the window starting its own `antennad` and the daemon accepting on the socket.
+- **`daemon_host_test.dart` "first run" failed now and then with `OS Error: Connection reset by peer, errno = 104`**
+  while the whole widget and host suite ran in parallel (twice: once before 0.1.0, once in the 0.1.1 release run).
+  Cause: when the daemon resets a unix socket during `Socket.connect`, Dart throws a bare `OSError`, not a
+  `SocketException`; the control client mapped only `SocketException` to `XDaemonUnreachable`, so the unawaited
+  `resyncStreams` after unlock, which expects `XClientException`, let it escape as an uncaught error. Fix: the client
+  maps `OSError` to `XDaemonUnreachable` on connect and on read (`lib/protocol/src/client.dart`). Check:
+  `client_v6_test.dart` "a socket reset while connecting…" injects the `OSError` through `IOOverrides.socketConnect`
+  and fails with the old client.
 
 ### Live window tests time out on a busy build machine (2026-10-03)
 - `release-linux.sh v0.1.0-preview.3` failed once in `live_history_test.dart` with `TimeoutException: timeout: delivered: b2 after backup` while another build ran on the same machine (load average 7–8). The test passed 3 of 3 times on its own. Live tests start real daemons and wait for deliveries with fixed timeouts, and `flutter test` runs test files in parallel by default. The release script and the `linux` job now run widget, host and golden tests first (`--exclude-tags live`) and the live tests one file at a time (`--tags live --concurrency=1`).
@@ -3249,6 +3254,53 @@ The same copy without the replaced helper starts in seconds.
 - **Fix.** In a terminal nothing is needed: the session belongs to the terminal. In scripts, give each owner command
   the password itself where it takes one (`--password-stdin`), or keep the commands in one long-lived shell, feed the
   password with a here-string (`antenna login --password-stdin <<< "$PW"`, no pipeline fork) and end the script with
-  a command that is not an owner command (`true`), so bash cannot `exec` the last one.
+  a command that is not an owner command (`true`), so bash cannot `exec` the last one. `antenna connect …
+  --password-stdin` needs neither since 2026-10-31: it reads the password once and holds a session for its own
+  requests (`login {hold: true}`, CONTROL §3), which ends with it.
 - **Not a weakness to fix by widening the session.** Binding it to the exact parent keeps another process of the same
   user from borrowing an owner session it did not open.
+
+## 2026-10-31 · The Windows build cannot be made on Linux: the window has no cross build, the core's OpenSSL wants `nmake.exe` (`packaging/windows/`, D-139)
+
+- **Symptom.** A Windows package has to come from a Windows machine: `flutter build windows` runs only on Windows, and
+  a full `cargo build --target x86_64-pc-windows-msvc` of the core on Linux would stop in `openssl-src`
+  (`failed to find nmake`), even with a downloaded MSVC CRT and SDK.
+- **Cause.** Flutter's Windows tooling (the AOT snapshotter, the CMake/MSBuild runner build) is Windows-only.
+  `openssl-src` (SQLCipher's vendored OpenSSL) configures `VC-WIN64A` and builds with `nmake.exe`, which it looks up
+  in the Visual Studio registry (`src/lib.rs`, `cc::windows_registry::find`); there is no Linux stand-in. And downloading
+  the MSVC files with `cargo-xwin` is ruled out by WP-32.
+- **Fix.** Build on a Windows machine (`packaging/windows/setup-build-machine.ps1`, then `build-installer.ps1`, which
+  runs `build-folder.ps1` and Inno Setup); keep `tools/check-windows.sh` as the Linux type check before a batch goes to
+  that machine.
+- **How to verify.** On the Windows machine `build-installer.ps1` ends with `done: …-setup.exe (<bytes>, sha256 …)`,
+  and `check-install.ps1 -Setup <it> -Uninstall -Reinstall` prints `failures: 0`.
+
+## 2026-10-31 · A message to an agent sent right after pairing reached the contact's person instead (`crates/antenna-core/src/node.rs`, PROTOCOL §21, §23)
+
+- **Symptom.** On a loaded machine, `antenna send --to-agent claude <contact> …` sent a moment after pairing answered
+  `"addressed": false`; the contact's agent never saw the message (its inbox stayed empty) and the contact's person got
+  it. Seen once in `own_computer.rs` (`hook_runs_level_5_tasks_…`: the agent's session ceiling was `null`).
+- **Cause.** An address goes on the wire only when the contact's node has said it understands addresses (`addr/0`,
+  the `features` exchange of §21). With the features unknown, the sender waited up to 3 s in `connect_raw`, but that
+  returns at once when a connection already exists, and right after pairing one does while its own `features`
+  exchange is still on its way. So the wait did not wait, and the message went out without its address. Asking an own
+  computer to stop its agents and the picture sync had the same wait.
+- **Fix.** `LinkShared::learn_features`: when the features are still unknown on a live connection, ask on it, within
+  the same budget. All three places use it.
+- **How to verify.** `cargo test -p antenna-cli --test addressing a_message_to_an_agent_right_after_pairing` (alice
+  holds her side of the exchange for 2 s with the debug-only `--test-features-delay-ms`; bob sends as soon as the link
+  is connected). It fails on the old wait (`"addressed": false`), and release builds refuse the switch.
+
+## 2026-10-31 · Accept or reject right after a file's check: "another operation on this file is in progress" (`crates/antenna-files/src/quarantine.rs`, D-130)
+
+- **Symptom.** `antenna files accept <id>` (or reject) on a file the list already showed as `checked` answered
+  `bad_state: another operation on this file is in progress`; a second try worked. Seen once on a build Mac at load
+  ~100–800 (`files.rs`, `level3_share_check_preview_accept_and_threats_do_not_reach_the_agent`, which expected
+  `forbidden` for a threat).
+- **Cause.** Every operation on a quarantined file takes a per-file guard that refuses at once when it is taken. The
+  daemon's own work holds it for a moment after the state is already `checked`: the end of the check, then marking
+  the file held for the owner (`set_held`, D-130). A decision that came in that moment was refused.
+- **Fix.** A decision of the owner or an agent (`accept`, `reject`) waits up to 5 s for the guard (`lock_waiting`);
+  the daemon's own operations still refuse at once, and two decisions at once still refuse the second after the wait.
+- **How to verify.** `cargo test -p antenna-files --lib quarantine::tests` (a decision waits out a 150 ms operation;
+  the control: one that outlasts the wait is refused); both fail with the old immediate guard.

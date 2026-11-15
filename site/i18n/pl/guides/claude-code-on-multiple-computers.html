@@ -1,0 +1,40 @@
+<!--guide {"title": "Claude Code na kilku komputerach z jednego miejsca — Antenna", "h1": "Claude Code na kilku komputerach, obsługiwany z jednego miejsca", "description": "Uruchom Claude Code na laptopie, desktopie i serwerze i miej każdą sesję na jednej liście czatów: jej stan, prośby i przycisk zatrzymania dla każdej.", "summary": "Sesje Claude Code na kilku twoich komputerach na jednej liście czatów, ze stanem i prośbami każdego komputera.", "source": "2026-11-14"}-->
+<p class="lead">Niech Claude Code działa tam, gdzie jest praca — na laptopie, desktopie i serwerze — i zainstaluj Antennę na każdym z tych komputerów. Połącz je raz jako własne (∞). Potem z każdego z nich widzisz wszystkie sesje na jednej liście czatów, piszesz do dowolnej po nazwie, odpowiadasz na ich prośby o zgodę i zatrzymujesz sesję, która wymknęła się spod kontroli, bez otwierania terminala na tamtej maszynie. Codex działa tak samo.</p>
+
+<h2>Co dostajesz</h2>
+<ul>
+  <li><strong>Jeden czat na sesję</strong>, niezależnie od tego, na którym komputerze działa. Sesja na serwerze i sesja na desktopie są na tej samej liście co twoje kontakty.</li>
+  <li><strong>My devices</strong> (moje urządzenia): karta każdego twojego komputera z systemem i wersją Antenny, stanem według jego własnych testów, agentami wraz z informacją, czy są podłączone, oraz prośbami, które tam na ciebie czekają.</li>
+  <li><strong>Zgody tam, gdzie jesteś.</strong> Prośbę agenta z serwera możesz zatwierdzić na Macu, przez Touch ID albo hasłem do Maca. Serwer sprawdza podpis i sam wykonuje prośbę.</li>
+  <li><strong>Przycisk zatrzymania</strong> dla każdego agenta na innym komputerze: zatrzymuje agenta i wszystkie procesy, które tam uruchomił.</li>
+  <li><strong>Mapa agentów</strong>, na której łączysz sesję na jednym komputerze z sesją na innym, żeby pisały do siebie.</li>
+</ul>
+
+<h2>Konfiguracja</h2>
+<ol>
+  <li><strong>Zainstaluj Antennę na każdym komputerze</strong>: aplikację na Macu albo desktopie z Linuksem, węzeł na serwerze z Linuksem (<code>curl -fsSL https://antenna.contact/install.sh | sh</code>).</li>
+  <li><strong>Połącz komputery ze sobą jako własne.</strong> Utwórz zaproszenie z zaznaczonym <strong>This is my own computer (∞)</strong>, otwórz je na drugim komputerze, a kod, który pokaże jedna strona, wpisz po drugiej. Połącz każdy komputer z każdym innym, który chcesz z niego widzieć albo z nim łączyć: każdy musi mieć drugi na poziomie ∞.</li>
+  <li><strong>Nadaj każdej sesji Claude Code nazwę.</strong> Na desktopie uruchom ją w trybie Code mode przyciskiem <code>+</code> w panelu agentów. Na serwerze, w folderze projektu, uruchom <code>antenna connect claude-code --agent api-dev --links mac --hello mac</code> i utrzymuj ją przy życiu poleceniem <code>antenna session start api-dev --dir ~/projects/api</code>; wszystkie kroki opisuje poradnik <a href="/guides/run-claude-code-on-a-vps">Claude Code na VPS</a>.</li>
+  <li><strong>Pozwól głównemu komputerowi odpowiadać na prośby.</strong> Na serwerze uruchom raz <code>antenna devices confirm mac</code>; na desktopie zaakceptuj klucz głównego komputera w <strong>My devices</strong> → jego karta → <strong>Approvals</strong>.</li>
+</ol>
+
+<h2>Przekazywanie pracy między komputerami</h2>
+<p>Pisz do sesji tak, jak do człowieka: „<code>api-dev</code>, uruchom migracje na serwerze i powiedz mi, co się zmieniło”. Pliki wrzucone do jej czatu są zapisywane na tamtym komputerze, a agent dostaje informację, gdzie leżą; między twoimi własnymi komputerami zwykłe pliki zapisują się bez pytania, a programy i instalatory nadal czekają na ciebie. Żeby sesja na desktopie mogła przekazywać pracę sesji na serwerze, połącz je na mapie agentów. Sesja na serwerze budzi się, gdy przyjdzie wiadomość, a pilna wiadomość może przerwać jej bieżącą turę. <em>Funkcja eksperymentalna.</em></p>
+
+<h2>Pytania</h2>
+<details>
+  <summary>Czy Antenna synchronizuje ustawienia albo historię Claude Code między komputerami?</summary>
+  <p>Nie. Claude Code trzyma ustawienia, historię i logowanie na każdym komputerze osobno, a twój kod przenosi się tak jak dotąd, przez gita. Antenna przenosi między sesjami wiadomości, pliki i zgody.</p>
+</details>
+<details>
+  <summary>Czy serwer potrzebuje publicznego IP albo otwartych portów?</summary>
+  <p>Nie. Każdy komputer łączy się na zewnątrz, bezpośrednio, gdy pozwala na to sieć, a w przeciwnym razie przez przekaźnik (relay), który przekazuje tylko zaszyfrowany ruch.</p>
+</details>
+<details>
+  <summary>Czy mogę stąd zmienić ustawienie na innym komputerze?</summary>
+  <p>Nie. Między twoimi komputerami przesyłane są tylko zgody, polecenia zatrzymania i prośby o połączenie z mapy agentów, które tamten komputer daje ci do zatwierdzenia. Zaufanie, zaproszenia, aktualizacje i ustawienia zmienia się na samym komputerze, więc skradziony laptop nie przepisze zasad serwera.</p>
+</details>
+<details>
+  <summary>Czy to działa na Windowsie albo na telefonie?</summary>
+  <p>Jeszcze nie. Na razie Antenna działa na macOS i Linuksie.</p>
+</details>

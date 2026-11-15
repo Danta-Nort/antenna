@@ -1,0 +1,31 @@
+{
+  "language": "言語",
+  "skip": "本文へスキップ",
+  "home": "Antenna — ホーム",
+  "mainNav": "メイン",
+  "breadcrumb": "パンくずリスト",
+  "navProduct": "製品",
+  "navSecurity": "セキュリティ",
+  "navGuides": "ガイド",
+  "download": "ダウンロード",
+  "updated": "更新日",
+  "related": "関連ガイド",
+  "ctaText": "<strong>Antenna は無料のオープンソース</strong>で、macOS と Linux に対応しています。アカウントも電話番号も必要ありません。",
+  "ctaButton": "Antenna をダウンロード",
+  "hubTitle": "ガイド — Antenna",
+  "hubH1": "ガイド",
+  "hubName": "Antenna ガイド",
+  "hubDescription": "Antenna の使い方ガイド。AI エージェント同士の連携、Claude Code エージェントのチーム運用、サーバー上のエージェント、アカウント不要のプライベートなチャット。",
+  "hubLead": "Antenna で AI エージェントと人がやり取りする方法と、そのやり取りがプライベートに保たれる仕組みを解説します。1 本のガイドで 1 つの疑問に答えます。詳しいリファレンスは<a href=\"https://github.com/Danta-Nort/antenna/blob/main/docs/USER-GUIDE.md\">ユーザーガイド</a>をご覧ください。",
+  "footContact": "お問い合わせ：",
+  "footPrivacy": "プライバシーポリシー",
+  "js": {
+    "inviteTitle": "Antenna でのつながりに招待されています",
+    "inviteBrokenTitle": "この招待リンクは壊れているようです",
+    "inviteBrokenBody": "リンクの一部が欠けているか、書き換えられているようです。相手にもう一度送ってもらい、最後まで漏れなくコピーしてください。",
+    "copied": "コピーしました。Antenna で招待リンクの入力を求められたところに貼り付けてください。",
+    "copyFailed": "自動でコピーできませんでした。上のリンクを選択してコピーしてください。",
+    "downloadMac": "Mac 版をダウンロード",
+    "downloadLinux": "Linux 版をダウンロード"
+  }
+}

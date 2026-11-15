@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>تطبيق مراسلة مستضاف ذاتيًا (self-hosted) بلا خادم تديره — Antenna</title>
+<meta name="description" content="يحفظ Antenna كل رسالة على حواسيب المتحادثين أنفسهم. لا شيء تستضيفه افتراضيًا؛ أضف عقدة تعمل دائمًا أو خادم ترحيل خاصًا بك إن أردت فقط.">
+<link rel="canonical" href="https://antenna.contact/ar/guides/self-hosted-messenger">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="تطبيق مراسلة مستضاف ذاتيًا (self-hosted) بلا خادم تديره — Antenna">
+<meta property="og:description" content="يحفظ Antenna كل رسالة على حواسيب المتحادثين أنفسهم. لا شيء تستضيفه افتراضيًا؛ أضف عقدة تعمل دائمًا أو خادم ترحيل خاصًا بك إن أردت فقط.">
+<meta property="og:url" content="https://antenna.contact/ar/guides/self-hosted-messenger">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ar_AR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/self-hosted-messenger">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ar/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "الأدلة",
+     "item": "https://antenna.contact/ar/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "تطبيق مراسلة مستضاف ذاتيًا دون خادم تديره",
+     "item": "https://antenna.contact/ar/guides/self-hosted-messenger"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "تطبيق مراسلة مستضاف ذاتيًا دون خادم تديره",
+   "description": "يحفظ Antenna كل رسالة على حواسيب المتحادثين أنفسهم. لا شيء تستضيفه افتراضيًا؛ أضف عقدة تعمل دائمًا أو خادم ترحيل خاصًا بك إن أردت فقط.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "ar",
+   "url": "https://antenna.contact/ar/guides/self-hosted-messenger",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ar/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "هل تستطيع عائلتي استخدامه؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "على الحواسيب، نعم: يعمل Antenna 0.1 على macOS ‏(Apple Silicon) وLinux. ولا يوجد تطبيق للهاتف بعد."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يخزّن خادم الترحيل الرسائل لجهات الاتصال غير المتصلة؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "لا. الرسالة الموجهة إلى جهة اتصال غير متصلة تنتظر على حاسوبك أنت، وتُرسل تلقائيًا بمجرد عودتها."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل هناك شيء يجب أن أستضيفه؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "لا. يعمل Antenna مع خادم الترحيل الافتراضي ودون أي خادم تابع لك. العقدة وخادم الترحيل لمن يريدهما."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "كيف تعمل التحديثات على الخادم؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "العقدة المثبتة بـ install.sh تُحدَّث بالأمر antenna update، الذي يتحقق من توقيع الإصدار أولًا؛ أما التثبيت عبر حزمة فيُحدَّث من خلال مدير الحزم لديك."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">انتقل إلى المحتوى</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="القائمة الرئيسية">
+      <a href="/ar/#product">المنتج</a>
+      <a href="/ar/#security">الأمان</a>
+      <a href="/ar/guides/">الأدلة</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="اللغة: العربية"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">AR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/self-hosted-messenger" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/self-hosted-messenger" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/self-hosted-messenger" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/self-hosted-messenger" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/self-hosted-messenger" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/self-hosted-messenger" hreflang="ar" lang="ar" aria-current="true">العربية</a></li>
+        <li><a href="/fr/guides/self-hosted-messenger" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/self-hosted-messenger" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/self-hosted-messenger" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/self-hosted-messenger" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/self-hosted-messenger" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/self-hosted-messenger" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/self-hosted-messenger" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/self-hosted-messenger" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/self-hosted-messenger" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ar/#download">تنزيل</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="مسار التنقل"><a href="/ar/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ar/guides/">الأدلة</a></nav>
+    <p class="eyebrow">آخر تحديث <time datetime="2026-11-09">9 نوفمبر 2026</time></p>
+    <h1>تطبيق مراسلة مستضاف ذاتيًا دون خادم تديره</h1>
+    <p class="lead">يستضيف الناس تطبيق المراسلة بأنفسهم كي تبقى رسائلهم بعيدة عن خوادم الآخرين. ويصل Antenna إلى النتيجة نفسها دون أي خادم: يشغّل كل شخص Antenna على حاسوبه، وتنتقل الرسائل بين هذه الحواسيب مشفّرة تشفيرًا تامًا بين الطرفين، ولا يُخزَّن السجل إلا هناك، في قاعدة بيانات مشفرة. وإن أردت تحكمًا أكبر، يمكنك إضافة عقدة Linux تعمل دائمًا أو تشغيل خادم ترحيل خاص بك، وكلاهما مفتوح المصدر.</p>
+
+    <h2>ما يعنيه الخادم المستضاف ذاتيًا عادة</h2>
+    <p>تطبيق المراسلة المستضاف ذاتيًا بصورته التقليدية خادم تثبّته وتحدّثه وتنسخه احتياطيًا وتبقيه متصلًا، ويحتفظ بكل حساب وكل رسالة لكل من يستخدمه. وهو ينقل الثقة من شركة إليك، ومعها العمل والمخاطرة: فإن اختُرق الخادم، اختُرق سجل الجميع.</p>
+
+    <h2>ما يفعله Antenna بدلًا من ذلك</h2>
+    <ul>
+      <li><strong>لا حسابات تستضيفها.</strong> هويتك مفتاح على حاسوبك، تحميه كلمة مرورك. وتضيف الناس برابط دعوة لمرة واحدة ورمز تقارنانه صوتيًا.</li>
+      <li><strong>لا مخزن رسائل في المنتصف.</strong> سجلك يعيش على حاسوبك، في قاعدة بيانات مشفرة بـ SQLCipher، وعلى حاسوب الطرف الآخر.</li>
+      <li><strong>لا خادم يلزم إبقاؤه متصلًا.</strong> يتصل حاسوبان مباشرة حين تسمح الشبكة، وإلا فعبر خادم ترحيل (relay) يمرر حركة مرور مشفرة ولا يحتفظ بشيء.</li>
+    </ul>
+
+    <h2>أضف عقدة تعمل دائمًا</h2>
+    <p>الحاسوب المحمول ينام، أما الخادم فلا. ولكي يبقى وكلاء الذكاء الاصطناعي لديك في المتناول على مدار الساعة، ثبّت عقدة Antenna على خادم Linux ‏(x86_64): فك ضغط الإصدار وشغّل <code>./install.sh</code>، الذي يُعدّ خدمة systemd على مستوى المستخدم دون root، أو ثبّت حزمة <code>.deb</code> أو <code>.rpm</code>. ثم اقرنها بحاسوبك كأي جهة اتصال، بالمستوى <strong>∞ · My computer</strong>. الخطوات بالتفصيل: <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md">إضافة خادم</a>.</p>
+    <p>بعد إعادة التشغيل تبقى مفاتيح العقدة مقفلة حتى تسجّل الدخول وتشغّل <code>antenna unlock</code>: فصورة القرص المسروقة لا تمنح أحدًا مفاتيحك.</p>
+
+    <h2>شغّل خادم ترحيل خاصًا بك</h2>
+    <p>خادم الترحيل هو القطعة المشتركة الوحيدة، ولا يرى إلا حزمًا مشفرة وأي الأطراف تتواصل عبره. وإن كنت تفضّل أن يكون ذلك جهازك أنت، فشغّل <code>iroh-relay</code> مفتوح المصدر وابدأ عقدتك بالأمر <code>antennad --relay &lt;your relay URL&gt;</code>. وجهات الاتصال التي تثق بها في المستويين 1 و2 تتصل دائمًا عبر خادم ترحيل، فلا تعرف عنوان IP الخاص بك أبدًا.</p>
+
+    <h2>أسئلة</h2>
+    <details>
+      <summary>هل تستطيع عائلتي استخدامه؟</summary>
+      <p>على الحواسيب، نعم: يعمل Antenna 0.1 على macOS ‏(Apple Silicon) وLinux. ولا يوجد تطبيق للهاتف بعد.</p>
+    </details>
+    <details>
+      <summary>هل يخزّن خادم الترحيل الرسائل لجهات الاتصال غير المتصلة؟</summary>
+      <p>لا. الرسالة الموجهة إلى جهة اتصال غير متصلة تنتظر على حاسوبك أنت، وتُرسل تلقائيًا بمجرد عودتها.</p>
+    </details>
+    <details>
+      <summary>هل هناك شيء يجب أن أستضيفه؟</summary>
+      <p>لا. يعمل Antenna مع خادم الترحيل الافتراضي ودون أي خادم تابع لك. العقدة وخادم الترحيل لمن يريدهما.</p>
+    </details>
+    <details>
+      <summary>كيف تعمل التحديثات على الخادم؟</summary>
+      <p>العقدة المثبتة بـ <code>install.sh</code> تُحدَّث بالأمر <code>antenna update</code>، الذي يتحقق من توقيع الإصدار أولًا؛ أما التثبيت عبر حزمة فيُحدَّث من خلال مدير الحزم لديك.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna مجاني ومفتوح المصدر</strong>، لنظامي macOS وLinux. بلا حساب وبلا رقم هاتف.</p>
+      <a class="btn" href="/ar/#download">نزّل Antenna</a>
+    </aside>
+    <h2>أدلة ذات صلة</h2>
+    <ul class="related">
+      <li><a href="/ar/guides/peer-to-peer-encrypted-messenger">تطبيق مراسلة مفتوح المصدر يعمل ند لند (P2P) بتشفير ما بعد الكم</a></li>
+      <li><a href="/ar/guides/messenger-without-phone-number">تطبيق مراسلة خاص بلا رقم هاتف ولا بريد إلكتروني</a></li>
+      <li><a href="/ar/guides/message-claude-code-on-another-computer">أرسل رسالة إلى Claude Code على حاسوب آخر</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ar/guides/">الأدلة</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>للتواصل: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ar/privacy">سياسة الخصوصية</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

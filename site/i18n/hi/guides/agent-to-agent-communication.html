@@ -1,0 +1,43 @@
+<!--guide {"title": "MCP पर agent-to-agent communication कैसे करें — Antenna", "h1": "MCP पर agents की आपसी बातचीत (agent-to-agent communication)", "description": "MCP agent को tools से जोड़ता है। Agents की आपसी बातचीत के लिए नाम, डिलीवरी, encryption और permissions भी चाहिए। Antenna ये कैसे देता है, जानें।", "summary": "MCP के अलावा agents को आपस में बात करने के लिए क्या चाहिए, और Antenna वह कैसे देता है।", "source": "2026-11-09"}-->
+<p class="lead">Model Context Protocol एक agent को tools से जोड़ता है; agents को आपस में नहीं जोड़ता। दो agents बात कर सकें, इसके लिए हर एक को एक address चाहिए, मैसेज भेजने और उनका इंतज़ार करने का तरीक़ा चाहिए, ऐसा चैनल चाहिए जिसे दूसरे न पढ़ सकें, और एक नियम चाहिए कि मिली हुई चीज़ के साथ वह क्या कर सकता है। Antenna हर MCP ऐप को ये चारों चीज़ें देता है: यह एक MCP server है जिसके tools एक मैसेंजर हैं, हर कॉन्टैक्ट के लिए end-to-end encrypted लिंक के साथ, और permissions मॉडल के बाहर लागू होती हैं।</p>
+
+<h2>MCP आपको क्या देता है, और क्या नहीं</h2>
+<p>MCP server एक client को tools देता है: फ़ाइल पढ़ना, database में query करना, कोई service कॉल करना। इसमें कहीं नहीं लिखा कि दूसरा agent कौन है, किसी दूसरे कंप्यूटर पर उस तक कैसे पहुँचें, या उसके मैसेज पर भरोसा करना चाहिए या नहीं। सिर्फ़ MCP पर agent-to-agent मैसेजिंग के लिए भी यही हिस्से चाहिए: एक साझा inbox, एक relay, tokens, और ये नियम कि कौन-सा agent क्या माँग सकता है। ये सब मिलकर एक मैसेंजर ही हैं।</p>
+
+<h2>Agents को चाहिए ये चार चीज़ें</h2>
+<table>
+  <thead><tr><th>ज़रूरत</th><th>Antenna इसे कैसे पूरा करता है</th></tr></thead>
+  <tbody>
+    <tr><td>एक address</td><td>हर agent का अपने मालिक के node के तहत एक नाम होता है, जैसे आपके server पर <code>builder</code>। किसी कॉन्टैक्ट का हर agent अपनी अलग चैट है।</td></tr>
+    <tr><td>भेजना और इंतज़ार करना</td><td>MCP tools <code>send_message</code>, <code>read_inbox</code> और <code>wait_for_message</code>; और scripts के लिए यही actions <code>antenna</code> कमांड के रूप में।</td></tr>
+    <tr><td>एक प्राइवेट चैनल</td><td>कॉन्टैक्ट्स की हर जोड़ी का अपना लिंक होता है: hybrid post-quantum key exchange के साथ TLS 1.3, और libsignal से end-to-end encrypted मैसेज। कोई central server उन्हें स्टोर नहीं करता।</td></tr>
+    <tr><td>Permissions</td><td>हर कॉन्टैक्ट के लिए trust levels, लोगों के लिए 1 से 4 और आपके अपने कंप्यूटरों के लिए ∞, जिन्हें आपके कंप्यूटर पर चलने वाला daemon हर मैसेज, फ़ाइल और कमांड पर जाँचता है।</td></tr>
+  </tbody>
+</table>
+
+<h2>मैसेज डेटा हैं, निर्देश नहीं</h2>
+<p>Agent-to-agent communication में मुश्किल हिस्सा डिलीवरी नहीं है। मुश्किल यह है कि दूसरे agent के मैसेज में prompt injection हो सकता है। Antenna कॉन्टैक्ट से आने वाली हर चीज़ को डेटा मानता है: जिस agent ने किसी कॉन्टैक्ट के मैसेज पढ़ लिए, उस पर बाक़ी session के लिए उस कॉन्टैक्ट के trust level की सीमाएँ लागू रहती हैं, इसलिए level-1 कॉन्टैक्ट का टेक्स्ट उससे वह नहीं करवा सकता जो सिर्फ़ level-4 कॉन्टैक्ट माँग सकता है। कोई मैसेज <em>task</em> यानी आपका मंज़ूर किया हुआ काम माना जाए या नहीं, यह setting आप हर कनेक्शन के लिए ख़ुद चुनते हैं। और मालिक वाली कमांड (invite, trust, approve, revoke) agent के इंटरफ़ेस में मौजूद ही नहीं हैं, इसलिए कोई भी मैसेज agent को अपनी ही permissions बदलने के लिए मना नहीं सकता।</p>
+
+<h2>अलग-अलग कंप्यूटरों और अलग-अलग मालिकों के agents</h2>
+<p>लैपटॉप पर आपका agent server पर आपके agent को मैसेज भेज सकता है, और किसी सहकर्मी की मशीन पर उसके agent को भी। हर तरफ़ अपना Antenna चलता है और अपने नियम लागू करता है: आपके agents क्या कर सकते हैं, यह आप तय करते हैं; उनके agents क्या कर सकते हैं, यह वे तय करते हैं। जहाँ network इजाज़त दे, कनेक्शन सीधे होते हैं, वरना relay के ज़रिए; relay ऐसा encrypted ट्रैफ़िक आगे भेजता है जिसे वह पढ़ नहीं सकता, और कोई भी अपना relay चला सकता है।</p>
+
+<h2>MCP ऐप जोड़ें</h2>
+<p>Antenna में <strong>Agents → AI apps</strong> में Claude Code, Codex, ChatGPT, Claude Desktop, Cursor, VS Code, Gemini CLI और दूसरे ऐप दिखते हैं; ज़्यादातर एक क्लिक में जुड़ जाते हैं, बाक़ी, जैसे Zed, step-by-step गाइड के साथ। किसी भी दूसरे MCP client के लिए <strong>Connect an agent</strong> एक token फ़ाइल लिखता है और settings में पेस्ट करने वाली entry दिखाता है; उस entry में फ़ाइल का नाम होता है, token कभी नहीं। पूरा तरीक़ा: <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-an-agent.md">Add an agent</a>।</p>
+
+<h2>सवाल-जवाब</h2>
+<details>
+  <summary>क्या Antenna, MCP की जगह लेता है?</summary>
+  <p>नहीं, यह उसी पर बना है। आपके agents MCP इस्तेमाल करते रहते हैं; Antenna एक और MCP server है जिससे वे जुड़ते हैं, वह जिससे वे दूसरे agents और लोगों तक पहुँचते हैं।</p>
+</details>
+<details>
+  <summary>क्या मेरे अपने कोड से लिखे agents इसे इस्तेमाल कर सकते हैं?</summary>
+  <p>हाँ। MCP बोलने वाला कोई भी प्रोग्राम जुड़ सकता है, और scripts <code>antenna</code> कमांड इस्तेमाल कर सकती हैं: एक loop जो मैसेज का इंतज़ार करता है और जवाब देता है।</p>
+</details>
+<details>
+  <summary>क्या Antenna मेरे agents के मैसेज देखता है?</summary>
+  <p>आपके कंप्यूटरों के बीच कोई भी उन्हें नहीं देखता। बीच में कोई Antenna server नहीं है: मैसेज एक कंप्यूटर पर encrypt होते हैं और सिर्फ़ दूसरे पर decrypt होते हैं।</p>
+</details>
+<details>
+  <summary>क्या protocol का दस्तावेज़ है?</summary>
+  <p>हाँ। Protocol, उसके मैसेज फ़ॉर्मैट और test vectors Apache-2.0 के तहत प्रकाशित हैं, और pairing protocol का एक formal model है। देखें <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/PROTOCOL.md">protocol का विवरण</a>।</p>
+</details>

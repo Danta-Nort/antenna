@@ -1,0 +1,40 @@
+<!--guide {"title": "Cursor ve Claude Code birlikte: iş devri ve kod incelemesi", "h1": "Cursor ve Claude Code’u birlikte kullanın", "description": "Cursor’ı tek tıkla Antenna’ya bağlayın, Claude Code’u Antenna’nın penceresinde başlatın ve aralarına bir çizgi çekin: birbirlerine iş ve inceleme gönderirler.", "summary": "Aynı bilgisayarda ya da iki bilgisayarda birbirine iş ve inceleme devreden Cursor ajanı ve Claude Code.", "source": "2026-11-15"}-->
+<p class="lead">Cursor’ı tek tıkla Antenna’ya bağlayın, Claude Code’u Antenna’nın penceresinde başlatın ve Antenna’nın ajan haritasında ikisinin arasına bir çizgi çekin. Bundan sonra ikisi Antenna’nın MCP araçlarıyla birbirine yazar: Cursor’ın ajanı, Claude Code’dan bir değişikliği incelemesini ister, Claude Code da Cursor’a bir görev verir; yanıt aynı yoldan geri gelir. İkisi de kendi Cursor ve Claude oturumlarınızla çalışır.</p>
+
+<h2>Tek bilgisayarda</h2>
+<ol>
+  <li><a href="/#download">Antenna’yı kurun</a> (macOS ya da Linux) ve düğümünüzü oluşturun: tek bir parola, hesap yok.</li>
+  <li><strong>Agents → AI apps</strong> bölümünü açın ve Cursor’ın yanındaki <strong>Connect</strong> düğmesine basın. <strong>Assistant with access to my projects</strong> (projelerime erişimi olan asistan) seçeneğini seçin, parolanızı girin ve <strong>Continue</strong> düğmesine basın. Antenna, Cursor’ın kurulum bağlantısını açacağını söyler; <strong>Open Cursor</strong> düğmesine basın, Cursor da Antenna’yı gösterip kurmanızı ister. Ardından Cursor’da yeni bir sohbet başlatın ve “Antenna mesajlarımı kontrol et” deyin: satır <strong>Connected</strong> (bağlı) olur ve “Contacts write to it as cursor” yazar. Cursor, MCP’yi ücretli planında listeler.</li>
+  <li>Aynı sayfada Claude Code’un yanındaki <strong>Start in Code mode</strong> düğmesine basın. <strong>New agent…</strong> seçin, ajana <code>reviewer</code> adını verin, aynı rolü seçin, <strong>Working folder</strong> (çalışma klasörü) olarak Cursor’da açık olan projeyi belirleyin, parolanızı girin ve <strong>Start</strong> düğmesine basın. Claude Code, pencerenin içindeki bir terminal sekmesinde çalışır.</li>
+  <li><strong>Agents → Map</strong> ekranını açın, bir ajanın tutamacından diğerine sürükleyin, parolanızı girin ve <strong>Connect</strong> düğmesine basın. İkisi <em>yerel bir rota</em> alır: mesajları bilgisayardan asla çıkmaz ve siz işareti kaldırmadıkça her biri diğerinin mesajlarını görev olarak alır.</li>
+</ol>
+<p>İkisine de aynı rolü verin: Antenna, verilerinizin daha fazlasını görmüş bir ajanın daha azını görmüş bir ajana yazmasına izin vermez. Her birine yazmak ve incelemek gibi ayrı bir iş verin ki aynı dosyayı aynı anda düzenlemesinler.</p>
+
+<h2>Birbirlerine nasıl seslenirler</h2>
+<p>Çizgi çekildikten sonra her ajan diğerinin varsayılan muhatabıdır: “bunu muhatabına gönder” demek yeterlidir. Diğerini adıyla belirtmek için ajan, <code>local_agent</code> değeri <code>cursor</code> ya da <code>reviewer</code> olacak şekilde <code>send_message</code> çağırır. Alan taraf mesajları <code>read_inbox</code> ile okur ya da <code>wait_for_message</code> ile her çağrıda en fazla 10 dakika bekler.</p>
+<p>İkisi farklı biçimde bekler. Code modundaki Claude Code kendiliğinden uyanır: bir mesaj geldiğinde boşta bekliyorsa Antenna onun için gelen kutusunu okumasını söyleyen tek bir satır yazar (<em>deneysel</em>). Antenna Cursor’a asla bir şey yazmaz; bu yüzden Cursor’ın ajanı mesajlarını ancak Antenna’yı bir sonraki çağırışında okur. Bu da konuşmayı başlatmak için doğal tarafın Cursor olduğu anlamına gelir: “<code>reviewer</code> ajanından <code>src/</code> içindeki diff’i incelemesini iste, sonra yanıtını bekle ve bulduklarını düzelt.” Claude Code uyanır, inceler ve yanıtlar. Cursor’a iş vermek için önce ona mesaj beklemesini söyleyin.</p>
+
+<h2>İki bilgisayarda</h2>
+<p>Cursor dizüstünüzde kalırken Claude Code bir masaüstü bilgisayarda ya da sunucuda çalışabilir. Her birine Antenna kurun, ikisini bir kez, bir davet bağlantısı ve altı haneli bir kodla, <strong>This is my own computer (∞)</strong> (bu benim kendi bilgisayarım) seçeneğini işaretleyerek eşleştirin ve haritada çizgiyi çekin. Diğer bilgisayar kendi tarafı için onayınızı ister; orada ya da <strong>My devices</strong> (cihazlarım) bölümünde. Ekranı olmayan bir sunucuda Claude Code, <code>antenna connect claude-code</code> ve <code>antenna session start</code> ile çalışır: bkz. <a href="/guides/run-claude-code-on-a-vps">VPS’te Claude Code</a>.</p>
+
+<h2>Neleri siz onaylarsınız, neler sınırlı kalır</h2>
+<ul>
+  <li><strong>Bağlantılar sizin elinizde.</strong> Çizgi çekmek parolanızı ister; hiçbir ajan bağlantı kuramaz ya da değiştiremez.</li>
+  <li><strong>Antenna her mesajı kontrol eder.</strong> Aynı bilgisayardaki iki ajan arasında anahtar, parola ya da token içeriyor gibi görünen bir mesaj reddedilir ve bir zincir 10 dakika içinde 8 mesajdan sonra durur; böylece ikisi birbirini sonsuza dek meşgul edemez.</li>
+  <li><strong>Güven seviyeleri ajanın okuduklarını izler.</strong> Aynı bilgisayarda bir ajan bir kişiden gelen mesajı okuduysa, diğer ajana gönderdiği mesaj o kişinin sınırlarını da taşır; diğer ajan da o mesajı kendisi okumuş gibi sınırlanır.</li>
+  <li><strong>Claude Code her araçtan önce denetlenir.</strong> Code modunda Antenna her komut ve düzenlemeden önce kendi daemon’una sorar. Cursor’ın kendi düzenlemeleri ve komutları Cursor’ın kendi ayarlarına tabi kalır; Antenna kendisinden geçeni kontrol eder.</li>
+</ul>
+
+<h2>Sorular</h2>
+<details>
+  <summary>Bunun için API anahtarı gerekiyor mu?</summary>
+  <p>Hayır. Cursor her zamanki gibi Cursor hesabınızı, Claude Code da Claude planınızı kullanır. Antenna yalnızca mesajları taşır.</p>
+</details>
+<details>
+  <summary>Claude Code bunun yerine Cursor’ın terminalinde çalışabilir mi?</summary>
+  <p>Evet: <strong>AI apps</strong> içindeki Claude Code menüsünde bulunan <strong>Step-by-step guide</strong> (adım adım rehber), <code>claude mcp add</code> satırını verir. Bu şekilde başlatılan Claude Code uyandırılmaz; Code modu onu uyandırır ve her araçtan önce Antenna’nın denetimini ekler.</p>
+</details>
+<details>
+  <summary>Bu tamamlandı mı?</summary>
+  <p>Ajanları haritada bağlamak ve boştaki ajanları uyandırmak Antenna 0.1’de deneysel olarak işaretlidir: çalışırlar ve test edilmişlerdir, ancak hâlâ değişebilirler.</p>
+</details>

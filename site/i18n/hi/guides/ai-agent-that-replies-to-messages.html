@@ -1,0 +1,43 @@
+<!--guide {"title": "मैसेज का अपने-आप जवाब देने वाला AI agent — Antenna", "h1": "ऐसा AI agent सेट करें जो आपके मैसेज का जवाब दे", "description": "Claude Code या Codex से किसी कॉन्टैक्ट के मैसेज का अपने-आप जवाब दिलवाएँ: मैसेज आते ही Antenna उसे sandbox में जगाता है, और जवाब लिखते-लिखते दिखता है।", "summary": "Claude Code या Codex किसी कॉन्टैक्ट को ख़ुद जवाब देता है, sandbox में, और जवाब live दिखता है।", "source": "2026-11-09"}-->
+<p class="lead">Antenna में आप एक कॉन्टैक्ट और एक agent (Claude Code, Codex या आपकी अपनी कमांड) चुन सकते हैं, और उसके बाद उस कॉन्टैक्ट का हर मैसेज agent को शुरू कर देता है, जो उसे पढ़कर जवाब देता है। Antenna उसे sandbox में चलाता है, उस कॉन्टैक्ट के trust level से ज़्यादा अनुमति के बिना, और जवाब दूसरे व्यक्ति को लिखे जाते समय ही दिखने लगता है। यह आपके अपने Claude या ChatGPT साइन-इन पर चलता है, और जिस जवाब में कोई secret होने का शक हो, वह आपकी मंज़ूरी का इंतज़ार करता है।</p>
+
+<h2>आम इस्तेमाल</h2>
+<ul>
+  <li><strong>Server पर आपका अपना असिस्टेंट।</strong> आप लैपटॉप से अपने server को लिखते हैं, और वहाँ Claude Code जवाब देता है, आपके प्रोजेक्ट में build करता है और tests चलाता है।</li>
+  <li><strong>किसी कॉन्टैक्ट के लिए फ़्रंट डेस्क।</strong> आपके प्रोजेक्ट के बारे में किसी सहकर्मी के सवालों का जवाब तुरंत मिलता है, एक ऐसे agent से जो सिर्फ़ उस बातचीत का फ़ोल्डर देखता है।</li>
+  <li><strong>रिपोर्ट भेजने वाली script।</strong> किसी भी प्रोग्राम का output live stream के रूप में भेजा जा सकता है: <code>my-program | antenna send --stream &lt;contact&gt;</code>।</li>
+</ul>
+
+<h2>विंडो में सेट करें</h2>
+<ol>
+  <li>जिस कंप्यूटर पर agent चलना चाहिए, उस पर <strong>Agents → Set up for a contact…</strong> खोलें (या बातचीत में कॉन्टैक्ट कार्ड का <strong>Agent replies → Set up…</strong>)।</li>
+  <li>कॉन्टैक्ट और प्रोग्राम चुनें: <strong>Claude Code</strong>, <strong>Codex</strong> या आपकी अपनी कमांड।</li>
+  <li>चाहें तो लंबे समय तक चलने वाला साइन-इन token (<code>claude setup-token</code> से) <strong>Value (optional)</strong> में पेस्ट करें। यह एक बार आपके node तक जाता है और उसके encrypted database में रखा जाता है। Mac पर यही भरोसेमंद तरीक़ा है, क्योंकि sandbox keychain नहीं खोल सकता।</li>
+  <li>अपने owner password से पुष्टि करें। नियम, उसका आख़िरी run और <strong>Run log</strong> <strong>Agents</strong> में दिखते हैं।</li>
+</ol>
+<p>Terminal से यह एक लाइन है: <code>antenna wake set &lt;contact&gt; --cmd "claude -p --output-format stream-json"</code>। <code>antenna wake list</code> नियम और हाल के runs दिखाता है; <code>antenna wake off &lt;contact&gt;</code> इसे बंद करता है।</p>
+
+<h2>Agent क्या कर सकता है और क्या नहीं</h2>
+<ul>
+  <li><strong>उसका prompt तय है:</strong> “आपके लिए नया मैसेज है, उसे पढ़ें और जवाब दें”। मैसेज ख़ुद कभी prompt नहीं बनता; agent उसे डेटा की तरह पढ़ता है, कॉन्टैक्ट के trust level से ज़्यादा अनुमति के बिना।</li>
+  <li><strong>यह sandbox में चलता है</strong> (Linux पर bubblewrap या Landlock, macOS पर Seatbelt): यह अपना temporary फ़ोल्डर और उस बातचीत का फ़ोल्डर देखता है, और सिर्फ़ अपने model provider तक पहुँचता है। आपके प्रोजेक्ट, आपकी दूसरी फ़ाइलें और node की keys उसकी पहुँच से बाहर हैं। Sandbox न हो, तो Antenna उसे शुरू ही नहीं करता।</li>
+  <li><strong>हर run साफ़ शुरू होता है</strong>, जब तक आप agent को resident न बनाएँ (नीचे देखें), ताकि पहले का कोई मैसेज बाद वाले run के लिए निर्देश न छोड़ सके।</li>
+  <li><strong>सीमाएँ:</strong> हर run के लिए समय-सीमा और प्रति घंटे runs की गिनती, ताकि बहुत बातूनी कॉन्टैक्ट आपका usage न बढ़ा सके।</li>
+</ul>
+
+<h2>इसे अपने किसी प्रोजेक्ट में काम करने दें</h2>
+<p>सिर्फ़ आपके अपने कंप्यूटरों (∞) के लिए, agent आपके toolchain के साथ एक प्रोजेक्ट फ़ोल्डर में भी काम कर सकता है: <code>--project ~/code/payments</code>, साथ में read-only <code>--tool-path</code> फ़ोल्डर और वे package registries जिन तक वह <code>--allow-host</code> से पहुँच सकता है। किसी भी दूसरे कॉन्टैक्ट के लिए Antenna यह मना कर देता है, और आपका home फ़ोल्डर, अपना डेटा या secrets रखने वाले फ़ोल्डर, जैसे <code>~/.ssh</code>, कभी नहीं खोलता।</p>
+
+<h2>सवाल-जवाब</h2>
+<details>
+  <summary>क्या दूसरे व्यक्ति को जवाब टाइप होते हुए दिखता है?</summary>
+  <p>हाँ, level 3 और उससे ऊपर के कॉन्टैक्ट्स के लिए: एक live bubble जो agent के लिखने के साथ बढ़ता है और आख़िर में आम मैसेज बन जाता है। Levels 1 और 2 को पूरा जवाब मिलता है।</p>
+</details>
+<details>
+  <summary>अगर agent अपने जवाब में कोई password या key लिख दे तो?</summary>
+  <p>दूसरे व्यक्ति के लिए stream रुक जाता है और मैसेज आपकी मंज़ूरी का इंतज़ार करता है। सिर्फ़ आपके अपने कंप्यूटरों तक यह आगे जाता है।</p>
+</details>
+<details>
+  <summary>क्या इसे पिछली बातचीत याद रहती है?</summary>
+  <p>Default रूप से नहीं: हर मैसेज एक नया run शुरू करता है। घंटों चलने वाले काम के लिए <code>--resident</code> जोड़ें: तब वही Claude Code session बातचीत के साथ बना रहता है, जो कहा और तय हुआ वह याद रखता है, और हर नया मैसेज उसकी अगली बारी बनता है। मैसेज तब भी उस तक दूसरे पक्ष के डेटा की तरह ही पहुँचते हैं।</p>
+</details>

@@ -313,7 +313,9 @@ is not kept afterwards. Without the password the daemon answers `password_requir
 cannot stand in for the password here: the root key opens only with the password.
 
 What a check tells the update host: the computer's address and the time, once a day, and nothing else (no identifier,
-no version in the request; the user agent is curl's). To turn it off: `off` in `~/.config/antenna/update-url` or in
+no version in the request; the user agent is curl's). The one exception is an installation's first check, which also
+carries the header `X-Stillbyte-First: 1`, so the host can count new installs a day; the daemon sends it until the host
+has answered once, and never again (D-140). To turn it off: `off` in `~/.config/antenna/update-url` or in
 `ANTENNA_UPDATE_URL`.
 
 ### 8.5 Not covered

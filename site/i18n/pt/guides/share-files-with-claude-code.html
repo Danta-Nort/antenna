@@ -1,0 +1,35 @@
+<!--guide {"title": "Como enviar arquivos ao Claude Code em outro computador — Antenna", "h1": "Como compartilhar arquivos com o Claude Code em outro computador", "description": "Envie um arquivo do notebook ao Claude Code num servidor ou em outro computador pelo Antenna: ele é verificado na chegada, e o agente fica sabendo onde está.", "summary": "Envio de arquivos de e para uma sessão do Claude Code em outro computador, verificados na chegada.", "source": "2026-11-09"}-->
+<p class="lead">No mesmo computador, o Claude Code lê os seus arquivos diretamente: passe o caminho ou arraste o arquivo para o terminal dele. Em outro computador, como um servidor, envie o arquivo pelo Antenna: solte-o no chat com aquela sessão do Claude Code, o Antenna o verifica na chegada e o salva lá, na pasta da conexão, e o agente recebe na caixa de entrada o nome, o local, o tamanho e o SHA-256 do arquivo. Os arquivos que o agente manda de volta chegam ao seu notebook do mesmo jeito.</p>
+
+<h2>Envie um arquivo para o agente</h2>
+<ol>
+  <li>Pareie o notebook com o outro computador como seu (∞) e conecte o Claude Code de lá ao Antenna: veja <a href="/guides/run-claude-code-on-a-vps">Claude Code numa VPS</a>.</li>
+  <li>Abra no notebook o chat com a sessão e solte o arquivo nele, ou anexe-o como faria em qualquer mensageiro.</li>
+  <li>No outro computador, o Antenna verifica o tipo do arquivo pelo conteúdo, procura ameaças e segredos e o salva na pasta da conexão, <code>~/Antenna/links/&lt;folder&gt;/shared/</code>, ou numa pasta de projeto que você escolheu para aquele computador.</li>
+  <li>O agente fica sabendo do arquivo salvo sozinho, na próxima leitura da caixa de entrada, com o caminho e os hashes, e pode usá-lo no próximo passo.</li>
+</ol>
+
+<h2>Receba arquivos do agente</h2>
+<p>O agente pode enviar a você um arquivo, um build, um relatório ou uma captura de tela, com as mesmas ferramentas que usa para mensagens. Ele chega no seu chat e em <strong>Files</strong>, como um cartão com o nome do arquivo, o que a verificação percebeu e o hash. Imagens aparecem como uma prévia segura e verificada, recriada pelo Antenna.</p>
+
+<h2>O que é verificado e o que espera por você</h2>
+<ul>
+  <li><strong>Entre os seus próprios computadores</strong>, arquivos comuns são salvos sozinhos. Qualquer coisa que possa executar ou instalar software, como um programa, um instalador ou um arquivo compactado que contenha um, continua esperando a sua decisão, a menos que você libere isso para aquele computador.</li>
+  <li><strong>Vindos do agente de outra pessoa</strong> nos níveis 3 e 4, os arquivos são verificados e esperam o seu Accept (aceitar), ou que um dos seus agentes os aceite. Nos níveis 1 e 2, você decide cada arquivo.</li>
+  <li><strong>Na saída</strong>, um arquivo que pareça conter uma chave, uma senha ou um token fica retido até você aprovar, exceto entre os seus próprios computadores.</li>
+  <li><strong>Nada é sobrescrito.</strong> Um arquivo cujo nome já está em uso é salvo como <code>report (2).pdf</code>, e quem enviou fica sabendo o nome.</li>
+</ul>
+
+<h2>Perguntas</h2>
+<details>
+  <summary>Por que não usar scp ou uma pasta compartilhada?</summary>
+  <p>Você pode, e para árvores grandes de arquivos talvez prefira. O Antenna é para os arquivos que fazem parte de uma conversa com o agente: eles chegam onde o agente espera, o agente fica sabendo, e um arquivo vindo de qualquer pessoa que não seja você é verificado antes de ser salvo.</p>
+</details>
+<details>
+  <summary>O arquivo é criptografado no caminho?</summary>
+  <p>Sim, de ponta a ponta, pela mesma conexão das suas mensagens. Nenhum servidor no meio o armazena.</p>
+</details>
+<details>
+  <summary>Posso escolher onde os arquivos são salvos?</summary>
+  <p>Sim. No cartão de contato do computador, <strong>Files from this computer</strong> permite escolher uma pasta para aquele computador e uma para cada um dos agentes dele. Pelo terminal: <code>antenna files save-to &lt;contact&gt; &lt;folder&gt;</code>.</p>
+</details>

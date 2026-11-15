@@ -1,0 +1,45 @@
+<!--guide {"title": "Open-Source-P2P-Messenger mit Post-Quanten-Verschlüsselung — Antenna", "h1": "Ein Open-Source-Peer-to-Peer-Messenger mit Post-Quanten-Verschlüsselung", "description": "Antenna schickt Nachrichten direkt von Gerät zu Gerät, Ende-zu-Ende-verschlüsselt mit Post-Quanten-Schlüsseln, ohne zentralen Server. So funktioniert es.", "summary": "Wie Antenna Geräte direkt verbindet, mit Post-Quanten-Schlüsseln verschlüsselt und was ein Relay sieht und was nicht.", "source": "2026-11-09"}-->
+<p class="lead">Antenna ist ein kostenloser Open-Source-Peer-to-Peer-Messenger für macOS und Linux. Nachrichten und Dateien gehen über QUIC direkt von einem Gerät zum anderen, Ende-zu-Ende-verschlüsselt mit den Post-Quanten-Protokollen von libsignal, und die Verbindung selbst nutzt einen hybriden Post-Quanten-Schlüsselaustausch. Es gibt keinen zentralen Server, der Ihre Nachrichten speichert oder weiterleitet; können sich zwei Geräte nicht direkt erreichen, leitet ein Relay Datenverkehr weiter, den es nicht entschlüsseln kann.</p>
+
+<h2>Peer-to-Peer in der Praxis</h2>
+<p>„Peer-to-Peer“ klingt einfach, doch die meisten Computer stehen hinter Heimroutern und Firewalls, die eingehende Verbindungen blockieren. Antenna nutzt iroh, eine QUIC-Bibliothek, die einen direkten Weg durch diese Hürden findet (Hole Punching) und auf ein Relay ausweicht, wenn es keinen gibt. Meist beginnt eine Verbindung über das Relay und wechselt auf den direkten Weg, sobald einer gefunden ist. So oder so sieht das Relay nur verschlüsselte Pakete, und jeder kann statt des Standard-Relays sein eigenes betreiben.</p>
+<p>Im selben Netzwerk können sich Kontakte, denen Sie genug vertrauen, auch über das lokale Netzwerk verbinden, sogar ganz ohne Internet.</p>
+
+<h2>Zwei Verschlüsselungsebenen</h2>
+<table>
+  <thead><tr><th>Ebene</th><th>Was sie nutzt</th><th>Was sie schützt</th></tr></thead>
+  <tbody>
+    <tr><td>Verbindung</td><td>TLS 1.3 mit X25519MLKEM768, einer Kombination aus klassischem und Post-Quanten-Schlüsselaustausch</td><td>Die Verbindung zwischen den beiden Geräten, auch über ein Relay</td></tr>
+    <tr><td>Nachrichten</td><td>libsignal: PQXDH zum Start eines Gesprächs und der Post-Quanten-Ratchet SPQR</td><td>Jede Nachricht und Datei, Ende zu Ende, mit Forward Secrecy</td></tr>
+  </tbody>
+</table>
+<p>„Post-Quanten“ heißt: Der Schlüsselaustausch bleibt sicher gegen jemanden, der heute Datenverkehr mitschneidet und ihn später mit einem Quantencomputer entschlüsselt. Antenna schreibt keine eigene Kryptografie: Beide Ebenen stammen aus auditierten oder formal verifizierten Bibliotheken, und für das Kopplungsprotokoll gibt es ein formales Modell, geprüft mit ProVerif.</p>
+
+<h2>Was das Peer-to-Peer-Design ändert</h2>
+<ul>
+  <li><strong>Kein Konto, das man stehlen kann.</strong> Es gibt keinen Server mit einer Liste von Nutzern, ihren Kontakten oder ihren Nachrichten.</li>
+  <li><strong>Keine Telefonnummer.</strong> Kontakte fügen Sie mit einem Einmal-Link und einem Code hinzu, den Sie mündlich vergleichen. Siehe <a href="/guides/messenger-without-phone-number">Messenger ohne Telefonnummer</a>.</li>
+  <li><strong>Ihre IP-Adresse, zu Ihren Bedingungen.</strong> Eine direkte Verbindung zeigt der anderen Seite Ihre Adresse. Kontakte der Vertrauensstufen 1 und 2 laufen immer über das Relay und sehen sie daher nie.</li>
+  <li><strong>Beide Geräte müssen gleichzeitig online sein.</strong> Bis dahin wartet eine Nachricht in der Warteschlange des Absenders und geht von selbst raus; ein Server, den Sie laufen lassen, hält Ihre Agenten erreichbar.</li>
+</ul>
+
+<h2>Open Source und überprüfbar</h2>
+<p>Die Anwendung steht unter AGPL-3.0; das Protokoll, seine Formate und Testvektoren unter Apache-2.0, sodass andere kompatible Clients bauen können. Releases sind signiert, und Quellcode, Spezifikation und jede Designentscheidung liegen auf <a href="https://github.com/Danta-Nort/antenna">GitHub</a>. Nachrichten sind signiert und per Hash verkettet, und beide Seiten vergleichen ihre Kopien. Eine veränderte oder zurückgesetzte Nachricht zeigt also, wo es passiert ist.</p>
+
+<h2>Fragen</h2>
+<details>
+  <summary>Ist ein Peer-to-Peer-Messenger langsamer?</summary>
+  <p>Meist nicht: Ein direkter Weg spart den Umweg über ein Rechenzentrum, und über ein Relay nimmt eine Nachricht nur einen zusätzlichen Zwischenschritt.</p>
+</details>
+<details>
+  <summary>Kann ich mein eigenes Relay betreiben?</summary>
+  <p>Ja. Das Relay ist Open Source und leitet nur verschlüsselten Datenverkehr weiter; stellen Sie Ihren Knoten statt auf das Standard-Relay auf Ihr eigenes ein.</p>
+</details>
+<details>
+  <summary>Funktioniert es für Gruppen?</summary>
+  <p>Noch nicht. Antenna 0.1 kennt Gespräche zu zweit: zwischen Menschen, zwischen Menschen und Agenten und zwischen Agenten.</p>
+</details>
+<details>
+  <summary>Welche Plattformen werden unterstützt?</summary>
+  <p>macOS auf Apple Silicon (signiert und notarisiert) und Linux auf x86_64: die Desktop-App und ein Server-Knoten.</p>
+</details>

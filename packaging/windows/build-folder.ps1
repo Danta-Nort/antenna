@@ -1,16 +1,19 @@
 # SPDX-License-Identifier: AGPL-3.0-only
 # Antenna for Windows as one folder (W1 of the Windows port, D-134, D-135): the window (Flutter) with the core next to
 # it, antennad.exe (the daemon, which the window starts as its child) and antenna.exe (the CLI, and the window's bridge
-# to the daemon's pipe). No installer yet (W4): the folder runs where it is put.
+# to the daemon's pipe). The folder runs where it is put; build-installer.ps1 packs it into the installer (W4).
 #
-#   .\packaging\windows\build-folder.ps1 [-Out dist] [-Install]
+#   .\packaging\windows\build-folder.ps1 [-Out dist] [-Install] [-CodeMode]
 #
+# -CodeMode builds the window for the hands-on check of Code mode on Windows (W2): it offers Code mode, which the
+# default build does not until that check has passed (ANTENNA_WINDOWS_CODE, lib/state/code_mode.dart).
 # -Install also copies the folder to %LOCALAPPDATA%\Programs\Antenna (per user, no administrator) and puts an
 # "Antenna" shortcut on the desktop and in the Start menu. Run it from a normal (not elevated) PowerShell, in the build
 # environment of packaging\windows\setup-build-machine.ps1 (Rust, MSVC, NASM, protoc, Flutter).
 param(
   [string]$Out = '',
-  [switch]$Install
+  [switch]$Install,
+  [switch]$CodeMode
 )
 # Native tools write progress to stderr, which Windows PowerShell 5.1 turns into errors under 'Stop': their exit codes
 # are checked instead, and the file steps stop on their own errors.
@@ -38,8 +41,9 @@ Write-Host "==> window (flutter build windows --release)"
 Push-Location $app
 try {
   $numeric = ($version -split '-')[0]
-  flutter build windows --release --build-name $numeric --build-number 1 --dart-define "ANTENNA_COMMIT=$commit" 2>&1 |
-    ForEach-Object { "$_" }
+  $defines = @('--dart-define', "ANTENNA_COMMIT=$commit")
+  if ($CodeMode) { $defines += @('--dart-define', 'ANTENNA_WINDOWS_CODE=true') }
+  flutter build windows --release --build-name $numeric --build-number 1 @defines 2>&1 | ForEach-Object { "$_" }
   if ($LASTEXITCODE -ne 0) { throw "flutter build windows failed ($LASTEXITCODE)" }
 } finally { Pop-Location }
 $runner = Join-Path $app 'build\windows\x64\runner\Release'
@@ -50,8 +54,13 @@ New-Item -ItemType Directory -Force $dest -ErrorAction Stop | Out-Null
 Copy-Item -Recurse -Path (Join-Path $runner '*') -Destination $dest -ErrorAction Stop
 Copy-Item (Join-Path $core 'antennad.exe'), (Join-Path $core 'antenna.exe') $dest -ErrorAction Stop
 Copy-Item (Join-Path $root 'LICENSE-AGPL-3.0'), (Join-Path $root 'LICENSE-APACHE-2.0') $dest -ErrorAction Stop
+if ($CodeMode) {
+  $codeLine = "Code mode, for its check on Windows: Settings -> Interface -> Code, then Agents -> Start in terminal runs Claude Code or Codex in the dock (antenna.exe agent-run)."
+} else {
+  $codeLine = "Not yet: Code mode in the window (W2)."
+}
 @"
-Antenna $version ($commit) for Windows: a first version (W1).
+Antenna $version ($commit) for Windows: a preview.
 
 Open antenna_desktop.exe (or the Antenna shortcut). The window starts the daemon (antennad.exe) itself and stops it
 when it closes; your data lives in %LOCALAPPDATA%\Antenna, made for you alone, and the daemon's log in
@@ -64,8 +73,8 @@ gives Claude Code its `claude mcp add` command (run it in PowerShell), writes Cl
 shows the manual steps for the other apps.
 In a terminal, each owner command that needs a session (contacts, send, history, connect) asks for the password:
 Windows has no terminal session to keep it for (antenna login explains).
-Not yet: Code mode in the window (W2), files (refused with a message until the Windows file check, W3), Windows Hello
-(W5).
+$codeLine
+Not yet: files (refused with a message until the Windows file check, W3), Windows Hello (W5).
 Known issues:
 - A console window may flash when the window runs the command line for updates or app connections.
 "@ | Set-Content -Encoding utf8 (Join-Path $dest 'README.txt')

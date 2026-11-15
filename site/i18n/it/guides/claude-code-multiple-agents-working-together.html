@@ -1,0 +1,45 @@
+<!--guide {"title": "Claude Code: più agenti che lavorano insieme su un progetto", "h1": "Più agenti Claude Code che lavorano insieme sullo stesso progetto", "description": "Un agente Claude Code capo divide il lavoro, i worker programmano in parallelo, ognuno in una sandbox; ogni risultato è verificato e decidi tu il merge.", "summary": "Un agente capo e worker in parallelo sullo stesso repository, ognuno nella sua sandbox, con verifiche e l'ultima parola a te.", "source": "2026-11-09"}-->
+<p class="lead">In Antenna, un <strong>team</strong> è un agente capo con dei worker su un progetto git. Fissi un budget una volta (per esempio “fino a 2 programmatori Claude Code”) e il capo divide il lavoro in compiti, avvia i worker entro quel budget, controlla ogni risultato e lo rimanda indietro o lo accetta. Ogni worker scrive codice in parallelo nella propria sandbox, su una propria copia del progetto, e il lavoro del team arriva al tuo branch solo quando lo approvi tu. <em>Sperimentale.</em></p>
+
+<h2>Il problema di più agenti nella stessa cartella</h2>
+<p>Far girare due o tre sessioni di Claude Code una accanto all'altra è facile; evitare che si pestino i piedi no. Modificano gli stessi file, eseguono comandi nella stessa cartella e ognuna può leggere tutto ciò che leggono le altre. Qualcuno deve distribuire i compiti, controllare ciò che torna indietro e fare il merge, e di solito quel qualcuno sei tu, che salti da un terminale all'altro.</p>
+
+<h2>Come funziona un team</h2>
+<ol>
+  <li><strong>Crei il team</strong> in <strong>Teams → New team</strong>: la cartella del progetto, il capo (uno dei tuoi agenti, un modello locale o tu stesso), il budget di worker e le regole: se i worker possono eseguire comandi, quali <strong>Check commands</strong> può indicare un compito (<code>cargo test</code>, <code>npm test</code>) e quali registri di pacchetti possono raggiungere quelle verifiche.</li>
+  <li><strong>Dai l'obiettivo al capo</strong>, nel suo terminale: “Dividi la funzione di login in piccoli compiti per due programmatori.”</li>
+  <li><strong>Il capo pianifica e forma la squadra.</strong> Scrive i compiti, avvia worker come <code>web.coder-1</code> entro il budget e li assegna.</li>
+  <li><strong>I worker programmano in parallelo.</strong> Ognuno riceve una copia nuova del progetto sul branch del team, legge solo il proprio compito, lavora e consegna, oppure fa una domanda al capo quando è bloccato.</li>
+  <li><strong>Antenna verifica ogni risultato</strong> eseguendo il comando di verifica del compito in una sandbox separata, senza token e senza rete oltre ai registri che hai indicato. Una verifica fallita torna da sola al worker, fino a un limite, prima che decida il capo.</li>
+  <li><strong>Il capo esegue la revisione:</strong> accetta, oppure rimanda indietro con dei commenti. Il lavoro accettato si accumula su un branch del team, <code>antenna/web</code>.</li>
+  <li><strong>Sei tu ad applicarlo.</strong> <strong>Review and apply</strong> mostra che cosa verrà unito al tuo branch; con la tua password viene unito, come fast-forward. Senza, non si muove nulla.</li>
+</ol>
+
+<h2>Che cosa vedi</h2>
+<p>La bacheca del team mostra ogni compito per stato, da Open e Working a In review, Blocked, Accepted e Applied, con l'output in diretta di ogni worker, che cosa cambia il suo risultato, l'output della verifica e i token usati. Puoi fare tutto ciò che può fare il capo: rispondere alla domanda di un worker, chiedere modifiche, annullare un compito o fermare un worker. Quando il capo gira nella modalità Code di Antenna, viene svegliato ogni volta che un worker consegna o chiede qualcosa, così il team va avanti anche quando non ci sei.</p>
+
+<h2>Che cosa protegge il progetto</h2>
+<ul>
+  <li><strong>I worker non vedono mai la tua cartella</strong>, gli altri tuoi file o le copie degli altri worker, e raggiungono solo il loro fornitore del modello.</li>
+  <li><strong>Il capo non può alzarsi il budget da solo</strong>, approvare qualcosa al posto tuo o vedere il token di un worker: ogni chiamata la decide Antenna, non il modello.</li>
+  <li><strong>L'input non fidato resta confinato.</strong> Un compito scritto dopo aver letto il messaggio di un contatto di livello 2 non esegue comandi né verifiche, quindi un'istruzione infilata in quel messaggio non può arrivare al tuo computer.</li>
+  <li><strong>Solo in locale, se vuoi.</strong> Un team può essere limitato ai modelli che girano sul tuo computer, senza alcun modello nel cloud.</li>
+</ul>
+
+<h2>Domande</h2>
+<details>
+  <summary>Quali agenti possono fare da worker?</summary>
+  <p>Claude Code con il tuo accesso, un altro programma che parla lo stream-json di Claude Code, oppure un modello locale per ruoli più leggeri come smistamento, riassunti e documentazione.</p>
+</details>
+<details>
+  <summary>Il capo può essere Codex o un'altra app?</summary>
+  <p>Il capo può essere qualsiasi tuo agente collegato ad Antenna: riceve gli strumenti del team via MCP al successivo avvio della sua app. Puoi anche guidare tu stesso il team dalla bacheca.</p>
+</details>
+<details>
+  <summary>Come limito i costi?</summary>
+  <p>Il budget fissa quanti worker di ciascun tipo possono esistere, e le regole limitano la durata di un turno e di una verifica e i token che un compito può usare.</p>
+</details>
+<details>
+  <summary>Funziona sul mio Mac?</summary>
+  <p>Sì, su macOS e Linux. I worker girano sul computer in cui si trova il team; i worker sugli altri tuoi computer arriveranno più avanti.</p>
+</details>

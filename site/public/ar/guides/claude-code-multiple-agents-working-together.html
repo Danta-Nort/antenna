@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Code: عدة وكلاء يعملون معًا على مشروع واحد — Antenna</title>
+<meta name="description" content="وكيل Claude Code قائد يقسّم العمل، وعمّال يبرمجون بالتوازي كل في بيئته المعزولة، وكل نتيجة تُفحص، ولا شيء يصل إلى فرعك دون موافقتك.">
+<link rel="canonical" href="https://antenna.contact/ar/guides/claude-code-multiple-agents-working-together">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Claude Code: عدة وكلاء يعملون معًا على مشروع واحد — Antenna">
+<meta property="og:description" content="وكيل Claude Code قائد يقسّم العمل، وعمّال يبرمجون بالتوازي كل في بيئته المعزولة، وكل نتيجة تُفحص، ولا شيء يصل إلى فرعك دون موافقتك.">
+<meta property="og:url" content="https://antenna.contact/ar/guides/claude-code-multiple-agents-working-together">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ar_AR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/claude-code-multiple-agents-working-together">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/claude-code-multiple-agents-working-together">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ar/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "الأدلة",
+     "item": "https://antenna.contact/ar/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "شغّل عدة وكلاء Claude Code يعملون معًا على مشروع واحد",
+     "item": "https://antenna.contact/ar/guides/claude-code-multiple-agents-working-together"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "شغّل عدة وكلاء Claude Code يعملون معًا على مشروع واحد",
+   "description": "وكيل Claude Code قائد يقسّم العمل، وعمّال يبرمجون بالتوازي كل في بيئته المعزولة، وكل نتيجة تُفحص، ولا شيء يصل إلى فرعك دون موافقتك.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "ar",
+   "url": "https://antenna.contact/ar/guides/claude-code-multiple-agents-working-together",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ar/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "أي الوكلاء يمكن أن يكونوا عمّالًا؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Claude Code بتسجيل دخولك، أو برنامج آخر يتحدث صيغة stream-json الخاصة بـ Claude Code، أو نموذج محلي للأدوار الأخف مثل الفرز والملخصات والتوثيق."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يمكن أن يكون القائد Codex أو تطبيقًا آخر؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "يمكن أن يكون القائد أي وكيل من وكلائك المتصلين بـ Antenna: يحصل على أدوات الفريق عبر MCP في المرة التالية التي يبدأ فيها تطبيقه. ويمكنك أيضًا قيادة الفريق بنفسك من اللوحة."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "كيف أحدّ من التكلفة؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "تحدد الميزانية العدد الأقصى للعمّال من كل نوع، وتحدد القواعد مدة الدور ومدة الفحص وعدد رموز النموذج (tokens) التي يجوز للمهمة استهلاكها."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يعمل على جهاز Mac؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "نعم، على macOS وLinux. يعمل العمّال على الحاسوب الذي يوجد عليه الفريق؛ أما العمّال على حواسيبك الأخرى فسيأتون لاحقًا."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">انتقل إلى المحتوى</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="القائمة الرئيسية">
+      <a href="/ar/#product">المنتج</a>
+      <a href="/ar/#security">الأمان</a>
+      <a href="/ar/guides/">الأدلة</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="اللغة: العربية"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">AR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/claude-code-multiple-agents-working-together" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/claude-code-multiple-agents-working-together" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/claude-code-multiple-agents-working-together" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/claude-code-multiple-agents-working-together" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/claude-code-multiple-agents-working-together" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/claude-code-multiple-agents-working-together" hreflang="ar" lang="ar" aria-current="true">العربية</a></li>
+        <li><a href="/fr/guides/claude-code-multiple-agents-working-together" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/claude-code-multiple-agents-working-together" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/claude-code-multiple-agents-working-together" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/claude-code-multiple-agents-working-together" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/claude-code-multiple-agents-working-together" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/claude-code-multiple-agents-working-together" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/claude-code-multiple-agents-working-together" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/claude-code-multiple-agents-working-together" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/claude-code-multiple-agents-working-together" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ar/#download">تنزيل</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="مسار التنقل"><a href="/ar/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ar/guides/">الأدلة</a></nav>
+    <p class="eyebrow">آخر تحديث <time datetime="2026-11-09">9 نوفمبر 2026</time></p>
+    <h1>شغّل عدة وكلاء Claude Code يعملون معًا على مشروع واحد</h1>
+    <p class="lead">في Antenna، <strong>الفريق</strong> هو وكيل قائد وعمّال على مشروع git واحد. تحدد ميزانية مرة واحدة (مثلًا «حتى مبرمجَين اثنين من Claude Code»)، فيقسّم القائد العمل إلى مهام، ويشغّل العمّال ضمن تلك الميزانية، ويراجع كل نتيجة فيعيدها أو يقبلها. يبرمج كل عامل بالتوازي في بيئته المعزولة (sandbox)، على نسخته الخاصة من المشروع، ولا يصل عمل الفريق إلى فرعك إلا حين توافق عليه. <em>تجريبي.</em></p>
+
+    <h2>مشكلة عدة وكلاء في مجلد واحد</h2>
+    <p>تشغيل جلستين أو ثلاث من Claude Code جنبًا إلى جنب أمر سهل؛ أما منعها من التداخل فليس كذلك. فهي تعدّل الملفات نفسها، وتشغّل الأوامر في المجلد نفسه، وكل منها يستطيع قراءة كل ما يقرؤه الآخرون. ولا بد من شخص يوزّع المهام ويتحقق مما يعود ويدمجه، وهذا الشخص عادة هو أنت، تتنقل بين الطرفيات.</p>
+
+    <h2>كيف يعمل الفريق</h2>
+    <ol>
+      <li><strong>تنشئ الفريق</strong> في <strong>Teams → New team</strong>: مجلد المشروع، والقائد (أحد وكلائك، أو نموذج محلي، أو أنت)، وميزانية العمّال، والقواعد: هل يحق للعمّال تشغيل الأوامر، وأي <strong>Check commands</strong> (أوامر الفحص) يجوز للمهمة أن تذكرها (<code>cargo test</code>، <code>npm test</code>)، وأي سجلات حزم يحق لتلك الفحوص الوصول إليها.</li>
+      <li><strong>تعطي القائد الهدف</strong>، في طرفيته الخاصة: «قسّم ميزة تسجيل الدخول إلى مهام صغيرة لمبرمجَين اثنين».</li>
+      <li><strong>يخطط القائد ويوزّع.</strong> يكتب المهام، ويشغّل عمّالًا مثل <code>web.coder-1</code> ضمن الميزانية، ويسند إليهم المهام.</li>
+      <li><strong>يبرمج العمّال بالتوازي.</strong> يحصل كل منهم على نسخة جديدة من المشروع على فرع الفريق، ولا يقرأ إلا مهمته، فيعمل ويسلّم، أو يسأل القائد حين يتعثر.</li>
+      <li><strong>يفحص Antenna كل نتيجة</strong> بتشغيل أمر الفحص الخاص بالمهمة في بيئة معزولة منفصلة، بلا رموز وصول ولا شبكة عدا السجلات التي حددتها. ويعود الفحص الفاشل إلى العامل تلقائيًا، حتى حد معين، قبل أن يقرر القائد.</li>
+      <li><strong>يراجع القائد:</strong> يقبل، أو يعيد العمل مع ملاحظات. ويتجمع العمل المقبول على فرع للفريق، <code>antenna/web</code>.</li>
+      <li><strong>أنت تطبّقه.</strong> يعرض <strong>Review and apply</strong> ما سيُدمج في فرعك، وبكلمة مرورك يُدمج بطريقة fast-forward. ومن دونها لا يتحرك شيء.</li>
+    </ol>
+
+    <h2>ما تراه</h2>
+    <p>تعرض لوحة الفريق كل مهمة بحسب حالتها، من Open وWorking إلى In review وBlocked وAccepted وApplied، مع المخرجات الحية لكل عامل، وما تغيّره نتيجته، ومخرجات الفحص، ورموز النموذج (tokens) التي استهلكها. ويمكنك فعل أي شيء يفعله القائد: الإجابة عن سؤال عامل، أو طلب تعديلات، أو إلغاء مهمة، أو إيقاف عامل. وحين يعمل القائد في وضع Code في Antenna، يُوقَظ كلما سلّم عامل عمله أو سأل شيئًا، فيواصل الفريق العمل في غيابك.</p>
+
+    <h2>ما الذي يحمي المشروع</h2>
+    <ul>
+      <li><strong>لا يرى العمّال مجلدك أبدًا</strong>، ولا ملفاتك الأخرى، ولا نسخ بعضهم، ولا يصلون إلا إلى مزوّد نموذجهم.</li>
+      <li><strong>لا يستطيع القائد رفع ميزانيته</strong>، ولا الموافقة على أي شيء نيابة عنك، ولا رؤية رمز وصول أي عامل: Antenna، لا النموذج، هو من يقرر في كل استدعاء.</li>
+      <li><strong>المُدخل غير الموثوق يبقى محصورًا.</strong> المهمة المكتوبة بعد قراءة رسالة من جهة اتصال من المستوى 2 لا تشغّل أوامر ولا فحوصًا، فلا تستطيع تعليمات مدسوسة في تلك الرسالة الوصول إلى حاسوبك.</li>
+      <li><strong>محليًا فقط، إن أردت.</strong> يمكن قصر الفريق على نماذج تعمل على حاسوبك، دون أي نموذج سحابي.</li>
+    </ul>
+
+    <h2>أسئلة</h2>
+    <details>
+      <summary>أي الوكلاء يمكن أن يكونوا عمّالًا؟</summary>
+      <p>Claude Code بتسجيل دخولك، أو برنامج آخر يتحدث صيغة stream-json الخاصة بـ Claude Code، أو نموذج محلي للأدوار الأخف مثل الفرز والملخصات والتوثيق.</p>
+    </details>
+    <details>
+      <summary>هل يمكن أن يكون القائد Codex أو تطبيقًا آخر؟</summary>
+      <p>يمكن أن يكون القائد أي وكيل من وكلائك المتصلين بـ Antenna: يحصل على أدوات الفريق عبر MCP في المرة التالية التي يبدأ فيها تطبيقه. ويمكنك أيضًا قيادة الفريق بنفسك من اللوحة.</p>
+    </details>
+    <details>
+      <summary>كيف أحدّ من التكلفة؟</summary>
+      <p>تحدد الميزانية العدد الأقصى للعمّال من كل نوع، وتحدد القواعد مدة الدور ومدة الفحص وعدد رموز النموذج (tokens) التي يجوز للمهمة استهلاكها.</p>
+    </details>
+    <details>
+      <summary>هل يعمل على جهاز Mac؟</summary>
+      <p>نعم، على macOS وLinux. يعمل العمّال على الحاسوب الذي يوجد عليه الفريق؛ أما العمّال على حواسيبك الأخرى فسيأتون لاحقًا.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna مجاني ومفتوح المصدر</strong>، لنظامي macOS وLinux. بلا حساب وبلا رقم هاتف.</p>
+      <a class="btn" href="/ar/#download">نزّل Antenna</a>
+    </aside>
+    <h2>أدلة ذات صلة</h2>
+    <ul class="related">
+      <li><a href="/ar/guides/claude-code-and-codex-talk-to-each-other">كيف تجعل Claude Code وCodex يتحدثان مع بعضهما</a></li>
+      <li><a href="/ar/guides/message-claude-code-on-another-computer">أرسل رسالة إلى Claude Code على حاسوب آخر</a></li>
+      <li><a href="/ar/guides/agent-to-agent-communication">التواصل بين الوكلاء عبر MCP</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ar/guides/">الأدلة</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>للتواصل: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ar/privacy">سياسة الخصوصية</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

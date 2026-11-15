@@ -1,0 +1,49 @@
+<!--guide {"title": "VPS で Claude Code を 24 時間動かし、ノート PC から操作する — Antenna", "h1": "VPS で Claude Code を 24 時間動かし、ノート PC から話しかける", "description": "VPS に Antenna を入れて Claude Code や Codex を起動し、ノート PC のチャットからタスクを依頼。ポート開放も、SSH セッションの維持も不要です。", "summary": "サーバーで常時動く Claude Code や Codex に、ノート PC からチャットで話しかける方法。", "source": "2026-11-09"}-->
+<p class="lead">Linux の VPS に Claude Code と Antenna のノードをインストールし、サーバーとノート PC を一度だけペアリングして、プロジェクトフォルダーで Antenna 経由で Claude Code を起動します。すると Claude Code はログアウト後も専用の tmux セッションで動き続け、宛てたメッセージが届くと起きて、ノート PC のチャットで答えます。受信用のポートを開ける必要も、SSH セッションを維持する必要もありません。Codex も同じように使えます。</p>
+
+<h2>必要なもの</h2>
+<ul>
+  <li>x86_64 の Linux サーバー。Claude Code（または Codex）がインストール済みでサインイン済みであること、そして tmux。</li>
+  <li>ノート PC に <a href="/#download">Antenna</a>。macOS または Linux。</li>
+</ul>
+
+<h2>1. サーバーに Antenna のノードをインストールする</h2>
+<pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+sudo loginctl enable-linger $USER</code></pre>
+<p>インストーラーは署名付きマニフェストから最新のリリースを読み取ってアーカイブを検証し、<code>antennad</code> と <code>antenna</code> を systemd のユーザーサービスとして <code>~/.local/bin</code> にインストールし（root は不要）、パスワード付きでノードを作成します。2 行目は、ログアウト後もサービスを動かし続けるためのものです。Ubuntu や Fedora なら、代わりに <code>.deb</code> や <code>.rpm</code> をインストールすることもできます。</p>
+
+<h2>2. ノート PC とペアリングする</h2>
+<p>ノート PC で <strong>New contact → Invite</strong> を開き、名前を付け、<strong>This is my own computer (∞)</strong> にチェックを入れて <strong>Create link</strong> を押し、リンクをコピーします。サーバーで：</p>
+<pre><code>antenna join '&lt;link&gt;' --trust 5 --label mac</code></pre>
+<p>シングルクォートは外さないでください。リンクには <code>#</code> が含まれています。ノート PC に表示されたコードをサーバーのターミナルに入力し、ノート PC で <strong>The contact confirmed — codes match</strong> を押します。レベル 5 は双方で ∞ にあたるので、サーバーはあなた自身のコンピューターとして扱われます。</p>
+
+<h2>3. Antenna 経由で Claude Code を起動する</h2>
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api
+antenna session attach api-dev</code></pre>
+<p>connect の行はセッションに専用のエージェントとトークンを与え、あいさつを送るので、ノート PC に <code>api-dev</code> という名前のチャットが現れます。start の行は Antenna 専用の tmux サーバーで Claude Code を起動します（あなたの tmux には触れません）。一度アタッチして、フォルダーを信頼するかどうかといった Claude Code の最初の質問に答え、<code>Ctrl-b d</code> でデタッチすれば、Claude Code は動き続けます。Codex の場合は <code>antenna connect codex</code> と <code>--cli codex</code> を使います。</p>
+
+<h2>4. 話しかける</h2>
+<p>ノート PC の <code>api-dev</code> のチャットに書きます：「マイグレーションのテストを実行して、失敗したものを直して」。Claude Code がプロンプトで待機していると、Antenna が短い 1 行を入力してあなたのメッセージを読ませます。連絡先のテキストを入力することも、代わりに質問に答えることもありません。<strong>My devices</strong> のサーバーのカードにはその健全性とエージェントが表示され、サーバーからのリクエストをノート PC で承認できます。</p>
+
+<h2>再起動後</h2>
+<p>サーバーが再起動すると、ノードの鍵はロックされます。サービスは動いていますが、あなたがログインして <code>antenna unlock</code> を実行するまで、リンクは沈黙したままです。こうしておけば、サーバーのディスクのコピーを手に入れても誰もあなたの鍵を得られません。ロックされているかどうかは <code>antenna status</code> でわかります。</p>
+
+<h2>よくある質問</h2>
+<details>
+  <summary>SSH と tmux だけではだめなのですか？</summary>
+  <p>ターミナルの前に座っている間はそれで十分です。Antenna はそれに加えて、ノート PC からいつでも書き込めるチャットを用意し、書き込んだらセッションを起こし、ほかのエージェントからも仕事を渡せるようにします。権限は Antenna 自身が検査します。</p>
+</details>
+<details>
+  <summary>サーバーにグローバル IP やポート開放は必要ですか？</summary>
+  <p>いいえ。どちらの側も外向きに接続します。ネットワークが許せば直接、そうでなければリレーを経由し、リレーは暗号化された通信を転送するだけです。</p>
+</details>
+<details>
+  <summary>1 台のサーバーで複数のセッションを動かせますか？</summary>
+  <p>はい。プロジェクトフォルダーごとに 1 つのエージェントで、それぞれがノート PC 上に自分の名前と自分のチャットを持ちます。</p>
+</details>
+<details>
+  <summary>ARM 向けのビルドはありますか？</summary>
+  <p>まだありません。サーバー用のノードは x86_64 の Linux 向けにビルドされています。</p>
+</details>

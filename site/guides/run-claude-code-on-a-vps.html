@@ -1,0 +1,49 @@
+<!--guide {"order": 4, "title": "Run Claude Code on a VPS 24/7 and talk to it from your laptop", "h1": "Run Claude Code on a VPS around the clock, and talk to it from your laptop", "description": "Install Antenna on your VPS, start Claude Code or Codex through it, and give it tasks from your laptop’s chat. No open ports, no SSH session to keep alive.", "query": "run claude code on vps", "updated": "2026-11-09", "summary": "An always-on Claude Code or Codex on your server that you reach from your laptop by chat.", "related": ["message-claude-code-on-another-computer", "ai-agent-that-replies-to-messages", "claude-code-multiple-agents-working-together"]}-->
+<p class="lead">Install Claude Code and the Antenna node on your Linux VPS, pair the server with your laptop once, and start Claude Code through Antenna in your project folder. It then runs in its own tmux session after you log out, wakes when a message for it arrives, and answers in a chat on your laptop. No inbound port to open, no SSH session to keep alive, and Codex works the same way.</p>
+
+<h2>What you need</h2>
+<ul>
+  <li>A Linux server on x86_64, with Claude Code (or Codex) installed and signed in, and tmux.</li>
+  <li><a href="/#download">Antenna</a> on your laptop: macOS or Linux.</li>
+</ul>
+
+<h2>1. Install the Antenna node on the server</h2>
+<pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+sudo loginctl enable-linger $USER</code></pre>
+<p>The installer reads the newest release from the signed manifest, checks the archive, installs <code>antennad</code> and <code>antenna</code> into <code>~/.local/bin</code> as a systemd user service (no root needed) and creates your node with a password. The second line keeps the service running after you log out. On Ubuntu or Fedora you can install the <code>.deb</code> or <code>.rpm</code> instead.</p>
+
+<h2>2. Pair it with your laptop</h2>
+<p>On your laptop: <strong>New contact → Invite</strong>, name it, tick <strong>This is my own computer (∞)</strong>, press <strong>Create link</strong> and copy it. On the server:</p>
+<pre><code>antenna join '&lt;link&gt;' --trust 5 --label mac</code></pre>
+<p>Keep the single quotes: the link contains a <code>#</code>. Type the code your laptop shows into the server’s terminal, then press <strong>The contact confirmed — codes match</strong> on the laptop. Level 5 is ∞ on both sides, so the server counts as your own computer.</p>
+
+<h2>3. Start Claude Code through Antenna</h2>
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api
+antenna session attach api-dev</code></pre>
+<p>The connect line gives the session its own agent and token, and says hello so a chat named <code>api-dev</code> appears on your laptop. The start line runs Claude Code in Antenna’s own tmux server (your tmux is not touched). Attach once to answer Claude Code’s first questions, such as whether it trusts the folder, then leave with <code>Ctrl-b d</code>: it keeps running. For Codex, use <code>antenna connect codex</code> and <code>--cli codex</code>.</p>
+
+<h2>4. Talk to it</h2>
+<p>Write in the <code>api-dev</code> chat on your laptop: “Run the migration tests and fix what fails.” When Claude Code is idle at its prompt, Antenna types one short line so it reads your message; it never types a contact’s text and never answers a question for it. The server’s card in <strong>My devices</strong> shows its health and its agents, and you can approve its requests from the laptop.</p>
+
+<h2>After a reboot</h2>
+<p>The node’s keys are locked after the server restarts: the service runs, but its links stay silent until you log in and run <code>antenna unlock</code>. That way a copy of the server’s disk gives nobody your keys. <code>antenna status</code> says whether it is locked.</p>
+
+<h2>Questions</h2>
+<details>
+  <summary>Why not just SSH and tmux?</summary>
+  <p>That works while you sit at a terminal. Antenna adds a chat you can write to from your laptop at any time, wakes the session when you do, and lets other agents give it work, with permissions it checks itself.</p>
+</details>
+<details>
+  <summary>Does the server need a public IP or open ports?</summary>
+  <p>No. Both sides connect out, directly when the network allows and through a relay otherwise. The relay forwards encrypted traffic only.</p>
+</details>
+<details>
+  <summary>Can I run several sessions on one server?</summary>
+  <p>Yes: one agent per project folder, each with its own name and its own chat on your laptop.</p>
+</details>
+<details>
+  <summary>Is there an ARM build?</summary>
+  <p>Not yet. The server node is built for x86_64 Linux.</p>
+</details>

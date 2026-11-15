@@ -1,0 +1,37 @@
+<!--guide {"title": "Mensajería autoalojada sin servidor que mantener — Antenna", "h1": "Mensajería autoalojada (self-hosted) sin ningún servidor que mantener", "description": "Antenna guarda cada mensaje en las computadoras de quienes hablan. No hay nada que alojar; añade un nodo siempre encendido o tu propio relay solo si quieres.", "summary": "Por qué Antenna no necesita servidor, y cómo añadir un nodo siempre encendido o tu propio relay cuando quieras.", "source": "2026-11-09"}-->
+<p class="lead">La gente aloja su propia mensajería para que sus mensajes no acaben en el servidor de otro. Antenna llega al mismo sitio sin ningún servidor: cada persona ejecuta Antenna en su propia computadora, los mensajes van entre esas computadoras cifrados de extremo a extremo, y el historial solo se guarda allí, en una base de datos cifrada. Si quieres más control, puedes añadir un nodo Linux siempre encendido o montar tu propio relay, ambos de código abierto.</p>
+
+<h2>Lo que suele significar un servidor autoalojado</h2>
+<p>Una mensajería autoalojada clásica es un servidor que instalas, actualizas, del que haces copias de seguridad y que mantienes en línea, y que guarda todas las cuentas y todos los mensajes de todos los que lo usan. Traslada la confianza de una empresa a ti, y con ella el trabajo y el riesgo: si alguien entra en el servidor, entra en el historial de todos.</p>
+
+<h2>Lo que hace Antenna en su lugar</h2>
+<ul>
+  <li><strong>No hay cuentas que alojar.</strong> Tu identidad es una clave en tu computadora, protegida con tu contraseña. Añades a la gente con un enlace de invitación de un solo uso y un código que se comprueba de viva voz.</li>
+  <li><strong>No hay almacén de mensajes en medio.</strong> Tu historial vive en tu computadora, en una base de datos cifrada con SQLCipher, y en el de la otra persona.</li>
+  <li><strong>No hay servidor que mantener en línea.</strong> Dos computadoras se conectan directamente cuando la red lo permite y, si no, a través de un relay que reenvía tráfico cifrado y no guarda nada.</li>
+</ul>
+
+<h2>Añade un nodo siempre encendido</h2>
+<p>Un portátil se suspende; un servidor, no. Para que tus agentes de IA estén localizables a todas horas, instala el nodo de Antenna en un servidor Linux (x86_64): descomprime la versión y ejecuta <code>./install.sh</code>, que configura un servicio de usuario de systemd sin root, o instala el paquete <code>.deb</code> o <code>.rpm</code>. Después emparéjalo con tu computadora como si fuera un contacto, con <strong>∞ · My computer</strong>. Paso a paso: <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md">Añadir un servidor</a>.</p>
+<p>Después de un reinicio, las claves del nodo siguen bloqueadas hasta que inicias sesión y ejecutas <code>antenna unlock</code>: una imagen robada del disco no le da tus claves a nadie.</p>
+
+<h2>Monta tu propio relay</h2>
+<p>El relay es la única pieza compartida, y solo ve paquetes cifrados y qué extremos se comunican a través de él. Si prefieres que sea una máquina tuya, ejecuta el <code>iroh-relay</code> de código abierto e inicia tu nodo con <code>antennad --relay &lt;your relay URL&gt;</code>. Los contactos con niveles de confianza 1 y 2 siempre se conectan a través de un relay, así que nunca conocen tu dirección IP.</p>
+
+<h2>Preguntas</h2>
+<details>
+  <summary>¿Puede usarla mi familia?</summary>
+  <p>En computadoras, sí: Antenna 0.1 funciona en macOS (Apple Silicon) y Linux. Todavía no hay app para teléfonos.</p>
+</details>
+<details>
+  <summary>¿El relay guarda los mensajes para los contactos desconectados?</summary>
+  <p>No. Un mensaje para un contacto que no está conectado espera en tu propia computadora y sale solo cuando vuelve.</p>
+</details>
+<details>
+  <summary>¿Tengo que alojar algo sí o sí?</summary>
+  <p>No. Antenna funciona con el relay predeterminado y sin ningún servidor tuyo. El nodo y el relay son para cuando los quieras.</p>
+</details>
+<details>
+  <summary>¿Cómo se actualiza en un servidor?</summary>
+  <p>Un nodo instalado con <code>install.sh</code> se actualiza con <code>antenna update</code>, que primero comprueba la firma de la versión; una instalación con paquete se actualiza con tu gestor de paquetes.</p>
+</details>

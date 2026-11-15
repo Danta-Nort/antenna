@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mensajería autoalojada sin servidor que mantener — Antenna</title>
+<meta name="description" content="Antenna guarda cada mensaje en las computadoras de quienes hablan. No hay nada que alojar; añade un nodo siempre encendido o tu propio relay solo si quieres.">
+<link rel="canonical" href="https://antenna.contact/es/guides/self-hosted-messenger">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Mensajería autoalojada sin servidor que mantener — Antenna">
+<meta property="og:description" content="Antenna guarda cada mensaje en las computadoras de quienes hablan. No hay nada que alojar; añade un nodo siempre encendido o tu propio relay solo si quieres.">
+<meta property="og:url" content="https://antenna.contact/es/guides/self-hosted-messenger">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="es_ES">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/self-hosted-messenger">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/self-hosted-messenger">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/es/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Guías",
+     "item": "https://antenna.contact/es/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Mensajería autoalojada (self-hosted) sin ningún servidor que mantener",
+     "item": "https://antenna.contact/es/guides/self-hosted-messenger"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Mensajería autoalojada (self-hosted) sin ningún servidor que mantener",
+   "description": "Antenna guarda cada mensaje en las computadoras de quienes hablan. No hay nada que alojar; añade un nodo siempre encendido o tu propio relay solo si quieres.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "es",
+   "url": "https://antenna.contact/es/guides/self-hosted-messenger",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/es/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "¿Puede usarla mi familia?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "En computadoras, sí: Antenna 0.1 funciona en macOS (Apple Silicon) y Linux. Todavía no hay app para teléfonos."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿El relay guarda los mensajes para los contactos desconectados?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No. Un mensaje para un contacto que no está conectado espera en tu propia computadora y sale solo cuando vuelve."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Tengo que alojar algo sí o sí?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No. Antenna funciona con el relay predeterminado y sin ningún servidor tuyo. El nodo y el relay son para cuando los quieras."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Cómo se actualiza en un servidor?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Un nodo instalado con install.sh se actualiza con antenna update, que primero comprueba la firma de la versión; una instalación con paquete se actualiza con tu gestor de paquetes."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/es/" aria-label="Antenna — inicio"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Principal">
+      <a href="/es/#product">Producto</a>
+      <a href="/es/#security">Seguridad</a>
+      <a href="/es/guides/">Guías</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Idioma: Español"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">ES</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/self-hosted-messenger" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/self-hosted-messenger" hreflang="es" lang="es" aria-current="true">Español</a></li>
+        <li><a href="/pt/guides/self-hosted-messenger" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/self-hosted-messenger" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/self-hosted-messenger" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/self-hosted-messenger" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/self-hosted-messenger" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/self-hosted-messenger" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/self-hosted-messenger" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/self-hosted-messenger" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/self-hosted-messenger" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/self-hosted-messenger" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/self-hosted-messenger" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/self-hosted-messenger" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/self-hosted-messenger" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/es/#download">Descargar</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Ruta de navegación"><a href="/es/">Antenna</a> <span aria-hidden="true">›</span> <a href="/es/guides/">Guías</a></nav>
+    <p class="eyebrow">Actualizado <time datetime="2026-11-09">9 de noviembre de 2026</time></p>
+    <h1>Mensajería autoalojada (self-hosted) sin ningún servidor que mantener</h1>
+    <p class="lead">La gente aloja su propia mensajería para que sus mensajes no acaben en el servidor de otro. Antenna llega al mismo sitio sin ningún servidor: cada persona ejecuta Antenna en su propia computadora, los mensajes van entre esas computadoras cifrados de extremo a extremo, y el historial solo se guarda allí, en una base de datos cifrada. Si quieres más control, puedes añadir un nodo Linux siempre encendido o montar tu propio relay, ambos de código abierto.</p>
+
+    <h2>Lo que suele significar un servidor autoalojado</h2>
+    <p>Una mensajería autoalojada clásica es un servidor que instalas, actualizas, del que haces copias de seguridad y que mantienes en línea, y que guarda todas las cuentas y todos los mensajes de todos los que lo usan. Traslada la confianza de una empresa a ti, y con ella el trabajo y el riesgo: si alguien entra en el servidor, entra en el historial de todos.</p>
+
+    <h2>Lo que hace Antenna en su lugar</h2>
+    <ul>
+      <li><strong>No hay cuentas que alojar.</strong> Tu identidad es una clave en tu computadora, protegida con tu contraseña. Añades a la gente con un enlace de invitación de un solo uso y un código que se comprueba de viva voz.</li>
+      <li><strong>No hay almacén de mensajes en medio.</strong> Tu historial vive en tu computadora, en una base de datos cifrada con SQLCipher, y en el de la otra persona.</li>
+      <li><strong>No hay servidor que mantener en línea.</strong> Dos computadoras se conectan directamente cuando la red lo permite y, si no, a través de un relay que reenvía tráfico cifrado y no guarda nada.</li>
+    </ul>
+
+    <h2>Añade un nodo siempre encendido</h2>
+    <p>Un portátil se suspende; un servidor, no. Para que tus agentes de IA estén localizables a todas horas, instala el nodo de Antenna en un servidor Linux (x86_64): descomprime la versión y ejecuta <code>./install.sh</code>, que configura un servicio de usuario de systemd sin root, o instala el paquete <code>.deb</code> o <code>.rpm</code>. Después emparéjalo con tu computadora como si fuera un contacto, con <strong>∞ · My computer</strong>. Paso a paso: <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md">Añadir un servidor</a>.</p>
+    <p>Después de un reinicio, las claves del nodo siguen bloqueadas hasta que inicias sesión y ejecutas <code>antenna unlock</code>: una imagen robada del disco no le da tus claves a nadie.</p>
+
+    <h2>Monta tu propio relay</h2>
+    <p>El relay es la única pieza compartida, y solo ve paquetes cifrados y qué extremos se comunican a través de él. Si prefieres que sea una máquina tuya, ejecuta el <code>iroh-relay</code> de código abierto e inicia tu nodo con <code>antennad --relay &lt;your relay URL&gt;</code>. Los contactos con niveles de confianza 1 y 2 siempre se conectan a través de un relay, así que nunca conocen tu dirección IP.</p>
+
+    <h2>Preguntas</h2>
+    <details>
+      <summary>¿Puede usarla mi familia?</summary>
+      <p>En computadoras, sí: Antenna 0.1 funciona en macOS (Apple Silicon) y Linux. Todavía no hay app para teléfonos.</p>
+    </details>
+    <details>
+      <summary>¿El relay guarda los mensajes para los contactos desconectados?</summary>
+      <p>No. Un mensaje para un contacto que no está conectado espera en tu propia computadora y sale solo cuando vuelve.</p>
+    </details>
+    <details>
+      <summary>¿Tengo que alojar algo sí o sí?</summary>
+      <p>No. Antenna funciona con el relay predeterminado y sin ningún servidor tuyo. El nodo y el relay son para cuando los quieras.</p>
+    </details>
+    <details>
+      <summary>¿Cómo se actualiza en un servidor?</summary>
+      <p>Un nodo instalado con <code>install.sh</code> se actualiza con <code>antenna update</code>, que primero comprueba la firma de la versión; una instalación con paquete se actualiza con tu gestor de paquetes.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna es gratis y de código abierto</strong>, para macOS y Linux. Sin cuenta y sin número de teléfono.</p>
+      <a class="btn" href="/es/#download">Descargar Antenna</a>
+    </aside>
+    <h2>Guías relacionadas</h2>
+    <ul class="related">
+      <li><a href="/es/guides/peer-to-peer-encrypted-messenger">Una app de mensajería peer-to-peer de código abierto con cifrado poscuántico</a></li>
+      <li><a href="/es/guides/messenger-without-phone-number">Una app de mensajería privada sin número de teléfono ni email</a></li>
+      <li><a href="/es/guides/message-claude-code-on-another-computer">Envía un mensaje a Claude Code en otra computadora</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/es/" aria-label="Antenna — inicio"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/es/guides/">Guías</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Contacto: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/es/privacy">Política de privacidad</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

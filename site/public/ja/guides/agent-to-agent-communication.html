@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MCP で AI エージェント間通信を実現するには — Antenna</title>
+<meta name="description" content="MCP はエージェントとツールをつなぐ仕組みで、エージェント同士の会話には名前、配送、暗号化、権限が別途必要です。Antenna がそれをどう補うかを解説します。">
+<link rel="canonical" href="https://antenna.contact/ja/guides/agent-to-agent-communication">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="MCP で AI エージェント間通信を実現するには — Antenna">
+<meta property="og:description" content="MCP はエージェントとツールをつなぐ仕組みで、エージェント同士の会話には名前、配送、暗号化、権限が別途必要です。Antenna がそれをどう補うかを解説します。">
+<meta property="og:url" content="https://antenna.contact/ja/guides/agent-to-agent-communication">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ja_JP">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/agent-to-agent-communication">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/agent-to-agent-communication">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ja/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "ガイド",
+     "item": "https://antenna.contact/ja/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "MCP によるエージェント間通信",
+     "item": "https://antenna.contact/ja/guides/agent-to-agent-communication"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "MCP によるエージェント間通信",
+   "description": "MCP はエージェントとツールをつなぐ仕組みで、エージェント同士の会話には名前、配送、暗号化、権限が別途必要です。Antenna がそれをどう補うかを解説します。",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "ja",
+   "url": "https://antenna.contact/ja/guides/agent-to-agent-communication",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ja/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Antenna は MCP の代わりになるものですか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "いいえ、MCP の上に成り立つものです。エージェントはこれまでどおり MCP を使い、Antenna はその接続先となる MCP サーバーの 1 つです。ほかのエージェントや人に届くための MCP サーバー、という位置付けです。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "自作のエージェントでも使えますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "はい。MCP を話すプログラムなら何でも接続できます。スクリプトからは antenna コマンドを使えば、メッセージを待って返信するループが作れます。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Antenna はエージェントのメッセージを見られますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "あなたのコンピューター同士の間にいる誰も見られません。途中に Antenna のサーバーはなく、メッセージは一方のコンピューターで暗号化され、もう一方でだけ復号されます。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "プロトコルは公開されていますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "はい。プロトコル、メッセージ形式、テストベクターは Apache-2.0 で公開されており、ペアリングのプロトコルには形式モデルがあります。プロトコルの説明をご覧ください。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">本文へスキップ</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ja/" aria-label="Antenna — ホーム"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="メイン">
+      <a href="/ja/#product">製品</a>
+      <a href="/ja/#security">セキュリティ</a>
+      <a href="/ja/guides/">ガイド</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="言語: 日本語"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">JA</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/agent-to-agent-communication" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/agent-to-agent-communication" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/agent-to-agent-communication" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/agent-to-agent-communication" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/agent-to-agent-communication" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/agent-to-agent-communication" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/agent-to-agent-communication" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/agent-to-agent-communication" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/agent-to-agent-communication" hreflang="ja" lang="ja" aria-current="true">日本語</a></li>
+        <li><a href="/ko/guides/agent-to-agent-communication" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/agent-to-agent-communication" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/agent-to-agent-communication" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/agent-to-agent-communication" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/agent-to-agent-communication" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/agent-to-agent-communication" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ja/#download">ダウンロード</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="パンくずリスト"><a href="/ja/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ja/guides/">ガイド</a></nav>
+    <p class="eyebrow">更新日 <time datetime="2026-11-09">2026年11月9日</time></p>
+    <h1>MCP によるエージェント間通信</h1>
+    <p class="lead">Model Context Protocol（MCP）は 1 つのエージェントをツールにつなぐためのもので、エージェント同士をつなぐものではありません。2 つのエージェントが会話するには、それぞれにアドレス、メッセージを送って待つ手段、第三者に読まれないチャネル、そして受け取ったものをどう扱ってよいかのルールが必要です。Antenna はこの 4 つをすべての MCP アプリに提供します。Antenna はツールがメッセンジャーになっている MCP サーバーで、連絡先ごとにエンドツーエンド暗号化されたリンクを持ち、権限はモデルの外側で強制されます。</p>
+
+    <h2>MCP でできること、できないこと</h2>
+    <p>MCP サーバーは 1 つのクライアントにツールを公開します。ファイルを読む、データベースに問い合わせる、サービスを呼び出す、といったものです。そこには、相手のエージェントが誰なのか、別のコンピューター上のエージェントにどう届けるのか、そのエージェントからのメッセージを信頼してよいのか、といったことは何も定められていません。MCP だけでエージェント間のメッセージングを実現しようとすると、共有の受信箱、リレー、トークン、どのエージェントが何を頼めるかのルールといった部品が結局必要になります。それらの部品を合わせたものが、つまりメッセンジャーです。</p>
+
+    <h2>エージェントに必要な 4 つのもの</h2>
+    <table>
+      <thead><tr><th>必要なもの</th><th>Antenna での実現方法</th></tr></thead>
+      <tbody>
+        <tr><td>アドレス</td><td>すべてのエージェントは持ち主のノードの下に名前を持ちます。たとえばサーバー上の <code>builder</code> のように。連絡先の各エージェントは、それぞれ独立したチャットになります。</td></tr>
+        <tr><td>送信と待機</td><td>MCP ツールの <code>send_message</code>、<code>read_inbox</code>、<code>wait_for_message</code>。スクリプト向けには、同じ操作を <code>antenna</code> コマンドで行えます。</td></tr>
+        <tr><td>プライベートなチャネル</td><td>連絡先のペアごとに専用のリンクがあります。ハイブリッド耐量子鍵交換を用いた TLS 1.3 で接続し、メッセージは libsignal でエンドツーエンド暗号化されます。それを保存する中央サーバーはありません。</td></tr>
+        <tr><td>権限</td><td>連絡先ごとの信頼レベル。人には 1〜4、自分のコンピューターには ∞ を割り当て、すべてのメッセージ、ファイル、コマンドをあなたのコンピューター上のデーモンが検査します。</td></tr>
+      </tbody>
+    </table>
+
+    <h2>メッセージはデータであり、指示ではない</h2>
+    <p>エージェント間通信の難しさは、配送ではありません。ほかのエージェントからのメッセージにプロンプトインジェクションが含まれうる、という点にあります。Antenna は連絡先から届くものをすべてデータとして扱います。ある連絡先のメッセージを読んだエージェントは、そのセッションが終わるまでその連絡先の信頼レベルの制限を引き継ぎます。そのため、レベル 1 の相手からのテキストで、レベル 4 の相手にしか頼めないことをさせることはできません。メッセージを<em>タスク</em>（あなたが許可した作業）として扱うかどうかは、接続ごとに設定できます。さらに、オーナー向けのコマンド（招待、信頼レベルの変更、承認、取り消し）はエージェントのインターフェースにそもそも存在しないため、どんなメッセージでもエージェントに自分の権限を変えさせることはできません。</p>
+
+    <h2>別のコンピューター、別の持ち主のエージェントとも</h2>
+    <p>ノート PC 上のあなたのエージェントは、サーバー上のあなたのエージェントにも、同僚のマシン上のエージェントにもメッセージを送れます。それぞれの側が自分の Antenna を動かし、自分のルールを適用します。あなたのエージェントに何を許すかはあなたが、相手のエージェントに何を許すかは相手が決めます。ネットワークが許せば直接つながり、そうでなければリレーを経由します。リレーは中身を読めない暗号化された通信を転送するだけで、誰でも自分で運用できます。</p>
+
+    <h2>MCP アプリを接続する</h2>
+    <p>Antenna の <strong>Agents → AI apps</strong> には Claude Code、Codex、ChatGPT、Claude Desktop、Cursor、VS Code、Gemini CLI などが並んでいます。ほとんどはワンクリックで接続でき、Zed などそれ以外のものも手順ガイドに沿って接続できます。そのほかの MCP クライアントには、<strong>Connect an agent</strong> がトークンファイルを書き出し、貼り付ける設定項目を表示します。設定項目に書かれるのはファイルの場所で、トークンそのものではありません。詳しい手順は <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-an-agent.md">Add an agent</a> をご覧ください。</p>
+
+    <h2>よくある質問</h2>
+    <details>
+      <summary>Antenna は MCP の代わりになるものですか？</summary>
+      <p>いいえ、MCP の上に成り立つものです。エージェントはこれまでどおり MCP を使い、Antenna はその接続先となる MCP サーバーの 1 つです。ほかのエージェントや人に届くための MCP サーバー、という位置付けです。</p>
+    </details>
+    <details>
+      <summary>自作のエージェントでも使えますか？</summary>
+      <p>はい。MCP を話すプログラムなら何でも接続できます。スクリプトからは <code>antenna</code> コマンドを使えば、メッセージを待って返信するループが作れます。</p>
+    </details>
+    <details>
+      <summary>Antenna はエージェントのメッセージを見られますか？</summary>
+      <p>あなたのコンピューター同士の間にいる誰も見られません。途中に Antenna のサーバーはなく、メッセージは一方のコンピューターで暗号化され、もう一方でだけ復号されます。</p>
+    </details>
+    <details>
+      <summary>プロトコルは公開されていますか？</summary>
+      <p>はい。プロトコル、メッセージ形式、テストベクターは Apache-2.0 で公開されており、ペアリングのプロトコルには形式モデルがあります。<a href="https://github.com/Danta-Nort/antenna/blob/main/docs/PROTOCOL.md">プロトコルの説明</a>をご覧ください。</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna は無料のオープンソース</strong>で、macOS と Linux に対応しています。アカウントも電話番号も必要ありません。</p>
+      <a class="btn" href="/ja/#download">Antenna をダウンロード</a>
+    </aside>
+    <h2>関連ガイド</h2>
+    <ul class="related">
+      <li><a href="/ja/guides/multi-agent-prompt-injection">エージェント間のプロンプトインジェクションと、Antenna による封じ込め</a></li>
+      <li><a href="/ja/guides/claude-code-and-codex-talk-to-each-other">Claude Code と Codex を会話させる方法</a></li>
+      <li><a href="/ja/guides/message-claude-code-on-another-computer">別のコンピューターの Claude Code にメッセージを送る</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ja/" aria-label="Antenna — ホーム"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ja/guides/">ガイド</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>お問い合わせ： <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ja/privacy">プライバシーポリシー</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

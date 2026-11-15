@@ -566,9 +566,7 @@ impl Session {
             let sh = rt.shared.clone();
             if sh.peer_feat.load(std::sync::atomic::Ordering::SeqCst) == 0 {
                 tokio::spawn(async move {
-                    let _ =
-                        tokio::time::timeout(std::time::Duration::from_secs(10), sh.connect_raw())
-                            .await;
+                    sh.learn_features(std::time::Duration::from_secs(10)).await;
                 });
                 continue;
             }

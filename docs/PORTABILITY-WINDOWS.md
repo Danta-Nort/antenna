@@ -76,7 +76,7 @@ the reason).
 | Received file flag | — | `com.apple.quarantine` | `Zone.Identifier` stream with `ZoneId=3` (Mark of the Web), WP-21 | — |
 | DB durability | `fsync` | `F_FULLFSYNC` | `FlushFileBuffers` (what SQLite already calls): nothing to add (WP-23) | — |
 
-## 2.0. Status of the changes (2026-10-13)
+## 2.0. Status of the changes (2026-10-13, W4 rows 2026-10-31)
 
 Built and checked on the Windows 11 build PC (25H2, build 26200): `cargo test` for the crates below, the window's
 Windows tests, and the packaged folder (`packaging/windows/build-folder.ps1`) by hand: the window starts its daemon,
@@ -97,7 +97,8 @@ table differ, this section says what is built; the table stays the D-134 design.
 | WP-11 | not yet | `harden()` says "not implemented on Windows yet (WP-11)" as a warning, and the daemon goes on | the process DACL, the WER exclusion, the mitigation policies |
 | WP-13 | partly | The window starts its daemon with `--exit-with-stdin` and keeps its stdin open: when the window is gone, even killed, the daemon locks and exits as on SIGTERM (Linux too). The console's close event | the named stop event for the installer and updates (W4) |
 | WP-17 | ✅ for Claude Desktop | Connect writes Claude Desktop's file inside its MSIX package when that package is installed, otherwise `%APPDATA%\Claude\…` (`AppConfigSpec.windows`); the MSIX path was checked on the PC. Every other app gets the manual steps, never a guessed path | Cursor and LM Studio by their deep links |
-| WP-28 | partly | A release `antennad.exe` is a GUI-subsystem program that attaches to its parent's console for `--version` and `--help`. `build-folder.ps1` makes one folder (the window, `antennad.exe`, `antenna.exe`) and with `-Install` copies it to `%LOCALAPPDATA%\Programs\Antenna` with Start menu and desktop shortcuts, per user, without an administrator | the installer, the Run entry, `PATH`, the uninstaller (W4) |
+| WP-28 | partly | A release `antennad.exe` is a GUI-subsystem program that attaches to its parent's console for `--version` and `--help`. `build-folder.ps1` makes one folder (the window, `antennad.exe`, `antenna.exe`); `build-installer.ps1` packs it with `antenna.iss` (Inno Setup 6, D-139) into `Antenna-<version>-windows-x86_64-setup.exe`: per user, never elevated, `%LOCALAPPDATA%\Programs\Antenna`, a Start menu entry, an optional desktop shortcut, an uninstall entry under HKCU; uninstalling leaves the data folder. `check-install.ps1` checks a silent install, the files, the entries, both versions, a silent uninstall and a reinstall (2026-10-31: written, not yet run on a Windows computer) | the run of `check-install.ps1` on the PC; the Run entry (start at login) and `PATH`; Authenticode (open question) |
+| WP-29 | partly | The signed manifest names the Windows installer (kind `installer`, `classify_name`, D-139), and `antenna update --check` on Windows looks for it. `antenna update` on Windows says to run the new installer, which updates the copy in place | `antenna update` running the installer itself (`/VERYSILENT`, after the named stop event of WP-13), its tests on the fake OS, and the Windows asset in the release scripts |
 | WP-35 | ✅ | `antenna_sys::windows::console`: the password typed without echo, restored on drop | — |
 
 ## 2. Table of changes

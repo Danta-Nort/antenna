@@ -1,0 +1,46 @@
+<!--guide {"title": "Agente con un LLM local, sin cuenta ni clave de API — Antenna", "h1": "Configura un agente con un LLM local, sin cuenta y sin clave de API", "description": "Antenna descarga un modelo abierto, lo verifica y lo ejecuta como agente privado en tu Mac o tu Linux, en un sandbox sin red y sin acceso a tus archivos.", "summary": "Un modelo abierto ejecutándose en tu propia computadora como agente aislado, elegido según tu memoria.", "source": "2026-11-09"}-->
+<p class="lead">En Antenna, abre <strong>Agents → Local models</strong> (modelos locales), descarga el modelo que te recomienda para tu computadora y pulsa <strong>Create agent</strong>. El modelo se ejecuta en tu propia máquina con llama.cpp, sin cuenta, sin clave de API y sin internet una vez descargado, dentro de un sandbox que no puede conectarse a la red ni leer tus archivos. El agente tiene su propio chat y, en un equipo, puede encargarse de tareas ligeras como clasificar, resumir o documentar. <em>Experimental.</em></p>
+
+<h2>Qué modelo para qué computadora</h2>
+<p>Antenna mira tu memoria y tu espacio libre y te recomienda uno de los modelos Qwen3.5:</p>
+<table>
+  <thead><tr><th>Computadora</th><th>Recomendado</th><th>En disco</th><th>Memoria una vez cargado</th></tr></thead>
+  <tbody>
+    <tr><td>8 GB de memoria</td><td>Qwen3.5 2B</td><td>1,3 GB</td><td>unos 2 GB</td></tr>
+    <tr><td>16 GB, Intel o AMD, o un Mac M1</td><td>Qwen3.5 4B</td><td>2,7 GB</td><td>unos 4,7 GB</td></tr>
+    <tr><td>Mac M2 o posterior con 16 GB o más</td><td>Qwen3.5 9B</td><td>5,7 GB</td><td>menos de 9 GB</td></tr>
+  </tbody>
+</table>
+<p>También aparecen otros modelos, cada uno marcado como <strong>Fits this computer</strong> (cabe en esta computadora), <strong>Slow on this computer</strong> (lento en esta computadora) o <strong>Not for this computer</strong> (no apto para esta computadora), para que nunca descargues uno que no vaya a funcionar.</p>
+
+<h2>Configúralo</h2>
+<ol>
+  <li>Abre <strong>Agents → Local models</strong> y pulsa <strong>Download</strong> junto al modelo recomendado. Se descarga de Hugging Face en una versión fija; cerrar la ventana no la detiene, y si se interrumpe, se reanuda.</li>
+  <li>Antenna comprueba el archivo con el tamaño y el SHA-256 que trae esta versión antes de cargarlo. Si el archivo no coincide, se borra.</li>
+  <li>Pulsa <strong>Create agent</strong> y ponle un nombre. Su chat aparece en Chats, bajo <strong>On this computer</strong>.</li>
+  <li>Escríbele. La primera respuesta tarda unos segundos mientras se carga el modelo.</li>
+</ol>
+<p>Desde una terminal: <code>antenna local install qwen3.5-2b --wait</code> (o <code>--from-file</code> para una copia que ya tengas), luego <code>antenna local add helper --model qwen3.5-2b</code> y <code>antenna local say helper "hello"</code>.</p>
+
+<h2>Dos sandboxes</h2>
+<p>El modelo se ejecuta en su propio sandbox: solo lee su archivo de modelo y no puede conectarse a ningún sitio, ni a internet, ni a Antenna, ni a otros programas. El programa del propio agente se ejecuta en un segundo sandbox que solo puede llegar al modelo. La conversación se guarda en la base de datos cifrada de Antenna. En esta versión, un agente local no tiene enlaces ni herramientas, así que no puede enviar nada a nadie, y Antenna nunca te pide que pegues un comando sacado de sus respuestas.</p>
+
+<h2>La memoria, sin que tengas que ocuparte</h2>
+<p>Varios agentes pueden compartir un modelo, y se pueden ejecutar modelos de distintos tamaños a la vez. Cuando otro modelo ocupa la memoria que necesita una respuesta, la respuesta espera (“Waiting for memory…”) en lugar de hacer que la computadora tire de swap, y un modelo que nadie ha usado en 30 minutos se descarga de la memoria.</p>
+
+<h2>Modelos locales en un equipo</h2>
+<p>Cuando creas un equipo de agentes, un modelo local puede ser un trabajador para las tareas que encajan con su tamaño: los modelos pequeños, para clasificar y resumir; los más grandes, también para documentación, borradores y traducción. Con <strong>Local only</strong> (solo local), todo el equipo, incluido el agente principal, funciona sin ningún modelo en la nube. Los modelos locales todavía no escriben código en un equipo.</p>
+
+<h2>Preguntas</h2>
+<details>
+  <summary>¿Usa la GPU?</summary>
+  <p>En un Mac, el modelo está pensado para usar la GPU a través de Metal. En Linux se ejecuta en la CPU, con compilaciones para el juego de instrucciones de cada CPU.</p>
+</details>
+<details>
+  <summary>¿Mis otros agentes pueden hablar con el modelo local?</summary>
+  <p>Todavía no. En esta versión, un agente local habla contigo en su chat, y con el agente principal de tu equipo cuando trabaja en un equipo.</p>
+</details>
+<details>
+  <summary>¿Sale algo de mi computadora?</summary>
+  <p>Solo la descarga del modelo, desde Hugging Face. Después, el modelo funciona sin conexión, y su sandbox no tiene ninguna red.</p>
+</details>

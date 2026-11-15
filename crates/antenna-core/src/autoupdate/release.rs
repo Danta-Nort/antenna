@@ -149,12 +149,19 @@ pub(crate) fn find_in(folder: &Path, cfg: &AutoConfig) -> Found {
 }
 
 /// The daily check (D-103): the manifest and its signature from the update URL; when they verify and announce a newer
-/// release, this installation's file into `dest` (a fresh folder), then the same check as for received files.
-pub(crate) fn fetch_into(url: &str, dest: &Path, cfg: &AutoConfig) -> Found {
-    let bytes = match up::fetch::https(url, manifest::MAX_BYTES as u64, None) {
+/// release, this installation's file into `dest` (a fresh folder), then the same check as for received files. With
+/// `first`, the manifest request carries the first-check mark (D-140). The second value says whether the host answered
+/// the manifest request.
+pub(crate) fn fetch_into(url: &str, dest: &Path, cfg: &AutoConfig, first: bool) -> (Found, bool) {
+    let header = first.then_some(up::fetch::FIRST_CHECK_HEADER);
+    let bytes = match up::fetch::https_with(url, manifest::MAX_BYTES as u64, None, header) {
         Ok(b) => b,
-        Err(e) => return refused(None, &e),
+        Err(e) => return (refused(None, &e), false),
     };
+    (verify_and_fetch(url, dest, cfg, bytes), true)
+}
+
+fn verify_and_fetch(url: &str, dest: &Path, cfg: &AutoConfig, bytes: Vec<u8>) -> Found {
     let sig_bytes = match up::fetch::https(&format!("{url}.sig"), sig::MAX_BYTES as u64, None) {
         Ok(b) => b,
         Err(e) => return refused(None, &e),

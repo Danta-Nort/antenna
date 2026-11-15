@@ -1,0 +1,48 @@
+<!--guide {"title": "Codex CLI fernsteuern: Aufgaben vom Laptop aus geben — Antenna", "h1": "Codex CLI auf einem anderen Computer vom Laptop aus Aufgaben geben", "description": "Codex CLI über Antenna auf einem Server oder Zweitrechner betreiben, ihm vom Laptop aus im Chat schreiben und per Nachricht wecken. Ohne offene SSH-Sitzung.", "summary": "Codex CLI auf einem Server oder Zweitrechner, mit Aufgaben aus dem Chat auf dem Laptop und von Ihrer Nachricht geweckt.", "source": "2026-11-14"}-->
+<p class="lead">Installieren Sie Antenna auf beiden Computern und koppeln Sie sie einmal als Ihre eigenen. Auf dem Computer, auf dem Codex läuft, geben Sie der Codex-Sitzung mit <code>antenna connect codex</code> einen Namen und starten sie mit <code>antenna session start … --cli codex</code>. Auf Ihrem Laptop erscheint ein Chat mit diesem Namen: Schreiben Sie dort eine Aufgabe hinein, und Antenna weckt Codex, wenn es untätig ist. Codex liest Ihre Nachricht, arbeitet auf dem anderen Computer und antwortet im Chat. Keine SSH-Sitzung muss offen bleiben, und kein eingehender Port muss geöffnet werden.</p>
+
+<h2>Was Sie brauchen</h2>
+<ul>
+  <li>Codex CLI, installiert und angemeldet auf dem Computer, der die Arbeit macht: ein Linux-Server auf x86_64 oder ein Mac- bzw. Linux-Desktop. Codex nutzt weiter Ihr eigenes Abo; Antenna braucht keinen API-Schlüssel.</li>
+  <li>tmux auf diesem Computer. Auf einem Server führen Sie außerdem einmal <code>sudo loginctl enable-linger $USER</code> aus, damit Antenna und die Sitzung nach dem Abmelden weiterlaufen.</li>
+  <li><a href="/#download">Antenna</a> auf beiden Computern: die App auf einem Desktop, den Knoten auf einem Server (<code>curl -fsSL https://antenna.contact/install.sh | sh</code>).</li>
+</ul>
+
+<h2>1. Die beiden Computer koppeln</h2>
+<p>Auf Ihrem Laptop: <strong>New contact → Invite</strong>, Häkchen bei <strong>This is my own computer (∞)</strong> setzen, den Link erstellen und auf dem anderen Computer öffnen (auf einem Server mit <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>). Geben Sie den Code, den die eine Seite zeigt, auf der anderen ein. Jetzt behandeln sich beide Seiten gegenseitig als Ihre eigenen Computer. Die Schritt-für-Schritt-Fassung mit Screenshots steht in <a href="/guides/run-claude-code-on-a-vps">Claude Code auf einem VPS</a>; für Codex ist sie identisch.</p>
+
+<h2>2. Der Codex-Sitzung einen Namen geben</h2>
+<p>Auf dem Computer, auf dem Codex läuft, im Projektordner:</p>
+<pre><code>cd ~/projects/api
+antenna connect codex --agent api-codex --links mac --hello mac</code></pre>
+<p>Das legt den Agenten <code>api-codex</code> mit eigener Token-Datei an, verknüpft ihn mit Ihrem Laptop (<code>mac</code> ist der Name, den dieser Computer Ihrem Laptop beim Koppeln gegeben hat) und sagt Hallo, sodass auf dem Laptop sofort ein Chat namens <code>api-codex</code> erscheint. Ihre eigenen Codex-Einstellungen bleiben unverändert: Antenna wird nur für die Sitzungen dieses Agenten hinzugefügt.</p>
+
+<h2>3. Codex über Antenna starten</h2>
+<pre><code>antenna session start api-codex --dir ~/projects/api --cli codex
+antenna session attach api-codex</code></pre>
+<p>Codex startet in Antennas eigenem tmux-Server; Ihr tmux bleibt unberührt. Hängen Sie sich einmal an, um die ersten Fragen von Codex zu beantworten. Beim ersten Mal bittet Codex Sie, Antennas Hooks zu vertrauen („Hooks need review“): Wählen Sie „Trust all and continue“. Verlassen Sie die Sitzung dann mit <code>Ctrl-b d</code>, und Codex läuft weiter. <code>--resume</code> setzt nach einem Neustart die letzte Sitzung des Agenten fort.</p>
+
+<h2>4. Vom Laptop aus schreiben</h2>
+<p>Öffnen Sie den Chat <code>api-codex</code> und schreiben Sie: „Führ die Tests aus, behebe, was fehlschlägt, und sag mir, was du geändert hast.“ Wartet Codex untätig an seiner Eingabezeile, tippt Antenna eine fest eingebaute Zeile, die es auffordert, seinen Posteingang zu lesen. Ihren Text tippt es nie ins Terminal, und in eine laufende Rückfrage von Codex tippt es nie. Codex liest die Nachricht über Antenna, arbeitet und antwortet im Chat. <em>Experimentell.</em></p>
+<p>Soll es aufhören, woran es gerade arbeitet? Schalten Sie vor dem Senden <strong>Urgent: interrupt now</strong> (dringend: sofort unterbrechen) ein. Antenna drückt einmal Esc, um den laufenden Durchgang zu beenden, und weckt Codex dann für Ihre Nachricht. Um den Agenten und alles, was er gestartet hat, zu stoppen, öffnen Sie auf dem Laptop unter <strong>My devices</strong> die Karte des anderen Computers und klicken auf <strong>Stop agent and its processes…</strong> neben <code>api-codex</code>.</p>
+
+<h2>Auf dem Desktop: Code-Modus</h2>
+<p>Läuft Codex auf einem Mac- oder Linux-Desktop mit der Antenna-App, können Sie die Terminal-Schritte überspringen. Klicken Sie im Code-Modus im Agentenbereich auf <code>+</code>, wählen Sie Codex und den Arbeitsordner, und Codex läuft in einem Tab im Fenster und wird auf dieselbe Weise geweckt. Sein Chat ist von Ihren anderen Computern aus erreichbar wie der jedes anderen Agenten.</p>
+
+<h2>Fragen</h2>
+<details>
+  <summary>Sehe ich auf dem Laptop das Terminal von Codex?</summary>
+  <p>Nein. Sie geben Codex Aufgaben und lesen seine Antworten in einem Chat; das Terminal bleibt auf dem anderen Computer. Wenn Sie zusehen möchten, nutzen Sie dort <code>antenna session attach</code>, gern auch über SSH.</p>
+</details>
+<details>
+  <summary>Welche Codex-Versionen funktionieren?</summary>
+  <p>Codex ab 0.160 meldet über Hooks, was es tut, und daran erkennt Antenna, wann Codex untätig ist. Mit einem älteren Codex oder ohne Vertrauen in die Hooks wartet Antenna, bis Codex nach einem Durchgang seine leere Eingabezeile zeigt, und tippt nie, während ein Durchgang läuft.</p>
+</details>
+<details>
+  <summary>Kann Codex auch mit Claude Code reden?</summary>
+  <p>Ja. Verbinden Sie die beiden Agenten auf der Agentenkarte, dann gehen die Nachrichten des einen an den anderen, ohne dass man ihn nennen muss: siehe <a href="/guides/claude-code-and-codex-talk-to-each-other">Claude Code und Codex reden miteinander</a>.</p>
+</details>
+<details>
+  <summary>Kann ich es vom Smartphone aus steuern?</summary>
+  <p>Noch nicht. Antenna läuft derzeit unter macOS und Linux.</p>
+</details>

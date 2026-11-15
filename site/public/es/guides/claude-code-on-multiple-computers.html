@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Code en varias computadoras desde un solo sitio — Antenna</title>
+<meta name="description" content="Ejecuta Claude Code en tu portátil, tu equipo de escritorio y tu servidor, y gestiona todas las sesiones desde una lista de chats, con estado y botón de parada.">
+<link rel="canonical" href="https://antenna.contact/es/guides/claude-code-on-multiple-computers">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Claude Code en varias computadoras desde un solo sitio — Antenna">
+<meta property="og:description" content="Ejecuta Claude Code en tu portátil, tu equipo de escritorio y tu servidor, y gestiona todas las sesiones desde una lista de chats, con estado y botón de parada.">
+<meta property="og:url" content="https://antenna.contact/es/guides/claude-code-on-multiple-computers">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="es_ES">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/claude-code-on-multiple-computers">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/claude-code-on-multiple-computers">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/es/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Guías",
+     "item": "https://antenna.contact/es/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Usa Claude Code en varias computadoras desde un solo sitio",
+     "item": "https://antenna.contact/es/guides/claude-code-on-multiple-computers"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Usa Claude Code en varias computadoras desde un solo sitio",
+   "description": "Ejecuta Claude Code en tu portátil, tu equipo de escritorio y tu servidor, y gestiona todas las sesiones desde una lista de chats, con estado y botón de parada.",
+   "datePublished": "2026-11-14",
+   "dateModified": "2026-11-14",
+   "inLanguage": "es",
+   "url": "https://antenna.contact/es/guides/claude-code-on-multiple-computers",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/es/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "¿Antenna sincroniza la configuración o el historial de Claude Code entre computadoras?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No. Claude Code guarda su configuración, su historial y su sesión en cada computadora, y tu código se mueve como ya lo hace, con git. Antenna lleva mensajes, archivos y aprobaciones entre las sesiones."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Necesito una IP pública o abrir puertos en el servidor?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No. Cada computadora se conecta hacia fuera, directamente cuando la red lo permite y, si no, a través de un relay, que solo reenvía tráfico cifrado."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Puedo cambiar un ajuste de otra computadora desde aquí?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No. Entre tus computadoras solo viajan aprobaciones, paradas y peticiones de conexión del mapa de agentes, que esa computadora te pide aprobar. La confianza, las invitaciones, las actualizaciones y los ajustes se cambian en la propia computadora, así que un portátil robado no puede reescribir las reglas del servidor."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Funciona en Windows o en el teléfono?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Todavía no. Hoy Antenna funciona en macOS y Linux."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/es/" aria-label="Antenna — inicio"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Principal">
+      <a href="/es/#product">Producto</a>
+      <a href="/es/#security">Seguridad</a>
+      <a href="/es/guides/">Guías</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Idioma: Español"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">ES</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/claude-code-on-multiple-computers" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/claude-code-on-multiple-computers" hreflang="es" lang="es" aria-current="true">Español</a></li>
+        <li><a href="/pt/guides/claude-code-on-multiple-computers" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/claude-code-on-multiple-computers" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/claude-code-on-multiple-computers" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/claude-code-on-multiple-computers" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/claude-code-on-multiple-computers" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/claude-code-on-multiple-computers" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/claude-code-on-multiple-computers" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/claude-code-on-multiple-computers" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/claude-code-on-multiple-computers" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/claude-code-on-multiple-computers" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/claude-code-on-multiple-computers" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/claude-code-on-multiple-computers" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/claude-code-on-multiple-computers" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/es/#download">Descargar</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Ruta de navegación"><a href="/es/">Antenna</a> <span aria-hidden="true">›</span> <a href="/es/guides/">Guías</a></nav>
+    <p class="eyebrow">Actualizado <time datetime="2026-11-14">14 de noviembre de 2026</time></p>
+    <h1>Usa Claude Code en varias computadoras desde un solo sitio</h1>
+    <p class="lead">Deja que Claude Code se ejecute donde está el trabajo, en tu portátil, en una computadora de escritorio y en un servidor, e instala Antenna en cada uno. Empareja las computadoras una vez como tuyas (∞). Desde cualquiera de ellos verás todas las sesiones en una sola lista de chats, podrás escribir a cualquiera por su nombre, responder a sus peticiones de aprobación y detener una sesión que se descontrole, sin abrir una terminal en esa máquina. Con Codex funciona igual.</p>
+
+    <h2>Qué obtienes</h2>
+    <ul>
+      <li><strong>Un chat por sesión</strong>, en la computadora que sea. Una sesión en el servidor y otra en la computadora de escritorio aparecen en la misma lista que tus contactos.</li>
+      <li><strong>My devices</strong> (mis dispositivos): una ficha para cada una de tus computadoras con su sistema y su versión de Antenna, su estado según sus propias comprobaciones, sus agentes y si cada uno está conectado, y las peticiones que te esperan allí.</li>
+      <li><strong>Aprobaciones desde donde estés.</strong> Una petición de un agente del servidor se puede aprobar en tu Mac, con Touch ID o con la contraseña del Mac. El servidor comprueba la firma y ejecuta la petición él mismo.</li>
+      <li><strong>Un botón de parada</strong> para cada agente de otra computadora: detiene el agente y todos los procesos que haya lanzado allí.</li>
+      <li><strong>El mapa de agentes</strong>, donde conectas una sesión de una computadora con una sesión de otra para que se escriban entre sí.</li>
+    </ul>
+
+    <h2>Configúralo</h2>
+    <ol>
+      <li><strong>Instala Antenna en cada computadora</strong>: la app en un Mac o en un escritorio Linux, y el nodo en un servidor Linux (<code>curl -fsSL https://antenna.contact/install.sh | sh</code>).</li>
+      <li><strong>Empareja las computadoras entre sí como tuyas.</strong> Crea una invitación con <strong>This is my own computer (∞)</strong> (esta es mi propia computadora) marcado, ábrela en la otra computadora e introduce en una el código que muestra la otra. Empareja cada computadora con todas las demás que quieras ver o conectar desde ella: cada una debe tener a la otra en ∞.</li>
+      <li><strong>Ponle nombre a cada sesión de Claude Code.</strong> En un escritorio, iníciala en modo Code desde el <code>+</code> del panel de agentes. En un servidor, en la carpeta del proyecto, ejecuta <code>antenna connect claude-code --agent api-dev --links mac --hello mac</code> y mantenla en marcha con <code>antenna session start api-dev --dir ~/projects/api</code>; en <a href="/es/guides/run-claude-code-on-a-vps">Claude Code en un VPS</a> tienes todos los pasos.</li>
+      <li><strong>Deja que tu computadora principal responda a las peticiones.</strong> En el servidor, ejecuta <code>antenna devices confirm mac</code> una vez; en un escritorio, acepta la clave de la computadora principal en <strong>My devices</strong> → su ficha → <strong>Approvals</strong>.</li>
+    </ol>
+
+    <h2>Pasar trabajo de una computadora a otra</h2>
+    <p>Escríbele a una sesión como le escribirías a una persona: “<code>api-dev</code>, ejecuta las migraciones en el servidor y dime qué ha cambiado”. Los archivos que sueltas en su chat se guardan en esa computadora y se le dice al agente dónde están; entre tus propias computadoras, los archivos normales se guardan sin preguntar, mientras que los programas y los instaladores siguen esperándote. Para que una sesión de la computadora de escritorio le pase trabajo a una del servidor, conecta las dos en el mapa de agentes. Una sesión de allí se despierta cuando llega un mensaje, y un mensaje urgente puede interrumpir su turno actual. <em>Experimental.</em></p>
+
+    <h2>Preguntas</h2>
+    <details>
+      <summary>¿Antenna sincroniza la configuración o el historial de Claude Code entre computadoras?</summary>
+      <p>No. Claude Code guarda su configuración, su historial y su sesión en cada computadora, y tu código se mueve como ya lo hace, con git. Antenna lleva mensajes, archivos y aprobaciones entre las sesiones.</p>
+    </details>
+    <details>
+      <summary>¿Necesito una IP pública o abrir puertos en el servidor?</summary>
+      <p>No. Cada computadora se conecta hacia fuera, directamente cuando la red lo permite y, si no, a través de un relay, que solo reenvía tráfico cifrado.</p>
+    </details>
+    <details>
+      <summary>¿Puedo cambiar un ajuste de otra computadora desde aquí?</summary>
+      <p>No. Entre tus computadoras solo viajan aprobaciones, paradas y peticiones de conexión del mapa de agentes, que esa computadora te pide aprobar. La confianza, las invitaciones, las actualizaciones y los ajustes se cambian en la propia computadora, así que un portátil robado no puede reescribir las reglas del servidor.</p>
+    </details>
+    <details>
+      <summary>¿Funciona en Windows o en el teléfono?</summary>
+      <p>Todavía no. Hoy Antenna funciona en macOS y Linux.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna es gratis y de código abierto</strong>, para macOS y Linux. Sin cuenta y sin número de teléfono.</p>
+      <a class="btn" href="/es/#download">Descargar Antenna</a>
+    </aside>
+    <h2>Guías relacionadas</h2>
+    <ul class="related">
+      <li><a href="/es/guides/message-claude-code-on-another-computer">Envía un mensaje a Claude Code en otra computadora</a></li>
+      <li><a href="/es/guides/run-claude-code-on-a-vps">Claude Code en un VPS a todas horas, y hablando con él desde tu portátil</a></li>
+      <li><a href="/es/guides/share-files-with-claude-code">Cómo compartir archivos con Claude Code en otra computadora</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/es/" aria-label="Antenna — inicio"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/es/guides/">Guías</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Contacto: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/es/privacy">Política de privacidad</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

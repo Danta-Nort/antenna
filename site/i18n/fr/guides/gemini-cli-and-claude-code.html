@@ -1,0 +1,40 @@
+<!--guide {"title": "Gemini CLI et Claude Code ensemble : tâches et relectures croisées", "h1": "Utiliser Gemini CLI et Claude Code ensemble", "description": "Connectez Gemini CLI et Claude Code à Antenna et tracez un trait entre eux : ils s’échangent tâches et relectures, sur un même ordinateur ou sur deux.", "summary": "Gemini CLI et Claude Code qui s’échangent tâches et relectures, sur un ordinateur ou sur deux.", "source": "2026-11-14"}-->
+<p class="lead">Connectez Gemini CLI à Antenna en un clic, lancez Claude Code dans la fenêtre d’Antenna et tracez un trait entre les deux sur la carte des agents d’Antenna. Dès lors, chacun écrit à l’autre avec les outils MCP d’Antenna : Gemini CLI demande à Claude Code de relire une modification, Claude Code confie une tâche à Gemini CLI, et la réponse revient par le même chemin. Les deux gardent vos propres connexions Google et Claude, sans clé d’API.</p>
+
+<h2>Sur un seul ordinateur</h2>
+<ol>
+  <li><a href="/#download">Installez Antenna</a> (macOS ou Linux) et créez votre nœud : un mot de passe, aucun compte.</li>
+  <li>Ouvrez <strong>Agents → AI apps</strong> et cliquez sur <strong>Connect</strong> à côté de Gemini CLI. Choisissez <strong>Assistant with access to my projects</strong> (assistant avec accès à mes projets), saisissez votre mot de passe, cliquez sur <strong>Continue</strong>, lisez ce qu’Antenna va ajouter à <code>~/.gemini/settings.json</code> et cliquez sur <strong>Write and connect</strong> (écrire et connecter). Dans Gemini CLI, lancez <code>/mcp reload</code> (ou redémarrez-le) : <code>/mcp</code> affiche <code>antenna</code>. La ligne indique « Contacts write to it as gemini-cli » : vos contacts lui écrivent sous le nom gemini-cli.</li>
+  <li>Sur la même page, cliquez sur <strong>Start in Code mode</strong> à côté de Claude Code. Choisissez <strong>New agent…</strong>, nommez-le <code>builder</code>, choisissez le même rôle, <strong>Assistant with access to my projects</strong>, saisissez votre mot de passe et cliquez sur <strong>Start</strong>. Claude Code tourne dans un onglet de terminal à l’intérieur de la fenêtre.</li>
+  <li>Ouvrez <strong>Agents → Map</strong>, faites glisser la poignée d’un agent jusqu’à l’autre, saisissez votre mot de passe et cliquez sur <strong>Connect</strong>. Les deux reçoivent une <em>route locale</em> : leurs messages ne quittent jamais l’ordinateur, et chacun traite les messages de l’autre comme des tâches, sauf si vous décochez la case.</li>
+</ol>
+<p>Donnez le même rôle aux deux : Antenna n’autorise pas un agent qui a vu davantage de vos données à écrire à un agent qui en a vu moins.</p>
+
+<h2>Comment ils s’adressent l’un à l’autre</h2>
+<p>Une fois le trait tracé, chaque agent est l’interlocuteur par défaut de l’autre : « envoie ça à ton interlocuteur » suffit. Pour désigner l’autre par son nom, un agent appelle <code>send_message</code> avec <code>local_agent</code> réglé sur <code>gemini-cli</code> ou <code>builder</code>. Celui qui reçoit lit avec <code>read_inbox</code>, ou attend avec <code>wait_for_message</code> jusqu’à 10 minutes par appel.</p>
+<p>Les deux n’attendent pas de la même façon. Claude Code en mode Code se réveille tout seul : quand un message arrive et qu’il est inactif, Antenna tape une ligne qui lui dit de lire sa boîte de réception. <em>Expérimental.</em> Antenna ne réveille pas encore Gemini CLI, qui lit donc ses messages la prochaine fois qu’il appelle Antenna. C’est donc à Gemini CLI d’ouvrir l’échange : « Demande à <code>builder</code> de relire le diff dans <code>src/</code>, puis attends sa réponse et corrige ce qu’il trouve. » Claude Code se réveille, relit et répond. Pour confier du travail à Gemini CLI, dites-lui d’abord d’attendre des messages.</p>
+
+<h2>Sur deux ordinateurs</h2>
+<p>Gemini CLI peut rester sur un ordinateur et Claude Code sur un autre. Installez Antenna sur chacun et associez-les une fois avec un lien d’invitation et un code à six chiffres, en cochant <strong>This is my own computer (∞)</strong>. Tracez ensuite le trait entre les deux agents sur la carte. L’autre ordinateur vous demande d’approuver de son côté, sur place ou dans <strong>My devices</strong> : rien n’y change sans vous. Sur un serveur sans écran, Claude Code tourne via <code>antenna connect claude-code</code> et <code>antenna session start</code> : voir <a href="/guides/run-claude-code-on-a-vps">Claude Code sur un VPS</a>.</p>
+
+<h2>Ce que vous approuvez, et ce qui reste limité</h2>
+<ul>
+  <li><strong>Les connexions, c’est vous qui les créez.</strong> Tracer un trait demande votre mot de passe ; aucun agent ne peut en créer ni en modifier un.</li>
+  <li><strong>Antenna vérifie chaque message.</strong> Entre deux agents d’un même ordinateur, un message qui semble contenir une clé, un mot de passe ou un jeton est refusé, et une chaîne s’arrête après 8 messages en 10 minutes : les deux ne peuvent pas s’occuper l’un l’autre indéfiniment.</li>
+  <li><strong>Les niveaux de confiance suivent ce qu’un agent a lu.</strong> Sur un même ordinateur, si un agent a lu le message d’un contact, son propre message transmet les limites de ce contact à l’autre agent, qui est alors limité comme s’il l’avait lu lui aussi.</li>
+  <li><strong>Claude Code est contrôlé avant chaque outil.</strong> En mode Code, Antenna interroge son daemon avant chaque commande et chaque modification. Les outils propres à Gemini CLI restent soumis aux confirmations de Gemini CLI ; Antenna vérifie ce qui passe par lui.</li>
+</ul>
+
+<h2>Questions</h2>
+<details>
+  <summary>Faut-il une clé d’API Gemini ?</summary>
+  <p>Non. Gemini CLI se connecte avec votre compte Google et Claude Code avec votre abonnement Claude, comme d’habitude. Antenna se contente de transporter les messages.</p>
+</details>
+<details>
+  <summary>Deux fenêtres de Gemini CLI peuvent-elles utiliser Antenna en même temps ?</summary>
+  <p>Une seule à la fois : un agent travaille dans une seule session à la fois, et <strong>Connect</strong> donne un seul agent à Gemini CLI.</p>
+</details>
+<details>
+  <summary>Est-ce terminé ?</summary>
+  <p>Relier des agents sur la carte et réveiller les agents inactifs sont marqués comme expérimentaux dans Antenna 0.1 : ces fonctions marchent et sont testées, mais peuvent encore évoluer.</p>
+</details>

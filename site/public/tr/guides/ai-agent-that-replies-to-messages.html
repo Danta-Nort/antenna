@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mesajlara otomatik cevap veren yapay zeka ajanı — Antenna</title>
+<meta name="description" content="Bir kişinin mesajlarını Claude Code ya da Codex kendisi yanıtlasın: mesaj gelince Antenna onu sandbox içinde uyandırır, cevap yazıldıkça karşıya akar.">
+<link rel="canonical" href="https://antenna.contact/tr/guides/ai-agent-that-replies-to-messages">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Mesajlara otomatik cevap veren yapay zeka ajanı — Antenna">
+<meta property="og:description" content="Bir kişinin mesajlarını Claude Code ya da Codex kendisi yanıtlasın: mesaj gelince Antenna onu sandbox içinde uyandırır, cevap yazıldıkça karşıya akar.">
+<meta property="og:url" content="https://antenna.contact/tr/guides/ai-agent-that-replies-to-messages">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="tr_TR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/ai-agent-that-replies-to-messages">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/ai-agent-that-replies-to-messages">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/tr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Rehberler",
+     "item": "https://antenna.contact/tr/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Mesajlarınıza cevap veren bir yapay zeka ajanı kurun",
+     "item": "https://antenna.contact/tr/guides/ai-agent-that-replies-to-messages"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Mesajlarınıza cevap veren bir yapay zeka ajanı kurun",
+   "description": "Bir kişinin mesajlarını Claude Code ya da Codex kendisi yanıtlasın: mesaj gelince Antenna onu sandbox içinde uyandırır, cevap yazıldıkça karşıya akar.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "tr",
+   "url": "https://antenna.contact/tr/guides/ai-agent-that-replies-to-messages",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/tr/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Karşı taraf yanıtı yazılırken görüyor mu?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Evet, 3. seviye ve üzerindeki kişiler için: ajan yazdıkça büyüyen canlı bir baloncuk, sonunda normal bir mesaja dönüşür. 1. ve 2. seviyeler bitmiş yanıtı alır."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Ajan yanıtına bir parola ya da anahtar yazarsa ne olur?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Karşı taraf için akış durur ve mesaj onayınızı bekler. Akış yalnızca kendi bilgisayarlarınıza devam eder."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Önceki konuşmaları hatırlıyor mu?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Varsayılan olarak hayır: her mesaj yeni bir çalıştırma başlatır. Saatler süren işler için --resident ekleyin: aynı Claude Code oturumu konuşmayla birlikte kalır, söylenenleri ve kararlaştırılanları hatırlar, her yeni mesaj da bir sonraki adımı olur. Mesajlar ona yine karşı taraftan gelen veri olarak ulaşır."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">İçeriğe geç</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/tr/" aria-label="Antenna — ana sayfa"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Ana menü">
+      <a href="/tr/#product">Ürün</a>
+      <a href="/tr/#security">Güvenlik</a>
+      <a href="/tr/guides/">Rehberler</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Dil: Türkçe"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">TR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/ai-agent-that-replies-to-messages" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/ai-agent-that-replies-to-messages" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/ai-agent-that-replies-to-messages" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/ai-agent-that-replies-to-messages" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/ai-agent-that-replies-to-messages" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/ai-agent-that-replies-to-messages" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/ai-agent-that-replies-to-messages" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/ai-agent-that-replies-to-messages" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/ai-agent-that-replies-to-messages" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/ai-agent-that-replies-to-messages" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/ai-agent-that-replies-to-messages" hreflang="tr" lang="tr" aria-current="true">Türkçe</a></li>
+        <li><a href="/it/guides/ai-agent-that-replies-to-messages" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/ai-agent-that-replies-to-messages" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/ai-agent-that-replies-to-messages" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/ai-agent-that-replies-to-messages" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/tr/#download">İndir</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Sayfa yolu"><a href="/tr/">Antenna</a> <span aria-hidden="true">›</span> <a href="/tr/guides/">Rehberler</a></nav>
+    <p class="eyebrow">Güncellendi <time datetime="2026-11-09">9 Kasım 2026</time></p>
+    <h1>Mesajlarınıza cevap veren bir yapay zeka ajanı kurun</h1>
+    <p class="lead">Antenna’da bir kişi ve bir ajan (Claude Code, Codex ya da kendi komutunuz) seçebilirsiniz; o andan itibaren o kişiden gelen her mesaj ajanı başlatır, ajan da mesajı okuyup yanıt verir. Antenna ajanı bir sandbox içinde, o kişinin güven seviyesinden fazla yetki vermeden çalıştırır ve yanıt, yazıldığı sırada karşı tarafta belirir. Ajan kendi Claude ya da ChatGPT oturumunuzla çalışır; içinde bir gizli bilgi varmış gibi görünen yanıtlar ise onayınızı bekler.</p>
+
+    <h2>Tipik kullanımlar</h2>
+    <ul>
+      <li><strong>Sunucuda kendi asistanınız.</strong> Dizüstü bilgisayarınızdan sunucunuza yazarsınız; oradaki Claude Code yanıt verir, projenizi derler ve testleri çalıştırır.</li>
+      <li><strong>Bir kişi için danışma masası.</strong> Bir iş arkadaşınızın projenizle ilgili soruları hemen yanıt bulur; yanıtı veren ajan yalnızca o konuşmanın klasörünü görür.</li>
+      <li><strong>Sonuçları bildiren bir betik.</strong> Herhangi bir programın çıktısı canlı akış olarak gönderilebilir: <code>my-program | antenna send --stream &lt;contact&gt;</code>.</li>
+    </ul>
+
+    <h2>Pencereden kurulum</h2>
+    <ol>
+      <li>Ajanın çalışacağı bilgisayarda <strong>Agents → Set up for a contact…</strong> menüsünü açın (ya da bir konuşmada kişi kartındaki <strong>Agent replies → Set up…</strong> seçeneğini).</li>
+      <li>Kişiyi ve programı seçin: <strong>Claude Code</strong>, <strong>Codex</strong> ya da kendi komutunuz.</li>
+      <li>İsterseniz uzun ömürlü bir oturum tokenını (<code>claude setup-token</code> komutundan) <strong>Value (optional)</strong> alanına yapıştırın. Token düğümünüze bir kez gider ve şifreli veritabanında saklanır. Mac’te güvenilir yol budur, çünkü sandbox anahtar zincirini (keychain) açamaz.</li>
+      <li>Sahip parolanızla onaylayın. Kural, son çalıştırması ve <strong>Run log</strong> (çalıştırma kaydı), <strong>Agents</strong> bölümünde görünür.</li>
+    </ol>
+    <p>Terminalden tek satır yeterli: <code>antenna wake set &lt;contact&gt; --cmd "claude -p --output-format stream-json"</code>. <code>antenna wake list</code> kuralları ve son çalıştırmaları gösterir; <code>antenna wake off &lt;contact&gt;</code> kapatır.</p>
+
+    <h2>Ajan neyi yapabilir, neyi yapamaz</h2>
+    <ul>
+      <li><strong>İstemi sabittir:</strong> “yeni bir mesajınız var, okuyun ve yanıtlayın”. Mesajın kendisi asla isteme dönüşmez; ajan onu, kişinin güven seviyesinden fazla yetki olmadan, veri olarak okur.</li>
+      <li><strong>Sandbox içinde çalışır</strong> (Linux’ta bubblewrap ya da Landlock, macOS’ta Seatbelt): yalnızca kendi geçici klasörünü ve o konuşmanın klasörünü görür, ağda yalnızca model sağlayıcısına ulaşır. Projeleriniz, diğer dosyalarınız ve düğümün anahtarları erişim dışındadır. Sandbox yoksa Antenna ajanı başlatmaz.</li>
+      <li><strong>Her çalıştırma temiz başlar</strong>, ajanı kalıcı yapmadığınız sürece (aşağıda); böylece önceki bir mesaj sonraki çalıştırmaya talimat bırakamaz.</li>
+      <li><strong>Sınırlar:</strong> çalıştırma başına süre sınırı ve saatlik çalıştırma sayısı; böylece çok konuşan bir kişi kullanım kotanızı tüketemez.</li>
+    </ul>
+
+    <h2>Kendi projelerinizden birinde çalıştırın</h2>
+    <p>Yalnızca kendi bilgisayarlarınız (∞) için ajan, araç zincirinizle tek bir proje klasöründe de çalışabilir: <code>--project ~/code/payments</code>, ayrıca salt okunur <code>--tool-path</code> klasörleri ve <code>--allow-host</code> ile erişebileceği paket depoları. Antenna bunu başka hiçbir kişi için kabul etmez ve ev klasörünüzü, kendi verilerini ya da <code>~/.ssh</code> gibi gizli bilgi barındıran klasörleri asla açmaz.</p>
+
+    <h2>Sorular</h2>
+    <details>
+      <summary>Karşı taraf yanıtı yazılırken görüyor mu?</summary>
+      <p>Evet, 3. seviye ve üzerindeki kişiler için: ajan yazdıkça büyüyen canlı bir baloncuk, sonunda normal bir mesaja dönüşür. 1. ve 2. seviyeler bitmiş yanıtı alır.</p>
+    </details>
+    <details>
+      <summary>Ajan yanıtına bir parola ya da anahtar yazarsa ne olur?</summary>
+      <p>Karşı taraf için akış durur ve mesaj onayınızı bekler. Akış yalnızca kendi bilgisayarlarınıza devam eder.</p>
+    </details>
+    <details>
+      <summary>Önceki konuşmaları hatırlıyor mu?</summary>
+      <p>Varsayılan olarak hayır: her mesaj yeni bir çalıştırma başlatır. Saatler süren işler için <code>--resident</code> ekleyin: aynı Claude Code oturumu konuşmayla birlikte kalır, söylenenleri ve kararlaştırılanları hatırlar, her yeni mesaj da bir sonraki adımı olur. Mesajlar ona yine karşı taraftan gelen veri olarak ulaşır.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna ücretsiz ve açık kaynaklıdır</strong>, macOS ve Linux için. Hesap da telefon numarası da gerekmez.</p>
+      <a class="btn" href="/tr/#download">Antenna’yı indir</a>
+    </aside>
+    <h2>İlgili rehberler</h2>
+    <ul class="related">
+      <li><a href="/tr/guides/message-claude-code-on-another-computer">Başka bir bilgisayardaki Claude Code’a mesaj gönderin</a></li>
+      <li><a href="/tr/guides/claude-code-multiple-agents-working-together">Aynı projede birlikte çalışan birden fazla Claude Code ajanı</a></li>
+      <li><a href="/tr/guides/agent-to-agent-communication">MCP üzerinden ajanlar arası iletişim</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/tr/" aria-label="Antenna — ana sayfa"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/tr/guides/">Rehberler</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>İletişim: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/tr/privacy">Gizlilik politikası</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -81,6 +81,10 @@ struct Args {
     /// TESTS ONLY: approval requests expire after this many ms (only shorter than the 10 minutes of SPEC §9).
     #[arg(long, hide = true)]
     approval_ttl_ms: Option<u64>,
+    /// TESTS ONLY, debug builds: hold this node's side of the contact `features` exchange this many ms (a loaded
+    /// machine right after pairing).
+    #[arg(long, hide = true)]
+    test_features_delay_ms: Option<u64>,
     /// The local model runtime (llama.cpp's `llama-server`) to run models with (default
     /// `<directory of antennad>/llama/llama-server`; its chat templates in `templates/` next to it).
     #[arg(long, hide = true)]
@@ -557,6 +561,12 @@ async fn run(
         cfg.owner_password_every = cfg
             .owner_password_every
             .min(Duration::from_millis(ms.max(1)));
+    }
+    if let Some(ms) = args.test_features_delay_ms {
+        if !cfg!(debug_assertions) {
+            return Err("--test-features-delay-ms exists only in debug builds".into());
+        }
+        cfg.features_delay = Duration::from_millis(ms);
     }
     cfg.share_content_max = args.share_content_max_mib.saturating_mul(1024 * 1024);
     // A catalog or a hub other than the release's would load models this release did not pin: only in debug builds,

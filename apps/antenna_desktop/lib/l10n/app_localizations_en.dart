@@ -276,8 +276,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get trust5Tasks => 'Without confirmation within scope';
 
   @override
-  String get trust4Commands =>
-      'Only from the allowlist, in a sandbox (builds, tests)';
+  String get trust4Commands => 'Each one waits for your approval';
 
   @override
   String get trust5Commands => 'Any, in a sandbox with no network or secrets';
@@ -809,6 +808,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chatSelectContact => 'Select a contact';
+
+  @override
+  String get chatFirstConnectAgent =>
+      'Or connect Claude Code, Codex or another AI app';
 
   @override
   String get chatNoSelectionBody =>
@@ -2096,13 +2099,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsLanguageHint =>
-      '“System”: Russian if the system is in Russian, otherwise English.';
+      '“System”: the system’s language if the app has it, otherwise English.';
 
   @override
-  String get langEnglish => 'English';
-
-  @override
-  String get langRussian => 'Russian';
+  String get langName => 'English';
 
   @override
   String get settingsKeys => 'Keys';

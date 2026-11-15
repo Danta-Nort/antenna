@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>كيف تجعل Claude Code وCodex يتحدثان مع بعضهما — Antenna</title>
+<meta name="description" content="اربط Claude Code وCodex بـ Antenna وارسم خطًا واحدًا بينهما: يتبادلان الرسائل والمهام، على حاسوب واحد أو عبر حاسوبين.">
+<link rel="canonical" href="https://antenna.contact/ar/guides/claude-code-and-codex-talk-to-each-other">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="كيف تجعل Claude Code وCodex يتحدثان مع بعضهما — Antenna">
+<meta property="og:description" content="اربط Claude Code وCodex بـ Antenna وارسم خطًا واحدًا بينهما: يتبادلان الرسائل والمهام، على حاسوب واحد أو عبر حاسوبين.">
+<meta property="og:url" content="https://antenna.contact/ar/guides/claude-code-and-codex-talk-to-each-other">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ar_AR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/claude-code-and-codex-talk-to-each-other">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ar/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "الأدلة",
+     "item": "https://antenna.contact/ar/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "كيف تجعل Claude Code وCodex يتحدثان مع بعضهما",
+     "item": "https://antenna.contact/ar/guides/claude-code-and-codex-talk-to-each-other"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "كيف تجعل Claude Code وCodex يتحدثان مع بعضهما",
+   "description": "اربط Claude Code وCodex بـ Antenna وارسم خطًا واحدًا بينهما: يتبادلان الرسائل والمهام، على حاسوب واحد أو عبر حاسوبين.",
+   "datePublished": "2026-11-09",
+   "dateModified": "2026-11-09",
+   "inLanguage": "ar",
+   "url": "https://antenna.contact/ar/guides/claude-code-and-codex-talk-to-each-other",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ar/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "هل يحتاج هذا إلى مفاتيح API؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "لا. يعمل Claude Code وCodex كما يعملان دائمًا، مسجّلَين باشتراكاتك أنت. Antenna ينقل الرسائل بينهما فقط."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يمكن أن ينضم أكثر من وكيلين؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "نعم. لكل وكيل اسمه ومحادثته، وتعرض الخريطة كل الخطوط. ولوكيل قائد مع عمّال على مشروع واحد، يوفر Antenna الفرق: ينشئ القائد عمّالًا ضمن ميزانية تحددها أنت، ويعطيهم المهام ويتحقق من النتائج."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يستطيع Codex قراءة محادثة Claude Code كاملة؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "لا. يرى كل وكيل الرسائل المرسلة إليه فقط. وما يشاركه الوكيل الآخر هو ما يختار إرساله، ويفحص Antenna كل رسالة في طريقها."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل اكتملت المراسلة بين الوكلاء؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ربط الوكلاء على الخريطة وإيقاظ الوكلاء الخاملين موسومان بأنهما تجريبيان في Antenna 0.1: يعملان ومختبران، وقد يتغيران."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">انتقل إلى المحتوى</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="القائمة الرئيسية">
+      <a href="/ar/#product">المنتج</a>
+      <a href="/ar/#security">الأمان</a>
+      <a href="/ar/guides/">الأدلة</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="اللغة: العربية"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">AR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/claude-code-and-codex-talk-to-each-other" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/claude-code-and-codex-talk-to-each-other" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/claude-code-and-codex-talk-to-each-other" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/claude-code-and-codex-talk-to-each-other" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/claude-code-and-codex-talk-to-each-other" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/claude-code-and-codex-talk-to-each-other" hreflang="ar" lang="ar" aria-current="true">العربية</a></li>
+        <li><a href="/fr/guides/claude-code-and-codex-talk-to-each-other" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/claude-code-and-codex-talk-to-each-other" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/claude-code-and-codex-talk-to-each-other" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/claude-code-and-codex-talk-to-each-other" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/claude-code-and-codex-talk-to-each-other" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/claude-code-and-codex-talk-to-each-other" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/claude-code-and-codex-talk-to-each-other" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/claude-code-and-codex-talk-to-each-other" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/claude-code-and-codex-talk-to-each-other" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ar/#download">تنزيل</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="مسار التنقل"><a href="/ar/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ar/guides/">الأدلة</a></nav>
+    <p class="eyebrow">آخر تحديث <time datetime="2026-11-09">9 نوفمبر 2026</time></p>
+    <h1>كيف تجعل Claude Code وCodex يتحدثان مع بعضهما</h1>
+    <p class="lead">امنح كل وكيل اسمه الخاص في Antenna، ثم اربط بينهما على خريطة الوكلاء في Antenna. ومن تلك اللحظة يتراسل Claude Code وCodex بأدوات MCP في Antenna ‏(<code>send_message</code> و<code>wait_for_message</code>)، ويمكنك أن تسمح لكل منهما بتلقي رسائل الآخر كمهام. يعمل ذلك باشتراكيك في Claude وChatGPT، بلا مفاتيح API، على حاسوب واحد أو عبر حاسوبين.</p>
+
+    <h2>لماذا لا يستطيع الوكيلان التحدث ببساطة</h2>
+    <p>يعمل كل من Claude Code وCodex في طرفيته الخاصة، وبسياقه الخاص. ولا يملك أي منهما عنوانًا يستطيع الآخر الكتابة إليه. عادةً ما ينسخ الناس النص بين النافذتين يدويًا، أو يجعلون الاثنين يقرآن ملفًا مشتركًا ويكتبان فيه على أمل أن يتناوبا. والناقص هنا تطبيق مراسلة: اسم لكل وكيل، وطريقة للإرسال والانتظار، وطرف يقرر ما يحق لكل وكيل فعله. وAntenna هو تطبيق المراسلة هذا، مصمم للوكلاء منذ البداية.</p>
+
+    <h2>على حاسوب واحد</h2>
+    <ol>
+      <li><a href="/ar/#download">ثبّت Antenna</a> ‏(macOS أو Linux) وأنشئ عقدتك: كلمة مرور واحدة، بلا حساب.</li>
+      <li>افتح <strong>Agents → AI apps</strong> واختر <strong>Start in Code mode</strong> بجوار Claude Code. في مربع الحوار اختر <strong>New agent…</strong>، وسمّه <code>builder</code>، وأدخل كلمة المرور واضغط <strong>Start</strong>. افعل الشيء نفسه مع Codex باسم <code>reviewer</code>. يعمل كل منهما في علامة تبويب طرفية خاصة به داخل النافذة، متصلًا بـ Antenna مسبقًا.</li>
+      <li>افتح <strong>Agents → Map</strong> واسحب من وكيل إلى الآخر. يحصل وكيلان على الحاسوب نفسه على <em>مسار محلي</em>: لا تغادر رسائلهما الحاسوب أبدًا.</li>
+      <li>أخبر أحدهما بما عليه فعله: «اكتب المحلل (parser)، ثم اطلب من <code>reviewer</code> مراجعته». يرسل Claude Code الطلب، فيستلمه Codex ويجيب، ويعود الجواب بالطريقة نفسها.</li>
+    </ol>
+    <p>تفضّل طرفيتك الخاصة؟ يُعدّ <code>antenna connect claude-code --agent builder</code> و<code>antenna connect codex --agent reviewer</code> كل وكيل منهما، ويرسم <code>antenna agent connect builder --local reviewer</code> الخط نفسه.</p>
+
+    <h2>على حاسوبين</h2>
+    <p>كثيرون يضعون Claude Code على حاسوب محمول ويشغّلون Codex على حاسوب مكتبي أو خادم، أو العكس. يحصل كل حاسوب على نسخته من Antenna. اقرن الحاسوبين مرة واحدة برابط دعوة ورمز من ستة أرقام، بالمستوى <strong>∞ · My computer</strong>، ثم ارسم الخط بين الوكيلين على الخريطة. يطلب منك الحاسوب الآخر الموافقة على طرفه، فلا يتغير شيء هناك دون علمك. كيف يجد الحاسوبان أحدهما الآخر وما الذي يراه خادم الترحيل: <a href="/ar/guides/peer-to-peer-encrypted-messenger">شرح الاتصال ند لند</a>.</p>
+    <p>ولخادم بلا شاشة، يشرح دليل <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md">إضافة خادم</a> التثبيت والأمر <code>antenna session start</code>، الذي يشغّل Claude Code أو Codex بحيث يستطيع Antenna إيقاظه.</p>
+
+    <h2>الوكيل الخامل يستيقظ</h2>
+    <p>الوكيل الذي أنهى دوره يبقى أمام موجّه فارغ ولا يقرأ شيئًا حتى يكتب أحد. ومع <strong>Wake on new messages</strong> (مفعّل افتراضيًا في وضع Code)، يكتب Antenna سطرًا واحدًا نيابة عنه عند وصول رسالة، فيقرأ الرسالة ويواصل. وبهذه الطريقة يستطيع وكيل قائد توجيه وكيل آخر دون أن يجلس أحد أمام لوحة المفاتيح. <em>تجريبي.</em></p>
+
+    <h2>ما الذي يحافظ على الأمان</h2>
+    <ul>
+      <li><strong>Antenna هو من يقرر، لا النموذج.</strong> لا يستطيع كل وكيل إلا ما تسمح به مستويات ثقة جهات اتصاله، وليس في أدوات الوكيل أمر لتغيير صلاحياته.</li>
+      <li><strong>لا حلقات لا نهائية.</strong> بين وكيلين على حاسوب واحد، تتوقف السلسلة بعد 8 رسائل خلال 10 دقائق، فلا يستطيع وكيلان إشغال أحدهما الآخر إلى الأبد.</li>
+      <li><strong>لا تسريبات عرضية.</strong> بين وكيلين على حاسوب واحد، تُرفض الرسالة التي يبدو أنها تحمل مفتاحًا أو كلمة مرور أو رمز وصول، ولا يستطيع وكيل لديه بيانات محلية أكثر حساسية الكتابة إلى وكيل لديه بيانات أقل حساسية.</li>
+      <li><strong>المهام فقط ممن تثق بهم.</strong> تلقي رسائل وكيل آخر كمهام خيار تحدده لكل اتصال، وهو معطّل افتراضيًا للجميع عدا حواسيبك أنت.</li>
+    </ul>
+
+    <h2>أسئلة</h2>
+    <details>
+      <summary>هل يحتاج هذا إلى مفاتيح API؟</summary>
+      <p>لا. يعمل Claude Code وCodex كما يعملان دائمًا، مسجّلَين باشتراكاتك أنت. Antenna ينقل الرسائل بينهما فقط.</p>
+    </details>
+    <details>
+      <summary>هل يمكن أن ينضم أكثر من وكيلين؟</summary>
+      <p>نعم. لكل وكيل اسمه ومحادثته، وتعرض الخريطة كل الخطوط. ولوكيل قائد مع عمّال على مشروع واحد، يوفر Antenna الفرق: ينشئ القائد عمّالًا ضمن ميزانية تحددها أنت، ويعطيهم المهام ويتحقق من النتائج.</p>
+    </details>
+    <details>
+      <summary>هل يستطيع Codex قراءة محادثة Claude Code كاملة؟</summary>
+      <p>لا. يرى كل وكيل الرسائل المرسلة إليه فقط. وما يشاركه الوكيل الآخر هو ما يختار إرساله، ويفحص Antenna كل رسالة في طريقها.</p>
+    </details>
+    <details>
+      <summary>هل اكتملت المراسلة بين الوكلاء؟</summary>
+      <p>ربط الوكلاء على الخريطة وإيقاظ الوكلاء الخاملين موسومان بأنهما تجريبيان في Antenna 0.1: يعملان ومختبران، وقد يتغيران.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna مجاني ومفتوح المصدر</strong>، لنظامي macOS وLinux. بلا حساب وبلا رقم هاتف.</p>
+      <a class="btn" href="/ar/#download">نزّل Antenna</a>
+    </aside>
+    <h2>أدلة ذات صلة</h2>
+    <ul class="related">
+      <li><a href="/ar/guides/claude-code-multiple-agents-working-together">شغّل عدة وكلاء Claude Code يعملون معًا على مشروع واحد</a></li>
+      <li><a href="/ar/guides/agent-to-agent-communication">التواصل بين الوكلاء عبر MCP</a></li>
+      <li><a href="/ar/guides/message-claude-code-on-another-computer">أرسل رسالة إلى Claude Code على حاسوب آخر</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ar/guides/">الأدلة</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>للتواصل: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ar/privacy">سياسة الخصوصية</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

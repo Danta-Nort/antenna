@@ -1,0 +1,46 @@
+<!--guide {"title": "Local LLM agent सेटअप: बिना अकाउंट, बिना API key — Antenna", "h1": "बिना अकाउंट और बिना API key के local LLM agent सेट करें", "description": "Antenna एक open model डाउनलोड करता है, उसे जाँचता है, और आपके Mac या Linux पर प्राइवेट agent की तरह चलाता है: sandbox में, बिना network और बिना आपकी फ़ाइलों के।", "summary": "आपके अपने कंप्यूटर पर sandboxed agent के रूप में चलता open model, आपकी memory के हिसाब से चुना गया।", "source": "2026-11-09"}-->
+<p class="lead">Antenna में <strong>Agents → Local models</strong> खोलें, आपके कंप्यूटर के लिए सुझाया गया model डाउनलोड करें, और <strong>Create agent</strong> दबाएँ। Model आपकी अपनी मशीन पर llama.cpp से चलता है, डाउनलोड होने के बाद बिना अकाउंट, बिना API key और बिना इंटरनेट के, एक ऐसे sandbox के अंदर जो न network तक पहुँच सकता है, न आपकी फ़ाइलें पढ़ सकता है। Agent को अपनी चैट मिलती है, और team में वह triage, summaries और docs जैसे हल्के role ले सकता है। <em>Experimental।</em></p>
+
+<h2>कौन-सा model, किस कंप्यूटर के लिए</h2>
+<p>Antenna आपकी memory और ख़ाली जगह देखकर Qwen3.5 models में से एक सुझाता है:</p>
+<table>
+  <thead><tr><th>कंप्यूटर</th><th>सुझाया गया</th><th>डिस्क पर</th><th>लोड होने पर memory</th></tr></thead>
+  <tbody>
+    <tr><td>8 GB memory</td><td>Qwen3.5 2B</td><td>1.3 GB</td><td>लगभग 2 GB</td></tr>
+    <tr><td>16 GB, Intel या AMD, या M1 Mac</td><td>Qwen3.5 4B</td><td>2.7 GB</td><td>लगभग 4.7 GB</td></tr>
+    <tr><td>16 GB या ज़्यादा वाला M2 या नया Mac</td><td>Qwen3.5 9B</td><td>5.7 GB</td><td>9 GB से कम</td></tr>
+  </tbody>
+</table>
+<p>दूसरे models भी लिस्ट में होते हैं, हर एक पर <strong>Fits this computer</strong>, <strong>Slow on this computer</strong> या <strong>Not for this computer</strong> लिखा होता है, ताकि आप कभी ऐसा model डाउनलोड न करें जो चलेगा ही नहीं।</p>
+
+<h2>सेट करें</h2>
+<ol>
+  <li><strong>Agents → Local models</strong> खोलें और सुझाए गए model के आगे <strong>Download</strong> दबाएँ। यह Hugging Face से एक तय वर्ज़न में आता है; विंडो बंद करने से डाउनलोड नहीं रुकता, और बीच में रुका डाउनलोड वहीं से फिर शुरू होता है।</li>
+  <li>लोड करने से पहले Antenna फ़ाइल को इस release में दर्ज साइज़ और SHA-256 से मिलाता है। जो फ़ाइल मेल न खाए, वह डिलीट कर दी जाती है।</li>
+  <li><strong>Create agent</strong> दबाएँ और उसे एक नाम दें। उसकी चैट Chats में <strong>On this computer</strong> के नीचे दिखती है।</li>
+  <li>उसे लिखें। पहला जवाब model लोड होने तक कुछ सेकंड रुकता है।</li>
+</ol>
+<p>Terminal से: <code>antenna local install qwen3.5-2b --wait</code> (या आपके पास पहले से मौजूद कॉपी के लिए <code>--from-file</code>), फिर <code>antenna local add helper --model qwen3.5-2b</code> और <code>antenna local say helper "hello"</code>।</p>
+
+<h2>दो sandboxes</h2>
+<p>Model अपने sandbox में चलता है: वह सिर्फ़ अपनी model फ़ाइल पढ़ता है और कहीं कनेक्ट नहीं कर सकता, न इंटरनेट से, न Antenna से, न दूसरे प्रोग्रामों से। Agent का अपना प्रोग्राम एक दूसरे sandbox में चलता है जो सिर्फ़ model तक पहुँच सकता है। बातचीत Antenna के encrypted database में रखी जाती है। इस वर्ज़न में local agent के पास न लिंक हैं न tools, इसलिए वह किसी को कुछ नहीं भेज सकता, और Antenna कभी आपसे उसके जवाबों से कोई कमांड पेस्ट करने को नहीं कहता।</p>
+
+<h2>Memory की फ़िक्र Antenna करता है</h2>
+<p>कई agents एक model शेयर कर सकते हैं, और अलग-अलग साइज़ के models साथ-साथ चल सकते हैं। जब जवाब के लिए ज़रूरी memory किसी दूसरे model ने घेर रखी हो, तो जवाब इंतज़ार करता है (“Waiting for memory…”), कंप्यूटर को swap में धकेलने के बजाय, और जिस model को 30 मिनट तक किसी ने इस्तेमाल न किया हो, उसे unload कर दिया जाता है।</p>
+
+<h2>Team में local models</h2>
+<p>जब आप agents की team बनाते हैं, तो local model उन roles के लिए worker बन सकता है जो उसके साइज़ के हिसाब से ठीक हों: छोटे models triage और summaries के लिए, बड़े models docs, drafts और अनुवाद के लिए भी। <strong>Local only</strong> के साथ पूरी team, lead समेत, बिना किसी cloud model के चलती है। Team में local models अभी कोड नहीं लिखते।</p>
+
+<h2>सवाल-जवाब</h2>
+<details>
+  <summary>क्या यह GPU इस्तेमाल करता है?</summary>
+  <p>Mac पर model, Metal के ज़रिए GPU इस्तेमाल करने के लिए बना है। Linux पर यह CPU पर चलता है, CPU के अपने instruction sets के लिए बने builds के साथ।</p>
+</details>
+<details>
+  <summary>क्या मेरे दूसरे agents local model से बात कर सकते हैं?</summary>
+  <p>अभी नहीं। इस वर्ज़न में local agent अपनी चैट में आपसे बात करता है, और team में काम करते समय team के lead से।</p>
+</details>
+<details>
+  <summary>क्या मेरे कंप्यूटर से कुछ बाहर जाता है?</summary>
+  <p>सिर्फ़ model का डाउनलोड, Hugging Face से। उसके बाद model offline चलता है, और उसके sandbox में network है ही नहीं।</p>
+</details>

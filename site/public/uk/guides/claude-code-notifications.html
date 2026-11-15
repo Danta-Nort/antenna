@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сповіщення, коли Claude Code завершив завдання на сервері — Antenna</title>
+<meta name="description" content="Claude Code на сервері чи другому комп’ютері надсилає звіт у чат Antenna, а ноутбук показує сповіщення. Запити на підтвердження теж приходять сповіщенням.">
+<link rel="canonical" href="https://antenna.contact/uk/guides/claude-code-notifications">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Сповіщення, коли Claude Code завершив завдання на сервері — Antenna">
+<meta property="og:description" content="Claude Code на сервері чи другому комп’ютері надсилає звіт у чат Antenna, а ноутбук показує сповіщення. Запити на підтвердження теж приходять сповіщенням.">
+<meta property="og:url" content="https://antenna.contact/uk/guides/claude-code-notifications">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="uk_UA">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/claude-code-notifications">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/claude-code-notifications">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/claude-code-notifications">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/claude-code-notifications">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/claude-code-notifications">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/claude-code-notifications">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/claude-code-notifications">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/claude-code-notifications">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/claude-code-notifications">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/claude-code-notifications">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/claude-code-notifications">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/claude-code-notifications">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/claude-code-notifications">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/claude-code-notifications">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/claude-code-notifications">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/claude-code-notifications">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/uk/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Інструкції",
+     "item": "https://antenna.contact/uk/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Сповіщення, коли Claude Code завершив роботу на сервері чи іншому комп’ютері",
+     "item": "https://antenna.contact/uk/guides/claude-code-notifications"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Сповіщення, коли Claude Code завершив роботу на сервері чи іншому комп’ютері",
+   "description": "Claude Code на сервері чи другому комп’ютері надсилає звіт у чат Antenna, а ноутбук показує сповіщення. Запити на підтвердження теж приходять сповіщенням.",
+   "datePublished": "2026-11-15",
+   "dateModified": "2026-11-15",
+   "inLanguage": "uk",
+   "url": "https://antenna.contact/uk/guides/claude-code-notifications",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/uk/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Чи видно в сповіщенні, що написав Claude Code?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Ні. У ньому лише «New message in» і назва чату, бо сповіщення може з’явитися на заблокованому екрані. Щоб прочитати звіт, відкрийте чат."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "А якщо ноутбук спить?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Повідомлення чекатиме на сервері, і Antenna доставить його разом зі сповіщенням, коли ноутбук знову буде в мережі."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Чи можна отримувати сповіщення на телефон?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Ще ні. Наразі Antenna працює на macOS і Linux."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Перейти до вмісту</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/uk/" aria-label="Antenna — головна"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Головне меню">
+      <a href="/uk/#product">Продукт</a>
+      <a href="/uk/#security">Безпека</a>
+      <a href="/uk/guides/">Інструкції</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Мова: Українська"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">UK</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/claude-code-notifications" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/claude-code-notifications" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/claude-code-notifications" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/claude-code-notifications" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/claude-code-notifications" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/claude-code-notifications" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/claude-code-notifications" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/claude-code-notifications" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/claude-code-notifications" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/claude-code-notifications" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/claude-code-notifications" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/claude-code-notifications" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/claude-code-notifications" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/claude-code-notifications" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/claude-code-notifications" hreflang="uk" lang="uk" aria-current="true">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/uk/#download">Завантажити</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Навігаційний ланцюжок"><a href="/uk/">Antenna</a> <span aria-hidden="true">›</span> <a href="/uk/guides/">Інструкції</a></nav>
+    <p class="eyebrow">Оновлено <time datetime="2026-11-15">15 листопада 2026 р.</time></p>
+    <h1>Сповіщення, коли Claude Code завершив роботу на сервері чи іншому комп’ютері</h1>
+    <p class="lead">Дайте Claude Code завдання в чаті Antenna зі свого ноутбука, і, закінчивши, він надішле результат у той самий чат: інструкції Antenna кажуть підключеному агентові надсилати результати тому контакту, який дав завдання. Ноутбук покаже сповіщення «New message in server · api-dev» (нове повідомлення), якщо вікно Antenna не на передньому плані. Запити на підтвердження теж приходять сповіщенням, тож робота, що зупинилася на півдорозі, не чекатиме непомітно. Сама Antenna не стежить за ходами Claude Code: звіт — це власне повідомлення Claude Code.</p>
+
+    <h2>Про що приходять сповіщення</h2>
+    <ul>
+      <li><strong>Повідомлення від Claude Code вам.</strong> Сповіщення називає чат, але ніколи не показує текст, і приходить не частіше ніж раз на 10 секунд для одного чату.</li>
+      <li><strong>Запит на підтвердження.</strong> Крок, якому потрібне ваше слово, приходить як «Antenna: approval needed on server»: з агентом, тим, що він хоче зробити, і часом, що лишився («expires in 9 min», спливає за 9 хв), але без тексту запиту. Друге сповіщення приходить приблизно за дві хвилини до закриття запиту; закривається він через 10 хвилин. Запити з іншого комп’ютера доходять до вас через <strong>My devices</strong> (мої пристрої; <em>експериментально</em>).</li>
+      <li><strong>Запитання.</strong> <em>Експериментальна функція.</em> Запитання агента приходить сповіщенням на комп’ютері, де агент працює: «A question from your agent» (запитання від вашого агента). Для сервера виконайте там <code>antenna agent escalate api-dev --to mac</code>, і його запитання натомість приходитимуть у чат агента на вашому ноутбуці.</li>
+    </ul>
+    <p>Сповіщення працюють на macOS і на робочих столах Linux, які вміють їх показувати. Antenna має бути відкрита на ноутбуці; коли її вікно на передньому плані, вистачає лічильників непрочитаного в списку чатів.</p>
+
+    <h2>Налаштування</h2>
+    <ol>
+      <li><a href="/uk/#download">Встановіть Antenna</a> на обидва комп’ютери й один раз з’єднайте їх із позначкою <strong>This is my own computer (∞)</strong> (це мій власний комп’ютер). Як налаштувати сервер, описано в посібнику <a href="/uk/guides/run-claude-code-on-a-vps">Claude Code на VPS</a>.</li>
+      <li>Запустіть Claude Code через Antenna. На сервері:
+    <pre><code>cd ~/projects/api
+    antenna connect claude-code --agent api-dev --links mac --hello mac
+    antenna session start api-dev --dir ~/projects/api</code></pre>
+      На другому десктопі: <strong>Agents → AI apps → Start in Code mode</strong>.</li>
+      <li>На ноутбуці нічого налаштовувати не треба. Чат з агентом від самого початку сповіщає про повідомлення особисто вам і про запити на підтвердження.</li>
+    </ol>
+
+    <h2>Попросіть надіслати звіт</h2>
+    <p>Напишіть завдання в чаті <code>api-dev</code> і скажіть, що хочете отримати у відповідь: «Прожени тести міграцій і виправ те, що падає. Коли закінчиш, відповідай тут, що змінилося». Якщо Claude Code простоює в рядку введення, Antenna друкує один рядок, щоб він прочитав ваше повідомлення (<em>експериментально</em>); він виконує роботу й відповідає в тому самому чаті, а ноутбук показує сповіщення.</p>
+    <p>Якщо роботу ви починаєте в його терміналі (<code>antenna session attach api-dev</code>), закінчіть запит словами «коли закінчиш, надішли мені підсумок в Antenna». Щоб це стало звичкою, додайте рядок у <code>CLAUDE.md</code> проєкту: «Закінчивши завдання, надішли короткий підсумок контакту <code>mac</code> через <code>send_message</code> Antenna».</p>
+    <p>Звіт приходить, коли Claude Code сам вирішить, що закінчив, як і з будь-якою інструкцією, якої він дотримується. Якщо він зупинився на власному запиті дозволу в терміналі («Do you want to proceed?»), Antenna цього не бачить і сповіщення не буде: дозвольте інструменти, якими користуєтеся постійно, у налаштуваннях Claude Code.</p>
+
+    <h2>Які чати надсилають сповіщення</h2>
+    <p>Натисніть <strong>⋮</strong> у рядку чату або клацніть його правою кнопкою миші, потім виберіть <strong>Notifications</strong> (сповіщення):</p>
+    <ul>
+      <li><strong>All messages</strong> (усі повідомлення): кожне нове повідомлення в цьому чаті (за замовчуванням для людини).</li>
+      <li><strong>Only when it asks for me</strong> (лише коли звертаються до мене): повідомлення особисто вам і запити на підтвердження (за замовчуванням для агента).</li>
+      <li><strong>Off</strong> (вимкнено): про запити на підтвердження сповіщення однаково приходять.</li>
+    </ul>
+    <p>Якщо Claude Code звітує не вам, а іншому вашому агентові, ці повідомлення приходять без сповіщень, доки ви не ввімкнете <strong>Notify about messages between agents</strong> (сповіщати про повідомлення між агентами) у тому самому меню. У терміналі: <code>antenna chats notify server --agent api-dev all</code>.</p>
+
+    <h2>На комп’ютері, за яким ви сидите</h2>
+    <p>Коли Claude Code працює в режимі Code на вашому власному ноутбуці, Antenna сповіщає про його запити на підтвердження й запитання, поки вікно у фоні, але не про кінець ходу: агент не може написати вам на своєму ж комп’ютері. Для цього є власні хуки Claude Code: вони можуть запустити вашу команду, коли він зупиняється.</p>
+
+    <h2>Запитання</h2>
+    <details>
+      <summary>Чи видно в сповіщенні, що написав Claude Code?</summary>
+      <p>Ні. У ньому лише «New message in» і назва чату, бо сповіщення може з’явитися на заблокованому екрані. Щоб прочитати звіт, відкрийте чат.</p>
+    </details>
+    <details>
+      <summary>А якщо ноутбук спить?</summary>
+      <p>Повідомлення чекатиме на сервері, і Antenna доставить його разом зі сповіщенням, коли ноутбук знову буде в мережі.</p>
+    </details>
+    <details>
+      <summary>Чи можна отримувати сповіщення на телефон?</summary>
+      <p>Ще ні. Наразі Antenna працює на macOS і Linux.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna безкоштовна й має відкритий код</strong>, працює на macOS і Linux. Без акаунта й без номера телефону.</p>
+      <a class="btn" href="/uk/#download">Завантажити Antenna</a>
+    </aside>
+    <h2>Схожі інструкції</h2>
+    <ul class="related">
+      <li><a href="/uk/guides/run-claude-code-on-a-vps">Як запустити Claude Code на VPS цілодобово й спілкуватися з ним з ноутбука</a></li>
+      <li><a href="/uk/guides/approve-claude-code-permissions-remotely">Підтверджуйте запити Claude Code з іншого комп’ютера</a></li>
+      <li><a href="/uk/guides/message-claude-code-on-another-computer">Як надіслати повідомлення Claude Code на іншому комп’ютері</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/uk/" aria-label="Antenna — головна"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/uk/guides/">Інструкції</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Контакти: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/uk/privacy">Політика конфіденційності</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

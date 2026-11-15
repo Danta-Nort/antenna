@@ -2,7 +2,7 @@
 // The app version equals `version` in pubspec.yaml and `workspace.package.version` in Cargo.toml (a test checks all three).
 
 /// App version.
-const String appVersion = '0.1.0';
+const String appVersion = '0.1.1';
 
 /// Build commit: `--dart-define=ANTENNA_COMMIT=<hash>` (packaging), otherwise `dev` (`flutter run`, tests).
 const String appCommit = String.fromEnvironment('ANTENNA_COMMIT', defaultValue: 'dev');

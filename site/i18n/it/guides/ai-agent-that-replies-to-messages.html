@@ -1,0 +1,43 @@
+<!--guide {"title": "Un agente AI che risponde ai messaggi al posto tuo — Antenna", "h1": "Configurare un agente AI che risponde ai tuoi messaggi", "description": "Fai rispondere Claude Code o Codex ai messaggi di un contatto: Antenna lo avvia in una sandbox quando arriva un messaggio e la risposta appare in diretta.", "summary": "Claude Code o Codex che rispondono da soli a un contatto, in una sandbox, con la risposta in diretta.", "source": "2026-11-09"}-->
+<p class="lead">In Antenna puoi scegliere un contatto e un agente (Claude Code, Codex o un tuo comando) e da quel momento ogni messaggio di quel contatto avvia l'agente, che lo legge e risponde. Antenna lo esegue in una sandbox, con permessi non superiori al livello di fiducia di quel contatto, e l'altra persona vede la risposta mentre viene scritta. Funziona con il tuo accesso a Claude o a ChatGPT, e una risposta che sembra contenere un segreto aspetta la tua approvazione.</p>
+
+<h2>Usi tipici</h2>
+<ul>
+  <li><strong>Il tuo assistente su un server.</strong> Scrivi al server dal portatile e Claude Code, lì, risponde, compila ed esegue i test del tuo progetto.</li>
+  <li><strong>Uno sportello per un contatto.</strong> Le domande di un collega sul tuo progetto ricevono subito una risposta, da un agente che vede solo la cartella di quella conversazione.</li>
+  <li><strong>Uno script che ti aggiorna.</strong> L'output di qualsiasi programma può essere inviato in diretta: <code>my-program | antenna send --stream &lt;contact&gt;</code>.</li>
+</ul>
+
+<h2>Configurarlo dalla finestra</h2>
+<ol>
+  <li>Sul computer dove deve girare l'agente, apri <strong>Agents → Set up for a contact…</strong> (oppure, in una conversazione, <strong>Agent replies → Set up…</strong> nella scheda del contatto).</li>
+  <li>Scegli il contatto e il programma: <strong>Claude Code</strong>, <strong>Codex</strong> o un tuo comando.</li>
+  <li>Se vuoi, incolla un token di accesso a lunga durata (da <code>claude setup-token</code>) in <strong>Value (optional)</strong>. Va al tuo nodo una sola volta e resta nel suo database cifrato. Su Mac è il metodo affidabile, perché la sandbox non può aprire il portachiavi.</li>
+  <li>Conferma con la tua password da proprietario. La regola, la sua ultima esecuzione e il <strong>Run log</strong> compaiono in <strong>Agents</strong>.</li>
+</ol>
+<p>Da terminale basta una riga: <code>antenna wake set &lt;contact&gt; --cmd "claude -p --output-format stream-json"</code>. <code>antenna wake list</code> mostra le regole e le esecuzioni recenti; <code>antenna wake off &lt;contact&gt;</code> la disattiva.</p>
+
+<h2>Che cosa può fare l'agente e che cosa no</h2>
+<ul>
+  <li><strong>Il suo prompt è fisso:</strong> “hai un nuovo messaggio, leggilo e rispondi”. Il messaggio non diventa mai il prompt; l'agente lo legge come dati, con permessi non superiori al livello di fiducia del contatto.</li>
+  <li><strong>Gira in una sandbox</strong> (bubblewrap o Landlock su Linux, Seatbelt su macOS): vede la propria cartella temporanea e la cartella di quella conversazione, e raggiunge solo il proprio fornitore del modello. I tuoi progetti, gli altri tuoi file e le chiavi del nodo restano fuori portata. Senza sandbox, Antenna non lo avvia.</li>
+  <li><strong>Ogni esecuzione parte da zero</strong>, a meno che tu non renda l'agente residente (vedi sotto), così un messaggio precedente non può lasciare istruzioni per un'esecuzione successiva.</li>
+  <li><strong>Limiti:</strong> un tempo massimo per esecuzione e un numero massimo di esecuzioni all'ora, così un contatto chiacchierone non può farti consumare il tuo piano.</li>
+</ul>
+
+<h2>Farlo lavorare in un tuo progetto</h2>
+<p>Solo per i tuoi computer (∞), l'agente può anche lavorare in una cartella di progetto con i tuoi strumenti di sviluppo: <code>--project ~/code/payments</code>, più le cartelle in sola lettura di <code>--tool-path</code> e i registri di pacchetti che può raggiungere con <code>--allow-host</code>. Antenna lo rifiuta per qualsiasi altro contatto e non apre mai la tua cartella home, i propri dati o le cartelle che contengono segreti, come <code>~/.ssh</code>.</p>
+
+<h2>Domande</h2>
+<details>
+  <summary>L'altra persona vede la risposta mentre viene scritta?</summary>
+  <p>Sì, per i contatti di livello 3 e superiore: una nuvoletta in diretta che cresce mentre l'agente scrive e alla fine diventa un normale messaggio. I livelli 1 e 2 ricevono la risposta finita.</p>
+</details>
+<details>
+  <summary>E se l'agente scrive una password o una chiave nella risposta?</summary>
+  <p>Il flusso si interrompe per l'altra persona e il messaggio aspetta la tua approvazione. Prosegue solo verso i tuoi computer.</p>
+</details>
+<details>
+  <summary>Si ricorda delle conversazioni precedenti?</summary>
+  <p>Di default no: ogni messaggio avvia un'esecuzione nuova. Per lavori che durano ore, aggiungi <code>--resident</code>: la stessa sessione di Claude Code resta allora legata alla conversazione, ricorda ciò che è stato detto e deciso, e ogni nuovo messaggio diventa il suo turno successivo. I messaggi gli arrivano comunque come dati da un'altra persona.</p>
+</details>
