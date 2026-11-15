@@ -138,7 +138,7 @@ fn rule(c: Vec<SeccompCondition>) -> Result<SeccompRule, String> {
 
 /// System calls that kill the process.
 fn kill_list() -> Vec<i64> {
-    let mut v = vec![
+    let common = [
         libc::SYS_execve,
         libc::SYS_execveat,
         libc::SYS_socket,
@@ -169,9 +169,13 @@ fn kill_list() -> Vec<i64> {
         libc::SYS_perf_event_open,
         libc::SYS_io_uring_setup,
     ];
+    // fork and vfork exist only on x86_64 (aarch64 has clone alone). A list per architecture, not a `let mut` extended
+    // under cfg: that `mut` would be unused on aarch64, which `-D warnings` refuses there (D-150).
     #[cfg(target_arch = "x86_64")]
-    v.extend([libc::SYS_fork, libc::SYS_vfork]);
-    v
+    let arch_only: &[i64] = &[libc::SYS_fork, libc::SYS_vfork];
+    #[cfg(not(target_arch = "x86_64"))]
+    let arch_only: &[i64] = &[];
+    [&common[..], arch_only].concat()
 }
 
 fn seccomp() -> Result<(), String> {

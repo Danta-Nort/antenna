@@ -3304,3 +3304,17 @@ The same copy without the replaced helper starts in seconds.
   the daemon's own operations still refuse at once, and two decisions at once still refuse the second after the wait.
 - **How to verify.** `cargo test -p antenna-files --lib quarantine::tests` (a decision waits out a 150 ms operation;
   the control: one that outlasts the wait is refused); both fail with the old immediate guard.
+
+## 2026-11-15 · The ARM node's clippy fails on an unused `mut` that x86_64 needs (`crates/antenna-files/src/sandbox_linux.rs`, D-150)
+- **Symptom.** `cargo clippy --target aarch64-unknown-linux-gnu … -- -D warnings` stops in `antenna-files`:
+  `variable does not need to be mutable` in `kill_list`. On x86_64 the same code is clean, so CI on x86_64 never saw it;
+  the arm64 workflow (`.github/workflows/linux-arm64.yml`) runs this clippy first and would fail before building.
+- **Cause.** The list was a `let mut v` that only an x86_64-only line extended (`fork`, `vfork` exist only there). On
+  aarch64 that line is compiled out, the `mut` is unused, and `-D warnings` turns the lint into an error.
+- **Fix.** A list per architecture joined with the common one (`[&common[..], arch_only].concat()`), no `mut` and no
+  extension under `cfg`. Code under `#[cfg(target_arch = …)]` should not leave a binding that only one architecture uses.
+- **How to verify.** Both clippy passes for aarch64 from x86_64 Linux, with the C build scripts replaced as in
+  `tools/check-darwin.sh` (the `[target.aarch64-apple-darwin.*]` keys of `tools/darwin-check.toml` renamed to
+  `aarch64-unknown-linux-gnu`, cfg `aarch64_unknown_linux_gnu`, `CC_aarch64_unknown_linux_gnu=clang` with
+  `--target=aarch64-linux-gnu -ffreestanding`, and the bundled SQLCipher bindings copied into `libsqlite3-sys`'s
+  `OUT_DIR`): both exit 0 with the fix, the first fails without it.

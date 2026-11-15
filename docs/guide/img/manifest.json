@@ -172,7 +172,7 @@
     "src": "docs/design/screens/60_update_ready.png"
   },
   "61_update_auto.png": {
-    "sha256": "6f869e357e8e7910cbdd1a1e4758bf0339e2bfd3fcaf8382cf58bc6f74ec3440",
+    "sha256": "6acd8b53e9922ba19a5b1ad9d13f5b763c179d9c823df862766628aceb81260e",
     "src": "docs/design/screens/61_update_auto.png"
   },
   "62_file_rename.png": {

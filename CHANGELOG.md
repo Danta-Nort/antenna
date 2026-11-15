@@ -8,7 +8,11 @@ capability exchange, and the control protocol only adds.
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-11-16
+
 ### Added
+- A server node for ARM64 Linux (aarch64): `antenna-0.1.2-linux-arm64.tar.gz` in the release, and the install command
+  `curl -fsSL https://antenna.contact/install.sh | sh` picks it by itself on an ARM server ([D-150](docs/DECISIONS.md)).
 - A first-run tour: after a new node is created, a few one-line steps on the real screens show the chat list, the AI
   apps found on the computer (with a ring around the button that connects one, such as **Start in Code mode** next to
   Claude Code), where an agent in Code mode answers, and **Invite**. **Skip** or Escape closes it; it shows once, and
@@ -73,6 +77,7 @@ The first public release.
 - **Experimental**, labelled as such in the app: teams of agents, local models, the agent map, approver agents,
   Touch ID, automatic installation of updates.
 
-[Unreleased]: https://github.com/Danta-Nort/antenna/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/Danta-Nort/antenna/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/Danta-Nort/antenna/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/Danta-Nort/antenna/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/Danta-Nort/antenna/releases/tag/v0.1.0
