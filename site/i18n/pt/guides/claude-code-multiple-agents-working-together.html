@@ -6,17 +6,17 @@
 
 <h2>Como uma equipe funciona</h2>
 <ol>
-  <li><strong>Você cria a equipe</strong> em <strong>Teams → New team</strong>: a pasta do projeto, o líder (um dos seus agentes, um modelo local ou você mesmo), o orçamento de trabalhadores e as regras: se os trabalhadores podem rodar comandos, quais <strong>Check commands</strong> (comandos de verificação) uma tarefa pode indicar (<code>cargo test</code>, <code>npm test</code>) e quais registros de pacotes essas verificações podem acessar.</li>
+  <li><strong>Você cria a equipe</strong> em <strong>Equipes → Nova equipe</strong>: a pasta do projeto, o líder (um dos seus agentes, um modelo local ou você mesmo), o orçamento de trabalhadores e as regras: se os trabalhadores podem rodar comandos, quais <strong>Comandos de verificação</strong> uma tarefa pode indicar (<code>cargo test</code>, <code>npm test</code>) e quais registros de pacotes essas verificações podem acessar.</li>
   <li><strong>Você passa o objetivo ao líder</strong>, no terminal dele: “Divida a funcionalidade de login em tarefas pequenas para dois programadores.”</li>
   <li><strong>O líder planeja e monta o time.</strong> Ele escreve as tarefas, inicia trabalhadores como <code>web.coder-1</code> dentro do orçamento e as atribui.</li>
   <li><strong>Os trabalhadores programam em paralelo.</strong> Cada um recebe uma cópia nova do projeto no branch da equipe, lê só a própria tarefa, trabalha e entrega, ou faz uma pergunta ao líder quando trava.</li>
   <li><strong>O Antenna confere cada resultado</strong> rodando o comando de verificação da tarefa numa sandbox separada, sem tokens e sem rede além dos registros que você indicou. Uma verificação que falha volta sozinha para o trabalhador, até um limite, antes de o líder decidir.</li>
   <li><strong>O líder revisa:</strong> aceita ou devolve com comentários. O trabalho aceito se acumula num branch da equipe, <code>antenna/web</code>.</li>
-  <li><strong>Você aplica.</strong> <strong>Review and apply</strong> (revisar e aplicar) mostra o que será mesclado no seu branch; com a sua senha, o merge é feito, como fast-forward. Sem ela, nada sai do lugar.</li>
+  <li><strong>Você aplica.</strong> <strong>Revisar e aplicar</strong> mostra o que será mesclado no seu branch; com a sua senha, o merge é feito, como fast-forward. Sem ela, nada sai do lugar.</li>
 </ol>
 
 <h2>O que você vê</h2>
-<p>O quadro da equipe mostra cada tarefa por estado, de Open e Working a In review, Blocked, Accepted e Applied, com a saída ao vivo de cada trabalhador, o que o resultado dele muda, a saída da verificação e os tokens usados. Você pode fazer tudo o que o líder faz: responder à pergunta de um trabalhador, pedir alterações, cancelar uma tarefa ou parar um trabalhador. Quando o líder roda no Code mode do Antenna, ele é acordado sempre que um trabalhador entrega algo ou faz uma pergunta, então a equipe continua andando enquanto você está fora.</p>
+<p>O quadro da equipe mostra cada tarefa por estado, de “Abertas” e “Em andamento” a “Em revisão”, “Bloqueadas”, “Aceitas” e “Aplicadas”, com a saída ao vivo de cada trabalhador, o que o resultado dele muda, a saída da verificação e os tokens usados. Você pode fazer tudo o que o líder faz: responder à pergunta de um trabalhador, pedir alterações, cancelar uma tarefa ou parar um trabalhador. Quando o líder roda no modo Código do Antenna, ele é acordado sempre que um trabalhador entrega algo ou faz uma pergunta, então a equipe continua andando enquanto você está fora.</p>
 
 <h2>O que mantém o projeto seguro</h2>
 <ul>

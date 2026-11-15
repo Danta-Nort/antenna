@@ -9,7 +9,7 @@
 </ul>
 
 <h2>1. Empareja las dos computadoras</h2>
-<p>En tu portátil: <strong>New contact → Invite</strong> (nuevo contacto → invitar), marca <strong>This is my own computer (∞)</strong>, crea el enlace y ábrelo en la otra computadora (en un servidor, <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>). Introduce en una el código que muestra la otra. Ahora cada lado trata al otro como una computadora tuya. La versión paso a paso con capturas está en <a href="/guides/run-claude-code-on-a-vps">Claude Code en un VPS</a>; con Codex es igual.</p>
+<p>En tu portátil: <strong>Contacto nuevo → Invitar</strong>, marca <strong>Es mi propia computadora (∞)</strong>, crea el enlace y ábrelo en la otra computadora (en un servidor, <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>). Introduce en una el código que muestra la otra. Ahora cada lado trata al otro como una computadora tuya. La versión paso a paso con capturas está en <a href="/guides/run-claude-code-on-a-vps">Claude Code en un VPS</a>; con Codex es igual.</p>
 
 <h2>2. Ponle nombre a la sesión de Codex</h2>
 <p>En la computadora donde se ejecuta Codex, dentro de la carpeta del proyecto:</p>
@@ -24,7 +24,7 @@ antenna session attach api-codex</code></pre>
 
 <h2>4. Escríbele desde tu portátil</h2>
 <p>Abre el chat <code>api-codex</code> y escribe: “Ejecuta las pruebas, arregla lo que falle y dime qué has cambiado”. Cuando Codex está inactivo en su prompt, Antenna escribe una línea predefinida que le dice que lea su bandeja de entrada. Nunca escribe tu texto en la terminal y nunca escribe encima de una pregunta que Codex te esté haciendo. Codex lee el mensaje a través de Antenna, trabaja y responde en el chat. <em>Experimental.</em></p>
-<p>¿Necesitas que deje lo que está haciendo? Activa <strong>Urgent: interrupt now</strong> (urgente: interrumpir ya) antes de enviar. Antenna pulsa Esc una vez para terminar el turno en curso y luego despierta a Codex para tu mensaje. Para detener el agente y todo lo que haya lanzado, abre la ficha de la otra computadora en <strong>My devices</strong> en tu portátil y pulsa <strong>Stop agent and its processes…</strong> junto a <code>api-codex</code>.</p>
+<p>¿Necesitas que deje lo que está haciendo? Activa <strong>Urgente: interrumpir ahora</strong> antes de enviar. Antenna pulsa Esc una vez para terminar el turno en curso y luego despierta a Codex para tu mensaje. Para detener el agente y todo lo que haya lanzado, abre la ficha de la otra computadora en <strong>Mis dispositivos</strong> en tu portátil y pulsa <strong>Detener el agente y sus procesos…</strong> junto a <code>api-codex</code>.</p>
 
 <h2>En un escritorio: modo Code</h2>
 <p>Si Codex se ejecuta en un Mac o en un escritorio Linux con la app Antenna, puedes saltarte los pasos de terminal. En el modo Code, pulsa <code>+</code> en el panel de agentes, elige Codex y la carpeta de trabajo, y Codex se ejecuta en una pestaña dentro de la ventana y se despierta igual. Su chat está disponible desde tus otras computadoras como el de cualquier otro agente.</p>

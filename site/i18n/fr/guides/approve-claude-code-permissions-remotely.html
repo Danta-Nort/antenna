@@ -1,35 +1,35 @@
 <!--guide {"title": "Approuver les permissions de Claude Code à distance — Antenna", "h1": "Approuver les demandes de Claude Code depuis un autre ordinateur", "description": "Claude Code, sur un serveur ou un autre PC, attend votre accord : Antenna affiche la demande sur tous vos ordinateurs, validez-la par mot de passe ou Touch ID.", "summary": "Les demandes d’approbation de Claude Code sur un autre ordinateur, auxquelles vous répondez depuis l’ordinateur où vous êtes.", "source": "2026-11-15"}-->
-<p class="lead">Lancez Claude Code via Antenna, en mode Code dans la fenêtre ou avec <code>antenna session</code> sur un serveur, et le daemon d’Antenna vérifie chaque outil qu’il utilise et chaque message qu’il envoie. Quand une étape a besoin de vous, elle devient une demande d’approbation qui s’affiche, avec une notification, sur chacun des ordinateurs que vous avez associés comme étant les vôtres, dans <strong>My devices</strong> (mes appareils). Approuvez-la là avec le mot de passe de cet ordinateur ou avec Touch ID : l’ordinateur où tourne Claude Code vérifie votre réponse, exécute l’étape, et Claude Code poursuit.</p>
+<p class="lead">Lancez Claude Code via Antenna, en mode Code dans la fenêtre ou avec <code>antenna session</code> sur un serveur, et le daemon d’Antenna vérifie chaque outil qu’il utilise et chaque message qu’il envoie. Quand une étape a besoin de vous, elle devient une demande d’approbation qui s’affiche, avec une notification, sur chacun des ordinateurs que vous avez associés comme étant les vôtres, dans <strong>Mes appareils</strong>. Approuvez-la là avec le mot de passe de cet ordinateur ou avec Touch ID : l’ordinateur où tourne Claude Code vérifie votre réponse, exécute l’étape, et Claude Code poursuit.</p>
 
 <h2>Ce qui vous parvient</h2>
 <ul>
   <li><strong>Les actions après la lecture du message d’un contact.</strong> Dès que Claude Code a lu un message d’un collègue, le niveau de confiance de ce collègue fixe ce qu’il peut faire : au niveau 4, chaque commande attend votre accord ; aux niveaux 2 et 3, c’est chaque modification qui l’attend, et les commandes sont refusées.</li>
   <li><strong>Les changements de sa propre configuration.</strong> Après avoir lu le message de n’importe quel contact, même celui de votre propre portable, les modifications de <code>CLAUDE.md</code>, de <code>.claude/</code>, des profils du shell, des clés et des fichiers de build comme <code>package.json</code> attendent votre accord.</li>
   <li><strong>Les messages qui feraient sortir vos données.</strong> Dès qu’il a lu des fichiers de votre projet, chaque message vers un contact en dessous de ∞ attend, de même que tout message vers un tel contact qui semble contenir une clé, un mot de passe ou un jeton. Dès qu’il a lu une conversation, un message vers une autre attend aussi.</li>
-  <li><strong>Les questions.</strong> <em>Expérimental.</em> Les questions d’un agent s’affichent sur l’ordinateur où il tourne, sous <strong>Questions from your agents</strong> (questions de vos agents). Pour les recevoir plutôt sur votre portable, lancez <code>antenna agent escalate api-dev --to mac</code> sur cet ordinateur : chaque question arrive alors dans la conversation de l’agent, et vous y répondez dans la conversation.</li>
+  <li><strong>Les questions.</strong> <em>Expérimental.</em> Les questions d’un agent s’affichent sur l’ordinateur où il tourne, sous <strong>Questions de vos agents</strong>. Pour les recevoir plutôt sur votre portable, lancez <code>antenna agent escalate api-dev --to mac</code> sur cet ordinateur : chaque question arrive alors dans la conversation de l’agent, et vous y répondez dans la conversation.</li>
 </ul>
 <p>L’invite de permission de Claude Code lui-même (« Do you want to proceed? ») reste dans son terminal : Antenna n’y tape jamais rien. Autorisez dans les réglages de Claude Code les outils dont vous vous servez couramment, ou répondez-y avec <code>antenna session attach</code>.</p>
 
 <h2>Mise en place</h2>
 <ol>
-  <li><a href="/#download">Installez Antenna</a> sur les deux ordinateurs et associez-les une fois en cochant <strong>This is my own computer (∞)</strong> (c’est mon propre ordinateur), comme dans <a href="/guides/run-claude-code-on-a-vps">Claude Code sur un VPS</a>.</li>
-  <li>Lancez Claude Code via Antenna. Sur un poste de bureau : <strong>Agents → AI apps → Start in Code mode</strong>. Sur un serveur :
+  <li><a href="/#download">Installez Antenna</a> sur les deux ordinateurs et associez-les une fois en cochant <strong>C’est mon propre ordinateur (∞)</strong>, comme dans <a href="/guides/run-claude-code-on-a-vps">Claude Code sur un VPS</a>.</li>
+  <li>Lancez Claude Code via Antenna. Sur un poste de bureau : <strong>Agents → Apps IA → Lancer en mode Code</strong>. Sur un serveur :
 <pre><code>cd ~/projects/api
 antenna connect claude-code --agent api-dev --links mac --hello mac
 antenna session start api-dev --dir ~/projects/api</code></pre></li>
-  <li>Sur l’ordinateur où tourne Claude Code, acceptez les réponses de celui depuis lequel vous approuverez : <strong>My devices</strong> → la fiche de cet ordinateur → <strong>Approvals</strong> → <strong>Accept approvals signed with …</strong>, avec votre mot de passe. Sur un serveur : <code>antenna devices confirm mac</code>.</li>
+  <li>Sur l’ordinateur où tourne Claude Code, acceptez les réponses de celui depuis lequel vous approuverez : <strong>Mes appareils</strong> → la fiche de cet ordinateur → <strong>Approbations</strong> → <strong>Accepter les approbations signées avec …</strong>, avec votre mot de passe. Sur un serveur : <code>antenna devices confirm mac</code>.</li>
 </ol>
 
 <h2>Répondre depuis n’importe quel ordinateur</h2>
-<p>La demande s’affiche sur la fiche de l’ordinateur qui la pose, dans <strong>My devices</strong> (<em>expérimental</em>), avec une notification comme « Antenna: approval needed on Mac mini ». La fiche indique quel agent demande, quoi et pourquoi, et cite son texte, sauf si ce texte contient un secret : celui-ci ne quitte jamais l’ordinateur qui a posé la demande. Cliquez sur <strong>Approve with Touch ID</strong> sur un Mac (<em>expérimental</em>), sur <strong>Approve with password</strong> avec le mot de passe de l’ordinateur devant lequel vous êtes, ou sur <strong>Deny</strong> (refuser).</p>
-<p>L’ordinateur qui a posé la demande vérifie la signature au regard des clés que vous y avez acceptées, de son propre défi à usage unique et de cette demande précise, puis l’exécute lui-même, une seule fois. Sur cet ordinateur lui-même, la demande se trouve dans <strong>Approval requests</strong>, ou dans un terminal avec <code>antenna approvals</code> et <code>antenna approve &lt;id&gt;</code>.</p>
+<p>La demande s’affiche sur la fiche de l’ordinateur qui la pose, dans <strong>Mes appareils</strong> (<em>expérimental</em>), avec une notification comme « Antenna : approbation requise sur Mac mini ». La fiche indique quel agent demande, quoi et pourquoi, et cite son texte, sauf si ce texte contient un secret : celui-ci ne quitte jamais l’ordinateur qui a posé la demande. Cliquez sur <strong>Approuver avec Touch ID</strong> sur un Mac (<em>expérimental</em>), sur <strong>Approuver avec le mot de passe</strong>, celui de l’ordinateur devant lequel vous êtes, ou sur <strong>Refuser</strong>.</p>
+<p>L’ordinateur qui a posé la demande vérifie la signature au regard des clés que vous y avez acceptées, de son propre défi à usage unique et de cette demande précise, puis l’exécute lui-même, une seule fois. Sur cet ordinateur lui-même, la demande se trouve dans <strong>Demandes d’approbation</strong>, ou dans un terminal avec <code>antenna approvals</code> et <code>antenna approve &lt;id&gt;</code>.</p>
 <p>Claude Code attend jusqu’à 50 secondes, et une étape approuvée dans ce délai s’exécute aussitôt. Au-delà, il passe à autre chose ; quand vous approuvez, Antenna tape « Approved — continue. » dans son invite et il relance l’étape.</p>
 
 <h2>Si personne ne répond</h2>
-<p>Une demande se ferme au bout de 10 minutes : rien ne s’exécute, rien n’est envoyé, et Claude Code apprend que personne ne l’a approuvée. Une notification vous prévient peu avant. Après <strong>Deny</strong>, qui ne demande pas de mot de passe, Claude Code apprend que vous avez dit non.</p>
+<p>Une demande se ferme au bout de 10 minutes : rien ne s’exécute, rien n’est envoyé, et Claude Code apprend que personne ne l’a approuvée. Une notification vous prévient peu avant. Après <strong>Refuser</strong>, qui ne demande pas de mot de passe, Claude Code apprend que vous avez dit non.</p>
 
 <h2>Un agent qui approuve à votre place</h2>
-<p><em>Expérimental.</em> <strong>Can approve for…</strong> (peut approuver pour…) dans <strong>Agents</strong> permet à un agent de confiance de répondre aux demandes de vos autres agents concernant des messages et des fichiers, et sa réponse ne compte que si tout ce que touche la demande est au niveau ∞. Les commandes et les modifications vous reviennent toujours.</p>
+<p><em>Expérimental.</em> <strong>Peut approuver pour…</strong> dans <strong>Agents</strong> permet à un agent de confiance de répondre aux demandes de vos autres agents concernant des messages et des fichiers, et sa réponse ne compte que si tout ce que touche la demande est au niveau ∞. Les commandes et les modifications vous reviennent toujours.</p>
 
 <h2>Questions</h2>
 <details>
@@ -38,7 +38,7 @@ antenna session start api-dev --dir ~/projects/api</code></pre></li>
 </details>
 <details>
   <summary>N’importe quel ordinateur peut-il approuver ?</summary>
-  <p>Non. Seulement un ordinateur que vous avez associé comme le vôtre et dont vous avez accepté les clés, avec le mot de passe, sur l’ordinateur qui pose la demande. Si vous en perdez un, utilisez <strong>Revoke this computer</strong> (révoquer cet ordinateur) sur chacun des autres.</p>
+  <p>Non. Seulement un ordinateur que vous avez associé comme le vôtre et dont vous avez accepté les clés, avec le mot de passe, sur l’ordinateur qui pose la demande. Si vous en perdez un, utilisez <strong>Révoquer cet ordinateur</strong> sur chacun des autres.</p>
 </details>
 <details>
   <summary>Puis-je approuver depuis mon téléphone ?</summary>

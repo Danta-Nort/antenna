@@ -107,7 +107,7 @@
      "name": "Consigo ver o que a sessão está fazendo?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "O chat mostra as respostas dela, e o mapa de agentes mostra quem falou com quem. Em My devices, você também vê os agentes dos seus outros computadores e pode parar um deles junto com tudo o que ele iniciou."
+      "text": "O chat mostra as respostas dela, e o mapa de agentes mostra quem falou com quem. Em Meus dispositivos, você também vê os agentes dos seus outros computadores e pode parar um deles junto com tudo o que ele iniciou."
      }
     },
     {
@@ -170,7 +170,7 @@
     <nav class="crumbs" aria-label="Trilha de navegação"><a href="/pt/">Antenna</a> <span aria-hidden="true">›</span> <a href="/pt/guides/">Guias</a></nav>
     <p class="eyebrow">Atualizado em <time datetime="2026-11-14">14 de novembro de 2026</time></p>
     <h1>Envie uma mensagem ao Claude Code em outro computador</h1>
-    <p class="lead">Instale o Antenna nos dois computadores, pareie-os uma vez como <strong>∞ · My computer</strong> e conecte a sessão do Claude Code de lá ao Antenna com um nome próprio. A partir daí, você escreve para essa sessão do seu Mac como para um contato num chat, ou deixa o seu Claude Code local escrever para ela. Se você iniciar a sessão pelo Antenna, ela é acordada quando fica parada, e uma mensagem urgente pode interrompê-la no meio do turno. Duas sessões no mesmo computador? Nesse caso, ligue-as no mapa de agentes: <a href="/pt/guides/claude-code-and-codex-talk-to-each-other">dois agentes conversando</a>.</p>
+    <p class="lead">Instale o Antenna nos dois computadores, pareie-os uma vez como <strong>∞ · Meu computador</strong> e conecte a sessão do Claude Code de lá ao Antenna com um nome próprio. A partir daí, você escreve para essa sessão do seu Mac como para um contato num chat, ou deixa o seu Claude Code local escrever para ela. Se você iniciar a sessão pelo Antenna, ela é acordada quando fica parada, e uma mensagem urgente pode interrompê-la no meio do turno. Duas sessões no mesmo computador? Nesse caso, ligue-as no mapa de agentes: <a href="/pt/guides/claude-code-and-codex-talk-to-each-other">dois agentes conversando</a>.</p>
 
     <h2>Quando você precisa disso</h2>
     <ul>
@@ -190,10 +190,10 @@
     <h2>3. Mantenha a sessão acordada</h2>
     <p>O Claude Code só lê o Antenna enquanto está trabalhando em alguma coisa. Para que ele pegue uma mensagem quando está parado num prompt vazio, inicie-o pelo Antenna:</p>
     <pre><code>antenna session start api-dev --dir ~/projects/api</code></pre>
-    <p>(Para isso, o servidor precisa do tmux.) O Antenna então digita uma linha curta no prompt vazio quando chega uma mensagem, e a sessão lê a mensagem como dado e segue com o trabalho. Num desktop, o Code mode do Antenna faz o mesmo numa aba de terminal dentro da janela. <em>Experimental.</em></p>
+    <p>(Para isso, o servidor precisa do tmux.) O Antenna então digita uma linha curta no prompt vazio quando chega uma mensagem, e a sessão lê a mensagem como dado e segue com o trabalho. Num desktop, o modo Código do Antenna faz o mesmo numa aba de terminal dentro da janela. <em>Experimental.</em></p>
 
     <h2>4. Escreva para ela</h2>
-    <p>Abra o chat <code>api-dev</code> no seu Mac e escreva, como escreveria para uma pessoa. Ou peça ao seu Claude Code local: “Peça ao <code>api-dev</code> para rodar os testes da migration e me contar o resultado.” Quando não dá para esperar, ative <strong>Urgent: interrupt now</strong> (o botão de raio ao lado de Send) antes de enviar (pelo terminal, <code>antenna send --urgent</code>): numa sessão que o Antenna roda, no Code mode ou com <code>antenna session start</code>, o Antenna interrompe uma vez o turno em andamento, como você faria apertando Esc, e a sessão lê a sua mensagem. Ele nunca aperta Esc por cima de uma pergunta ou de um pedido de permissão aberto no terminal. <em>Experimental.</em></p>
+    <p>Abra o chat <code>api-dev</code> no seu Mac e escreva, como escreveria para uma pessoa. Ou peça ao seu Claude Code local: “Peça ao <code>api-dev</code> para rodar os testes da migration e me contar o resultado.” Quando não dá para esperar, ative <strong>Urgente: interromper agora</strong> (o botão de raio ao lado de Enviar) antes de enviar (pelo terminal, <code>antenna send --urgent</code>): numa sessão que o Antenna roda, no modo Código ou com <code>antenna session start</code>, o Antenna interrompe uma vez o turno em andamento, como você faria apertando Esc, e a sessão lê a sua mensagem. Ele nunca aperta Esc por cima de uma pergunta ou de um pedido de permissão aberto no terminal. <em>Experimental.</em></p>
 
     <h2>O que trafega e o que não trafega</h2>
     <p>A mensagem é criptografada em um computador e descriptografada no outro. Nenhum terminal é compartilhado, e nenhuma porta precisa ser aberta ou redirecionada: a outra sessão só recebe mensagens, e o próprio Antenna dela decide o que ela pode fazer com elas. O token do agente fica no computador em que foi criado.</p>
@@ -205,7 +205,7 @@
     </details>
     <details>
       <summary>Consigo ver o que a sessão está fazendo?</summary>
-      <p>O chat mostra as respostas dela, e o mapa de agentes mostra quem falou com quem. Em <strong>My devices</strong>, você também vê os agentes dos seus outros computadores e pode parar um deles junto com tudo o que ele iniciou.</p>
+      <p>O chat mostra as respostas dela, e o mapa de agentes mostra quem falou com quem. Em <strong>Meus dispositivos</strong>, você também vê os agentes dos seus outros computadores e pode parar um deles junto com tudo o que ele iniciou.</p>
     </details>
     <details>
       <summary>O servidor precisa de um endereço público?</summary>

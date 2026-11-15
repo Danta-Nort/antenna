@@ -9,7 +9,7 @@
 </ul>
 
 <h2>1. 2 台のコンピューターをペアリングする</h2>
-<p>ノート PC で <strong>New contact → Invite</strong> を開き、<strong>This is my own computer (∞)</strong> にチェックを入れてリンクを作り、もう一方のコンピューターで開きます（サーバーでは <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>）。片方に表示されたコードをもう片方に入力します。これで両者は互いを自分のコンピューターとして扱います。スクリーンショット付きの詳しい手順は <a href="/guides/run-claude-code-on-a-vps">VPS で Claude Code を動かす</a>にあり、Codex でも同じです。</p>
+<p>ノート PC で <strong>新しい連絡先 → 招待</strong> を開き、<strong>これは自分のコンピューターです（∞）</strong> にチェックを入れてリンクを作り、もう一方のコンピューターで開きます（サーバーでは <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>）。片方に表示されたコードをもう片方に入力します。これで両者は互いを自分のコンピューターとして扱います。スクリーンショット付きの詳しい手順は <a href="/guides/run-claude-code-on-a-vps">VPS で Claude Code を動かす</a>にあり、Codex でも同じです。</p>
 
 <h2>2. Codex セッションに名前を付ける</h2>
 <p>Codex を動かすコンピューターの、プロジェクトフォルダーで：</p>
@@ -24,7 +24,7 @@ antenna session attach api-codex</code></pre>
 
 <h2>4. ノート PC からメッセージを送る</h2>
 <p><code>api-codex</code> のチャットを開いて書きます：「テストを実行して、失敗したものを直して、何を変えたか教えて」。Codex がプロンプトで待機していると、Antenna が受信箱を読むよう伝える組み込みの 1 行を入力します。あなたのテキストをターミナルに入力することはなく、Codex が質問している最中に入力することもありません。Codex は Antenna を通じてメッセージを読み、作業して、チャットで返信します。<em>実験的機能です。</em></p>
-<p>今やっていることを止めさせたいときは、送信前に <strong>Urgent: interrupt now</strong>（緊急：今すぐ中断）をオンにします。Antenna が Esc を一度押して実行中のターンを終わらせ、それからあなたのメッセージのために Codex を起こします。エージェントとそれが起動したすべてのものを止めるには、ノート PC の <strong>My devices</strong> でもう一方のコンピューターのカードを開き、<strong>Stop agent and its processes…</strong>（<code>api-codex</code> の横にあります）を押します。</p>
+<p>今やっていることを止めさせたいときは、送信前に <strong>緊急: 今すぐ中断</strong>をオンにします。Antenna が Esc を一度押して実行中のターンを終わらせ、それからあなたのメッセージのために Codex を起こします。エージェントとそれが起動したすべてのものを止めるには、ノート PC の <strong>自分のデバイス</strong> でもう一方のコンピューターのカードを開き、<strong>エージェントとそのプロセスを停止…</strong>（<code>api-codex</code> の横にあります）を押します。</p>
 
 <h2>デスクトップなら Code モードで</h2>
 <p>Codex を Antenna アプリの入った Mac や Linux のデスクトップで動かすなら、ターミナルでの手順は省けます。Code モードでエージェントパネルの <code>+</code> を押し、Codex と作業フォルダーを選ぶと、Codex はウィンドウ内のタブで動き、同じように起こされます。そのチャットには、ほかのエージェントと同じく、あなたのほかのコンピューターからもアクセスできます。</p>

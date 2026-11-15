@@ -10,10 +10,10 @@
 
 <h2>Le configurer dans la fenêtre</h2>
 <ol>
-  <li>Sur l’ordinateur où l’agent doit tourner, ouvrez <strong>Agents → Set up for a contact…</strong> (ou, dans une conversation, <strong>Agent replies → Set up…</strong> sur la fiche du contact).</li>
+  <li>Sur l’ordinateur où l’agent doit tourner, ouvrez <strong>Agents → Configurer pour un contact…</strong> (ou, dans une conversation, <strong>Réponses de l’agent → Configurer…</strong> sur la fiche du contact).</li>
   <li>Choisissez le contact et le programme : <strong>Claude Code</strong>, <strong>Codex</strong> ou votre propre commande.</li>
-  <li>Vous pouvez coller un jeton de connexion longue durée (obtenu avec <code>claude setup-token</code>) dans <strong>Value (optional)</strong>. Il est transmis une seule fois à votre nœud et conservé dans sa base de données chiffrée. Sur Mac, c’est la méthode fiable, car le bac à sable ne peut pas ouvrir le trousseau.</li>
-  <li>Confirmez avec votre mot de passe de propriétaire. La règle, sa dernière exécution et le <strong>Run log</strong> (journal des exécutions) apparaissent dans <strong>Agents</strong>.</li>
+  <li>Vous pouvez coller un jeton de connexion longue durée (obtenu avec <code>claude setup-token</code>) dans <strong>Valeur (facultative)</strong>. Il est transmis une seule fois à votre nœud et conservé dans sa base de données chiffrée. Sur Mac, c’est la méthode fiable, car le bac à sable ne peut pas ouvrir le trousseau.</li>
+  <li>Confirmez avec votre mot de passe de propriétaire. La règle, sa dernière exécution et le <strong>Journal des exécutions</strong> apparaissent dans <strong>Agents</strong>.</li>
 </ol>
 <p>Depuis un terminal, une seule ligne suffit : <code>antenna wake set &lt;contact&gt; --cmd "claude -p --output-format stream-json"</code>. <code>antenna wake list</code> affiche les règles et les exécutions récentes ; <code>antenna wake off &lt;contact&gt;</code> désactive la règle.</p>
 

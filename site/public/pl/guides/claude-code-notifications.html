@@ -99,7 +99,7 @@
      "name": "Czy powiadomienie pokazuje, co napisał Claude Code?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Nie. Zawiera tylko „New message in” i nazwę czatu, bo powiadomienie może się pojawić na zablokowanym ekranie. Żeby przeczytać raport, otwórz czat."
+      "text": "Nie. Zawiera tylko „Nowa wiadomość w:” i nazwę czatu, bo powiadomienie może się pojawić na zablokowanym ekranie. Żeby przeczytać raport, otwórz czat."
      }
     },
     {
@@ -162,24 +162,24 @@
     <nav class="crumbs" aria-label="Ścieżka nawigacji"><a href="/pl/">Antenna</a> <span aria-hidden="true">›</span> <a href="/pl/guides/">Poradniki</a></nav>
     <p class="eyebrow">Zaktualizowano <time datetime="2026-11-15">15 listopada 2026</time></p>
     <h1>Powiadomienie, gdy Claude Code skończy pracę na serwerze albo innym komputerze</h1>
-    <p class="lead">Daj Claude Code zadanie w czacie Antenny ze swojego laptopa, a gdy skończy, odeśle wynik do tego samego czatu: instrukcje Antenny każą podłączonemu agentowi odsyłać wyniki kontaktowi, który zlecił zadanie. Laptop pokaże wtedy powiadomienie „New message in server · api-dev” (nowa wiadomość), o ile okno Antenny nie jest na wierzchu. Prośby o zgodę też przychodzą z powiadomieniem, więc praca zatrzymana w połowie nie czeka niezauważona. Sama Antenna nie śledzi tur Claude Code: raport to własna wiadomość Claude Code.</p>
+    <p class="lead">Daj Claude Code zadanie w czacie Antenny ze swojego laptopa, a gdy skończy, odeśle wynik do tego samego czatu: instrukcje Antenny każą podłączonemu agentowi odsyłać wyniki kontaktowi, który zlecił zadanie. Laptop pokaże wtedy powiadomienie „Nowa wiadomość w: server · api-dev”, o ile okno Antenny nie jest na wierzchu. Prośby o zgodę też przychodzą z powiadomieniem, więc praca zatrzymana w połowie nie czeka niezauważona. Sama Antenna nie śledzi tur Claude Code: raport to własna wiadomość Claude Code.</p>
 
     <h2>O czym dostajesz powiadomienia</h2>
     <ul>
       <li><strong>Wiadomość od Claude Code do ciebie.</strong> Powiadomienie podaje nazwę czatu, nigdy treść, najwyżej raz na 10 sekund dla jednego czatu.</li>
-      <li><strong>Prośba o zgodę.</strong> Krok, który wymaga twojej decyzji, pojawia się jako „Antenna: approval needed on server”, z nazwą agenta, tym, co chce zrobić, i pozostałym czasem („expires in 9 min”, wygasa za 9 min), ale nigdy z treścią prośby. Drugie powiadomienie przychodzi około dwóch minut przed zamknięciem prośby; prośba zamyka się po 10 minutach. Prośby z innego komputera docierają do ciebie przez <strong>My devices</strong> (moje urządzenia; <em>funkcja eksperymentalna</em>).</li>
-      <li><strong>Pytanie.</strong> <em>Funkcja eksperymentalna.</em> Pytanie agenta pojawia się jako powiadomienie na komputerze, na którym agent działa: „A question from your agent” (pytanie od twojego agenta). W przypadku serwera uruchom na nim <code>antenna agent escalate api-dev --to mac</code>, a jego pytania będą zamiast tego trafiać do czatu agenta na twoim laptopie.</li>
+      <li><strong>Prośba o zgodę.</strong> Krok, który wymaga twojej decyzji, pojawia się jako „Antenna: potrzebna zgoda na server”, z nazwą agenta, tym, co chce zrobić, i pozostałym czasem („wygasa za 9 min”), ale nigdy z treścią prośby. Drugie powiadomienie przychodzi około dwóch minut przed zamknięciem prośby; prośba zamyka się po 10 minutach. Prośby z innego komputera docierają do ciebie przez sekcję <strong>Moje urządzenia</strong> (<em>funkcja eksperymentalna</em>).</li>
+      <li><strong>Pytanie.</strong> <em>Funkcja eksperymentalna.</em> Pytanie agenta pojawia się jako powiadomienie na komputerze, na którym agent działa: „Pytanie od twojego agenta”. W przypadku serwera uruchom na nim <code>antenna agent escalate api-dev --to mac</code>, a jego pytania będą zamiast tego trafiać do czatu agenta na twoim laptopie.</li>
     </ul>
     <p>Powiadomienia działają na macOS i na tych pulpitach Linuksa, które pokazują powiadomienia. Antenna musi być otwarta na laptopie; gdy jej okno jest na wierzchu, wystarczą liczniki nieprzeczytanych na liście czatów.</p>
 
     <h2>Konfiguracja</h2>
     <ol>
-      <li><a href="/pl/#download">Zainstaluj Antennę</a> na obu komputerach i połącz je raz z zaznaczonym <strong>This is my own computer (∞)</strong> (to mój własny komputer). Stronę serwera opisuje poradnik <a href="/pl/guides/run-claude-code-on-a-vps">Claude Code na VPS</a>.</li>
+      <li><a href="/pl/#download">Zainstaluj Antennę</a> na obu komputerach i połącz je raz z zaznaczonym polem <strong>To mój własny komputer (∞)</strong>. Stronę serwera opisuje poradnik <a href="/pl/guides/run-claude-code-on-a-vps">Claude Code na VPS</a>.</li>
       <li>Uruchom Claude Code przez Antennę. Na serwerze:
     <pre><code>cd ~/projects/api
     antenna connect claude-code --agent api-dev --links mac --hello mac
     antenna session start api-dev --dir ~/projects/api</code></pre>
-      Na drugim desktopie: <strong>Agents → AI apps → Start in Code mode</strong>.</li>
+      Na drugim desktopie: <strong>Agenci → Aplikacje AI → Uruchom w trybie Code mode</strong>.</li>
       <li>Na laptopie nie trzeba niczego ustawiać. Czat z agentem od początku powiadamia o wiadomościach skierowanych do ciebie i o prośbach o zgodę.</li>
     </ol>
 
@@ -189,13 +189,13 @@
     <p>Raport przychodzi wtedy, gdy Claude Code uzna, że skończył, jak przy każdej instrukcji, którą wykonuje. Jeśli zatrzyma się na własnym pytaniu o zgodę w terminalu („Do you want to proceed?”), Antenna tego nie widzi i żadne powiadomienie nie przyjdzie: zezwól w ustawieniach Claude Code na narzędzia, których używasz na co dzień.</p>
 
     <h2>Wybierz, które czaty powiadamiają</h2>
-    <p>Otwórz <strong>⋮</strong> w wierszu czatu albo kliknij go prawym przyciskiem, potem <strong>Notifications</strong> (powiadomienia):</p>
+    <p>Otwórz <strong>⋮</strong> w wierszu czatu albo kliknij go prawym przyciskiem, potem <strong>Powiadomienia</strong>:</p>
     <ul>
-      <li><strong>All messages</strong> (wszystkie wiadomości): każda nowa wiadomość w tym czacie (domyślnie dla osoby).</li>
-      <li><strong>Only when it asks for me</strong> (tylko gdy zwraca się do mnie): wiadomości skierowane do ciebie i prośby o zgodę (domyślnie dla agenta).</li>
-      <li><strong>Off</strong> (wyłączone): o prośbach o zgodę i tak dostaniesz powiadomienie.</li>
+      <li><strong>Wszystkie wiadomości</strong>: każda nowa wiadomość w tym czacie (domyślnie dla osoby).</li>
+      <li><strong>Tylko gdy zwraca się do mnie</strong>: wiadomości skierowane do ciebie i prośby o zgodę (domyślnie dla agenta).</li>
+      <li><strong>Wyłączone</strong>: o prośbach o zgodę i tak dostaniesz powiadomienie.</li>
     </ul>
-    <p>Gdy Claude Code raportuje nie tobie, tylko innemu z twoich agentów, te wiadomości przychodzą bez powiadomień, chyba że w tym samym menu włączysz <strong>Notify about messages between agents</strong> (powiadamiaj o wiadomościach między agentami). W terminalu: <code>antenna chats notify server --agent api-dev all</code>.</p>
+    <p>Gdy Claude Code raportuje nie tobie, tylko innemu z twoich agentów, te wiadomości przychodzą bez powiadomień, chyba że w tym samym menu włączysz <strong>Powiadamiaj o wiadomościach między agentami</strong>. W terminalu: <code>antenna chats notify server --agent api-dev all</code>.</p>
 
     <h2>Na komputerze, przy którym siedzisz</h2>
     <p>Gdy Claude Code działa w trybie Code mode na twoim własnym laptopie, Antenna powiadamia o jego prośbach o zgodę i pytaniach, kiedy okno jest w tle, ale nie o końcu tury: agent nie może napisać do ciebie na własnym komputerze. Do tego służą własne hooki Claude Code, które mogą uruchomić twoje polecenie, gdy Claude Code się zatrzyma.</p>
@@ -203,7 +203,7 @@
     <h2>Pytania</h2>
     <details>
       <summary>Czy powiadomienie pokazuje, co napisał Claude Code?</summary>
-      <p>Nie. Zawiera tylko „New message in” i nazwę czatu, bo powiadomienie może się pojawić na zablokowanym ekranie. Żeby przeczytać raport, otwórz czat.</p>
+      <p>Nie. Zawiera tylko „Nowa wiadomość w:” i nazwę czatu, bo powiadomienie może się pojawić na zablokowanym ekranie. Żeby przeczytać raport, otwórz czat.</p>
     </details>
     <details>
       <summary>A jeśli laptop śpi?</summary>

@@ -177,17 +177,17 @@
 
     <h2>Jak działa zespół</h2>
     <ol>
-      <li><strong>Tworzysz zespół</strong> w <strong>Teams → New team</strong>: folder projektu, agent prowadzący (jeden z twoich agentów, lokalny model albo ty), budżet pomocników i zasady: czy pomocnicy mogą uruchamiać polecenia, jakie <strong>Check commands</strong> (polecenia sprawdzające) może wskazać zadanie (<code>cargo test</code>, <code>npm test</code>) i do jakich rejestrów pakietów te sprawdzenia mogą sięgać.</li>
+      <li><strong>Tworzysz zespół</strong> w sekcji <strong>Zespoły → Nowy zespół</strong>: folder projektu, agent prowadzący (jeden z twoich agentów, lokalny model albo ty), budżet pomocników i zasady: czy pomocnicy mogą uruchamiać polecenia, jakie <strong>Polecenia sprawdzające</strong> może wskazać zadanie (<code>cargo test</code>, <code>npm test</code>) i do jakich rejestrów pakietów te sprawdzenia mogą sięgać.</li>
       <li><strong>Dajesz agentowi prowadzącemu cel</strong>, w jego własnym terminalu: „Podziel funkcję logowania na małe zadania dla dwóch programistów”.</li>
       <li><strong>Agent prowadzący planuje i kompletuje zespół.</strong> Pisze zadania, w ramach budżetu uruchamia pomocników, na przykład <code>web.coder-1</code>, i przydziela im pracę.</li>
       <li><strong>Pomocnicy kodują równolegle.</strong> Każdy dostaje świeżą kopię projektu z gałęzi zespołu, czyta tylko swoje zadanie, pracuje i oddaje wynik albo, gdy utknie, zadaje pytanie agentowi prowadzącemu.</li>
       <li><strong>Antenna sprawdza każdy wynik</strong>, uruchamiając polecenie sprawdzające zadania w osobnej piaskownicy, bez tokenów i bez sieci poza wskazanymi przez ciebie rejestrami. Wynik, który nie przejdzie sprawdzenia, sam wraca do pomocnika, do określonego limitu, zanim zdecyduje agent prowadzący.</li>
       <li><strong>Agent prowadzący przegląda wynik:</strong> przyjmuje go albo odsyła z uwagami. Przyjęta praca zbiera się w gałęzi zespołu, <code>antenna/web</code>.</li>
-      <li><strong>Ty ją wprowadzasz.</strong> <strong>Review and apply</strong> pokazuje, co zostanie scalone z twoją gałęzią; po podaniu hasła zmiany są scalane jako fast-forward. Bez hasła nic się nie rusza.</li>
+      <li><strong>Ty ją wprowadzasz.</strong> <strong>Przejrzyj i wprowadź</strong> pokazuje, co zostanie scalone z twoją gałęzią; po podaniu hasła zmiany są scalane jako fast-forward. Bez hasła nic się nie rusza.</li>
     </ol>
 
     <h2>Co widzisz</h2>
-    <p>Tablica zespołu pokazuje każde zadanie według stanu, od Open i Working, przez In review i Blocked, po Accepted i Applied, razem z wyjściem każdego pomocnika na żywo, zmianami, które wprowadza jego wynik, wynikiem sprawdzenia i zużytymi tokenami. Możesz zrobić wszystko, co agent prowadzący: odpowiedzieć na pytanie pomocnika, poprosić o zmiany, anulować zadanie albo zatrzymać pomocnika. Gdy agent prowadzący działa w trybie Code mode Antenny, budzi się za każdym razem, gdy pomocnik odda wynik albo o coś zapyta, więc zespół pracuje dalej, kiedy ciebie nie ma.</p>
+    <p>Tablica zespołu pokazuje każde zadanie według stanu, od „Otwarte” i „W toku”, przez „Do przeglądu” i „Zablokowane”, po „Przyjęte” i „Wprowadzone”, razem z wyjściem każdego pomocnika na żywo, zmianami, które wprowadza jego wynik, wynikiem sprawdzenia i zużytymi tokenami. Możesz zrobić wszystko, co agent prowadzący: odpowiedzieć na pytanie pomocnika, poprosić o zmiany, anulować zadanie albo zatrzymać pomocnika. Gdy agent prowadzący działa w trybie Code mode Antenny, budzi się za każdym razem, gdy pomocnik odda wynik albo o coś zapyta, więc zespół pracuje dalej, kiedy ciebie nie ma.</p>
 
     <h2>Co chroni projekt</h2>
     <ul>

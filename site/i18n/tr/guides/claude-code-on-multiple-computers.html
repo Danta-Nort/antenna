@@ -4,7 +4,7 @@
 <h2>Neler elde edersiniz</h2>
 <ul>
   <li><strong>Her oturum için bir sohbet</strong>, hangi bilgisayarda çalışırsa çalışsın. Sunucudaki bir oturum ve masaüstündeki bir oturum, kişilerinizle aynı listede yer alır.</li>
-  <li><strong>My devices</strong>: her bilgisayarınız için bir kart; sistemi ve Antenna sürümü, kendi kontrollerine göre sağlık durumu, ajanları ve her birinin bağlı olup olmadığı, orada sizi bekleyen istekler.</li>
+  <li><strong>Cihazlarım</strong>: her bilgisayarınız için bir kart; sistemi ve Antenna sürümü, kendi kontrollerine göre sağlık durumu, ajanları ve her birinin bağlı olup olmadığı, orada sizi bekleyen istekler.</li>
   <li><strong>Bulunduğunuz yerden onay.</strong> Sunucudaki bir ajanın isteğini Mac’inizde Touch ID ya da Mac’in parolasıyla onaylayabilirsiniz. Sunucu imzayı kontrol eder ve isteği kendisi yerine getirir.</li>
   <li><strong>Durdurma düğmesi</strong>: başka bir bilgisayardaki her ajan için; ajanı ve orada başlattığı tüm işlemleri durdurur.</li>
   <li><strong>Ajan haritası</strong>: bir bilgisayardaki oturumu başka bir bilgisayardaki oturuma bağlarsınız, böylece birbirlerine yazarlar.</li>
@@ -13,9 +13,9 @@
 <h2>Kurulum</h2>
 <ol>
   <li><strong>Her bilgisayara Antenna kurun</strong>: Mac’e ya da Linux masaüstüne uygulamayı, Linux sunucuya düğümü (<code>curl -fsSL https://antenna.contact/install.sh | sh</code>).</li>
-  <li><strong>Bilgisayarları birbirleriyle kendi bilgisayarlarınız olarak eşleştirin.</strong> <strong>This is my own computer (∞)</strong> işaretli bir davet oluşturun, diğer bilgisayarda açın ve bir tarafın gösterdiği kodu diğerine girin. Her bilgisayarı, oradan görmek ya da bağlanmak istediğiniz diğer her bilgisayarla eşleştirin: her biri diğerini ∞ seviyesinde tanımalıdır.</li>
+  <li><strong>Bilgisayarları birbirleriyle kendi bilgisayarlarınız olarak eşleştirin.</strong> <strong>Bu benim kendi bilgisayarım (∞)</strong> işaretli bir davet oluşturun, diğer bilgisayarda açın ve bir tarafın gösterdiği kodu diğerine girin. Her bilgisayarı, oradan görmek ya da bağlanmak istediğiniz diğer her bilgisayarla eşleştirin: her biri diğerini ∞ seviyesinde tanımalıdır.</li>
   <li><strong>Her Claude Code oturumuna bir ad verin.</strong> Masaüstünde, ajanlar panelindeki <code>+</code> ile Code modunda başlatın. Sunucuda proje klasöründe <code>antenna connect claude-code --agent api-dev --links mac --hello mac</code> komutunu çalıştırın ve oturumu <code>antenna session start api-dev --dir ~/projects/api</code> ile çalışır durumda tutun; tüm adımlar <a href="/guides/run-claude-code-on-a-vps">VPS’te Claude Code</a> rehberinde.</li>
-  <li><strong>Ana bilgisayarınızın istekleri yanıtlamasına izin verin.</strong> Sunucuda bir kez <code>antenna devices confirm mac</code> çalıştırın; masaüstünde ana bilgisayarın anahtarını <strong>My devices</strong> → onun kartı → <strong>Approvals</strong> bölümünden kabul edin.</li>
+  <li><strong>Ana bilgisayarınızın istekleri yanıtlamasına izin verin.</strong> Sunucuda bir kez <code>antenna devices confirm mac</code> çalıştırın; masaüstünde ana bilgisayarın anahtarını <strong>Cihazlarım</strong> → onun kartı → <strong>Onaylar</strong> bölümünden kabul edin.</li>
 </ol>
 
 <h2>İşi bilgisayarlar arasında taşımak</h2>

@@ -178,18 +178,18 @@
     <h2>Sullo stesso computer</h2>
     <ol>
       <li><a href="/it/#download">Installa Antenna</a> (macOS o Linux) e crea il tuo nodo: una password, nessun account.</li>
-      <li>Apri <strong>Agents → AI apps</strong> e scegli <strong>Start in Code mode</strong> accanto a Claude Code. Nella finestra scegli <strong>New agent…</strong>, chiamalo <code>builder</code>, inserisci la password e premi <strong>Start</strong>. Fai lo stesso per Codex, con il nome <code>reviewer</code>. Ognuno gira nella propria scheda di terminale dentro la finestra, già collegato ad Antenna.</li>
-      <li>Apri <strong>Agents → Map</strong> e trascina da un agente all'altro. Due agenti dello stesso computer ricevono un <em>percorso locale</em>: i loro messaggi non lasciano mai il computer.</li>
+      <li>Apri <strong>Agenti → App AI</strong> e scegli <strong>Avvia in modalità Code</strong> accanto a Claude Code. Nella finestra scegli <strong>Nuovo agente…</strong>, chiamalo <code>builder</code>, inserisci la password e premi <strong>Avvia</strong>. Fai lo stesso per Codex, con il nome <code>reviewer</code>. Ognuno gira nella propria scheda di terminale dentro la finestra, già collegato ad Antenna.</li>
+      <li>Apri <strong>Agenti → Mappa</strong> e trascina da un agente all'altro. Due agenti dello stesso computer ricevono un <em>percorso locale</em>: i loro messaggi non lasciano mai il computer.</li>
       <li>Di' a uno dei due che cosa fare: “Scrivi il parser, poi chiedi a <code>reviewer</code> di revisionarlo.” Claude Code invia la richiesta; Codex la riceve, risponde, e la risposta torna indietro allo stesso modo.</li>
     </ol>
     <p>Preferisci il tuo terminale? <code>antenna connect claude-code --agent builder</code> e <code>antenna connect codex --agent reviewer</code> configurano ciascuno dei due, e <code>antenna agent connect builder --local reviewer</code> traccia la stessa linea.</p>
 
     <h2>Su due computer</h2>
-    <p>Molti tengono Claude Code sul portatile e fanno girare Codex su un desktop o su un server, o viceversa. Ogni computer ha la sua Antenna. Abbinali una volta con un link di invito e un codice di sei cifre, al livello <strong>∞ · My computer</strong>, poi traccia la linea tra i due agenti sulla mappa. L'altro computer ti chiede di approvare la sua parte, quindi lì non cambia nulla senza di te. Come si trovano i due computer e che cosa vede un relay: <a href="/it/guides/peer-to-peer-encrypted-messenger">il peer-to-peer spiegato</a>.</p>
+    <p>Molti tengono Claude Code sul portatile e fanno girare Codex su un desktop o su un server, o viceversa. Ogni computer ha la sua Antenna. Abbinali una volta con un link di invito e un codice di sei cifre, al livello <strong>∞ · Il mio computer</strong>, poi traccia la linea tra i due agenti sulla mappa. L'altro computer ti chiede di approvare la sua parte, quindi lì non cambia nulla senza di te. Come si trovano i due computer e che cosa vede un relay: <a href="/it/guides/peer-to-peer-encrypted-messenger">il peer-to-peer spiegato</a>.</p>
     <p>Per un server senza schermo, <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md">Aggiungere un server</a> spiega l'installazione e <code>antenna session start</code>, che avvia Claude Code o Codex in modo che Antenna possa svegliarli.</p>
 
     <h2>L'agente inattivo si sveglia</h2>
-    <p>Un agente che ha finito il suo turno resta fermo su un prompt vuoto e non legge nulla finché qualcuno non scrive. Con <strong>Wake on new messages</strong> (attivo di default nella modalità Code), Antenna scrive una riga al posto tuo quando arriva un messaggio, così l'agente lo legge e va avanti. In questo modo un agente capo può guidarne un altro senza nessuno alla tastiera. <em>Sperimentale.</em></p>
+    <p>Un agente che ha finito il suo turno resta fermo su un prompt vuoto e non legge nulla finché qualcuno non scrive. Con <strong>Sveglia ai nuovi messaggi</strong> (attivo di default nella modalità Code), Antenna scrive una riga al posto tuo quando arriva un messaggio, così l'agente lo legge e va avanti. In questo modo un agente capo può guidarne un altro senza nessuno alla tastiera. <em>Sperimentale.</em></p>
 
     <h2>Che cosa lo rende sicuro</h2>
     <ul>

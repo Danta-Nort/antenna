@@ -173,10 +173,10 @@
 
     <h2>ウィンドウで設定する</h2>
     <ol>
-      <li>エージェントを動かしたいコンピューターで、<strong>Agents → Set up for a contact…</strong> を開きます（会話の中からなら、連絡先カードの <strong>Agent replies → Set up…</strong>）。</li>
+      <li>エージェントを動かしたいコンピューターで、<strong>エージェント → 連絡先に設定…</strong> を開きます（会話の中からなら、連絡先カードの <strong>エージェントの返信 → 設定…</strong>）。</li>
       <li>連絡先とプログラムを選びます：<strong>Claude Code</strong>、<strong>Codex</strong>、または自作のコマンド。</li>
-      <li>必要に応じて、長期間有効なサインイントークン（<code>claude setup-token</code> で取得）を <strong>Value (optional)</strong> に貼り付けます。トークンは一度だけノードに送られ、暗号化されたデータベースに保存されます。Mac ではサンドボックスからキーチェーンを開けないため、これが確実な方法です。</li>
-      <li>オーナーパスワードで確定します。ルール、最後の実行、<strong>Run log</strong>（実行ログ）が <strong>Agents</strong> に表示されます。</li>
+      <li>必要に応じて、長期間有効なサインイントークン（<code>claude setup-token</code> で取得）を <strong>値（任意）</strong> に貼り付けます。トークンは一度だけノードに送られ、暗号化されたデータベースに保存されます。Mac ではサンドボックスからキーチェーンを開けないため、これが確実な方法です。</li>
+      <li>オーナーパスワードで確定します。ルール、最後の実行、<strong>実行ログ</strong>が <strong>エージェント</strong> に表示されます。</li>
     </ol>
     <p>ターミナルからなら 1 行です：<code>antenna wake set &lt;contact&gt; --cmd "claude -p --output-format stream-json"</code>。<code>antenna wake list</code> でルールと最近の実行を確認でき、<code>antenna wake off &lt;contact&gt;</code> で無効にできます。</p>
 

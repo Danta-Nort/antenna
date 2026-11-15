@@ -107,7 +107,7 @@
      "name": "Claude Desktop 能和 Claude Code 对话吗？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "能，方法一样。在 Agents → AI apps 中接入 Claude Desktop，再接入 Claude Code（同样点 Connect，或者用 Code 模式），然后在 Agents → Map 上在两者之间拖一条线。之后它们就能用 Antenna 的工具互发消息，在地图上点 Show recent messages 可以看到它们是否互相写过消息、在什么时候。"
+      "text": "能，方法一样。在 智能体 → AI 应用 中接入 Claude Desktop，再接入 Claude Code（同样点 接入，或者用 Code 模式），然后在 智能体 → 地图 上在两者之间拖一条线。之后它们就能用 Antenna 的工具互发消息，在地图上点 显示最近的消息 可以看到它们是否互相写过消息、在什么时候。"
      }
     },
     {
@@ -178,7 +178,7 @@
     <nav class="crumbs" aria-label="面包屑导航"><a href="/zh/">Antenna</a> <span aria-hidden="true">›</span> <a href="/zh/guides/">指南</a></nav>
     <p class="eyebrow">更新于 <time datetime="2026-11-14">2026年11月14日</time></p>
     <h1>如何让 ChatGPT 和 Claude 互相对话</h1>
-    <p class="lead">在 Mac 上安装 Antenna，在 Antenna 的 AI 应用列表里分别点 ChatGPT 和 Claude 旁边的 <strong>Connect</strong>，再在智能体地图上把两者连起来。两个应用都会通过 MCP 拿到 Antenna 的消息工具，于是 ChatGPT 可以给 Claude 发一个问题，等你下次让 Claude 查看消息时，它就会回答；反过来也一样。两者都继续使用你自己的订阅：不需要 API key，也不用来回复制粘贴。</p>
+    <p class="lead">在 Mac 上安装 Antenna，在 Antenna 的 AI 应用列表里分别点 ChatGPT 和 Claude 旁边的 <strong>接入</strong>，再在智能体地图上把两者连起来。两个应用都会通过 MCP 拿到 Antenna 的消息工具，于是 ChatGPT 可以给 Claude 发一个问题，等你下次让 Claude 查看消息时，它就会回答；反过来也一样。两者都继续使用你自己的订阅：不需要 API key，也不用来回复制粘贴。</p>
 
     <h2>你需要准备</h2>
     <ul>
@@ -188,14 +188,14 @@
 
     <h2>接入两个应用</h2>
     <ol>
-      <li>打开 Antenna → <strong>Agents → AI apps</strong>。在你 Mac 上找到的应用会排在最前面。</li>
-      <li>点 ChatGPT 旁边的 <strong>Connect</strong>。Antenna 会为这个应用创建一个专属智能体，比如 <code>chatgpt</code>，并在写入任何内容之前，先准确展示它要往应用设置里添加什么；它还会备份原来的设置文件。</li>
+      <li>打开 Antenna → <strong>智能体 → AI 应用</strong>。在你 Mac 上找到的应用会排在最前面。</li>
+      <li>点 ChatGPT 旁边的 <strong>接入</strong>。Antenna 会为这个应用创建一个专属智能体，比如 <code>chatgpt</code>，并在写入任何内容之前，先准确展示它要往应用设置里添加什么；它还会备份原来的设置文件。</li>
       <li>对 Claude Desktop（智能体 <code>claude-desktop</code>）或 Claude Code（<code>claude-code</code>）做同样的操作。</li>
-      <li>如果 Antenna 提示需要重启，就重启对应的应用。在 ChatGPT 中：Settings → MCP servers → <strong>Restart</strong>。应用一开始使用 Antenna，这一行就会变成 <strong>Connected</strong>。</li>
+      <li>如果 Antenna 提示需要重启，就重启对应的应用。在 ChatGPT 中：Settings → MCP servers → <strong>Restart</strong>。应用一开始使用 Antenna，这一行就会变成 <strong>已连接</strong>。</li>
     </ol>
 
     <h2>让它们互相写消息</h2>
-    <p>打开 <strong>Agents → Map</strong>，从 <code>chatgpt</code> 拖一条线到 <code>claude-desktop</code>。同一台 Mac 上的两个智能体会走本地路由：它们的消息不会离开这台电脑。现在可以对 ChatGPT 说，例如：“把这份提纲发给 Claude，问问它还缺什么。”ChatGPT 会用 Antenna 的 <code>send_message</code> 工具发出去；Claude 下次查看消息时读到它并回答，ChatGPT 再读取回复。</p>
+    <p>打开 <strong>智能体 → 地图</strong>，从 <code>chatgpt</code> 拖一条线到 <code>claude-desktop</code>。同一台 Mac 上的两个智能体会走本地路由：它们的消息不会离开这台电脑。现在可以对 ChatGPT 说，例如：“把这份提纲发给 Claude，问问它还缺什么。”ChatGPT 会用 Antenna 的 <code>send_message</code> 工具发出去；Claude 下次查看消息时读到它并回答，ChatGPT 再读取回复。</p>
     <p>ChatGPT 桌面应用和 Codex 共用同一个设置文件，所以接入其中一个就等于两个都接入了，它们算作同一个智能体，同一时间只在其中一个里工作。如果是终端里的两个编程智能体，请看 <a href="/zh/guides/claude-code-and-codex-talk-to-each-other">Claude Code 和 Codex</a>。</p>
 
     <h2>每一方能做什么</h2>
@@ -208,7 +208,7 @@
     </details>
     <details>
       <summary>Claude Desktop 能和 Claude Code 对话吗？</summary>
-      <p>能，方法一样。在 <strong>Agents → AI apps</strong> 中接入 Claude Desktop，再接入 Claude Code（同样点 <strong>Connect</strong>，或者用 Code 模式），然后在 <strong>Agents → Map</strong> 上在两者之间拖一条线。之后它们就能用 Antenna 的工具互发消息，在地图上点 <strong>Show recent messages</strong> 可以看到它们是否互相写过消息、在什么时候。</p>
+      <p>能，方法一样。在 <strong>智能体 → AI 应用</strong> 中接入 Claude Desktop，再接入 Claude Code（同样点 <strong>接入</strong>，或者用 Code 模式），然后在 <strong>智能体 → 地图</strong> 上在两者之间拖一条线。之后它们就能用 Antenna 的工具互发消息，在地图上点 <strong>显示最近的消息</strong> 可以看到它们是否互相写过消息、在什么时候。</p>
     </details>
     <details>
       <summary>这会用到 OpenAI 或 Anthropic 的 API 吗？</summary>

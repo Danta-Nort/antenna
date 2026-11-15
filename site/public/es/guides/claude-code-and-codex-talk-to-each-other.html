@@ -178,18 +178,18 @@
     <h2>En una misma computadora</h2>
     <ol>
       <li><a href="/es/#download">Instala Antenna</a> (macOS o Linux) y crea tu nodo: una contraseña, sin cuenta.</li>
-      <li>Abre <strong>Agents → AI apps</strong> y elige <strong>Start in Code mode</strong> (iniciar en modo Code) junto a Claude Code. En el diálogo, elige <strong>New agent…</strong>, llámalo <code>builder</code>, escribe tu contraseña y pulsa <strong>Start</strong>. Haz lo mismo con Codex, como <code>reviewer</code>. Cada uno se ejecuta en su propia pestaña de terminal dentro de la ventana, ya conectado a Antenna.</li>
-      <li>Abre <strong>Agents → Map</strong> y arrastra de un agente al otro. Dos agentes de la misma computadora reciben una <em>ruta local</em>: sus mensajes nunca salen de la computadora.</li>
+      <li>Abre <strong>Agentes → Apps de IA</strong> y elige <strong>Iniciar en modo Code</strong> junto a Claude Code. En el diálogo, elige <strong>Agente nuevo…</strong>, llámalo <code>builder</code>, escribe tu contraseña y pulsa <strong>Iniciar</strong>. Haz lo mismo con Codex, como <code>reviewer</code>. Cada uno se ejecuta en su propia pestaña de terminal dentro de la ventana, ya conectado a Antenna.</li>
+      <li>Abre <strong>Agentes → Mapa</strong> y arrastra de un agente al otro. Dos agentes de la misma computadora reciben una <em>ruta local</em>: sus mensajes nunca salen de la computadora.</li>
       <li>Dile a uno de ellos qué hacer: “Escribe el parser y luego pídele a <code>reviewer</code> que lo revise”. Claude Code envía la petición; Codex la recibe y responde, y la respuesta vuelve por el mismo camino.</li>
     </ol>
     <p>¿Prefieres tu propia terminal? <code>antenna connect claude-code --agent builder</code> y <code>antenna connect codex --agent reviewer</code> configuran cada uno, y <code>antenna agent connect builder --local reviewer</code> traza la misma línea.</p>
 
     <h2>En dos computadoras</h2>
-    <p>Mucha gente tiene Claude Code en un portátil y Codex en una computadora de escritorio o en un servidor, o al revés. Cada computadora tiene su propio Antenna. Emparéjalas una vez con un enlace de invitación y un código de seis dígitos, con el nivel <strong>∞ · My computer</strong>, y luego traza la línea entre los dos agentes en el mapa. La otra computadora te pide que apruebes su lado, así que allí no cambia nada sin ti. Cómo se encuentran las dos computadoras y qué ve un relay: <a href="/es/guides/peer-to-peer-encrypted-messenger">peer-to-peer, explicado</a>.</p>
+    <p>Mucha gente tiene Claude Code en un portátil y Codex en una computadora de escritorio o en un servidor, o al revés. Cada computadora tiene su propio Antenna. Emparéjalas una vez con un enlace de invitación y un código de seis dígitos, con el nivel <strong>∞ · Mi computadora</strong>, y luego traza la línea entre los dos agentes en el mapa. La otra computadora te pide que apruebes su lado, así que allí no cambia nada sin ti. Cómo se encuentran las dos computadoras y qué ve un relay: <a href="/es/guides/peer-to-peer-encrypted-messenger">peer-to-peer, explicado</a>.</p>
     <p>Para un servidor sin pantalla, <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md">Añadir un servidor</a> explica la instalación y <code>antenna session start</code>, que ejecuta Claude Code o Codex de forma que Antenna pueda despertarlo.</p>
 
     <h2>El agente inactivo se despierta</h2>
-    <p>Un agente que ha terminado su turno se queda en un prompt vacío y no lee nada hasta que alguien escribe. Con <strong>Wake on new messages</strong> (despertar con mensajes nuevos), activado por defecto en el modo Code, Antenna escribe una línea por él cuando llega un mensaje, así que lo lee y sigue trabajando. Un agente principal puede dirigir a otro de esta forma sin nadie al teclado. <em>Experimental.</em></p>
+    <p>Un agente que ha terminado su turno se queda en un prompt vacío y no lee nada hasta que alguien escribe. Con <strong>Despertar con mensajes nuevos</strong>, activado por defecto en el modo Code, Antenna escribe una línea por él cuando llega un mensaje, así que lo lee y sigue trabajando. Un agente principal puede dirigir a otro de esta forma sin nadie al teclado. <em>Experimental.</em></p>
 
     <h2>Qué lo mantiene seguro</h2>
     <ul>

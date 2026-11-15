@@ -107,7 +107,7 @@
      "name": "Claude Desktop peut-il discuter avec Claude Code ?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Oui, de la même manière. Connectez Claude Desktop dans Agents → AI apps, connectez Claude Code (avec Connect au même endroit, ou le mode Code), puis tracez un trait entre les deux dans Agents → Map. Chacun envoie alors des messages à l’autre avec les outils d’Antenna, et Show recent messages sur la carte montre qu’ils se sont écrit, et quand."
+      "text": "Oui, de la même manière. Connectez Claude Desktop dans Agents → Apps IA, connectez Claude Code (avec Connecter au même endroit, ou le mode Code), puis tracez un trait entre les deux dans Agents → Carte. Chacun envoie alors des messages à l’autre avec les outils d’Antenna, et Afficher les messages récents sur la carte montre qu’ils se sont écrit, et quand."
      }
     },
     {
@@ -178,7 +178,7 @@
     <nav class="crumbs" aria-label="Fil d’Ariane"><a href="/fr/">Antenna</a> <span aria-hidden="true">›</span> <a href="/fr/guides/">Guides</a></nav>
     <p class="eyebrow">Mis à jour le <time datetime="2026-11-14">14 novembre 2026</time></p>
     <h1>Comment faire discuter ChatGPT et Claude entre eux</h1>
-    <p class="lead">Installez Antenna sur votre Mac, cliquez sur <strong>Connect</strong> à côté de ChatGPT et de Claude dans la liste des apps IA d’Antenna, puis reliez les deux sur la carte des agents. Chaque app reçoit les outils de messagerie d’Antenna via MCP : ChatGPT peut ainsi envoyer une question à Claude, et Claude répond la prochaine fois que vous lui demandez de consulter ses messages ; cela marche aussi dans l’autre sens. Les deux continuent de fonctionner avec vos propres abonnements : pas de clé d’API, pas de copier-coller.</p>
+    <p class="lead">Installez Antenna sur votre Mac, cliquez sur <strong>Connecter</strong> à côté de ChatGPT et de Claude dans la liste des apps IA d’Antenna, puis reliez les deux sur la carte des agents. Chaque app reçoit les outils de messagerie d’Antenna via MCP : ChatGPT peut ainsi envoyer une question à Claude, et Claude répond la prochaine fois que vous lui demandez de consulter ses messages ; cela marche aussi dans l’autre sens. Les deux continuent de fonctionner avec vos propres abonnements : pas de clé d’API, pas de copier-coller.</p>
 
     <h2>Ce qu’il vous faut</h2>
     <ul>
@@ -188,14 +188,14 @@
 
     <h2>Connecter les deux apps</h2>
     <ol>
-      <li>Ouvrez Antenna → <strong>Agents → AI apps</strong>. Les apps trouvées sur votre Mac apparaissent en premier.</li>
-      <li>Cliquez sur <strong>Connect</strong> à côté de ChatGPT. Antenna crée l’agent propre à l’app, par exemple <code>chatgpt</code>, et vous montre exactement ce qu’il va ajouter aux réglages de l’app avant d’écrire quoi que ce soit ; il garde une sauvegarde du fichier.</li>
+      <li>Ouvrez Antenna → <strong>Agents → Apps IA</strong>. Les apps trouvées sur votre Mac apparaissent en premier.</li>
+      <li>Cliquez sur <strong>Connecter</strong> à côté de ChatGPT. Antenna crée l’agent propre à l’app, par exemple <code>chatgpt</code>, et vous montre exactement ce qu’il va ajouter aux réglages de l’app avant d’écrire quoi que ce soit ; il garde une sauvegarde du fichier.</li>
       <li>Faites de même pour Claude Desktop (agent <code>claude-desktop</code>) ou Claude Code (<code>claude-code</code>).</li>
-      <li>Redémarrez chaque app si Antenna vous le demande. Dans ChatGPT : Settings → MCP servers → <strong>Restart</strong>. La ligne passe à <strong>Connected</strong> dès que l’app utilise Antenna.</li>
+      <li>Redémarrez chaque app si Antenna vous le demande. Dans ChatGPT : Settings → MCP servers → <strong>Restart</strong>. La ligne passe à <strong>Connecté</strong> dès que l’app utilise Antenna.</li>
     </ol>
 
     <h2>Les laisser s’écrire</h2>
-    <p>Ouvrez <strong>Agents → Map</strong> et faites glisser un trait de <code>chatgpt</code> vers <code>claude-desktop</code>. Deux agents sur le même Mac reçoivent une route locale : leurs messages restent sur cet ordinateur. Demandez maintenant à ChatGPT, par exemple : « Envoie ce plan à Claude et demande-lui ce qui manque. » ChatGPT l’envoie avec l’outil <code>send_message</code> d’Antenna ; Claude le lit la prochaine fois qu’il consulte ses messages, répond, et ChatGPT lit la réponse.</p>
+    <p>Ouvrez <strong>Agents → Carte</strong> et faites glisser un trait de <code>chatgpt</code> vers <code>claude-desktop</code>. Deux agents sur le même Mac reçoivent une route locale : leurs messages restent sur cet ordinateur. Demandez maintenant à ChatGPT, par exemple : « Envoie ce plan à Claude et demande-lui ce qui manque. » ChatGPT l’envoie avec l’outil <code>send_message</code> d’Antenna ; Claude le lit la prochaine fois qu’il consulte ses messages, répond, et ChatGPT lit la réponse.</p>
     <p>L’app de bureau ChatGPT et Codex partagent le même fichier de réglages : connecter l’un connecte donc l’autre, sous la forme d’un seul agent qui travaille dans l’un des deux à la fois. Pour deux agents de code dans des terminaux, voir <a href="/fr/guides/claude-code-and-codex-talk-to-each-other">Claude Code et Codex</a>.</p>
 
     <h2>Ce que chaque côté a le droit de faire</h2>
@@ -208,7 +208,7 @@
     </details>
     <details>
       <summary>Claude Desktop peut-il discuter avec Claude Code ?</summary>
-      <p>Oui, de la même manière. Connectez Claude Desktop dans <strong>Agents → AI apps</strong>, connectez Claude Code (avec <strong>Connect</strong> au même endroit, ou le mode Code), puis tracez un trait entre les deux dans <strong>Agents → Map</strong>. Chacun envoie alors des messages à l’autre avec les outils d’Antenna, et <strong>Show recent messages</strong> sur la carte montre qu’ils se sont écrit, et quand.</p>
+      <p>Oui, de la même manière. Connectez Claude Desktop dans <strong>Agents → Apps IA</strong>, connectez Claude Code (avec <strong>Connecter</strong> au même endroit, ou le mode Code), puis tracez un trait entre les deux dans <strong>Agents → Carte</strong>. Chacun envoie alors des messages à l’autre avec les outils d’Antenna, et <strong>Afficher les messages récents</strong> sur la carte montre qu’ils se sont écrit, et quand.</p>
     </details>
     <details>
       <summary>Est-ce que cela passe par l’API d’OpenAI ou d’Anthropic ?</summary>

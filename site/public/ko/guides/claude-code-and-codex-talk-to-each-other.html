@@ -178,18 +178,18 @@
     <h2>한 컴퓨터에서</h2>
     <ol>
       <li><a href="/ko/#download">Antenna를 설치하고</a>(macOS 또는 Linux) 노드를 만드세요. 비밀번호 하나면 되고, 계정은 없어요.</li>
-      <li><strong>Agents → AI apps</strong>를 열고 Claude Code 옆의 <strong>Start in Code mode</strong>를 고르세요. 대화상자에서 <strong>New agent…</strong>를 고르고 이름을 <code>builder</code>로 정한 뒤, 비밀번호를 입력하고 <strong>Start</strong>를 누르세요. Codex도 <code>reviewer</code>라는 이름으로 똑같이 하세요. 각각 창 안의 자기 터미널 탭에서 돌고, 이미 Antenna에 연결돼 있어요.</li>
-      <li><strong>Agents → Map</strong>을 열고 한 에이전트에서 다른 에이전트로 끌어다 놓으세요. 같은 컴퓨터의 두 에이전트는 <em>로컬 경로</em>로 연결돼서, 메시지가 컴퓨터 밖으로 절대 나가지 않아요.</li>
+      <li><strong>에이전트 → AI 앱</strong>을 열고 Claude Code 옆의 <strong>Code 모드로 시작</strong>을 고르세요. 대화상자에서 <strong>새 에이전트…</strong>를 고르고 이름을 <code>builder</code>로 정한 뒤, 비밀번호를 입력하고 <strong>시작</strong>을 누르세요. Codex도 <code>reviewer</code>라는 이름으로 똑같이 하세요. 각각 창 안의 자기 터미널 탭에서 돌고, 이미 Antenna에 연결돼 있어요.</li>
+      <li><strong>에이전트 → 맵</strong>을 열고 한 에이전트에서 다른 에이전트로 끌어다 놓으세요. 같은 컴퓨터의 두 에이전트는 <em>로컬 경로</em>로 연결돼서, 메시지가 컴퓨터 밖으로 절대 나가지 않아요.</li>
       <li>둘 중 하나에게 할 일을 알려 주세요: “파서를 작성한 다음 <code>reviewer</code>에게 리뷰를 부탁해.” Claude Code가 요청을 보내면 Codex가 받아서 답하고, 답은 같은 길로 돌아와요.</li>
     </ol>
     <p>내 터미널이 더 편한가요? <code>antenna connect claude-code --agent builder</code>와 <code>antenna connect codex --agent reviewer</code>로 각각 설정하고, <code>antenna agent connect builder --local reviewer</code>로 같은 선을 그을 수 있어요.</p>
 
     <h2>두 컴퓨터에서</h2>
-    <p>노트북에는 Claude Code를, 데스크톱이나 서버에는 Codex를 두는 경우가 많아요. 반대일 수도 있고요. 컴퓨터마다 Antenna를 하나씩 설치하세요. 초대 링크와 여섯 자리 코드로 <strong>∞ · My computer</strong> 레벨로 한 번 페어링한 다음, 맵에서 두 에이전트 사이에 선을 그으세요. 다른 컴퓨터는 그쪽 연결을 승인해 달라고 물어보니, 내가 모르게 바뀌는 건 없어요. 두 컴퓨터가 서로를 어떻게 찾는지, 릴레이에는 무엇이 보이는지는 <a href="/ko/guides/peer-to-peer-encrypted-messenger">P2P 설명</a>에 있어요.</p>
+    <p>노트북에는 Claude Code를, 데스크톱이나 서버에는 Codex를 두는 경우가 많아요. 반대일 수도 있고요. 컴퓨터마다 Antenna를 하나씩 설치하세요. 초대 링크와 여섯 자리 코드로 <strong>∞ · 내 컴퓨터</strong> 레벨로 한 번 페어링한 다음, 맵에서 두 에이전트 사이에 선을 그으세요. 다른 컴퓨터는 그쪽 연결을 승인해 달라고 물어보니, 내가 모르게 바뀌는 건 없어요. 두 컴퓨터가 서로를 어떻게 찾는지, 릴레이에는 무엇이 보이는지는 <a href="/ko/guides/peer-to-peer-encrypted-messenger">P2P 설명</a>에 있어요.</p>
     <p>화면 없는 서버라면 <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md">서버 추가하기</a>에서 설치 과정과 <code>antenna session start</code>를 안내해요. 이 명령은 Antenna가 깨울 수 있도록 Claude Code나 Codex를 실행해요.</p>
 
     <h2>쉬고 있는 에이전트를 깨워요</h2>
-    <p>자기 턴을 마친 에이전트는 빈 프롬프트에서 누가 입력할 때까지 아무것도 읽지 않아요. <strong>Wake on new messages</strong>(새 메시지가 오면 깨우기, Code 모드에서 기본으로 켜져 있음)를 켜 두면, 메시지가 도착했을 때 Antenna가 대신 한 줄을 입력해 줘서 에이전트가 메시지를 읽고 이어서 일해요. 이렇게 하면 키보드 앞에 아무도 없어도 리드 에이전트가 다른 에이전트를 움직일 수 있어요. <em>실험적 기능이에요.</em></p>
+    <p>자기 턴을 마친 에이전트는 빈 프롬프트에서 누가 입력할 때까지 아무것도 읽지 않아요. <strong>새 메시지가 오면 깨우기</strong>(Code 모드에서 기본으로 켜져 있음)를 켜 두면, 메시지가 도착했을 때 Antenna가 대신 한 줄을 입력해 줘서 에이전트가 메시지를 읽고 이어서 일해요. 이렇게 하면 키보드 앞에 아무도 없어도 리드 에이전트가 다른 에이전트를 움직일 수 있어요. <em>실험적 기능이에요.</em></p>
 
     <h2>안전을 지키는 장치</h2>
     <ul>

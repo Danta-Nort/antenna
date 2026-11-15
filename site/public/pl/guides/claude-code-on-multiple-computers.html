@@ -175,7 +175,7 @@
     <h2>Co dostajesz</h2>
     <ul>
       <li><strong>Jeden czat na sesję</strong>, niezależnie od tego, na którym komputerze działa. Sesja na serwerze i sesja na desktopie są na tej samej liście co twoje kontakty.</li>
-      <li><strong>My devices</strong> (moje urządzenia): karta każdego twojego komputera z systemem i wersją Antenny, stanem według jego własnych testów, agentami wraz z informacją, czy są podłączone, oraz prośbami, które tam na ciebie czekają.</li>
+      <li><strong>Moje urządzenia</strong>: karta każdego twojego komputera z systemem i wersją Antenny, stanem według jego własnych testów, agentami wraz z informacją, czy są podłączone, oraz prośbami, które tam na ciebie czekają.</li>
       <li><strong>Zgody tam, gdzie jesteś.</strong> Prośbę agenta z serwera możesz zatwierdzić na Macu, przez Touch ID albo hasłem do Maca. Serwer sprawdza podpis i sam wykonuje prośbę.</li>
       <li><strong>Przycisk zatrzymania</strong> dla każdego agenta na innym komputerze: zatrzymuje agenta i wszystkie procesy, które tam uruchomił.</li>
       <li><strong>Mapa agentów</strong>, na której łączysz sesję na jednym komputerze z sesją na innym, żeby pisały do siebie.</li>
@@ -184,9 +184,9 @@
     <h2>Konfiguracja</h2>
     <ol>
       <li><strong>Zainstaluj Antennę na każdym komputerze</strong>: aplikację na Macu albo desktopie z Linuksem, węzeł na serwerze z Linuksem (<code>curl -fsSL https://antenna.contact/install.sh | sh</code>).</li>
-      <li><strong>Połącz komputery ze sobą jako własne.</strong> Utwórz zaproszenie z zaznaczonym <strong>This is my own computer (∞)</strong>, otwórz je na drugim komputerze, a kod, który pokaże jedna strona, wpisz po drugiej. Połącz każdy komputer z każdym innym, który chcesz z niego widzieć albo z nim łączyć: każdy musi mieć drugi na poziomie ∞.</li>
+      <li><strong>Połącz komputery ze sobą jako własne.</strong> Utwórz zaproszenie z zaznaczonym polem <strong>To mój własny komputer (∞)</strong>, otwórz je na drugim komputerze, a kod, który pokaże jedna strona, wpisz po drugiej. Połącz każdy komputer z każdym innym, który chcesz z niego widzieć albo z nim łączyć: każdy musi mieć drugi na poziomie ∞.</li>
       <li><strong>Nadaj każdej sesji Claude Code nazwę.</strong> Na desktopie uruchom ją w trybie Code mode przyciskiem <code>+</code> w panelu agentów. Na serwerze, w folderze projektu, uruchom <code>antenna connect claude-code --agent api-dev --links mac --hello mac</code> i utrzymuj ją przy życiu poleceniem <code>antenna session start api-dev --dir ~/projects/api</code>; wszystkie kroki opisuje poradnik <a href="/pl/guides/run-claude-code-on-a-vps">Claude Code na VPS</a>.</li>
-      <li><strong>Pozwól głównemu komputerowi odpowiadać na prośby.</strong> Na serwerze uruchom raz <code>antenna devices confirm mac</code>; na desktopie zaakceptuj klucz głównego komputera w <strong>My devices</strong> → jego karta → <strong>Approvals</strong>.</li>
+      <li><strong>Pozwól głównemu komputerowi odpowiadać na prośby.</strong> Na serwerze uruchom raz <code>antenna devices confirm mac</code>; na desktopie zaakceptuj klucz głównego komputera w sekcji <strong>Moje urządzenia</strong> → jego karta → <strong>Zgody</strong>.</li>
     </ol>
 
     <h2>Przekazywanie pracy między komputerami</h2>

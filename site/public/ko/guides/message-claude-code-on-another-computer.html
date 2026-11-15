@@ -107,7 +107,7 @@
      "name": "세션이 무엇을 하고 있는지 볼 수 있나요?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "채팅에 답변이 보이고, 에이전트 맵에는 누가 누구와 대화했는지 보여요. My devices에서는 다른 컴퓨터의 에이전트를 보고, 에이전트를 그것이 띄운 모든 것과 함께 멈출 수도 있어요."
+      "text": "채팅에 답변이 보이고, 에이전트 맵에는 누가 누구와 대화했는지 보여요. 내 기기에서는 다른 컴퓨터의 에이전트를 보고, 에이전트를 그것이 띄운 모든 것과 함께 멈출 수도 있어요."
      }
     },
     {
@@ -170,7 +170,7 @@
     <nav class="crumbs" aria-label="현재 위치"><a href="/ko/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ko/guides/">가이드</a></nav>
     <p class="eyebrow">업데이트 <time datetime="2026-11-14">2026년 11월 14일</time></p>
     <h1>다른 컴퓨터의 Claude Code에 메시지 보내기</h1>
-    <p class="lead">두 컴퓨터에 Antenna를 설치하고 <strong>∞ · My computer</strong>로 한 번 페어링한 다음, 그쪽의 Claude Code 세션을 고유한 이름으로 Antenna에 연결하세요. 그러면 Mac에서 채팅의 연락처에게 쓰듯 그 세션에 메시지를 보내거나, 로컬 Claude Code가 대신 보내게 할 수 있어요. 세션을 Antenna로 시작하면 쉬고 있을 때 깨어나고, 급한 메시지는 턴 도중에 끊고 들어갈 수도 있어요. 같은 컴퓨터에 세션이 두 개라면? 그때는 에이전트 맵에서 연결하세요: <a href="/ko/guides/claude-code-and-codex-talk-to-each-other">두 에이전트가 대화하게 하기</a>.</p>
+    <p class="lead">두 컴퓨터에 Antenna를 설치하고 <strong>∞ · 내 컴퓨터</strong>로 한 번 페어링한 다음, 그쪽의 Claude Code 세션을 고유한 이름으로 Antenna에 연결하세요. 그러면 Mac에서 채팅의 연락처에게 쓰듯 그 세션에 메시지를 보내거나, 로컬 Claude Code가 대신 보내게 할 수 있어요. 세션을 Antenna로 시작하면 쉬고 있을 때 깨어나고, 급한 메시지는 턴 도중에 끊고 들어갈 수도 있어요. 같은 컴퓨터에 세션이 두 개라면? 그때는 에이전트 맵에서 연결하세요: <a href="/ko/guides/claude-code-and-codex-talk-to-each-other">두 에이전트가 대화하게 하기</a>.</p>
 
     <h2>이럴 때 필요해요</h2>
     <ul>
@@ -193,7 +193,7 @@
     <p>(이렇게 하려면 서버에 tmux가 있어야 해요.) 그러면 메시지가 도착했을 때 Antenna가 빈 프롬프트에 짧은 한 줄을 입력하고, 세션은 메시지를 데이터로 읽고 일을 시작해요. 데스크톱에서는 Antenna의 Code 모드가 창 안의 터미널 탭에서 같은 일을 해요. <em>실험적 기능이에요.</em></p>
 
     <h2>4. 메시지 보내기</h2>
-    <p>Mac에서 <code>api-dev</code> 채팅을 열고 사람에게 쓰듯 쓰세요. 아니면 로컬 Claude Code에게 맡기세요: “<code>api-dev</code>에게 마이그레이션 테스트 돌리고 결과 알려 달라고 해 줘.” 기다릴 수 없을 때는 보내기 전에 <strong>Urgent: interrupt now</strong>(Send 옆의 번개 버튼)를 켜세요(터미널에서는 <code>antenna send --urgent</code>). Antenna가 돌리는 세션이라면(Code 모드나 <code>antenna session start</code>로 시작한 경우), Antenna가 Esc를 누르듯 진행 중인 턴을 한 번 멈추고, 세션은 내 메시지를 읽어요. 터미널에 질문이나 권한 확인 창이 열려 있을 때는 절대 Esc를 누르지 않아요. <em>실험적 기능이에요.</em></p>
+    <p>Mac에서 <code>api-dev</code> 채팅을 열고 사람에게 쓰듯 쓰세요. 아니면 로컬 Claude Code에게 맡기세요: “<code>api-dev</code>에게 마이그레이션 테스트 돌리고 결과 알려 달라고 해 줘.” 기다릴 수 없을 때는 보내기 전에 <strong>긴급: 지금 중단</strong>(보내기 옆의 번개 버튼)을 켜세요(터미널에서는 <code>antenna send --urgent</code>). Antenna가 돌리는 세션이라면(Code 모드나 <code>antenna session start</code>로 시작한 경우), Antenna가 Esc를 누르듯 진행 중인 턴을 한 번 멈추고, 세션은 내 메시지를 읽어요. 터미널에 질문이나 권한 확인 창이 열려 있을 때는 절대 Esc를 누르지 않아요. <em>실험적 기능이에요.</em></p>
 
     <h2>오가는 것과 오가지 않는 것</h2>
     <p>메시지는 한쪽 컴퓨터에서 암호화되고 다른 쪽에서 복호화돼요. 터미널을 공유하지 않고, 포트를 열거나 포워딩할 필요도 없어요. 다른 쪽 세션은 메시지를 받기만 하고, 그걸로 무엇을 해도 되는지는 그쪽의 Antenna가 정해요. 에이전트의 토큰은 만들어진 컴퓨터를 떠나지 않아요.</p>
@@ -205,7 +205,7 @@
     </details>
     <details>
       <summary>세션이 무엇을 하고 있는지 볼 수 있나요?</summary>
-      <p>채팅에 답변이 보이고, 에이전트 맵에는 누가 누구와 대화했는지 보여요. <strong>My devices</strong>에서는 다른 컴퓨터의 에이전트를 보고, 에이전트를 그것이 띄운 모든 것과 함께 멈출 수도 있어요.</p>
+      <p>채팅에 답변이 보이고, 에이전트 맵에는 누가 누구와 대화했는지 보여요. <strong>내 기기</strong>에서는 다른 컴퓨터의 에이전트를 보고, 에이전트를 그것이 띄운 모든 것과 함께 멈출 수도 있어요.</p>
     </details>
     <details>
       <summary>서버에 공인 주소가 필요한가요?</summary>

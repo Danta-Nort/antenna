@@ -1,5 +1,5 @@
 <!--guide {"title": "Lokales LLM als Agent einrichten, ohne Konto und API-Key — Antenna", "h1": "Einen lokalen LLM-Agenten ohne Konto und ohne API-Schlüssel einrichten", "description": "Antenna lädt ein offenes Modell, prüft es und startet es als privaten Agenten auf Mac oder Linux: abgeschottet, ohne Netzwerk und ohne Zugriff auf Ihre Dateien.", "summary": "Ein offenes Modell auf Ihrem eigenen Computer als Agent in einer Sandbox, passend zu Ihrem Arbeitsspeicher ausgewählt.", "source": "2026-11-09"}-->
-<p class="lead">Öffnen Sie in Antenna <strong>Agents → Local models</strong>, laden Sie das Modell herunter, das Antenna für Ihren Computer empfiehlt, und klicken Sie auf <strong>Create agent</strong>. Das Modell läuft mit llama.cpp auf Ihrem eigenen Rechner, ohne Konto, ohne API-Schlüssel und nach dem Download ohne Internet, in einer Sandbox, die weder ins Netzwerk kommt noch Ihre Dateien lesen kann. Der Agent bekommt einen eigenen Chat, und in einem Team kann er leichte Rollen übernehmen wie Triage, Zusammenfassungen und Dokumentation. <em>Experimentell.</em></p>
+<p class="lead">Öffnen Sie in Antenna <strong>Agenten → Lokale Modelle</strong>, laden Sie das Modell herunter, das Antenna für Ihren Computer empfiehlt, und klicken Sie auf <strong>Agent erstellen</strong>. Das Modell läuft mit llama.cpp auf Ihrem eigenen Rechner, ohne Konto, ohne API-Schlüssel und nach dem Download ohne Internet, in einer Sandbox, die weder ins Netzwerk kommt noch Ihre Dateien lesen kann. Der Agent bekommt einen eigenen Chat, und in einem Team kann er leichte Rollen übernehmen wie Triage, Zusammenfassungen und Dokumentation. <em>Experimentell.</em></p>
 
 <h2>Welches Modell für welchen Computer</h2>
 <p>Antenna schaut sich Arbeitsspeicher und freien Plattenplatz an und empfiehlt eines der Qwen3.5-Modelle:</p>
@@ -11,13 +11,13 @@
     <tr><td>Mac mit M2 oder neuer und 16 GB oder mehr</td><td>Qwen3.5 9B</td><td>5,7 GB</td><td>unter 9 GB</td></tr>
   </tbody>
 </table>
-<p>Weitere Modelle stehen ebenfalls in der Liste, jeweils markiert mit <strong>Fits this computer</strong> (passt), <strong>Slow on this computer</strong> (langsam) oder <strong>Not for this computer</strong> (ungeeignet). So laden Sie nie ein Modell herunter, das nicht läuft.</p>
+<p>Weitere Modelle stehen ebenfalls in der Liste, jeweils markiert mit <strong>Passt zu diesem Computer</strong>, <strong>Langsam auf diesem Computer</strong> oder <strong>Nicht für diesen Computer</strong>. So laden Sie nie ein Modell herunter, das nicht läuft.</p>
 
 <h2>Einrichten</h2>
 <ol>
-  <li>Öffnen Sie <strong>Agents → Local models</strong> und klicken Sie neben dem empfohlenen Modell auf <strong>Download</strong>. Es kommt in einer festen Version von Hugging Face; das Schließen des Fensters stoppt den Download nicht, und ein unterbrochener Download wird fortgesetzt.</li>
+  <li>Öffnen Sie <strong>Agenten → Lokale Modelle</strong> und klicken Sie neben dem empfohlenen Modell auf <strong>Herunterladen</strong>. Es kommt in einer festen Version von Hugging Face; das Schließen des Fensters stoppt den Download nicht, und ein unterbrochener Download wird fortgesetzt.</li>
   <li>Antenna prüft die Datei gegen die Größe und den SHA-256-Wert, die diese Version mitbringt, bevor es sie überhaupt lädt. Eine Datei, die nicht passt, wird gelöscht.</li>
-  <li>Klicken Sie auf <strong>Create agent</strong> und geben Sie ihm einen Namen. Sein Chat erscheint unter Chats im Abschnitt <strong>On this computer</strong>.</li>
+  <li>Klicken Sie auf <strong>Agent erstellen</strong> und geben Sie ihm einen Namen. Sein Chat erscheint unter Chats im Abschnitt <strong>Auf diesem Computer</strong>.</li>
   <li>Schreiben Sie ihm. Die erste Antwort dauert ein paar Sekunden, während das Modell lädt.</li>
 </ol>
 <p>Im Terminal: <code>antenna local install qwen3.5-2b --wait</code> (oder <code>--from-file</code> für eine Kopie, die Sie schon haben), dann <code>antenna local add helper --model qwen3.5-2b</code> und <code>antenna local say helper "hello"</code>.</p>
@@ -26,10 +26,10 @@
 <p>Das Modell läuft in seiner eigenen Sandbox: Es liest nur seine Modelldatei und kann sich nirgendwohin verbinden, weder ins Internet noch zu Antenna noch zu anderen Programmen. Das eigentliche Programm des Agenten läuft in einer zweiten Sandbox, die nur das Modell erreicht. Das Gespräch wird in Antennas verschlüsselter Datenbank gespeichert. Ein lokaler Agent hat in dieser Version keine Verbindungen und keine Tools, kann also niemandem etwas senden, und Antenna bittet Sie nie, einen Befehl aus seinen Antworten einzufügen.</p>
 
 <h2>Den Arbeitsspeicher verwaltet Antenna für Sie</h2>
-<p>Mehrere Agenten können sich ein Modell teilen, und Modelle unterschiedlicher Größe können nebeneinander laufen. Belegt ein anderes Modell den Speicher, den eine Antwort braucht, wartet die Antwort („Waiting for memory…“), statt den Computer ins Swappen zu treiben, und ein Modell, das 30 Minuten niemand genutzt hat, wird entladen.</p>
+<p>Mehrere Agenten können sich ein Modell teilen, und Modelle unterschiedlicher Größe können nebeneinander laufen. Belegt ein anderes Modell den Speicher, den eine Antwort braucht, wartet die Antwort („Wartet auf Arbeitsspeicher…“), statt den Computer ins Swappen zu treiben, und ein Modell, das 30 Minuten niemand genutzt hat, wird entladen.</p>
 
 <h2>Lokale Modelle im Team</h2>
-<p>Wenn Sie ein Team aus Agenten anlegen, kann ein lokales Modell Helfer für die Rollen sein, zu denen seine Größe passt: kleine Modelle für Triage und Zusammenfassungen, größere auch für Dokumentation, Entwürfe und Übersetzungen. Mit <strong>Local only</strong> läuft das ganze Team, der Leiter eingeschlossen, ohne jedes Cloud-Modell. Code schreiben lokale Modelle im Team noch nicht.</p>
+<p>Wenn Sie ein Team aus Agenten anlegen, kann ein lokales Modell Helfer für die Rollen sein, zu denen seine Größe passt: kleine Modelle für Triage und Zusammenfassungen, größere auch für Dokumentation, Entwürfe und Übersetzungen. Mit <strong>Nur lokal</strong> läuft das ganze Team, der Leiter eingeschlossen, ohne jedes Cloud-Modell. Code schreiben lokale Modelle im Team noch nicht.</p>
 
 <h2>Fragen</h2>
 <details>

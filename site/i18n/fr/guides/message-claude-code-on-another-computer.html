@@ -1,5 +1,5 @@
 <!--guide {"title": "Envoyer un message à Claude Code sur un autre ordinateur — Antenna", "h1": "Envoyer un message à Claude Code sur un autre ordinateur", "description": "Joignez une session Claude Code sur votre serveur ou un second Mac depuis votre poste : associez les deux ordinateurs dans Antenna et écrivez-lui par son nom.", "summary": "Écrire à une session Claude Code ou Codex sur votre serveur ou un second ordinateur, et la réveiller quand elle est inactive.", "source": "2026-11-14"}-->
-<p class="lead">Installez Antenna sur les deux ordinateurs, associez-les une fois au niveau <strong>∞ · My computer</strong>, puis connectez à Antenna la session Claude Code distante sous un nom bien à elle. Vous écrivez alors à cette session depuis votre Mac comme à un contact dans une conversation, ou vous laissez votre Claude Code local lui écrire. Si vous lancez la session via Antenna, elle est réveillée quand elle est inactive, et un message urgent peut l’interrompre en plein tour. Deux sessions sur le même ordinateur ? Reliez-les plutôt sur la carte des agents : <a href="/guides/claude-code-and-codex-talk-to-each-other">deux agents qui se parlent</a>.</p>
+<p class="lead">Installez Antenna sur les deux ordinateurs, associez-les une fois au niveau <strong>∞ · Mon ordinateur</strong>, puis connectez à Antenna la session Claude Code distante sous un nom bien à elle. Vous écrivez alors à cette session depuis votre Mac comme à un contact dans une conversation, ou vous laissez votre Claude Code local lui écrire. Si vous lancez la session via Antenna, elle est réveillée quand elle est inactive, et un message urgent peut l’interrompre en plein tour. Deux sessions sur le même ordinateur ? Reliez-les plutôt sur la carte des agents : <a href="/guides/claude-code-and-codex-talk-to-each-other">deux agents qui se parlent</a>.</p>
 
 <h2>Quand en avez-vous besoin ?</h2>
 <ul>
@@ -22,7 +22,7 @@
 <p>(Le serveur a besoin de tmux pour cela.) Antenna tape alors une courte ligne dans l’invite vide quand un message arrive, et la session lit le message comme des données et se met au travail. Sur un poste de bureau, le mode Code d’Antenna fait la même chose dans un onglet de terminal à l’intérieur de la fenêtre. <em>Expérimental.</em></p>
 
 <h2>4. Lui écrire</h2>
-<p>Ouvrez la conversation <code>api-dev</code> sur votre Mac et écrivez, comme vous le feriez à une personne. Ou laissez votre Claude Code local s’en charger : « Demande à <code>api-dev</code> de lancer les tests de migration et de me faire un compte rendu. » Quand ça ne peut pas attendre, activez <strong>Urgent: interrupt now</strong> (le bouton en forme d’éclair à côté du bouton d’envoi) avant d’envoyer (depuis un terminal, <code>antenna send --urgent</code>) : pour une session lancée par Antenna, en mode Code ou avec <code>antenna session start</code>, Antenna interrompt une fois le tour en cours, comme si vous appuyiez sur Échap, et la session lit votre message. Il n’appuie jamais sur Échap quand une question ou une demande d’autorisation est ouverte dans le terminal. <em>Expérimental.</em></p>
+<p>Ouvrez la conversation <code>api-dev</code> sur votre Mac et écrivez, comme vous le feriez à une personne. Ou laissez votre Claude Code local s’en charger : « Demande à <code>api-dev</code> de lancer les tests de migration et de me faire un compte rendu. » Quand ça ne peut pas attendre, activez <strong>Urgent : interrompre maintenant</strong> (le bouton en forme d’éclair à côté du bouton Envoyer) avant d’envoyer (depuis un terminal, <code>antenna send --urgent</code>) : pour une session lancée par Antenna, en mode Code ou avec <code>antenna session start</code>, Antenna interrompt une fois le tour en cours, comme si vous appuyiez sur Échap, et la session lit votre message. Il n’appuie jamais sur Échap quand une question ou une demande d’autorisation est ouverte dans le terminal. <em>Expérimental.</em></p>
 
 <h2>Ce qui circule, et ce qui ne circule pas</h2>
 <p>Le message est chiffré sur un ordinateur et déchiffré sur l’autre. Aucun terminal n’est partagé et aucun port n’a besoin d’être ouvert ou redirigé : l’autre session ne fait que recevoir des messages, et son propre Antenna décide de ce qu’elle peut en faire. Le jeton de l’agent reste sur l’ordinateur où il a été créé.</p>
@@ -34,7 +34,7 @@
 </details>
 <details>
   <summary>Puis-je voir ce que fait la session ?</summary>
-  <p>La conversation affiche ses réponses, et la carte des agents montre qui a parlé à qui. Dans <strong>My devices</strong>, vous voyez aussi les agents de vos autres ordinateurs et pouvez en arrêter un, avec tout ce qu’il a lancé.</p>
+  <p>La conversation affiche ses réponses, et la carte des agents montre qui a parlé à qui. Dans <strong>Mes appareils</strong>, vous voyez aussi les agents de vos autres ordinateurs et pouvez en arrêter un, avec tout ce qu’il a lancé.</p>
 </details>
 <details>
   <summary>Le serveur a-t-il besoin d’une adresse publique ?</summary>

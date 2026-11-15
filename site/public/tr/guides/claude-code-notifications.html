@@ -99,7 +99,7 @@
      "name": "Bildirimde Claude Code’un yazdıkları görünür mü?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Hayır. Bildirim kilitli ekranda görünebileceği için yalnızca “New message in” ve sohbetin adı yazar. Raporu okumak için sohbeti açın."
+      "text": "Hayır. Bildirim kilitli ekranda görünebileceği için yalnızca sohbetin adını ve “içinde yeni mesaj” sözünü yazar. Raporu okumak için sohbeti açın."
      }
     },
     {
@@ -162,24 +162,24 @@
     <nav class="crumbs" aria-label="Sayfa yolu"><a href="/tr/">Antenna</a> <span aria-hidden="true">›</span> <a href="/tr/guides/">Rehberler</a></nav>
     <p class="eyebrow">Güncellendi <time datetime="2026-11-15">15 Kasım 2026</time></p>
     <h1>Claude Code sunucuda ya da başka bir bilgisayarda işini bitirince bildirim alın</h1>
-    <p class="lead">Claude Code’a görevini dizüstünüzden bir Antenna sohbetinde verin; iş bitince sonucu aynı sohbete geri gönderir: Antenna’nın talimatları, bağlı bir ajana sonuçlarını görevi veren kişiye geri göndermesini söyler. Antenna’nın penceresi önde değilken dizüstünüz “New message in server · api-dev” (yeni mesaj) bildirimini gösterir. Onay istekleri de bildirim gönderir; böylece yarıda duran bir iş fark edilmeden beklemez. Antenna, Claude Code’un turlarını kendisi izlemez: rapor, Claude Code’un kendi mesajıdır.</p>
+    <p class="lead">Claude Code’a görevini dizüstünüzden bir Antenna sohbetinde verin; iş bitince sonucu aynı sohbete geri gönderir: Antenna’nın talimatları, bağlı bir ajana sonuçlarını görevi veren kişiye geri göndermesini söyler. Antenna’nın penceresi önde değilken dizüstünüz “server · api-dev içinde yeni mesaj” bildirimini gösterir. Onay istekleri de bildirim gönderir; böylece yarıda duran bir iş fark edilmeden beklemez. Antenna, Claude Code’un turlarını kendisi izlemez: rapor, Claude Code’un kendi mesajıdır.</p>
 
     <h2>Neler bildirim gönderir</h2>
     <ul>
       <li><strong>Claude Code’dan size gelen bir mesaj.</strong> Bildirim sohbetin adını verir, metni asla göstermez ve aynı sohbet için en fazla 10 saniyede bir gelir.</li>
-      <li><strong>Bir onay isteği.</strong> Sizin sözünüzü gerektiren bir adım, “Antenna: approval needed on server” olarak görünür; ajanı, ne yapmak istediğini ve kalan süreyi (“expires in 9 min”, 9 dakika içinde sona erer) gösterir, ama isteğin metnini asla göstermez. İstek kapanmadan yaklaşık iki dakika önce ikinci bir bildirim gelir; istek 10 dakika sonra kapanır. Başka bir bilgisayardan gelen istekler size <strong>My devices</strong> (cihazlarım) üzerinden ulaşır (<em>deneysel</em>).</li>
-      <li><strong>Bir soru.</strong> <em>Deneysel.</em> Bir ajanın sorusu, çalıştığı bilgisayarda bildirim olarak görünür: “A question from your agent” (ajanınızdan bir soru). Sunucu için orada <code>antenna agent escalate api-dev --to mac</code> komutunu çalıştırın; soruları bunun yerine dizüstünüzde ajanın sohbetine gelir.</li>
+      <li><strong>Bir onay isteği.</strong> Sizin sözünüzü gerektiren bir adım, “Antenna: server üzerinde onay gerekiyor” olarak görünür; ajanı, ne yapmak istediğini ve kalan süreyi (“9 dk içinde sona erer”) gösterir, ama isteğin metnini asla göstermez. İstek kapanmadan yaklaşık iki dakika önce ikinci bir bildirim gelir; istek 10 dakika sonra kapanır. Başka bir bilgisayardan gelen istekler size <strong>Cihazlarım</strong> üzerinden ulaşır (<em>deneysel</em>).</li>
+      <li><strong>Bir soru.</strong> <em>Deneysel.</em> Bir ajanın sorusu, çalıştığı bilgisayarda bildirim olarak görünür: “Ajanınızdan bir soru”. Sunucu için orada <code>antenna agent escalate api-dev --to mac</code> komutunu çalıştırın; soruları bunun yerine dizüstünüzde ajanın sohbetine gelir.</li>
     </ul>
     <p>Bildirimler macOS’ta ve bildirim gösteren Linux masaüstlerinde çalışır. Antenna dizüstünüzde açık olmalıdır; penceresi öndeyken sohbet listesindeki okunmamış sayıları bu işi görür.</p>
 
     <h2>Kurulum</h2>
     <ol>
-      <li>İki bilgisayara da <a href="/tr/#download">Antenna’yı kurun</a> ve onları <strong>This is my own computer (∞)</strong> (bu benim kendi bilgisayarım) işaretli olarak bir kez eşleştirin. Sunucu tarafını <a href="/tr/guides/run-claude-code-on-a-vps">VPS’te Claude Code</a> rehberi adım adım anlatır.</li>
+      <li>İki bilgisayara da <a href="/tr/#download">Antenna’yı kurun</a> ve onları <strong>Bu benim kendi bilgisayarım (∞)</strong> işaretli olarak bir kez eşleştirin. Sunucu tarafını <a href="/tr/guides/run-claude-code-on-a-vps">VPS’te Claude Code</a> rehberi adım adım anlatır.</li>
       <li>Claude Code’u Antenna üzerinden başlatın. Sunucuda:
     <pre><code>cd ~/projects/api
     antenna connect claude-code --agent api-dev --links mac --hello mac
     antenna session start api-dev --dir ~/projects/api</code></pre>
-      İkinci bir masaüstü bilgisayarda: <strong>Agents → AI apps → Start in Code mode</strong>.</li>
+      İkinci bir masaüstü bilgisayarda: <strong>Ajanlar → Yapay zeka uygulamaları → Code modunda başlat</strong>.</li>
       <li>Dizüstünde ayarlanacak bir şey yok. Bir ajanla sohbet, en baştan size doğrudan gelen mesajları ve onay isteklerini bildirir.</li>
     </ol>
 
@@ -189,13 +189,13 @@
     <p>Rapor, takip ettiği her talimatta olduğu gibi, Claude Code işinin bittiğine karar verdiğinde gelir. Terminaldeki kendi izin sorusunda (“Do you want to proceed?”) durursa Antenna bunu görmez ve size bildirim gelmez: sürekli kullandığınız araçlara Claude Code’un ayarlarından izin verin.</p>
 
     <h2>Hangi sohbetlerin bildirim göndereceğini seçin</h2>
-    <p>Bir sohbetin satırındaki <strong>⋮</strong> düğmesini açın ya da satıra sağ tıklayın, ardından <strong>Notifications</strong> (bildirimler):</p>
+    <p>Bir sohbetin satırındaki <strong>⋮</strong> düğmesini açın ya da satıra sağ tıklayın, ardından <strong>Bildirimler</strong>:</p>
     <ul>
-      <li><strong>All messages</strong> (tüm mesajlar): bu sohbetteki her yeni mesaj (bir kişi için varsayılan).</li>
-      <li><strong>Only when it asks for me</strong> (yalnızca bana seslendiğinde): size doğrudan gelen mesajlar ve onay istekleri (bir ajan için varsayılan).</li>
-      <li><strong>Off</strong> (kapalı): onay istekleri yine de bildirim gönderir.</li>
+      <li><strong>Tüm mesajlar</strong>: bu sohbetteki her yeni mesaj (bir kişi için varsayılan).</li>
+      <li><strong>Yalnızca bana seslendiğinde</strong>: size doğrudan gelen mesajlar ve onay istekleri (bir ajan için varsayılan).</li>
+      <li><strong>Kapalı</strong>: onay istekleri yine de bildirim gönderir.</li>
     </ul>
-    <p>Claude Code size değil de diğer ajanlarınızdan birine rapor verdiğinde, aynı menüde <strong>Notify about messages between agents</strong> (ajanlar arasındaki mesajları bildir) seçeneğini açmadıkça bu mesajlar sessiz kalır. Terminalde: <code>antenna chats notify server --agent api-dev all</code>.</p>
+    <p>Claude Code size değil de diğer ajanlarınızdan birine rapor verdiğinde, aynı menüde <strong>Ajanlar arasındaki mesajları bildir</strong> seçeneğini açmadıkça bu mesajlar sessiz kalır. Terminalde: <code>antenna chats notify server --agent api-dev all</code>.</p>
 
     <h2>Başında olduğunuz bilgisayarda</h2>
     <p>Claude Code kendi dizüstünüzde Code modunda çalışırken Antenna, pencere arka plandayken onun onay isteklerini ve sorularını bildirir, ama bir turun bittiğini bildirmez: bir ajan, kendi bilgisayarında size mesaj gönderemez. Bunun için Claude Code’un kendi hook’ları, durduğunda sizin bir komutunuzu çalıştırabilir.</p>
@@ -203,7 +203,7 @@
     <h2>Sorular</h2>
     <details>
       <summary>Bildirimde Claude Code’un yazdıkları görünür mü?</summary>
-      <p>Hayır. Bildirim kilitli ekranda görünebileceği için yalnızca “New message in” ve sohbetin adı yazar. Raporu okumak için sohbeti açın.</p>
+      <p>Hayır. Bildirim kilitli ekranda görünebileceği için yalnızca sohbetin adını ve “içinde yeni mesaj” sözünü yazar. Raporu okumak için sohbeti açın.</p>
     </details>
     <details>
       <summary>Dizüstüm uykudaysa ne olur?</summary>

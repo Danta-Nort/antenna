@@ -184,9 +184,9 @@
     <p>インストーラーは署名付きマニフェストから最新のリリースを読み取ってアーカイブを検証し、<code>antennad</code> と <code>antenna</code> を systemd のユーザーサービスとして <code>~/.local/bin</code> にインストールし（root は不要）、パスワード付きでノードを作成します。2 行目は、ログアウト後もサービスを動かし続けるためのものです。Ubuntu や Fedora なら、代わりに <code>.deb</code> や <code>.rpm</code> をインストールすることもできます。</p>
 
     <h2>2. ノート PC とペアリングする</h2>
-    <p>ノート PC で <strong>New contact → Invite</strong> を開き、名前を付け、<strong>This is my own computer (∞)</strong> にチェックを入れて <strong>Create link</strong> を押し、リンクをコピーします。サーバーで：</p>
+    <p>ノート PC で <strong>新しい連絡先 → 招待</strong> を開き、名前を付け、<strong>これは自分のコンピューターです（∞）</strong> にチェックを入れて <strong>リンクを作成</strong> を押し、リンクをコピーします。サーバーで：</p>
     <pre><code>antenna join '&lt;link&gt;' --trust 5 --label mac</code></pre>
-    <p>シングルクォートは外さないでください。リンクには <code>#</code> が含まれています。ノート PC に表示されたコードをサーバーのターミナルに入力し、ノート PC で <strong>The contact confirmed — codes match</strong> を押します。レベル 5 は双方で ∞ にあたるので、サーバーはあなた自身のコンピューターとして扱われます。</p>
+    <p>シングルクォートは外さないでください。リンクには <code>#</code> が含まれています。ノート PC に表示されたコードをサーバーのターミナルに入力し、ノート PC で <strong>相手が確認しました — コードは一致</strong> を押します。レベル 5 は双方で ∞ にあたるので、サーバーはあなた自身のコンピューターとして扱われます。</p>
 
     <h2>3. Antenna 経由で Claude Code を起動する</h2>
     <pre><code>cd ~/projects/api
@@ -196,7 +196,7 @@
     <p>connect の行はセッションに専用のエージェントとトークンを与え、あいさつを送るので、ノート PC に <code>api-dev</code> という名前のチャットが現れます。start の行は Antenna 専用の tmux サーバーで Claude Code を起動します（あなたの tmux には触れません）。一度アタッチして、フォルダーを信頼するかどうかといった Claude Code の最初の質問に答え、<code>Ctrl-b d</code> でデタッチすれば、Claude Code は動き続けます。Codex の場合は <code>antenna connect codex</code> と <code>--cli codex</code> を使います。</p>
 
     <h2>4. 話しかける</h2>
-    <p>ノート PC の <code>api-dev</code> のチャットに書きます：「マイグレーションのテストを実行して、失敗したものを直して」。Claude Code がプロンプトで待機していると、Antenna が短い 1 行を入力してあなたのメッセージを読ませます。連絡先のテキストを入力することも、代わりに質問に答えることもありません。<strong>My devices</strong> のサーバーのカードにはその健全性とエージェントが表示され、サーバーからのリクエストをノート PC で承認できます。</p>
+    <p>ノート PC の <code>api-dev</code> のチャットに書きます：「マイグレーションのテストを実行して、失敗したものを直して」。Claude Code がプロンプトで待機していると、Antenna が短い 1 行を入力してあなたのメッセージを読ませます。連絡先のテキストを入力することも、代わりに質問に答えることもありません。<strong>自分のデバイス</strong> のサーバーのカードにはその健全性とエージェントが表示され、サーバーからのリクエストをノート PC で承認できます。</p>
 
     <h2>再起動後</h2>
     <p>サーバーが再起動すると、ノードの鍵はロックされます。サービスは動いていますが、あなたがログインして <code>antenna unlock</code> を実行するまで、リンクは沈黙したままです。こうしておけば、サーバーのディスクのコピーを手に入れても誰もあなたの鍵を得られません。ロックされているかどうかは <code>antenna status</code> でわかります。</p>

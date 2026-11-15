@@ -6,17 +6,17 @@
 
 <h2>So arbeitet ein Team</h2>
 <ol>
-  <li><strong>Sie legen das Team an</strong>, unter <strong>Teams → New team</strong>: den Projektordner, den Leiter (einer Ihrer Agenten, ein lokales Modell oder Sie selbst), das Budget an Helfern und die Regeln: ob Helfer Befehle ausführen dürfen, welche <strong>Check commands</strong> (Prüfbefehle) eine Aufgabe nennen darf (<code>cargo test</code>, <code>npm test</code>) und welche Paket-Registries diese Prüfungen erreichen dürfen.</li>
+  <li><strong>Sie legen das Team an</strong>, unter <strong>Teams → Neues Team</strong>: den Projektordner, den Leiter (einer Ihrer Agenten, ein lokales Modell oder Sie selbst), das Budget an Helfern und die Regeln: ob Helfer Befehle ausführen dürfen, welche <strong>Prüfbefehle</strong> eine Aufgabe nennen darf (<code>cargo test</code>, <code>npm test</code>) und welche Paket-Registries diese Prüfungen erreichen dürfen.</li>
   <li><strong>Sie geben dem Leiter das Ziel vor</strong>, in seinem eigenen Terminal: „Zerleg die Login-Funktion in kleine Aufgaben für zwei Coder.“</li>
   <li><strong>Der Leiter plant und besetzt.</strong> Er schreibt Aufgaben, startet innerhalb des Budgets Helfer wie <code>web.coder-1</code> und teilt sie ihnen zu.</li>
   <li><strong>Die Helfer arbeiten parallel.</strong> Jeder bekommt eine frische Kopie des Projekts auf dem Stand des Team-Branches, liest nur seine eigene Aufgabe, arbeitet und reicht ein, oder er fragt den Leiter, wenn er nicht weiterkommt.</li>
   <li><strong>Antenna prüft jedes Ergebnis</strong>, indem es den Prüfbefehl der Aufgabe in einer separaten Sandbox ausführt, ohne Tokens und ohne Netzwerk außer den Registries, die Sie genannt haben. Schlägt die Prüfung fehl, geht die Arbeit von selbst an den Helfer zurück, bis zu einem Limit, bevor der Leiter entscheidet.</li>
   <li><strong>Der Leiter prüft:</strong> annehmen oder mit Kommentaren zurückschicken. Angenommene Arbeit sammelt sich auf einem Team-Branch, <code>antenna/web</code>.</li>
-  <li><strong>Sie übernehmen sie.</strong> <strong>Review and apply</strong> zeigt, was in Ihren Branch gemergt wird; mit Ihrem Passwort wird es gemergt, als Fast-Forward. Ohne Passwort bewegt sich nichts.</li>
+  <li><strong>Sie übernehmen sie.</strong> <strong>Prüfen und übernehmen</strong> zeigt, was in Ihren Branch gemergt wird; mit Ihrem Passwort wird es gemergt, als Fast-Forward. Ohne Passwort bewegt sich nichts.</li>
 </ol>
 
 <h2>Was Sie sehen</h2>
-<p>Das Board des Teams zeigt jede Aufgabe nach Zustand, von Open und Working über In review und Blocked bis Accepted und Applied, mit der Live-Ausgabe jedes Helfers, den Änderungen seines Ergebnisses, der Ausgabe der Prüfung und den verbrauchten Tokens. Sie können alles tun, was der Leiter kann: die Frage eines Helfers beantworten, Änderungen anfordern, eine Aufgabe abbrechen oder einen Helfer stoppen. Läuft der Leiter im Code-Modus von Antenna, wird er geweckt, sobald ein Helfer etwas einreicht oder fragt. So kommt das Team auch voran, während Sie weg sind.</p>
+<p>Das Board des Teams zeigt jede Aufgabe nach Zustand, von „Offen“ und „In Arbeit“ über „In Prüfung“ und „Blockiert“ bis „Angenommen“ und „Übernommen“, mit der Live-Ausgabe jedes Helfers, den Änderungen seines Ergebnisses, der Ausgabe der Prüfung und den verbrauchten Tokens. Sie können alles tun, was der Leiter kann: die Frage eines Helfers beantworten, Änderungen anfordern, eine Aufgabe abbrechen oder einen Helfer stoppen. Läuft der Leiter im Code-Modus von Antenna, wird er geweckt, sobald ein Helfer etwas einreicht oder fragt. So kommt das Team auch voran, während Sie weg sind.</p>
 
 <h2>Was das Projekt schützt</h2>
 <ul>

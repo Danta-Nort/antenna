@@ -14,7 +14,11 @@ ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 OUT="${OUT:-$ROOT/dist}"
 VERSION="${VERSION:-$("$ROOT/packaging/version.sh")}"
 VERSION="${VERSION#v}"
-ARCH="$(uname -m)"
+# The release names an architecture as the updater does (antenna_update::manifest::classify_name): arm64, x86_64.
+case "$(uname -m)" in
+  aarch64 | arm64) ARCH=arm64 ;;
+  *) ARCH="$(uname -m)" ;;
+esac
 export ANTENNA_COMMIT="${ANTENNA_COMMIT:-$(git -C "$ROOT" rev-parse --short=12 HEAD 2>/dev/null || echo unknown)}"
 
 cd "$ROOT"

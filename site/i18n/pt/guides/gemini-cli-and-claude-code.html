@@ -4,25 +4,25 @@
 <h2>No mesmo computador</h2>
 <ol>
   <li><a href="/#download">Instale o Antenna</a> (macOS ou Linux) e crie o seu nó: uma senha, nenhuma conta.</li>
-  <li>Abra <strong>Agents → AI apps</strong> e clique em <strong>Connect</strong> ao lado do Gemini CLI. Escolha <strong>Assistant with access to my projects</strong> (assistente com acesso aos meus projetos), digite a sua senha, clique em <strong>Continue</strong>, leia o que o Antenna vai acrescentar a <code>~/.gemini/settings.json</code> e clique em <strong>Write and connect</strong> (gravar e conectar). No Gemini CLI, rode <code>/mcp reload</code> (ou inicie de novo): <code>/mcp</code> lista o <code>antenna</code>. A linha diz “Contacts write to it as gemini-cli”: os contatos escrevem para ele como gemini-cli.</li>
-  <li>Na mesma página, clique em <strong>Start in Code mode</strong> ao lado do Claude Code. Escolha <strong>New agent…</strong>, dê o nome <code>builder</code>, escolha o mesmo papel, <strong>Assistant with access to my projects</strong>, digite a sua senha e clique em <strong>Start</strong>. O Claude Code roda numa aba de terminal dentro da janela.</li>
-  <li>Abra <strong>Agents → Map</strong>, arraste do ponto de conexão de um agente até o outro, digite a sua senha e clique em <strong>Connect</strong>. Os dois ganham uma <em>rota local</em>: as mensagens deles nunca saem do computador, e cada um aceita as mensagens do outro como tarefas, a menos que você desmarque essa opção.</li>
+  <li>Abra <strong>Agentes → Apps de IA</strong> e clique em <strong>Conectar</strong> ao lado do Gemini CLI. Escolha <strong>Assistente com acesso aos meus projetos</strong>, digite a sua senha, clique em <strong>Continuar</strong>, leia o que o Antenna vai acrescentar a <code>~/.gemini/settings.json</code> e clique em <strong>Gravar e conectar</strong>. No Gemini CLI, rode <code>/mcp reload</code> (ou inicie de novo): <code>/mcp</code> lista o <code>antenna</code>. A linha diz “Os contatos escrevem para ele como gemini-cli”.</li>
+  <li>Na mesma página, clique em <strong>Iniciar no modo Código</strong> ao lado do Claude Code. Escolha <strong>Novo agente…</strong>, dê o nome <code>builder</code>, escolha o mesmo papel, <strong>Assistente com acesso aos meus projetos</strong>, digite a sua senha e clique em <strong>Iniciar</strong>. O Claude Code roda numa aba de terminal dentro da janela.</li>
+  <li>Abra <strong>Agentes → Mapa</strong>, arraste do ponto de conexão de um agente até o outro, digite a sua senha e clique em <strong>Conectar</strong>. Os dois ganham uma <em>rota local</em>: as mensagens deles nunca saem do computador, e cada um aceita as mensagens do outro como tarefas, a menos que você desmarque essa opção.</li>
 </ol>
 <p>Dê o mesmo papel aos dois: o Antenna não deixa um agente que viu mais dos seus dados escrever para um que viu menos.</p>
 
 <h2>Como um chama o outro</h2>
 <p>Com a linha traçada, cada agente é o interlocutor padrão do outro: “mande isto para o seu interlocutor” já basta. Para chamar o outro pelo nome, um agente usa <code>send_message</code> com <code>local_agent</code> igual a <code>gemini-cli</code> ou <code>builder</code>. Quem recebe lê com <code>read_inbox</code>, ou espera com <code>wait_for_message</code> por até 10 minutos a cada chamada.</p>
-<p>Os dois esperam de jeitos diferentes. O Claude Code no Code mode acorda sozinho: quando chega uma mensagem e ele está parado, o Antenna digita uma linha dizendo para ele ler a caixa de entrada. <em>Experimental.</em> O Antenna ainda não acorda o Gemini CLI, então o Gemini CLI lê as mensagens na próxima vez que chamar o Antenna. Por isso o natural é o Gemini CLI começar a conversa: “Peça ao <code>builder</code> para revisar o diff em <code>src/</code>, depois espere a resposta dele e corrija o que ele encontrar.” O Claude Code acorda, revisa e responde. Para passar trabalho ao Gemini CLI, primeiro diga a ele para esperar mensagens.</p>
+<p>Os dois esperam de jeitos diferentes. O Claude Code no modo Código acorda sozinho: quando chega uma mensagem e ele está parado, o Antenna digita uma linha dizendo para ele ler a caixa de entrada. <em>Experimental.</em> O Antenna ainda não acorda o Gemini CLI, então o Gemini CLI lê as mensagens na próxima vez que chamar o Antenna. Por isso o natural é o Gemini CLI começar a conversa: “Peça ao <code>builder</code> para revisar o diff em <code>src/</code>, depois espere a resposta dele e corrija o que ele encontrar.” O Claude Code acorda, revisa e responde. Para passar trabalho ao Gemini CLI, primeiro diga a ele para esperar mensagens.</p>
 
 <h2>Em dois computadores</h2>
-<p>O Gemini CLI pode ficar num computador e o Claude Code em outro. Instale o Antenna em cada um e pareie os dois uma vez com um link de convite e um código de seis dígitos, marcando <strong>This is my own computer (∞)</strong>. Depois trace a linha entre os dois agentes no mapa. O outro computador pede que você aprove o lado dele, lá mesmo ou em <strong>My devices</strong>, então nada muda lá sem você. Num servidor sem tela, o Claude Code roda com <code>antenna connect claude-code</code> e <code>antenna session start</code>: veja <a href="/guides/run-claude-code-on-a-vps">Claude Code numa VPS</a>.</p>
+<p>O Gemini CLI pode ficar num computador e o Claude Code em outro. Instale o Antenna em cada um e pareie os dois uma vez com um link de convite e um código de seis dígitos, marcando <strong>Este é o meu próprio computador (∞)</strong>. Depois trace a linha entre os dois agentes no mapa. O outro computador pede que você aprove o lado dele, lá mesmo ou em <strong>Meus dispositivos</strong>, então nada muda lá sem você. Num servidor sem tela, o Claude Code roda com <code>antenna connect claude-code</code> e <code>antenna session start</code>: veja <a href="/guides/run-claude-code-on-a-vps">Claude Code numa VPS</a>.</p>
 
 <h2>O que você aprova e o que continua limitado</h2>
 <ul>
   <li><strong>As conexões são decisão sua.</strong> Traçar uma linha pede a sua senha; nenhum agente consegue criar ou mudar uma.</li>
   <li><strong>O Antenna confere cada mensagem.</strong> Entre dois agentes do mesmo computador, uma mensagem que pareça conter uma chave, uma senha ou um token é recusada, e uma cadeia para depois de 8 mensagens em 10 minutos, para que os dois não fiquem se ocupando para sempre.</li>
   <li><strong>Os níveis de confiança acompanham o que o agente leu.</strong> No mesmo computador, se um agente leu a mensagem de um contato, a mensagem dele leva os limites desse contato ao outro agente, que fica limitado como se também a tivesse lido.</li>
-  <li><strong>O Claude Code é verificado antes de cada ferramenta.</strong> No Code mode, o Antenna consulta o seu daemon antes de cada comando e de cada edição. As ferramentas do próprio Gemini CLI continuam sob as confirmações do Gemini CLI; o Antenna confere o que passa por ele.</li>
+  <li><strong>O Claude Code é verificado antes de cada ferramenta.</strong> No modo Código, o Antenna consulta o seu daemon antes de cada comando e de cada edição. As ferramentas do próprio Gemini CLI continuam sob as confirmações do Gemini CLI; o Antenna confere o que passa por ele.</li>
 </ul>
 
 <h2>Perguntas</h2>
@@ -32,7 +32,7 @@
 </details>
 <details>
   <summary>Duas janelas do Gemini CLI podem usar o Antenna ao mesmo tempo?</summary>
-  <p>Uma de cada vez: um agente trabalha numa sessão por vez, e <strong>Connect</strong> dá ao Gemini CLI um único agente.</p>
+  <p>Uma de cada vez: um agente trabalha numa sessão por vez, e <strong>Conectar</strong> dá ao Gemini CLI um único agente.</p>
 </details>
 <details>
   <summary>Isso está pronto?</summary>

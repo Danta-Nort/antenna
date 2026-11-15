@@ -6,17 +6,17 @@
 
 <h2>Cómo funciona un equipo</h2>
 <ol>
-  <li><strong>Creas el equipo</strong> en <strong>Teams → New team</strong>: la carpeta del proyecto, el agente principal (uno de tus agentes, un modelo local o tú), el presupuesto de trabajadores y las reglas: si los trabajadores pueden ejecutar comandos, qué <strong>Check commands</strong> (comandos de comprobación) puede indicar una tarea (<code>cargo test</code>, <code>npm test</code>) y a qué registros de paquetes pueden acceder esas comprobaciones.</li>
+  <li><strong>Creas el equipo</strong> en <strong>Equipos → Equipo nuevo</strong>: la carpeta del proyecto, el agente principal (uno de tus agentes, un modelo local o tú), el presupuesto de trabajadores y las reglas: si los trabajadores pueden ejecutar comandos, qué <strong>Comandos de comprobación</strong> puede indicar una tarea (<code>cargo test</code>, <code>npm test</code>) y a qué registros de paquetes pueden acceder esas comprobaciones.</li>
   <li><strong>Le das el objetivo al agente principal</strong>, en su propia terminal: “Divide la función de inicio de sesión en tareas pequeñas para dos programadores”.</li>
   <li><strong>El agente principal planifica y forma el equipo.</strong> Escribe las tareas, pone en marcha trabajadores como <code>web.coder-1</code> dentro del presupuesto y se las asigna.</li>
   <li><strong>Los trabajadores programan en paralelo.</strong> Cada uno recibe una copia limpia del proyecto en la rama del equipo, lee solo su propia tarea, trabaja y entrega, o le hace una pregunta al agente principal cuando se atasca.</li>
   <li><strong>Antenna comprueba cada resultado</strong> ejecutando el comando de comprobación de la tarea en un sandbox aparte, sin tokens y sin más red que los registros que hayas indicado. Si la comprobación falla, el resultado vuelve solo al trabajador, hasta un límite, antes de que decida el agente principal.</li>
   <li><strong>El agente principal revisa:</strong> acepta o devuelve con comentarios. El trabajo aceptado se acumula en una rama del equipo, <code>antenna/web</code>.</li>
-  <li><strong>Tú lo aplicas.</strong> <strong>Review and apply</strong> (revisar y aplicar) muestra lo que se va a fusionar en tu rama; con tu contraseña se fusiona, como fast-forward. Sin ella, no se mueve nada.</li>
+  <li><strong>Tú lo aplicas.</strong> <strong>Revisar y aplicar</strong> muestra lo que se va a fusionar en tu rama; con tu contraseña se fusiona, como fast-forward. Sin ella, no se mueve nada.</li>
 </ol>
 
 <h2>Lo que ves</h2>
-<p>El tablero del equipo muestra cada tarea según su estado, de Open y Working a In review, Blocked, Accepted y Applied, con la salida en directo de cada trabajador, lo que cambia su resultado, la salida de la comprobación y los tokens que ha usado. Puedes hacer todo lo que puede hacer el agente principal: responder la pregunta de un trabajador, pedir cambios, cancelar una tarea o detener a un trabajador. Cuando el agente principal se ejecuta en el modo Code de Antenna, se despierta cada vez que un trabajador entrega algo o pregunta, así que el equipo sigue avanzando mientras no estás.</p>
+<p>El tablero del equipo muestra cada tarea según su estado, de “Abiertas” y “En curso” a “En revisión”, “Bloqueadas”, “Aceptadas” y “Aplicadas”, con la salida en directo de cada trabajador, lo que cambia su resultado, la salida de la comprobación y los tokens que ha usado. Puedes hacer todo lo que puede hacer el agente principal: responder la pregunta de un trabajador, pedir cambios, cancelar una tarea o detener a un trabajador. Cuando el agente principal se ejecuta en el modo Code de Antenna, se despierta cada vez que un trabajador entrega algo o pregunta, así que el equipo sigue avanzando mientras no estás.</p>
 
 <h2>Qué mantiene seguro el proyecto</h2>
 <ul>

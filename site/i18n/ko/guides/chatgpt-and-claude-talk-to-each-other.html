@@ -1,5 +1,5 @@
 <!--guide {"title": "ChatGPT와 Claude가 서로 대화하게 하는 방법 — Antenna", "h1": "ChatGPT와 Claude가 서로 대화하게 하는 방법", "description": "ChatGPT 앱과 Claude를 Antenna에 각각 클릭 한 번으로 연결하면, 둘이 Antenna로 메시지를 주고받아요. API 키 없이 내 구독 그대로 써요.", "summary": "Mac에서 ChatGPT 앱과 Claude Desktop 또는 Claude Code가 서로 메시지를 주고받아요.", "source": "2026-11-14"}-->
-<p class="lead">Mac에 Antenna를 설치하고, Antenna의 AI 앱 목록에서 ChatGPT와 Claude 옆의 <strong>Connect</strong>를 누른 다음, 에이전트 맵에서 둘을 연결하세요. 각 앱이 MCP로 Antenna의 메시징 도구를 받게 되니, ChatGPT가 Claude에게 질문을 보내면 Claude는 다음에 메시지를 확인하라고 할 때 답해요. 반대 방향도 똑같이 돼요. 두 앱 모두 내 구독으로 계속 돌아가요. API 키도, 복사해서 붙여 넣기도 필요 없어요.</p>
+<p class="lead">Mac에 Antenna를 설치하고, Antenna의 AI 앱 목록에서 ChatGPT와 Claude 옆의 <strong>연결</strong>을 누른 다음, 에이전트 맵에서 둘을 연결하세요. 각 앱이 MCP로 Antenna의 메시징 도구를 받게 되니, ChatGPT가 Claude에게 질문을 보내면 Claude는 다음에 메시지를 확인하라고 할 때 답해요. 반대 방향도 똑같이 돼요. 두 앱 모두 내 구독으로 계속 돌아가요. API 키도, 복사해서 붙여 넣기도 필요 없어요.</p>
 
 <h2>준비물</h2>
 <ul>
@@ -9,14 +9,14 @@
 
 <h2>두 앱 연결하기</h2>
 <ol>
-  <li>Antenna를 열고 <strong>Agents → AI apps</strong>로 가세요. Mac에서 찾은 앱이 맨 위에 나와요.</li>
-  <li>ChatGPT 옆의 <strong>Connect</strong>를 누르세요. Antenna가 그 앱 전용 에이전트(예: <code>chatgpt</code>)를 만들고, 무언가를 쓰기 전에 앱 설정에 정확히 무엇을 추가할지 먼저 보여 줘요. 설정 파일의 백업도 남겨 둬요.</li>
+  <li>Antenna를 열고 <strong>에이전트 → AI 앱</strong>으로 가세요. Mac에서 찾은 앱이 맨 위에 나와요.</li>
+  <li>ChatGPT 옆의 <strong>연결</strong>을 누르세요. Antenna가 그 앱 전용 에이전트(예: <code>chatgpt</code>)를 만들고, 무언가를 쓰기 전에 앱 설정에 정확히 무엇을 추가할지 먼저 보여 줘요. 설정 파일의 백업도 남겨 둬요.</li>
   <li>Claude Desktop(에이전트 <code>claude-desktop</code>)이나 Claude Code(<code>claude-code</code>)도 똑같이 하세요.</li>
-  <li>Antenna가 안내하면 각 앱을 다시 시작하세요. ChatGPT에서는 Settings → MCP servers → <strong>Restart</strong>예요. 앱이 Antenna를 쓰기 시작하면 바로 해당 줄이 <strong>Connected</strong>로 바뀌어요.</li>
+  <li>Antenna가 안내하면 각 앱을 다시 시작하세요. ChatGPT에서는 Settings → MCP servers → <strong>Restart</strong>예요. 앱이 Antenna를 쓰기 시작하면 바로 해당 줄이 <strong>연결됨</strong>으로 바뀌어요.</li>
 </ol>
 
 <h2>서로 메시지를 주고받게 하기</h2>
-<p><strong>Agents → Map</strong>을 열고 <code>chatgpt</code>에서 <code>claude-desktop</code>으로 끌어다 놓으세요. 같은 Mac에 있는 두 에이전트는 로컬 경로로 연결돼서, 메시지가 이 컴퓨터 밖으로 나가지 않아요. 이제 ChatGPT에게 이렇게 부탁해 보세요: “이 개요를 Claude에게 보내고 빠진 게 뭔지 물어봐 줘.” ChatGPT는 Antenna의 <code>send_message</code> 도구로 보내고, Claude는 다음에 메시지를 확인할 때 읽고 답하며, ChatGPT가 그 답을 읽어요.</p>
+<p><strong>에이전트 → 맵</strong>을 열고 <code>chatgpt</code>에서 <code>claude-desktop</code>으로 끌어다 놓으세요. 같은 Mac에 있는 두 에이전트는 로컬 경로로 연결돼서, 메시지가 이 컴퓨터 밖으로 나가지 않아요. 이제 ChatGPT에게 이렇게 부탁해 보세요: “이 개요를 Claude에게 보내고 빠진 게 뭔지 물어봐 줘.” ChatGPT는 Antenna의 <code>send_message</code> 도구로 보내고, Claude는 다음에 메시지를 확인할 때 읽고 답하며, ChatGPT가 그 답을 읽어요.</p>
 <p>ChatGPT 데스크톱 앱과 Codex는 설정 파일 하나를 함께 써서, 하나를 연결하면 둘 다 연결돼요. 에이전트 하나로 취급되고, 한 번에 둘 중 한쪽에서만 동작해요. 터미널에서 도는 코딩 에이전트 두 개라면 <a href="/guides/claude-code-and-codex-talk-to-each-other">Claude Code와 Codex</a> 가이드를 참고하세요.</p>
 
 <h2>각자 할 수 있는 일</h2>
@@ -29,7 +29,7 @@
 </details>
 <details>
   <summary>Claude Desktop과 Claude Code도 서로 대화할 수 있나요?</summary>
-  <p>네, 같은 방법이에요. <strong>Agents → AI apps</strong>에서 Claude Desktop을 연결하고, Claude Code도 연결한 다음(거기서 <strong>Connect</strong>를 누르거나 Code 모드로), <strong>Agents → Map</strong>에서 둘 사이에 선을 그으세요. 그러면 각자 Antenna의 도구로 서로 메시지를 보내고, 맵의 <strong>Show recent messages</strong>(최근 메시지 보기)에서 둘이 언제 메시지를 주고받았는지 확인할 수 있어요.</p>
+  <p>네, 같은 방법이에요. <strong>에이전트 → AI 앱</strong>에서 Claude Desktop을 연결하고, Claude Code도 연결한 다음(거기서 <strong>연결</strong>을 누르거나 Code 모드로), <strong>에이전트 → 맵</strong>에서 둘 사이에 선을 그으세요. 그러면 각자 Antenna의 도구로 서로 메시지를 보내고, 맵의 <strong>최근 메시지 보기</strong>에서 둘이 언제 메시지를 주고받았는지 확인할 수 있어요.</p>
 </details>
 <details>
   <summary>OpenAI나 Anthropic API를 쓰나요?</summary>

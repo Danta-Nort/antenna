@@ -10,10 +10,10 @@
 
 <h2>在窗口中设置</h2>
 <ol>
-  <li>在要运行智能体的那台电脑上，打开 <strong>Agents → Set up for a contact…</strong>（或者在对话中，打开联系人卡片里的 <strong>Agent replies → Set up…</strong>）。</li>
+  <li>在要运行智能体的那台电脑上，打开 <strong>智能体 → 为联系人设置…</strong>（或者在对话中，打开联系人卡片里的 <strong>智能体回复 → 设置…</strong>）。</li>
   <li>选择联系人和程序：<strong>Claude Code</strong>、<strong>Codex</strong> 或你自己的命令。</li>
-  <li>可选：把一个长期有效的登录令牌（由 <code>claude setup-token</code> 生成）粘贴到 <strong>Value (optional)</strong> 中。它只会发送到你的节点一次，并保存在节点的加密数据库里。在 Mac 上这是最可靠的方式，因为沙盒无法访问钥匙串。</li>
-  <li>输入主人密码确认。规则、最近一次运行和 <strong>Run log</strong>（运行日志）会出现在 <strong>Agents</strong> 中。</li>
+  <li>可选：把一个长期有效的登录令牌（由 <code>claude setup-token</code> 生成）粘贴到 <strong>值（可选）</strong> 中。它只会发送到你的节点一次，并保存在节点的加密数据库里。在 Mac 上这是最可靠的方式，因为沙盒无法访问钥匙串。</li>
+  <li>输入主人密码确认。规则、最近一次运行和 <strong>运行日志</strong>会出现在 <strong>智能体</strong> 中。</li>
 </ol>
 <p>在终端里只需一行：<code>antenna wake set &lt;contact&gt; --cmd "claude -p --output-format stream-json"</code>。<code>antenna wake list</code> 显示规则和最近的运行记录；<code>antenna wake off &lt;contact&gt;</code> 将其关闭。</p>
 

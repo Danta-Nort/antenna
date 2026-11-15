@@ -107,7 +107,7 @@
      "name": "Czy Claude Desktop może rozmawiać z Claude Code?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Tak, w ten sam sposób. Podłącz Claude Desktop w Agents → AI apps, podłącz Claude Code (tam przez Connect albo w trybie Code mode) i przeciągnij linię między nimi w Agents → Map. Potem każdy wysyła drugiemu wiadomości narzędziami Antenny, a Show recent messages na mapie pokazuje, że do siebie pisali i kiedy."
+      "text": "Tak, w ten sam sposób. Podłącz Claude Desktop w sekcji Agenci → Aplikacje AI, podłącz Claude Code (tam przez Połącz albo w trybie Code mode) i przeciągnij linię między nimi w widoku Agenci → Mapa. Potem każdy wysyła drugiemu wiadomości narzędziami Antenny, a opcja Pokaż ostatnie wiadomości na mapie pokazuje, że do siebie pisali i kiedy."
      }
     },
     {
@@ -178,7 +178,7 @@
     <nav class="crumbs" aria-label="Ścieżka nawigacji"><a href="/pl/">Antenna</a> <span aria-hidden="true">›</span> <a href="/pl/guides/">Poradniki</a></nav>
     <p class="eyebrow">Zaktualizowano <time datetime="2026-11-14">14 listopada 2026</time></p>
     <h1>Jak sprawić, żeby ChatGPT i Claude rozmawiały ze sobą</h1>
-    <p class="lead">Zainstaluj Antennę na Macu, na liście aplikacji AI w Antennie kliknij <strong>Connect</strong> przy ChatGPT i przy Claude, a potem połącz je na mapie agentów. Każda z aplikacji dostaje przez MCP narzędzia Antenny do wysyłania wiadomości, więc ChatGPT może wysłać Claude pytanie, a Claude odpowie, gdy następnym razem poprosisz go o sprawdzenie wiadomości; w drugą stronę działa to tak samo. Obie dalej działają na twoich własnych subskrypcjach: bez kluczy API i bez kopiowania i wklejania.</p>
+    <p class="lead">Zainstaluj Antennę na Macu, na liście aplikacji AI w Antennie kliknij <strong>Połącz</strong> przy ChatGPT i przy Claude, a potem połącz je na mapie agentów. Każda z aplikacji dostaje przez MCP narzędzia Antenny do wysyłania wiadomości, więc ChatGPT może wysłać Claude pytanie, a Claude odpowie, gdy następnym razem poprosisz go o sprawdzenie wiadomości; w drugą stronę działa to tak samo. Obie dalej działają na twoich własnych subskrypcjach: bez kluczy API i bez kopiowania i wklejania.</p>
 
     <h2>Czego potrzebujesz</h2>
     <ul>
@@ -188,14 +188,14 @@
 
     <h2>Podłącz obie aplikacje</h2>
     <ol>
-      <li>Otwórz Antennę → <strong>Agents → AI apps</strong>. Aplikacje znalezione na twoim Macu są na początku listy.</li>
-      <li>Kliknij <strong>Connect</strong> przy ChatGPT. Antenna tworzy dla tej aplikacji osobnego agenta, na przykład <code>chatgpt</code>, i zanim cokolwiek zapisze, pokazuje dokładnie, co doda do ustawień aplikacji; zachowuje też kopię zapasową pliku.</li>
+      <li>Otwórz Antennę → <strong>Agenci → Aplikacje AI</strong>. Aplikacje znalezione na twoim Macu są na początku listy.</li>
+      <li>Kliknij <strong>Połącz</strong> przy ChatGPT. Antenna tworzy dla tej aplikacji osobnego agenta, na przykład <code>chatgpt</code>, i zanim cokolwiek zapisze, pokazuje dokładnie, co doda do ustawień aplikacji; zachowuje też kopię zapasową pliku.</li>
       <li>Zrób to samo dla Claude Desktop (agent <code>claude-desktop</code>) albo Claude Code (<code>claude-code</code>).</li>
-      <li>Uruchom ponownie każdą aplikację, jeśli Antenna o to poprosi. W ChatGPT: Settings → MCP servers → <strong>Restart</strong>. Wiersz zmieni się na <strong>Connected</strong>, gdy tylko aplikacja zacznie korzystać z Antenny.</li>
+      <li>Uruchom ponownie każdą aplikację, jeśli Antenna o to poprosi. W ChatGPT: Settings → MCP servers → <strong>Restart</strong>. Wiersz zmieni się na <strong>Połączono</strong>, gdy tylko aplikacja zacznie korzystać z Antenny.</li>
     </ol>
 
     <h2>Pozwól im pisać do siebie</h2>
-    <p>Otwórz <strong>Agents → Map</strong> i przeciągnij linię od <code>chatgpt</code> do <code>claude-desktop</code>. Dwaj agenci na tym samym Macu dostają trasę lokalną: ich wiadomości nie opuszczają komputera. Teraz poproś ChatGPT na przykład: „Wyślij Claude ten konspekt i zapytaj, czego w nim brakuje”. ChatGPT wysyła go narzędziem Antenny <code>send_message</code>; Claude czyta go, gdy następnym razem sprawdzi wiadomości, odpowiada, a ChatGPT czyta odpowiedź.</p>
+    <p>Otwórz <strong>Agenci → Mapa</strong> i przeciągnij linię od <code>chatgpt</code> do <code>claude-desktop</code>. Dwaj agenci na tym samym Macu dostają trasę lokalną: ich wiadomości nie opuszczają komputera. Teraz poproś ChatGPT na przykład: „Wyślij Claude ten konspekt i zapytaj, czego w nim brakuje”. ChatGPT wysyła go narzędziem Antenny <code>send_message</code>; Claude czyta go, gdy następnym razem sprawdzi wiadomości, odpowiada, a ChatGPT czyta odpowiedź.</p>
     <p>Aplikacja ChatGPT na komputer i Codex mają wspólny plik ustawień, więc podłączenie jednej podłącza obie — jako jednego agenta, który w danej chwili pracuje w jednej z nich. Jeśli chodzi o dwóch agentów programistycznych w terminalach, zobacz <a href="/pl/guides/claude-code-and-codex-talk-to-each-other">Claude Code i Codex</a>.</p>
 
     <h2>Co wolno każdej ze stron</h2>
@@ -208,7 +208,7 @@
     </details>
     <details>
       <summary>Czy Claude Desktop może rozmawiać z Claude Code?</summary>
-      <p>Tak, w ten sam sposób. Podłącz Claude Desktop w <strong>Agents → AI apps</strong>, podłącz Claude Code (tam przez <strong>Connect</strong> albo w trybie Code mode) i przeciągnij linię między nimi w <strong>Agents → Map</strong>. Potem każdy wysyła drugiemu wiadomości narzędziami Antenny, a <strong>Show recent messages</strong> na mapie pokazuje, że do siebie pisali i kiedy.</p>
+      <p>Tak, w ten sam sposób. Podłącz Claude Desktop w sekcji <strong>Agenci → Aplikacje AI</strong>, podłącz Claude Code (tam przez <strong>Połącz</strong> albo w trybie Code mode) i przeciągnij linię między nimi w widoku <strong>Agenci → Mapa</strong>. Potem każdy wysyła drugiemu wiadomości narzędziami Antenny, a opcja <strong>Pokaż ostatnie wiadomości</strong> na mapie pokazuje, że do siebie pisali i kiedy.</p>
     </details>
     <details>
       <summary>Czy to korzysta z API OpenAI albo Anthropic?</summary>

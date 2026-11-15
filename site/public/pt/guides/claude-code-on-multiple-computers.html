@@ -175,7 +175,7 @@
     <h2>O que você ganha</h2>
     <ul>
       <li><strong>Um chat por sessão</strong>, seja qual for o computador em que ela roda. Uma sessão no servidor e outra no desktop ficam na mesma lista que os seus contatos.</li>
-      <li><strong>My devices</strong> (meus dispositivos): um cartão para cada computador seu, com o sistema e a versão do Antenna, o estado de saúde segundo as próprias verificações dele, os agentes e se cada um está conectado, e os pedidos que esperam por você lá.</li>
+      <li><strong>Meus dispositivos</strong>: um cartão para cada computador seu, com o sistema e a versão do Antenna, o estado de saúde segundo as próprias verificações dele, os agentes e se cada um está conectado, e os pedidos que esperam por você lá.</li>
       <li><strong>Aprovações de onde você estiver.</strong> Um pedido de um agente no servidor pode ser aprovado no seu Mac, com Touch ID ou com a senha do Mac. O servidor confere a assinatura e executa o pedido por conta própria.</li>
       <li><strong>Um botão de parar</strong> para cada agente em outro computador: ele para o agente e todos os processos que ele iniciou lá.</li>
       <li><strong>O mapa de agentes</strong>, onde você liga uma sessão de um computador a uma sessão de outro, para que elas escrevam uma para a outra.</li>
@@ -184,9 +184,9 @@
     <h2>Configure</h2>
     <ol>
       <li><strong>Instale o Antenna em cada computador</strong>: o app num Mac ou num desktop Linux, o nó num servidor Linux (<code>curl -fsSL https://antenna.contact/install.sh | sh</code>).</li>
-      <li><strong>Pareie os computadores entre si como seus.</strong> Crie um convite com <strong>This is my own computer (∞)</strong> (este é o meu próprio computador) marcado, abra-o no outro computador e digite em um lado o código que o outro mostra. Pareie cada computador com todos os outros que você quer ver ou conectar a partir dele: cada um precisa ter o outro em ∞.</li>
-      <li><strong>Dê um nome a cada sessão do Claude Code.</strong> Num desktop, inicie-a em Code mode pelo <code>+</code> do painel de agentes. Num servidor, na pasta do projeto, rode <code>antenna connect claude-code --agent api-dev --links mac --hello mac</code> e mantenha-a rodando com <code>antenna session start api-dev --dir ~/projects/api</code>; o guia <a href="/pt/guides/run-claude-code-on-a-vps">Claude Code numa VPS</a> tem todos os passos.</li>
-      <li><strong>Deixe o seu computador principal responder aos pedidos.</strong> No servidor, rode <code>antenna devices confirm mac</code> uma vez; num desktop, aceite a chave do computador principal em <strong>My devices</strong> → o cartão dele → <strong>Approvals</strong>.</li>
+      <li><strong>Pareie os computadores entre si como seus.</strong> Crie um convite com <strong>Este é o meu próprio computador (∞)</strong> marcado, abra-o no outro computador e digite em um lado o código que o outro mostra. Pareie cada computador com todos os outros que você quer ver ou conectar a partir dele: cada um precisa ter o outro em ∞.</li>
+      <li><strong>Dê um nome a cada sessão do Claude Code.</strong> Num desktop, inicie-a no modo Código pelo <code>+</code> do painel de agentes. Num servidor, na pasta do projeto, rode <code>antenna connect claude-code --agent api-dev --links mac --hello mac</code> e mantenha-a rodando com <code>antenna session start api-dev --dir ~/projects/api</code>; o guia <a href="/pt/guides/run-claude-code-on-a-vps">Claude Code numa VPS</a> tem todos os passos.</li>
+      <li><strong>Deixe o seu computador principal responder aos pedidos.</strong> No servidor, rode <code>antenna devices confirm mac</code> uma vez; num desktop, aceite a chave do computador principal em <strong>Meus dispositivos</strong> → o cartão dele → <strong>Aprovações</strong>.</li>
     </ol>
 
     <h2>Passando trabalho de um computador para outro</h2>

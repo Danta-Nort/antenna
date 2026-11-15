@@ -1,0 +1,124 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# The server node for ARM Linux (D-150), built and checked natively on GitHub's arm64 runner, which is free for public
+# repositories (the job is skipped in a private one, and off with the repository variable LINUX_ARM64=false).
+#
+# A workflow of its own, not a job of release.yml: release.yml's jobs run on the self-hosted Mac, which the public
+# repository does not have, and its run is cancelled when a release is published from the build machine. This one
+# needs nothing but GitHub's runner:
+#   on a `v*` tag   the core's clippy passes, every core test, the MCP smoke test; antenna-<ver>-linux-arm64.tar.gz with
+#                   the local model runtime; its install.sh check; then the archive and its .sha256 go into the tag's
+#                   draft release, where packaging/release-linux.sh signs them into the release manifest with every
+#                   other file. Only into a draft: a release that is already published keeps the manifest it was
+#                   signed with, and the archive stays a run artifact. A failure here does not hold the release back:
+#                   the release then simply has no ARM node.
+#   by hand         the same checks and the archive, as a run artifact only.
+name: linux-arm64
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write   # upload into the tag's draft release
+
+concurrency:
+  group: linux-arm64-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  node:
+    name: linux (arm64 node)
+    if: ${{ !github.event.repository.private && vars.LINUX_ARM64 != 'false' }}
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262   # v4.4.0
+
+      - id: v
+        name: Version (Cargo.toml) and tag
+        run: |
+          set -euo pipefail
+          v="$(packaging/version.sh)"
+          if [ "$GITHUB_REF_TYPE" = tag ] && [ "$GITHUB_REF_NAME" != "v$v" ]; then
+            echo "::error::tag $GITHUB_REF_NAME does not match the version in Cargo.toml ($v): expected v$v"
+            exit 1
+          fi
+          echo "version=$v" >> "$GITHUB_OUTPUT"
+          echo "commit=$(git rev-parse --short=12 HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Build packages (CI runner)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends protobuf-compiler cmake build-essential perl jq \
+            clang ninja-build pkg-config
+
+      - name: Rust (version from rust-toolchain.toml)
+        run: |
+          rustup show active-toolchain || rustup toolchain install
+          rustc --version
+
+      - name: Cargo cache
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830   # v4.3.0
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: linux-arm64-cargo-${{ hashFiles('Cargo.lock', 'rust-toolchain.toml') }}
+
+      # The core's own checks on arm64: the sandboxes' seccomp filters and the x86-only syscalls differ by architecture
+      - name: Core checks (clippy, all tests, MCP smoke test)
+        env:
+          ANTENNA_COMMIT: ${{ steps.v.outputs.commit }}
+        run: |
+          cargo clippy --workspace --all-targets --locked -- -D warnings
+          cargo clippy --workspace --lib --bins --locked -- -D clippy::unwrap_used -D clippy::panic
+          bash -c 'exec 7<Cargo.toml 8<Cargo.toml; cargo test --workspace --locked'
+          cargo build --locked -p antennad -p antenna-cli
+          python3 tools/mcp_smoke.py target/debug
+
+      - name: Build .tar.gz (the node with the local model runtime)
+        env:
+          VERSION: ${{ steps.v.outputs.version }}
+          ANTENNA_COMMIT: ${{ steps.v.outputs.commit }}
+        run: |
+          packaging/llama/build.sh "$RUNNER_TEMP/runtime"
+          LLAMA_DIR="$RUNNER_TEMP/runtime/llama" packaging/linux/build-tarball.sh
+
+      - name: Check install.sh from the archive (no systemd, in a temporary HOME)
+        run: packaging/linux/check-install.sh dist/antenna-${{ steps.v.outputs.version }}-linux-arm64.tar.gz
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02   # v4.6.2
+        with:
+          name: antenna-linux-arm64
+          path: |
+            dist/antenna-*-linux-arm64.tar.gz
+            dist/antenna-*-linux-arm64.tar.gz.sha256
+          if-no-files-found: error
+          retention-days: 14
+
+      # The draft appears when the release is prepared on the build machine (after the tag is pushed): wait for it up to
+      # two hours. Never into a published release: its signed manifest would not name the file.
+      - name: Into the tag's draft release
+        if: ${{ github.ref_type == 'tag' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+          VERSION: ${{ steps.v.outputs.version }}
+        run: |
+          set -euo pipefail
+          for _ in $(seq 1 240); do
+            draft="$(gh release view "$TAG" -R "$GITHUB_REPOSITORY" --json isDraft --jq .isDraft 2>/dev/null || true)"
+            [ -n "$draft" ] && break
+            sleep 30
+          done
+          case "$draft" in
+            true) gh release upload "$TAG" -R "$GITHUB_REPOSITORY" --clobber \
+                    "dist/antenna-$VERSION-linux-arm64.tar.gz" "dist/antenna-$VERSION-linux-arm64.tar.gz.sha256" ;;
+            false) echo "::warning::$TAG is already published: the ARM node stays a run artifact" ;;
+            *) echo "::error::no release $TAG after two hours"; exit 1 ;;
+          esac

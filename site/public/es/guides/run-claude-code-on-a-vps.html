@@ -184,9 +184,9 @@
     <p>El instalador lee la versión más reciente del manifiesto firmado, comprueba el archivo, instala <code>antennad</code> y <code>antenna</code> en <code>~/.local/bin</code> como servicio de usuario de systemd (sin necesidad de root) y crea tu nodo con una contraseña. La segunda línea mantiene el servicio en marcha cuando cierras la sesión. En Ubuntu o Fedora también puedes instalar el <code>.deb</code> o el <code>.rpm</code>.</p>
 
     <h2>2. Emparéjalo con tu portátil</h2>
-    <p>En tu portátil: <strong>New contact → Invite</strong> (nuevo contacto → invitar), ponle un nombre, marca <strong>This is my own computer (∞)</strong>, pulsa <strong>Create link</strong> y cópialo. En el servidor:</p>
+    <p>En tu portátil: <strong>Contacto nuevo → Invitar</strong>, ponle un nombre, marca <strong>Es mi propia computadora (∞)</strong>, pulsa <strong>Crear enlace</strong> y cópialo. En el servidor:</p>
     <pre><code>antenna join '&lt;link&gt;' --trust 5 --label mac</code></pre>
-    <p>No quites las comillas simples: el enlace contiene un <code>#</code>. Escribe en la terminal del servidor el código que muestra tu portátil y luego pulsa <strong>The contact confirmed — codes match</strong> (el contacto lo ha confirmado: los códigos coinciden) en el portátil. El nivel 5 es ∞ en los dos lados, así que el servidor cuenta como una computadora tuya.</p>
+    <p>No quites las comillas simples: el enlace contiene un <code>#</code>. Escribe en la terminal del servidor el código que muestra tu portátil y luego pulsa <strong>El contacto lo confirmó: los códigos coinciden</strong> en el portátil. El nivel 5 es ∞ en los dos lados, así que el servidor cuenta como una computadora tuya.</p>
 
     <h2>3. Inicia Claude Code a través de Antenna</h2>
     <pre><code>cd ~/projects/api
@@ -196,7 +196,7 @@
     <p>La línea con «connect» le da a la sesión su propio agente y su propio token, y saluda para que en tu portátil aparezca un chat llamado <code>api-dev</code>. La línea con «start» inicia Claude Code en el servidor tmux propio de Antenna (tu tmux no se toca). Conéctate una vez para responder a las primeras preguntas de Claude Code, como si confía en la carpeta, y luego sal con <code>Ctrl-b d</code>: sigue en marcha. Para Codex, usa <code>antenna connect codex</code> y <code>--cli codex</code>.</p>
 
     <h2>4. Háblale</h2>
-    <p>Escribe en el chat <code>api-dev</code> de tu portátil: “Ejecuta las pruebas de la migración y arregla lo que falle”. Cuando Claude Code está inactivo en su prompt, Antenna escribe una línea corta para que lea tu mensaje; nunca escribe el texto de un contacto ni responde por él a una pregunta. La ficha del servidor en <strong>My devices</strong> muestra su estado y sus agentes, y puedes aprobar sus peticiones desde el portátil.</p>
+    <p>Escribe en el chat <code>api-dev</code> de tu portátil: “Ejecuta las pruebas de la migración y arregla lo que falle”. Cuando Claude Code está inactivo en su prompt, Antenna escribe una línea corta para que lea tu mensaje; nunca escribe el texto de un contacto ni responde por él a una pregunta. La ficha del servidor en <strong>Mis dispositivos</strong> muestra su estado y sus agentes, y puedes aprobar sus peticiones desde el portátil.</p>
 
     <h2>Después de un reinicio</h2>
     <p>Las claves del nodo quedan bloqueadas cuando el servidor se reinicia: el servicio sigue en marcha, pero sus enlaces se quedan en silencio hasta que inicias sesión y ejecutas <code>antenna unlock</code>. Así, una copia del disco del servidor no le da tus claves a nadie. <code>antenna status</code> te dice si está bloqueado.</p>

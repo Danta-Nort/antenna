@@ -9,7 +9,7 @@
 </ul>
 
 <h2>1. İki bilgisayarı eşleştirin</h2>
-<p>Dizüstü bilgisayarınızda: <strong>New contact → Invite</strong>, <strong>This is my own computer (∞)</strong> seçeneğini işaretleyin, bağlantıyı oluşturun ve diğer bilgisayarda açın (sunucuda: <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>). Bir tarafın gösterdiği kodu diğerine girin. Artık iki taraf da birbirini kendi bilgisayarınız olarak görür. Ekran görüntülü adım adım anlatım <a href="/guides/run-claude-code-on-a-vps">VPS’te Claude Code</a> rehberinde; Codex için de aynısı geçerli.</p>
+<p>Dizüstü bilgisayarınızda: <strong>Yeni kişi → Davet et</strong>, <strong>Bu benim kendi bilgisayarım (∞)</strong> seçeneğini işaretleyin, bağlantıyı oluşturun ve diğer bilgisayarda açın (sunucuda: <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>). Bir tarafın gösterdiği kodu diğerine girin. Artık iki taraf da birbirini kendi bilgisayarınız olarak görür. Ekran görüntülü adım adım anlatım <a href="/guides/run-claude-code-on-a-vps">VPS’te Claude Code</a> rehberinde; Codex için de aynısı geçerli.</p>
 
 <h2>2. Codex oturumuna bir ad verin</h2>
 <p>Codex’in çalıştığı bilgisayarda, proje klasöründe:</p>
@@ -24,7 +24,7 @@ antenna session attach api-codex</code></pre>
 
 <h2>4. Dizüstünüzden ona yazın</h2>
 <p><code>api-codex</code> sohbetini açın ve yazın: “Testleri çalıştır, başarısız olanları düzelt ve neyi değiştirdiğini söyle.” Codex komut isteminde boşta beklerken Antenna, gelen kutusunu okumasını söyleyen yerleşik tek bir satır yazar. Sizin metninizi terminale asla yazmaz ve Codex’in sorduğu bir soruya asla bir şey yazmaz. Codex mesajı Antenna üzerinden okur, çalışır ve sohbette yanıt verir. <em>Deneysel.</em></p>
-<p>Yaptığı işi durdurması mı gerekiyor? Göndermeden önce <strong>Urgent: interrupt now</strong> seçeneğini açın. Antenna çalışan adımı bitirmek için bir kez Esc tuşuna basar, ardından Codex’i mesajınız için uyandırır. Ajanı ve başlattığı her şeyi durdurmak için dizüstünüzde <strong>My devices</strong> içinde diğer bilgisayarın kartını açın ve <strong>Stop agent and its processes…</strong> düğmesini <code>api-codex</code> satırında bulup basın.</p>
+<p>Yaptığı işi durdurması mı gerekiyor? Göndermeden önce <strong>Acil: şimdi yarıda kes</strong> seçeneğini açın. Antenna çalışan adımı bitirmek için bir kez Esc tuşuna basar, ardından Codex’i mesajınız için uyandırır. Ajanı ve başlattığı her şeyi durdurmak için dizüstünüzde <strong>Cihazlarım</strong> içinde diğer bilgisayarın kartını açın ve <strong>Ajanı ve işlemlerini durdur…</strong> düğmesini <code>api-codex</code> satırında bulup basın.</p>
 
 <h2>Masaüstünde: Code modu</h2>
 <p>Codex, Antenna uygulamasının kurulu olduğu bir Mac ya da Linux masaüstünde çalışıyorsa terminal adımlarını atlayabilirsiniz. Code modunda ajanlar panelindeki <code>+</code> düğmesine basın, Codex’i ve çalışma klasörünü seçin; Codex pencerenin içindeki bir sekmede çalışır ve aynı şekilde uyandırılır. Sohbetine, diğer her ajanınki gibi, öteki bilgisayarlarınızdan ulaşabilirsiniz.</p>

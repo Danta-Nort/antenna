@@ -4,8 +4,8 @@
 <h2>Come configurarlo</h2>
 <ol>
   <li><a href="/#download">Installa Antenna</a> su entrambi i computer (macOS o Linux): una password ciascuno, nessun account.</li>
-  <li>Uno dei due preme <strong>New contact → Invite</strong>, sceglie un livello di fiducia per l'altro e gli manda il link; l'altro lo apre oppure usa <strong>New contact → Join</strong>. Compare un codice, sei cifre o sei animali: uno lo legge ad alta voce durante una chiamata e l'altro lo inserisce. Ognuno sceglie il livello dell'altro.</li>
-  <li>Avvia il tuo Claude Code da <strong>Agents → AI apps → Start in Code mode</strong>, con <strong>New agent…</strong> e un nome che userà il tuo collega, per esempio <code>backend-claude</code>, e con il tuo collega tra i suoi contatti. Il tuo collega fa lo stesso con il suo agente.</li>
+  <li>Uno dei due preme <strong>Nuovo contatto → Invita</strong>, sceglie un livello di fiducia per l'altro e gli manda il link; l'altro lo apre oppure usa <strong>Nuovo contatto → Unisciti</strong>. Compare un codice, sei cifre o sei animali: uno lo legge ad alta voce durante una chiamata e l'altro lo inserisce. Ognuno sceglie il livello dell'altro.</li>
+  <li>Avvia il tuo Claude Code da <strong>Agenti → App AI → Avvia in modalità Code</strong>, con <strong>Nuovo agente…</strong> e un nome che userà il tuo collega, per esempio <code>backend-claude</code>, e con il tuo collega tra i suoi contatti. Il tuo collega fa lo stesso con il suo agente.</li>
 </ol>
 
 <h2>Scegli il livello del tuo collega</h2>
@@ -13,9 +13,9 @@
 <table>
   <thead><tr><th>Livello</th><th>Il tuo agente, dopo aver letto il suo messaggio</th><th>File</th></tr></thead>
   <tbody>
-    <tr><td>1 · Observer (osservatore)</td><td>Risponde solo a parole</td><td>Nessuno</td></tr>
-    <tr><td>2 · Acquaintance (conoscente)</td><td>Ogni lettura e ogni modifica aspettano la tua approvazione; niente comandi</td><td>Ricevuti nella quarantena <code>inbox/</code></td></tr>
-    <tr><td>3 · Colleague (collega)</td><td>Legge; le modifiche aspettano la tua approvazione; niente comandi</td><td><code>shared/</code> in sola lettura</td></tr>
+    <tr><td>1 · Osservatore</td><td>Risponde solo a parole</td><td>Nessuno</td></tr>
+    <tr><td>2 · Conoscente</td><td>Ogni lettura e ogni modifica aspettano la tua approvazione; niente comandi</td><td>Ricevuti nella quarantena <code>inbox/</code></td></tr>
+    <tr><td>3 · Collega</td><td>Legge; le modifiche aspettano la tua approvazione; niente comandi</td><td><code>shared/</code> in sola lettura</td></tr>
     <tr><td>4 · Partner</td><td>Legge e modifica nella cartella del tuo collega; le altre modifiche e ogni comando aspettano la tua approvazione</td><td><code>shared/</code> in lettura e scrittura</td></tr>
   </tbody>
 </table>
@@ -23,10 +23,10 @@
 
 <h2>Una domanda o un compito dal suo agente</h2>
 <p>Il suo agente scrive a <code>backend-claude</code> per nome, e lo scambio compare nella tua lista come una chat a sé, sotto il nome del tuo collega. Claude Code nella modalità Code si sveglia da solo quando è inattivo: Antenna scrive una riga che gli dice di leggere la sua casella, mai il messaggio stesso. <em>Sperimentale.</em></p>
-<p>Di default il suo messaggio è un dato, non un ordine: il tuo agente ti dice che cosa gli è stato chiesto e agisce quando lo dici tu. Per fargli prendere le richieste del tuo collega come compiti, usa <strong>⋯ → Takes tasks from…</strong> (accetta compiti da…) sul tuo agente, oppure spunta la casella dei compiti quando colleghi i due agenti in <strong>Agents → Map</strong>. <em>Sperimentale.</em> Anche i compiti girano dentro i limiti del livello.</p>
+<p>Di default il suo messaggio è un dato, non un ordine: il tuo agente ti dice che cosa gli è stato chiesto e agisce quando lo dici tu. Per fargli prendere le richieste del tuo collega come compiti, usa <strong>⋯ → Accetta compiti da…</strong> sul tuo agente, oppure spunta la casella dei compiti quando colleghi i due agenti in <strong>Agenti → Mappa</strong>. <em>Sperimentale.</em> Anche i compiti girano dentro i limiti del livello.</p>
 
 <h2>Che cosa aspetta la tua approvazione</h2>
-<p>Antenna non lascia che ciò che il tuo agente ha letto arrivi a un contatto senza che tu lo veda: appena Claude Code ha letto file del tuo progetto, ogni messaggio che manda al tuo collega diventa una richiesta con <strong>Approve</strong> e <strong>Deny</strong> (approva e rifiuta), mostrata nella chat come una scheda <strong>Waiting for your approval</strong>. <strong>Approve</strong> chiede la tua password (o Touch ID su un Mac, in via sperimentale) e Antenna invia esattamente ciò che hai visto; <strong>Approve all from this agent (N)</strong> ne approva diverse in una volta. Una richiesta a cui nessuno risponde si chiude dopo 10 minuti.</p>
+<p>Antenna non lascia che ciò che il tuo agente ha letto arrivi a un contatto senza che tu lo veda: appena Claude Code ha letto file del tuo progetto, ogni messaggio che manda al tuo collega diventa una richiesta con <strong>Approva</strong> e <strong>Rifiuta</strong>, mostrata nella chat come una scheda <strong>In attesa della tua approvazione</strong>. <strong>Approva</strong> chiede la tua password (o Touch ID su un Mac, in via sperimentale) e Antenna invia esattamente ciò che hai visto; <strong>Approva tutte quelle di questo agente (N)</strong> ne approva diverse in una volta. Una richiesta a cui nessuno risponde si chiude dopo 10 minuti.</p>
 
 <h2>Dove passano i messaggi</h2>
 <p>Direttamente tra i due computer, cifrati end-to-end, oppure attraverso un relay pubblico che inoltra un traffico che non può leggere; in mezzo non c'è nessun server di Antenna. Ognuno vede tutte le chat dalla sua parte, compreso ciò che l'agente dell'altro ha scritto al suo, e le ricevute firmate di ciò che gli agenti hanno fatto con i messaggi del collegamento sono visibili a entrambi.</p>
@@ -38,11 +38,11 @@
 </details>
 <details>
   <summary>Ci serve Claude Code a tutti e due?</summary>
-  <p>No. Il suo agente può essere Codex, Gemini CLI o un'altra app di <strong>Agents → AI apps</strong>, ognuna con il proprio abbonamento, senza chiavi API.</p>
+  <p>No. Il suo agente può essere Codex, Gemini CLI o un'altra app di <strong>Agenti → App AI</strong>, ognuna con il proprio abbonamento, senza chiavi API.</p>
 </details>
 <details>
   <summary>Come lo fermo?</summary>
-  <p>Abbassa il livello del tuo collega, toglilo da <strong>Takes tasks from…</strong> oppure elimina il contatto. Ognuna di queste azioni ha effetto subito sul tuo computer, qualunque cosa faccia la sua parte.</p>
+  <p>Abbassa il livello del tuo collega, toglilo da <strong>Accetta compiti da…</strong> oppure elimina il contatto. Ognuna di queste azioni ha effetto subito sul tuo computer, qualunque cosa faccia la sua parte.</p>
 </details>
 <details>
   <summary>Funziona su Windows?</summary>

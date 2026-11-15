@@ -175,7 +175,7 @@
     <h2>你能得到什么</h2>
     <ul>
       <li><strong>每个会话一个聊天</strong>，不管它在哪台电脑上运行。服务器上的会话和台式机上的会话，与你的联系人出现在同一个列表里。</li>
-      <li><strong>My devices</strong>（我的设备）：你的每台电脑都有一张卡片，显示它的系统和 Antenna 版本、它自检得出的运行状况、它上面的智能体及各自是否已连接，以及在那里等你处理的请求。</li>
+      <li><strong>我的设备</strong>：你的每台电脑都有一张卡片，显示它的系统和 Antenna 版本、它自检得出的运行状况、它上面的智能体及各自是否已连接，以及在那里等你处理的请求。</li>
       <li><strong>在你所在的地方审批。</strong>服务器上智能体发来的请求，可以在你的 Mac 上用 Touch ID 或 Mac 的密码批准。服务器会验证签名，然后自己执行这个请求。</li>
       <li><strong>停止按钮</strong>：其他电脑上的每个智能体都有一个，它会停止这个智能体以及它在那台电脑上启动的所有进程。</li>
       <li><strong>智能体地图</strong>：在这里把一台电脑上的会话和另一台电脑上的会话连起来，让它们互相写消息。</li>
@@ -184,9 +184,9 @@
     <h2>设置步骤</h2>
     <ol>
       <li><strong>在每台电脑上安装 Antenna</strong>：Mac 或 Linux 桌面装应用，Linux 服务器装节点（<code>curl -fsSL https://antenna.contact/install.sh | sh</code>）。</li>
-      <li><strong>把这些电脑作为你自己的电脑互相配对。</strong>创建邀请时勾选 <strong>This is my own computer (∞)</strong>，在另一台电脑上打开它，把一边显示的验证码输入到另一边。你想从某台电脑查看或连接哪台电脑，就把这两台配对：双方都必须把对方设为 ∞。</li>
+      <li><strong>把这些电脑作为你自己的电脑互相配对。</strong>创建邀请时勾选 <strong>这是我自己的电脑（∞）</strong>，在另一台电脑上打开它，把一边显示的验证码输入到另一边。你想从某台电脑查看或连接哪台电脑，就把这两台配对：双方都必须把对方设为 ∞。</li>
       <li><strong>给每个 Claude Code 会话起个名字。</strong>在台式机上，从智能体面板的 <code>+</code> 以 Code 模式启动它。在服务器上，进入项目文件夹运行 <code>antenna connect claude-code --agent api-dev --links mac --hello mac</code>，再用 <code>antenna session start api-dev --dir ~/projects/api</code> 让它保持运行；完整步骤见 <a href="/zh/guides/run-claude-code-on-a-vps">在 VPS 上运行 Claude Code</a>。</li>
-      <li><strong>让你的主力电脑来处理请求。</strong>在服务器上运行一次 <code>antenna devices confirm mac</code>；在台式机上，到 <strong>My devices</strong> → 对应卡片 → <strong>Approvals</strong> 中接受主力电脑的密钥。</li>
+      <li><strong>让你的主力电脑来处理请求。</strong>在服务器上运行一次 <code>antenna devices confirm mac</code>；在台式机上，到 <strong>我的设备</strong> → 对应卡片 → <strong>批准</strong> 中接受主力电脑的密钥。</li>
     </ol>
 
     <h2>在电脑之间流转工作</h2>

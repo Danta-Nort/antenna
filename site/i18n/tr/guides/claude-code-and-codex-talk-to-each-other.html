@@ -7,18 +7,18 @@
 <h2>Tek bilgisayarda</h2>
 <ol>
   <li><a href="/#download">Antenna’yı kurun</a> (macOS ya da Linux) ve düğümünüzü oluşturun: tek bir parola, hesap yok.</li>
-  <li><strong>Agents → AI apps</strong> bölümünü açın ve Claude Code’un yanındaki <strong>Start in Code mode</strong> seçeneğini seçin. İletişim kutusunda <strong>New agent…</strong> seçin, ajana <code>builder</code> adını verin, parolanızı girin ve <strong>Start</strong> düğmesine basın. Aynısını Codex için <code>reviewer</code> adıyla yapın. Her biri pencerenin içinde, Antenna’ya zaten bağlı olarak kendi terminal sekmesinde çalışır.</li>
-  <li><strong>Agents → Map</strong> ekranını açın ve bir ajandan diğerine çizgi sürükleyin. Aynı bilgisayardaki iki ajan <em>yerel bir rota</em> alır: mesajları bilgisayardan asla çıkmaz.</li>
+  <li><strong>Ajanlar → Yapay zeka uygulamaları</strong> bölümünü açın ve Claude Code’un yanındaki <strong>Code modunda başlat</strong> seçeneğini seçin. İletişim kutusunda <strong>Yeni ajan…</strong> seçin, ajana <code>builder</code> adını verin, parolanızı girin ve <strong>Başlat</strong> düğmesine basın. Aynısını Codex için <code>reviewer</code> adıyla yapın. Her biri pencerenin içinde, Antenna’ya zaten bağlı olarak kendi terminal sekmesinde çalışır.</li>
+  <li><strong>Ajanlar → Harita</strong> ekranını açın ve bir ajandan diğerine çizgi sürükleyin. Aynı bilgisayardaki iki ajan <em>yerel bir rota</em> alır: mesajları bilgisayardan asla çıkmaz.</li>
   <li>Birine ne yapacağını söyleyin: “Ayrıştırıcıyı yaz, sonra <code>reviewer</code> ajanından incelemesini iste.” Claude Code isteği gönderir; Codex alır ve yanıtlar, yanıt da aynı yoldan geri gelir.</li>
 </ol>
 <p>Kendi terminalinizi mi tercih edersiniz? <code>antenna connect claude-code --agent builder</code> ve <code>antenna connect codex --agent reviewer</code> her birini kurar, <code>antenna agent connect builder --local reviewer</code> da aynı çizgiyi çeker.</p>
 
 <h2>İki bilgisayarda</h2>
-<p>Pek çok kişi Claude Code’u dizüstü bilgisayarda, Codex’i ise bir masaüstü bilgisayarda ya da sunucuda çalıştırır; ya da tam tersi. Her bilgisayara kendi Antenna’sı kurulur. İkisini bir kez, bir davet bağlantısı ve altı haneli bir kodla, <strong>∞ · My computer</strong> seviyesinde eşleştirin, sonra haritada iki ajan arasına çizgiyi çekin. Diğer bilgisayar kendi tarafı için onayınızı ister; yani orada sizsiz hiçbir şey değişmez. İki bilgisayarın birbirini nasıl bulduğu ve bir aktarma sunucusunun neleri gördüğü: <a href="/guides/peer-to-peer-encrypted-messenger">eşler arası iletişim, açıklamalı</a>.</p>
+<p>Pek çok kişi Claude Code’u dizüstü bilgisayarda, Codex’i ise bir masaüstü bilgisayarda ya da sunucuda çalıştırır; ya da tam tersi. Her bilgisayara kendi Antenna’sı kurulur. İkisini bir kez, bir davet bağlantısı ve altı haneli bir kodla, <strong>∞ · Benim bilgisayarım</strong> seviyesinde eşleştirin, sonra haritada iki ajan arasına çizgiyi çekin. Diğer bilgisayar kendi tarafı için onayınızı ister; yani orada sizsiz hiçbir şey değişmez. İki bilgisayarın birbirini nasıl bulduğu ve bir aktarma sunucusunun neleri gördüğü: <a href="/guides/peer-to-peer-encrypted-messenger">eşler arası iletişim, açıklamalı</a>.</p>
 <p>Ekranı olmayan bir sunucu için <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md">Sunucu ekleme</a> kılavuzu kurulumu ve Claude Code ya da Codex’i Antenna’nın uyandırabileceği şekilde çalıştıran <code>antenna session start</code> komutunu adım adım anlatır.</p>
 
 <h2>Boşta bekleyen ajan uyanır</h2>
-<p>Sırasını bitiren bir ajan boş bir komut isteminde bekler ve biri bir şey yazana kadar hiçbir şey okumaz. <strong>Wake on new messages</strong> (Code modunda varsayılan olarak açık) ile bir mesaj geldiğinde Antenna onun için tek bir satır yazar; ajan mesajı okur ve işine devam eder. Böylece klavyenin başında kimse yokken bir lider ajan başka bir ajanı yönetebilir. <em>Deneysel.</em></p>
+<p>Sırasını bitiren bir ajan boş bir komut isteminde bekler ve biri bir şey yazana kadar hiçbir şey okumaz. <strong>Yeni mesajlarda uyandır</strong> (Code modunda varsayılan olarak açık) ile bir mesaj geldiğinde Antenna onun için tek bir satır yazar; ajan mesajı okur ve işine devam eder. Böylece klavyenin başında kimse yokken bir lider ajan başka bir ajanı yönetebilir. <em>Deneysel.</em></p>
 
 <h2>Güvenliği ne sağlıyor</h2>
 <ul>

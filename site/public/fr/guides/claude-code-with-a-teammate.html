@@ -107,7 +107,7 @@
      "name": "Faut-il que nous ayons tous les deux Claude Code ?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Non. Son agent peut être Codex, Gemini CLI ou une autre app de Agents → AI apps, chacune avec son propre abonnement, sans clé d’API."
+      "text": "Non. Son agent peut être Codex, Gemini CLI ou une autre app de Agents → Apps IA, chacune avec son propre abonnement, sans clé d’API."
      }
     },
     {
@@ -115,7 +115,7 @@
      "name": "Comment tout arrêter ?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Baissez le niveau de votre collègue, retirez-le de Takes tasks from… ou supprimez le contact. Chacune de ces actions prend effet immédiatement sur votre ordinateur, quoi que fasse son côté."
+      "text": "Baissez le niveau de votre collègue, retirez-le dans Accepte les tâches de… ou supprimez le contact. Chacune de ces actions prend effet immédiatement sur votre ordinateur, quoi que fasse son côté."
      }
     },
     {
@@ -175,8 +175,8 @@
     <h2>Mise en place</h2>
     <ol>
       <li><a href="/fr/#download">Installez Antenna</a> sur les deux ordinateurs (macOS ou Linux) : un mot de passe chacun, aucun compte.</li>
-      <li>L’un de vous clique sur <strong>New contact → Invite</strong>, choisit un niveau de confiance pour l’autre et lui envoie le lien ; l’autre l’ouvre ou passe par <strong>New contact → Join</strong>. Un code s’affiche, six chiffres ou six animaux : l’un le lit à voix haute pendant un appel, l’autre le saisit. Chacun choisit le niveau de l’autre.</li>
-      <li>Lancez votre Claude Code depuis <strong>Agents → AI apps → Start in Code mode</strong>, avec <strong>New agent…</strong> et un nom que votre collègue utilisera, par exemple <code>backend-claude</code>, et avec votre collègue parmi ses contacts. Votre collègue connecte son agent de la même façon.</li>
+      <li>L’un de vous clique sur <strong>Nouveau contact → Inviter</strong>, choisit un niveau de confiance pour l’autre et lui envoie le lien ; l’autre l’ouvre ou passe par <strong>Nouveau contact → Rejoindre</strong>. Un code s’affiche, six chiffres ou six animaux : l’un le lit à voix haute pendant un appel, l’autre le saisit. Chacun choisit le niveau de l’autre.</li>
+      <li>Lancez votre Claude Code depuis <strong>Agents → Apps IA → Lancer en mode Code</strong>, avec <strong>Nouvel agent…</strong> et un nom que votre collègue utilisera, par exemple <code>backend-claude</code>, et avec votre collègue parmi ses contacts. Votre collègue connecte son agent de la même façon.</li>
     </ol>
 
     <h2>Choisir le niveau de votre collègue</h2>
@@ -184,20 +184,20 @@
     <table>
       <thead><tr><th>Niveau</th><th>Votre agent, après avoir lu son message</th><th>Fichiers</th></tr></thead>
       <tbody>
-        <tr><td>1 · Observer (observateur)</td><td>Répond uniquement par du texte</td><td>Aucun</td></tr>
-        <tr><td>2 · Acquaintance (connaissance)</td><td>Chaque lecture et chaque modification attendent votre accord ; aucune commande</td><td>Reçus en quarantaine dans <code>inbox/</code></td></tr>
-        <tr><td>3 · Colleague (collègue)</td><td>Lit ; les modifications attendent votre accord ; aucune commande</td><td><code>shared/</code> en lecture seule</td></tr>
-        <tr><td>4 · Partner (partenaire)</td><td>Lit et modifie dans le dossier de votre collègue ; les autres modifications et toutes les commandes attendent votre accord</td><td><code>shared/</code> en lecture et écriture</td></tr>
+        <tr><td>1 · Observateur</td><td>Répond uniquement par du texte</td><td>Aucun</td></tr>
+        <tr><td>2 · Connaissance</td><td>Chaque lecture et chaque modification attendent votre accord ; aucune commande</td><td>Reçus en quarantaine dans <code>inbox/</code></td></tr>
+        <tr><td>3 · Collègue</td><td>Lit ; les modifications attendent votre accord ; aucune commande</td><td><code>shared/</code> en lecture seule</td></tr>
+        <tr><td>4 · Partenaire</td><td>Lit et modifie dans le dossier de votre collègue ; les autres modifications et toutes les commandes attendent votre accord</td><td><code>shared/</code> en lecture et écriture</td></tr>
       </tbody>
     </table>
     <p>Aux niveaux 1 et 2, votre collègue ne voit jamais votre adresse IP : la liaison passe uniquement par un relais. Réservez ∞ à vos propres ordinateurs ; il envoie fichiers et secrets sans demander. Changez le niveau dans la fiche du contact avec votre mot de passe : un niveau plus bas s’applique immédiatement, même à une session qui a déjà lu ses messages.</p>
 
     <h2>Une question ou une tâche venant de son agent</h2>
     <p>Son agent écrit à <code>backend-claude</code> par son nom, et l’échange apparaît dans votre liste comme une conversation à part, sous le nom de votre collègue. Claude Code en mode Code se réveille tout seul quand il est inactif : Antenna tape une ligne qui lui dit de lire sa boîte de réception, jamais le message lui-même. <em>Expérimental.</em></p>
-    <p>Par défaut, son message est une donnée, pas un ordre : votre agent vous dit ce qui a été demandé et agit sur votre parole. Pour qu’il traite les demandes de votre collègue comme des tâches, utilisez <strong>⋯ → Takes tasks from…</strong> (accepte les tâches de…) sur votre agent, ou cochez la case des tâches en reliant les deux agents dans <strong>Agents → Map</strong>. <em>Expérimental.</em> Les tâches restent exécutées dans les limites du niveau.</p>
+    <p>Par défaut, son message est une donnée, pas un ordre : votre agent vous dit ce qui a été demandé et agit sur votre parole. Pour qu’il traite les demandes de votre collègue comme des tâches, utilisez <strong>⋯ → Accepte les tâches de…</strong> sur votre agent, ou cochez la case des tâches en reliant les deux agents dans <strong>Agents → Carte</strong>. <em>Expérimental.</em> Les tâches restent exécutées dans les limites du niveau.</p>
 
     <h2>Ce qui attend votre accord</h2>
-    <p>Antenna ne laisse pas ce que votre agent a lu filer vers un contact à votre insu : dès que Claude Code a lu des fichiers de votre projet, chaque message qu’il envoie à votre collègue devient une demande avec <strong>Approve</strong> et <strong>Deny</strong> (approuver, refuser), affichée dans la conversation sous forme de carte <strong>Waiting for your approval</strong>. <strong>Approve</strong> demande votre mot de passe (ou Touch ID sur un Mac, en expérimental), puis Antenna envoie exactement ce que vous avez vu ; <strong>Approve all from this agent (N)</strong> en approuve plusieurs d’un coup. Une demande restée sans réponse se ferme au bout de 10 minutes.</p>
+    <p>Antenna ne laisse pas ce que votre agent a lu filer vers un contact à votre insu : dès que Claude Code a lu des fichiers de votre projet, chaque message qu’il envoie à votre collègue devient une demande avec <strong>Approuver</strong> et <strong>Refuser</strong>, affichée dans la conversation sous forme de carte <strong>En attente de votre accord</strong>. <strong>Approuver</strong> demande votre mot de passe (ou Touch ID sur un Mac, en expérimental), puis Antenna envoie exactement ce que vous avez vu ; <strong>Tout approuver de cet agent (N)</strong> en approuve plusieurs d’un coup. Une demande restée sans réponse se ferme au bout de 10 minutes.</p>
 
     <h2>Par où passent les messages</h2>
     <p>Directement d’un ordinateur à l’autre, chiffrés de bout en bout, ou via un relais public qui transmet un trafic qu’il ne peut pas lire ; aucun serveur d’Antenna ne se trouve entre les deux. Chacun voit toutes les conversations de son côté, y compris ce que l’agent de l’autre a écrit au sien, et vous voyez tous les deux les reçus signés de ce que les agents ont fait des messages de la liaison.</p>
@@ -209,11 +209,11 @@
     </details>
     <details>
       <summary>Faut-il que nous ayons tous les deux Claude Code ?</summary>
-      <p>Non. Son agent peut être Codex, Gemini CLI ou une autre app de <strong>Agents → AI apps</strong>, chacune avec son propre abonnement, sans clé d’API.</p>
+      <p>Non. Son agent peut être Codex, Gemini CLI ou une autre app de <strong>Agents → Apps IA</strong>, chacune avec son propre abonnement, sans clé d’API.</p>
     </details>
     <details>
       <summary>Comment tout arrêter ?</summary>
-      <p>Baissez le niveau de votre collègue, retirez-le de <strong>Takes tasks from…</strong> ou supprimez le contact. Chacune de ces actions prend effet immédiatement sur votre ordinateur, quoi que fasse son côté.</p>
+      <p>Baissez le niveau de votre collègue, retirez-le dans <strong>Accepte les tâches de…</strong> ou supprimez le contact. Chacune de ces actions prend effet immédiatement sur votre ordinateur, quoi que fasse son côté.</p>
     </details>
     <details>
       <summary>Est-ce que ça marche sous Windows ?</summary>

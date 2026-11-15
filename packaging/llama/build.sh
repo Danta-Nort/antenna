@@ -54,8 +54,9 @@ FLAGS=(
   -DGGML_NATIVE=OFF
 )
 case "$(uname -s)-$(uname -m)" in
-  Linux-x86_64)
-    # The CPU variants chosen at run time (AVX2, AVX-512, …), as upstream's Linux release; libraries next to the binary.
+  Linux-x86_64 | Linux-aarch64)
+    # The CPU variants chosen at run time (x86-64: AVX2, AVX-512, …; arm64: NEON dot product, SVE, …), as upstream's
+    # Linux releases; libraries next to the binary.
     FLAGS+=(-DBUILD_SHARED_LIBS=ON -DGGML_BACKEND_DL=ON -DGGML_CPU_ALL_VARIANTS=ON
       "-DCMAKE_INSTALL_RPATH=\$ORIGIN" -DCMAKE_BUILD_WITH_INSTALL_RPATH=ON)
     ;;

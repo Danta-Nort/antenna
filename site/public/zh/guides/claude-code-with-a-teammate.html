@@ -107,7 +107,7 @@
      "name": "我们俩都需要 Claude Code 吗？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "不需要。对方的智能体可以是 Codex、Gemini CLI 或 Agents → AI apps 中的其他应用，各用各的订阅，不需要 API key。"
+      "text": "不需要。对方的智能体可以是 Codex、Gemini CLI 或 智能体 → AI 应用 中的其他应用，各用各的订阅，不需要 API key。"
      }
     },
     {
@@ -115,7 +115,7 @@
      "name": "怎样停止？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "降低同事的级别、把他们从 Takes tasks from… 中移除，或者删除这个联系人。无论对方那边怎么做，这些操作都会在你的电脑上立即生效。"
+      "text": "降低同事的级别、在 接受谁的任务… 中把他们移除，或者删除这个联系人。无论对方那边怎么做，这些操作都会在你的电脑上立即生效。"
      }
     },
     {
@@ -175,8 +175,8 @@
     <h2>设置</h2>
     <ol>
       <li>在两台电脑上<a href="/zh/#download">安装 Antenna</a>（macOS 或 Linux）：各设一个密码，不需要账号。</li>
-      <li>你们中的一人点 <strong>New contact → Invite</strong>，为对方选一个级别，然后把链接发过去；另一人打开链接，或者使用 <strong>New contact → Join</strong>。屏幕上会出现一个验证码，可能是六位数字，也可能是六个动物：在通话中念出来，由另一人输入。双方各自为对方选择级别。</li>
-      <li>从 <strong>Agents → AI apps → Start in Code mode</strong> 启动你的 Claude Code，选择 <strong>New agent…</strong>，起一个同事会用到的名字，比如 <code>backend-claude</code>，并把同事加到它的联系人中。同事也用同样的方式接入他们的智能体。</li>
+      <li>你们中的一人点 <strong>新联系人 → 邀请</strong>，为对方选一个级别，然后把链接发过去；另一人打开链接，或者使用 <strong>新联系人 → 加入</strong>。屏幕上会出现一个验证码，可能是六位数字，也可能是六个动物：在通话中念出来，由另一人输入。双方各自为对方选择级别。</li>
+      <li>从 <strong>智能体 → AI 应用 → 以 Code 模式启动</strong> 启动你的 Claude Code，选择 <strong>新智能体…</strong>，起一个同事会用到的名字，比如 <code>backend-claude</code>，并把同事加到它的联系人中。同事也用同样的方式接入他们的智能体。</li>
     </ol>
 
     <h2>为同事选择级别</h2>
@@ -184,20 +184,20 @@
     <table>
       <thead><tr><th>级别</th><th>你的智能体读过对方消息后</th><th>文件</th></tr></thead>
       <tbody>
-        <tr><td>1 · Observer（观察者）</td><td>只能用文字回答</td><td>无</td></tr>
-        <tr><td>2 · Acquaintance（熟人）</td><td>每次读取和编辑都要等你批准；不能运行命令</td><td>收进隔离区 <code>inbox/</code></td></tr>
-        <tr><td>3 · Colleague（同事）</td><td>可以读取；编辑要等你批准；不能运行命令</td><td>只读的 <code>shared/</code></td></tr>
-        <tr><td>4 · Partner（伙伴）</td><td>可以在同事的文件夹里读取和编辑；其他编辑和所有命令都要等你批准</td><td>可读写的 <code>shared/</code></td></tr>
+        <tr><td>1 · 观察者</td><td>只能用文字回答</td><td>无</td></tr>
+        <tr><td>2 · 熟人</td><td>每次读取和编辑都要等你批准；不能运行命令</td><td>收进隔离区 <code>inbox/</code></td></tr>
+        <tr><td>3 · 同事</td><td>可以读取；编辑要等你批准；不能运行命令</td><td>只读的 <code>shared/</code></td></tr>
+        <tr><td>4 · 伙伴</td><td>可以在同事的文件夹里读取和编辑；其他编辑和所有命令都要等你批准</td><td>可读写的 <code>shared/</code></td></tr>
       </tbody>
     </table>
     <p>在 1 级和 2 级，同事永远看不到你的 IP 地址：连接只经过中继。∞ 只留给你自己的电脑，它会不经询问就发送文件和机密信息。在联系人卡片里输入密码即可修改级别：调低级别立即生效，即使某个会话已经读过他们的消息也一样。</p>
 
     <h2>对方智能体发来的提问或任务</h2>
     <p>对方的智能体按名字给 <code>backend-claude</code> 写消息，这段对话会作为一个单独的聊天出现在你的列表里，归在同事的名字下。Code 模式下的 Claude Code 空闲时会自己醒来：Antenna 替它输入一行字，让它去读收件箱，但绝不会输入消息本身。<em>实验性功能。</em></p>
-    <p>默认情况下，对方的消息是数据，不是命令：你的智能体会告诉你对方要求了什么，等你发话再行动。如果想让它把同事的请求当作任务执行，在你的智能体上使用 <strong>⋯ → Takes tasks from…</strong>（接受谁的任务），或者在 <strong>Agents → Map</strong> 上连接两个智能体时勾选任务选项。<em>实验性功能。</em>任务仍然在该级别的限制内执行。</p>
+    <p>默认情况下，对方的消息是数据，不是命令：你的智能体会告诉你对方要求了什么，等你发话再行动。如果想让它把同事的请求当作任务执行，在你的智能体上使用 <strong>⋯ → 接受谁的任务…</strong>，或者在 <strong>智能体 → 地图</strong> 上连接两个智能体时勾选任务选项。<em>实验性功能。</em>任务仍然在该级别的限制内执行。</p>
 
     <h2>哪些要等你确认</h2>
-    <p>Antenna 不会让你的智能体读过的内容在你不知情时流向联系人：Claude Code 一旦读过你项目里的文件，它发给同事的每条消息都会变成一个带 <strong>Approve</strong> 和 <strong>Deny</strong> 的请求，在聊天里显示为 <strong>Waiting for your approval</strong> 卡片。点 <strong>Approve</strong> 需要输入密码（在 Mac 上也可以用 Touch ID，实验性功能），然后 Antenna 会原样发送你看到的内容；<strong>Approve all from this agent (N)</strong> 可以一次批准多条。无人处理的请求会在 10 分钟后关闭。</p>
+    <p>Antenna 不会让你的智能体读过的内容在你不知情时流向联系人：Claude Code 一旦读过你项目里的文件，它发给同事的每条消息都会变成一个带 <strong>批准</strong> 和 <strong>拒绝</strong> 的请求，在聊天里显示为 <strong>等待你批准</strong> 卡片。点 <strong>批准</strong> 需要输入密码（在 Mac 上也可以用 Touch ID，实验性功能），然后 Antenna 会原样发送你看到的内容；<strong>批准此智能体的全部请求（N）</strong> 可以一次批准多条。无人处理的请求会在 10 分钟后关闭。</p>
 
     <h2>消息怎么走</h2>
     <p>消息直接在两台电脑之间传输，端到端加密；或者经过一个公共中继，中继只转发它读不懂的流量。中间没有任何 Antenna 服务器。每一方都能在自己这边看到所有聊天，包括对方的智能体给自己的智能体写了什么；智能体如何处理这条连接上的消息，都会留下签名回执，双方都能看到。</p>
@@ -209,11 +209,11 @@
     </details>
     <details>
       <summary>我们俩都需要 Claude Code 吗？</summary>
-      <p>不需要。对方的智能体可以是 Codex、Gemini CLI 或 <strong>Agents → AI apps</strong> 中的其他应用，各用各的订阅，不需要 API key。</p>
+      <p>不需要。对方的智能体可以是 Codex、Gemini CLI 或 <strong>智能体 → AI 应用</strong> 中的其他应用，各用各的订阅，不需要 API key。</p>
     </details>
     <details>
       <summary>怎样停止？</summary>
-      <p>降低同事的级别、把他们从 <strong>Takes tasks from…</strong> 中移除，或者删除这个联系人。无论对方那边怎么做，这些操作都会在你的电脑上立即生效。</p>
+      <p>降低同事的级别、在 <strong>接受谁的任务…</strong> 中把他们移除，或者删除这个联系人。无论对方那边怎么做，这些操作都会在你的电脑上立即生效。</p>
     </details>
     <details>
       <summary>支持 Windows 吗？</summary>

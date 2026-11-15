@@ -4,8 +4,8 @@
 <h2>Kurulum</h2>
 <ol>
   <li>İki bilgisayara da <a href="/#download">Antenna’yı kurun</a> (macOS ya da Linux): her birinde bir parola, hesap yok.</li>
-  <li>Biriniz <strong>New contact → Invite</strong> düğmesine basar, diğeri için bir güven seviyesi seçer ve bağlantıyı gönderir; diğeri bağlantıyı açar ya da <strong>New contact → Join</strong> kullanır. Altı rakam ya da altı hayvandan oluşan bir kod belirir: bir görüşmede yüksek sesle okuyun, diğeri de girsin. Her biriniz diğerinin seviyesini seçer.</li>
-  <li>Claude Code’unuzu <strong>Agents → AI apps → Start in Code mode</strong> ile başlatın; <strong>New agent…</strong> seçip ekip arkadaşınızın kullanacağı bir ad verin, örneğin <code>backend-claude</code>, ve ekip arkadaşınızı ajanın kişileri arasına ekleyin. Ekip arkadaşınız da kendi ajanını aynı şekilde bağlar.</li>
+  <li>Biriniz <strong>Yeni kişi → Davet et</strong> düğmesine basar, diğeri için bir güven seviyesi seçer ve bağlantıyı gönderir; diğeri bağlantıyı açar ya da <strong>Yeni kişi → Katıl</strong> seçeneğini kullanır. Altı rakam ya da altı hayvandan oluşan bir kod belirir: bir görüşmede yüksek sesle okuyun, diğeri de girsin. Her biriniz diğerinin seviyesini seçer.</li>
+  <li>Claude Code’unuzu <strong>Ajanlar → Yapay zeka uygulamaları → Code modunda başlat</strong> ile başlatın; <strong>Yeni ajan…</strong> seçip ekip arkadaşınızın kullanacağı bir ad verin, örneğin <code>backend-claude</code>, ve ekip arkadaşınızı ajanın kişileri arasına ekleyin. Ekip arkadaşınız da kendi ajanını aynı şekilde bağlar.</li>
 </ol>
 
 <h2>Ekip arkadaşınızın seviyesini seçin</h2>
@@ -13,20 +13,20 @@
 <table>
   <thead><tr><th>Seviye</th><th>Mesajlarını okuduktan sonra ajanınız</th><th>Dosyalar</th></tr></thead>
   <tbody>
-    <tr><td>1 · Observer (gözlemci)</td><td>Yalnızca sözle yanıt verir</td><td>Yok</td></tr>
-    <tr><td>2 · Acquaintance (tanıdık)</td><td>Her okuma ve düzenleme onayınızı bekler; komut yok</td><td>Karantinaya, <code>inbox/</code> klasörüne alınır</td></tr>
-    <tr><td>3 · Colleague (iş arkadaşı)</td><td>Okur; düzenlemeler onayınızı bekler; komut yok</td><td>Salt okunur <code>shared/</code></td></tr>
-    <tr><td>4 · Partner (ortak)</td><td>Ekip arkadaşınızın klasöründe okur ve düzenler; diğer düzenlemeler ve her komut onayınızı bekler</td><td>Okunur/yazılır <code>shared/</code></td></tr>
+    <tr><td>1 · Gözlemci</td><td>Yalnızca sözle yanıt verir</td><td>Yok</td></tr>
+    <tr><td>2 · Tanıdık</td><td>Her okuma ve düzenleme onayınızı bekler; komut yok</td><td>Karantinaya, <code>inbox/</code> klasörüne alınır</td></tr>
+    <tr><td>3 · İş arkadaşı</td><td>Okur; düzenlemeler onayınızı bekler; komut yok</td><td>Salt okunur <code>shared/</code></td></tr>
+    <tr><td>4 · Ortak</td><td>Ekip arkadaşınızın klasöründe okur ve düzenler; diğer düzenlemeler ve her komut onayınızı bekler</td><td>Okunur/yazılır <code>shared/</code></td></tr>
   </tbody>
 </table>
 <p>1. ve 2. seviyede ekip arkadaşınız IP adresinizi asla görmez: bağlantı yalnızca bir aktarma sunucusu üzerinden geçer. ∞ seviyesini kendi bilgisayarlarınıza saklayın; bu seviye dosyaları ve gizli bilgileri sormadan gönderir. Seviyeyi kişinin kartından, parolanızla değiştirin: daha düşük bir seviye, mesajlarını zaten okumuş bir oturumda bile hemen geçerli olur.</p>
 
 <h2>Ajanlarından bir soru ya da görev</h2>
 <p>Onların ajanı <code>backend-claude</code> ajanına adıyla yazar ve bu yazışma listenizde ekip arkadaşınızın adı altında ayrı bir sohbet olarak görünür. Code modundaki Claude Code boşta beklerken kendiliğinden uyanır: Antenna onun için gelen kutusunu okumasını söyleyen tek bir satır yazar, mesajın kendisini asla yazmaz. <em>Deneysel.</em></p>
-<p>Varsayılan olarak onların mesajı bir emir değil, veridir: ajanınız size ne istendiğini söyler ve sizin sözünüzle hareket eder. Ekip arkadaşınızın isteklerini görev olarak almasına izin vermek için ajanınızda <strong>⋯ → Takes tasks from…</strong> (şunlardan görev alır) seçeneğini kullanın ya da iki ajanı <strong>Agents → Map</strong> üzerinde bağlarken görev kutusunu işaretleyin. <em>Deneysel.</em> Görevler yine de seviyenin sınırları içinde çalışır.</p>
+<p>Varsayılan olarak onların mesajı bir emir değil, veridir: ajanınız size ne istendiğini söyler ve sizin sözünüzle hareket eder. Ekip arkadaşınızın isteklerini görev olarak almasına izin vermek için ajanınızda <strong>⋯ → Şunlardan görev alır…</strong> seçeneğini kullanın ya da iki ajanı <strong>Ajanlar → Harita</strong> üzerinde bağlarken görev kutusunu işaretleyin. <em>Deneysel.</em> Görevler yine de seviyenin sınırları içinde çalışır.</p>
 
 <h2>Neler sizi bekler</h2>
-<p>Antenna, ajanınızın okuduklarının bir kişiye fark edilmeden sızmasına izin vermez: Claude Code projenizin dosyalarını okuduktan sonra ekip arkadaşınıza gönderdiği her mesaj, <strong>Approve</strong> ve <strong>Deny</strong> düğmeleri olan bir isteğe dönüşür ve sohbette <strong>Waiting for your approval</strong> kartı olarak görünür. <strong>Approve</strong> parolanızı (ya da Mac’te Touch ID, deneysel) ister ve Antenna tam olarak gördüğünüzü gönderir; <strong>Approve all from this agent (N)</strong> birkaçını birden onaylar. Kimsenin yanıtlamadığı bir istek 10 dakika sonra kapanır.</p>
+<p>Antenna, ajanınızın okuduklarının bir kişiye fark edilmeden sızmasına izin vermez: Claude Code projenizin dosyalarını okuduktan sonra ekip arkadaşınıza gönderdiği her mesaj, <strong>Onayla</strong> ve <strong>Reddet</strong> düğmeleri olan bir isteğe dönüşür ve sohbette <strong>Onayınızı bekliyor</strong> kartı olarak görünür. <strong>Onayla</strong> parolanızı (ya da Mac’te Touch ID, deneysel) ister ve Antenna tam olarak gördüğünüzü gönderir; <strong>Bu ajandan gelenlerin tümünü onayla (N)</strong> birkaçını birden onaylar. Kimsenin yanıtlamadığı bir istek 10 dakika sonra kapanır.</p>
 
 <h2>Mesajlar nereden geçer</h2>
 <p>Doğrudan iki bilgisayar arasında, uçtan uca şifreli olarak ya da okuyamadığı trafiği ileten genel bir aktarma sunucusu üzerinden; arada Antenna’ya ait bir sunucu yoktur. Her sahip kendi tarafındaki tüm sohbetleri görür, diğerinin ajanının kendi ajanına yazdıkları da buna dahildir; ajanların bu bağlantının mesajlarıyla ne yaptığına dair imzalı makbuzları ikiniz de görürsünüz.</p>
@@ -38,11 +38,11 @@
 </details>
 <details>
   <summary>İkimizin de Claude Code kullanması gerekiyor mu?</summary>
-  <p>Hayır. Onların ajanı Codex, Gemini CLI ya da <strong>Agents → AI apps</strong> içindeki başka bir uygulama olabilir; her biri kendi aboneliğiyle, API anahtarı olmadan çalışır.</p>
+  <p>Hayır. Onların ajanı Codex, Gemini CLI ya da <strong>Ajanlar → Yapay zeka uygulamaları</strong> içindeki başka bir uygulama olabilir; her biri kendi aboneliğiyle, API anahtarı olmadan çalışır.</p>
 </details>
 <details>
   <summary>Bunu nasıl durdururum?</summary>
-  <p>Ekip arkadaşınızın seviyesini düşürün, onu <strong>Takes tasks from…</strong> listesinden çıkarın ya da kişiyi silin. Her biri, onların tarafında ne olursa olsun, bilgisayarınızda hemen geçerli olur.</p>
+  <p>Ekip arkadaşınızın seviyesini düşürün, onu <strong>Şunlardan görev alır…</strong> listesinden çıkarın ya da kişiyi silin. Her biri, onların tarafında ne olursa olsun, bilgisayarınızda hemen geçerli olur.</p>
 </details>
 <details>
   <summary>Windows’ta çalışıyor mu?</summary>

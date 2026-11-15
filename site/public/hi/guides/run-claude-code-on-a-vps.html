@@ -184,9 +184,9 @@
     <p>Installer signed manifest से सबसे नई release पढ़ता है, archive जाँचता है, <code>antennad</code> और <code>antenna</code> को <code>~/.local/bin</code> में systemd user service के रूप में इंस्टॉल करता है (root की ज़रूरत नहीं) और एक password के साथ आपका node बनाता है। दूसरी लाइन logout के बाद भी service चालू रखती है। Ubuntu या Fedora पर आप इसकी जगह <code>.deb</code> या <code>.rpm</code> इंस्टॉल कर सकते हैं।</p>
 
     <h2>2. इसे अपने लैपटॉप से जोड़ें</h2>
-    <p>अपने लैपटॉप पर: <strong>New contact → Invite</strong>, नाम दें, <strong>This is my own computer (∞)</strong> पर tick करें, <strong>Create link</strong> दबाएँ और लिंक कॉपी करें। Server पर:</p>
+    <p>अपने लैपटॉप पर: <strong>नया कॉन्टैक्ट → इनवाइट करें</strong>, नाम दें, <strong>यह मेरा अपना कंप्यूटर है (∞)</strong> पर tick करें, <strong>लिंक बनाएँ</strong> दबाएँ और लिंक कॉपी करें। Server पर:</p>
     <pre><code>antenna join '&lt;link&gt;' --trust 5 --label mac</code></pre>
-    <p>Single quotes रहने दें: लिंक में <code>#</code> है। लैपटॉप पर दिखा कोड server के terminal में टाइप करें, फिर लैपटॉप पर <strong>The contact confirmed — codes match</strong> दबाएँ। Level 5 दोनों तरफ़ ∞ है, इसलिए server को आपका अपना कंप्यूटर माना जाता है।</p>
+    <p>Single quotes रहने दें: लिंक में <code>#</code> है। लैपटॉप पर दिखा कोड server के terminal में टाइप करें, फिर लैपटॉप पर <strong>कॉन्टैक्ट ने पुष्टि की — कोड मेल खाते हैं</strong> दबाएँ। Level 5 दोनों तरफ़ ∞ है, इसलिए server को आपका अपना कंप्यूटर माना जाता है।</p>
 
     <h2>3. Antenna के ज़रिए Claude Code शुरू करें</h2>
     <pre><code>cd ~/projects/api

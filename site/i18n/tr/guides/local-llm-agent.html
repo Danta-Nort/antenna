@@ -1,5 +1,5 @@
 <!--guide {"title": "Yerel LLM ajanı kurulumu: hesapsız, API anahtarsız — Antenna", "h1": "Hesap ve API anahtarı olmadan yerel bir LLM ajanı kurun", "description": "Antenna açık bir modeli indirir, doğrular ve Mac ya da Linux bilgisayarınızda, ağa ve dosyalarınıza erişemeyen sandbox’lı gizli bir ajan olarak çalıştırır.", "summary": "Kendi bilgisayarınızda, belleğinize göre seçilen ve sandbox içinde ajan olarak çalışan açık bir model.", "source": "2026-11-09"}-->
-<p class="lead">Antenna’da <strong>Agents → Local models</strong> ekranını açın, bilgisayarınız için önerilen modeli indirin ve <strong>Create agent</strong> düğmesine basın. Model kendi makinenizde llama.cpp ile çalışır: hesap yok, API anahtarı yok, indirildikten sonra internet de gerekmez; ağa erişemeyen ve dosyalarınızı okuyamayan bir sandbox içinde çalışır. Ajanın kendi sohbeti olur; bir ekipte ön eleme, özet ve dokümantasyon gibi hafif rolleri üstlenebilir. <em>Deneysel.</em></p>
+<p class="lead">Antenna’da <strong>Ajanlar → Yerel modeller</strong> ekranını açın, bilgisayarınız için önerilen modeli indirin ve <strong>Ajan oluştur</strong> düğmesine basın. Model kendi makinenizde llama.cpp ile çalışır: hesap yok, API anahtarı yok, indirildikten sonra internet de gerekmez; ağa erişemeyen ve dosyalarınızı okuyamayan bir sandbox içinde çalışır. Ajanın kendi sohbeti olur; bir ekipte ön eleme, özet ve dokümantasyon gibi hafif rolleri üstlenebilir. <em>Deneysel.</em></p>
 
 <h2>Hangi bilgisayara hangi model</h2>
 <p>Antenna belleğinize ve boş alanınıza bakar ve Qwen3.5 modellerinden birini önerir:</p>
@@ -11,13 +11,13 @@
     <tr><td>16 GB ya da daha fazla belleğe sahip M2 veya daha yeni Mac</td><td>Qwen3.5 9B</td><td>5,7 GB</td><td>9 GB’tan az</td></tr>
   </tbody>
 </table>
-<p>Diğer modeller de listelenir ve her biri <strong>Fits this computer</strong> (bu bilgisayara uygun), <strong>Slow on this computer</strong> (bu bilgisayarda yavaş) ya da <strong>Not for this computer</strong> (bu bilgisayar için değil) olarak işaretlenir; böylece çalışmayacak bir modeli asla indirmezsiniz.</p>
+<p>Diğer modeller de listelenir ve her biri <strong>Bu bilgisayara uygun</strong>, <strong>Bu bilgisayarda yavaş</strong> ya da <strong>Bu bilgisayar için değil</strong> olarak işaretlenir; böylece çalışmayacak bir modeli asla indirmezsiniz.</p>
 
 <h2>Kurulum</h2>
 <ol>
-  <li><strong>Agents → Local models</strong> ekranını açın ve önerilen modelin yanındaki <strong>Download</strong> düğmesine basın. Model, sabit bir sürümüyle Hugging Face’ten gelir; pencereyi kapatmak indirmeyi durdurmaz, yarıda kalan indirme de kaldığı yerden devam eder.</li>
+  <li><strong>Ajanlar → Yerel modeller</strong> ekranını açın ve önerilen modelin yanındaki <strong>İndir</strong> düğmesine basın. Model, sabit bir sürümüyle Hugging Face’ten gelir; pencereyi kapatmak indirmeyi durdurmaz, yarıda kalan indirme de kaldığı yerden devam eder.</li>
   <li>Antenna, dosyayı yüklemeden önce bu sürümün taşıdığı boyut ve SHA-256 değerleriyle karşılaştırır. Eşleşmeyen dosya silinir.</li>
-  <li><strong>Create agent</strong> düğmesine basın ve ajana bir ad verin. Sohbeti, Chats içinde <strong>On this computer</strong> altında belirir.</li>
+  <li><strong>Ajan oluştur</strong> düğmesine basın ve ajana bir ad verin. Sohbeti, Sohbetler içinde <strong>Bu bilgisayarda</strong> altında belirir.</li>
   <li>Ona yazın. Model yüklenirken ilk yanıt birkaç saniye bekler.</li>
 </ol>
 <p>Terminalden: <code>antenna local install qwen3.5-2b --wait</code> (elinizde zaten bir kopyası varsa <code>--from-file</code>), ardından <code>antenna local add helper --model qwen3.5-2b</code> ve <code>antenna local say helper "hello"</code>.</p>
@@ -26,10 +26,10 @@
 <p>Model kendi sandbox’ında çalışır: yalnızca model dosyasını okur ve hiçbir yere bağlanamaz; ne internete, ne Antenna’ya, ne de başka programlara. Ajanın kendi programı ise yalnızca modele erişebilen ikinci bir sandbox’ta çalışır. Konuşma, Antenna’nın şifreli veritabanında saklanır. Bu sürümde yerel bir ajanın bağlantısı ve aracı yoktur; bu yüzden kimseye hiçbir şey gönderemez ve Antenna sizden asla onun yanıtlarındaki bir komutu yapıştırmanızı istemez.</p>
 
 <h2>Bellek yönetimi sizin yerinize</h2>
-<p>Birden fazla ajan tek bir modeli paylaşabilir, farklı boyutlardaki modeller de yan yana çalışabilir. Bir yanıtın ihtiyaç duyduğu belleği başka bir model tutuyorsa yanıt, bilgisayarı swap’a düşürmek yerine bekler (“Waiting for memory…”); 30 dakika boyunca kimsenin kullanmadığı bir model de bellekten çıkarılır.</p>
+<p>Birden fazla ajan tek bir modeli paylaşabilir, farklı boyutlardaki modeller de yan yana çalışabilir. Bir yanıtın ihtiyaç duyduğu belleği başka bir model tutuyorsa yanıt, bilgisayarı swap’a düşürmek yerine bekler (“Bellek bekleniyor…”); 30 dakika boyunca kimsenin kullanmadığı bir model de bellekten çıkarılır.</p>
 
 <h2>Ekipte yerel modeller</h2>
-<p>Bir ajan ekibi oluşturduğunuzda yerel bir model, boyutunun uygun olduğu rollerde çalışan olabilir: küçük modeller ön eleme ve özetler için, büyükleri ayrıca dokümantasyon, taslak ve çeviri için. <strong>Local only</strong> ile lider dahil tüm ekip hiçbir bulut modeli olmadan çalışır. Yerel modeller ekip içinde henüz kod yazmıyor.</p>
+<p>Bir ajan ekibi oluşturduğunuzda yerel bir model, boyutunun uygun olduğu rollerde çalışan olabilir: küçük modeller ön eleme ve özetler için, büyükleri ayrıca dokümantasyon, taslak ve çeviri için. <strong>Yalnızca yerel</strong> ile lider dahil tüm ekip hiçbir bulut modeli olmadan çalışır. Yerel modeller ekip içinde henüz kod yazmıyor.</p>
 
 <h2>Sorular</h2>
 <details>

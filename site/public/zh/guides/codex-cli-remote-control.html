@@ -180,7 +180,7 @@
     </ul>
 
     <h2>1. 配对两台电脑</h2>
-    <p>在笔记本上：<strong>New contact → Invite</strong>，勾选 <strong>This is my own computer (∞)</strong>，生成链接，在另一台电脑上打开它（服务器上用 <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>）。把一边显示的验证码输入到另一边。现在双方都把对方当作你自己的电脑。带截图的分步说明见 <a href="/zh/guides/run-claude-code-on-a-vps">在 VPS 上运行 Claude Code</a>，对 Codex 来说步骤完全一样。</p>
+    <p>在笔记本上：<strong>新联系人 → 邀请</strong>，勾选 <strong>这是我自己的电脑（∞）</strong>，生成链接，在另一台电脑上打开它（服务器上用 <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>）。把一边显示的验证码输入到另一边。现在双方都把对方当作你自己的电脑。带截图的分步说明见 <a href="/zh/guides/run-claude-code-on-a-vps">在 VPS 上运行 Claude Code</a>，对 Codex 来说步骤完全一样。</p>
 
     <h2>2. 给 Codex 会话起个名字</h2>
     <p>在运行 Codex 的电脑上，进入项目文件夹：</p>
@@ -195,7 +195,7 @@
 
     <h2>4. 在笔记本上给它写消息</h2>
     <p>打开 <code>api-codex</code> 聊天，写下：“跑一下测试，修好失败的，然后告诉我你改了什么。”当 Codex 停在提示符前闲着时，Antenna 会输入一行内置的文字，让它去读收件箱。Antenna 永远不会把你的文字输入终端，也永远不会在 Codex 正在提问时输入任何东西。Codex 通过 Antenna 读取消息，开始干活，然后在聊天里回复。<em>实验性功能。</em></p>
-    <p>需要它立刻停下手头的事？发送前打开 <strong>Urgent: interrupt now</strong>。Antenna 会按一次 Esc 结束当前这一轮，然后唤醒 Codex 处理你的消息。如果要停止这个智能体以及它启动的所有东西，在笔记本的 <strong>My devices</strong> 中打开另一台电脑的卡片，点 <strong>Stop agent and its processes…</strong>（就在 <code>api-codex</code> 旁边）。</p>
+    <p>需要它立刻停下手头的事？发送前打开 <strong>紧急：立即打断</strong>。Antenna 会按一次 Esc 结束当前这一轮，然后唤醒 Codex 处理你的消息。如果要停止这个智能体以及它启动的所有东西，在笔记本的 <strong>我的设备</strong> 中打开另一台电脑的卡片，点 <strong>停止智能体及其进程…</strong>（就在 <code>api-codex</code> 旁边）。</p>
 
     <h2>在台式机上：Code 模式</h2>
     <p>如果 Codex 运行在装有 Antenna 应用的 Mac 或 Linux 台式机上，可以跳过终端里的这些步骤。在 Code 模式下，点智能体面板里的 <code>+</code>，选择 Codex 和工作文件夹，Codex 就会在窗口内的一个标签页里运行，唤醒方式相同。和其他智能体一样，你在其他电脑上也能访问它的聊天。</p>

@@ -1,22 +1,22 @@
 <!--guide {"title": "Benachrichtigung, wenn Claude Code auf einem anderen PC fertig ist", "h1": "Benachrichtigt werden, wenn Claude Code auf einem Server oder anderen Computer fertig ist", "description": "Claude Code auf Server oder Zweitrechner meldet sich in einem Antenna-Chat, Ihr Laptop zeigt eine Benachrichtigung. Auch Freigabeanfragen melden sich.", "summary": "Eine Desktop-Benachrichtigung auf dem Laptop, wenn Claude Code auf einem Server oder anderen Computer eine Aufgabe erledigt hat oder Ihre Freigabe braucht.", "source": "2026-11-15"}-->
-<p class="lead">Geben Sie Claude Code seine Aufgabe in einem Antenna-Chat von Ihrem Laptop aus, und wenn es fertig ist, schickt es das Ergebnis in diesen Chat zurück: Antennas Anweisungen sagen einem verbundenen Agenten, seine Ergebnisse an den Kontakt zurückzuschicken, der ihm die Aufgabe gegeben hat. Ihr Laptop zeigt dann eine Benachrichtigung, „New message in server · api-dev“, solange das Antenna-Fenster nicht im Vordergrund ist. Auch Freigabeanfragen lösen eine Benachrichtigung aus, damit ein Lauf, der auf halbem Weg stehen bleibt, nicht unbemerkt wartet. Antenna beobachtet die Durchgänge von Claude Code nicht selbst: Der Bericht ist eine Nachricht von Claude Code.</p>
+<p class="lead">Geben Sie Claude Code seine Aufgabe in einem Antenna-Chat von Ihrem Laptop aus, und wenn es fertig ist, schickt es das Ergebnis in diesen Chat zurück: Antennas Anweisungen sagen einem verbundenen Agenten, seine Ergebnisse an den Kontakt zurückzuschicken, der ihm die Aufgabe gegeben hat. Ihr Laptop zeigt dann eine Benachrichtigung, „Neue Nachricht in server · api-dev“, solange das Antenna-Fenster nicht im Vordergrund ist. Auch Freigabeanfragen lösen eine Benachrichtigung aus, damit ein Lauf, der auf halbem Weg stehen bleibt, nicht unbemerkt wartet. Antenna beobachtet die Durchgänge von Claude Code nicht selbst: Der Bericht ist eine Nachricht von Claude Code.</p>
 
 <h2>Wann Sie benachrichtigt werden</h2>
 <ul>
   <li><strong>Eine Nachricht von Claude Code an Sie.</strong> Die Benachrichtigung nennt den Chat, nie den Text, höchstens einmal alle 10 Sekunden pro Chat.</li>
-  <li><strong>Eine Freigabeanfrage.</strong> Ein Schritt, der Ihr Okay braucht, erscheint als „Antenna: approval needed on server“, mit dem Agenten, dem, was er tun will, und der verbleibenden Zeit („expires in 9 min“), aber nie mit dem Text der Anfrage. Eine zweite Benachrichtigung kommt etwa zwei Minuten, bevor die Anfrage sich schließt; sie schließt sich nach 10 Minuten. Anfragen von einem anderen Computer erreichen Sie über <strong>My devices</strong> (meine Geräte, <em>experimentell</em>).</li>
-  <li><strong>Eine Frage.</strong> <em>Experimentell.</em> Die Frage eines Agenten meldet sich auf dem Computer, auf dem er läuft: „A question from your agent“. Führen Sie auf einem Server dort <code>antenna agent escalate api-dev --to mac</code> aus, dann kommen seine Fragen stattdessen im Chat des Agenten auf Ihrem Laptop an.</li>
+  <li><strong>Eine Freigabeanfrage.</strong> Ein Schritt, der Ihr Okay braucht, erscheint als „Antenna: Freigabe auf server nötig“, mit dem Agenten, dem, was er tun will, und der verbleibenden Zeit („läuft ab in 9 Min.“), aber nie mit dem Text der Anfrage. Eine zweite Benachrichtigung kommt etwa zwei Minuten, bevor die Anfrage sich schließt; sie schließt sich nach 10 Minuten. Anfragen von einem anderen Computer erreichen Sie über <strong>Meine Geräte</strong> (<em>experimentell</em>).</li>
+  <li><strong>Eine Frage.</strong> <em>Experimentell.</em> Die Frage eines Agenten meldet sich auf dem Computer, auf dem er läuft: „Eine Frage Ihres Agenten“. Führen Sie auf einem Server dort <code>antenna agent escalate api-dev --to mac</code> aus, dann kommen seine Fragen stattdessen im Chat des Agenten auf Ihrem Laptop an.</li>
 </ul>
 <p>Benachrichtigungen funktionieren unter macOS und auf Linux-Desktops, die Benachrichtigungen anzeigen. Antenna muss auf dem Laptop geöffnet sein; ist sein Fenster im Vordergrund, übernehmen die Ungelesen-Zähler in der Chatliste diese Aufgabe.</p>
 
 <h2>Einrichten</h2>
 <ol>
-  <li><a href="/#download">Installieren Sie Antenna</a> auf beiden Computern und koppeln Sie sie einmal mit gesetztem Häkchen bei <strong>This is my own computer (∞)</strong> (das ist mein eigener Computer). <a href="/guides/run-claude-code-on-a-vps">Claude Code auf einem VPS</a> beschreibt die Serverseite Schritt für Schritt.</li>
+  <li><a href="/#download">Installieren Sie Antenna</a> auf beiden Computern und koppeln Sie sie einmal mit gesetztem Häkchen bei <strong>Das ist mein eigener Computer (∞)</strong>. <a href="/guides/run-claude-code-on-a-vps">Claude Code auf einem VPS</a> beschreibt die Serverseite Schritt für Schritt.</li>
   <li>Starten Sie Claude Code über Antenna. Auf einem Server:
 <pre><code>cd ~/projects/api
 antenna connect claude-code --agent api-dev --links mac --hello mac
 antenna session start api-dev --dir ~/projects/api</code></pre>
-  Auf einem zweiten Desktop: <strong>Agents → AI apps → Start in Code mode</strong>.</li>
+  Auf einem zweiten Desktop: <strong>Agenten → KI-Apps → Im Code-Modus starten</strong>.</li>
   <li>Auf dem Laptop ist nichts einzustellen. Ein Chat mit einem Agenten meldet von Anfang an Nachrichten, die sich direkt an Sie richten, und Freigabeanfragen.</li>
 </ol>
 
@@ -26,13 +26,13 @@ antenna session start api-dev --dir ~/projects/api</code></pre>
 <p>Der Bericht kommt, wenn Claude Code entscheidet, dass es fertig ist, wie bei jeder Anweisung, die es befolgt. Bleibt es an seiner eigenen Berechtigungsabfrage im Terminal stehen („Do you want to proceed?“), sieht Antenna das nicht, und keine Benachrichtigung erreicht Sie: Erlauben Sie die Tools, die Sie regelmäßig nutzen, in den Einstellungen von Claude Code.</p>
 
 <h2>Festlegen, welche Chats benachrichtigen</h2>
-<p>Öffnen Sie <strong>⋮</strong> in der Zeile eines Chats oder klicken Sie sie mit der rechten Maustaste an, dann <strong>Notifications</strong> (Benachrichtigungen):</p>
+<p>Öffnen Sie <strong>⋮</strong> in der Zeile eines Chats oder klicken Sie sie mit der rechten Maustaste an, dann <strong>Benachrichtigungen</strong>:</p>
 <ul>
-  <li><strong>All messages</strong> (alle Nachrichten): jede neue Nachricht in diesem Chat (Standard bei einer Person).</li>
-  <li><strong>Only when it asks for me</strong> (nur wenn ich gefragt bin): Nachrichten direkt an Sie und Freigabeanfragen (Standard bei einem Agenten).</li>
-  <li><strong>Off</strong> (aus): Freigabeanfragen melden sich trotzdem.</li>
+  <li><strong>Alle Nachrichten</strong>: jede neue Nachricht in diesem Chat (Standard bei einer Person).</li>
+  <li><strong>Nur wenn ich gefragt bin</strong>: Nachrichten direkt an Sie und Freigabeanfragen (Standard bei einem Agenten).</li>
+  <li><strong>Aus</strong>: Freigabeanfragen melden sich trotzdem.</li>
 </ul>
-<p>Berichtet Claude Code an einen Ihrer anderen Agenten statt an Sie, bleiben diese Nachrichten stumm, es sei denn, Sie schalten im selben Menü <strong>Notify about messages between agents</strong> (bei Nachrichten zwischen Agenten benachrichtigen) ein. Im Terminal: <code>antenna chats notify server --agent api-dev all</code>.</p>
+<p>Berichtet Claude Code an einen Ihrer anderen Agenten statt an Sie, bleiben diese Nachrichten stumm, es sei denn, Sie schalten im selben Menü <strong>Bei Nachrichten zwischen Agenten benachrichtigen</strong> ein. Im Terminal: <code>antenna chats notify server --agent api-dev all</code>.</p>
 
 <h2>Auf dem Computer, an dem Sie sitzen</h2>
 <p>Läuft Claude Code im Code-Modus auf Ihrem eigenen Laptop, meldet Antenna seine Freigabeanfragen und Fragen, solange das Fenster im Hintergrund ist, aber nicht das Ende eines Durchgangs: Ein Agent kann Ihnen auf seinem eigenen Computer keine Nachricht schicken. Dafür können die Hooks von Claude Code selbst einen Befehl Ihrer Wahl ausführen, wenn es anhält.</p>
@@ -40,7 +40,7 @@ antenna session start api-dev --dir ~/projects/api</code></pre>
 <h2>Fragen</h2>
 <details>
   <summary>Zeigt die Benachrichtigung, was Claude Code geschrieben hat?</summary>
-  <p>Nein. Sie zeigt nur „New message in“ und den Namen des Chats, weil eine Benachrichtigung auch auf einem gesperrten Bildschirm erscheinen kann. Öffnen Sie den Chat, um den Bericht zu lesen.</p>
+  <p>Nein. Sie zeigt nur „Neue Nachricht in“ und den Namen des Chats, weil eine Benachrichtigung auch auf einem gesperrten Bildschirm erscheinen kann. Öffnen Sie den Chat, um den Bericht zu lesen.</p>
 </details>
 <details>
   <summary>Was, wenn mein Laptop im Ruhezustand ist?</summary>

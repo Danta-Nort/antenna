@@ -1,5 +1,5 @@
 <!--guide {"title": "给另一台电脑上的 Claude Code 会话发消息 — Antenna", "h1": "给另一台电脑上的 Claude Code 发消息", "description": "在眼前这台电脑上联系服务器或另一台 Mac 上的 Claude Code 会话：在 Antenna 中配对两台电脑，然后按名字给会话发消息。", "summary": "给服务器或另一台电脑上的 Claude Code 或 Codex 会话发消息，空闲时自动唤醒它。", "source": "2026-11-14"}-->
-<p class="lead">在两台电脑上都装好 Antenna，以 <strong>∞ · My computer</strong> 级别配对一次，再把那边的 Claude Code 会话用一个专属名字接入 Antenna。之后你就可以在 Mac 上像在聊天里给联系人发消息一样给那个会话写消息，或者让你本地的 Claude Code 去给它写。如果会话是通过 Antenna 启动的，它闲着时会被唤醒，紧急消息还能在它一轮进行到一半时打断它。两个会话在同一台电脑上？那就在智能体地图上把它们连起来：见<a href="/guides/claude-code-and-codex-talk-to-each-other">两个智能体互相对话</a>。</p>
+<p class="lead">在两台电脑上都装好 Antenna，以 <strong>∞ · 我的电脑</strong> 级别配对一次，再把那边的 Claude Code 会话用一个专属名字接入 Antenna。之后你就可以在 Mac 上像在聊天里给联系人发消息一样给那个会话写消息，或者让你本地的 Claude Code 去给它写。如果会话是通过 Antenna 启动的，它闲着时会被唤醒，紧急消息还能在它一轮进行到一半时打断它。两个会话在同一台电脑上？那就在智能体地图上把它们连起来：见<a href="/guides/claude-code-and-codex-talk-to-each-other">两个智能体互相对话</a>。</p>
 
 <h2>什么时候需要这个</h2>
 <ul>
@@ -22,7 +22,7 @@
 <p>（服务器上需要有 tmux。）之后每当有消息到达，Antenna 就会在空提示符处输入一行简短的文字，会话把消息当作数据读取，然后开始干活。在台式机上，Antenna 的 Code 模式会在窗口内的终端标签页里做同样的事。<em>实验性功能。</em></p>
 
 <h2>4. 给它写消息</h2>
-<p>在 Mac 上打开 <code>api-dev</code> 聊天，像给人写消息一样写就行。或者让你本地的 Claude Code 去写：“请 <code>api-dev</code> 跑一下迁移测试，然后汇报结果。”如果等不及，发送前打开 <strong>Urgent: interrupt now</strong>（发送按钮旁边的闪电按钮；在终端里用 <code>antenna send --urgent</code>）：对于由 Antenna 运行的会话（Code 模式或 <code>antenna session start</code> 启动的），Antenna 会像你按 Esc 一样中止一次正在进行的这一轮，然后会话读取你的消息。如果终端里正开着一个问题或权限确认提示，它永远不会按 Esc。<em>实验性功能。</em></p>
+<p>在 Mac 上打开 <code>api-dev</code> 聊天，像给人写消息一样写就行。或者让你本地的 Claude Code 去写：“请 <code>api-dev</code> 跑一下迁移测试，然后汇报结果。”如果等不及，发送前打开 <strong>紧急：立即打断</strong>（发送按钮旁边的闪电按钮；在终端里用 <code>antenna send --urgent</code>）：对于由 Antenna 运行的会话（Code 模式或 <code>antenna session start</code> 启动的），Antenna 会像你按 Esc 一样中止一次正在进行的这一轮，然后会话读取你的消息。如果终端里正开着一个问题或权限确认提示，它永远不会按 Esc。<em>实验性功能。</em></p>
 
 <h2>什么会传过去，什么不会</h2>
 <p>消息在一台电脑上加密，在另一台电脑上解密。不共享任何终端，也不需要开放或转发任何端口：另一边的会话只接收消息，它能拿这些消息做什么，由它自己那边的 Antenna 决定。智能体的令牌留在创建它的那台电脑上。</p>
@@ -34,7 +34,7 @@
 </details>
 <details>
   <summary>我能看到会话在做什么吗？</summary>
-  <p>聊天里会显示它的回复，智能体地图会显示谁和谁说过话。在 <strong>My devices</strong> 中，你还能看到其他电脑上的智能体，并能停止某个智能体以及它启动的所有东西。</p>
+  <p>聊天里会显示它的回复，智能体地图会显示谁和谁说过话。在 <strong>我的设备</strong> 中，你还能看到其他电脑上的智能体，并能停止某个智能体以及它启动的所有东西。</p>
 </details>
 <details>
   <summary>服务器需要公网地址吗？</summary>

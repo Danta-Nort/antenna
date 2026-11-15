@@ -13,9 +13,9 @@ sudo loginctl enable-linger $USER</code></pre>
 <p>L'installer legge la versione più recente dal manifest firmato, verifica l'archivio, installa <code>antennad</code> e <code>antenna</code> in <code>~/.local/bin</code> come servizio utente systemd (senza bisogno di root) e crea il tuo nodo con una password. La seconda riga mantiene attivo il servizio dopo il logout. Su Ubuntu o Fedora puoi installare invece il pacchetto <code>.deb</code> o <code>.rpm</code>.</p>
 
 <h2>2. Abbinalo al portatile</h2>
-<p>Sul portatile: <strong>New contact → Invite</strong>, dagli un nome, spunta <strong>This is my own computer (∞)</strong>, premi <strong>Create link</strong> e copialo. Sul server:</p>
+<p>Sul portatile: <strong>Nuovo contatto → Invita</strong>, dagli un nome, spunta <strong>Questo è un mio computer (∞)</strong>, premi <strong>Crea il link</strong> e copialo. Sul server:</p>
 <pre><code>antenna join '&lt;link&gt;' --trust 5 --label mac</code></pre>
-<p>Lascia gli apici singoli: il link contiene un <code>#</code>. Digita nel terminale del server il codice che mostra il portatile, poi premi <strong>The contact confirmed — codes match</strong> sul portatile. Il livello 5 corrisponde a ∞ su entrambi i lati, quindi il server conta come un tuo computer.</p>
+<p>Lascia gli apici singoli: il link contiene un <code>#</code>. Digita nel terminale del server il codice che mostra il portatile, poi premi <strong>Il contatto ha confermato: i codici corrispondono</strong> sul portatile. Il livello 5 corrisponde a ∞ su entrambi i lati, quindi il server conta come un tuo computer.</p>
 
 <h2>3. Avvia Claude Code tramite Antenna</h2>
 <pre><code>cd ~/projects/api
@@ -25,7 +25,7 @@ antenna session attach api-dev</code></pre>
 <p>La riga connect dà alla sessione un agente e un token propri e manda un saluto, così sul portatile compare una chat chiamata <code>api-dev</code>. La riga start avvia Claude Code nel server tmux di Antenna (il tuo tmux non viene toccato). Collegati una volta per rispondere alle prime domande di Claude Code, per esempio se si fida della cartella, poi esci con <code>Ctrl-b d</code>: continua a girare. Per Codex usa <code>antenna connect codex</code> e <code>--cli codex</code>.</p>
 
 <h2>4. Parlagli</h2>
-<p>Scrivi nella chat <code>api-dev</code> sul portatile: “Esegui i test di migrazione e correggi ciò che fallisce.” Quando Claude Code è fermo al suo prompt, Antenna digita una breve riga perché legga il tuo messaggio; non digita mai il testo di un contatto e non risponde mai a una domanda al suo posto. La scheda del server in <strong>My devices</strong> mostra il suo stato e i suoi agenti, e puoi approvare le sue richieste dal portatile.</p>
+<p>Scrivi nella chat <code>api-dev</code> sul portatile: “Esegui i test di migrazione e correggi ciò che fallisce.” Quando Claude Code è fermo al suo prompt, Antenna digita una breve riga perché legga il tuo messaggio; non digita mai il testo di un contatto e non risponde mai a una domanda al suo posto. La scheda del server nella sezione <strong>I miei dispositivi</strong> mostra il suo stato e i suoi agenti, e puoi approvare le sue richieste dal portatile.</p>
 
 <h2>Dopo un riavvio</h2>
 <p>Dopo il riavvio del server le chiavi del nodo sono bloccate: il servizio gira, ma i suoi collegamenti restano muti finché non accedi ed esegui <code>antenna unlock</code>. Così una copia del disco del server non dà a nessuno le tue chiavi. <code>antenna status</code> ti dice se è bloccato.</p>

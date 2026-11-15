@@ -1,5 +1,5 @@
 <!--guide {"title": "Jak wysłać wiadomość do Claude Code na innym komputerze — Antenna", "h1": "Jak wysłać wiadomość do Claude Code na innym komputerze", "description": "Dotrzyj do sesji Claude Code na serwerze albo drugim Macu z komputera, przy którym siedzisz: połącz oba komputery w Antennie i pisz do sesji po nazwie.", "summary": "Pisz do sesji Claude Code albo Codex na serwerze lub drugim komputerze i budź ją, gdy jest bezczynna.", "source": "2026-11-14"}-->
-<p class="lead">Zainstaluj Antennę na obu komputerach, połącz je raz jako <strong>∞ · My computer</strong> i podłącz tamtejszą sesję Claude Code do Antenny pod jej własną nazwą. Potem piszesz do tej sesji z Maca jak do kontaktu na czacie albo pozwalasz pisać do niej swojemu lokalnemu Claude Code. Jeśli uruchomisz sesję przez Antennę, będzie budzona, gdy jest bezczynna, a pilna wiadomość może przerwać jej turę w połowie. Dwie sesje na tym samym komputerze? Wtedy połącz je na mapie agentów: <a href="/guides/claude-code-and-codex-talk-to-each-other">dwaj agenci w rozmowie</a>.</p>
+<p class="lead">Zainstaluj Antennę na obu komputerach, połącz je raz jako <strong>∞ · Mój komputer</strong> i podłącz tamtejszą sesję Claude Code do Antenny pod jej własną nazwą. Potem piszesz do tej sesji z Maca jak do kontaktu na czacie albo pozwalasz pisać do niej swojemu lokalnemu Claude Code. Jeśli uruchomisz sesję przez Antennę, będzie budzona, gdy jest bezczynna, a pilna wiadomość może przerwać jej turę w połowie. Dwie sesje na tym samym komputerze? Wtedy połącz je na mapie agentów: <a href="/guides/claude-code-and-codex-talk-to-each-other">dwaj agenci w rozmowie</a>.</p>
 
 <h2>Kiedy to się przydaje</h2>
 <ul>
@@ -22,7 +22,7 @@
 <p>(Serwer potrzebuje do tego tmuxa). Antenna wpisuje wtedy jedną krótką linię przy pustym prompcie, gdy przyjdzie wiadomość, a sesja czyta wiadomość jako dane i bierze się do pracy. Na desktopie to samo robi tryb Code mode Antenny, w karcie terminala w oknie aplikacji. <em>Funkcja eksperymentalna.</em></p>
 
 <h2>4. Napisz do niej</h2>
-<p>Otwórz na Macu czat <code>api-dev</code> i pisz tak, jak do człowieka. Albo zleć to swojemu lokalnemu Claude Code: „Poproś <code>api-dev</code>, żeby uruchomił testy migracji i zdał relację”. Gdy sprawa nie może czekać, przed wysłaniem włącz <strong>Urgent: interrupt now</strong> (przycisk z błyskawicą obok Send; w terminalu <code>antenna send --urgent</code>): w sesji uruchomionej przez Antennę, w trybie Code mode albo przez <code>antenna session start</code>, Antenna raz przerywa trwającą turę, jak po naciśnięciu Esc, a sesja czyta twoją wiadomość. Nigdy nie naciska Esc, gdy w terminalu jest otwarte pytanie albo prośba o uprawnienia. <em>Funkcja eksperymentalna.</em></p>
+<p>Otwórz na Macu czat <code>api-dev</code> i pisz tak, jak do człowieka. Albo zleć to swojemu lokalnemu Claude Code: „Poproś <code>api-dev</code>, żeby uruchomił testy migracji i zdał relację”. Gdy sprawa nie może czekać, przed wysłaniem włącz <strong>Pilne: przerwij teraz</strong> (przycisk z błyskawicą obok Wyślij; w terminalu <code>antenna send --urgent</code>): w sesji uruchomionej przez Antennę, w trybie Code mode albo przez <code>antenna session start</code>, Antenna raz przerywa trwającą turę, jak po naciśnięciu Esc, a sesja czyta twoją wiadomość. Nigdy nie naciska Esc, gdy w terminalu jest otwarte pytanie albo prośba o uprawnienia. <em>Funkcja eksperymentalna.</em></p>
 
 <h2>Co jest przesyłane, a co nie</h2>
 <p>Wiadomość jest szyfrowana na jednym komputerze i odszyfrowywana na drugim. Żaden terminal nie jest współdzielony i nie trzeba otwierać ani przekierowywać żadnego portu: druga sesja tylko odbiera wiadomości, a jej własna Antenna decyduje, co wolno jej z nimi zrobić. Token agenta zostaje na komputerze, na którym go utworzono.</p>
@@ -34,7 +34,7 @@
 </details>
 <details>
   <summary>Czy widzę, co robi sesja?</summary>
-  <p>Czat pokazuje jej odpowiedzi, a mapa agentów — kto z kim rozmawiał. W <strong>My devices</strong> widzisz też agentów na swoich pozostałych komputerach i możesz zatrzymać każdego z nich razem ze wszystkim, co uruchomił.</p>
+  <p>Czat pokazuje jej odpowiedzi, a mapa agentów — kto z kim rozmawiał. W sekcji <strong>Moje urządzenia</strong> widzisz też agentów na swoich pozostałych komputerach i możesz zatrzymać każdego z nich razem ze wszystkim, co uruchomił.</p>
 </details>
 <details>
   <summary>Czy serwer potrzebuje publicznego adresu?</summary>

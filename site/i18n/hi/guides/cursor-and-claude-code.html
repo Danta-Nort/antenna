@@ -4,9 +4,9 @@
 <h2>एक कंप्यूटर पर</h2>
 <ol>
   <li><a href="/#download">Antenna इंस्टॉल करें</a> (macOS या Linux) और अपना node बनाएँ: एक password, कोई अकाउंट नहीं।</li>
-  <li><strong>Agents → AI apps</strong> खोलें और Cursor के आगे <strong>Connect</strong> दबाएँ। <strong>Assistant with access to my projects</strong> (मेरे प्रोजेक्ट्स तक पहुँच वाला assistant) चुनें, अपना password डालें और <strong>Continue</strong> दबाएँ। Antenna बताता है कि वह Cursor का install link खोलेगा; <strong>Open Cursor</strong> दबाएँ, और Cursor, Antenna दिखाकर आपसे उसे install करने को कहता है। फिर Cursor में नई चैट शुरू करें और लिखें “मेरे Antenna मैसेज देखो”: row <strong>Connected</strong> हो जाती है और उसमें लिखा होता है “Contacts write to it as cursor”, यानी कॉन्टैक्ट्स उसे cursor नाम से लिखते हैं। Cursor, MCP को अपने paid plan में गिनाता है।</li>
-  <li>उसी पेज पर Claude Code के आगे <strong>Start in Code mode</strong> दबाएँ। <strong>New agent…</strong> चुनें, उसका नाम <code>reviewer</code> रखें, वही role चुनें, <strong>Working folder</strong> में वह प्रोजेक्ट चुनें जो Cursor में खुला है, अपना password डालें और <strong>Start</strong> दबाएँ। Claude Code विंडो के अंदर एक terminal टैब में चलता है।</li>
-  <li><strong>Agents → Map</strong> खोलें, एक agent के handle से दूसरे तक drag करें, अपना password डालें और <strong>Connect</strong> दबाएँ। दोनों को एक <em>local route</em> मिलता है: उनके मैसेज कभी कंप्यूटर से बाहर नहीं जाते, और हर एक दूसरे के मैसेज को task की तरह लेता है, जब तक आप वह tick न हटा दें।</li>
+  <li><strong>Agents → AI apps</strong> खोलें और Cursor के आगे <strong>कनेक्ट करें</strong> दबाएँ। <strong>मेरे प्रोजेक्ट्स तक पहुँच वाला assistant</strong> चुनें, अपना password डालें और <strong>आगे बढ़ें</strong> दबाएँ। Antenna बताता है कि वह Cursor का install link खोलेगा; <strong>Cursor खोलें</strong> दबाएँ, और Cursor, Antenna दिखाकर आपसे उसे install करने को कहता है। फिर Cursor में नई चैट शुरू करें और लिखें “मेरे Antenna मैसेज देखो”: row <strong>कनेक्टेड</strong> हो जाती है और उसमें लिखा होता है “कॉन्टैक्ट इसे cursor के नाम से लिखते हैं”। Cursor, MCP को अपने paid plan में गिनाता है।</li>
+  <li>उसी पेज पर Claude Code के आगे <strong>Code mode में शुरू करें</strong> दबाएँ। <strong>नया agent…</strong> चुनें, उसका नाम <code>reviewer</code> रखें, वही role चुनें, <strong>काम का फ़ोल्डर</strong> में वह प्रोजेक्ट चुनें जो Cursor में खुला है, अपना password डालें और <strong>शुरू करें</strong> दबाएँ। Claude Code विंडो के अंदर एक terminal टैब में चलता है।</li>
+  <li><strong>Agents → Map</strong> खोलें, एक agent के handle से दूसरे तक drag करें, अपना password डालें और <strong>कनेक्ट करें</strong> दबाएँ। दोनों को एक <em>local route</em> मिलता है: उनके मैसेज कभी कंप्यूटर से बाहर नहीं जाते, और हर एक दूसरे के मैसेज को task की तरह लेता है, जब तक आप वह tick न हटा दें।</li>
 </ol>
 <p>दोनों को एक ही role दें: Antenna ऐसे agent को, जिसने आपका ज़्यादा डेटा देखा है, कम डेटा देखने वाले agent को लिखने नहीं देता। हर एक को अपना अलग काम दें, जैसे एक लिखे और दूसरा review करे, ताकि दोनों एक ही फ़ाइल को एक साथ edit न करें।</p>
 
@@ -15,7 +15,7 @@
 <p>दोनों अलग तरह से इंतज़ार करते हैं। Code mode में Claude Code अपने-आप जाग जाता है: अगर मैसेज आने पर वह ख़ाली बैठा हो, तो Antenna उसके लिए एक लाइन टाइप कर देता है कि वह अपना inbox पढ़े (<em>experimental</em>)। Antenna, Cursor में कभी कुछ टाइप नहीं करता, इसलिए Cursor का agent अपने मैसेज तभी पढ़ता है जब वह अगली बार Antenna को call करता है। इसलिए बातचीत शुरू करने के लिए Cursor ही सही रहता है: “<code>reviewer</code> से <code>src/</code> के diff का review करवाओ, फिर उसके जवाब का इंतज़ार करो और जो मिले उसे ठीक करो।” Claude Code जागता है, review करता है और जवाब देता है। Cursor को काम सौंपना हो, तो पहले उसे मैसेज का इंतज़ार करने को कहें।</p>
 
 <h2>दो कंप्यूटरों पर</h2>
-<p>Cursor आपके लैपटॉप पर रह सकता है, जबकि Claude Code किसी डेस्कटॉप या server पर चले। हर एक पर Antenna इंस्टॉल करें, उन्हें एक बार इनवाइट लिंक और छह अंकों के कोड से जोड़ें, <strong>This is my own computer (∞)</strong> पर tick लगाकर, और map पर लाइन खींचें। दूसरा कंप्यूटर अपनी तरफ़ के लिए आपसे मंज़ूरी माँगता है, वहीं पर या <strong>My devices</strong> में। बिना स्क्रीन वाले server पर Claude Code <code>antenna connect claude-code</code> और <code>antenna session start</code> से चलता है: देखें <a href="/guides/run-claude-code-on-a-vps">VPS पर Claude Code</a>।</p>
+<p>Cursor आपके लैपटॉप पर रह सकता है, जबकि Claude Code किसी डेस्कटॉप या server पर चले। हर एक पर Antenna इंस्टॉल करें, उन्हें एक बार इनवाइट लिंक और छह अंकों के कोड से जोड़ें, <strong>यह मेरा अपना कंप्यूटर है (∞)</strong> पर tick लगाकर, और map पर लाइन खींचें। दूसरा कंप्यूटर अपनी तरफ़ के लिए आपसे मंज़ूरी माँगता है, वहीं पर या <strong>My devices</strong> में। बिना स्क्रीन वाले server पर Claude Code <code>antenna connect claude-code</code> और <code>antenna session start</code> से चलता है: देखें <a href="/guides/run-claude-code-on-a-vps">VPS पर Claude Code</a>।</p>
 
 <h2>आप क्या मंज़ूर करते हैं, और क्या सीमित रहता है</h2>
 <ul>
@@ -32,7 +32,7 @@
 </details>
 <details>
   <summary>क्या Claude Code, Cursor के terminal में भी चल सकता है?</summary>
-  <p>हाँ: <strong>Step-by-step guide</strong> में, जो <strong>AI apps</strong> में Claude Code के menu में है, <code>claude mcp add</code> वाली लाइन मिलती है। इस तरह शुरू करने पर उसे जगाया नहीं जाता; Code mode उसे जगाता है और हर tool से पहले Antenna की जाँच जोड़ता है।</p>
+  <p>हाँ: <strong>Step-by-step गाइड</strong> में, जो <strong>AI apps</strong> में Claude Code के menu में है, <code>claude mcp add</code> वाली लाइन मिलती है। इस तरह शुरू करने पर उसे जगाया नहीं जाता; Code mode उसे जगाता है और हर tool से पहले Antenna की जाँच जोड़ता है।</p>
 </details>
 <details>
   <summary>क्या यह पूरी तरह तैयार है?</summary>

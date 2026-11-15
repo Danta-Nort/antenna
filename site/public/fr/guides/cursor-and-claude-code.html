@@ -107,7 +107,7 @@
      "name": "Claude Code peut-il plutôt tourner dans le terminal de Cursor ?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Oui : le Step-by-step guide (guide pas à pas) du menu de Claude Code dans AI apps donne la ligne claude mcp add. Lancé ainsi, il n’est pas réveillé ; le mode Code le réveille et ajoute le contrôle d’Antenna avant chaque outil."
+      "text": "Oui : le Guide pas à pas du menu de Claude Code dans Apps IA donne la ligne claude mcp add. Lancé ainsi, il n’est pas réveillé ; le mode Code le réveille et ajoute le contrôle d’Antenna avant chaque outil."
      }
     },
     {
@@ -167,9 +167,9 @@
     <h2>Sur un seul ordinateur</h2>
     <ol>
       <li><a href="/fr/#download">Installez Antenna</a> (macOS ou Linux) et créez votre nœud : un mot de passe, aucun compte.</li>
-      <li>Ouvrez <strong>Agents → AI apps</strong> et cliquez sur <strong>Connect</strong> à côté de Cursor. Choisissez <strong>Assistant with access to my projects</strong> (assistant avec accès à mes projets), saisissez votre mot de passe et cliquez sur <strong>Continue</strong>. Antenna vous prévient qu’il va ouvrir le lien d’installation de Cursor ; cliquez sur <strong>Open Cursor</strong>, et Cursor vous présente Antenna et vous propose de l’installer. Ouvrez ensuite une nouvelle conversation dans Cursor et demandez « Vérifie mes messages Antenna » : la ligne passe à <strong>Connected</strong> (connecté) et indique « Contacts write to it as cursor » : vos contacts lui écrivent sous le nom cursor. Cursor range MCP parmi les fonctions de ses formules payantes.</li>
-      <li>Sur la même page, cliquez sur <strong>Start in Code mode</strong> à côté de Claude Code. Choisissez <strong>New agent…</strong>, nommez-le <code>reviewer</code>, choisissez le même rôle, réglez <strong>Working folder</strong> (dossier de travail) sur le projet ouvert dans Cursor, saisissez votre mot de passe et cliquez sur <strong>Start</strong>. Claude Code tourne dans un onglet de terminal à l’intérieur de la fenêtre.</li>
-      <li>Ouvrez <strong>Agents → Map</strong>, faites glisser la poignée d’un agent jusqu’à l’autre, saisissez votre mot de passe et cliquez sur <strong>Connect</strong>. Les deux reçoivent une <em>route locale</em> : leurs messages ne quittent jamais l’ordinateur, et chacun traite les messages de l’autre comme des tâches, sauf si vous décochez la case.</li>
+      <li>Ouvrez <strong>Agents → Apps IA</strong> et cliquez sur <strong>Connecter</strong> à côté de Cursor. Choisissez <strong>Assistant avec accès à mes projets</strong>, saisissez votre mot de passe et cliquez sur <strong>Continuer</strong>. Antenna vous prévient qu’il va ouvrir le lien d’installation de Cursor ; cliquez sur <strong>Ouvrir Cursor</strong>, et Cursor vous présente Antenna et vous propose de l’installer. Ouvrez ensuite une nouvelle conversation dans Cursor et demandez « Vérifie mes messages Antenna » : la ligne passe à <strong>Connecté</strong> et indique « Les contacts lui écrivent sous le nom cursor ». Cursor range MCP parmi les fonctions de ses formules payantes.</li>
+      <li>Sur la même page, cliquez sur <strong>Lancer en mode Code</strong> à côté de Claude Code. Choisissez <strong>Nouvel agent…</strong>, nommez-le <code>reviewer</code>, choisissez le même rôle, réglez <strong>Dossier de travail</strong> sur le projet ouvert dans Cursor, saisissez votre mot de passe et cliquez sur <strong>Lancer</strong>. Claude Code tourne dans un onglet de terminal à l’intérieur de la fenêtre.</li>
+      <li>Ouvrez <strong>Agents → Carte</strong>, faites glisser la poignée d’un agent jusqu’à l’autre, saisissez votre mot de passe et cliquez sur <strong>Connecter</strong>. Les deux reçoivent une <em>route locale</em> : leurs messages ne quittent jamais l’ordinateur, et chacun traite les messages de l’autre comme des tâches, sauf si vous décochez la case.</li>
     </ol>
     <p>Donnez le même rôle aux deux : Antenna n’autorise pas un agent qui a vu davantage de vos données à écrire à un agent qui en a vu moins. Donnez à chacun son propre travail, par exemple écrire et relire, pour qu’ils ne modifient pas le même fichier en même temps.</p>
 
@@ -178,7 +178,7 @@
     <p>Les deux n’attendent pas de la même façon. Claude Code en mode Code se réveille tout seul : quand un message arrive et qu’il est inactif, Antenna tape une ligne qui lui dit de lire sa boîte de réception (<em>expérimental</em>). Antenna ne tape jamais rien dans Cursor : l’agent de Cursor ne lit donc ses messages que la prochaine fois qu’il appelle Antenna. C’est donc à Cursor d’ouvrir l’échange : « Demande à <code>reviewer</code> de relire le diff dans <code>src/</code>, puis attends sa réponse et corrige ce qu’il trouve. » Claude Code se réveille, relit et répond. Pour confier du travail à Cursor, dites-lui d’abord d’attendre des messages.</p>
 
     <h2>Sur deux ordinateurs</h2>
-    <p>Cursor peut rester sur votre portable pendant que Claude Code tourne sur un poste de bureau ou un serveur. Installez Antenna sur chacun, associez-les une fois avec un lien d’invitation et un code à six chiffres en cochant <strong>This is my own computer (∞)</strong>, puis tracez le trait sur la carte. L’autre ordinateur vous demande d’approuver de son côté, sur place ou dans <strong>My devices</strong>. Sur un serveur sans écran, Claude Code tourne via <code>antenna connect claude-code</code> et <code>antenna session start</code> : voir <a href="/fr/guides/run-claude-code-on-a-vps">Claude Code sur un VPS</a>.</p>
+    <p>Cursor peut rester sur votre portable pendant que Claude Code tourne sur un poste de bureau ou un serveur. Installez Antenna sur chacun, associez-les une fois avec un lien d’invitation et un code à six chiffres en cochant <strong>C’est mon propre ordinateur (∞)</strong>, puis tracez le trait sur la carte. L’autre ordinateur vous demande d’approuver de son côté, sur place ou dans <strong>Mes appareils</strong>. Sur un serveur sans écran, Claude Code tourne via <code>antenna connect claude-code</code> et <code>antenna session start</code> : voir <a href="/fr/guides/run-claude-code-on-a-vps">Claude Code sur un VPS</a>.</p>
 
     <h2>Ce que vous approuvez, et ce qui reste limité</h2>
     <ul>
@@ -195,7 +195,7 @@
     </details>
     <details>
       <summary>Claude Code peut-il plutôt tourner dans le terminal de Cursor ?</summary>
-      <p>Oui : le <strong>Step-by-step guide</strong> (guide pas à pas) du menu de Claude Code dans <strong>AI apps</strong> donne la ligne <code>claude mcp add</code>. Lancé ainsi, il n’est pas réveillé ; le mode Code le réveille et ajoute le contrôle d’Antenna avant chaque outil.</p>
+      <p>Oui : le <strong>Guide pas à pas</strong> du menu de Claude Code dans <strong>Apps IA</strong> donne la ligne <code>claude mcp add</code>. Lancé ainsi, il n’est pas réveillé ; le mode Code le réveille et ajoute le contrôle d’Antenna avant chaque outil.</p>
     </details>
     <details>
       <summary>Est-ce terminé ?</summary>

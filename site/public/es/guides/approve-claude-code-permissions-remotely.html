@@ -107,7 +107,7 @@
      "name": "¿Puede aprobar cualquier computadora?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "No. Solo una computadora que emparejaste como tuya y cuyas claves aceptaste con tu contraseña en la computadora que pregunta. Si pierdes una, pulsa Revoke this computer (revocar esta computadora) en cada una de las demás."
+      "text": "No. Solo una computadora que emparejaste como tuya y cuyas claves aceptaste con tu contraseña en la computadora que pregunta. Si pierdes una, pulsa Revocar esta computadora en cada una de las demás."
      }
     },
     {
@@ -162,37 +162,37 @@
     <nav class="crumbs" aria-label="Ruta de navegación"><a href="/es/">Antenna</a> <span aria-hidden="true">›</span> <a href="/es/guides/">Guías</a></nav>
     <p class="eyebrow">Actualizado <time datetime="2026-11-15">15 de noviembre de 2026</time></p>
     <h1>Aprueba las peticiones de Claude Code desde otra computadora</h1>
-    <p class="lead">Inicia Claude Code a través de Antenna, en modo Code desde la ventana o con <code>antenna session</code> en un servidor, y el daemon de Antenna comprobará cada herramienta que use y cada mensaje que envíe. Cuando un paso te necesita, se convierte en una petición de aprobación que aparece, con una notificación, en cada computadora que emparejaste como tuya, en <strong>My devices</strong> (mis dispositivos). Apruébala allí con la contraseña de esa computadora o con Touch ID: la computadora donde se ejecuta Claude Code comprueba tu respuesta, lleva a cabo el paso y Claude Code sigue adelante.</p>
+    <p class="lead">Inicia Claude Code a través de Antenna, en modo Code desde la ventana o con <code>antenna session</code> en un servidor, y el daemon de Antenna comprobará cada herramienta que use y cada mensaje que envíe. Cuando un paso te necesita, se convierte en una petición de aprobación que aparece, con una notificación, en cada computadora que emparejaste como tuya, en <strong>Mis dispositivos</strong>. Apruébala allí con la contraseña de esa computadora o con Touch ID: la computadora donde se ejecuta Claude Code comprueba tu respuesta, lleva a cabo el paso y Claude Code sigue adelante.</p>
 
     <h2>Qué te llega</h2>
     <ul>
       <li><strong>Pasos después de leer el mensaje de un contacto.</strong> En cuanto Claude Code ha leído un mensaje de un compañero, el nivel de confianza de ese compañero decide qué puede hacer: en el nivel 4 cada comando espera tu aprobación; en los niveles 2 y 3 la espera cada edición, y los comandos se rechazan.</li>
       <li><strong>Cambios en su propia configuración.</strong> Después de leer el mensaje de cualquier contacto, aunque venga de tu propio portátil, las ediciones de <code>CLAUDE.md</code>, <code>.claude/</code>, los perfiles de la shell, las claves y los archivos de compilación como <code>package.json</code> esperan tu aprobación.</li>
       <li><strong>Mensajes que sacarían tus datos.</strong> En cuanto ha leído archivos de tu proyecto, cada mensaje a un contacto por debajo de ∞ espera, igual que cualquier mensaje a uno de esos contactos que parezca contener una clave, una contraseña o un token. En cuanto ha leído una conversación, también espera un mensaje a otra.</li>
-      <li><strong>Preguntas.</strong> <em>Experimental.</em> Las preguntas de un agente aparecen en la computadora donde se ejecuta, en <strong>Questions from your agents</strong> (preguntas de tus agentes). Para recibirlas en tu portátil, ejecuta <code>antenna agent escalate api-dev --to mac</code> en esa computadora: a partir de entonces cada pregunta llega al chat del agente y la respondes ahí.</li>
+      <li><strong>Preguntas.</strong> <em>Experimental.</em> Las preguntas de un agente aparecen en la computadora donde se ejecuta, en <strong>Preguntas de tus agentes</strong>. Para recibirlas en tu portátil, ejecuta <code>antenna agent escalate api-dev --to mac</code> en esa computadora: a partir de entonces cada pregunta llega al chat del agente y la respondes ahí.</li>
     </ul>
     <p>El aviso de permisos propio de Claude Code («Do you want to proceed?») se queda en su terminal: Antenna nunca escribe en él. Permite en la configuración de Claude Code las herramientas que usas a diario, o respóndelo con <code>antenna session attach</code>.</p>
 
     <h2>Cómo configurarlo</h2>
     <ol>
-      <li><a href="/es/#download">Instala Antenna</a> en las dos computadoras y emparéjalas una vez con <strong>This is my own computer (∞)</strong> (esta es mi propia computadora) marcado, como en <a href="/es/guides/run-claude-code-on-a-vps">Claude Code en un VPS</a>.</li>
-      <li>Inicia Claude Code a través de Antenna. En un escritorio: <strong>Agents → AI apps → Start in Code mode</strong>. En un servidor:
+      <li><a href="/es/#download">Instala Antenna</a> en las dos computadoras y emparéjalas una vez con <strong>Es mi propia computadora (∞)</strong> marcado, como en <a href="/es/guides/run-claude-code-on-a-vps">Claude Code en un VPS</a>.</li>
+      <li>Inicia Claude Code a través de Antenna. En un escritorio: <strong>Agentes → Apps de IA → Iniciar en modo Code</strong>. En un servidor:
     <pre><code>cd ~/projects/api
     antenna connect claude-code --agent api-dev --links mac --hello mac
     antenna session start api-dev --dir ~/projects/api</code></pre></li>
-      <li>En la computadora donde se ejecuta Claude Code, acepta las respuestas de la computadora desde la que vas a aprobar: <strong>My devices</strong> → la ficha de esa computadora → <strong>Approvals</strong> → <strong>Accept approvals signed with …</strong>, con tu contraseña. En un servidor: <code>antenna devices confirm mac</code>.</li>
+      <li>En la computadora donde se ejecuta Claude Code, acepta las respuestas de la computadora desde la que vas a aprobar: <strong>Mis dispositivos</strong> → la ficha de esa computadora → <strong>Aprobaciones</strong> → <strong>Aceptar aprobaciones firmadas con …</strong>, con tu contraseña. En un servidor: <code>antenna devices confirm mac</code>.</li>
     </ol>
 
     <h2>Responde desde cualquier computadora</h2>
-    <p>La petición aparece en la ficha de la computadora que pregunta, en <strong>My devices</strong> (<em>experimental</em>), con una notificación como «Antenna: approval needed on Mac mini». La ficha dice qué agente pregunta, para qué y por qué, y cita su texto, salvo que el texto contenga un secreto: ese nunca sale de la computadora que preguntó. Pulsa <strong>Approve with Touch ID</strong> en un Mac (<em>experimental</em>), <strong>Approve with password</strong> con la contraseña de la computadora en la que estás, o <strong>Deny</strong> (rechazar).</p>
-    <p>La computadora que preguntó comprueba la firma con las claves que aceptaste en ella, con su propio desafío de un solo uso y con esta petición exacta, y luego la lleva a cabo ella misma, una sola vez. En esa misma computadora, la petición está en <strong>Approval requests</strong>, o en una terminal con <code>antenna approvals</code> y <code>antenna approve &lt;id&gt;</code>.</p>
+    <p>La petición aparece en la ficha de la computadora que pregunta, en <strong>Mis dispositivos</strong> (<em>experimental</em>), con una notificación como «Antenna: se necesita aprobación en Mac mini». La ficha dice qué agente pregunta, para qué y por qué, y cita su texto, salvo que el texto contenga un secreto: ese nunca sale de la computadora que preguntó. Pulsa <strong>Aprobar con Touch ID</strong> en un Mac (<em>experimental</em>), <strong>Aprobar con contraseña</strong> con la contraseña de la computadora en la que estás, o <strong>Rechazar</strong>.</p>
+    <p>La computadora que preguntó comprueba la firma con las claves que aceptaste en ella, con su propio desafío de un solo uso y con esta petición exacta, y luego la lleva a cabo ella misma, una sola vez. En esa misma computadora, la petición está en <strong>Peticiones de aprobación</strong>, o en una terminal con <code>antenna approvals</code> y <code>antenna approve &lt;id&gt;</code>.</p>
     <p>Claude Code espera hasta 50 segundos, y un paso aprobado en ese plazo se ejecuta al momento. Si tardas más, sigue con otro trabajo; cuando apruebas, Antenna escribe «Approved — continue.» en su prompt y Claude Code vuelve a ejecutar el paso.</p>
 
     <h2>Si nadie responde</h2>
-    <p>Una petición se cierra a los 10 minutos: no se ejecuta nada, no se envía nada y Claude Code se entera de que nadie la aprobó. Poco antes te avisa una notificación. Después de <strong>Deny</strong>, que no pide contraseña, Claude Code se entera de que dijiste que no.</p>
+    <p>Una petición se cierra a los 10 minutos: no se ejecuta nada, no se envía nada y Claude Code se entera de que nadie la aprobó. Poco antes te avisa una notificación. Después de <strong>Rechazar</strong>, que no pide contraseña, Claude Code se entera de que dijiste que no.</p>
 
     <h2>Un agente que aprueba por ti</h2>
-    <p><em>Experimental.</em> <strong>Can approve for…</strong> (puede aprobar por…) en <strong>Agents</strong> deja que un agente de tu confianza responda a las peticiones de tus otros agentes sobre mensajes y archivos, y su respuesta solo cuenta cuando todo lo que toca la petición está en ∞. Los comandos y las ediciones siempre te llegan a ti.</p>
+    <p><em>Experimental.</em> <strong>Puede aprobar por…</strong> en <strong>Agentes</strong> deja que un agente de tu confianza responda a las peticiones de tus otros agentes sobre mensajes y archivos, y su respuesta solo cuenta cuando todo lo que toca la petición está en ∞. Los comandos y las ediciones siempre te llegan a ti.</p>
 
     <h2>Preguntas</h2>
     <details>
@@ -201,7 +201,7 @@
     </details>
     <details>
       <summary>¿Puede aprobar cualquier computadora?</summary>
-      <p>No. Solo una computadora que emparejaste como tuya y cuyas claves aceptaste con tu contraseña en la computadora que pregunta. Si pierdes una, pulsa <strong>Revoke this computer</strong> (revocar esta computadora) en cada una de las demás.</p>
+      <p>No. Solo una computadora que emparejaste como tuya y cuyas claves aceptaste con tu contraseña en la computadora que pregunta. Si pierdes una, pulsa <strong>Revocar esta computadora</strong> en cada una de las demás.</p>
     </details>
     <details>
       <summary>¿Puedo aprobar desde el móvil?</summary>

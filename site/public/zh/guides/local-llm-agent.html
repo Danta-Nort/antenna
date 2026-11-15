@@ -162,7 +162,7 @@
     <nav class="crumbs" aria-label="面包屑导航"><a href="/zh/">Antenna</a> <span aria-hidden="true">›</span> <a href="/zh/guides/">指南</a></nav>
     <p class="eyebrow">更新于 <time datetime="2026-11-09">2026年11月9日</time></p>
     <h1>搭建本地大模型智能体，无需账号和 API key</h1>
-    <p class="lead">在 Antenna 中打开 <strong>Agents → Local models</strong>，下载它为你的电脑推荐的模型，然后点 <strong>Create agent</strong>。模型通过 llama.cpp 在你自己的机器上运行，下载完成后无需账号、无需 API key、也无需联网，并且运行在一个既不能联网、也不能读取你文件的沙盒里。这个智能体有自己的聊天，在团队中可以承担分类、总结、写文档这类较轻的角色。<em>实验性功能。</em></p>
+    <p class="lead">在 Antenna 中打开 <strong>智能体 → 本地模型</strong>，下载它为你的电脑推荐的模型，然后点 <strong>创建智能体</strong>。模型通过 llama.cpp 在你自己的机器上运行，下载完成后无需账号、无需 API key、也无需联网，并且运行在一个既不能联网、也不能读取你文件的沙盒里。这个智能体有自己的聊天，在团队中可以承担分类、总结、写文档这类较轻的角色。<em>实验性功能。</em></p>
 
     <h2>什么电脑用什么模型</h2>
     <p>Antenna 会根据你的内存和剩余磁盘空间，推荐一个 Qwen3.5 模型：</p>
@@ -174,13 +174,13 @@
         <tr><td>M2 或更新的 Mac，16 GB 及以上</td><td>Qwen3.5 9B</td><td>5.7 GB</td><td>不到 9 GB</td></tr>
       </tbody>
     </table>
-    <p>列表里也有其他模型，每个都标注了 <strong>Fits this computer</strong>（适合这台电脑）、<strong>Slow on this computer</strong>（在这台电脑上较慢）或 <strong>Not for this computer</strong>（不适合这台电脑），所以你永远不会下载一个跑不起来的模型。</p>
+    <p>列表里也有其他模型，每个都标注了 <strong>适合这台电脑</strong>、<strong>在这台电脑上较慢</strong>或 <strong>不适用于这台电脑</strong>，所以你永远不会下载一个跑不起来的模型。</p>
 
     <h2>设置步骤</h2>
     <ol>
-      <li>打开 <strong>Agents → Local models</strong>，点推荐模型旁边的 <strong>Download</strong>。模型从 Hugging Face 下载，版本固定；关闭窗口不会中断下载，下载中断后也能续传。</li>
+      <li>打开 <strong>智能体 → 本地模型</strong>，点推荐模型旁边的 <strong>下载</strong>。模型从 Hugging Face 下载，版本固定；关闭窗口不会中断下载，下载中断后也能续传。</li>
       <li>在加载之前，Antenna 会用本版本内置的文件大小和 SHA-256 校验下载的文件。不匹配的文件会被删除。</li>
-      <li>点 <strong>Create agent</strong> 并起个名字。它的聊天会出现在 Chats 的 <strong>On this computer</strong> 下面。</li>
+      <li>点 <strong>创建智能体</strong> 并起个名字。它的聊天会出现在“聊天”的 <strong>在这台电脑上</strong> 下面。</li>
       <li>给它发消息。第一次回复需要等几秒钟加载模型。</li>
     </ol>
     <p>在终端里：<code>antenna local install qwen3.5-2b --wait</code>（如果你已经有模型文件，用 <code>--from-file</code>），然后 <code>antenna local add helper --model qwen3.5-2b</code> 和 <code>antenna local say helper "hello"</code>。</p>
@@ -189,10 +189,10 @@
     <p>模型运行在自己的沙盒里：它只能读取自己的模型文件，哪儿也连不上，不能访问互联网，不能访问 Antenna，也不能访问其他程序。智能体本身的程序运行在第二个沙盒里，只能访问模型。对话保存在 Antenna 的加密数据库中。在这个版本里，本地智能体没有任何连接和工具，所以它无法向任何人发送任何东西，Antenna 也永远不会让你粘贴它回答里的命令。</p>
 
     <h2>内存，替你管好</h2>
-    <p>多个智能体可以共用一个模型，不同大小的模型也可以同时运行。当某次回复需要的内存被另一个模型占着时，这次回复会等待（“Waiting for memory…”），而不是让电脑去用交换空间；30 分钟没人用的模型会被卸载。</p>
+    <p>多个智能体可以共用一个模型，不同大小的模型也可以同时运行。当某次回复需要的内存被另一个模型占着时，这次回复会等待（“正在等待内存…”），而不是让电脑去用交换空间；30 分钟没人用的模型会被卸载。</p>
 
     <h2>团队中的本地模型</h2>
-    <p>当你创建一个智能体团队时，本地模型可以作为工作智能体，承担与其规模相称的角色：小模型做分类和总结，大一些的模型还能写文档、起草和翻译。开启 <strong>Local only</strong> 后，整个团队（包括主导智能体）都不使用任何云端模型。在团队中，本地模型目前还不写代码。</p>
+    <p>当你创建一个智能体团队时，本地模型可以作为工作智能体，承担与其规模相称的角色：小模型做分类和总结，大一些的模型还能写文档、起草和翻译。开启 <strong>仅本地</strong> 后，整个团队（包括主导智能体）都不使用任何云端模型。在团队中，本地模型目前还不写代码。</p>
 
     <h2>常见问题</h2>
     <details>

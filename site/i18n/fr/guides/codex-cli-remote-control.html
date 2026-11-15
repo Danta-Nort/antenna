@@ -9,7 +9,7 @@
 </ul>
 
 <h2>1. Associer les deux ordinateurs</h2>
-<p>Sur votre portable : <strong>New contact → Invite</strong>, cochez <strong>This is my own computer (∞)</strong>, créez le lien et ouvrez-le sur l’autre ordinateur (sur un serveur, <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>). Saisissez sur l’un le code affiché par l’autre. Les deux côtés se considèrent désormais comme vos propres ordinateurs. La version pas à pas, avec captures d’écran, se trouve dans <a href="/guides/run-claude-code-on-a-vps">Claude Code sur un VPS</a> ; c’est la même chose pour Codex.</p>
+<p>Sur votre portable : <strong>Nouveau contact → Inviter</strong>, cochez <strong>C’est mon propre ordinateur (∞)</strong>, créez le lien et ouvrez-le sur l’autre ordinateur (sur un serveur, <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>). Saisissez sur l’un le code affiché par l’autre. Les deux côtés se considèrent désormais comme vos propres ordinateurs. La version pas à pas, avec captures d’écran, se trouve dans <a href="/guides/run-claude-code-on-a-vps">Claude Code sur un VPS</a> ; c’est la même chose pour Codex.</p>
 
 <h2>2. Donner un nom à la session Codex</h2>
 <p>Sur l’ordinateur où tourne Codex, dans le dossier du projet :</p>
@@ -24,7 +24,7 @@ antenna session attach api-codex</code></pre>
 
 <h2>4. Lui écrire depuis votre portable</h2>
 <p>Ouvrez la conversation <code>api-codex</code> et écrivez : « Lance les tests, corrige ce qui échoue et dis-moi ce que tu as changé. » Quand Codex attend, inactif, devant son invite, Antenna tape une ligne prédéfinie qui lui dit de lire sa boîte de réception. Il ne tape jamais votre texte dans le terminal et ne tape jamais par-dessus une question que pose Codex. Codex lit le message via Antenna, travaille et répond dans la conversation. <em>Expérimental.</em></p>
-<p>Besoin qu’il arrête ce qu’il fait ? Activez <strong>Urgent: interrupt now</strong> avant d’envoyer. Antenna appuie une fois sur Échap pour mettre fin au tour en cours, puis réveille Codex pour votre message. Pour arrêter l’agent et tout ce qu’il a lancé, ouvrez la fiche de l’autre ordinateur dans <strong>My devices</strong> sur votre portable et cliquez sur <strong>Stop agent and its processes…</strong> à côté de <code>api-codex</code>.</p>
+<p>Besoin qu’il arrête ce qu’il fait ? Activez <strong>Urgent : interrompre maintenant</strong> avant d’envoyer. Antenna appuie une fois sur Échap pour mettre fin au tour en cours, puis réveille Codex pour votre message. Pour arrêter l’agent et tout ce qu’il a lancé, ouvrez la fiche de l’autre ordinateur dans <strong>Mes appareils</strong> sur votre portable et cliquez sur <strong>Arrêter l’agent et ses processus…</strong> à côté de <code>api-codex</code>.</p>
 
 <h2>Sur un poste de bureau : le mode Code</h2>
 <p>Si Codex tourne sur un Mac ou un poste Linux avec l’app Antenna, vous pouvez sauter les étapes en terminal. En mode Code, cliquez sur <code>+</code> dans le panneau des agents, choisissez Codex et le dossier de travail : Codex tourne alors dans un onglet à l’intérieur de la fenêtre, réveillé de la même façon. Sa conversation est joignable depuis vos autres ordinateurs comme celle de n’importe quel autre agent.</p>

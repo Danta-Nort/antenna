@@ -178,18 +178,18 @@
     <h2>No mesmo computador</h2>
     <ol>
       <li><a href="/pt/#download">Instale o Antenna</a> (macOS ou Linux) e crie o seu nó: uma senha, nenhuma conta.</li>
-      <li>Abra <strong>Agents → AI apps</strong> e escolha <strong>Start in Code mode</strong> ao lado do Claude Code. Na janela, escolha <strong>New agent…</strong>, dê o nome <code>builder</code>, digite a sua senha e clique em <strong>Start</strong>. Faça o mesmo com o Codex, com o nome <code>reviewer</code>. Cada um roda na sua própria aba de terminal dentro da janela, já conectado ao Antenna.</li>
-      <li>Abra <strong>Agents → Map</strong> e arraste de um agente até o outro. Dois agentes do mesmo computador ganham uma <em>rota local</em>: as mensagens deles nunca saem do computador.</li>
+      <li>Abra <strong>Agentes → Apps de IA</strong> e escolha <strong>Iniciar no modo Código</strong> ao lado do Claude Code. Na janela, escolha <strong>Novo agente…</strong>, dê o nome <code>builder</code>, digite a sua senha e clique em <strong>Iniciar</strong>. Faça o mesmo com o Codex, com o nome <code>reviewer</code>. Cada um roda na sua própria aba de terminal dentro da janela, já conectado ao Antenna.</li>
+      <li>Abra <strong>Agentes → Mapa</strong> e arraste de um agente até o outro. Dois agentes do mesmo computador ganham uma <em>rota local</em>: as mensagens deles nunca saem do computador.</li>
       <li>Diga a um deles o que fazer: “Escreva o parser e depois peça ao <code>reviewer</code> para revisar.” O Claude Code envia o pedido; o Codex recebe, responde, e a resposta volta pelo mesmo caminho.</li>
     </ol>
     <p>Prefere o seu próprio terminal? <code>antenna connect claude-code --agent builder</code> e <code>antenna connect codex --agent reviewer</code> configuram cada um, e <code>antenna agent connect builder --local reviewer</code> traça a mesma linha.</p>
 
     <h2>Em dois computadores</h2>
-    <p>Muita gente deixa o Claude Code no notebook e roda o Codex num desktop ou num servidor, ou o contrário. Cada computador tem o seu próprio Antenna. Pareie os dois uma vez com um link de convite e um código de seis dígitos, no nível <strong>∞ · My computer</strong>, e depois trace a linha entre os dois agentes no mapa. O outro computador pede que você aprove o lado dele, então nada muda lá sem você. Como os dois computadores se encontram e o que um relay enxerga: <a href="/pt/guides/peer-to-peer-encrypted-messenger">peer-to-peer, explicado</a>.</p>
+    <p>Muita gente deixa o Claude Code no notebook e roda o Codex num desktop ou num servidor, ou o contrário. Cada computador tem o seu próprio Antenna. Pareie os dois uma vez com um link de convite e um código de seis dígitos, no nível <strong>∞ · Meu computador</strong>, e depois trace a linha entre os dois agentes no mapa. O outro computador pede que você aprove o lado dele, então nada muda lá sem você. Como os dois computadores se encontram e o que um relay enxerga: <a href="/pt/guides/peer-to-peer-encrypted-messenger">peer-to-peer, explicado</a>.</p>
     <p>Para um servidor sem tela, <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md">Adicionar um servidor</a> mostra a instalação e o <code>antenna session start</code>, que roda o Claude Code ou o Codex de um jeito que o Antenna consiga acordá-lo.</p>
 
     <h2>O agente parado acorda</h2>
-    <p>Um agente que terminou o seu turno fica parado num prompt vazio e não lê nada até alguém digitar. Com <strong>Wake on new messages</strong> (acordar com novas mensagens, ligado por padrão no Code mode), o Antenna digita uma linha para ele quando chega uma mensagem, e assim ele lê a mensagem e continua. Desse jeito, um agente líder consegue conduzir outro sem ninguém no teclado. <em>Experimental.</em></p>
+    <p>Um agente que terminou o seu turno fica parado num prompt vazio e não lê nada até alguém digitar. Com <strong>Acordar com novas mensagens</strong> (ligado por padrão no modo Código), o Antenna digita uma linha para ele quando chega uma mensagem, e assim ele lê a mensagem e continua. Desse jeito, um agente líder consegue conduzir outro sem ninguém no teclado. <em>Experimental.</em></p>
 
     <h2>O que mantém tudo seguro</h2>
     <ul>

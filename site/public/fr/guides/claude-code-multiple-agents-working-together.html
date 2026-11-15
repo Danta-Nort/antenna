@@ -177,17 +177,17 @@
 
     <h2>Comment fonctionne une équipe</h2>
     <ol>
-      <li><strong>Vous créez l’équipe</strong> dans <strong>Teams → New team</strong> : le dossier du projet, l’agent principal (l’un de vos agents, un modèle local, ou vous-même), le budget d’exécutants et les règles : les exécutants peuvent-ils lancer des commandes, quelles <strong>Check commands</strong> (commandes de vérification) une tâche peut citer (<code>cargo test</code>, <code>npm test</code>), et quels registres de paquets ces vérifications peuvent joindre.</li>
+      <li><strong>Vous créez l’équipe</strong> dans <strong>Équipes → Nouvelle équipe</strong> : le dossier du projet, l’agent principal (l’un de vos agents, un modèle local, ou vous-même), le budget d’exécutants et les règles : les exécutants peuvent-ils lancer des commandes, quelles <strong>Commandes de vérification</strong> une tâche peut citer (<code>cargo test</code>, <code>npm test</code>), et quels registres de paquets ces vérifications peuvent joindre.</li>
       <li><strong>Vous donnez l’objectif à l’agent principal</strong>, dans son propre terminal : « Découpe la fonction de connexion en petites tâches pour deux codeurs. »</li>
       <li><strong>L’agent principal planifie et recrute.</strong> Il rédige les tâches, lance des exécutants comme <code>web.coder-1</code> dans la limite du budget et les leur attribue.</li>
       <li><strong>Les exécutants codent en parallèle.</strong> Chacun reçoit une copie neuve du projet sur la branche de l’équipe, ne lit que sa propre tâche, travaille et rend son résultat, ou pose une question à l’agent principal s’il est bloqué.</li>
       <li><strong>Antenna vérifie chaque résultat</strong> en lançant la commande de vérification de la tâche dans un bac à sable séparé, sans jeton et sans réseau au-delà des registres que vous avez indiqués. Une vérification qui échoue retourne d’elle-même à l’exécutant, jusqu’à une certaine limite, avant que l’agent principal ne tranche.</li>
       <li><strong>L’agent principal relit :</strong> il accepte, ou renvoie avec des commentaires. Le travail accepté s’accumule sur une branche d’équipe, <code>antenna/web</code>.</li>
-      <li><strong>Vous l’appliquez.</strong> <strong>Review and apply</strong> montre ce qui va être fusionné dans votre branche ; avec votre mot de passe, la fusion se fait en fast-forward. Sans lui, rien ne bouge.</li>
+      <li><strong>Vous l’appliquez.</strong> <strong>Examiner et appliquer</strong> montre ce qui va être fusionné dans votre branche ; avec votre mot de passe, la fusion se fait en fast-forward. Sans lui, rien ne bouge.</li>
     </ol>
 
     <h2>Ce que vous voyez</h2>
-    <p>Le tableau de l’équipe affiche chaque tâche selon son état, de Open et Working à In review, Blocked, Accepted et Applied, avec la sortie en direct de chaque exécutant, ce que change son résultat, la sortie de la vérification et les jetons consommés. Vous pouvez faire tout ce que fait l’agent principal : répondre à la question d’un exécutant, demander des modifications, annuler une tâche ou arrêter un exécutant. Quand l’agent principal tourne dans le mode Code d’Antenna, il est réveillé dès qu’un exécutant rend son travail ou pose une question : l’équipe continue d’avancer pendant votre absence.</p>
+    <p>Le tableau de l’équipe affiche chaque tâche selon son état, de « Ouvertes » et « En cours » à « En revue », « Bloquées », « Acceptées » et « Appliquées », avec la sortie en direct de chaque exécutant, ce que change son résultat, la sortie de la vérification et les jetons consommés. Vous pouvez faire tout ce que fait l’agent principal : répondre à la question d’un exécutant, demander des modifications, annuler une tâche ou arrêter un exécutant. Quand l’agent principal tourne dans le mode Code d’Antenna, il est réveillé dès qu’un exécutant rend son travail ou pose une question : l’équipe continue d’avancer pendant votre absence.</p>
 
     <h2>Ce qui protège le projet</h2>
     <ul>

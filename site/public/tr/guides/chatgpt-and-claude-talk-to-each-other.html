@@ -107,7 +107,7 @@
      "name": "Claude Desktop, Claude Code ile konuşabilir mi?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Evet, aynı şekilde. Claude Desktop’u Agents → AI apps bölümünden bağlayın, Claude Code’u bağlayın (oradaki Connect ile ya da Code modu ile) ve Agents → Map ekranında ikisi arasına bir çizgi çekin. Bundan sonra ikisi Antenna’nın araçlarıyla birbirine mesaj gönderir; haritadaki Show recent messages birbirlerine yazıp yazmadıklarını ve ne zaman yazdıklarını gösterir."
+      "text": "Evet, aynı şekilde. Claude Desktop’u Ajanlar → Yapay zeka uygulamaları bölümünden bağlayın, Claude Code’u bağlayın (oradaki Bağla ile ya da Code modu ile) ve Ajanlar → Harita ekranında ikisi arasına bir çizgi çekin. Bundan sonra ikisi Antenna’nın araçlarıyla birbirine mesaj gönderir; haritadaki Son mesajları göster birbirlerine yazıp yazmadıklarını ve ne zaman yazdıklarını gösterir."
      }
     },
     {
@@ -178,7 +178,7 @@
     <nav class="crumbs" aria-label="Sayfa yolu"><a href="/tr/">Antenna</a> <span aria-hidden="true">›</span> <a href="/tr/guides/">Rehberler</a></nav>
     <p class="eyebrow">Güncellendi <time datetime="2026-11-14">14 Kasım 2026</time></p>
     <h1>ChatGPT ve Claude birbiriyle nasıl konuşturulur</h1>
-    <p class="lead">Antenna’yı Mac’inize kurun, Antenna’nın yapay zeka uygulamaları listesinde ChatGPT’nin ve Claude’un yanındaki <strong>Connect</strong> düğmesine basın, ardından ajan haritasında ikisini birbirine bağlayın. Her uygulama MCP üzerinden Antenna’nın mesajlaşma araçlarını alır; böylece ChatGPT Claude’a bir soru gönderebilir, Claude da ondan mesajlarını kontrol etmesini bir sonraki istediğinizde yanıt verir. Tersi de aynı şekilde çalışır. İkisi de kendi aboneliklerinizle çalışmaya devam eder: API anahtarı yok, kopyala-yapıştır yok.</p>
+    <p class="lead">Antenna’yı Mac’inize kurun, Antenna’nın yapay zeka uygulamaları listesinde ChatGPT’nin ve Claude’un yanındaki <strong>Bağla</strong> düğmesine basın, ardından ajan haritasında ikisini birbirine bağlayın. Her uygulama MCP üzerinden Antenna’nın mesajlaşma araçlarını alır; böylece ChatGPT Claude’a bir soru gönderebilir, Claude da ondan mesajlarını kontrol etmesini bir sonraki istediğinizde yanıt verir. Tersi de aynı şekilde çalışır. İkisi de kendi aboneliklerinizle çalışmaya devam eder: API anahtarı yok, kopyala-yapıştır yok.</p>
 
     <h2>Neye ihtiyacınız var</h2>
     <ul>
@@ -188,14 +188,14 @@
 
     <h2>İki uygulamayı da bağlayın</h2>
     <ol>
-      <li>Antenna’yı açın → <strong>Agents → AI apps</strong>. Mac’inizde bulunan uygulamalar listenin başında yer alır.</li>
-      <li>ChatGPT’nin yanındaki <strong>Connect</strong> düğmesine basın. Antenna uygulamanın kendi ajanını oluşturur (örneğin <code>chatgpt</code>) ve herhangi bir şey yazmadan önce uygulamanın ayarlarına tam olarak neyi ekleyeceğini gösterir; dosyanın bir yedeğini de saklar.</li>
+      <li>Antenna’yı açın → <strong>Ajanlar → Yapay zeka uygulamaları</strong>. Mac’inizde bulunan uygulamalar listenin başında yer alır.</li>
+      <li>ChatGPT’nin yanındaki <strong>Bağla</strong> düğmesine basın. Antenna uygulamanın kendi ajanını oluşturur (örneğin <code>chatgpt</code>) ve herhangi bir şey yazmadan önce uygulamanın ayarlarına tam olarak neyi ekleyeceğini gösterir; dosyanın bir yedeğini de saklar.</li>
       <li>Aynısını Claude Desktop (ajan <code>claude-desktop</code>) ya da Claude Code (<code>claude-code</code>) için yapın.</li>
-      <li>Antenna söylerse her uygulamayı yeniden başlatın. ChatGPT’de: Settings → MCP servers → <strong>Restart</strong>. Uygulama Antenna’yı kullanmaya başladığı anda satır <strong>Connected</strong> olur.</li>
+      <li>Antenna söylerse her uygulamayı yeniden başlatın. ChatGPT’de: Settings → MCP servers → <strong>Restart</strong>. Uygulama Antenna’yı kullanmaya başladığı anda satır <strong>Bağlı</strong> olur.</li>
     </ol>
 
     <h2>Birbirlerine yazmalarını sağlayın</h2>
-    <p><strong>Agents → Map</strong> ekranını açın ve <code>chatgpt</code> ajanından <code>claude-desktop</code> ajanına bir çizgi sürükleyin. Aynı Mac’teki iki ajan yerel bir rota alır: mesajları bu bilgisayardan çıkmaz. Şimdi ChatGPT’ye örneğin şunu söyleyin: “Bu taslağı Claude’a gönder ve neyin eksik olduğunu sor.” ChatGPT taslağı Antenna’nın <code>send_message</code> aracıyla gönderir; Claude mesajlarını bir sonraki kontrol edişinde okur ve yanıtlar, ChatGPT de yanıtı okur.</p>
+    <p><strong>Ajanlar → Harita</strong> ekranını açın ve <code>chatgpt</code> ajanından <code>claude-desktop</code> ajanına bir çizgi sürükleyin. Aynı Mac’teki iki ajan yerel bir rota alır: mesajları bu bilgisayardan çıkmaz. Şimdi ChatGPT’ye örneğin şunu söyleyin: “Bu taslağı Claude’a gönder ve neyin eksik olduğunu sor.” ChatGPT taslağı Antenna’nın <code>send_message</code> aracıyla gönderir; Claude mesajlarını bir sonraki kontrol edişinde okur ve yanıtlar, ChatGPT de yanıtı okur.</p>
     <p>ChatGPT masaüstü uygulaması ve Codex aynı ayar dosyasını paylaşır; bu yüzden birini bağlamak ikisini birden bağlar ve ikisi, aynı anda bunlardan birinde çalışan tek bir ajan olur. Terminalde çalışan iki kodlama ajanı için <a href="/tr/guides/claude-code-and-codex-talk-to-each-other">Claude Code ve Codex</a> rehberine bakın.</p>
 
     <h2>Her taraf neler yapabilir</h2>
@@ -208,7 +208,7 @@
     </details>
     <details>
       <summary>Claude Desktop, Claude Code ile konuşabilir mi?</summary>
-      <p>Evet, aynı şekilde. Claude Desktop’u <strong>Agents → AI apps</strong> bölümünden bağlayın, Claude Code’u bağlayın (oradaki <strong>Connect</strong> ile ya da Code modu ile) ve <strong>Agents → Map</strong> ekranında ikisi arasına bir çizgi çekin. Bundan sonra ikisi Antenna’nın araçlarıyla birbirine mesaj gönderir; haritadaki <strong>Show recent messages</strong> birbirlerine yazıp yazmadıklarını ve ne zaman yazdıklarını gösterir.</p>
+      <p>Evet, aynı şekilde. Claude Desktop’u <strong>Ajanlar → Yapay zeka uygulamaları</strong> bölümünden bağlayın, Claude Code’u bağlayın (oradaki <strong>Bağla</strong> ile ya da Code modu ile) ve <strong>Ajanlar → Harita</strong> ekranında ikisi arasına bir çizgi çekin. Bundan sonra ikisi Antenna’nın araçlarıyla birbirine mesaj gönderir; haritadaki <strong>Son mesajları göster</strong> birbirlerine yazıp yazmadıklarını ve ne zaman yazdıklarını gösterir.</p>
     </details>
     <details>
       <summary>Bu, OpenAI ya da Anthropic API’sini kullanıyor mu?</summary>

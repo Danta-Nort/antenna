@@ -1,35 +1,35 @@
 <!--guide {"title": "Claude Code 권한 요청을 다른 컴퓨터에서 원격으로 승인하기 — Antenna", "h1": "다른 컴퓨터에서 Claude Code의 요청 승인하기", "description": "서버나 다른 컴퓨터의 Claude Code가 승인을 기다릴 때, Antenna가 요청을 내 모든 컴퓨터로 보내 줘요. 비밀번호나 Touch ID로 승인하세요.", "summary": "다른 컴퓨터의 Claude Code가 보낸 승인 요청에, 지금 앞에 있는 내 컴퓨터에서 답해요.", "source": "2026-11-15"}-->
-<p class="lead">Claude Code를 Antenna로 시작하면(창에서는 Code 모드, 서버에서는 <code>antenna session</code>), Antenna 데몬이 Claude Code가 쓰는 모든 도구와 보내는 모든 메시지를 확인해요. 내 판단이 필요한 단계는 승인 요청이 되어, 내 컴퓨터로 페어링한 모든 컴퓨터의 <strong>My devices</strong>(내 기기)에 알림과 함께 나타나요. 거기서 그 컴퓨터의 비밀번호나 Touch ID로 승인하면, Claude Code가 돌아가는 컴퓨터가 내 답을 확인하고 그 단계를 실행하고, Claude Code는 하던 일을 이어가요.</p>
+<p class="lead">Claude Code를 Antenna로 시작하면(창에서는 Code 모드, 서버에서는 <code>antenna session</code>), Antenna 데몬이 Claude Code가 쓰는 모든 도구와 보내는 모든 메시지를 확인해요. 내 판단이 필요한 단계는 승인 요청이 되어, 내 컴퓨터로 페어링한 모든 컴퓨터의 <strong>내 기기</strong>에 알림과 함께 나타나요. 거기서 그 컴퓨터의 비밀번호나 Touch ID로 승인하면, Claude Code가 돌아가는 컴퓨터가 내 답을 확인하고 그 단계를 실행하고, Claude Code는 하던 일을 이어가요.</p>
 
 <h2>나에게 오는 것</h2>
 <ul>
   <li><strong>연락처의 메시지를 읽은 뒤의 단계.</strong> Claude Code가 팀원의 메시지를 읽고 나면, 그 팀원의 신뢰 레벨이 할 수 있는 일을 정해요. 레벨 4에서는 명령마다 내 승인을 기다리고, 레벨 2와 3에서는 편집마다 승인을 기다리며 명령은 거부돼요.</li>
   <li><strong>자기 설정을 바꾸는 단계.</strong> 어떤 연락처의 메시지든, 내 노트북에서 온 메시지라도 읽고 나면, <code>CLAUDE.md</code>, <code>.claude/</code>, 셸 프로필, 키, <code>package.json</code> 같은 빌드 파일의 편집은 내 승인을 기다려요.</li>
   <li><strong>내 데이터를 밖으로 가져갈 수 있는 메시지.</strong> 프로젝트 파일을 읽고 나면 ∞보다 낮은 연락처에 보내는 메시지는 모두 승인을 기다리고, 그런 연락처에 보내는 메시지 중 키나 비밀번호, 토큰이 든 것처럼 보이는 메시지도 마찬가지예요. 한 대화를 읽고 나면, 다른 대화로 보내는 메시지도 승인을 기다려요.</li>
-  <li><strong>질문.</strong> <em>실험적 기능이에요.</em> 에이전트의 질문은 그 에이전트가 돌아가는 컴퓨터의 <strong>Questions from your agents</strong>(에이전트의 질문)에 나타나요. 노트북에서 받고 싶다면 그 컴퓨터에서 <code>antenna agent escalate api-dev --to mac</code>을 실행하세요. 그러면 질문이 에이전트의 채팅으로 오고, 채팅에서 답하면 돼요.</li>
+  <li><strong>질문.</strong> <em>실험적 기능이에요.</em> 에이전트의 질문은 그 에이전트가 돌아가는 컴퓨터의 <strong>내 에이전트의 질문</strong>에 나타나요. 노트북에서 받고 싶다면 그 컴퓨터에서 <code>antenna agent escalate api-dev --to mac</code>을 실행하세요. 그러면 질문이 에이전트의 채팅으로 오고, 채팅에서 답하면 돼요.</li>
 </ul>
 <p>Claude Code 자체의 권한 확인 창(“Do you want to proceed?”)은 Claude Code의 터미널에 그대로 남아요. Antenna는 거기에 아무것도 입력하지 않아요. 자주 쓰는 도구는 Claude Code 설정에서 허용해 두거나, <code>antenna session attach</code>로 들어가서 답하세요.</p>
 
 <h2>설정하기</h2>
 <ol>
-  <li>두 컴퓨터 모두에 <a href="/#download">Antenna를 설치하고</a>, <strong>This is my own computer (∞)</strong>를 체크해서 한 번 페어링하세요. 방법은 <a href="/guides/run-claude-code-on-a-vps">VPS에서 Claude Code 돌리기</a>와 같아요.</li>
-  <li>Antenna로 Claude Code를 시작하세요. 데스크톱에서는 <strong>Agents → AI apps → Start in Code mode</strong>, 서버에서는 이렇게 해요.
+  <li>두 컴퓨터 모두에 <a href="/#download">Antenna를 설치하고</a>, <strong>내 컴퓨터예요(∞)</strong>를 체크해서 한 번 페어링하세요. 방법은 <a href="/guides/run-claude-code-on-a-vps">VPS에서 Claude Code 돌리기</a>와 같아요.</li>
+  <li>Antenna로 Claude Code를 시작하세요. 데스크톱에서는 <strong>에이전트 → AI 앱 → Code 모드로 시작</strong>, 서버에서는 이렇게 해요.
 <pre><code>cd ~/projects/api
 antenna connect claude-code --agent api-dev --links mac --hello mac
 antenna session start api-dev --dir ~/projects/api</code></pre></li>
-  <li>Claude Code가 돌아가는 컴퓨터에서, 승인에 쓸 컴퓨터의 답을 받아들이세요. <strong>My devices</strong> → 그 컴퓨터의 카드 → <strong>Approvals</strong> → <strong>Accept approvals signed with …</strong>에서 비밀번호를 입력하면 돼요. 서버에서는 <code>antenna devices confirm mac</code>을 실행하세요.</li>
+  <li>Claude Code가 돌아가는 컴퓨터에서, 승인에 쓸 컴퓨터의 답을 받아들이세요. <strong>내 기기</strong> → 그 컴퓨터의 카드 → <strong>승인</strong> → <strong>…(으)로 서명된 승인 받아들이기</strong>에서 비밀번호를 입력하면 돼요. 서버에서는 <code>antenna devices confirm mac</code>을 실행하세요.</li>
 </ol>
 
 <h2>어느 컴퓨터에서든 답하기</h2>
-<p>요청은 <strong>My devices</strong>에서 요청한 컴퓨터의 카드에 나타나고(<em>실험적 기능</em>), “Antenna: approval needed on Mac mini” 같은 알림이 와요. 카드에는 어떤 에이전트가, 무엇을, 왜 요청하는지와 그 문구가 그대로 보여요. 단, 비밀 정보가 든 문구는 요청한 컴퓨터 밖으로 나가지 않아요. Mac에서는 <strong>Approve with Touch ID</strong>(<em>실험적 기능</em>)를, 지금 쓰는 컴퓨터의 비밀번호로는 <strong>Approve with password</strong>를 누르거나, <strong>Deny</strong>를 누르세요.</p>
-<p>요청한 컴퓨터는 거기서 받아들인 키, 자신이 낸 일회용 챌린지, 그리고 바로 이 요청에 비춰 서명을 확인한 다음, 요청을 직접 한 번만 실행해요. 요청한 컴퓨터 자체에서는 요청이 <strong>Approval requests</strong>(승인 요청)에 있고, 터미널에서는 <code>antenna approvals</code>와 <code>antenna approve &lt;id&gt;</code>로 다룰 수 있어요.</p>
+<p>요청은 <strong>내 기기</strong>에서 요청한 컴퓨터의 카드에 나타나고(<em>실험적 기능</em>), “Antenna: Mac mini에서 승인 필요” 같은 알림이 와요. 카드에는 어떤 에이전트가, 무엇을, 왜 요청하는지와 그 문구가 그대로 보여요. 단, 비밀 정보가 든 문구는 요청한 컴퓨터 밖으로 나가지 않아요. Mac에서는 <strong>Touch ID로 승인</strong>(<em>실험적 기능</em>)을, 지금 쓰는 컴퓨터의 비밀번호로는 <strong>비밀번호로 승인</strong>을 누르거나, <strong>거부</strong>를 누르세요.</p>
+<p>요청한 컴퓨터는 거기서 받아들인 키, 자신이 낸 일회용 챌린지, 그리고 바로 이 요청에 비춰 서명을 확인한 다음, 요청을 직접 한 번만 실행해요. 요청한 컴퓨터 자체에서는 요청이 <strong>승인 요청</strong>에 있고, 터미널에서는 <code>antenna approvals</code>와 <code>antenna approve &lt;id&gt;</code>로 다룰 수 있어요.</p>
 <p>Claude Code는 최대 50초 동안 기다리고, 그 안에 승인된 단계는 바로 실행돼요. 그보다 늦으면 다른 일을 하고 있다가, 내가 승인하면 Antenna가 프롬프트에 “Approved — continue.”를 입력하고 Claude Code가 그 단계를 다시 실행해요.</p>
 
 <h2>아무도 답하지 않으면</h2>
-<p>요청은 10분 뒤에 닫혀요. 아무것도 실행되지 않고 아무것도 보내지지 않으며, Claude Code는 아무도 승인하지 않았다는 걸 알게 돼요. 닫히기 조금 전에 알림으로 알려 줘요. <strong>Deny</strong>는 비밀번호가 필요 없고, 누르면 Claude Code는 내가 거절했다는 걸 알게 돼요.</p>
+<p>요청은 10분 뒤에 닫혀요. 아무것도 실행되지 않고 아무것도 보내지지 않으며, Claude Code는 아무도 승인하지 않았다는 걸 알게 돼요. 닫히기 조금 전에 알림으로 알려 줘요. <strong>거부</strong>는 비밀번호가 필요 없고, 누르면 Claude Code는 내가 거절했다는 걸 알게 돼요.</p>
 
 <h2>나 대신 승인하는 에이전트</h2>
-<p><em>실험적 기능이에요.</em> <strong>Can approve for…</strong>(대신 승인할 대상)를 <strong>Agents</strong>에서 설정하면, 내가 믿는 에이전트가 다른 에이전트들의 메시지와 파일에 관한 요청에 답할 수 있어요. 그 답은 요청이 건드리는 모든 것이 ∞일 때만 인정돼요. 명령과 편집은 언제나 나에게 와요.</p>
+<p><em>실험적 기능이에요.</em> <strong>대신 승인할 대상…</strong>을 <strong>에이전트</strong>에서 설정하면, 내가 믿는 에이전트가 다른 에이전트들의 메시지와 파일에 관한 요청에 답할 수 있어요. 그 답은 요청이 건드리는 모든 것이 ∞일 때만 인정돼요. 명령과 편집은 언제나 나에게 와요.</p>
 
 <h2>자주 묻는 질문</h2>
 <details>
@@ -38,7 +38,7 @@ antenna session start api-dev --dir ~/projects/api</code></pre></li>
 </details>
 <details>
   <summary>아무 컴퓨터나 승인할 수 있나요?</summary>
-  <p>아니요. 내 컴퓨터로 페어링했고 요청하는 컴퓨터에서 키를 받아들인 컴퓨터만, 비밀번호로 승인할 수 있어요. 잃어버린 컴퓨터는 나머지 컴퓨터마다 <strong>Revoke this computer</strong>(이 컴퓨터 해지)를 누르세요.</p>
+  <p>아니요. 내 컴퓨터로 페어링했고 요청하는 컴퓨터에서 키를 받아들인 컴퓨터만, 비밀번호로 승인할 수 있어요. 잃어버린 컴퓨터는 나머지 컴퓨터마다 <strong>이 컴퓨터 회수</strong>를 누르세요.</p>
 </details>
 <details>
   <summary>휴대폰으로 승인할 수 있나요?</summary>

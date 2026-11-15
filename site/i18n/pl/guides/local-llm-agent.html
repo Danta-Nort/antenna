@@ -1,5 +1,5 @@
 <!--guide {"title": "Lokalny agent LLM bez konta i klucza API — Antenna", "h1": "Jak uruchomić lokalnego agenta LLM bez konta i klucza API", "description": "Antenna pobiera otwarty model, sprawdza go i uruchamia jako prywatnego agenta na Macu albo Linuksie, w piaskownicy bez sieci i bez dostępu do twoich plików.", "summary": "Otwarty model na twoim komputerze jako agent w piaskownicy, dobrany do ilości pamięci.", "source": "2026-11-09"}-->
-<p class="lead">W Antennie otwórz <strong>Agents → Local models</strong>, pobierz model, który Antenna poleca dla twojego komputera, i kliknij <strong>Create agent</strong>. Model działa na twoim własnym komputerze przez llama.cpp, bez konta, bez klucza API, a po pobraniu także bez internetu, w piaskownicy (sandbox), która nie ma dostępu do sieci ani do twoich plików. Agent dostaje własny czat, a w zespole może pełnić lżejsze role, takie jak wstępna selekcja, podsumowania i dokumentacja. <em>Funkcja eksperymentalna.</em></p>
+<p class="lead">W Antennie otwórz <strong>Agenci → Modele lokalne</strong>, pobierz model, który Antenna poleca dla twojego komputera, i kliknij <strong>Utwórz agenta</strong>. Model działa na twoim własnym komputerze przez llama.cpp, bez konta, bez klucza API, a po pobraniu także bez internetu, w piaskownicy (sandbox), która nie ma dostępu do sieci ani do twoich plików. Agent dostaje własny czat, a w zespole może pełnić lżejsze role, takie jak wstępna selekcja, podsumowania i dokumentacja. <em>Funkcja eksperymentalna.</em></p>
 
 <h2>Jaki model na jaki komputer</h2>
 <p>Antenna sprawdza ilość pamięci i wolnego miejsca i poleca jeden z modeli Qwen3.5:</p>
@@ -11,13 +11,13 @@
     <tr><td>Mac z M2 lub nowszym i co najmniej 16 GB</td><td>Qwen3.5 9B</td><td>5,7 GB</td><td>poniżej 9 GB</td></tr>
   </tbody>
 </table>
-<p>Na liście są też inne modele, każdy oznaczony jako <strong>Fits this computer</strong> (pasuje do tego komputera), <strong>Slow on this computer</strong> (wolny na tym komputerze) albo <strong>Not for this computer</strong> (nie dla tego komputera), więc nigdy nie pobierzesz modelu, który się nie uruchomi.</p>
+<p>Na liście są też inne modele, każdy oznaczony jako <strong>Pasuje do tego komputera</strong>, <strong>Wolny na tym komputerze</strong> albo <strong>Nie dla tego komputera</strong>, więc nigdy nie pobierzesz modelu, który się nie uruchomi.</p>
 
 <h2>Konfiguracja</h2>
 <ol>
-  <li>Otwórz <strong>Agents → Local models</strong> i kliknij <strong>Download</strong> przy polecanym modelu. Model pochodzi z Hugging Face, w ustalonej wersji; zamknięcie okna nie przerywa pobierania, a przerwane pobieranie zostanie wznowione.</li>
+  <li>Otwórz <strong>Agenci → Modele lokalne</strong> i kliknij <strong>Pobierz</strong> przy polecanym modelu. Model pochodzi z Hugging Face, w ustalonej wersji; zamknięcie okna nie przerywa pobierania, a przerwane pobieranie zostanie wznowione.</li>
   <li>Zanim Antenna w ogóle załaduje plik, porównuje go z rozmiarem i sumą SHA-256 zapisanymi w tym wydaniu. Plik, który się nie zgadza, zostaje usunięty.</li>
-  <li>Kliknij <strong>Create agent</strong> i nadaj mu nazwę. Jego czat pojawi się w zakładce Chats, w sekcji <strong>On this computer</strong>.</li>
+  <li>Kliknij <strong>Utwórz agenta</strong> i nadaj mu nazwę. Jego czat pojawi się w zakładce Czaty, w sekcji <strong>Na tym komputerze</strong>.</li>
   <li>Napisz do niego. Na pierwszą odpowiedź poczekasz kilka sekund, aż model się załaduje.</li>
 </ol>
 <p>W terminalu: <code>antenna local install qwen3.5-2b --wait</code> (albo <code>--from-file</code> dla kopii, którą już masz), potem <code>antenna local add helper --model qwen3.5-2b</code> i <code>antenna local say helper "hello"</code>.</p>
@@ -26,10 +26,10 @@
 <p>Model działa we własnej piaskownicy: czyta tylko swój plik modelu i nie może się nigdzie połączyć — ani z internetem, ani z Antenną, ani z innymi programami. Program samego agenta działa w drugiej piaskownicy, z której dociera tylko do modelu. Rozmowa jest przechowywana w zaszyfrowanej bazie danych Antenny. W tej wersji lokalny agent nie ma połączeń ani narzędzi, więc nie może nikomu niczego wysłać, a Antenna nigdy nie poprosi cię o wklejenie polecenia z jego odpowiedzi.</p>
 
 <h2>Pamięcią zarządza Antenna</h2>
-<p>Kilku agentów może korzystać z jednego modelu, a modele różnej wielkości mogą działać obok siebie. Gdy pamięć potrzebną do odpowiedzi zajmuje inny model, odpowiedź czeka („Waiting for memory…”), zamiast zmuszać komputer do swapowania, a model, którego nikt nie używał przez 30 minut, zostaje wyładowany z pamięci.</p>
+<p>Kilku agentów może korzystać z jednego modelu, a modele różnej wielkości mogą działać obok siebie. Gdy pamięć potrzebną do odpowiedzi zajmuje inny model, odpowiedź czeka („Czekanie na pamięć…”), zamiast zmuszać komputer do swapowania, a model, którego nikt nie używał przez 30 minut, zostaje wyładowany z pamięci.</p>
 
 <h2>Lokalne modele w zespole</h2>
-<p>Gdy tworzysz zespół agentów, lokalny model może być pomocnikiem w rolach dopasowanych do jego wielkości: małe modele do wstępnej selekcji i podsumowań, większe także do dokumentacji, szkiców i tłumaczeń. Z opcją <strong>Local only</strong> cały zespół, łącznie z agentem prowadzącym, działa bez żadnego modelu w chmurze. W zespole lokalne modele jeszcze nie piszą kodu.</p>
+<p>Gdy tworzysz zespół agentów, lokalny model może być pomocnikiem w rolach dopasowanych do jego wielkości: małe modele do wstępnej selekcji i podsumowań, większe także do dokumentacji, szkiców i tłumaczeń. Z opcją <strong>Tylko lokalnie</strong> cały zespół, łącznie z agentem prowadzącym, działa bez żadnego modelu w chmurze. W zespole lokalne modele jeszcze nie piszą kodu.</p>
 
 <h2>Pytania</h2>
 <details>

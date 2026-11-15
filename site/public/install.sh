@@ -23,7 +23,8 @@ case "$(uname -s)" in
 esac
 case "$(uname -m)" in
   x86_64 | amd64) ARCH=x86_64 ;;
-  *) die "this processor ($(uname -m)) has no Linux build yet (x86_64 only): see https://github.com/Danta-Nort/antenna" ;;
+  aarch64 | arm64) ARCH=arm64 ;;
+  *) die "this processor ($(uname -m)) has no Linux build yet: see https://github.com/Danta-Nort/antenna" ;;
 esac
 for t in curl tar sha256sum awk mktemp; do
   command -v "$t" >/dev/null 2>&1 || die "needs $t"
@@ -56,7 +57,7 @@ NAME="${PICK% *}"
 SHA="${PICK#* }"
 case "$NAME" in
   antenna-*-linux-"$ARCH".tar.gz) ;;
-  *) die "the release manifest names no Linux archive for $ARCH" ;;
+  *) die "the newest release has no Linux build for this processor ($ARCH) yet: see https://github.com/Danta-Nort/antenna" ;;
 esac
 printf '%s' "$SHA" | grep -Eq '^[0-9a-f]{64}$' || die "the release manifest has no SHA-256 for $NAME"
 

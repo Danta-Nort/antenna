@@ -4,7 +4,7 @@
 <h2>Ce que vous obtenez</h2>
 <ul>
   <li><strong>Une conversation par session</strong>, quel que soit l’ordinateur où elle tourne. Une session sur le serveur et une autre sur le fixe se côtoient dans la même liste que vos contacts.</li>
-  <li><strong>My devices</strong> (mes appareils) : une fiche pour chacun de vos ordinateurs, avec son système et sa version d’Antenna, son état de santé selon ses propres vérifications, ses agents et leur état de connexion, et les demandes qui vous y attendent.</li>
+  <li><strong>Mes appareils</strong> : une fiche pour chacun de vos ordinateurs, avec son système et sa version d’Antenna, son état de santé selon ses propres vérifications, ses agents et leur état de connexion, et les demandes qui vous y attendent.</li>
   <li><strong>Des approbations depuis là où vous êtes.</strong> Une demande d’un agent sur le serveur peut être approuvée sur votre Mac, avec Touch ID ou le mot de passe du Mac. Le serveur vérifie la signature et exécute lui-même la demande.</li>
   <li><strong>Un bouton d’arrêt</strong> pour chaque agent sur un autre ordinateur : il arrête l’agent et tous les processus qu’il y a lancés.</li>
   <li><strong>La carte des agents</strong>, où vous reliez une session d’un ordinateur à une session d’un autre, pour qu’elles s’écrivent.</li>
@@ -13,9 +13,9 @@
 <h2>Mise en place</h2>
 <ol>
   <li><strong>Installez Antenna sur chaque ordinateur</strong> : l’app sur un Mac ou un poste Linux, le nœud sur un serveur Linux (<code>curl -fsSL https://antenna.contact/install.sh | sh</code>).</li>
-  <li><strong>Associez les ordinateurs entre eux comme étant les vôtres.</strong> Créez une invitation en cochant <strong>This is my own computer (∞)</strong>, ouvrez-la sur l’autre ordinateur, et saisissez sur l’un le code affiché par l’autre. Associez chaque ordinateur à chacun de ceux que vous voulez voir ou relier depuis lui : chacun doit avoir l’autre au niveau ∞.</li>
+  <li><strong>Associez les ordinateurs entre eux comme étant les vôtres.</strong> Créez une invitation en cochant <strong>C’est mon propre ordinateur (∞)</strong>, ouvrez-la sur l’autre ordinateur, et saisissez sur l’un le code affiché par l’autre. Associez chaque ordinateur à chacun de ceux que vous voulez voir ou relier depuis lui : chacun doit avoir l’autre au niveau ∞.</li>
   <li><strong>Donnez un nom à chaque session Claude Code.</strong> Sur un poste de bureau, lancez-la en mode Code avec le <code>+</code> du panneau des agents. Sur un serveur, dans le dossier du projet, lancez <code>antenna connect claude-code --agent api-dev --links mac --hello mac</code> et gardez-la active avec <code>antenna session start api-dev --dir ~/projects/api</code> ; le guide <a href="/guides/run-claude-code-on-a-vps">Claude Code sur un VPS</a> détaille chaque étape.</li>
-  <li><strong>Laissez votre ordinateur principal répondre aux demandes.</strong> Sur le serveur, lancez une fois <code>antenna devices confirm mac</code> ; sur un poste de bureau, acceptez la clé de l’ordinateur principal dans <strong>My devices</strong> → sa fiche → <strong>Approvals</strong>.</li>
+  <li><strong>Laissez votre ordinateur principal répondre aux demandes.</strong> Sur le serveur, lancez une fois <code>antenna devices confirm mac</code> ; sur un poste de bureau, acceptez la clé de l’ordinateur principal dans <strong>Mes appareils</strong> → sa fiche → <strong>Approbations</strong>.</li>
 </ol>
 
 <h2>Faire circuler le travail entre ordinateurs</h2>

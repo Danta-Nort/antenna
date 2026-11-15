@@ -175,7 +175,7 @@
     <h2>できること</h2>
     <ul>
       <li><strong>セッションごとに 1 つのチャット。</strong>どのコンピューターで動いていても同じです。サーバーのセッションもデスクトップのセッションも、連絡先と同じ一覧に並びます。</li>
-      <li><strong>My devices</strong>（自分のデバイス）：コンピューターごとのカードに、OS と Antenna のバージョン、そのマシン自身のチェックによる健全性、エージェントとそれぞれの接続状態、そこであなたを待っているリクエストが表示されます。</li>
+      <li><strong>自分のデバイス</strong>：コンピューターごとのカードに、OS と Antenna のバージョン、そのマシン自身のチェックによる健全性、エージェントとそれぞれの接続状態、そこであなたを待っているリクエストが表示されます。</li>
       <li><strong>今いる場所から承認。</strong>サーバー上のエージェントからのリクエストを、Mac で Touch ID や Mac のパスワードを使って承認できます。サーバーは署名を確認し、リクエストを自分で実行します。</li>
       <li><strong>停止ボタン。</strong>ほかのコンピューター上のエージェントごとにあり、エージェントとそれがそこで起動したすべてのプロセスを止めます。</li>
       <li><strong>エージェントマップ。</strong>あるコンピューターのセッションを別のコンピューターのセッションとつなぎ、互いにメッセージを送り合えるようにします。</li>
@@ -184,9 +184,9 @@
     <h2>セットアップ</h2>
     <ol>
       <li><strong>各コンピューターに Antenna をインストールします。</strong>Mac や Linux のデスクトップにはアプリを、Linux サーバーにはノードを入れます（<code>curl -fsSL https://antenna.contact/install.sh | sh</code>）。</li>
-      <li><strong>コンピューター同士を自分のものとしてペアリングします。</strong><strong>This is my own computer (∞)</strong> にチェックを入れて招待を作り、もう一方のコンピューターで開いて、片方に表示されたコードをもう片方に入力します。互いに見たり接続したりしたいすべてのコンピューターの組み合わせでペアリングしてください。どちらの側も、相手を ∞ にしておく必要があります。</li>
+      <li><strong>コンピューター同士を自分のものとしてペアリングします。</strong><strong>これは自分のコンピューターです（∞）</strong> にチェックを入れて招待を作り、もう一方のコンピューターで開いて、片方に表示されたコードをもう片方に入力します。互いに見たり接続したりしたいすべてのコンピューターの組み合わせでペアリングしてください。どちらの側も、相手を ∞ にしておく必要があります。</li>
       <li><strong>各 Claude Code セッションに名前を付けます。</strong>デスクトップでは、エージェントパネルの <code>+</code> から Code モードで起動します。サーバーでは、プロジェクトフォルダーで <code>antenna connect claude-code --agent api-dev --links mac --hello mac</code> を実行し、<code>antenna session start api-dev --dir ~/projects/api</code> で動かし続けます。すべての手順は <a href="/ja/guides/run-claude-code-on-a-vps">VPS で Claude Code を動かす</a>にあります。</li>
-      <li><strong>メインのコンピューターがリクエストに答えられるようにします。</strong>サーバーでは <code>antenna devices confirm mac</code> を一度実行します。デスクトップでは、<strong>My devices</strong> → そのカード → <strong>Approvals</strong> で、メインのコンピューターの鍵を受け入れます。</li>
+      <li><strong>メインのコンピューターがリクエストに答えられるようにします。</strong>サーバーでは <code>antenna devices confirm mac</code> を一度実行します。デスクトップでは、<strong>自分のデバイス</strong> → そのカード → <strong>承認</strong> で、メインのコンピューターの鍵を受け入れます。</li>
     </ol>
 
     <h2>コンピューター間で作業を受け渡す</h2>

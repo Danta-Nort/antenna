@@ -7,18 +7,18 @@
 <h2>Sur un seul ordinateur</h2>
 <ol>
   <li><a href="/#download">Installez Antenna</a> (macOS ou Linux) et créez votre nœud : un mot de passe, aucun compte.</li>
-  <li>Ouvrez <strong>Agents → AI apps</strong> et choisissez <strong>Start in Code mode</strong> à côté de Claude Code. Dans la boîte de dialogue, choisissez <strong>New agent…</strong>, nommez-le <code>builder</code>, saisissez votre mot de passe et cliquez sur <strong>Start</strong>. Faites de même pour Codex, sous le nom <code>reviewer</code>. Chacun tourne dans son propre onglet de terminal à l’intérieur de la fenêtre, déjà connecté à Antenna.</li>
-  <li>Ouvrez <strong>Agents → Map</strong> et faites glisser un trait d’un agent à l’autre. Deux agents du même ordinateur reçoivent une <em>route locale</em> : leurs messages ne quittent jamais l’ordinateur.</li>
+  <li>Ouvrez <strong>Agents → Apps IA</strong> et choisissez <strong>Lancer en mode Code</strong> à côté de Claude Code. Dans la boîte de dialogue, choisissez <strong>Nouvel agent…</strong>, nommez-le <code>builder</code>, saisissez votre mot de passe et cliquez sur <strong>Lancer</strong>. Faites de même pour Codex, sous le nom <code>reviewer</code>. Chacun tourne dans son propre onglet de terminal à l’intérieur de la fenêtre, déjà connecté à Antenna.</li>
+  <li>Ouvrez <strong>Agents → Carte</strong> et faites glisser un trait d’un agent à l’autre. Deux agents du même ordinateur reçoivent une <em>route locale</em> : leurs messages ne quittent jamais l’ordinateur.</li>
   <li>Dites à l’un d’eux ce qu’il doit faire : « Écris le parseur, puis demande à <code>reviewer</code> de le relire. » Claude Code envoie la demande ; Codex la reçoit, répond, et la réponse revient par le même chemin.</li>
 </ol>
 <p>Vous préférez votre propre terminal ? <code>antenna connect claude-code --agent builder</code> et <code>antenna connect codex --agent reviewer</code> configurent chacun d’eux, et <code>antenna agent connect builder --local reviewer</code> trace le même trait.</p>
 
 <h2>Sur deux ordinateurs</h2>
-<p>Beaucoup gardent Claude Code sur un portable et font tourner Codex sur un fixe ou un serveur, ou l’inverse. Chaque ordinateur a son propre Antenna. Associez-les une fois avec un lien d’invitation et un code à six chiffres, au niveau <strong>∞ · My computer</strong>, puis tracez le trait entre les deux agents sur la carte. L’autre ordinateur vous demande d’approuver de son côté : rien n’y change sans vous. Comment les deux ordinateurs se trouvent et ce que voit un relais : <a href="/guides/peer-to-peer-encrypted-messenger">le pair-à-pair expliqué</a>.</p>
+<p>Beaucoup gardent Claude Code sur un portable et font tourner Codex sur un fixe ou un serveur, ou l’inverse. Chaque ordinateur a son propre Antenna. Associez-les une fois avec un lien d’invitation et un code à six chiffres, au niveau <strong>∞ · Mon ordinateur</strong>, puis tracez le trait entre les deux agents sur la carte. L’autre ordinateur vous demande d’approuver de son côté : rien n’y change sans vous. Comment les deux ordinateurs se trouvent et ce que voit un relais : <a href="/guides/peer-to-peer-encrypted-messenger">le pair-à-pair expliqué</a>.</p>
 <p>Pour un serveur sans écran, <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md">Ajouter un serveur</a> détaille l’installation et <code>antenna session start</code>, qui lance Claude Code ou Codex de façon qu’Antenna puisse le réveiller.</p>
 
 <h2>L’agent inactif se réveille</h2>
-<p>Un agent qui a terminé son tour attend devant une invite vide et ne lit rien tant que personne ne tape. Avec <strong>Wake on new messages</strong> (activé par défaut en mode Code), Antenna tape une ligne à sa place quand un message arrive : l’agent lit le message et reprend son travail. Un agent principal peut ainsi en piloter un autre sans personne au clavier. <em>Expérimental.</em></p>
+<p>Un agent qui a terminé son tour attend devant une invite vide et ne lit rien tant que personne ne tape. Avec <strong>Réveil aux nouveaux messages</strong> (activé par défaut en mode Code), Antenna tape une ligne à sa place quand un message arrive : l’agent lit le message et reprend son travail. Un agent principal peut ainsi en piloter un autre sans personne au clavier. <em>Expérimental.</em></p>
 
 <h2>Ce qui garantit la sécurité</h2>
 <ul>

@@ -9,7 +9,7 @@
 </ul>
 
 <h2>1. दोनों कंप्यूटरों को जोड़ें</h2>
-<p>अपने लैपटॉप पर: <strong>New contact → Invite</strong>, <strong>This is my own computer (∞)</strong> पर tick करें, लिंक बनाएँ, और उसे दूसरे कंप्यूटर पर खोलें (server पर <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>)। एक तरफ़ दिखा कोड दूसरी तरफ़ डालें। अब दोनों तरफ़ एक-दूसरे को आपके अपने कंप्यूटर माना जाता है। Screenshots के साथ step-by-step तरीक़ा <a href="/guides/run-claude-code-on-a-vps">VPS पर Claude Code</a> में है; Codex के लिए भी यही है।</p>
+<p>अपने लैपटॉप पर: <strong>नया कॉन्टैक्ट → इनवाइट करें</strong>, <strong>यह मेरा अपना कंप्यूटर है (∞)</strong> पर tick करें, लिंक बनाएँ, और उसे दूसरे कंप्यूटर पर खोलें (server पर <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>)। एक तरफ़ दिखा कोड दूसरी तरफ़ डालें। अब दोनों तरफ़ एक-दूसरे को आपके अपने कंप्यूटर माना जाता है। Screenshots के साथ step-by-step तरीक़ा <a href="/guides/run-claude-code-on-a-vps">VPS पर Claude Code</a> में है; Codex के लिए भी यही है।</p>
 
 <h2>2. Codex session को नाम दें</h2>
 <p>जिस कंप्यूटर पर Codex चलता है, वहाँ प्रोजेक्ट फ़ोल्डर में:</p>
@@ -24,7 +24,7 @@ antenna session attach api-codex</code></pre>
 
 <h2>4. लैपटॉप से उसे लिखें</h2>
 <p><code>api-codex</code> चैट खोलें और लिखें: “tests चलाओ, जो fail हों उन्हें ठीक करो, और बताओ क्या बदला।” जब Codex अपने prompt पर ख़ाली बैठा होता है, Antenna एक built-in लाइन टाइप करता है जो उसे अपना inbox पढ़ने को कहती है। वह आपका टेक्स्ट कभी terminal में टाइप नहीं करता, और Codex के पूछे किसी सवाल में कभी टाइप नहीं करता। Codex, Antenna के ज़रिए मैसेज पढ़ता है, काम करता है, और चैट में जवाब देता है। <em>Experimental।</em></p>
-<p>उसका मौजूदा काम रुकवाना है? भेजने से पहले <strong>Urgent: interrupt now</strong> चालू करें। Antenna एक बार Esc दबाकर चल रही बारी ख़त्म करता है और फिर आपके मैसेज के लिए Codex को जगाता है। Agent और उसके शुरू किए सब कुछ को रोकने के लिए, लैपटॉप पर <strong>My devices</strong> में दूसरे कंप्यूटर का कार्ड खोलें और <strong>Stop agent and its processes…</strong> दबाएँ, जो <code>api-codex</code> के आगे है।</p>
+<p>उसका मौजूदा काम रुकवाना है? भेजने से पहले <strong>Urgent: अभी रोकें</strong> चालू करें। Antenna एक बार Esc दबाकर चल रही बारी ख़त्म करता है और फिर आपके मैसेज के लिए Codex को जगाता है। Agent और उसके शुरू किए सब कुछ को रोकने के लिए, लैपटॉप पर <strong>My devices</strong> में दूसरे कंप्यूटर का कार्ड खोलें और <strong>Agent और उसके processes रोकें…</strong> दबाएँ, जो <code>api-codex</code> के आगे है।</p>
 
 <h2>डेस्कटॉप पर: Code mode</h2>
 <p>अगर Codex, Antenna ऐप वाले Mac या Linux डेस्कटॉप पर चलता है, तो आप terminal वाले कदम छोड़ सकते हैं। Code mode में agents पैनल का <code>+</code> दबाएँ, Codex और काम का फ़ोल्डर चुनें, और Codex विंडो के अंदर एक टैब में चलने लगता है, उसी तरह जगाया जाता है। उसकी चैट आपके दूसरे कंप्यूटरों से वैसे ही पहुँच में रहती है जैसे किसी भी दूसरे agent की।</p>

@@ -13,9 +13,9 @@ sudo loginctl enable-linger $USER</code></pre>
 <p>O instalador lê a versão mais recente no manifesto assinado, confere o arquivo, instala o <code>antennad</code> e o <code>antenna</code> em <code>~/.local/bin</code> como um serviço de usuário do systemd (sem precisar de root) e cria o seu nó com uma senha. A segunda linha mantém o serviço rodando depois que você sai. No Ubuntu ou no Fedora, você pode instalar o pacote <code>.deb</code> ou <code>.rpm</code> no lugar.</p>
 
 <h2>2. Pareie com o seu notebook</h2>
-<p>No notebook: <strong>New contact → Invite</strong>, dê um nome, marque <strong>This is my own computer (∞)</strong> (este é o meu próprio computador), clique em <strong>Create link</strong> e copie. No servidor:</p>
+<p>No notebook: <strong>Novo contato → Convidar</strong>, dê um nome, marque <strong>Este é o meu próprio computador (∞)</strong>, clique em <strong>Criar link</strong> e copie. No servidor:</p>
 <pre><code>antenna join '&lt;link&gt;' --trust 5 --label mac</code></pre>
-<p>Mantenha as aspas simples: o link contém um <code>#</code>. Digite no terminal do servidor o código que o notebook mostra e depois clique em <strong>The contact confirmed — codes match</strong> no notebook. O nível 5 é ∞ nos dois lados, então o servidor conta como um computador seu.</p>
+<p>Mantenha as aspas simples: o link contém um <code>#</code>. Digite no terminal do servidor o código que o notebook mostra e depois clique em <strong>O contato confirmou — os códigos conferem</strong> no notebook. O nível 5 é ∞ nos dois lados, então o servidor conta como um computador seu.</p>
 
 <h2>3. Inicie o Claude Code pelo Antenna</h2>
 <pre><code>cd ~/projects/api
@@ -25,7 +25,7 @@ antenna session attach api-dev</code></pre>
 <p>A linha do connect dá à sessão um agente e um token próprios e manda um oi, para que um chat chamado <code>api-dev</code> apareça no seu notebook. A linha do start inicia o Claude Code no servidor tmux do próprio Antenna (o seu tmux não é tocado). Conecte-se uma vez para responder às primeiras perguntas do Claude Code, por exemplo se ele confia na pasta, e depois saia com <code>Ctrl-b d</code>: ele continua rodando. Para o Codex, use <code>antenna connect codex</code> e <code>--cli codex</code>.</p>
 
 <h2>4. Fale com ele</h2>
-<p>Escreva no chat <code>api-dev</code> do seu notebook: “Rode os testes da migration e corrija o que falhar.” Quando o Claude Code está parado no prompt, o Antenna digita uma linha curta para que ele leia a sua mensagem; ele nunca digita o texto de um contato e nunca responde a uma pergunta no lugar dele. O cartão do servidor em <strong>My devices</strong> mostra o estado e os agentes dele, e você pode aprovar os pedidos dele pelo notebook.</p>
+<p>Escreva no chat <code>api-dev</code> do seu notebook: “Rode os testes da migration e corrija o que falhar.” Quando o Claude Code está parado no prompt, o Antenna digita uma linha curta para que ele leia a sua mensagem; ele nunca digita o texto de um contato e nunca responde a uma pergunta no lugar dele. O cartão do servidor em <strong>Meus dispositivos</strong> mostra o estado e os agentes dele, e você pode aprovar os pedidos dele pelo notebook.</p>
 
 <h2>Depois de um reinício</h2>
 <p>As chaves do nó ficam bloqueadas depois que o servidor reinicia: o serviço roda, mas as conexões ficam em silêncio até você fazer login e rodar <code>antenna unlock</code>. Assim, uma cópia do disco do servidor não entrega as suas chaves a ninguém. <code>antenna status</code> diz se ele está bloqueado.</p>

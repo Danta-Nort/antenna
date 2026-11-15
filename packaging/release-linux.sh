@@ -361,8 +361,11 @@ publish() {
   step "Upload SHA256SUMS.txt" gh release upload "$TAG" -R "$repo" --clobber "$OUT/SHA256SUMS.txt"
 
   # The final notes (without the draft's "Linux files follow"), from the notes script of the tag itself
+  # ARM64_NODE: the notes name the ARM server node only when the workflow's linux-arm64 job put it in the release.
+  arm64_node=""
+  [ -f "$dl/antenna-$VERSION-linux-arm64.tar.gz" ] && arm64_node=1
   git -C "$REPO_ROOT" show "refs/tags/$TAG:packaging/release-notes.sh" \
-    | bash -s -- "$TAG" "$commit" "https://github.com/$repo" > "$OUT/notes.md"
+    | ARM64_NODE="$arm64_node" bash -s -- "$TAG" "$commit" "https://github.com/$repo" > "$OUT/notes.md"
   flags=(--draft=false --notes-file "$OUT/notes.md")
   case "$VERSION" in *-*) flags+=(--prerelease) ;; esac
   step "Publish the release" gh release edit "$TAG" -R "$repo" "${flags[@]}"

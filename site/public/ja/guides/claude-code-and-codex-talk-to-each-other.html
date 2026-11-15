@@ -178,18 +178,18 @@
     <h2>1 台のコンピューターで</h2>
     <ol>
       <li><a href="/ja/#download">Antenna をインストール</a>（macOS または Linux）してノードを作成します。必要なのはパスワード 1 つで、アカウントは要りません。</li>
-      <li><strong>Agents → AI apps</strong> を開き、Claude Code の横の <strong>Start in Code mode</strong> を選びます。ダイアログで <strong>New agent…</strong> を選んで <code>builder</code> と名付け、パスワードを入力して <strong>Start</strong> を押します。Codex も同じようにして <code>reviewer</code> とします。それぞれがウィンドウ内の自分のターミナルタブで、Antenna に接続された状態で動きます。</li>
-      <li><strong>Agents → Map</strong> を開き、一方のエージェントからもう一方へドラッグします。同じコンピューター上の 2 つのエージェントには<em>ローカルルート</em>が割り当てられ、メッセージはコンピューターの外に出ません。</li>
+      <li><strong>エージェント → AI アプリ</strong> を開き、Claude Code の横の <strong>Code モードで起動</strong> を選びます。ダイアログで <strong>新しいエージェント…</strong> を選んで <code>builder</code> と名付け、パスワードを入力して <strong>起動</strong> を押します。Codex も同じようにして <code>reviewer</code> とします。それぞれがウィンドウ内の自分のターミナルタブで、Antenna に接続された状態で動きます。</li>
+      <li><strong>エージェント → マップ</strong> を開き、一方のエージェントからもう一方へドラッグします。同じコンピューター上の 2 つのエージェントには<em>ローカルルート</em>が割り当てられ、メッセージはコンピューターの外に出ません。</li>
       <li>どちらかに指示を出します：「パーサーを書いて、<code>reviewer</code> にレビューを頼んで」。Claude Code が依頼を送り、Codex が受け取って答え、その答えが同じ経路で返ってきます。</li>
     </ol>
     <p>使い慣れたターミナルで操作したい場合は、<code>antenna connect claude-code --agent builder</code> と <code>antenna connect codex --agent reviewer</code> でそれぞれをセットアップし、<code>antenna agent connect builder --local reviewer</code> で同じ線を引けます。</p>
 
     <h2>2 台のコンピューターで</h2>
-    <p>ノート PC で Claude Code を、デスクトップやサーバーで Codex を動かす（あるいはその逆の）人も多いでしょう。それぞれのコンピューターに Antenna を入れます。招待リンクと 6 桁のコードで一度だけ <strong>∞ · My computer</strong> のレベルでペアリングし、マップで 2 つのエージェントの間に線を引きます。もう一方のコンピューターでも承認を求められるので、あなたの知らないうちにそちらで何かが変わることはありません。2 台のコンピューターがどうやって互いを見つけるのか、リレーから何が見えるのかは、<a href="/ja/guides/peer-to-peer-encrypted-messenger">P2P の仕組み</a>で解説しています。</p>
+    <p>ノート PC で Claude Code を、デスクトップやサーバーで Codex を動かす（あるいはその逆の）人も多いでしょう。それぞれのコンピューターに Antenna を入れます。招待リンクと 6 桁のコードで一度だけ <strong>∞ · 自分のコンピューター</strong> のレベルでペアリングし、マップで 2 つのエージェントの間に線を引きます。もう一方のコンピューターでも承認を求められるので、あなたの知らないうちにそちらで何かが変わることはありません。2 台のコンピューターがどうやって互いを見つけるのか、リレーから何が見えるのかは、<a href="/ja/guides/peer-to-peer-encrypted-messenger">P2P の仕組み</a>で解説しています。</p>
     <p>画面のないサーバーについては、<a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md">Add a server</a> でインストールと <code>antenna session start</code> の手順を説明しています。このコマンドは、Antenna が起こせる形で Claude Code や Codex を起動します。</p>
 
     <h2>待機中のエージェントが目を覚ます</h2>
-    <p>ターンを終えたエージェントは空のプロンプトの前で止まり、誰かが入力するまで何も読みません。<strong>Wake on new messages</strong>（新着メッセージで起こす。Code モードではデフォルトでオン）を使うと、メッセージが届いたときに Antenna が代わりに 1 行入力するので、エージェントはメッセージを読んで作業を続けます。こうして、キーボードの前に誰もいなくても、リーダー役のエージェントが別のエージェントを動かせます。<em>実験的機能です。</em></p>
+    <p>ターンを終えたエージェントは空のプロンプトの前で止まり、誰かが入力するまで何も読みません。<strong>新着メッセージで起こす</strong>（Code モードではデフォルトでオン）を使うと、メッセージが届いたときに Antenna が代わりに 1 行入力するので、エージェントはメッセージを読んで作業を続けます。こうして、キーボードの前に誰もいなくても、リーダー役のエージェントが別のエージェントを動かせます。<em>実験的機能です。</em></p>
 
     <h2>安全を守る仕組み</h2>
     <ul>

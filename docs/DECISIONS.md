@@ -7001,3 +7001,36 @@ a comparison when the terminal work comes up).
   with no addresses and no content.
 - Maintainer decision (2026-11-05): count new installs of every product, with no identifier leaving the device; for
   Antenna, change the privacy promise to say so.
+
+### D-150 · The ARM Linux server node is built on GitHub's arm64 runner (2026-11-14)
+- **Question.** The release has a server node for x86-64 Linux only, and the guides answer "Is there an ARM build?
+  Not yet". ARM servers are a common and cheap home for an always-on agent (Ampere and Graviton instances, free ARM
+  tiers). The decision on the release workflow left Linux aarch64 out because ARM runners for a private repository
+  cost money and the build machine is x86-64 (D-81). Can we ship an ARM node now, and how?
+- **Prior art.**
+  - Tailscale, Syncthing, Caddy: every release has `linux-arm64` next to `linux-amd64`, and the one-line installer
+    picks it from `uname -m`.
+  - llama.cpp: an `ubuntu-arm64` build from GitHub's arm64 runner in the same release workflow.
+  - Rust projects with C dependencies (aws-lc, SQLCipher): built natively on an arm64 runner rather than cross-compiled,
+    which needs a cross C toolchain and a target sysroot.
+- **Decision.** A workflow of its own, `linux-arm64.yml`, on `ubuntu-24.04-arm`, run in the public repository only
+  (free there; skipped in a private one, and off with the variable `LINUX_ARM64=false`). Not a job of `release.yml`:
+  that workflow's jobs run on the self-hosted Mac, which the public repository does not have, and its run is cancelled
+  when a release is published from the build machine. On a `v*` tag it runs the core's clippy passes, the full
+  `cargo test --workspace`, the MCP smoke test, builds `antenna-<ver>-linux-arm64.tar.gz` with the local model runtime
+  (`packaging/llama/build.sh`: llama.cpp's own arm64 CPU variants), checks its `install.sh`, and uploads the archive
+  into the tag's draft release (it waits up to two hours for the draft, and never uploads into a published release).
+  `packaging/release-linux.sh --publish-only` then signs the release manifest over every file of the draft as before,
+  so the ARM archive is in the signed manifest and `antenna update` on ARM Linux finds it (`Platform::this` already
+  maps `aarch64` to `arm64`); the release is published after the ARM job has finished, or without it if it failed.
+  Run by hand, the workflow does the same checks and leaves the archive as a run artifact. `build-tarball.sh` names
+  the archive `arm64`, as the release tool expects; the site's `install.sh` maps `aarch64` to `arm64` and, while the
+  newest release has no ARM node, says so. The release notes name the ARM node only when the release has it
+  (`ARM64_NODE`, set by `release-linux.sh`).
+- **Why.** Native build on a free runner: no cross toolchain on the build machine (nothing system-level to install
+  there), and the tests run on the architecture they protect: the sandboxes' seccomp filters are per architecture
+  (`TargetArch::aarch64`, no `fork`/`vfork` or x32 guard on arm64), and only a run on arm64 shows that they hold.
+  Not done: the Linux app on arm64 (desktops on ARM Linux are rare), `.deb`/`.rpm` for arm64, and a download button
+  on the site; the site and guides say "not yet" until a release has the node.
+- Maintainer decision pending (decided by the 80–90 % rule on 2026-11-14, for approval): ship the ARM node from the
+  next release.

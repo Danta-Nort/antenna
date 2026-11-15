@@ -107,7 +107,7 @@
      "name": "Posso vedere che cosa sta facendo la sessione?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "La chat mostra le sue risposte, e la mappa degli agenti mostra chi ha parlato con chi. In My devices puoi anche vedere gli agenti degli altri tuoi computer e fermarne uno insieme a tutto ciò che ha avviato."
+      "text": "La chat mostra le sue risposte, e la mappa degli agenti mostra chi ha parlato con chi. Nella sezione I miei dispositivi puoi anche vedere gli agenti degli altri tuoi computer e fermarne uno insieme a tutto ciò che ha avviato."
      }
     },
     {
@@ -170,7 +170,7 @@
     <nav class="crumbs" aria-label="Percorso"><a href="/it/">Antenna</a> <span aria-hidden="true">›</span> <a href="/it/guides/">Guide</a></nav>
     <p class="eyebrow">Aggiornata <time datetime="2026-11-14">14 novembre 2026</time></p>
     <h1>Inviare un messaggio a Claude Code su un altro computer</h1>
-    <p class="lead">Installa Antenna su entrambi i computer, abbinali una volta come <strong>∞ · My computer</strong> e collega ad Antenna la sessione di Claude Code che gira lì, con un nome tutto suo. Da quel momento scrivi a quella sessione dal tuo Mac come a un contatto in chat, oppure lasci che sia il tuo Claude Code locale a scriverle. Se avvii la sessione tramite Antenna, viene svegliata quando è inattiva, e un messaggio urgente può interromperla a metà turno. Due sessioni sullo stesso computer? Allora collegale sulla mappa degli agenti: <a href="/it/guides/claude-code-and-codex-talk-to-each-other">due agenti che parlano</a>.</p>
+    <p class="lead">Installa Antenna su entrambi i computer, abbinali una volta come <strong>∞ · Il mio computer</strong> e collega ad Antenna la sessione di Claude Code che gira lì, con un nome tutto suo. Da quel momento scrivi a quella sessione dal tuo Mac come a un contatto in chat, oppure lasci che sia il tuo Claude Code locale a scriverle. Se avvii la sessione tramite Antenna, viene svegliata quando è inattiva, e un messaggio urgente può interromperla a metà turno. Due sessioni sullo stesso computer? Allora collegale sulla mappa degli agenti: <a href="/it/guides/claude-code-and-codex-talk-to-each-other">due agenti che parlano</a>.</p>
 
     <h2>Quando ti serve</h2>
     <ul>
@@ -193,7 +193,7 @@
     <p>(Per questo sul server serve tmux.) Quando arriva un messaggio, Antenna digita una breve riga nel prompt vuoto, e la sessione legge il messaggio come dati e si mette al lavoro. Su un desktop, la modalità Code di Antenna fa lo stesso in una scheda di terminale dentro la finestra. <em>Sperimentale.</em></p>
 
     <h2>4. Scrivile</h2>
-    <p>Apri la chat <code>api-dev</code> sul Mac e scrivi, come faresti con una persona. Oppure fallo fare al tuo Claude Code locale: “Chiedi ad <code>api-dev</code> di eseguire i test di migrazione e di riferirmi.” Quando non può aspettare, attiva <strong>Urgent: interrupt now</strong> (il pulsante col fulmine accanto a Invia) prima di inviare (da terminale, <code>antenna send --urgent</code>): per una sessione gestita da Antenna, in modalità Code o con <code>antenna session start</code>, Antenna interrompe una volta il turno in corso, come se premessi Esc, e la sessione legge il tuo messaggio. Non preme mai Esc sopra una domanda o una richiesta di permesso aperta nel terminale. <em>Sperimentale.</em></p>
+    <p>Apri la chat <code>api-dev</code> sul Mac e scrivi, come faresti con una persona. Oppure fallo fare al tuo Claude Code locale: “Chiedi ad <code>api-dev</code> di eseguire i test di migrazione e di riferirmi.” Quando non può aspettare, attiva <strong>Urgente: interrompi ora</strong> (il pulsante col fulmine accanto a Invia) prima di inviare (da terminale, <code>antenna send --urgent</code>): per una sessione gestita da Antenna, in modalità Code o con <code>antenna session start</code>, Antenna interrompe una volta il turno in corso, come se premessi Esc, e la sessione legge il tuo messaggio. Non preme mai Esc sopra una domanda o una richiesta di permesso aperta nel terminale. <em>Sperimentale.</em></p>
 
     <h2>Che cosa viaggia e che cosa no</h2>
     <p>Il messaggio viene cifrato su un computer e decifrato sull'altro. Nessun terminale viene condiviso e non serve aprire o inoltrare porte: l'altra sessione riceve solo messaggi, e la sua Antenna decide che cosa può farne. Il token dell'agente resta sul computer su cui è stato creato.</p>
@@ -205,7 +205,7 @@
     </details>
     <details>
       <summary>Posso vedere che cosa sta facendo la sessione?</summary>
-      <p>La chat mostra le sue risposte, e la mappa degli agenti mostra chi ha parlato con chi. In <strong>My devices</strong> puoi anche vedere gli agenti degli altri tuoi computer e fermarne uno insieme a tutto ciò che ha avviato.</p>
+      <p>La chat mostra le sue risposte, e la mappa degli agenti mostra chi ha parlato con chi. Nella sezione <strong>I miei dispositivi</strong> puoi anche vedere gli agenti degli altri tuoi computer e fermarne uno insieme a tutto ciò che ha avviato.</p>
     </details>
     <details>
       <summary>Il server ha bisogno di un indirizzo pubblico?</summary>

@@ -4,8 +4,8 @@
 <h2>Konfiguracja</h2>
 <ol>
   <li><a href="/#download">Zainstaluj Antennę</a> na obu komputerach (macOS albo Linux): każde po jednym haśle, bez kont.</li>
-  <li>Jedno z was klika <strong>New contact → Invite</strong>, wybiera poziom dla drugiej osoby i wysyła link; druga osoba go otwiera albo używa <strong>New contact → Join</strong>. Pojawia się kod: sześć cyfr albo sześć zwierząt. Przeczytaj go na głos podczas rozmowy, a druga osoba go wpisze. Każde z was wybiera poziom dla drugiego.</li>
-  <li>Uruchom swój Claude Code przez <strong>Agents → AI apps → Start in Code mode</strong>, z <strong>New agent…</strong> i nazwą, której użyje druga osoba, np. <code>backend-claude</code>, oraz z nią na liście kontaktów agenta. Druga osoba podłącza swojego agenta tak samo.</li>
+  <li>Jedno z was klika <strong>Nowy kontakt → Zaproś</strong>, wybiera poziom dla drugiej osoby i wysyła link; druga osoba go otwiera albo używa opcji <strong>Nowy kontakt → Dołącz</strong>. Pojawia się kod: sześć cyfr albo sześć zwierząt. Przeczytaj go na głos podczas rozmowy, a druga osoba go wpisze. Każde z was wybiera poziom dla drugiego.</li>
+  <li>Uruchom swój Claude Code przez <strong>Agenci → Aplikacje AI → Uruchom w trybie Code mode</strong>, z opcją <strong>Nowy agent…</strong> i nazwą, której użyje druga osoba, np. <code>backend-claude</code>, oraz z nią na liście kontaktów agenta. Druga osoba podłącza swojego agenta tak samo.</li>
 </ol>
 
 <h2>Wybierz poziom dla osoby z zespołu</h2>
@@ -13,20 +13,20 @@
 <table>
   <thead><tr><th>Poziom</th><th>Twój agent po przeczytaniu jej wiadomości</th><th>Pliki</th></tr></thead>
   <tbody>
-    <tr><td>1 · Observer (obserwator)</td><td>Odpowiada tylko słowami</td><td>Brak</td></tr>
-    <tr><td>2 · Acquaintance (znajomy)</td><td>Każdy odczyt i każda edycja czekają na twoją zgodę; bez poleceń</td><td>Trafiają do kwarantanny <code>inbox/</code></td></tr>
-    <tr><td>3 · Colleague (współpracownik)</td><td>Czyta; edycje czekają na twoją zgodę; bez poleceń</td><td><code>shared/</code> tylko do odczytu</td></tr>
-    <tr><td>4 · Partner (partner)</td><td>Czyta i edytuje w folderze tej osoby; inne edycje i każde polecenie czekają na twoją zgodę</td><td><code>shared/</code> do odczytu i zapisu</td></tr>
+    <tr><td>1 · Obserwator</td><td>Odpowiada tylko słowami</td><td>Brak</td></tr>
+    <tr><td>2 · Znajomy</td><td>Każdy odczyt i każda edycja czekają na twoją zgodę; bez poleceń</td><td>Trafiają do kwarantanny <code>inbox/</code></td></tr>
+    <tr><td>3 · Współpracownik</td><td>Czyta; edycje czekają na twoją zgodę; bez poleceń</td><td><code>shared/</code> tylko do odczytu</td></tr>
+    <tr><td>4 · Partner</td><td>Czyta i edytuje w folderze tej osoby; inne edycje i każde polecenie czekają na twoją zgodę</td><td><code>shared/</code> do odczytu i zapisu</td></tr>
   </tbody>
 </table>
 <p>Na poziomach 1 i 2 druga osoba nigdy nie widzi twojego adresu IP: połączenie idzie wyłącznie przez przekaźnik (relay). Poziom ∞ zostaw dla swoich komputerów: wysyła pliki i sekrety bez pytania. Poziom zmienisz w karcie kontaktu, podając hasło: niższy poziom działa od razu, nawet w sesji, która już przeczytała wiadomości tej osoby.</p>
 
 <h2>Pytanie albo zadanie od jej agenta</h2>
 <p>Jej agent pisze do <code>backend-claude</code> po nazwie, a ta wymiana pojawia się na twojej liście jako osobny czat, pod imieniem tej osoby. Claude Code w trybie Code mode budzi się sam, gdy jest bezczynny: Antenna wpisuje za niego jedną linię, która każe mu przeczytać skrzynkę, nigdy samą wiadomość. <em>Funkcja eksperymentalna.</em></p>
-<p>Domyślnie jej wiadomość to dane, a nie polecenie: twój agent mówi ci, o co poproszono, i działa na twoje słowo. Żeby pozwolić mu przyjmować prośby tej osoby jako zadania, użyj przy swoim agencie <strong>⋯ → Takes tasks from…</strong> (przyjmuje zadania od…) albo zaznacz pole zadań, gdy łączysz dwóch agentów w <strong>Agents → Map</strong>. <em>Funkcja eksperymentalna.</em> Zadania i tak wykonują się w granicach poziomu.</p>
+<p>Domyślnie jej wiadomość to dane, a nie polecenie: twój agent mówi ci, o co poproszono, i działa na twoje słowo. Żeby pozwolić mu przyjmować prośby tej osoby jako zadania, użyj przy swoim agencie <strong>⋯ → Przyjmuje zadania od…</strong> albo zaznacz pole zadań, gdy łączysz dwóch agentów w widoku <strong>Agenci → Mapa</strong>. <em>Funkcja eksperymentalna.</em> Zadania i tak wykonują się w granicach poziomu.</p>
 
 <h2>Co czeka na ciebie</h2>
-<p>Antenna nie pozwala, żeby to, co przeczytał twój agent, niezauważenie trafiło do kontaktu: gdy Claude Code przeczyta pliki twojego projektu, każda jego wiadomość do drugiej osoby staje się prośbą z przyciskami <strong>Approve</strong> i <strong>Deny</strong>, widoczną w czacie jako karta <strong>Waiting for your approval</strong>. <strong>Approve</strong> prosi o hasło (albo Touch ID na Macu, funkcja eksperymentalna), a Antenna wysyła dokładnie to, co ci pokazała; <strong>Approve all from this agent (N)</strong> zatwierdza kilka naraz. Prośba, na którą nikt nie odpowie, zamyka się po 10 minutach.</p>
+<p>Antenna nie pozwala, żeby to, co przeczytał twój agent, niezauważenie trafiło do kontaktu: gdy Claude Code przeczyta pliki twojego projektu, każda jego wiadomość do drugiej osoby staje się prośbą z przyciskami <strong>Zatwierdź</strong> i <strong>Odrzuć</strong>, widoczną w czacie jako karta <strong>Czeka na twoją zgodę</strong>. <strong>Zatwierdź</strong> prosi o hasło (albo Touch ID na Macu, funkcja eksperymentalna), a Antenna wysyła dokładnie to, co ci pokazała; <strong>Zatwierdź wszystkie od tego agenta (N)</strong> zatwierdza kilka naraz. Prośba, na którą nikt nie odpowie, zamyka się po 10 minutach.</p>
 
 <h2>Którędy idą wiadomości</h2>
 <p>Prosto między dwoma komputerami, szyfrowane end-to-end, albo przez publiczny przekaźnik, który przekazuje ruch, ale nie może go odczytać; między wami nie ma żadnego serwera Antenny. Każdy właściciel widzi u siebie wszystkie czaty, także to, co agent drugiej strony napisał do jego agenta, a podpisane potwierdzenia tego, co agenci zrobili z wiadomościami tego połączenia, widzicie oboje.</p>
@@ -38,11 +38,11 @@
 </details>
 <details>
   <summary>Czy oboje potrzebujemy Claude Code?</summary>
-  <p>Nie. Jej agentem może być Codex, Gemini CLI albo inna aplikacja z <strong>Agents → AI apps</strong>, każda na własnej subskrypcji, bez kluczy API.</p>
+  <p>Nie. Jej agentem może być Codex, Gemini CLI albo inna aplikacja z sekcji <strong>Agenci → Aplikacje AI</strong>, każda na własnej subskrypcji, bez kluczy API.</p>
 </details>
 <details>
   <summary>Jak to zatrzymać?</summary>
-  <p>Obniż poziom tej osoby, usuń ją z <strong>Takes tasks from…</strong> albo usuń kontakt. Każda z tych zmian działa na twoim komputerze od razu, niezależnie od tego, co dzieje się po drugiej stronie.</p>
+  <p>Obniż poziom tej osoby, usuń ją z listy <strong>Przyjmuje zadania od…</strong> albo usuń kontakt. Każda z tych zmian działa na twoim komputerze od razu, niezależnie od tego, co dzieje się po drugiej stronie.</p>
 </details>
 <details>
   <summary>Czy to działa na Windowsie?</summary>

@@ -10,10 +10,10 @@
 
 <h2>Pencereden kurulum</h2>
 <ol>
-  <li>Ajanın çalışacağı bilgisayarda <strong>Agents → Set up for a contact…</strong> menüsünü açın (ya da bir konuşmada kişi kartındaki <strong>Agent replies → Set up…</strong> seçeneğini).</li>
+  <li>Ajanın çalışacağı bilgisayarda <strong>Ajanlar → Bir kişi için kur…</strong> menüsünü açın (ya da bir konuşmada kişi kartındaki <strong>Ajan yanıtları → Kur…</strong> seçeneğini).</li>
   <li>Kişiyi ve programı seçin: <strong>Claude Code</strong>, <strong>Codex</strong> ya da kendi komutunuz.</li>
-  <li>İsterseniz uzun ömürlü bir oturum tokenını (<code>claude setup-token</code> komutundan) <strong>Value (optional)</strong> alanına yapıştırın. Token düğümünüze bir kez gider ve şifreli veritabanında saklanır. Mac’te güvenilir yol budur, çünkü sandbox anahtar zincirini (keychain) açamaz.</li>
-  <li>Sahip parolanızla onaylayın. Kural, son çalıştırması ve <strong>Run log</strong> (çalıştırma kaydı), <strong>Agents</strong> bölümünde görünür.</li>
+  <li>İsterseniz uzun ömürlü bir oturum tokenını (<code>claude setup-token</code> komutundan) <strong>Değer (isteğe bağlı)</strong> alanına yapıştırın. Token düğümünüze bir kez gider ve şifreli veritabanında saklanır. Mac’te güvenilir yol budur, çünkü sandbox anahtar zincirini (keychain) açamaz.</li>
+  <li>Sahip parolanızla onaylayın. Kural, son çalıştırması ve <strong>Çalıştırma kaydı</strong>, <strong>Ajanlar</strong> bölümünde görünür.</li>
 </ol>
 <p>Terminalden tek satır yeterli: <code>antenna wake set &lt;contact&gt; --cmd "claude -p --output-format stream-json"</code>. <code>antenna wake list</code> kuralları ve son çalıştırmaları gösterir; <code>antenna wake off &lt;contact&gt;</code> kapatır.</p>
 

@@ -184,9 +184,9 @@
     <p>L’installeur lit la dernière version dans le manifeste signé, vérifie l’archive, installe <code>antennad</code> et <code>antenna</code> dans <code>~/.local/bin</code> en tant que service utilisateur systemd (sans root) et crée votre nœud avec un mot de passe. La deuxième ligne maintient le service actif après votre déconnexion. Sous Ubuntu ou Fedora, vous pouvez installer à la place le paquet <code>.deb</code> ou <code>.rpm</code>.</p>
 
     <h2>2. L’associer à votre portable</h2>
-    <p>Sur votre portable : <strong>New contact → Invite</strong>, donnez-lui un nom, cochez <strong>This is my own computer (∞)</strong>, cliquez sur <strong>Create link</strong> et copiez le lien. Sur le serveur :</p>
+    <p>Sur votre portable : <strong>Nouveau contact → Inviter</strong>, donnez-lui un nom, cochez <strong>C’est mon propre ordinateur (∞)</strong>, cliquez sur <strong>Créer le lien</strong> et copiez le lien. Sur le serveur :</p>
     <pre><code>antenna join '&lt;link&gt;' --trust 5 --label mac</code></pre>
-    <p>Gardez les guillemets simples : le lien contient un <code>#</code>. Saisissez dans le terminal du serveur le code affiché par votre portable, puis cliquez sur <strong>The contact confirmed — codes match</strong> sur le portable. Le niveau 5 correspond à ∞ des deux côtés : le serveur compte donc comme votre propre ordinateur.</p>
+    <p>Gardez les guillemets simples : le lien contient un <code>#</code>. Saisissez dans le terminal du serveur le code affiché par votre portable, puis cliquez sur <strong>Le contact a confirmé — les codes correspondent</strong> sur le portable. Le niveau 5 correspond à ∞ des deux côtés : le serveur compte donc comme votre propre ordinateur.</p>
 
     <h2>3. Lancer Claude Code via Antenna</h2>
     <pre><code>cd ~/projects/api
@@ -196,7 +196,7 @@
     <p>La commande connect donne à la session son propre agent et son propre jeton, et envoie un bonjour pour qu’une conversation nommée <code>api-dev</code> apparaisse sur votre portable. La commande start lance Claude Code dans le serveur tmux propre à Antenna (votre tmux n’est pas touché). Attachez-vous une fois pour répondre aux premières questions de Claude Code, par exemple s’il fait confiance au dossier, puis détachez-vous avec <code>Ctrl-b d</code> : il continue de tourner. Pour Codex, utilisez <code>antenna connect codex</code> et <code>--cli codex</code>.</p>
 
     <h2>4. Lui parler</h2>
-    <p>Écrivez dans la conversation <code>api-dev</code> sur votre portable : « Lance les tests de migration et corrige ce qui échoue. » Quand Claude Code attend, inactif, devant son invite, Antenna tape une courte ligne pour qu’il lise votre message ; il ne tape jamais le texte d’un contact et ne répond jamais à une question à sa place. La fiche du serveur dans <strong>My devices</strong> affiche son état de santé et ses agents, et vous pouvez approuver ses demandes depuis le portable.</p>
+    <p>Écrivez dans la conversation <code>api-dev</code> sur votre portable : « Lance les tests de migration et corrige ce qui échoue. » Quand Claude Code attend, inactif, devant son invite, Antenna tape une courte ligne pour qu’il lise votre message ; il ne tape jamais le texte d’un contact et ne répond jamais à une question à sa place. La fiche du serveur dans <strong>Mes appareils</strong> affiche son état de santé et ses agents, et vous pouvez approuver ses demandes depuis le portable.</p>
 
     <h2>Après un redémarrage</h2>
     <p>Les clés du nœud sont verrouillées après un redémarrage du serveur : le service tourne, mais ses liaisons restent muettes jusqu’à ce que vous vous connectiez et lanciez <code>antenna unlock</code>. Ainsi, une copie du disque du serveur ne livre vos clés à personne. <code>antenna status</code> indique s’il est verrouillé.</p>

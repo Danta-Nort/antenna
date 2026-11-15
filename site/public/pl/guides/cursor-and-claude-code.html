@@ -107,7 +107,7 @@
      "name": "Czy Claude Code może zamiast tego działać w terminalu Cursora?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Tak: Step-by-step guide (instrukcja krok po kroku) w menu Claude Code w AI apps podaje linię claude mcp add. Claude Code uruchomiony w ten sposób nie jest budzony; tryb Code mode go budzi i dodaje kontrolę Antenny przed każdym narzędziem."
+      "text": "Tak: Instrukcja krok po kroku w menu Claude Code w sekcji Aplikacje AI podaje linię claude mcp add. Claude Code uruchomiony w ten sposób nie jest budzony; tryb Code mode go budzi i dodaje kontrolę Antenny przed każdym narzędziem."
      }
     },
     {
@@ -167,9 +167,9 @@
     <h2>Na jednym komputerze</h2>
     <ol>
       <li><a href="/pl/#download">Zainstaluj Antennę</a> (macOS albo Linux) i utwórz swój węzeł: jedno hasło, bez konta.</li>
-      <li>Otwórz <strong>Agents → AI apps</strong> i kliknij <strong>Connect</strong> przy Cursorze. Wybierz <strong>Assistant with access to my projects</strong> (asystent z dostępem do moich projektów), wpisz hasło i kliknij <strong>Continue</strong>. Antenna uprzedzi, że otworzy link instalacyjny Cursora; kliknij <strong>Open Cursor</strong>, a Cursor pokaże Antennę i poprosi o jej instalację. Potem zacznij w Cursorze nowy czat i poproś „Sprawdź moje wiadomości w Antennie”: wiersz zmieni się na <strong>Connected</strong> (połączono) i pojawi się w nim „Contacts write to it as cursor”. Cursor podaje MCP jako funkcję płatnego planu.</li>
-      <li>Na tej samej stronie kliknij <strong>Start in Code mode</strong> przy Claude Code. Wybierz <strong>New agent…</strong>, nazwij go <code>reviewer</code>, wybierz tę samą rolę, w <strong>Working folder</strong> (folder roboczy) wskaż projekt otwarty w Cursorze, wpisz hasło i kliknij <strong>Start</strong>. Claude Code działa w karcie terminala w oknie aplikacji.</li>
-      <li>Otwórz <strong>Agents → Map</strong>, przeciągnij linię od uchwytu jednego agenta do drugiego, wpisz hasło i kliknij <strong>Connect</strong>. Oba dostają <em>trasę lokalną</em>: ich wiadomości nigdy nie opuszczają komputera, a każdy przyjmuje wiadomości drugiego jako zadania, chyba że odznaczysz tę opcję.</li>
+      <li>Otwórz <strong>Agenci → Aplikacje AI</strong> i kliknij <strong>Połącz</strong> przy Cursorze. Wybierz <strong>Asystent z dostępem do moich projektów</strong>, wpisz hasło i kliknij <strong>Dalej</strong>. Antenna uprzedzi, że otworzy link instalacyjny Cursora; kliknij <strong>Otwórz Cursor</strong>, a Cursor pokaże Antennę i poprosi o jej instalację. Potem zacznij w Cursorze nowy czat i poproś „Sprawdź moje wiadomości w Antennie”: wiersz zmieni się na <strong>Połączono</strong> i pojawi się w nim „Kontakty piszą do niego jako cursor”. Cursor podaje MCP jako funkcję płatnego planu.</li>
+      <li>Na tej samej stronie kliknij <strong>Uruchom w trybie Code mode</strong> przy Claude Code. Wybierz <strong>Nowy agent…</strong>, nazwij go <code>reviewer</code>, wybierz tę samą rolę, w polu <strong>Folder roboczy</strong> wskaż projekt otwarty w Cursorze, wpisz hasło i kliknij <strong>Uruchom</strong>. Claude Code działa w karcie terminala w oknie aplikacji.</li>
+      <li>Otwórz <strong>Agenci → Mapa</strong>, przeciągnij linię od uchwytu jednego agenta do drugiego, wpisz hasło i kliknij <strong>Połącz</strong>. Oba dostają <em>trasę lokalną</em>: ich wiadomości nigdy nie opuszczają komputera, a każdy przyjmuje wiadomości drugiego jako zadania, chyba że odznaczysz tę opcję.</li>
     </ol>
     <p>Daj obu tę samą rolę: Antenna nie pozwala agentowi, który widział więcej twoich danych, pisać do agenta, który widział mniej. Daj też każdemu osobne zajęcie, na przykład pisanie kodu i review, żeby nie edytowały jednego pliku naraz.</p>
 
@@ -178,7 +178,7 @@
     <p>Oba czekają inaczej. Claude Code w trybie Code mode budzi się sam: gdy przychodzi wiadomość, a on jest bezczynny, Antenna wpisuje za niego jedną linię, która każe mu przeczytać skrzynkę (<em>funkcja eksperymentalna</em>). W Cursorze Antenna nigdy niczego nie wpisuje, więc agent Cursora czyta wiadomości dopiero wtedy, gdy następnym razem odezwie się do Antenny. Dlatego to Cursor najlepiej zaczyna wymianę: „Poproś <code>reviewer</code> o przejrzenie diffu w <code>src/</code>, potem poczekaj na odpowiedź i popraw to, co znajdzie”. Claude Code się budzi, sprawdza i odpowiada. Żeby przekazać pracę Cursorowi, najpierw każ mu czekać na wiadomości.</p>
 
     <h2>Na dwóch komputerach</h2>
-    <p>Cursor może zostać na twoim laptopie, a Claude Code działać na desktopie albo serwerze. Zainstaluj Antennę na każdym i połącz je raz linkiem z zaproszeniem i sześciocyfrowym kodem, zaznaczając <strong>This is my own computer (∞)</strong> (to mój własny komputer), a potem narysuj linię na mapie. Drugi komputer poprosi cię o zatwierdzenie swojej strony, na miejscu albo w <strong>My devices</strong> (moje urządzenia). Na serwerze bez ekranu Claude Code uruchamiasz przez <code>antenna connect claude-code</code> i <code>antenna session start</code>: zobacz <a href="/pl/guides/run-claude-code-on-a-vps">Claude Code na VPS</a>.</p>
+    <p>Cursor może zostać na twoim laptopie, a Claude Code działać na desktopie albo serwerze. Zainstaluj Antennę na każdym i połącz je raz linkiem z zaproszeniem i sześciocyfrowym kodem, zaznaczając <strong>To mój własny komputer (∞)</strong>, a potem narysuj linię na mapie. Drugi komputer poprosi cię o zatwierdzenie swojej strony, na miejscu albo w sekcji <strong>Moje urządzenia</strong>. Na serwerze bez ekranu Claude Code uruchamiasz przez <code>antenna connect claude-code</code> i <code>antenna session start</code>: zobacz <a href="/pl/guides/run-claude-code-on-a-vps">Claude Code na VPS</a>.</p>
 
     <h2>Co zatwierdzasz ty, a co pozostaje ograniczone</h2>
     <ul>
@@ -195,7 +195,7 @@
     </details>
     <details>
       <summary>Czy Claude Code może zamiast tego działać w terminalu Cursora?</summary>
-      <p>Tak: <strong>Step-by-step guide</strong> (instrukcja krok po kroku) w menu Claude Code w <strong>AI apps</strong> podaje linię <code>claude mcp add</code>. Claude Code uruchomiony w ten sposób nie jest budzony; tryb Code mode go budzi i dodaje kontrolę Antenny przed każdym narzędziem.</p>
+      <p>Tak: <strong>Instrukcja krok po kroku</strong> w menu Claude Code w sekcji <strong>Aplikacje AI</strong> podaje linię <code>claude mcp add</code>. Claude Code uruchomiony w ten sposób nie jest budzony; tryb Code mode go budzi i dodaje kontrolę Antenny przed każdym narzędziem.</p>
     </details>
     <details>
       <summary>Czy to już jest gotowe?</summary>

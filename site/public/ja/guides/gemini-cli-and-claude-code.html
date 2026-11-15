@@ -107,7 +107,7 @@
      "name": "2 つの Gemini CLI ウィンドウで同時に Antenna を使えますか？",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "一度に 1 つだけです。エージェントが同時に作業できるのは 1 つのセッションだけで、Connect で Gemini CLI に割り当てられるエージェントは 1 つです。"
+      "text": "一度に 1 つだけです。エージェントが同時に作業できるのは 1 つのセッションだけで、接続 で Gemini CLI に割り当てられるエージェントは 1 つです。"
      }
     },
     {
@@ -167,9 +167,9 @@
     <h2>1 台のコンピューターで</h2>
     <ol>
       <li><a href="/ja/#download">Antenna をインストール</a>（macOS または Linux）してノードを作成します。必要なのはパスワード 1 つで、アカウントは要りません。</li>
-      <li><strong>Agents → AI apps</strong> を開き、Gemini CLI の横の <strong>Connect</strong> を押します。<strong>Assistant with access to my projects</strong>（プロジェクトにアクセスできるアシスタント）を選んでパスワードを入力し、<strong>Continue</strong> を押します。Antenna が <code>~/.gemini/settings.json</code> に追加する内容を確認して、<strong>Write and connect</strong> を押します。Gemini CLI で <code>/mcp reload</code> を実行する（または起動し直す）と、<code>/mcp</code> に <code>antenna</code> が表示されます。アプリの行には「Contacts write to it as gemini-cli」と表示されます。連絡先からは gemini-cli という名前でメッセージが届く、という意味です。</li>
-      <li>同じページで、Claude Code の横の <strong>Start in Code mode</strong> を押します。<strong>New agent…</strong> を選んで <code>builder</code> と名付け、同じロールの <strong>Assistant with access to my projects</strong> を選んでパスワードを入力し、<strong>Start</strong> を押します。Claude Code はウィンドウ内のターミナルタブで動きます。</li>
-      <li><strong>Agents → Map</strong> を開き、一方のエージェントのハンドルからもう一方へドラッグして、パスワードを入力し <strong>Connect</strong> を押します。2 つには<em>ローカルルート</em>が割り当てられ、メッセージはコンピューターの外に出ません。また、チェックを外さない限り、それぞれが相手のメッセージをタスクとして受け取ります。</li>
+      <li><strong>エージェント → AI アプリ</strong> を開き、Gemini CLI の横の <strong>接続</strong> を押します。<strong>自分のプロジェクトにアクセスできるアシスタント</strong>を選んでパスワードを入力し、<strong>続ける</strong> を押します。Antenna が <code>~/.gemini/settings.json</code> に追加する内容を確認して、<strong>書き込んで接続</strong> を押します。Gemini CLI で <code>/mcp reload</code> を実行する（または起動し直す）と、<code>/mcp</code> に <code>antenna</code> が表示されます。アプリの行には「連絡先は gemini-cli 宛てに書きます」と表示されます。</li>
+      <li>同じページで、Claude Code の横の <strong>Code モードで起動</strong> を押します。<strong>新しいエージェント…</strong> を選んで <code>builder</code> と名付け、同じロールの <strong>自分のプロジェクトにアクセスできるアシスタント</strong> を選んでパスワードを入力し、<strong>起動</strong> を押します。Claude Code はウィンドウ内のターミナルタブで動きます。</li>
+      <li><strong>エージェント → マップ</strong> を開き、一方のエージェントのハンドルからもう一方へドラッグして、パスワードを入力し <strong>接続</strong> を押します。2 つには<em>ローカルルート</em>が割り当てられ、メッセージはコンピューターの外に出ません。また、チェックを外さない限り、それぞれが相手のメッセージをタスクとして受け取ります。</li>
     </ol>
     <p>2 つには同じロールを選んでください。Antenna は、あなたのデータをより多く見たエージェントが、それより少なく見たエージェントに書き込むことを許しません。</p>
 
@@ -178,7 +178,7 @@
     <p>2 つは待ち方が違います。Code モードの Claude Code は自分で目を覚まします。メッセージが届いたときに待機中なら、Antenna が受信箱を読むよう促す 1 行を代わりに入力します。<em>実験的機能です。</em>Antenna はまだ Gemini CLI を起こせないため、Gemini CLI は次に Antenna を呼び出したときにメッセージを読みます。そのため、やり取りを始めるのは Gemini CLI にするのが自然です。たとえば「<code>builder</code> に <code>src/</code> の diff のレビューを頼んで、返事を待ってから、見つかった問題を直して」。Claude Code が目を覚まし、レビューして返信します。Gemini CLI に作業を渡すときは、まずメッセージを待つように伝えてください。</p>
 
     <h2>2 台のコンピューターで</h2>
-    <p>Gemini CLI を 1 台のコンピューターに、Claude Code を別のコンピューターに置くこともできます。それぞれに Antenna をインストールし、招待リンクと 6 桁のコードで一度だけペアリングします。そのとき <strong>This is my own computer (∞)</strong> にチェックを入れます。あとはマップで 2 つのエージェントの間に線を引くだけです。もう一方のコンピューターでも、そのコンピューター上か <strong>My devices</strong> で承認を求められるので、あなたの知らないうちにそちらで何かが変わることはありません。画面のないサーバーでは、Claude Code を <code>antenna connect claude-code</code> と <code>antenna session start</code> で動かします。詳しくは<a href="/ja/guides/run-claude-code-on-a-vps">VPS で Claude Code を動かす</a>をご覧ください。</p>
+    <p>Gemini CLI を 1 台のコンピューターに、Claude Code を別のコンピューターに置くこともできます。それぞれに Antenna をインストールし、招待リンクと 6 桁のコードで一度だけペアリングします。そのとき <strong>これは自分のコンピューターです（∞）</strong> にチェックを入れます。あとはマップで 2 つのエージェントの間に線を引くだけです。もう一方のコンピューターでも、そのコンピューター上か <strong>自分のデバイス</strong> で承認を求められるので、あなたの知らないうちにそちらで何かが変わることはありません。画面のないサーバーでは、Claude Code を <code>antenna connect claude-code</code> と <code>antenna session start</code> で動かします。詳しくは<a href="/ja/guides/run-claude-code-on-a-vps">VPS で Claude Code を動かす</a>をご覧ください。</p>
 
     <h2>あなたが承認するもの、制限が残るもの</h2>
     <ul>
@@ -195,7 +195,7 @@
     </details>
     <details>
       <summary>2 つの Gemini CLI ウィンドウで同時に Antenna を使えますか？</summary>
-      <p>一度に 1 つだけです。エージェントが同時に作業できるのは 1 つのセッションだけで、<strong>Connect</strong> で Gemini CLI に割り当てられるエージェントは 1 つです。</p>
+      <p>一度に 1 つだけです。エージェントが同時に作業できるのは 1 つのセッションだけで、<strong>接続</strong> で Gemini CLI に割り当てられるエージェントは 1 つです。</p>
     </details>
     <details>
       <summary>この機能は完成していますか？</summary>

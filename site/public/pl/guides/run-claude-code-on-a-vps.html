@@ -184,9 +184,9 @@
     <p>Instalator odczytuje najnowsze wydanie z podpisanego manifestu, sprawdza archiwum, instaluje <code>antennad</code> i <code>antenna</code> do <code>~/.local/bin</code> jako usługę użytkownika systemd (root nie jest potrzebny) i tworzy twój węzeł z hasłem. Druga linia sprawia, że usługa działa dalej po wylogowaniu. Na Ubuntu albo Fedorze możesz zamiast tego zainstalować pakiet <code>.deb</code> albo <code>.rpm</code>.</p>
 
     <h2>2. Połącz serwer z laptopem</h2>
-    <p>Na laptopie: <strong>New contact → Invite</strong>, nadaj nazwę, zaznacz <strong>This is my own computer (∞)</strong>, kliknij <strong>Create link</strong> i skopiuj link. Na serwerze:</p>
+    <p>Na laptopie: <strong>Nowy kontakt → Zaproś</strong>, nadaj nazwę, zaznacz <strong>To mój własny komputer (∞)</strong>, kliknij <strong>Utwórz link</strong> i skopiuj link. Na serwerze:</p>
     <pre><code>antenna join '&lt;link&gt;' --trust 5 --label mac</code></pre>
-    <p>Zostaw pojedyncze cudzysłowy: link zawiera znak <code>#</code>. Wpisz w terminalu serwera kod pokazany na laptopie, a potem na laptopie kliknij <strong>The contact confirmed — codes match</strong>. Poziom 5 to ∞ po obu stronach, więc serwer liczy się jako twój własny komputer.</p>
+    <p>Zostaw pojedyncze cudzysłowy: link zawiera znak <code>#</code>. Wpisz w terminalu serwera kod pokazany na laptopie, a potem na laptopie kliknij <strong>Kontakt potwierdził — kody się zgadzają</strong>. Poziom 5 to ∞ po obu stronach, więc serwer liczy się jako twój własny komputer.</p>
 
     <h2>3. Uruchom Claude Code przez Antennę</h2>
     <pre><code>cd ~/projects/api
@@ -196,7 +196,7 @@
     <p>Linia z connect daje sesji własnego agenta i token oraz wysyła powitanie, więc na laptopie pojawia się czat <code>api-dev</code>. Linia ze start uruchamia Claude Code na własnym serwerze tmux Antenny (twojego tmuxa nic nie dotyka). Podłącz się raz, żeby odpowiedzieć na pierwsze pytania Claude Code, na przykład czy ufa temu folderowi, a potem odłącz się skrótem <code>Ctrl-b d</code>: Claude Code działa dalej. W przypadku Codexa użyj <code>antenna connect codex</code> i <code>--cli codex</code>.</p>
 
     <h2>4. Rozmawiaj z nim</h2>
-    <p>Napisz na czacie <code>api-dev</code> na laptopie: „Uruchom testy migracji i napraw to, co nie przechodzi”. Gdy Claude Code czeka bezczynnie przy swoim prompcie, Antenna wpisuje jedną krótką linię, żeby przeczytał twoją wiadomość; nigdy nie wpisuje tekstu od kontaktu i nigdy nie odpowiada za niego na pytania. Karta serwera w <strong>My devices</strong> pokazuje jego stan i agentów, a jego prośby możesz zatwierdzać z laptopa.</p>
+    <p>Napisz na czacie <code>api-dev</code> na laptopie: „Uruchom testy migracji i napraw to, co nie przechodzi”. Gdy Claude Code czeka bezczynnie przy swoim prompcie, Antenna wpisuje jedną krótką linię, żeby przeczytał twoją wiadomość; nigdy nie wpisuje tekstu od kontaktu i nigdy nie odpowiada za niego na pytania. Karta serwera w sekcji <strong>Moje urządzenia</strong> pokazuje jego stan i agentów, a jego prośby możesz zatwierdzać z laptopa.</p>
 
     <h2>Po restarcie</h2>
     <p>Po restarcie serwera klucze węzła są zablokowane: usługa działa, ale połączenia milczą, dopóki się nie zalogujesz i nie uruchomisz <code>antenna unlock</code>. Dzięki temu kopia dysku serwera nikomu nie da twoich kluczy. <code>antenna status</code> pokazuje, czy węzeł jest zablokowany.</p>

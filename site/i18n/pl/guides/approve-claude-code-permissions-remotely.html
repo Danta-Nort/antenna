@@ -1,35 +1,35 @@
 <!--guide {"title": "Zatwierdzaj uprawnienia Claude Code zdalnie, z każdego komputera", "h1": "Zatwierdzaj prośby Claude Code z innego komputera", "description": "Claude Code na serwerze albo drugim komputerze czeka na twoją zgodę? Antenna pokaże prośbę na wszystkich twoich komputerach, a odpowiesz hasłem albo Touch ID.", "summary": "Prośby o zgodę od Claude Code na innym komputerze, z odpowiedzią z tego komputera, przy którym akurat siedzisz.", "source": "2026-11-15"}-->
-<p class="lead">Uruchom Claude Code przez Antennę, w trybie Code mode w oknie albo poleceniem <code>antenna session</code> na serwerze, a demon Antenny sprawdzi każde narzędzie, którego Claude Code używa, i każdą wiadomość, którą wysyła. Gdy jakiś krok wymaga twojej decyzji, staje się prośbą o zgodę, która pojawia się z powiadomieniem w <strong>My devices</strong> (moje urządzenia) na każdym komputerze połączonym jako twój własny. Zatwierdź ją tam hasłem tego komputera albo Touch ID: komputer, na którym działa Claude Code, sprawdza twoją odpowiedź i wykonuje krok, a Claude Code pracuje dalej.</p>
+<p class="lead">Uruchom Claude Code przez Antennę, w trybie Code mode w oknie albo poleceniem <code>antenna session</code> na serwerze, a demon Antenny sprawdzi każde narzędzie, którego Claude Code używa, i każdą wiadomość, którą wysyła. Gdy jakiś krok wymaga twojej decyzji, staje się prośbą o zgodę, która pojawia się z powiadomieniem w sekcji <strong>Moje urządzenia</strong> na każdym komputerze połączonym jako twój własny. Zatwierdź ją tam hasłem tego komputera albo Touch ID: komputer, na którym działa Claude Code, sprawdza twoją odpowiedź i wykonuje krok, a Claude Code pracuje dalej.</p>
 
 <h2>Co do ciebie trafia</h2>
 <ul>
   <li><strong>Kroki po przeczytaniu wiadomości od kontaktu.</strong> Gdy Claude Code przeczyta wiadomość od kogoś z zespołu, poziom zaufania tej osoby wyznacza, co mu wolno: na poziomie 4 każde polecenie czeka na ciebie; na poziomach 2 i 3 czeka każda edycja, a polecenia są odrzucane.</li>
   <li><strong>Zmiany w jego własnej konfiguracji.</strong> Po przeczytaniu wiadomości od dowolnego kontaktu, nawet z twojego własnego laptopa, edycje <code>CLAUDE.md</code>, <code>.claude/</code>, profili powłoki, kluczy i plików budowania, takich jak <code>package.json</code>, czekają na ciebie.</li>
   <li><strong>Wiadomości, które wyniosłyby twoje dane.</strong> Gdy Claude Code przeczyta pliki twojego projektu, każda jego wiadomość do kontaktu poniżej ∞ czeka na ciebie, podobnie jak każda wiadomość do takiego kontaktu, która wygląda, jakby zawierała klucz, hasło albo token. Gdy przeczyta jedną rozmowę, wiadomość do innej też czeka.</li>
-  <li><strong>Pytania.</strong> <em>Funkcja eksperymentalna.</em> Pytania agenta pojawiają się na komputerze, na którym działa, w <strong>Questions from your agents</strong> (pytania od twoich agentów). Żeby zamiast tego dostawać je na laptopie, uruchom na tamtym komputerze <code>antenna agent escalate api-dev --to mac</code>: wtedy każde pytanie trafi do czatu agenta i odpowiesz w czacie.</li>
+  <li><strong>Pytania.</strong> <em>Funkcja eksperymentalna.</em> Pytania agenta pojawiają się na komputerze, na którym działa, w sekcji <strong>Pytania od twoich agentów</strong>. Żeby zamiast tego dostawać je na laptopie, uruchom na tamtym komputerze <code>antenna agent escalate api-dev --to mac</code>: wtedy każde pytanie trafi do czatu agenta i odpowiesz w czacie.</li>
 </ul>
 <p>Własne pytanie Claude Code o zgodę („Do you want to proceed?”) zostaje w jego terminalu: Antenna nigdy niczego w nim nie wpisuje. Narzędziom, których używasz na co dzień, zezwól w ustawieniach Claude Code albo odpowiadaj na to pytanie przez <code>antenna session attach</code>.</p>
 
 <h2>Konfiguracja</h2>
 <ol>
-  <li><a href="/#download">Zainstaluj Antennę</a> na obu komputerach i połącz je raz z zaznaczonym <strong>This is my own computer (∞)</strong> (to mój własny komputer), jak w poradniku <a href="/guides/run-claude-code-on-a-vps">Claude Code na VPS</a>.</li>
-  <li>Uruchom Claude Code przez Antennę. Na desktopie: <strong>Agents → AI apps → Start in Code mode</strong>. Na serwerze:
+  <li><a href="/#download">Zainstaluj Antennę</a> na obu komputerach i połącz je raz z zaznaczonym polem <strong>To mój własny komputer (∞)</strong>, jak w poradniku <a href="/guides/run-claude-code-on-a-vps">Claude Code na VPS</a>.</li>
+  <li>Uruchom Claude Code przez Antennę. Na desktopie: <strong>Agenci → Aplikacje AI → Uruchom w trybie Code mode</strong>. Na serwerze:
 <pre><code>cd ~/projects/api
 antenna connect claude-code --agent api-dev --links mac --hello mac
 antenna session start api-dev --dir ~/projects/api</code></pre></li>
-  <li>Na komputerze, na którym działa Claude Code, przyjmij odpowiedzi z tego, z którego będziesz zatwierdzać: <strong>My devices</strong> → karta tego komputera → <strong>Approvals</strong> (zgody) → <strong>Accept approvals signed with …</strong> (przyjmuj zgody podpisane kluczem…), z twoim hasłem. Na serwerze: <code>antenna devices confirm mac</code>.</li>
+  <li>Na komputerze, na którym działa Claude Code, przyjmij odpowiedzi z tego, z którego będziesz zatwierdzać: <strong>Moje urządzenia</strong> → karta tego komputera → <strong>Zgody</strong> → <strong>Przyjmuj zgody podpisane kluczem: …</strong>, z twoim hasłem. Na serwerze: <code>antenna devices confirm mac</code>.</li>
 </ol>
 
 <h2>Odpowiadaj z dowolnego komputera</h2>
-<p>Prośba pojawia się na karcie pytającego komputera w <strong>My devices</strong> (<em>funkcja eksperymentalna</em>), z powiadomieniem w rodzaju „Antenna: approval needed on Mac mini”. Karta mówi, który agent pyta, o co i dlaczego, i cytuje jego tekst, chyba że w tekście jest sekret: taki tekst nigdy nie opuszcza komputera, który pyta. Naciśnij <strong>Approve with Touch ID</strong> na Macu (<em>funkcja eksperymentalna</em>), <strong>Approve with password</strong> z hasłem komputera, przy którym siedzisz, albo <strong>Deny</strong> (odrzuć).</p>
-<p>Komputer, który pytał, sprawdza podpis względem przyjętych na nim kluczy, własnego jednorazowego wyzwania (challenge) i dokładnie tej prośby, a potem sam wykonuje prośbę, jeden raz. Na tym komputerze prośba jest też w <strong>Approval requests</strong> (prośby o zgodę), a w terminalu pod <code>antenna approvals</code> i <code>antenna approve &lt;id&gt;</code>.</p>
+<p>Prośba pojawia się na karcie pytającego komputera w sekcji <strong>Moje urządzenia</strong> (<em>funkcja eksperymentalna</em>), z powiadomieniem w rodzaju „Antenna: potrzebna zgoda na Mac mini”. Karta mówi, który agent pyta, o co i dlaczego, i cytuje jego tekst, chyba że w tekście jest sekret: taki tekst nigdy nie opuszcza komputera, który pyta. Naciśnij <strong>Zatwierdź przez Touch ID</strong> na Macu (<em>funkcja eksperymentalna</em>), <strong>Zatwierdź hasłem</strong>, podając hasło komputera, przy którym siedzisz, albo <strong>Odrzuć</strong>.</p>
+<p>Komputer, który pytał, sprawdza podpis względem przyjętych na nim kluczy, własnego jednorazowego wyzwania (challenge) i dokładnie tej prośby, a potem sam wykonuje prośbę, jeden raz. Na tym komputerze prośba jest też w sekcji <strong>Prośby o zgodę</strong>, a w terminalu pod <code>antenna approvals</code> i <code>antenna approve &lt;id&gt;</code>.</p>
 <p>Claude Code czeka do 50 sekund i krok zatwierdzony w tym czasie wykonuje się od razu. Później zajmuje się inną pracą; gdy zatwierdzisz, Antenna wpisuje w jego wiersz poleceń „Approved — continue.”, a Claude Code ponawia krok.</p>
 
 <h2>Jeśli nikt nie odpowie</h2>
-<p>Prośba zamyka się po 10 minutach: nic się nie wykonuje i nic nie jest wysyłane, a Claude Code dowiaduje się, że nikt jej nie zatwierdził. Krótko wcześniej ostrzeże cię powiadomienie. Po <strong>Deny</strong>, które nie wymaga hasła, Claude Code dowiaduje się, że twoja odpowiedź brzmi „nie”.</p>
+<p>Prośba zamyka się po 10 minutach: nic się nie wykonuje i nic nie jest wysyłane, a Claude Code dowiaduje się, że nikt jej nie zatwierdził. Krótko wcześniej ostrzeże cię powiadomienie. Po kliknięciu <strong>Odrzuć</strong>, które nie wymaga hasła, Claude Code dowiaduje się, że twoja odpowiedź brzmi „nie”.</p>
 
 <h2>Agent, który zatwierdza za ciebie</h2>
-<p><em>Funkcja eksperymentalna.</em> <strong>Can approve for…</strong> (może zatwierdzać za…) w <strong>Agents</strong> pozwala agentowi, któremu ufasz, odpowiadać na prośby twoich pozostałych agentów dotyczące wiadomości i plików, a jego odpowiedź liczy się tylko wtedy, gdy wszystko, czego dotyczy prośba, jest na poziomie ∞. Polecenia i edycje zawsze trafiają do ciebie.</p>
+<p><em>Funkcja eksperymentalna.</em> Opcja <strong>Może zatwierdzać za…</strong> w sekcji <strong>Agenci</strong> pozwala agentowi, któremu ufasz, odpowiadać na prośby twoich pozostałych agentów dotyczące wiadomości i plików, a jego odpowiedź liczy się tylko wtedy, gdy wszystko, czego dotyczy prośba, jest na poziomie ∞. Polecenia i edycje zawsze trafiają do ciebie.</p>
 
 <h2>Pytania</h2>
 <details>
@@ -38,7 +38,7 @@ antenna session start api-dev --dir ~/projects/api</code></pre></li>
 </details>
 <details>
   <summary>Czy każdy komputer może zatwierdzać?</summary>
-  <p>Nie. Tylko komputer połączony jako twój własny, którego klucze przyjęto na pytającym komputerze, i tylko z hasłem. Gdy zgubisz komputer, na każdym z pozostałych użyj <strong>Revoke this computer</strong> (unieważnij ten komputer).</p>
+  <p>Nie. Tylko komputer połączony jako twój własny, którego klucze przyjęto na pytającym komputerze, i tylko z hasłem. Gdy zgubisz komputer, na każdym z pozostałych użyj <strong>Unieważnij ten komputer</strong>.</p>
 </details>
 <details>
   <summary>Czy mogę zatwierdzać z telefonu?</summary>

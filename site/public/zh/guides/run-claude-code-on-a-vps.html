@@ -184,9 +184,9 @@
     <p>安装脚本会从签名清单中读取最新版本，校验压缩包，把 <code>antennad</code> 和 <code>antenna</code> 安装到 <code>~/.local/bin</code> 并注册为 systemd 用户服务（不需要 root），然后用一个密码创建你的节点。第二行让服务在你退出登录后继续运行。在 Ubuntu 或 Fedora 上，也可以改装 <code>.deb</code> 或 <code>.rpm</code> 包。</p>
 
     <h2>2. 和笔记本配对</h2>
-    <p>在笔记本上：<strong>New contact → Invite</strong>，起个名字，勾选 <strong>This is my own computer (∞)</strong>，点 <strong>Create link</strong> 并复制链接。在服务器上：</p>
+    <p>在笔记本上：<strong>新联系人 → 邀请</strong>，起个名字，勾选 <strong>这是我自己的电脑（∞）</strong>，点 <strong>创建链接</strong> 并复制链接。在服务器上：</p>
     <pre><code>antenna join '&lt;link&gt;' --trust 5 --label mac</code></pre>
-    <p>别漏了单引号：链接里有一个 <code>#</code>。把笔记本上显示的验证码输入服务器的终端，然后在笔记本上点 <strong>The contact confirmed — codes match</strong>。5 级在两边都对应 ∞，所以服务器会被当作你自己的电脑。</p>
+    <p>别漏了单引号：链接里有一个 <code>#</code>。把笔记本上显示的验证码输入服务器的终端，然后在笔记本上点 <strong>联系人已确认，验证码一致</strong>。5 级在两边都对应 ∞，所以服务器会被当作你自己的电脑。</p>
 
     <h2>3. 通过 Antenna 启动 Claude Code</h2>
     <pre><code>cd ~/projects/api
@@ -196,7 +196,7 @@
     <p>connect 这一行给会话分配专属的智能体和令牌，并打个招呼，于是你的笔记本上会出现一个名为 <code>api-dev</code> 的聊天。start 这一行在 Antenna 自己的 tmux 服务器里运行 Claude Code（不会碰你的 tmux）。先 attach 一次，回答 Claude Code 一开始的几个问题（比如是否信任这个文件夹），然后按 <code>Ctrl-b d</code> 退出：它会继续运行。如果是 Codex，就用 <code>antenna connect codex</code> 和 <code>--cli codex</code>。</p>
 
     <h2>4. 和它对话</h2>
-    <p>在笔记本的 <code>api-dev</code> 聊天里写：“跑一下迁移测试，修好失败的。”当 Claude Code 停在提示符前闲着时，Antenna 会输入一行简短的文字，让它去读你的消息；Antenna 永远不会把联系人的原文输入进去，也永远不会替它回答问题。<strong>My devices</strong> 中的服务器卡片会显示它的运行状况和上面的智能体，你可以在笔记本上批准它的请求。</p>
+    <p>在笔记本的 <code>api-dev</code> 聊天里写：“跑一下迁移测试，修好失败的。”当 Claude Code 停在提示符前闲着时，Antenna 会输入一行简短的文字，让它去读你的消息；Antenna 永远不会把联系人的原文输入进去，也永远不会替它回答问题。<strong>我的设备</strong> 中的服务器卡片会显示它的运行状况和上面的智能体，你可以在笔记本上批准它的请求。</p>
 
     <h2>重启之后</h2>
     <p>服务器重启后，节点的密钥会被锁定：服务在运行，但它的连接保持静默，直到你登录并运行 <code>antenna unlock</code>。这样一来，即使有人拿到服务器磁盘的副本，也拿不到你的密钥。<code>antenna status</code> 会显示它是否处于锁定状态。</p>

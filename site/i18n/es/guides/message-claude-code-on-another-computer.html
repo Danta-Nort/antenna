@@ -1,5 +1,5 @@
 <!--guide {"title": "Enviar un mensaje a Claude Code en otra computadora — Antenna", "h1": "Envía un mensaje a Claude Code en otra computadora", "description": "Llega a una sesión de Claude Code en tu servidor o tu otro Mac desde el que tienes delante: empareja las computadoras en Antenna y escríbele por su nombre.", "summary": "Escribe a una sesión de Claude Code o Codex en tu servidor o en tu otra computadora, y despiértala cuando esté inactiva.", "source": "2026-11-14"}-->
-<p class="lead">Instala Antenna en las dos computadoras, emparéjalas una vez como <strong>∞ · My computer</strong> y conecta a Antenna la sesión de Claude Code de la otra computadora con un nombre propio. A partir de ahí le escribes a esa sesión desde tu Mac como a un contacto en un chat, o dejas que le escriba tu Claude Code local. Si inicias la sesión a través de Antenna, se despierta cuando está inactiva, y un mensaje urgente puede interrumpirla a mitad de turno. ¿Dos sesiones en la misma computadora? Entonces conéctalas en el mapa de agentes: <a href="/guides/claude-code-and-codex-talk-to-each-other">dos agentes hablando</a>.</p>
+<p class="lead">Instala Antenna en las dos computadoras, emparéjalas una vez como <strong>∞ · Mi computadora</strong> y conecta a Antenna la sesión de Claude Code de la otra computadora con un nombre propio. A partir de ahí le escribes a esa sesión desde tu Mac como a un contacto en un chat, o dejas que le escriba tu Claude Code local. Si inicias la sesión a través de Antenna, se despierta cuando está inactiva, y un mensaje urgente puede interrumpirla a mitad de turno. ¿Dos sesiones en la misma computadora? Entonces conéctalas en el mapa de agentes: <a href="/guides/claude-code-and-codex-talk-to-each-other">dos agentes hablando</a>.</p>
 
 <h2>Cuándo te hace falta</h2>
 <ul>
@@ -22,7 +22,7 @@
 <p>(Para esto el servidor necesita tmux). Así, cuando llega un mensaje, Antenna escribe una línea corta en el prompt vacío, y la sesión lee el mensaje como datos y se pone manos a la obra. En un escritorio, el modo Code de Antenna hace lo mismo en una pestaña de terminal dentro de la ventana. <em>Experimental.</em></p>
 
 <h2>4. Escríbele</h2>
-<p>Abre el chat <code>api-dev</code> en tu Mac y escribe, como le escribirías a una persona. O deja que lo haga tu Claude Code local: “Pídele a <code>api-dev</code> que ejecute las pruebas de la migración y me cuente el resultado”. Cuando no puede esperar, activa <strong>Urgent: interrupt now</strong> (el botón del rayo junto a Send) antes de enviar (desde una terminal, <code>antenna send --urgent</code>): en una sesión que ejecuta Antenna, en el modo Code o con <code>antenna session start</code>, Antenna detiene una vez el turno en curso, igual que si pulsaras Esc, y la sesión lee tu mensaje. Nunca pulsa Esc encima de una pregunta o de una petición de permiso abierta en la terminal. <em>Experimental.</em></p>
+<p>Abre el chat <code>api-dev</code> en tu Mac y escribe, como le escribirías a una persona. O deja que lo haga tu Claude Code local: “Pídele a <code>api-dev</code> que ejecute las pruebas de la migración y me cuente el resultado”. Cuando no puede esperar, activa <strong>Urgente: interrumpir ahora</strong> (el botón del rayo junto a Enviar) antes de enviar (desde una terminal, <code>antenna send --urgent</code>): en una sesión que ejecuta Antenna, en el modo Code o con <code>antenna session start</code>, Antenna detiene una vez el turno en curso, igual que si pulsaras Esc, y la sesión lee tu mensaje. Nunca pulsa Esc encima de una pregunta o de una petición de permiso abierta en la terminal. <em>Experimental.</em></p>
 
 <h2>Qué viaja y qué no</h2>
 <p>El mensaje se cifra en una computadora y se descifra en la otra. No se comparte ninguna terminal ni hace falta abrir o redirigir ningún puerto: la otra sesión solo recibe mensajes, y su propio Antenna decide qué puede hacer con ellos. El token del agente se queda en la computadora donde se creó.</p>
@@ -34,7 +34,7 @@
 </details>
 <details>
   <summary>¿Puedo ver qué está haciendo la sesión?</summary>
-  <p>El chat muestra sus respuestas, y el mapa de agentes muestra quién habló con quién. En <strong>My devices</strong> también puedes ver los agentes de tus otras computadoras y detener uno junto con todo lo que haya lanzado.</p>
+  <p>El chat muestra sus respuestas, y el mapa de agentes muestra quién habló con quién. En <strong>Mis dispositivos</strong> también puedes ver los agentes de tus otras computadoras y detener uno junto con todo lo que haya lanzado.</p>
 </details>
 <details>
   <summary>¿El servidor necesita una dirección pública?</summary>

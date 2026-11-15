@@ -1,22 +1,22 @@
 <!--guide {"title": "Notificación cuando Claude Code termina en otra computadora", "h1": "Recibe un aviso cuando Claude Code termine, en un servidor u otra computadora", "description": "Claude Code en tu servidor u otra computadora te informa en un chat de Antenna y tu portátil muestra una notificación. Las aprobaciones también avisan.", "summary": "Una notificación en tu portátil cuando Claude Code, en un servidor u otra computadora, termina una tarea o necesita tu aprobación.", "source": "2026-11-15"}-->
-<p class="lead">Dale a Claude Code su tarea en un chat de Antenna desde tu portátil y, cuando termine, te enviará el resultado a ese mismo chat: las instrucciones de Antenna le piden a un agente conectado que devuelva sus resultados al contacto que le dio la tarea. Entonces tu portátil muestra una notificación, “New message in server · api-dev”, mientras la ventana de Antenna no está en primer plano. Las peticiones de aprobación también avisan, así que una ejecución que se detiene a medias no se queda esperando sin que te enteres. Antenna no vigila por su cuenta los turnos de Claude Code: el informe es un mensaje del propio Claude Code.</p>
+<p class="lead">Dale a Claude Code su tarea en un chat de Antenna desde tu portátil y, cuando termine, te enviará el resultado a ese mismo chat: las instrucciones de Antenna le piden a un agente conectado que devuelva sus resultados al contacto que le dio la tarea. Entonces tu portátil muestra una notificación, “Mensaje nuevo en server · api-dev”, mientras la ventana de Antenna no está en primer plano. Las peticiones de aprobación también avisan, así que una ejecución que se detiene a medias no se queda esperando sin que te enteres. Antenna no vigila por su cuenta los turnos de Claude Code: el informe es un mensaje del propio Claude Code.</p>
 
 <h2>Qué te avisa</h2>
 <ul>
   <li><strong>Un mensaje de Claude Code para ti.</strong> La notificación dice el nombre del chat, nunca el texto, y como mucho una vez cada 10 segundos por chat.</li>
-  <li><strong>Una petición de aprobación.</strong> Un paso que necesita tu visto bueno aparece como “Antenna: approval needed on server”, con el agente, lo que quiere hacer y el tiempo que queda (“expires in 9 min”), pero nunca con el texto de la petición. Una segunda notificación llega unos dos minutos antes de que la petición se cierre; se cierra a los 10 minutos. Las peticiones de otra computadora te llegan a través de <strong>My devices</strong> (mis dispositivos, <em>experimental</em>).</li>
-  <li><strong>Una pregunta.</strong> <em>Experimental.</em> La pregunta de un agente avisa en la computadora donde se ejecuta: “A question from your agent”. En un servidor, ejecuta allí <code>antenna agent escalate api-dev --to mac</code>, y sus preguntas te llegarán en cambio al chat del agente en tu portátil.</li>
+  <li><strong>Una petición de aprobación.</strong> Un paso que necesita tu visto bueno aparece como “Antenna: se necesita aprobación en server”, con el agente, lo que quiere hacer y el tiempo que queda (“Caduca en 9 min”), pero nunca con el texto de la petición. Una segunda notificación llega unos dos minutos antes de que la petición se cierre; se cierra a los 10 minutos. Las peticiones de otra computadora te llegan a través de <strong>Mis dispositivos</strong> (<em>experimental</em>).</li>
+  <li><strong>Una pregunta.</strong> <em>Experimental.</em> La pregunta de un agente avisa en la computadora donde se ejecuta: “Una pregunta de tu agente”. En un servidor, ejecuta allí <code>antenna agent escalate api-dev --to mac</code>, y sus preguntas te llegarán en cambio al chat del agente en tu portátil.</li>
 </ul>
 <p>Las notificaciones funcionan en macOS y en los escritorios Linux que muestran notificaciones. Antenna tiene que estar abierto en el portátil; con su ventana en primer plano, los contadores de no leídos de la lista de chats cumplen esa función.</p>
 
 <h2>Cómo configurarlo</h2>
 <ol>
-  <li><a href="/#download">Instala Antenna</a> en las dos computadoras y emparéjalas una vez con <strong>This is my own computer (∞)</strong> (esta es mi propia computadora) marcado. <a href="/guides/run-claude-code-on-a-vps">Claude Code en un VPS</a> explica paso a paso el lado del servidor.</li>
+  <li><a href="/#download">Instala Antenna</a> en las dos computadoras y emparéjalas una vez con <strong>Es mi propia computadora (∞)</strong> marcado. <a href="/guides/run-claude-code-on-a-vps">Claude Code en un VPS</a> explica paso a paso el lado del servidor.</li>
   <li>Inicia Claude Code a través de Antenna. En un servidor:
 <pre><code>cd ~/projects/api
 antenna connect claude-code --agent api-dev --links mac --hello mac
 antenna session start api-dev --dir ~/projects/api</code></pre>
-  En una segunda computadora de escritorio: <strong>Agents → AI apps → Start in Code mode</strong>.</li>
+  En una segunda computadora de escritorio: <strong>Agentes → Apps de IA → Iniciar en modo Code</strong>.</li>
   <li>En el portátil no hay nada que configurar. Desde el principio, un chat con un agente avisa de los mensajes dirigidos a ti en persona y de las peticiones de aprobación.</li>
 </ol>
 
@@ -26,13 +26,13 @@ antenna session start api-dev --dir ~/projects/api</code></pre>
 <p>El informe llega cuando Claude Code decide que ha terminado, como con cualquier instrucción que sigue. Si se detiene en su propio aviso de permisos en la terminal (“Do you want to proceed?”), Antenna no lo ve y no te llega ninguna notificación: permite en la configuración de Claude Code las herramientas que usas a diario.</p>
 
 <h2>Elige qué chats avisan</h2>
-<p>Abre <strong>⋮</strong> en la fila de un chat, o haz clic derecho sobre ella, y luego <strong>Notifications</strong> (notificaciones):</p>
+<p>Abre <strong>⋮</strong> en la fila de un chat, o haz clic derecho sobre ella, y luego <strong>Notificaciones</strong>:</p>
 <ul>
-  <li><strong>All messages</strong> (todos los mensajes): cada mensaje nuevo de este chat (lo predeterminado para una persona).</li>
-  <li><strong>Only when it asks for me</strong> (solo cuando me necesita): los mensajes dirigidos a ti en persona y las peticiones de aprobación (lo predeterminado para un agente).</li>
-  <li><strong>Off</strong> (desactivadas): las peticiones de aprobación siguen avisando.</li>
+  <li><strong>Todos los mensajes</strong>: cada mensaje nuevo de este chat (lo predeterminado para una persona).</li>
+  <li><strong>Solo cuando me pide algo</strong>: los mensajes dirigidos a ti en persona y las peticiones de aprobación (lo predeterminado para un agente).</li>
+  <li><strong>Desactivadas</strong>: las peticiones de aprobación siguen avisando.</li>
 </ul>
-<p>Cuando Claude Code informa a otro de tus agentes en lugar de a ti, esos mensajes no avisan, salvo que actives <strong>Notify about messages between agents</strong> (avisar de los mensajes entre agentes) en el mismo menú. En una terminal: <code>antenna chats notify server --agent api-dev all</code>.</p>
+<p>Cuando Claude Code informa a otro de tus agentes en lugar de a ti, esos mensajes no avisan, salvo que actives <strong>Avisar de los mensajes entre agentes</strong> en el mismo menú. En una terminal: <code>antenna chats notify server --agent api-dev all</code>.</p>
 
 <h2>En la computadora en la que estás</h2>
 <p>Con Claude Code en modo Code en tu propio portátil, Antenna te avisa de sus peticiones de aprobación y de sus preguntas mientras la ventana está en segundo plano, pero no del final de un turno: un agente no puede enviarte mensajes en su propia computadora. Para eso, los hooks del propio Claude Code pueden ejecutar un comando tuyo cuando se detiene.</p>
@@ -40,7 +40,7 @@ antenna session start api-dev --dir ~/projects/api</code></pre>
 <h2>Preguntas</h2>
 <details>
   <summary>¿La notificación muestra lo que escribió Claude Code?</summary>
-  <p>No. Solo dice “New message in” y el nombre del chat, porque una notificación puede aparecer con la pantalla bloqueada. Abre el chat para leer el informe.</p>
+  <p>No. Solo dice “Mensaje nuevo en” y el nombre del chat, porque una notificación puede aparecer con la pantalla bloqueada. Abre el chat para leer el informe.</p>
 </details>
 <details>
   <summary>¿Y si mi portátil está en reposo?</summary>

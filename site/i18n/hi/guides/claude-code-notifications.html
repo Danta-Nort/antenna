@@ -1,22 +1,22 @@
 <!--guide {"title": "Claude Code का काम पूरा होते ही notification पाएँ — Antenna", "h1": "Server या दूसरे कंप्यूटर पर Claude Code का काम पूरा होने पर notification पाएँ", "description": "Server या दूसरे कंप्यूटर पर Claude Code काम पूरा करके Antenna की चैट में रिपोर्ट भेजता है, और आपके लैपटॉप पर notification आता है। Approval requests पर भी।", "summary": "Server या दूसरे कंप्यूटर पर Claude Code काम पूरा होने की रिपोर्ट दे या आपकी मंज़ूरी माँगे, तो लैपटॉप पर desktop notification।", "source": "2026-11-15"}-->
-<p class="lead">अपने लैपटॉप से Antenna की चैट में Claude Code को task दें, और काम पूरा होने पर वह नतीजा उसी चैट में वापस भेजता है: Antenna के instructions जुड़े हुए agent से कहते हैं कि वह अपने नतीजे उसी कॉन्टैक्ट को भेजे जिसने task दिया था। जब तक Antenna की विंडो सामने नहीं होती, आपका लैपटॉप “New message in server · api-dev” notification दिखाता है। Approval requests पर भी notification आता है, ताकि बीच में रुका काम चुपचाप इंतज़ार में न पड़ा रहे। Antenna ख़ुद Claude Code के turns पर नज़र नहीं रखता: रिपोर्ट Claude Code का अपना मैसेज होती है।</p>
+<p class="lead">अपने लैपटॉप से Antenna की चैट में Claude Code को task दें, और काम पूरा होने पर वह नतीजा उसी चैट में वापस भेजता है: Antenna के instructions जुड़े हुए agent से कहते हैं कि वह अपने नतीजे उसी कॉन्टैक्ट को भेजे जिसने task दिया था। जब तक Antenna की विंडो सामने नहीं होती, आपका लैपटॉप “server · api-dev में नया मैसेज” notification दिखाता है। Approval requests पर भी notification आता है, ताकि बीच में रुका काम चुपचाप इंतज़ार में न पड़ा रहे। Antenna ख़ुद Claude Code के turns पर नज़र नहीं रखता: रिपोर्ट Claude Code का अपना मैसेज होती है।</p>
 
 <h2>किन बातों पर notification आता है</h2>
 <ul>
   <li><strong>Claude Code का आपको भेजा मैसेज।</strong> Notification में सिर्फ़ चैट का नाम होता है, टेक्स्ट कभी नहीं, और हर चैट के लिए 10 सेकंड में ज़्यादा से ज़्यादा एक बार।</li>
-  <li><strong>Approval request।</strong> जिस कदम के लिए आपकी हाँ चाहिए, वह “Antenna: approval needed on server” के रूप में दिखता है, साथ में agent, वह क्या करना चाहता है और कितना समय बचा है (“expires in 9 min”), पर request का टेक्स्ट कभी नहीं। Request बंद होने से करीब दो मिनट पहले दूसरा notification आता है; request 10 मिनट बाद बंद हो जाता है। दूसरे कंप्यूटर से आए requests आप तक <strong>My devices</strong> के ज़रिए पहुँचते हैं (<em>experimental</em>)।</li>
+  <li><strong>Approval request।</strong> जिस कदम के लिए आपकी हाँ चाहिए, वह “Antenna: server पर मंज़ूरी चाहिए” के रूप में दिखता है, साथ में agent, वह क्या करना चाहता है और कितना समय बचा है (“9 मिनट में मियाद ख़त्म”), पर request का टेक्स्ट कभी नहीं। Request बंद होने से करीब दो मिनट पहले दूसरा notification आता है; request 10 मिनट बाद बंद हो जाता है। दूसरे कंप्यूटर से आए requests आप तक <strong>My devices</strong> के ज़रिए पहुँचते हैं (<em>experimental</em>)।</li>
   <li><strong>सवाल।</strong> <em>Experimental।</em> Agent के सवाल का notification उसी कंप्यूटर पर आता है जहाँ वह चलता है: “A question from your agent”। Server के लिए वहाँ <code>antenna agent escalate api-dev --to mac</code> चलाएँ, फिर उसके सवाल आपके लैपटॉप पर agent की चैट में आते हैं।</li>
 </ul>
 <p>Notifications macOS पर और उन Linux desktops पर काम करते हैं जो notifications दिखाते हैं। लैपटॉप पर Antenna खुला होना चाहिए; विंडो सामने हो, तो चैट लिस्ट में unread की गिनती ही काफ़ी है।</p>
 
 <h2>सेट अप करें</h2>
 <ol>
-  <li>दोनों कंप्यूटरों पर <a href="/#download">Antenna इंस्टॉल करें</a> और उन्हें एक बार <strong>This is my own computer (∞)</strong> पर tick लगाकर जोड़ें। Server वाला हिस्सा <a href="/guides/run-claude-code-on-a-vps">VPS पर Claude Code</a> में कदम-दर-कदम बताया है।</li>
+  <li>दोनों कंप्यूटरों पर <a href="/#download">Antenna इंस्टॉल करें</a> और उन्हें एक बार <strong>यह मेरा अपना कंप्यूटर है (∞)</strong> पर tick लगाकर जोड़ें। Server वाला हिस्सा <a href="/guides/run-claude-code-on-a-vps">VPS पर Claude Code</a> में कदम-दर-कदम बताया है।</li>
   <li>Claude Code को Antenna के ज़रिए शुरू करें। Server पर:
 <pre><code>cd ~/projects/api
 antenna connect claude-code --agent api-dev --links mac --hello mac
 antenna session start api-dev --dir ~/projects/api</code></pre>
-  दूसरे डेस्कटॉप पर: <strong>Agents → AI apps → Start in Code mode</strong>।</li>
+  दूसरे डेस्कटॉप पर: <strong>Agents → AI apps → Code mode में शुरू करें</strong>।</li>
   <li>लैपटॉप पर कुछ सेट नहीं करना है। Agent वाली चैट शुरू से ही आपको सीधे भेजे गए मैसेज और approval requests पर notification देती है।</li>
 </ol>
 
@@ -28,11 +28,11 @@ antenna session start api-dev --dir ~/projects/api</code></pre>
 <h2>चुनें कि किन चैट्स पर notification आए</h2>
 <p>किसी चैट की row पर <strong>⋮</strong> खोलें, या उस पर right-click करें, फिर <strong>Notifications</strong> चुनें:</p>
 <ul>
-  <li><strong>All messages</strong> (सभी मैसेज): इस चैट का हर नया मैसेज (किसी व्यक्ति वाली चैट का default)।</li>
-  <li><strong>Only when it asks for me</strong> (सिर्फ़ जब मेरी ज़रूरत हो): आपको सीधे भेजे गए मैसेज और approval requests (agent वाली चैट का default)।</li>
-  <li><strong>Off</strong>: approval requests पर फिर भी notification आता है।</li>
+  <li><strong>सभी मैसेज</strong>: इस चैट का हर नया मैसेज (किसी व्यक्ति वाली चैट का default)।</li>
+  <li><strong>सिर्फ़ जब मेरी ज़रूरत हो</strong>: आपको सीधे भेजे गए मैसेज और approval requests (agent वाली चैट का default)।</li>
+  <li><strong>बंद</strong>: approval requests पर फिर भी notification आता है।</li>
 </ul>
-<p>जब Claude Code आपकी बजाय आपके किसी दूसरे agent को रिपोर्ट करता है, तो उन मैसेज पर notification नहीं आता, जब तक आप उसी menu में <strong>Notify about messages between agents</strong> (agents के आपसी मैसेज पर notification) चालू न करें। Terminal में: <code>antenna chats notify server --agent api-dev all</code>।</p>
+<p>जब Claude Code आपकी बजाय आपके किसी दूसरे agent को रिपोर्ट करता है, तो उन मैसेज पर notification नहीं आता, जब तक आप उसी menu में <strong>agents के आपसी मैसेज पर notification</strong> चालू न करें। Terminal में: <code>antenna chats notify server --agent api-dev all</code>।</p>
 
 <h2>जिस कंप्यूटर पर आप बैठे हैं</h2>
 <p>जब Claude Code आपके अपने लैपटॉप पर Code mode में चलता है, तो विंडो पीछे होने पर Antenna उसके approval requests और सवालों पर notification देता है, पर turn ख़त्म होने पर नहीं: agent अपने ही कंप्यूटर पर आपको मैसेज नहीं भेज सकता। इसके लिए Claude Code के अपने hooks, उसके रुकने पर आपकी कोई command चला सकते हैं।</p>
@@ -40,7 +40,7 @@ antenna session start api-dev --dir ~/projects/api</code></pre>
 <h2>सवाल-जवाब</h2>
 <details>
   <summary>क्या notification में दिखता है कि Claude Code ने क्या लिखा?</summary>
-  <p>नहीं। उसमें सिर्फ़ “New message in” और चैट का नाम होता है, क्योंकि notification lock screen पर भी दिख सकता है। रिपोर्ट पढ़ने के लिए चैट खोलें।</p>
+  <p>नहीं। उसमें सिर्फ़ चैट का नाम और “… में नया मैसेज” होता है, क्योंकि notification lock screen पर भी दिख सकता है। रिपोर्ट पढ़ने के लिए चैट खोलें।</p>
 </details>
 <details>
   <summary>अगर मेरा लैपटॉप sleep में हो तो?</summary>

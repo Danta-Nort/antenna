@@ -4,7 +4,7 @@
 <h2>Che cosa ottieni</h2>
 <ul>
   <li><strong>Una chat per ogni sessione</strong>, su qualunque computer giri. Una sessione sul server e una sul desktop stanno nella stessa lista dei tuoi contatti.</li>
-  <li><strong>My devices</strong>: una scheda per ogni tuo computer con il sistema e la versione di Antenna, il suo stato di salute secondo i suoi stessi controlli, i suoi agenti con l'indicazione di quali sono collegati, e le richieste che lì aspettano te.</li>
+  <li><strong>I miei dispositivi</strong>: una scheda per ogni tuo computer con il sistema e la versione di Antenna, il suo stato di salute secondo i suoi stessi controlli, i suoi agenti con l'indicazione di quali sono collegati, e le richieste che lì aspettano te.</li>
   <li><strong>Approvazioni da dove sei.</strong> Una richiesta di un agente sul server si può approvare sul Mac, con Touch ID o la password del Mac. Il server verifica la firma ed esegue la richiesta da sé.</li>
   <li><strong>Un pulsante di stop</strong> per ogni agente su un altro computer: ferma l'agente e tutti i processi che ha avviato lì.</li>
   <li><strong>La mappa degli agenti</strong>, dove colleghi una sessione su un computer a una sessione su un altro, così si scrivono a vicenda.</li>
@@ -13,9 +13,9 @@
 <h2>Configurazione</h2>
 <ol>
   <li><strong>Installa Antenna su ogni computer</strong>: l'app su un desktop Mac o Linux, il nodo su un server Linux (<code>curl -fsSL https://antenna.contact/install.sh | sh</code>).</li>
-  <li><strong>Abbina i computer tra loro come tuoi.</strong> Crea un invito con la casella <strong>This is my own computer (∞)</strong> spuntata, aprilo sull'altro computer e inserisci in un lato il codice mostrato dall'altro. Abbina ogni computer con tutti quelli che vuoi vedere o collegare da lì: ognuno deve avere l'altro a ∞.</li>
+  <li><strong>Abbina i computer tra loro come tuoi.</strong> Crea un invito con la casella <strong>Questo è un mio computer (∞)</strong> spuntata, aprilo sull'altro computer e inserisci in un lato il codice mostrato dall'altro. Abbina ogni computer con tutti quelli che vuoi vedere o collegare da lì: ognuno deve avere l'altro a ∞.</li>
   <li><strong>Dai un nome a ogni sessione di Claude Code.</strong> Su un desktop, avviala in modalità Code dal <code>+</code> nel pannello degli agenti. Su un server, nella cartella del progetto, esegui <code>antenna connect claude-code --agent api-dev --links mac --hello mac</code> e tienila attiva con <code>antenna session start api-dev --dir ~/projects/api</code>; in <a href="/guides/run-claude-code-on-a-vps">Claude Code su una VPS</a> trovi tutti i passaggi.</li>
-  <li><strong>Lascia che il computer principale risponda alle richieste.</strong> Sul server esegui una volta <code>antenna devices confirm mac</code>; su un desktop, accetta la chiave del computer principale in <strong>My devices</strong> → la sua scheda → <strong>Approvals</strong>.</li>
+  <li><strong>Lascia che il computer principale risponda alle richieste.</strong> Sul server esegui una volta <code>antenna devices confirm mac</code>; su un desktop, accetta la chiave del computer principale da <strong>I miei dispositivi</strong> → la sua scheda → <strong>Approvazioni</strong>.</li>
 </ol>
 
 <h2>Spostare il lavoro tra computer</h2>

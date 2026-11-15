@@ -107,7 +107,7 @@
      "name": "İki Gemini CLI penceresi Antenna’yı aynı anda kullanabilir mi?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Aynı anda yalnızca biri: bir ajan aynı anda tek bir oturumda çalışır ve Connect, Gemini CLI’a tek bir ajan verir."
+      "text": "Aynı anda yalnızca biri: bir ajan aynı anda tek bir oturumda çalışır ve Bağla, Gemini CLI’a tek bir ajan verir."
      }
     },
     {
@@ -167,9 +167,9 @@
     <h2>Tek bilgisayarda</h2>
     <ol>
       <li><a href="/tr/#download">Antenna’yı kurun</a> (macOS ya da Linux) ve düğümünüzü oluşturun: tek bir parola, hesap yok.</li>
-      <li><strong>Agents → AI apps</strong> bölümünü açın ve Gemini CLI’ın yanındaki <strong>Connect</strong> düğmesine basın. <strong>Assistant with access to my projects</strong> (projelerime erişimi olan asistan) seçeneğini seçin, parolanızı girin, <strong>Continue</strong> düğmesine basın, Antenna’nın <code>~/.gemini/settings.json</code> dosyasına ne ekleyeceğini okuyun ve <strong>Write and connect</strong> düğmesine basın. Gemini CLI’da <code>/mcp reload</code> komutunu çalıştırın (ya da yeniden başlatın): <code>/mcp</code> listesinde <code>antenna</code> görünür. Satırda “Contacts write to it as gemini-cli” yazar.</li>
-      <li>Aynı sayfada Claude Code’un yanındaki <strong>Start in Code mode</strong> düğmesine basın. <strong>New agent…</strong> seçin, ajana <code>builder</code> adını verin, aynı rolü, <strong>Assistant with access to my projects</strong> seçeneğini seçin, parolanızı girin ve <strong>Start</strong> düğmesine basın. Claude Code, pencerenin içindeki bir terminal sekmesinde çalışır.</li>
-      <li><strong>Agents → Map</strong> ekranını açın, bir ajanın tutamacından diğerine sürükleyin, parolanızı girin ve <strong>Connect</strong> düğmesine basın. İkisi <em>yerel bir rota</em> alır: mesajları bilgisayardan asla çıkmaz ve siz işareti kaldırmadıkça her biri diğerinin mesajlarını görev olarak alır.</li>
+      <li><strong>Ajanlar → Yapay zeka uygulamaları</strong> bölümünü açın ve Gemini CLI’ın yanındaki <strong>Bağla</strong> düğmesine basın. <strong>Projelerime erişimi olan asistan</strong> seçeneğini seçin, parolanızı girin, <strong>Devam</strong> düğmesine basın, Antenna’nın <code>~/.gemini/settings.json</code> dosyasına ne ekleyeceğini okuyun ve <strong>Yaz ve bağla</strong> düğmesine basın. Gemini CLI’da <code>/mcp reload</code> komutunu çalıştırın (ya da yeniden başlatın): <code>/mcp</code> listesinde <code>antenna</code> görünür. Satırda “Kişiler ona gemini-cli olarak yazar” yazar.</li>
+      <li>Aynı sayfada Claude Code’un yanındaki <strong>Code modunda başlat</strong> düğmesine basın. <strong>Yeni ajan…</strong> seçin, ajana <code>builder</code> adını verin, aynı rolü, <strong>Projelerime erişimi olan asistan</strong> seçeneğini seçin, parolanızı girin ve <strong>Başlat</strong> düğmesine basın. Claude Code, pencerenin içindeki bir terminal sekmesinde çalışır.</li>
+      <li><strong>Ajanlar → Harita</strong> ekranını açın, bir ajanın tutamacından diğerine sürükleyin, parolanızı girin ve <strong>Bağla</strong> düğmesine basın. İkisi <em>yerel bir rota</em> alır: mesajları bilgisayardan asla çıkmaz ve siz işareti kaldırmadıkça her biri diğerinin mesajlarını görev olarak alır.</li>
     </ol>
     <p>İkisine de aynı rolü verin: Antenna, verilerinizin daha fazlasını görmüş bir ajanın daha azını görmüş bir ajana yazmasına izin vermez.</p>
 
@@ -178,7 +178,7 @@
     <p>İkisi farklı biçimde bekler. Code modundaki Claude Code kendiliğinden uyanır: bir mesaj geldiğinde boşta bekliyorsa Antenna onun için gelen kutusunu okumasını söyleyen tek bir satır yazar. <em>Deneysel.</em> Antenna, Gemini CLI’ı henüz uyandırmıyor; bu yüzden Gemini CLI mesajlarını Antenna’yı bir sonraki çağırışında okur. Bu da konuşmayı başlatmak için en uygun tarafın Gemini CLI olduğu anlamına gelir: “<code>builder</code> ajanından <code>src/</code> içindeki diff’i incelemesini iste, sonra yanıtını bekle ve bulduklarını düzelt.” Claude Code uyanır, inceler ve yanıtlar. Gemini CLI’a iş vermek için önce ona mesaj beklemesini söyleyin.</p>
 
     <h2>İki bilgisayarda</h2>
-    <p>Gemini CLI bir bilgisayarda, Claude Code başka bir bilgisayarda kalabilir. Her birine Antenna kurun ve ikisini bir kez, bir davet bağlantısı ve altı haneli bir kodla, <strong>This is my own computer (∞)</strong> seçeneğini işaretleyerek eşleştirin. Sonra haritada iki ajan arasına çizgiyi çekin. Diğer bilgisayar kendi tarafı için onayınızı ister; orada ya da <strong>My devices</strong> bölümünde. Yani orada sizsiz hiçbir şey değişmez. Ekranı olmayan bir sunucuda Claude Code, <code>antenna connect claude-code</code> ve <code>antenna session start</code> ile çalışır: bkz. <a href="/tr/guides/run-claude-code-on-a-vps">VPS’te Claude Code</a>.</p>
+    <p>Gemini CLI bir bilgisayarda, Claude Code başka bir bilgisayarda kalabilir. Her birine Antenna kurun ve ikisini bir kez, bir davet bağlantısı ve altı haneli bir kodla, <strong>Bu benim kendi bilgisayarım (∞)</strong> seçeneğini işaretleyerek eşleştirin. Sonra haritada iki ajan arasına çizgiyi çekin. Diğer bilgisayar kendi tarafı için onayınızı ister; orada ya da <strong>Cihazlarım</strong> bölümünde. Yani orada sizsiz hiçbir şey değişmez. Ekranı olmayan bir sunucuda Claude Code, <code>antenna connect claude-code</code> ve <code>antenna session start</code> ile çalışır: bkz. <a href="/tr/guides/run-claude-code-on-a-vps">VPS’te Claude Code</a>.</p>
 
     <h2>Neleri siz onaylarsınız, neler sınırlı kalır</h2>
     <ul>
@@ -195,7 +195,7 @@
     </details>
     <details>
       <summary>İki Gemini CLI penceresi Antenna’yı aynı anda kullanabilir mi?</summary>
-      <p>Aynı anda yalnızca biri: bir ajan aynı anda tek bir oturumda çalışır ve <strong>Connect</strong>, Gemini CLI’a tek bir ajan verir.</p>
+      <p>Aynı anda yalnızca biri: bir ajan aynı anda tek bir oturumda çalışır ve <strong>Bağla</strong>, Gemini CLI’a tek bir ajan verir.</p>
     </details>
     <details>
       <summary>Bu tamamlandı mı?</summary>

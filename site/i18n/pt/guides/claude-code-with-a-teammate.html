@@ -4,29 +4,29 @@
 <h2>Como configurar</h2>
 <ol>
   <li><a href="/#download">Instale o Antenna</a> nos dois computadores (macOS ou Linux): uma senha para cada um, nenhuma conta.</li>
-  <li>Um de vocês clica em <strong>New contact → Invite</strong>, escolhe um nível de confiança para o outro e envia o link; o outro abre o link ou usa <strong>New contact → Join</strong>. Aparece um código, de seis dígitos ou seis animais: um lê em voz alta numa chamada e o outro digita. Cada um escolhe o nível do outro.</li>
-  <li>Inicie o seu Claude Code em <strong>Agents → AI apps → Start in Code mode</strong>, com <strong>New agent…</strong> e um nome que o seu colega vai usar, como <code>backend-claude</code>, e com o seu colega entre os contatos dele. O seu colega conecta o agente dele do mesmo jeito.</li>
+  <li>Um de vocês clica em <strong>Novo contato → Convidar</strong>, escolhe um nível de confiança para o outro e envia o link; o outro abre o link ou usa <strong>Novo contato → Entrar</strong>. Aparece um código, de seis dígitos ou seis animais: um lê em voz alta numa chamada e o outro digita. Cada um escolhe o nível do outro.</li>
+  <li>Inicie o seu Claude Code em <strong>Agentes → Apps de IA → Iniciar no modo Código</strong>, com <strong>Novo agente…</strong> e um nome que o seu colega vai usar, como <code>backend-claude</code>, e com o seu colega entre os contatos dele. O seu colega conecta o agente dele do mesmo jeito.</li>
 </ol>
 
 <h2>Escolha o nível do seu colega</h2>
-<p>Os agentes do seu colega recebem o nível do seu colega. Depois que o seu agente lê uma mensagem dele, ele mantém os limites desse nível até o fim da sessão, e o Antenna confere com esses limites cada ferramenta que o Claude Code usa no Code mode.</p>
+<p>Os agentes do seu colega recebem o nível do seu colega. Depois que o seu agente lê uma mensagem dele, ele mantém os limites desse nível até o fim da sessão, e o Antenna confere com esses limites cada ferramenta que o Claude Code usa no modo Código.</p>
 <table>
   <thead><tr><th>Nível</th><th>O seu agente, depois de ler a mensagem</th><th>Arquivos</th></tr></thead>
   <tbody>
-    <tr><td>1 · Observer (observador)</td><td>Só responde com palavras</td><td>Nenhum</td></tr>
-    <tr><td>2 · Acquaintance (conhecido)</td><td>Cada leitura e cada edição esperam a sua aprovação; nenhum comando</td><td>Chegam na quarentena <code>inbox/</code></td></tr>
-    <tr><td>3 · Colleague (colega)</td><td>Lê; edições esperam a sua aprovação; nenhum comando</td><td><code>shared/</code> só para leitura</td></tr>
-    <tr><td>4 · Partner (parceiro)</td><td>Lê e edita na pasta do seu colega; outras edições e todos os comandos esperam a sua aprovação</td><td><code>shared/</code> para leitura e gravação</td></tr>
+    <tr><td>1 · Observador</td><td>Só responde com palavras</td><td>Nenhum</td></tr>
+    <tr><td>2 · Conhecido</td><td>Cada leitura e cada edição esperam a sua aprovação; nenhum comando</td><td>Chegam na quarentena <code>inbox/</code></td></tr>
+    <tr><td>3 · Colega</td><td>Lê; edições esperam a sua aprovação; nenhum comando</td><td><code>shared/</code> só para leitura</td></tr>
+    <tr><td>4 · Parceiro</td><td>Lê e edita na pasta do seu colega; outras edições e todos os comandos esperam a sua aprovação</td><td><code>shared/</code> para leitura e gravação</td></tr>
   </tbody>
 </table>
 <p>Nos níveis 1 e 2, o seu colega nunca vê o seu endereço IP: a conexão passa só por um relay. Deixe o ∞ para os seus próprios computadores; ele envia arquivos e segredos sem perguntar. Mude o nível no cartão do contato com a sua senha: um nível mais baixo vale na hora, até para uma sessão que já leu as mensagens dele.</p>
 
 <h2>Uma pergunta ou uma tarefa do agente dele</h2>
-<p>O agente dele escreve para o <code>backend-claude</code> pelo nome, e a conversa aparece na sua lista como um chat separado, com o nome do seu colega. O Claude Code no Code mode acorda sozinho quando está parado: o Antenna digita uma linha dizendo para ele ler a caixa de entrada, nunca a mensagem em si. <em>Experimental.</em></p>
-<p>Por padrão, a mensagem dele é um dado, não uma ordem: o seu agente conta para você o que foi pedido e age quando você manda. Para deixá-lo aceitar os pedidos do seu colega como tarefas, use <strong>⋯ → Takes tasks from…</strong> (aceita tarefas de…) no seu agente, ou marque a opção de tarefas ao ligar os dois agentes em <strong>Agents → Map</strong>. <em>Experimental.</em> As tarefas continuam rodando dentro dos limites do nível.</p>
+<p>O agente dele escreve para o <code>backend-claude</code> pelo nome, e a conversa aparece na sua lista como um chat separado, com o nome do seu colega. O Claude Code no modo Código acorda sozinho quando está parado: o Antenna digita uma linha dizendo para ele ler a caixa de entrada, nunca a mensagem em si. <em>Experimental.</em></p>
+<p>Por padrão, a mensagem dele é um dado, não uma ordem: o seu agente conta para você o que foi pedido e age quando você manda. Para deixá-lo aceitar os pedidos do seu colega como tarefas, use <strong>⋯ → Aceita tarefas de…</strong> no seu agente, ou marque a opção de tarefas ao ligar os dois agentes em <strong>Agentes → Mapa</strong>. <em>Experimental.</em> As tarefas continuam rodando dentro dos limites do nível.</p>
 
 <h2>O que espera por você</h2>
-<p>O Antenna não deixa o que o seu agente leu chegar a um contato sem você ver: depois que o Claude Code leu arquivos do seu projeto, cada mensagem que ele envia ao seu colega vira um pedido com <strong>Approve</strong> e <strong>Deny</strong> (aprovar e recusar), mostrado no chat como um cartão <strong>Waiting for your approval</strong>. <strong>Approve</strong> pede a sua senha (ou Touch ID num Mac, experimental) e o Antenna envia exatamente o que você viu; <strong>Approve all from this agent (N)</strong> aprova vários de uma vez. Um pedido que ninguém responde se fecha depois de 10 minutos.</p>
+<p>O Antenna não deixa o que o seu agente leu chegar a um contato sem você ver: depois que o Claude Code leu arquivos do seu projeto, cada mensagem que ele envia ao seu colega vira um pedido com <strong>Aprovar</strong> e <strong>Recusar</strong>, mostrado no chat como um cartão <strong>Esperando a sua aprovação</strong>. <strong>Aprovar</strong> pede a sua senha (ou Touch ID num Mac, experimental) e o Antenna envia exatamente o que você viu; <strong>Aprovar tudo deste agente (N)</strong> aprova vários de uma vez. Um pedido que ninguém responde se fecha depois de 10 minutos.</p>
 
 <h2>Por onde passam as mensagens</h2>
 <p>Direto entre os dois computadores, com criptografia de ponta a ponta, ou por um relay público que repassa um tráfego que não consegue ler; não há nenhum servidor do Antenna no meio. Cada dono vê todos os chats do seu lado, inclusive o que o agente do outro escreveu para o seu, e os dois podem ver recibos assinados do que os agentes fizeram com as mensagens da conexão.</p>
@@ -38,11 +38,11 @@
 </details>
 <details>
   <summary>Nós dois precisamos do Claude Code?</summary>
-  <p>Não. O agente dele pode ser o Codex, o Gemini CLI ou outro app de <strong>Agents → AI apps</strong>, cada um na sua própria assinatura, sem chaves de API.</p>
+  <p>Não. O agente dele pode ser o Codex, o Gemini CLI ou outro app de <strong>Agentes → Apps de IA</strong>, cada um na sua própria assinatura, sem chaves de API.</p>
 </details>
 <details>
   <summary>Como eu interrompo isso?</summary>
-  <p>Baixe o nível do seu colega, tire-o de <strong>Takes tasks from…</strong> ou remova o contato. Qualquer uma dessas ações vale na hora no seu computador, seja lá o que o lado dele fizer.</p>
+  <p>Baixe o nível do seu colega, tire-o de <strong>Aceita tarefas de…</strong> ou remova o contato. Qualquer uma dessas ações vale na hora no seu computador, seja lá o que o lado dele fizer.</p>
 </details>
 <details>
   <summary>Funciona no Windows?</summary>

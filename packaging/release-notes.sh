@@ -4,6 +4,7 @@
 # verified, link to the user guide. Usage: packaging/release-notes.sh <tag> <commit> <repository URL> > notes.md
 # LINUX_PENDING=1: a draft that has only the macOS files so far; the notes say that the Linux files follow (D-81).
 # SIGNATURE_PENDING=1: a draft whose signed release manifest is not there yet (D-82).
+# ARM64_NODE=1: the release has the ARM Linux server node (the workflow's linux-arm64 job); without it, nothing about ARM.
 # packaging/release-linux.sh regenerates the notes without either when it publishes the release.
 set -euo pipefail
 TAG="${1:?tag, e.g. v0.1.0-preview.1}"
@@ -11,6 +12,18 @@ COMMIT="${2:?commit}"
 REPO="${3:?repository URL, e.g. https://github.com/owner/repo}"
 VERSION="${TAG#v}"
 GUIDE="$REPO/blob/$TAG/docs/USER-GUIDE.md"
+ARM_ROW=""
+ARM_SERVER=""
+LIMITS_PLATFORMS="Apple Silicon Macs and x86_64 Linux only"
+if [ -n "${ARM64_NODE:-}" ]; then
+  ARM_ROW="
+| \`antenna-$VERSION-linux-arm64.tar.gz\` | ARM Linux server or headless machine (arm64): the same node as above |"
+  ARM_SERVER="
+
+On an ARM server, the same with \`linux-arm64\`; or let \`curl -fsSL https://antenna.contact/install.sh | sh\` pick the
+right archive."
+  LIMITS_PLATFORMS="Apple Silicon Macs, x86_64 Linux and ARM Linux servers only (the Linux app is x86_64)"
+fi
 PRE=""
 case "$VERSION" in *-*) PRE=1 ;; esac
 
@@ -57,7 +70,7 @@ cat <<EOF
 | \`antenna-$VERSION-macos-arm64-cli.tar.gz\` | Mac without the app: just \`antenna\` and \`antennad\` (the same signed binaries as in the .dmg) |
 | \`antenna-desktop-$VERSION-linux-x86_64.tar.gz\` | Linux desktop (GTK 3): the app, with \`antenna\` and \`antennad\` built in |
 | \`antenna-desktop-$VERSION-linux-x86_64.deb\`, \`antenna-$VERSION-linux-x86_64.deb\` | Ubuntu and Debian: the app and the node as packages (install both for the app) |
-| \`antenna-$VERSION-linux-x86_64.tar.gz\` | Linux server or headless machine: \`antenna\`, \`antennad\`, \`install.sh\`, a systemd user service |
+| \`antenna-$VERSION-linux-x86_64.tar.gz\` | Linux server or headless machine: \`antenna\`, \`antennad\`, \`install.sh\`, a systemd user service |$ARM_ROW
 | \`antenna-$VERSION-manifest.json\` and \`.sig\` | The signed release manifest: what \`antenna update\` checks before it installs anything (sizes, SHA-256 and BLAKE3 of every file, signed with the release key) |
 | \`SHA256SUMS.txt\` | Checksums: \`shasum -a 256 -c SHA256SUMS.txt\` (Mac) or \`sha256sum -c SHA256SUMS.txt\` (Linux) |
 
@@ -81,7 +94,7 @@ tar xzf antenna-desktop-$VERSION-linux-x86_64.tar.gz && cd antenna-desktop-$VERS
 \`\`\`
 tar xzf antenna-$VERSION-linux-x86_64.tar.gz && cd antenna-$VERSION-linux-x86_64
 ./install.sh            # ~/.local/bin, systemd user service antennad, antenna init
-\`\`\`
+\`\`\`$ARM_SERVER
 
 **Then:** invite your other computer or a person (**New contact → Invite** in the app, \`antenna invite\` in a
 terminal), read the six-digit code to them, and connect an AI agent (**Agents → AI apps → Connect**, or
@@ -96,7 +109,7 @@ Guide: [getting started]($REPO/blob/$TAG/docs/guide/getting-started.md) · [user
 
 ## Known limits
 
-- Apple Silicon Macs and x86_64 Linux only; Windows and phones are not available yet.
+- $LIMITS_PLATFORMS; Windows and phones are not available yet.
 - The Linux app is verified by automation (build, launch under a virtual display, an antenna:// link); Linux
   desktops have had less hands-on use than macOS.
 - Features marked *experimental* in the app (teams, local models, the agent map, approver agents, Touch ID, updates

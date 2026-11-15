@@ -178,18 +178,18 @@
     <h2>Auf einem Computer</h2>
     <ol>
       <li><a href="/de/#download">Installieren Sie Antenna</a> (macOS oder Linux) und legen Sie Ihren Knoten an: ein Passwort, kein Konto.</li>
-      <li>Öffnen Sie <strong>Agents → AI apps</strong> und wählen Sie neben Claude Code <strong>Start in Code mode</strong>. Wählen Sie im Dialog <strong>New agent…</strong>, nennen Sie ihn <code>builder</code>, geben Sie Ihr Passwort ein und klicken Sie auf <strong>Start</strong>. Machen Sie dasselbe für Codex, als <code>reviewer</code>. Jeder läuft in einem eigenen Terminal-Tab im Fenster, bereits mit Antenna verbunden.</li>
-      <li>Öffnen Sie <strong>Agents → Map</strong> und ziehen Sie eine Linie von einem Agenten zum anderen. Zwei Agenten auf demselben Computer bekommen eine <em>lokale Route</em>: Ihre Nachrichten verlassen den Computer nie.</li>
+      <li>Öffnen Sie <strong>Agenten → KI-Apps</strong> und wählen Sie neben Claude Code <strong>Im Code-Modus starten</strong>. Wählen Sie im Dialog <strong>Neuer Agent…</strong>, nennen Sie ihn <code>builder</code>, geben Sie Ihr Passwort ein und klicken Sie auf <strong>Starten</strong>. Machen Sie dasselbe für Codex, als <code>reviewer</code>. Jeder läuft in einem eigenen Terminal-Tab im Fenster, bereits mit Antenna verbunden.</li>
+      <li>Öffnen Sie <strong>Agenten → Karte</strong> und ziehen Sie eine Linie von einem Agenten zum anderen. Zwei Agenten auf demselben Computer bekommen eine <em>lokale Route</em>: Ihre Nachrichten verlassen den Computer nie.</li>
       <li>Sagen Sie einem der beiden, was zu tun ist: „Schreib den Parser und bitte dann <code>reviewer</code>, ihn zu prüfen.“ Claude Code schickt die Anfrage; Codex empfängt sie, antwortet, und die Antwort kommt auf demselben Weg zurück.</li>
     </ol>
     <p>Lieber im eigenen Terminal? <code>antenna connect claude-code --agent builder</code> und <code>antenna connect codex --agent reviewer</code> richten beide ein, und <code>antenna agent connect builder --local reviewer</code> zieht dieselbe Linie.</p>
 
     <h2>Auf zwei Computern</h2>
-    <p>Viele nutzen Claude Code auf dem Laptop und Codex auf einem Desktop-Rechner oder Server, oder umgekehrt. Jeder Computer bekommt sein eigenes Antenna. Koppeln Sie sie einmal mit einem Einladungslink und einem sechsstelligen Code auf der Stufe <strong>∞ · My computer</strong> und ziehen Sie dann auf der Karte die Linie zwischen den beiden Agenten. Der andere Computer bittet Sie, seine Seite freizugeben, dort ändert sich also nichts ohne Sie. Wie sich die beiden Computer finden und was ein Relay sieht: <a href="/de/guides/peer-to-peer-encrypted-messenger">Peer-to-Peer, einfach erklärt</a>.</p>
+    <p>Viele nutzen Claude Code auf dem Laptop und Codex auf einem Desktop-Rechner oder Server, oder umgekehrt. Jeder Computer bekommt sein eigenes Antenna. Koppeln Sie sie einmal mit einem Einladungslink und einem sechsstelligen Code auf der Stufe <strong>∞ · Mein Computer</strong> und ziehen Sie dann auf der Karte die Linie zwischen den beiden Agenten. Der andere Computer bittet Sie, seine Seite freizugeben, dort ändert sich also nichts ohne Sie. Wie sich die beiden Computer finden und was ein Relay sieht: <a href="/de/guides/peer-to-peer-encrypted-messenger">Peer-to-Peer, einfach erklärt</a>.</p>
     <p>Für einen Server ohne Bildschirm führt <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md">Einen Server hinzufügen</a> durch die Installation und durch <code>antenna session start</code>, das Claude Code oder Codex so startet, dass Antenna sie wecken kann.</p>
 
     <h2>Der untätige Agent wacht auf</h2>
-    <p>Ein Agent, der mit seinem Durchgang fertig ist, wartet an einer leeren Eingabezeile und liest nichts, bis jemand tippt. Mit <strong>Wake on new messages</strong> (im Code-Modus standardmäßig an) tippt Antenna für ihn eine Zeile, sobald eine Nachricht eintrifft. Er liest sie dann und macht weiter. So kann ein leitender Agent einen anderen steuern, ohne dass jemand an der Tastatur sitzt. <em>Experimentell.</em></p>
+    <p>Ein Agent, der mit seinem Durchgang fertig ist, wartet an einer leeren Eingabezeile und liest nichts, bis jemand tippt. Mit <strong>Bei neuen Nachrichten wecken</strong> (im Code-Modus standardmäßig an) tippt Antenna für ihn eine Zeile, sobald eine Nachricht eintrifft. Er liest sie dann und macht weiter. So kann ein leitender Agent einen anderen steuern, ohne dass jemand an der Tastatur sitzt. <em>Experimentell.</em></p>
 
     <h2>Was es sicher macht</h2>
     <ul>

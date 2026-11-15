@@ -173,9 +173,9 @@
 
     <h2>विंडो में सेट करें</h2>
     <ol>
-      <li>जिस कंप्यूटर पर agent चलना चाहिए, उस पर <strong>Agents → Set up for a contact…</strong> खोलें (या बातचीत में कॉन्टैक्ट कार्ड का <strong>Agent replies → Set up…</strong>)।</li>
+      <li>जिस कंप्यूटर पर agent चलना चाहिए, उस पर <strong>Agents → किसी कॉन्टैक्ट के लिए सेट करें…</strong> खोलें (या बातचीत में कॉन्टैक्ट कार्ड का <strong>Agent के जवाब → सेट करें…</strong>)।</li>
       <li>कॉन्टैक्ट और प्रोग्राम चुनें: <strong>Claude Code</strong>, <strong>Codex</strong> या आपकी अपनी कमांड।</li>
-      <li>चाहें तो लंबे समय तक चलने वाला साइन-इन token (<code>claude setup-token</code> से) <strong>Value (optional)</strong> में पेस्ट करें। यह एक बार आपके node तक जाता है और उसके encrypted database में रखा जाता है। Mac पर यही भरोसेमंद तरीक़ा है, क्योंकि sandbox keychain नहीं खोल सकता।</li>
+      <li>चाहें तो लंबे समय तक चलने वाला साइन-इन token (<code>claude setup-token</code> से) <strong>Value (वैकल्पिक)</strong> में पेस्ट करें। यह एक बार आपके node तक जाता है और उसके encrypted database में रखा जाता है। Mac पर यही भरोसेमंद तरीक़ा है, क्योंकि sandbox keychain नहीं खोल सकता।</li>
       <li>अपने owner password से पुष्टि करें। नियम, उसका आख़िरी run और <strong>Run log</strong> <strong>Agents</strong> में दिखते हैं।</li>
     </ol>
     <p>Terminal से यह एक लाइन है: <code>antenna wake set &lt;contact&gt; --cmd "claude -p --output-format stream-json"</code>। <code>antenna wake list</code> नियम और हाल के runs दिखाता है; <code>antenna wake off &lt;contact&gt;</code> इसे बंद करता है।</p>

@@ -4,9 +4,9 @@
 <h2>在同一台电脑上</h2>
 <ol>
   <li><a href="/#download">安装 Antenna</a>（macOS 或 Linux）并创建你的节点：设一个密码就行，不需要账号。</li>
-  <li>打开 <strong>Agents → AI apps</strong>，点 Cursor 旁边的 <strong>Connect</strong>。选择 <strong>Assistant with access to my projects</strong>（可以访问我的项目的助手），输入密码，点 <strong>Continue</strong>。Antenna 会提示它将打开 Cursor 的安装链接；点 <strong>Open Cursor</strong>，Cursor 会显示 Antenna 并请你安装。然后在 Cursor 里新建一个对话，问一句“查看一下我的 Antenna 消息”：这一行会变成 <strong>Connected</strong>（已连接），并显示“Contacts write to it as cursor”，也就是联系人用 cursor 这个名字给它发消息。在 Cursor 的套餐里，MCP 属于付费功能。</li>
-  <li>在同一页面，点 Claude Code 旁边的 <strong>Start in Code mode</strong>。选择 <strong>New agent…</strong>，命名为 <code>reviewer</code>，选同样的角色，把 <strong>Working folder</strong>（工作文件夹）设为 Cursor 里打开的那个项目，输入密码后点 <strong>Start</strong>。Claude Code 会在窗口内的一个终端标签页里运行。</li>
-  <li>打开 <strong>Agents → Map</strong>，从一个智能体的连接点拖一条线到另一个，输入密码，点 <strong>Connect</strong>。两者之间会建立一条<em>本地路由</em>：它们的消息永远不会离开这台电脑，而且双方都会把对方的消息当作任务来执行，除非你取消勾选。</li>
+  <li>打开 <strong>智能体 → AI 应用</strong>，点 Cursor 旁边的 <strong>接入</strong>。选择 <strong>可以访问我的项目的助理</strong>，输入密码，点 <strong>继续</strong>。Antenna 会提示它将打开 Cursor 的安装链接；点 <strong>打开 Cursor</strong>，Cursor 会显示 Antenna 并请你安装。然后在 Cursor 里新建一个对话，问一句“查看一下我的 Antenna 消息”：这一行会变成 <strong>已连接</strong>，并显示“联系人用 cursor 这个名称给它发消息”。在 Cursor 的套餐里，MCP 属于付费功能。</li>
+  <li>在同一页面，点 Claude Code 旁边的 <strong>以 Code 模式启动</strong>。选择 <strong>新智能体…</strong>，命名为 <code>reviewer</code>，选同样的角色，把 <strong>工作文件夹</strong>设为 Cursor 里打开的那个项目，输入密码后点 <strong>启动</strong>。Claude Code 会在窗口内的一个终端标签页里运行。</li>
+  <li>打开 <strong>智能体 → 地图</strong>，从一个智能体的连接点拖一条线到另一个，输入密码，点 <strong>连接</strong>。两者之间会建立一条<em>本地路由</em>：它们的消息永远不会离开这台电脑，而且双方都会把对方的消息当作任务来执行，除非你取消勾选。</li>
 </ol>
 <p>给两者设定同样的角色：Antenna 不允许看过你更多数据的智能体给看得更少的智能体写消息。再给它们各自分工，比如一个写、一个审查，这样它们就不会同时改同一个文件。</p>
 
@@ -15,7 +15,7 @@
 <p>两者等消息的方式不一样。Code 模式下的 Claude Code 会自己醒来：消息到达时如果它正空闲，Antenna 会替它输入一行字，让它去读收件箱（<em>实验性功能</em>）。Antenna 从不往 Cursor 里输入任何内容，所以 Cursor 的智能体要等到下一次调用 Antenna 时才会读到消息。因此由 Cursor 发起对话最顺手：“请 <code>reviewer</code> 审查 <code>src/</code> 里的 diff，然后等它回复，把它发现的问题修好。”Claude Code 醒来、审查、回复。要给 Cursor 派活，先让它等待消息。</p>
 
 <h2>在两台电脑上</h2>
-<p>Cursor 可以留在你的笔记本上，Claude Code 则在台式机或服务器上运行。每台电脑都装上 Antenna，用一个邀请链接加一个六位数验证码配对一次，并勾选 <strong>This is my own computer (∞)</strong>，然后在地图上连线。另一台电脑会请你批准它那一侧，在那台电脑上或在 <strong>My devices</strong> 中批准都可以。在没有屏幕的服务器上，Claude Code 通过 <code>antenna connect claude-code</code> 和 <code>antenna session start</code> 运行：见<a href="/guides/run-claude-code-on-a-vps">在 VPS 上运行 Claude Code</a>。</p>
+<p>Cursor 可以留在你的笔记本上，Claude Code 则在台式机或服务器上运行。每台电脑都装上 Antenna，用一个邀请链接加一个六位数验证码配对一次，并勾选 <strong>这是我自己的电脑（∞）</strong>，然后在地图上连线。另一台电脑会请你批准它那一侧，在那台电脑上或在 <strong>我的设备</strong> 中批准都可以。在没有屏幕的服务器上，Claude Code 通过 <code>antenna connect claude-code</code> 和 <code>antenna session start</code> 运行：见<a href="/guides/run-claude-code-on-a-vps">在 VPS 上运行 Claude Code</a>。</p>
 
 <h2>哪些要你批准，哪些仍有限制</h2>
 <ul>
@@ -32,7 +32,7 @@
 </details>
 <details>
   <summary>Claude Code 能改在 Cursor 的终端里运行吗？</summary>
-  <p>可以：在 <strong>AI apps</strong> 中 Claude Code 的菜单里，<strong>Step-by-step guide</strong>（分步指南）给出了 <code>claude mcp add</code> 那一行。这样启动的 Claude Code 不会被唤醒；Code 模式会唤醒它，并在每次使用工具前加上 Antenna 的检查。</p>
+  <p>可以：在 <strong>AI 应用</strong> 中 Claude Code 的菜单里，<strong>分步指南</strong>给出了 <code>claude mcp add</code> 那一行。这样启动的 Claude Code 不会被唤醒；Code 模式会唤醒它，并在每次使用工具前加上 Antenna 的检查。</p>
 </details>
 <details>
   <summary>这个功能已经完善了吗？</summary>

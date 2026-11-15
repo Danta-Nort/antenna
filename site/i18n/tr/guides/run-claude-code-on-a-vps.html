@@ -13,9 +13,9 @@ sudo loginctl enable-linger $USER</code></pre>
 <p>Kurulum betiği en yeni sürümü imzalı manifestten okur, arşivi doğrular, <code>antennad</code> ve <code>antenna</code> programlarını <code>~/.local/bin</code> içine bir systemd kullanıcı servisi olarak kurar (root gerekmez) ve düğümünüzü bir parolayla oluşturur. İkinci satır, oturumu kapattıktan sonra da servisin çalışmaya devam etmesini sağlar. Ubuntu ya da Fedora’da bunun yerine <code>.deb</code> veya <code>.rpm</code> paketini kurabilirsiniz.</p>
 
 <h2>2. Dizüstü bilgisayarınızla eşleştirin</h2>
-<p>Dizüstünüzde: <strong>New contact → Invite</strong>, bir ad verin, <strong>This is my own computer (∞)</strong> seçeneğini işaretleyin, <strong>Create link</strong> düğmesine basın ve bağlantıyı kopyalayın. Sunucuda:</p>
+<p>Dizüstünüzde: <strong>Yeni kişi → Davet et</strong>, bir ad verin, <strong>Bu benim kendi bilgisayarım (∞)</strong> seçeneğini işaretleyin, <strong>Bağlantı oluştur</strong> düğmesine basın ve bağlantıyı kopyalayın. Sunucuda:</p>
 <pre><code>antenna join '&lt;link&gt;' --trust 5 --label mac</code></pre>
-<p>Tek tırnakları koruyun: bağlantıda bir <code>#</code> var. Dizüstünüzün gösterdiği kodu sunucunun terminaline yazın, ardından dizüstünde <strong>The contact confirmed — codes match</strong> düğmesine basın. 5. seviye iki tarafta da ∞ demektir; böylece sunucu sizin kendi bilgisayarınız sayılır.</p>
+<p>Tek tırnakları koruyun: bağlantıda bir <code>#</code> var. Dizüstünüzün gösterdiği kodu sunucunun terminaline yazın, ardından dizüstünde <strong>Kişi onayladı — kodlar eşleşiyor</strong> düğmesine basın. 5. seviye iki tarafta da ∞ demektir; böylece sunucu sizin kendi bilgisayarınız sayılır.</p>
 
 <h2>3. Claude Code’u Antenna üzerinden başlatın</h2>
 <pre><code>cd ~/projects/api
@@ -25,7 +25,7 @@ antenna session attach api-dev</code></pre>
 <p>connect satırı oturuma kendi ajanını ve tokenını verir ve selam gönderir; böylece dizüstünüzde <code>api-dev</code> adlı bir sohbet belirir. start satırı Claude Code’u Antenna’nın kendi tmux sunucusunda çalıştırır (sizin tmux’ınıza dokunulmaz). Claude Code’un klasöre güvenip güvenmediği gibi ilk sorularını yanıtlamak için bir kez bağlanın, sonra <code>Ctrl-b d</code> ile ayrılın: çalışmaya devam eder. Codex için <code>antenna connect codex</code> ve <code>--cli codex</code> kullanın.</p>
 
 <h2>4. Onunla konuşun</h2>
-<p>Dizüstünüzdeki <code>api-dev</code> sohbetine yazın: “Migration testlerini çalıştır ve başarısız olanları düzelt.” Claude Code komut isteminde boşta beklerken Antenna, mesajınızı okuması için kısa tek bir satır yazar; bir kişinin metnini asla yazmaz ve onun yerine bir soruyu asla yanıtlamaz. Sunucunun <strong>My devices</strong> içindeki kartı sağlık durumunu ve ajanlarını gösterir; isteklerini de dizüstünüzden onaylayabilirsiniz.</p>
+<p>Dizüstünüzdeki <code>api-dev</code> sohbetine yazın: “Migration testlerini çalıştır ve başarısız olanları düzelt.” Claude Code komut isteminde boşta beklerken Antenna, mesajınızı okuması için kısa tek bir satır yazar; bir kişinin metnini asla yazmaz ve onun yerine bir soruyu asla yanıtlamaz. Sunucunun <strong>Cihazlarım</strong> içindeki kartı sağlık durumunu ve ajanlarını gösterir; isteklerini de dizüstünüzden onaylayabilirsiniz.</p>
 
 <h2>Yeniden başlatmadan sonra</h2>
 <p>Sunucu yeniden başladıktan sonra düğümün anahtarları kilitlidir: servis çalışır, ama siz oturum açıp <code>antenna unlock</code> çalıştırana kadar bağlantıları sessiz kalır. Böylece sunucu diskinin bir kopyası kimseye anahtarlarınızı vermez. <code>antenna status</code> kilitli olup olmadığını söyler.</p>

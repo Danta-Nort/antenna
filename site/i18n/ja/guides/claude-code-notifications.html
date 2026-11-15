@@ -1,22 +1,22 @@
 <!--guide {"title": "Claude Code の作業完了を通知で受け取る：サーバーや別のコンピューターでも — Antenna", "h1": "サーバーや別のコンピューターの Claude Code が作業を終えたら通知を受け取る", "description": "サーバーや別のコンピューターの Claude Code が作業を終えると Antenna のチャットで報告し、ノート PC に通知が届きます。承認リクエストも通知されます。", "summary": "サーバーや別のコンピューターの Claude Code が作業の完了を報告したときや承認を求めたときに、ノート PC にデスクトップ通知を出す方法。", "source": "2026-11-15"}-->
-<p class="lead">ノート PC から Antenna のチャットで Claude Code にタスクを渡すと、終わったときに結果をそのチャットへ送り返してきます。接続されたエージェントには、タスクをくれた連絡先へ結果を返すよう Antenna の指示が伝えているからです。Antenna のウィンドウが前面にないあいだは、ノート PC に「New message in server · api-dev」という通知が表示されます。承認リクエストも通知されるので、途中で止まった作業が誰にも気づかれずに待ち続けることはありません。Antenna 自身が Claude Code のターンを見張っているわけではなく、報告は Claude Code 自身が送るメッセージです。</p>
+<p class="lead">ノート PC から Antenna のチャットで Claude Code にタスクを渡すと、終わったときに結果をそのチャットへ送り返してきます。接続されたエージェントには、タスクをくれた連絡先へ結果を返すよう Antenna の指示が伝えているからです。Antenna のウィンドウが前面にないあいだは、ノート PC に「server · api-dev に新着メッセージ」という通知が表示されます。承認リクエストも通知されるので、途中で止まった作業が誰にも気づかれずに待ち続けることはありません。Antenna 自身が Claude Code のターンを見張っているわけではなく、報告は Claude Code 自身が送るメッセージです。</p>
 
 <h2>通知されるもの</h2>
 <ul>
   <li><strong>Claude Code からあなたへのメッセージ。</strong>通知に出るのはチャット名だけで、本文は表示されません。通知は 1 つのチャットにつき 10 秒に 1 回までです。</li>
-  <li><strong>承認リクエスト。</strong>あなたの判断が必要な手順は「Antenna: approval needed on server」と表示され、エージェント、やろうとしていること、残り時間（「expires in 9 min」）が示されますが、リクエストの文面は表示されません。リクエストが閉じる約 2 分前にもう一度通知が届き、リクエストは 10 分で閉じます。別のコンピューターからのリクエストは <strong>My devices</strong>（自分のデバイス）経由で届きます（<em>実験的機能</em>）。</li>
-  <li><strong>質問。</strong><em>実験的機能です。</em>エージェントの質問は、それが動いているコンピューターで「A question from your agent」と通知されます。サーバーの場合は、サーバーで <code>antenna agent escalate api-dev --to mac</code> を実行すると、質問はノート PC にあるそのエージェントのチャットに届くようになります。</li>
+  <li><strong>承認リクエスト。</strong>あなたの判断が必要な手順は「Antenna: server で承認が必要です」と表示され、エージェント、やろうとしていること、残り時間（「残り 9 分」）が示されますが、リクエストの文面は表示されません。リクエストが閉じる約 2 分前にもう一度通知が届き、リクエストは 10 分で閉じます。別のコンピューターからのリクエストは <strong>自分のデバイス</strong>経由で届きます（<em>実験的機能</em>）。</li>
+  <li><strong>質問。</strong><em>実験的機能です。</em>エージェントの質問は、それが動いているコンピューターで「エージェントからの質問」と通知されます。サーバーの場合は、サーバーで <code>antenna agent escalate api-dev --to mac</code> を実行すると、質問はノート PC にあるそのエージェントのチャットに届くようになります。</li>
 </ul>
 <p>通知は macOS と、通知を表示できる Linux デスクトップで使えます。ノート PC で Antenna を開いておく必要があります。ウィンドウが前面にあるときは、チャット一覧の未読数で十分に用が足ります。</p>
 
 <h2>セットアップ</h2>
 <ol>
-  <li>両方のコンピューターに <a href="/#download">Antenna をインストール</a>し、<strong>This is my own computer (∞)</strong> にチェックを入れて一度だけペアリングします。サーバー側の手順は <a href="/guides/run-claude-code-on-a-vps">VPS で Claude Code を動かす</a>で説明しています。</li>
+  <li>両方のコンピューターに <a href="/#download">Antenna をインストール</a>し、<strong>これは自分のコンピューターです（∞）</strong> にチェックを入れて一度だけペアリングします。サーバー側の手順は <a href="/guides/run-claude-code-on-a-vps">VPS で Claude Code を動かす</a>で説明しています。</li>
   <li>Antenna 経由で Claude Code を起動します。サーバーでは次のとおりです。
 <pre><code>cd ~/projects/api
 antenna connect claude-code --agent api-dev --links mac --hello mac
 antenna session start api-dev --dir ~/projects/api</code></pre>
-  2 台目のデスクトップでは <strong>Agents → AI apps → Start in Code mode</strong> です。</li>
+  2 台目のデスクトップでは <strong>エージェント → AI アプリ → Code モードで起動</strong> です。</li>
   <li>ノート PC で設定することはありません。エージェントとのチャットは、最初からあなた宛てのメッセージと承認リクエストを通知します。</li>
 </ol>
 
@@ -26,13 +26,13 @@ antenna session start api-dev --dir ~/projects/api</code></pre>
 <p>報告が届くのは、ほかの指示と同じく、Claude Code が終わったと判断したときです。ターミナルで Claude Code 自身の権限確認（「Do you want to proceed?」）で止まった場合、Antenna にはそれが見えないため、何も通知されません。いつも使うツールは Claude Code の設定で許可しておいてください。</p>
 
 <h2>通知するチャットを選ぶ</h2>
-<p>チャットの行の <strong>⋮</strong> を開くか右クリックして、<strong>Notifications</strong>（通知）を選びます。</p>
+<p>チャットの行の <strong>⋮</strong> を開くか右クリックして、<strong>通知</strong>を選びます。</p>
 <ul>
-  <li><strong>All messages</strong>（すべてのメッセージ）：このチャットの新しいメッセージすべて（人とのチャットのデフォルト）。</li>
-  <li><strong>Only when it asks for me</strong>（自分が呼ばれたときだけ）：あなた宛てのメッセージと承認リクエスト（エージェントとのチャットのデフォルト）。</li>
-  <li><strong>Off</strong>（オフ）：承認リクエストは引き続き通知されます。</li>
+  <li><strong>すべてのメッセージ</strong>：このチャットの新しいメッセージすべて（人とのチャットのデフォルト）。</li>
+  <li><strong>自分が呼ばれたときだけ</strong>：あなた宛てのメッセージと承認リクエスト（エージェントとのチャットのデフォルト）。</li>
+  <li><strong>オフ</strong>：承認リクエストは引き続き通知されます。</li>
 </ul>
-<p>Claude Code があなたではなく、あなたの別のエージェントに報告する場合、同じメニューで <strong>Notify about messages between agents</strong>（エージェント同士のメッセージを通知）をオンにしない限り、それらのメッセージは通知されません。ターミナルでは <code>antenna chats notify server --agent api-dev all</code> です。</p>
+<p>Claude Code があなたではなく、あなたの別のエージェントに報告する場合、同じメニューで <strong>エージェント間のメッセージを通知</strong>をオンにしない限り、それらのメッセージは通知されません。ターミナルでは <code>antenna chats notify server --agent api-dev all</code> です。</p>
 
 <h2>いま使っているコンピューターでは</h2>
 <p>自分のノート PC で Claude Code を Code モードで動かしている場合、ウィンドウが背面にあるあいだ、Antenna はその承認リクエストと質問を通知しますが、ターンの終わりは通知しません。エージェントは、同じコンピューターにいるあなたにメッセージを送れないからです。その用途には、Claude Code 自身のフックを使えば、止まったときに任意のコマンドを実行できます。</p>
@@ -40,7 +40,7 @@ antenna session start api-dev --dir ~/projects/api</code></pre>
 <h2>よくある質問</h2>
 <details>
   <summary>通知に Claude Code が書いた内容は表示されますか？</summary>
-  <p>いいえ。通知はロック画面に表示されることもあるため、出るのは「New message in」とチャット名だけです。報告を読むにはチャットを開いてください。</p>
+  <p>いいえ。通知はロック画面に表示されることもあるため、出るのはチャット名と「に新着メッセージ」だけです。報告を読むにはチャットを開いてください。</p>
 </details>
 <details>
   <summary>ノート PC がスリープしていたらどうなりますか？</summary>

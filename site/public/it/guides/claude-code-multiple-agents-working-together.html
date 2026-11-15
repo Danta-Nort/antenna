@@ -177,17 +177,17 @@
 
     <h2>Come funziona un team</h2>
     <ol>
-      <li><strong>Crei il team</strong> in <strong>Teams → New team</strong>: la cartella del progetto, il capo (uno dei tuoi agenti, un modello locale o tu stesso), il budget di worker e le regole: se i worker possono eseguire comandi, quali <strong>Check commands</strong> può indicare un compito (<code>cargo test</code>, <code>npm test</code>) e quali registri di pacchetti possono raggiungere quelle verifiche.</li>
+      <li><strong>Crei il team</strong> in <strong>Team → Nuovo team</strong>: la cartella del progetto, il capo (uno dei tuoi agenti, un modello locale o tu stesso), il budget di worker e le regole: se i worker possono eseguire comandi, quali <strong>Comandi di verifica</strong> può indicare un compito (<code>cargo test</code>, <code>npm test</code>) e quali registri di pacchetti possono raggiungere quelle verifiche.</li>
       <li><strong>Dai l'obiettivo al capo</strong>, nel suo terminale: “Dividi la funzione di login in piccoli compiti per due programmatori.”</li>
       <li><strong>Il capo pianifica e forma la squadra.</strong> Scrive i compiti, avvia worker come <code>web.coder-1</code> entro il budget e li assegna.</li>
       <li><strong>I worker programmano in parallelo.</strong> Ognuno riceve una copia nuova del progetto sul branch del team, legge solo il proprio compito, lavora e consegna, oppure fa una domanda al capo quando è bloccato.</li>
       <li><strong>Antenna verifica ogni risultato</strong> eseguendo il comando di verifica del compito in una sandbox separata, senza token e senza rete oltre ai registri che hai indicato. Una verifica fallita torna da sola al worker, fino a un limite, prima che decida il capo.</li>
       <li><strong>Il capo esegue la revisione:</strong> accetta, oppure rimanda indietro con dei commenti. Il lavoro accettato si accumula su un branch del team, <code>antenna/web</code>.</li>
-      <li><strong>Sei tu ad applicarlo.</strong> <strong>Review and apply</strong> mostra che cosa verrà unito al tuo branch; con la tua password viene unito, come fast-forward. Senza, non si muove nulla.</li>
+      <li><strong>Sei tu ad applicarlo.</strong> <strong>Esamina e applica</strong> mostra che cosa verrà unito al tuo branch; con la tua password viene unito, come fast-forward. Senza, non si muove nulla.</li>
     </ol>
 
     <h2>Che cosa vedi</h2>
-    <p>La bacheca del team mostra ogni compito per stato, da Open e Working a In review, Blocked, Accepted e Applied, con l'output in diretta di ogni worker, che cosa cambia il suo risultato, l'output della verifica e i token usati. Puoi fare tutto ciò che può fare il capo: rispondere alla domanda di un worker, chiedere modifiche, annullare un compito o fermare un worker. Quando il capo gira nella modalità Code di Antenna, viene svegliato ogni volta che un worker consegna o chiede qualcosa, così il team va avanti anche quando non ci sei.</p>
+    <p>La bacheca del team mostra ogni compito per stato, da “Aperti” e “In corso” a “In revisione”, “Bloccati”, “Accettati” e “Applicati”, con l'output in diretta di ogni worker, che cosa cambia il suo risultato, l'output della verifica e i token usati. Puoi fare tutto ciò che può fare il capo: rispondere alla domanda di un worker, chiedere modifiche, annullare un compito o fermare un worker. Quando il capo gira nella modalità Code di Antenna, viene svegliato ogni volta che un worker consegna o chiede qualcosa, così il team va avanti anche quando non ci sei.</p>
 
     <h2>Che cosa protegge il progetto</h2>
     <ul>

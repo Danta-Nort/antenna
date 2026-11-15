@@ -178,18 +178,18 @@
     <h2>Na jednym komputerze</h2>
     <ol>
       <li><a href="/pl/#download">Zainstaluj Antennę</a> (macOS albo Linux) i utwórz swój węzeł: jedno hasło, bez konta.</li>
-      <li>Otwórz <strong>Agents → AI apps</strong> i przy Claude Code wybierz <strong>Start in Code mode</strong>. W oknie dialogowym wybierz <strong>New agent…</strong>, nazwij go <code>builder</code>, wpisz hasło i kliknij <strong>Start</strong>. To samo zrób dla Codexa, jako <code>reviewer</code>. Każdy działa we własnej karcie terminala w oknie aplikacji, od razu podłączony do Antenny.</li>
-      <li>Otwórz <strong>Agents → Map</strong> i przeciągnij linię od jednego agenta do drugiego. Dwaj agenci na tym samym komputerze dostają <em>trasę lokalną</em>: ich wiadomości nigdy nie opuszczają komputera.</li>
+      <li>Otwórz <strong>Agenci → Aplikacje AI</strong> i przy Claude Code wybierz <strong>Uruchom w trybie Code mode</strong>. W oknie dialogowym wybierz <strong>Nowy agent…</strong>, nazwij go <code>builder</code>, wpisz hasło i kliknij <strong>Uruchom</strong>. To samo zrób dla Codexa, jako <code>reviewer</code>. Każdy działa we własnej karcie terminala w oknie aplikacji, od razu podłączony do Antenny.</li>
+      <li>Otwórz <strong>Agenci → Mapa</strong> i przeciągnij linię od jednego agenta do drugiego. Dwaj agenci na tym samym komputerze dostają <em>trasę lokalną</em>: ich wiadomości nigdy nie opuszczają komputera.</li>
       <li>Powiedz jednemu z nich, co ma zrobić: „Napisz parser, a potem poproś <code>reviewer</code> o code review”. Claude Code wysyła prośbę; Codex ją odbiera, odpowiada, a odpowiedź wraca tą samą drogą.</li>
     </ol>
     <p>Wolisz własny terminal? <code>antenna connect claude-code --agent builder</code> i <code>antenna connect codex --agent reviewer</code> konfigurują każdego z nich, a <code>antenna agent connect builder --local reviewer</code> rysuje tę samą linię.</p>
 
     <h2>Na dwóch komputerach</h2>
-    <p>Wiele osób trzyma Claude Code na laptopie, a Codex uruchamia na desktopie albo serwerze, albo odwrotnie. Każdy komputer dostaje własną Antennę. Połącz je raz linkiem z zaproszeniem i sześciocyfrowym kodem, na poziomie <strong>∞ · My computer</strong>, a potem narysuj na mapie linię między dwoma agentami. Drugi komputer poprosi cię o zatwierdzenie swojej strony, więc nic się tam nie zmieni bez twojej wiedzy. Jak dwa komputery się znajdują i co widzi przekaźnik: <a href="/pl/guides/peer-to-peer-encrypted-messenger">peer-to-peer w praktyce</a>.</p>
+    <p>Wiele osób trzyma Claude Code na laptopie, a Codex uruchamia na desktopie albo serwerze, albo odwrotnie. Każdy komputer dostaje własną Antennę. Połącz je raz linkiem z zaproszeniem i sześciocyfrowym kodem, na poziomie <strong>∞ · Mój komputer</strong>, a potem narysuj na mapie linię między dwoma agentami. Drugi komputer poprosi cię o zatwierdzenie swojej strony, więc nic się tam nie zmieni bez twojej wiedzy. Jak dwa komputery się znajdują i co widzi przekaźnik: <a href="/pl/guides/peer-to-peer-encrypted-messenger">peer-to-peer w praktyce</a>.</p>
     <p>Dla serwera bez ekranu poradnik <a href="https://github.com/Danta-Nort/antenna/blob/main/docs/guide/add-a-server.md">dodawanie serwera</a> opisuje instalację i <code>antenna session start</code>, które uruchamia Claude Code albo Codex tak, żeby Antenna mogła go budzić.</p>
 
     <h2>Bezczynny agent się budzi</h2>
-    <p>Agent, który skończył swoją turę, czeka przy pustym prompcie i niczego nie czyta, dopóki ktoś czegoś nie wpisze. Z <strong>Wake on new messages</strong> (domyślnie włączone w trybie Code mode) Antenna wpisuje za niego jedną linię, gdy przyjdzie wiadomość, więc agent ją czyta i pracuje dalej. W ten sposób agent prowadzący może kierować innym agentem, nawet gdy nikt nie siedzi przy klawiaturze. <em>Funkcja eksperymentalna.</em></p>
+    <p>Agent, który skończył swoją turę, czeka przy pustym prompcie i niczego nie czyta, dopóki ktoś czegoś nie wpisze. Z opcją <strong>Budź przy nowych wiadomościach</strong> (domyślnie włączoną w trybie Code mode) Antenna wpisuje za niego jedną linię, gdy przyjdzie wiadomość, więc agent ją czyta i pracuje dalej. W ten sposób agent prowadzący może kierować innym agentem, nawet gdy nikt nie siedzi przy klawiaturze. <em>Funkcja eksperymentalna.</em></p>
 
     <h2>Co zapewnia bezpieczeństwo</h2>
     <ul>

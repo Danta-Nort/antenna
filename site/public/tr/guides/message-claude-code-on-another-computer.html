@@ -107,7 +107,7 @@
      "name": "Oturumun ne yaptığını görebilir miyim?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Sohbet yanıtlarını, ajan haritası da kimin kiminle konuştuğunu gösterir. My devices bölümünde diğer bilgisayarlarınızın ajanlarını da görebilir, birini başlattığı her şeyle birlikte durdurabilirsiniz."
+      "text": "Sohbet yanıtlarını, ajan haritası da kimin kiminle konuştuğunu gösterir. Cihazlarım bölümünde diğer bilgisayarlarınızın ajanlarını da görebilir, birini başlattığı her şeyle birlikte durdurabilirsiniz."
      }
     },
     {
@@ -170,7 +170,7 @@
     <nav class="crumbs" aria-label="Sayfa yolu"><a href="/tr/">Antenna</a> <span aria-hidden="true">›</span> <a href="/tr/guides/">Rehberler</a></nav>
     <p class="eyebrow">Güncellendi <time datetime="2026-11-14">14 Kasım 2026</time></p>
     <h1>Başka bir bilgisayardaki Claude Code’a mesaj gönderin</h1>
-    <p class="lead">Antenna’yı iki bilgisayara da kurun, onları bir kez <strong>∞ · My computer</strong> olarak eşleştirin ve oradaki Claude Code oturumunu kendine ait bir adla Antenna’ya bağlayın. Ardından o oturuma Mac’inizden, sohbetteki bir kişiye yazar gibi yazarsınız ya da yerel Claude Code’unuzun ona yazmasına izin verirsiniz. Oturumu Antenna üzerinden başlatırsanız boşta beklerken uyandırılır; acil bir mesaj da onu bir adımın ortasında durdurabilir. Aynı bilgisayarda iki oturum mu var? O zaman onları ajan haritasında bağlayın: <a href="/tr/guides/claude-code-and-codex-talk-to-each-other">birbiriyle konuşan iki ajan</a>.</p>
+    <p class="lead">Antenna’yı iki bilgisayara da kurun, onları bir kez <strong>∞ · Benim bilgisayarım</strong> olarak eşleştirin ve oradaki Claude Code oturumunu kendine ait bir adla Antenna’ya bağlayın. Ardından o oturuma Mac’inizden, sohbetteki bir kişiye yazar gibi yazarsınız ya da yerel Claude Code’unuzun ona yazmasına izin verirsiniz. Oturumu Antenna üzerinden başlatırsanız boşta beklerken uyandırılır; acil bir mesaj da onu bir adımın ortasında durdurabilir. Aynı bilgisayarda iki oturum mu var? O zaman onları ajan haritasında bağlayın: <a href="/tr/guides/claude-code-and-codex-talk-to-each-other">birbiriyle konuşan iki ajan</a>.</p>
 
     <h2>Buna ne zaman ihtiyaç duyarsınız</h2>
     <ul>
@@ -193,7 +193,7 @@
     <p>(Bunun için sunucuda tmux gerekir.) Bundan sonra bir mesaj geldiğinde Antenna boş komut istemine kısa tek bir satır yazar; oturum mesajı veri olarak okur ve işine koyulur. Masaüstünde Antenna’nın Code modu aynı şeyi pencerenin içindeki bir terminal sekmesinde yapar. <em>Deneysel.</em></p>
 
     <h2>4. Ona yazın</h2>
-    <p>Mac’inizde <code>api-dev</code> sohbetini açın ve bir insana yazar gibi yazın. Ya da bunu yerel Claude Code’unuza yaptırın: “<code>api-dev</code> ajanından migration testlerini çalıştırıp sonucu bildirmesini iste.” Bekleyemeyecek bir şeyse göndermeden önce <strong>Urgent: interrupt now</strong> seçeneğini açın (Send yanındaki şimşek düğmesi; terminalden <code>antenna send --urgent</code>): Antenna’nın çalıştırdığı bir oturumda, Code modunda ya da <code>antenna session start</code> ile, Antenna çalışan adımı bir kez, sizin Esc tuşuna basmanız gibi durdurur ve oturum mesajınızı okur. Terminalde açık bir soru ya da izin istemi varken asla Esc tuşuna basmaz. <em>Deneysel.</em></p>
+    <p>Mac’inizde <code>api-dev</code> sohbetini açın ve bir insana yazar gibi yazın. Ya da bunu yerel Claude Code’unuza yaptırın: “<code>api-dev</code> ajanından migration testlerini çalıştırıp sonucu bildirmesini iste.” Bekleyemeyecek bir şeyse göndermeden önce <strong>Acil: şimdi yarıda kes</strong> seçeneğini açın (Gönder yanındaki şimşek düğmesi; terminalden <code>antenna send --urgent</code>): Antenna’nın çalıştırdığı bir oturumda, Code modunda ya da <code>antenna session start</code> ile, Antenna çalışan adımı bir kez, sizin Esc tuşuna basmanız gibi durdurur ve oturum mesajınızı okur. Terminalde açık bir soru ya da izin istemi varken asla Esc tuşuna basmaz. <em>Deneysel.</em></p>
 
     <h2>Ne gider, ne gitmez</h2>
     <p>Mesaj bir bilgisayarda şifrelenir ve diğerinde çözülür. Hiçbir terminal paylaşılmaz ve hiçbir portun açılması ya da yönlendirilmesi gerekmez: diğer oturum yalnızca mesaj alır ve onlarla ne yapabileceğine kendi Antenna’sı karar verir. Ajanın tokenı oluşturulduğu bilgisayarda kalır.</p>
@@ -205,7 +205,7 @@
     </details>
     <details>
       <summary>Oturumun ne yaptığını görebilir miyim?</summary>
-      <p>Sohbet yanıtlarını, ajan haritası da kimin kiminle konuştuğunu gösterir. <strong>My devices</strong> bölümünde diğer bilgisayarlarınızın ajanlarını da görebilir, birini başlattığı her şeyle birlikte durdurabilirsiniz.</p>
+      <p>Sohbet yanıtlarını, ajan haritası da kimin kiminle konuştuğunu gösterir. <strong>Cihazlarım</strong> bölümünde diğer bilgisayarlarınızın ajanlarını da görebilir, birini başlattığı her şeyle birlikte durdurabilirsiniz.</p>
     </details>
     <details>
       <summary>Sunucunun genel bir adrese ihtiyacı var mı?</summary>

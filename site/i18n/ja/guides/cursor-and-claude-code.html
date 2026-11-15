@@ -4,9 +4,9 @@
 <h2>1 台のコンピューターで</h2>
 <ol>
   <li><a href="/#download">Antenna をインストール</a>（macOS または Linux）してノードを作成します。必要なのはパスワード 1 つで、アカウントは要りません。</li>
-  <li><strong>Agents → AI apps</strong> を開き、Cursor の横の <strong>Connect</strong> を押します。<strong>Assistant with access to my projects</strong>（プロジェクトにアクセスできるアシスタント）を選んでパスワードを入力し、<strong>Continue</strong> を押します。Antenna が Cursor のインストールリンクを開くと知らせるので、<strong>Open Cursor</strong> を押すと、Cursor に Antenna が表示され、インストールを求められます。次に Cursor で新しいチャットを始めて「Antenna のメッセージを確認して」と頼むと、行が <strong>Connected</strong>（接続済み）に変わり、「Contacts write to it as cursor」と表示されます。連絡先からは cursor という名前でメッセージが届く、という意味です。Cursor では、MCP は有料プランの機能とされています。</li>
-  <li>同じページで、Claude Code の横の <strong>Start in Code mode</strong> を押します。<strong>New agent…</strong> を選んで <code>reviewer</code> と名付け、同じロールを選び、<strong>Working folder</strong>（作業フォルダー）に Cursor で開いているプロジェクトを指定してパスワードを入力し、<strong>Start</strong> を押します。Claude Code はウィンドウ内のターミナルタブで動きます。</li>
-  <li><strong>Agents → Map</strong> を開き、一方のエージェントのハンドルからもう一方へドラッグして、パスワードを入力し <strong>Connect</strong> を押します。2 つには<em>ローカルルート</em>が割り当てられ、メッセージはコンピューターの外に出ません。また、チェックを外さない限り、それぞれが相手のメッセージをタスクとして受け取ります。</li>
+  <li><strong>エージェント → AI アプリ</strong> を開き、Cursor の横の <strong>接続</strong> を押します。<strong>自分のプロジェクトにアクセスできるアシスタント</strong>を選んでパスワードを入力し、<strong>続ける</strong> を押します。Antenna が Cursor のインストールリンクを開くと知らせるので、<strong>Cursor を開く</strong> を押すと、Cursor に Antenna が表示され、インストールを求められます。次に Cursor で新しいチャットを始めて「Antenna のメッセージを確認して」と頼むと、行が <strong>接続済み</strong>に変わり、「連絡先は cursor 宛てに書きます」と表示されます。Cursor では、MCP は有料プランの機能とされています。</li>
+  <li>同じページで、Claude Code の横の <strong>Code モードで起動</strong> を押します。<strong>新しいエージェント…</strong> を選んで <code>reviewer</code> と名付け、同じロールを選び、<strong>作業フォルダー</strong>に Cursor で開いているプロジェクトを指定してパスワードを入力し、<strong>起動</strong> を押します。Claude Code はウィンドウ内のターミナルタブで動きます。</li>
+  <li><strong>エージェント → マップ</strong> を開き、一方のエージェントのハンドルからもう一方へドラッグして、パスワードを入力し <strong>接続</strong> を押します。2 つには<em>ローカルルート</em>が割り当てられ、メッセージはコンピューターの外に出ません。また、チェックを外さない限り、それぞれが相手のメッセージをタスクとして受け取ります。</li>
 </ol>
 <p>2 つには同じロールを選んでください。Antenna は、あなたのデータをより多く見たエージェントが、それより少なく見たエージェントに書き込むことを許しません。また、書く役とレビューする役のように別々の仕事を与えれば、2 つが同じファイルを同時に編集することはありません。</p>
 
@@ -15,7 +15,7 @@
 <p>2 つは待ち方が違います。Code モードの Claude Code は自分で目を覚まします。待機中にメッセージが届くと、Antenna が受信箱を読むよう促す 1 行を代わりに入力します（<em>実験的機能</em>）。Antenna が Cursor に何かを入力することはないので、Cursor のエージェントがメッセージを読むのは、次に Antenna を呼び出したときです。そのため、やり取りを始めるのは Cursor にするのが自然です。たとえば「<code>reviewer</code> に <code>src/</code> の diff のレビューを頼んで、返事を待ってから、見つかった問題を直して」。Claude Code が目を覚まし、レビューして返信します。Cursor に作業を渡すときは、まずメッセージを待つように伝えてください。</p>
 
 <h2>2 台のコンピューターで</h2>
-<p>Cursor はノート PC に置いたまま、Claude Code をデスクトップやサーバーで動かすこともできます。それぞれに Antenna をインストールし、招待リンクと 6 桁のコードで一度だけペアリングします。そのとき <strong>This is my own computer (∞)</strong> にチェックを入れ、あとはマップで線を引きます。もう一方のコンピューターでは、そちら側の承認を、そのコンピューター上か <strong>My devices</strong> で求められます。画面のないサーバーでは、Claude Code を <code>antenna connect claude-code</code> と <code>antenna session start</code> で動かします。詳しくは<a href="/guides/run-claude-code-on-a-vps">VPS で Claude Code を動かす</a>をご覧ください。</p>
+<p>Cursor はノート PC に置いたまま、Claude Code をデスクトップやサーバーで動かすこともできます。それぞれに Antenna をインストールし、招待リンクと 6 桁のコードで一度だけペアリングします。そのとき <strong>これは自分のコンピューターです（∞）</strong> にチェックを入れ、あとはマップで線を引きます。もう一方のコンピューターでは、そちら側の承認を、そのコンピューター上か <strong>自分のデバイス</strong> で求められます。画面のないサーバーでは、Claude Code を <code>antenna connect claude-code</code> と <code>antenna session start</code> で動かします。詳しくは<a href="/guides/run-claude-code-on-a-vps">VPS で Claude Code を動かす</a>をご覧ください。</p>
 
 <h2>あなたが承認するもの、制限が残るもの</h2>
 <ul>
@@ -32,7 +32,7 @@
 </details>
 <details>
   <summary>Claude Code を Cursor のターミナルで動かすこともできますか？</summary>
-  <p>はい。<strong>Step-by-step guide</strong>（手順ガイド）を <strong>AI apps</strong> にある Claude Code のメニューから開くと、<code>claude mcp add</code> の行が載っています。ただし、その方法で起動した Claude Code は起こされません。Code モードなら起こされ、ツールを使う前に毎回 Antenna の確認も入ります。</p>
+  <p>はい。<strong>手順ガイド</strong>を <strong>AI アプリ</strong> にある Claude Code のメニューから開くと、<code>claude mcp add</code> の行が載っています。ただし、その方法で起動した Claude Code は起こされません。Code モードなら起こされ、ツールを使う前に毎回 Antenna の確認も入ります。</p>
 </details>
 <details>
   <summary>この機能は完成していますか？</summary>

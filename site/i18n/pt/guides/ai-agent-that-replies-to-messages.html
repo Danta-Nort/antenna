@@ -10,10 +10,10 @@
 
 <h2>Configure pela janela</h2>
 <ol>
-  <li>No computador onde o agente deve rodar, abra <strong>Agents → Set up for a contact…</strong> (ou, numa conversa, <strong>Agent replies → Set up…</strong> no cartão do contato).</li>
+  <li>No computador onde o agente deve rodar, abra <strong>Agentes → Configurar para um contato…</strong> (ou, numa conversa, <strong>Respostas do agente → Configurar…</strong> no cartão do contato).</li>
   <li>Escolha o contato e o programa: <strong>Claude Code</strong>, <strong>Codex</strong> ou um comando seu.</li>
-  <li>Se quiser, cole um token de login de longa duração (gerado com <code>claude setup-token</code>) em <strong>Value (optional)</strong>. Ele vai para o seu nó uma única vez e fica guardado no banco de dados criptografado dele. No Mac, esse é o caminho confiável, porque a sandbox não consegue abrir o Keychain.</li>
-  <li>Confirme com a sua senha de dono. A regra, a última execução e o <strong>Run log</strong> (registro de execuções) aparecem em <strong>Agents</strong>.</li>
+  <li>Se quiser, cole um token de login de longa duração (gerado com <code>claude setup-token</code>) em <strong>Valor (opcional)</strong>. Ele vai para o seu nó uma única vez e fica guardado no banco de dados criptografado dele. No Mac, esse é o caminho confiável, porque a sandbox não consegue abrir o Keychain.</li>
+  <li>Confirme com a sua senha de dono. A regra, a última execução e o <strong>Registro de execuções</strong> aparecem em <strong>Agentes</strong>.</li>
 </ol>
 <p>No terminal, é uma linha só: <code>antenna wake set &lt;contact&gt; --cmd "claude -p --output-format stream-json"</code>. <code>antenna wake list</code> mostra as regras e as execuções recentes; <code>antenna wake off &lt;contact&gt;</code> desliga.</p>
 

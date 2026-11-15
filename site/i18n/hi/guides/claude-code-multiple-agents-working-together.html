@@ -6,13 +6,13 @@
 
 <h2>Team कैसे काम करती है</h2>
 <ol>
-  <li><strong>आप team बनाते हैं</strong> <strong>Teams → New team</strong> में: प्रोजेक्ट फ़ोल्डर, lead (आपका कोई agent, कोई local model, या आप ख़ुद), workers का बजट, और नियम: workers कमांड चला सकते हैं या नहीं, कोई task कौन-सी <strong>Check commands</strong> बता सकता है (<code>cargo test</code>, <code>npm test</code>), और वे checks किन package registries तक पहुँच सकते हैं।</li>
+  <li><strong>आप team बनाते हैं</strong> <strong>टीमें → नई टीम</strong> में: प्रोजेक्ट फ़ोल्डर, lead (आपका कोई agent, कोई local model, या आप ख़ुद), workers का बजट, और नियम: workers कमांड चला सकते हैं या नहीं, कोई task कौन-सी <strong>Check कमांड</strong> बता सकता है (<code>cargo test</code>, <code>npm test</code>), और वे checks किन package registries तक पहुँच सकते हैं।</li>
   <li><strong>आप lead को लक्ष्य बताते हैं</strong>, उसके अपने terminal में: “login फ़ीचर को दो coders के लिए छोटे tasks में बाँटो।”</li>
   <li><strong>Lead योजना बनाता है और टीम जुटाता है।</strong> वह tasks लिखता है, बजट के भीतर <code>web.coder-1</code> जैसे workers शुरू करता है और उन्हें काम सौंपता है।</li>
   <li><strong>Workers साथ-साथ कोड लिखते हैं।</strong> हर एक को team की branch पर प्रोजेक्ट की नई कॉपी मिलती है, वह सिर्फ़ अपना task पढ़ता है, काम करता है और नतीजा जमा करता है, या अटकने पर lead से सवाल पूछता है।</li>
   <li><strong>Antenna हर नतीजा जाँचता है</strong>: वह task की check कमांड एक अलग sandbox में चलाता है, जिसमें न tokens होते हैं और न आपकी बताई registries के अलावा कोई network। Fail हुआ check, lead के फ़ैसले से पहले, एक सीमा तक अपने-आप worker के पास लौट जाता है।</li>
   <li><strong>Lead review करता है:</strong> स्वीकार करता है, या टिप्पणियों के साथ वापस भेजता है। स्वीकार किया गया काम team की branch <code>antenna/web</code> पर जमा होता है।</li>
-  <li><strong>आप उसे लागू करते हैं।</strong> <strong>Review and apply</strong> दिखाता है कि आपकी branch में क्या merge होगा; आपके password से यह fast-forward के रूप में merge हो जाता है। उसके बिना कुछ भी आगे नहीं बढ़ता।</li>
+  <li><strong>आप उसे लागू करते हैं।</strong> <strong>Review करें और लागू करें</strong> दिखाता है कि आपकी branch में क्या merge होगा; आपके password से यह fast-forward के रूप में merge हो जाता है। उसके बिना कुछ भी आगे नहीं बढ़ता।</li>
 </ol>
 
 <h2>आपको क्या दिखता है</h2>

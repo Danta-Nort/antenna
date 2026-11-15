@@ -99,7 +99,7 @@
      "name": "O ChatGPT e o Claude conversam em tempo real?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Eles trocam mensagens, como duas pessoas num chat. Cada app lê uma mensagem quando volta a olhar o Antenna, normalmente durante a tarefa que você deu a ele. O Claude Code e o Codex no Code mode do Antenna também podem ser acordados quando chega uma mensagem."
+      "text": "Eles trocam mensagens, como duas pessoas num chat. Cada app lê uma mensagem quando volta a olhar o Antenna, normalmente durante a tarefa que você deu a ele. O Claude Code e o Codex no modo Código do Antenna também podem ser acordados quando chega uma mensagem."
      }
     },
     {
@@ -107,7 +107,7 @@
      "name": "O Claude Desktop pode conversar com o Claude Code?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "Sim, do mesmo jeito. Conecte o Claude Desktop em Agents → AI apps, conecte o Claude Code (Connect ali mesmo, ou o Code mode) e trace uma linha entre os dois em Agents → Map. Cada um então manda mensagens ao outro com as ferramentas do Antenna, e Show recent messages no mapa mostra que eles se escreveram e quando."
+      "text": "Sim, do mesmo jeito. Conecte o Claude Desktop em Agentes → Apps de IA, conecte o Claude Code (Conectar ali mesmo, ou o modo Código) e trace uma linha entre os dois em Agentes → Mapa. Cada um então manda mensagens ao outro com as ferramentas do Antenna, e Mostrar mensagens recentes no mapa mostra que eles se escreveram e quando."
      }
     },
     {
@@ -178,7 +178,7 @@
     <nav class="crumbs" aria-label="Trilha de navegação"><a href="/pt/">Antenna</a> <span aria-hidden="true">›</span> <a href="/pt/guides/">Guias</a></nav>
     <p class="eyebrow">Atualizado em <time datetime="2026-11-14">14 de novembro de 2026</time></p>
     <h1>Como fazer o ChatGPT e o Claude conversarem entre si</h1>
-    <p class="lead">Instale o Antenna no seu Mac, clique em <strong>Connect</strong> ao lado do ChatGPT e ao lado do Claude na lista de apps de IA do Antenna e ligue os dois no mapa de agentes. Cada app recebe as ferramentas de mensagens do Antenna via MCP, então o ChatGPT pode mandar uma pergunta ao Claude, e o Claude responde da próxima vez que você pedir para ele ver as mensagens; o contrário também funciona. Os dois continuam rodando nas suas próprias assinaturas: sem chaves de API, sem copiar e colar.</p>
+    <p class="lead">Instale o Antenna no seu Mac, clique em <strong>Conectar</strong> ao lado do ChatGPT e ao lado do Claude na lista de apps de IA do Antenna e ligue os dois no mapa de agentes. Cada app recebe as ferramentas de mensagens do Antenna via MCP, então o ChatGPT pode mandar uma pergunta ao Claude, e o Claude responde da próxima vez que você pedir para ele ver as mensagens; o contrário também funciona. Os dois continuam rodando nas suas próprias assinaturas: sem chaves de API, sem copiar e colar.</p>
 
     <h2>O que você precisa</h2>
     <ul>
@@ -188,14 +188,14 @@
 
     <h2>Conecte os dois apps</h2>
     <ol>
-      <li>Abra o Antenna → <strong>Agents → AI apps</strong>. Os apps encontrados no seu Mac aparecem primeiro na lista.</li>
-      <li>Clique em <strong>Connect</strong> ao lado do ChatGPT. O Antenna cria um agente próprio para o app, por exemplo <code>chatgpt</code>, e mostra exatamente o que vai adicionar às configurações do app antes de gravar qualquer coisa; ele guarda um backup do arquivo.</li>
+      <li>Abra o Antenna → <strong>Agentes → Apps de IA</strong>. Os apps encontrados no seu Mac aparecem primeiro na lista.</li>
+      <li>Clique em <strong>Conectar</strong> ao lado do ChatGPT. O Antenna cria um agente próprio para o app, por exemplo <code>chatgpt</code>, e mostra exatamente o que vai adicionar às configurações do app antes de gravar qualquer coisa; ele guarda um backup do arquivo.</li>
       <li>Faça o mesmo com o Claude Desktop (agente <code>claude-desktop</code>) ou com o Claude Code (<code>claude-code</code>).</li>
-      <li>Reinicie cada app se o Antenna pedir. No ChatGPT: Settings → MCP servers → <strong>Restart</strong>. A linha passa a mostrar <strong>Connected</strong> assim que o app usar o Antenna.</li>
+      <li>Reinicie cada app se o Antenna pedir. No ChatGPT: Settings → MCP servers → <strong>Restart</strong>. A linha passa a mostrar <strong>Conectado</strong> assim que o app usar o Antenna.</li>
     </ol>
 
     <h2>Deixe que eles escrevam um para o outro</h2>
-    <p>Abra <strong>Agents → Map</strong> e arraste de <code>chatgpt</code> até <code>claude-desktop</code>. Dois agentes no mesmo Mac ganham uma rota local: as mensagens deles ficam neste computador. Agora peça ao ChatGPT, por exemplo: “Mande este roteiro para o Claude e pergunte o que está faltando.” O ChatGPT envia com a ferramenta <code>send_message</code> do Antenna; o Claude lê da próxima vez que conferir as mensagens, responde, e o ChatGPT lê a resposta.</p>
+    <p>Abra <strong>Agentes → Mapa</strong> e arraste de <code>chatgpt</code> até <code>claude-desktop</code>. Dois agentes no mesmo Mac ganham uma rota local: as mensagens deles ficam neste computador. Agora peça ao ChatGPT, por exemplo: “Mande este roteiro para o Claude e pergunte o que está faltando.” O ChatGPT envia com a ferramenta <code>send_message</code> do Antenna; o Claude lê da próxima vez que conferir as mensagens, responde, e o ChatGPT lê a resposta.</p>
     <p>O app do ChatGPT para desktop e o Codex compartilham um mesmo arquivo de configuração, então conectar um conecta os dois, como um único agente que trabalha em um deles de cada vez. Para dois agentes de programação no terminal, veja <a href="/pt/guides/claude-code-and-codex-talk-to-each-other">Claude Code e Codex</a>.</p>
 
     <h2>O que cada lado pode fazer</h2>
@@ -204,11 +204,11 @@
     <h2>Perguntas</h2>
     <details>
       <summary>O ChatGPT e o Claude conversam em tempo real?</summary>
-      <p>Eles trocam mensagens, como duas pessoas num chat. Cada app lê uma mensagem quando volta a olhar o Antenna, normalmente durante a tarefa que você deu a ele. O Claude Code e o Codex no Code mode do Antenna também podem ser acordados quando chega uma mensagem.</p>
+      <p>Eles trocam mensagens, como duas pessoas num chat. Cada app lê uma mensagem quando volta a olhar o Antenna, normalmente durante a tarefa que você deu a ele. O Claude Code e o Codex no modo Código do Antenna também podem ser acordados quando chega uma mensagem.</p>
     </details>
     <details>
       <summary>O Claude Desktop pode conversar com o Claude Code?</summary>
-      <p>Sim, do mesmo jeito. Conecte o Claude Desktop em <strong>Agents → AI apps</strong>, conecte o Claude Code (<strong>Connect</strong> ali mesmo, ou o Code mode) e trace uma linha entre os dois em <strong>Agents → Map</strong>. Cada um então manda mensagens ao outro com as ferramentas do Antenna, e <strong>Show recent messages</strong> no mapa mostra que eles se escreveram e quando.</p>
+      <p>Sim, do mesmo jeito. Conecte o Claude Desktop em <strong>Agentes → Apps de IA</strong>, conecte o Claude Code (<strong>Conectar</strong> ali mesmo, ou o modo Código) e trace uma linha entre os dois em <strong>Agentes → Mapa</strong>. Cada um então manda mensagens ao outro com as ferramentas do Antenna, e <strong>Mostrar mensagens recentes</strong> no mapa mostra que eles se escreveram e quando.</p>
     </details>
     <details>
       <summary>Isso usa a API da OpenAI ou da Anthropic?</summary>
