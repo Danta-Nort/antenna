@@ -1,0 +1,60 @@
+<!--guide {"title": "Control remoto de Claude Code en otra computadora — Antenna", "h1": "Controla Claude Code en otra computadora desde tu portátil", "description": "Ejecuta Claude Code en tu servidor o escritorio y dale tareas desde el chat de Antenna en tu portátil: peer-to-peer, cifrado de extremo a extremo y sin cuenta.", "summary": "Claude Code en un servidor u otra computadora tuya, con tareas y aprobaciones desde tu portátil por tu propio enlace cifrado.", "source": "2026-11-15"}-->
+<p class="lead">Instala Antenna en tu portátil y en la computadora donde se ejecuta Claude Code, empareja las dos una vez como computadoras tuyas e inicia Claude Code allí a través de Antenna. En tu portátil aparece un chat con esa sesión: escribe en él una tarea, Antenna despierta a Claude Code cuando está inactivo y su respuesta vuelve al chat. Los mensajes viajan por un enlace peer-to-peer cifrado de extremo a extremo entre tus dos computadoras, Antenna no necesita ninguna cuenta y los pasos que requieren tu aprobación llegan al portátil, donde respondes con tu contraseña.</p>
+
+<h2>El Remote Control de Claude Code y Antenna</h2>
+<p>Claude Code tiene su propia función Remote Control integrada; la documentación de Anthropic la describe. Esta guía trata de otra configuración: Claude Code se ejecuta en una computadora tuya que sigue encendida, un servidor o un escritorio, y lo manejas desde Antenna en tu portátil. Te conviene si quieres:</p>
+<ul>
+  <li><strong>Varias sesiones en varias computadoras, en una sola lista.</strong> Cada sesión es su propio chat, y <strong>Mis dispositivos</strong> muestra el estado de cada computadora, sus agentes y las peticiones que esperan allí.</li>
+  <li><strong>Tu propio enlace.</strong> Los mensajes se cifran en una computadora y se descifran en la otra. Tus computadoras se conectan directamente cuando la red lo permite y, si no, a través de un relay que solo reenvía tráfico cifrado. Sin cuenta y sin puertos de entrada.</li>
+  <li><strong>Permisos que comprueba el daemon de Antenna</strong> en la computadora donde se ejecuta Claude Code, con aprobaciones que respondes desde la computadora tuya en la que estés.</li>
+  <li><strong>Otros agentes de la misma forma:</strong> Codex funciona igual que Claude Code.</li>
+</ul>
+
+<h2>Cómo configurarlo</h2>
+<ol>
+  <li><a href="/#download">Instala Antenna</a> en las dos computadoras: la app en tu portátil (macOS o Linux) y, en la otra computadora, la app o, en un servidor Linux, el nodo:
+<pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+sudo loginctl enable-linger $USER</code></pre></li>
+  <li>Emparéjalas una vez. En el portátil: <strong>Contacto nuevo → Invitar</strong>, marca <strong>Es mi propia computadora (∞)</strong>, pulsa <strong>Crear enlace</strong> y cópialo. En un servidor: <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>; en un escritorio: <strong>Contacto nuevo → Unirse</strong>, con la misma casilla marcada. Escribe en un lado el código que muestra el otro y pulsa <strong>El contacto lo confirmó: los códigos coinciden</strong> en el portátil.</li>
+  <li>Inicia Claude Code a través de Antenna en la otra computadora. En un servidor, en la carpeta del proyecto (hace falta tmux):
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api
+antenna session attach api-dev</code></pre>
+  Responde a las primeras preguntas de Claude Code y sal con <code>Ctrl-b d</code>: sigue en marcha, y en tu portátil tienes un chat llamado <code>api-dev</code>. En un escritorio: <strong>Agentes → Apps de IA → Iniciar en modo Code</strong>, y Claude Code se ejecuta allí en una pestaña de la ventana de Antenna; pídele una vez que salude a tu portátil a través de Antenna y su chat aparecerá en el portátil.</li>
+  <li>Deja que el portátil responda a las peticiones de aprobación de esa computadora. En un servidor: <code>antenna devices confirm mac</code>. En un escritorio: <strong>Mis dispositivos</strong> → la ficha del portátil → <strong>Aprobaciones</strong> → <strong>Aceptar aprobaciones firmadas con …</strong>, con tu contraseña.</li>
+</ol>
+
+<h2>Manéjalo desde tu portátil</h2>
+<ul>
+  <li><strong>Dale una tarea.</strong> Escribe en el chat de la sesión como le escribirías a una persona. Cuando Claude Code está inactivo en su prompt, Antenna escribe una línea fija para que lea tu mensaje; nunca escribe tu texto en la terminal ni responde a una pregunta que Claude Code haga allí. <em>Experimental.</em></li>
+  <li><strong>Interrúmpelo.</strong> Activa <strong>Urgente: interrumpir ahora</strong> antes de enviar: Antenna pulsa Esc una vez para terminar el turno en curso, nunca encima de una pregunta o un aviso de permisos abierto allí, y Claude Code lee tu mensaje. <em>Experimental.</em></li>
+  <li><strong>Aprueba sus pasos.</strong> Un paso que te necesita aparece en la ficha de la otra computadora en <strong>Mis dispositivos</strong>, con una notificación. Pulsa <strong>Aprobar con contraseña</strong>, <strong>Aprobar con Touch ID</strong> en un Mac, o <strong>Rechazar</strong>. <em>Experimental.</em></li>
+  <li><strong>Detenlo.</strong> <strong>Detener el agente y sus procesos…</strong>, junto al agente en esa ficha, termina Claude Code y todo lo que inició allí. <em>Experimental.</em></li>
+</ul>
+<p>El aviso de permisos propio de Claude Code («Do you want to proceed?») se queda en su terminal en la otra computadora, y Antenna nunca lo responde. Permite en la configuración de Claude Code las herramientas que usas a diario, o respóndelo con <code>antenna session attach</code>.</p>
+
+<h2>Codex y otros agentes</h2>
+<p>Codex funciona igual: <code>antenna connect codex</code> y <code>--cli codex</code> en un servidor, o <strong>Iniciar en modo Code</strong> junto a Codex en un escritorio (consulta <a href="/guides/codex-cli-remote-control">Controlar Codex CLI en remoto</a>). Gemini CLI se conecta desde <strong>Agentes → Apps de IA</strong> y envía y lee mensajes a través de Antenna, pero Antenna todavía no lo despierta: lee un mensaje nuevo la próxima vez que llama a Antenna.</p>
+
+<h2>Preguntas</h2>
+<details>
+  <summary>¿Veo la terminal de Claude Code en mi portátil?</summary>
+  <p>No. Das tareas y lees respuestas en un chat; la terminal se queda en la otra computadora. Para verla, ejecuta allí <code>antenna session attach</code>, por SSH si quieres.</p>
+</details>
+<details>
+  <summary>¿La otra computadora necesita una IP pública o puertos abiertos?</summary>
+  <p>No. Las dos computadoras se conectan hacia fuera, directamente cuando la red lo permite y, si no, a través de un relay. El relay solo reenvía tráfico cifrado.</p>
+</details>
+<details>
+  <summary>¿Quién más puede darle tareas?</summary>
+  <p>Solo los contactos emparejados con esa computadora cuyos mensajes el agente puede leer (con <code>--links mac</code>, solo tu portátil) y los agentes que conectes con él en el mapa de agentes. Lo que el mensaje de un contacto puede hacerle hacer lo decide el daemon de Antenna en esa computadora, no Claude Code, según el nivel de confianza de ese contacto.</p>
+</details>
+<details>
+  <summary>¿Necesita una clave de API?</summary>
+  <p>No. Claude Code mantiene tu propio inicio de sesión en la computadora donde se ejecuta, y Antenna solo transporta mensajes, archivos y aprobaciones.</p>
+</details>
+<details>
+  <summary>¿Puedo controlarlo desde el móvil?</summary>
+  <p>Todavía no. Por ahora Antenna funciona en macOS y Linux.</p>
+</details>

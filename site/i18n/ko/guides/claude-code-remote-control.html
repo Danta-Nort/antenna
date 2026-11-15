@@ -1,0 +1,60 @@
+<!--guide {"title": "Claude Code 원격 제어: 다른 컴퓨터의 Claude Code를 노트북에서 — Antenna", "h1": "노트북에서 다른 컴퓨터의 Claude Code 조종하기", "description": "서버나 데스크톱에서 Claude Code를 돌리고, 노트북의 Antenna 채팅으로 작업을 맡기세요. P2P에 종단 간 암호화, 계정은 필요 없어요.", "summary": "서버나 내 다른 컴퓨터의 Claude Code에, 나만의 암호화된 연결로 노트북에서 작업과 승인을 보내요.", "source": "2026-11-15"}-->
+<p class="lead">노트북과 Claude Code가 돌아가는 컴퓨터 양쪽에 Antenna를 설치하고, 두 컴퓨터를 내 컴퓨터로 한 번 페어링한 다음, 그 컴퓨터에서 Antenna로 Claude Code를 시작하세요. 그러면 노트북에 그 세션과의 채팅이 나타나요. 거기에 작업을 쓰면 Claude Code가 쉬고 있을 때 Antenna가 깨우고, 답장은 채팅으로 돌아와요. 메시지는 두 컴퓨터 사이의 종단 간 암호화된 P2P 연결로 오가고, Antenna에는 계정이 필요 없어요. 내 승인이 필요한 단계는 노트북으로 오고, 비밀번호로 답하면 돼요.</p>
+
+<h2>Claude Code 자체의 Remote Control과 Antenna</h2>
+<p>Claude Code에는 Remote Control이라는 자체 기능이 내장되어 있고, Anthropic 문서에 설명되어 있어요. 이 가이드는 그와 다른 구성을 다뤄요. Claude Code는 계속 켜져 있는 내 컴퓨터(서버나 데스크톱)에서 돌고, 나는 노트북의 Antenna로 그것을 조종해요. 이런 것을 원한다면 잘 맞아요.</p>
+<ul>
+  <li><strong>여러 컴퓨터의 여러 세션을 한 목록에서.</strong> 세션마다 채팅이 따로 있고, <strong>내 기기</strong>에는 컴퓨터마다 상태, 에이전트, 거기서 기다리는 요청이 보여요.</li>
+  <li><strong>나만의 연결.</strong> 메시지는 한 컴퓨터에서 암호화되고 다른 컴퓨터에서 복호화돼요. 네트워크가 허락하면 컴퓨터끼리 직접 연결되고, 아니면 암호화된 트래픽만 전달하는 릴레이를 거쳐요. 계정도, 인바운드 포트도 없어요.</li>
+  <li><strong>Antenna 데몬이 확인하는 권한.</strong> 확인은 Claude Code가 돌아가는 컴퓨터에서 이뤄지고, 승인에는 지금 앞에 있는 내 컴퓨터에서 답할 수 있어요.</li>
+  <li><strong>다른 에이전트도 같은 방식으로:</strong> Codex도 Claude Code처럼 돼요.</li>
+</ul>
+
+<h2>설정하기</h2>
+<ol>
+  <li>두 컴퓨터 모두에 <a href="/#download">Antenna를 설치하세요</a>. 노트북에는 앱(macOS 또는 Linux), 다른 컴퓨터에는 앱을, Linux 서버라면 노드를 설치해요.
+<pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+sudo loginctl enable-linger $USER</code></pre></li>
+  <li>한 번 페어링하세요. 노트북에서 <strong>새 연락처 → 초대</strong>로 가서 <strong>내 컴퓨터예요(∞)</strong>를 체크하고, <strong>링크 만들기</strong>를 눌러 링크를 복사하세요. 서버에서는 <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>, 데스크톱에서는 같은 칸을 체크하고 <strong>새 연락처 → 참여</strong>로 가세요. 한쪽에 표시된 코드를 다른 쪽에 입력하고, 노트북에서 <strong>연락처가 확인함: 코드 일치</strong>를 누르세요.</li>
+  <li>다른 컴퓨터에서 Antenna로 Claude Code를 시작하세요. 서버라면 프로젝트 폴더에서(tmux 필요):
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api
+antenna session attach api-dev</code></pre>
+  Claude Code의 첫 질문에 답한 다음 <code>Ctrl-b d</code>로 빠져나오세요. Claude Code는 계속 돌고, 노트북에는 <code>api-dev</code>라는 채팅이 생겨요. 데스크톱이라면 <strong>에이전트 → AI 앱 → Code 모드로 시작</strong>을 누르면 그 컴퓨터의 Antenna 창 탭에서 Claude Code가 돌아요. Antenna로 노트북에 인사하라고 한 번만 부탁하면, 노트북에 그 채팅이 나타나요.</li>
+  <li>그 컴퓨터의 승인 요청에 노트북이 답할 수 있게 하세요. 서버에서는 <code>antenna devices confirm mac</code>. 데스크톱에서는 <strong>내 기기</strong> → 노트북의 카드 → <strong>승인</strong> → <strong>…(으)로 서명된 승인 받아들이기</strong>에서 비밀번호를 입력하면 돼요.</li>
+</ol>
+
+<h2>노트북에서 조종하기</h2>
+<ul>
+  <li><strong>작업 맡기기.</strong> 사람에게 쓰듯 세션의 채팅에 쓰세요. Claude Code가 프롬프트에서 쉬고 있으면 Antenna가 내장된 한 줄을 입력해서 메시지를 읽게 해요. 내 텍스트를 터미널에 입력하거나, Claude Code가 거기서 묻는 질문에 답하는 일은 절대 없어요. <em>실험적 기능이에요.</em></li>
+  <li><strong>중단하기.</strong> 보내기 전에 <strong>긴급: 지금 중단</strong>을 켜세요. Antenna가 Esc를 한 번 눌러 진행 중인 턴을 끝내고(거기에 질문이나 권한 확인 창이 열려 있으면 누르지 않아요), Claude Code가 내 메시지를 읽어요. <em>실험적 기능이에요.</em></li>
+  <li><strong>단계 승인하기.</strong> 내가 필요한 단계는 <strong>내 기기</strong>에서 다른 컴퓨터의 카드에 알림과 함께 나타나요. <strong>비밀번호로 승인</strong>, Mac이라면 <strong>Touch ID로 승인</strong>, 또는 <strong>거부</strong>를 누르세요. <em>실험적 기능이에요.</em></li>
+  <li><strong>멈추기.</strong> 그 카드에서 에이전트 옆의 <strong>에이전트와 프로세스 중지…</strong>를 누르면 Claude Code와 그것이 그 컴퓨터에서 시작한 모든 것이 끝나요. <em>실험적 기능이에요.</em></li>
+</ul>
+<p>Claude Code 자체의 권한 확인 창(“Do you want to proceed?”)은 다른 컴퓨터의 터미널에 그대로 남고, Antenna는 거기에 답하지 않아요. 자주 쓰는 도구는 Claude Code 설정에서 허용해 두거나, <code>antenna session attach</code>로 들어가서 답하세요.</p>
+
+<h2>Codex와 다른 에이전트</h2>
+<p>Codex도 똑같이 돼요. 서버에서는 <code>antenna connect codex</code>와 <code>--cli codex</code>, 데스크톱에서는 Codex 옆의 <strong>Code 모드로 시작</strong>을 쓰세요(<a href="/guides/codex-cli-remote-control">Codex CLI 원격 제어</a> 참고). Gemini CLI는 <strong>에이전트 → AI 앱</strong>에서 연결하고 Antenna로 메시지를 보내고 읽지만, Antenna가 아직 깨우지는 못해요. 다음에 Antenna를 호출할 때 새 메시지를 읽어요.</p>
+
+<h2>자주 묻는 질문</h2>
+<details>
+  <summary>노트북에서 Claude Code의 터미널이 보이나요?</summary>
+  <p>아니요. 작업을 맡기고 답장을 읽는 건 채팅에서 하고, 터미널은 다른 컴퓨터에 있어요. 보고 싶다면 거기서 <code>antenna session attach</code>를 실행하세요. SSH로 들어가도 돼요.</p>
+</details>
+<details>
+  <summary>다른 컴퓨터에 공인 IP나 열린 포트가 필요한가요?</summary>
+  <p>아니요. 두 컴퓨터 모두 바깥으로 연결해요. 네트워크가 허락하면 직접, 아니면 릴레이를 거쳐서요. 릴레이는 암호화된 트래픽만 전달해요.</p>
+</details>
+<details>
+  <summary>그 밖에 누가 작업을 맡길 수 있나요?</summary>
+  <p>그 컴퓨터와 페어링된 연락처 중 에이전트가 메시지를 읽어도 되는 연락처(<code>--links mac</code>이면 내 노트북뿐)와, 에이전트 맵에서 그 에이전트와 연결한 에이전트뿐이에요. 연락처의 메시지로 무엇을 시킬 수 있는지는 Claude Code가 아니라 그 컴퓨터의 Antenna 데몬이 그 연락처의 신뢰 레벨에 따라 정해요.</p>
+</details>
+<details>
+  <summary>API 키가 필요한가요?</summary>
+  <p>아니요. Claude Code는 돌아가는 컴퓨터에서 내 로그인을 그대로 쓰고, Antenna는 메시지, 파일, 승인만 실어 날라요.</p>
+</details>
+<details>
+  <summary>휴대폰으로 조종할 수 있나요?</summary>
+  <p>아직은 안 돼요. 지금 Antenna는 macOS와 Linux에서 돌아가요.</p>
+</details>

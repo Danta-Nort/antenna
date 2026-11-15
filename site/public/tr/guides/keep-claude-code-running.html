@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dizüstü kapalıyken Claude Code’u çalışır tutmak — Antenna</title>
+<meta name="description" content="Kapağı kapanan dizüstü uykuya geçer, Claude Code da durur. Onu sürekli açık bir bilgisayarda çalıştırın, görevleri dizüstünüzden Antenna ile verin.">
+<link rel="canonical" href="https://antenna.contact/tr/guides/keep-claude-code-running">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Dizüstü kapalıyken Claude Code’u çalışır tutmak — Antenna">
+<meta property="og:description" content="Kapağı kapanan dizüstü uykuya geçer, Claude Code da durur. Onu sürekli açık bir bilgisayarda çalıştırın, görevleri dizüstünüzden Antenna ile verin.">
+<meta property="og:url" content="https://antenna.contact/tr/guides/keep-claude-code-running">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="tr_TR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/keep-claude-code-running">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/tr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Rehberler",
+     "item": "https://antenna.contact/tr/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Dizüstünüz kapalıyken Claude Code çalışmaya devam etsin",
+     "item": "https://antenna.contact/tr/guides/keep-claude-code-running"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Dizüstünüz kapalıyken Claude Code çalışmaya devam etsin",
+   "description": "Kapağı kapanan dizüstü uykuya geçer, Claude Code da durur. Onu sürekli açık bir bilgisayarda çalıştırın, görevleri dizüstünüzden Antenna ile verin.",
+   "datePublished": "2026-11-15",
+   "dateModified": "2026-11-15",
+   "inLanguage": "tr",
+   "url": "https://antenna.contact/tr/guides/keep-claude-code-running",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/tr/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Dizüstümü kapatırsam Claude Code çalışmaya devam eder mi?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Kapağı kapatmak dizüstünü uyku moduna sokuyorsa, ki genellikle ayar böyledir, hayır: siz kapağı açana kadar Claude Code duraklar. Onu sürekli açık kalan bir bilgisayarda çalıştırırsanız çalışmaya devam eder."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Claude Code dizüstümde arka planda çalışabilir mi?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Dizüstü uyanıkken evet: Code modunda, Antenna penceresinde bakmanız gerekmeyen bir sekmede çalışır ve bir mesaj geldiğinde Antenna onu uyandırır. Yine de dizüstü uyku moduna geçince durur."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Bir SSH oturumunu açık tutmam gerekiyor mu?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Hayır. Claude Code sunucuda Antenna’nın tmux’ında çalışır ve ona sohbetten ulaşırsınız. İki bilgisayar da dışarıya bağlandığı için gelen bağlantılara bir port da açılmaz."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Antenna Mac’imi uyanık tutar mı?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Hayır. Mac’in uykuya geçmemesini sistem ayarlarından sağlayın. Code modu için Antenna’nın penceresi açık kalmalıdır."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Telefonumdan durumuna bakabilir miyim?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Henüz değil. Antenna bugün macOS ve Linux’ta çalışıyor."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">İçeriğe geç</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/tr/" aria-label="Antenna — ana sayfa"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Ana menü">
+      <a href="/tr/#product">Ürün</a>
+      <a href="/tr/#security">Güvenlik</a>
+      <a href="/tr/guides/">Rehberler</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Dil: Türkçe"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">TR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/keep-claude-code-running" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/keep-claude-code-running" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/keep-claude-code-running" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/keep-claude-code-running" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/keep-claude-code-running" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/keep-claude-code-running" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/keep-claude-code-running" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/keep-claude-code-running" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/keep-claude-code-running" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/keep-claude-code-running" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/keep-claude-code-running" hreflang="tr" lang="tr" aria-current="true">Türkçe</a></li>
+        <li><a href="/it/guides/keep-claude-code-running" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/keep-claude-code-running" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/keep-claude-code-running" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/keep-claude-code-running" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/tr/#download">İndir</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Sayfa yolu"><a href="/tr/">Antenna</a> <span aria-hidden="true">›</span> <a href="/tr/guides/">Rehberler</a></nav>
+    <p class="eyebrow">Güncellendi <time datetime="2026-11-15">15 Kasım 2026</time></p>
+    <h1>Dizüstünüz kapalıyken Claude Code çalışmaya devam etsin</h1>
+    <p class="lead">Dizüstünün kendisinde bu mümkün değil: kapağı kapatmak dizüstünü uyku moduna sokar, uyuyan bir bilgisayar hiçbir şey çalıştırmaz ve Claude Code da onunla birlikte duraklar. Çözüm, Claude Code’u sürekli açık kalan bir bilgisayarda, örneğin bir Linux sunucuda ya da uykuya geçmeyecek şekilde ayarlanmış bir Mac mini’de çalıştırmak: onu orada Antenna üzerinden başlatır ve görevleri dizüstünüzdeki Antenna sohbetinden verirsiniz. Dizüstünü kapatın: Claude Code diğer bilgisayarda çalışmaya devam eder, yanıtları da dizüstünü bekler ve dizüstü yeniden çevrimiçi olunca gelir.</p>
+
+    <h2>Neden duruyor</h2>
+    <p>Claude Code, onu başlattığınız bilgisayarda çalışır. O bilgisayar uyku moduna geçtiğinde, Claude Code dahil üzerindeki her program, bilgisayar uyanana kadar durur. Claude Code’un çalıştığı terminali ya da SSH penceresini kapatmak da onu sonlandırır. Bir dizüstü kapağı kapalıyken de uyanık tutulabilir, ama o zaman prize takılı ve açık kalması gerekir; yani artık bir sunucuya dönüşmüştür. Bu yüzden iş, her zaman açık olan bir bilgisayara taşınır ve dizüstü yalnızca onunla konuşur.</p>
+
+    <h2>Neye ihtiyacınız var</h2>
+    <ul>
+      <li>Sürekli açık kalan bir bilgisayar: x86_64 bir Linux sunucu (bir VPS ya da evdeki bir makine) ya da uykuya geçmeyecek şekilde ayarlanmış bir Mac veya Linux masaüstü.</li>
+      <li>Orada kurulu ve oturum açılmış Claude Code.</li>
+      <li>İki bilgisayarda da <a href="/tr/#download">Antenna</a>: dizüstünüzde uygulama (macOS ya da Linux), diğerinde düğüm ya da uygulama.</li>
+    </ul>
+
+    <h2>Bir sunucuda</h2>
+    <ol>
+      <li>Antenna düğümünü kurun ve oturumu kapattıktan sonra da çalışmasını sağlayın:
+    <pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+    sudo loginctl enable-linger $USER</code></pre>
+      Kurulum betiği Antenna’yı bir systemd kullanıcı servisi olarak ayarlar ve düğümünüzü bir parolayla oluşturur. Lingering’i kendisi açmaz, yalnızca hatırlatır: ikinci satır olmadan servis, oturumu kapattığınızda durur.</li>
+      <li>Sunucuyu dizüstünüzle bir kez eşleştirin. Dizüstünde: <strong>Yeni kişi → Davet et</strong>, <strong>Bu benim kendi bilgisayarım (∞)</strong> seçeneğini işaretleyin, <strong>Bağlantı oluştur</strong> düğmesine basın ve bağlantıyı kopyalayın. Sunucuda: <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>, dizüstünün gösterdiği kodu yazın, ardından dizüstünde <strong>Kişi onayladı — kodlar eşleşiyor</strong> düğmesine basın.</li>
+      <li>Claude Code’u proje klasöründe Antenna üzerinden başlatın (sunucuda tmux gerekir):
+    <pre><code>cd ~/projects/api
+    antenna connect claude-code --agent api-dev --links mac --hello mac
+    antenna session start api-dev --dir ~/projects/api
+    antenna session attach api-dev</code></pre>
+      Claude Code’un klasöre güvenip güvenmediği gibi ilk sorularını yanıtlayın, sonra <code>Ctrl-b d</code> ile ayrılın. Artık dizüstünüzde <code>api-dev</code> adlı bir sohbet var.</li>
+      <li>Sunucunun onay isteklerini dizüstünün yanıtlamasına izin verin: <code>antenna devices confirm mac</code>.</li>
+    </ol>
+    <p>Şimdi SSH oturumunu kapatabilirsiniz. Servis çalışmaya devam eder, Claude Code da Antenna’nın kendi tmux sunucusunda çalışmayı sürdürür; sizin tmux’ınıza dokunulmaz. Her adımın ayrıntısı <a href="/tr/guides/run-claude-code-on-a-vps">VPS’te Claude Code</a> rehberinde.</p>
+
+    <h2>Sürekli açık bir Mac’te ya da masaüstünde</h2>
+    <ol>
+      <li>Bilgisayarın sistem ayarlarından kendi kendine uykuya geçmemesini sağlayın. Antenna bir bilgisayarı uyanık tutmaz.</li>
+      <li>Onu yukarıdaki gibi, <strong>Bu benim kendi bilgisayarım (∞)</strong> işaretli olarak dizüstünüzle eşleştirin.</li>
+      <li>O bilgisayarda <strong>Ajanlar → Yapay zeka uygulamaları</strong> bölümünü açın ve Claude Code’un yanındaki <strong>Code modunda başlat</strong> düğmesine basın. <strong>Yeni ajan…</strong> seçeneğini seçip ona bir ad verin, <strong>Çalışma klasörü</strong> olarak bir klasör seçin, parolanızı girin ve <strong>Başlat</strong> düğmesine basın. Pencere Code moduna geçer ve Claude Code içindeki bir sekmede çalışır.</li>
+      <li>Claude Code’dan, kendi sekmesinde bir kez, Antenna üzerinden dizüstünüze selam vermesini isteyin. Sohbeti ardından dizüstünde belirir.</li>
+      <li>Onay isteklerini dizüstünün yanıtlamasına izin verin: <strong>Cihazlarım</strong> → dizüstünün kartı → <strong>Onaylar</strong> → <strong>… ile imzalanmış onayları kabul et</strong>, parolanızla.</li>
+    </ol>
+    <p>Antenna’nın penceresini açık bırakın: pencereyi kapatmak içinde çalışan ajanları durdurur ve pencere önce size sorar.</p>
+
+    <h2>Onu çalışırken bırakın</h2>
+    <p>Görevi dizüstünüzde ajanın sohbetine yazın: “Migration testlerini çalıştır, başarısız olanları düzelt ve neyin değiştiğini buraya yaz.” Claude Code komut isteminde boşta beklerken Antenna, mesajınızı okuması için yerleşik tek bir satır yazar; bir turun ortasındaysa mesajı tur bittiğinde alır. Antenna sizin metninizi terminale asla yazmaz. <em>Deneysel.</em> Ardından dizüstünü kapatın.</p>
+    <p>Uzun bir çalışmadan önce, kimse başında yokken onu neyin durdurabileceğini kontrol edin:</p>
+    <ul>
+      <li><strong>Claude Code’un kendi izin sorusu</strong> (“Do you want to proceed?”) biri yanıtlayana kadar terminalinde bekler ve Antenna onu asla yanıtlamaz. Görevin ihtiyaç duyduğu araçlara Claude Code’un ayarlarından izin verin.</li>
+      <li><strong>Antenna’nın onay istekleri</strong> 10 dakika bekler. Sonra hiçbir şey çalışmaz ve Claude Code kimsenin onaylamadığını öğrenir. ∞ seviyesindeki kendi bilgisayarınızdan verdiğiniz bir görev, komutlarını ve düzenlemelerini sormadan uygular; <code>CLAUDE.md</code> ya da <code>.claude/</code> gibi Claude Code’un kendi kurulumundaki değişiklikler yine de onay ister.</li>
+    </ul>
+
+    <h2>Dizüstü uyandığında</h2>
+    <p>Dizüstü uyurken Claude Code’un yanıtları diğer bilgisayarın kuyruğunda bekler ve Antenna onları iletmeyi denemeye devam eder. Dizüstü yeniden çevrimiçi olunca yanıtlar sohbete gelir; Antenna’nın penceresi önde değilse bir bildirimle birlikte. Çevrimdışıyken yazdığınız bir mesajda saat simgesi görünür ve mesaj kendiliğinden gönderilir. Hâlâ onayınızı bekleyen istekler, <strong>Cihazlarım</strong> içinde diğer bilgisayarın kartında görünür (<em>deneysel</em>).</p>
+
+    <h2>Diğer bilgisayar yeniden başladıktan sonra</h2>
+    <p>Yeniden başlatmadan sonra anahtarlar kilitlidir, bu yüzden siz parolayı girene kadar o bilgisayarın bağlantıları sessiz kalır. Sunucuda oturum açıp <code>antenna unlock</code> çalıştırın, ardından oturumu yeniden başlatın; <code>--resume</code>, Claude Code’un son oturumuna kaldığı yerden devam eder:</p>
+    <pre><code>antenna session start api-dev --dir ~/projects/api --resume</code></pre>
+    <p>Mac’te parolayı Antenna’nın penceresine girin ve ajanı yeniden başlatın.</p>
+
+    <h2>Sorular</h2>
+    <details>
+      <summary>Dizüstümü kapatırsam Claude Code çalışmaya devam eder mi?</summary>
+      <p>Kapağı kapatmak dizüstünü uyku moduna sokuyorsa, ki genellikle ayar böyledir, hayır: siz kapağı açana kadar Claude Code duraklar. Onu sürekli açık kalan bir bilgisayarda çalıştırırsanız çalışmaya devam eder.</p>
+    </details>
+    <details>
+      <summary>Claude Code dizüstümde arka planda çalışabilir mi?</summary>
+      <p>Dizüstü uyanıkken evet: Code modunda, Antenna penceresinde bakmanız gerekmeyen bir sekmede çalışır ve bir mesaj geldiğinde Antenna onu uyandırır. Yine de dizüstü uyku moduna geçince durur.</p>
+    </details>
+    <details>
+      <summary>Bir SSH oturumunu açık tutmam gerekiyor mu?</summary>
+      <p>Hayır. Claude Code sunucuda Antenna’nın tmux’ında çalışır ve ona sohbetten ulaşırsınız. İki bilgisayar da dışarıya bağlandığı için gelen bağlantılara bir port da açılmaz.</p>
+    </details>
+    <details>
+      <summary>Antenna Mac’imi uyanık tutar mı?</summary>
+      <p>Hayır. Mac’in uykuya geçmemesini sistem ayarlarından sağlayın. Code modu için Antenna’nın penceresi açık kalmalıdır.</p>
+    </details>
+    <details>
+      <summary>Telefonumdan durumuna bakabilir miyim?</summary>
+      <p>Henüz değil. Antenna bugün macOS ve Linux’ta çalışıyor.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna ücretsiz ve açık kaynaklıdır</strong>, macOS ve Linux için. Hesap da telefon numarası da gerekmez.</p>
+      <a class="btn" href="/tr/#download">Antenna’yı indir</a>
+    </aside>
+    <h2>İlgili rehberler</h2>
+    <ul class="related">
+      <li><a href="/tr/guides/run-claude-code-on-a-vps">Claude Code’u VPS’te 7/24 çalıştırın ve dizüstünüzden onunla konuşun</a></li>
+      <li><a href="/tr/guides/claude-code-notifications">Claude Code sunucuda ya da başka bir bilgisayarda işini bitirince bildirim alın</a></li>
+      <li><a href="/tr/guides/approve-claude-code-permissions-remotely">Claude Code’un isteklerini başka bir bilgisayardan onaylayın</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/tr/" aria-label="Antenna — ana sayfa"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/tr/guides/">Rehberler</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>İletişim: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/tr/privacy">Gizlilik politikası</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

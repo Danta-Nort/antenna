@@ -1,0 +1,77 @@
+<!--guide {"title": "लैपटॉप बंद करने पर भी Claude Code चलता रहे, कैसे — Antenna", "h1": "लैपटॉप का lid बंद हो, फिर भी Claude Code चलता रहे", "description": "Lid बंद करते ही लैपटॉप sleep में चला जाता है और Claude Code रुक जाता है। Claude Code को हमेशा चालू कंप्यूटर पर चलाएँ और लैपटॉप से Antenna के ज़रिए tasks दें।", "summary": "लैपटॉप sleep में हो, तब भी server या हमेशा चालू Mac पर रात भर काम करता Claude Code, जिसे आप लैपटॉप से चैट में tasks देते हैं।", "source": "2026-11-15"}-->
+<p class="lead">लैपटॉप पर ही यह मुमकिन नहीं: lid बंद करते ही लैपटॉप sleep में चला जाता है, sleep में पड़ा कंप्यूटर कुछ नहीं चलाता, और Claude Code भी उसके साथ रुक जाता है। रास्ता यह है कि Claude Code को ऐसे कंप्यूटर पर चलाएँ जो चालू रहता है, जैसे Linux server या ऐसा Mac mini जिसे sleep न होने के लिए सेट किया गया हो; वहाँ उसे Antenna के ज़रिए शुरू करें, और अपने लैपटॉप की Antenna चैट से उसे tasks दें। लैपटॉप बंद कर दें: Claude Code दूसरे कंप्यूटर पर काम करता रहता है, और उसके जवाब लैपटॉप का इंतज़ार करते हैं और उसके वापस online आते ही पहुँच जाते हैं।</p>
+
+<h2>यह रुकता क्यों है</h2>
+<p>Claude Code उसी कंप्यूटर पर चलता है जिस पर आप उसे शुरू करते हैं। जब वह कंप्यूटर sleep में जाता है, तो उस पर हर प्रोग्राम रुक जाता है, Claude Code भी, जब तक कंप्यूटर जाग न जाए। जिस terminal या SSH window में वह चल रहा है, उसे बंद करने से भी वह ख़त्म हो जाता है। लैपटॉप को lid बंद रहते हुए भी जगाए रखा जा सकता है, लेकिन तब उसे charger पर लगा और चालू रहना पड़ता है, यानी वह ख़ुद एक server बन जाता है। इसलिए काम ऐसे कंप्यूटर पर जाता है जो हमेशा चालू रहता है, और लैपटॉप सिर्फ़ उससे बात करता है।</p>
+
+<h2>आपको क्या चाहिए</h2>
+<ul>
+  <li>एक कंप्यूटर जो चालू रहे: x86_64 पर एक Linux server (VPS या घर पर रखा कोई), या ऐसा Mac या Linux डेस्कटॉप जिसे sleep न होने के लिए सेट किया गया हो।</li>
+  <li>उस पर Claude Code इंस्टॉल और साइन-इन हो।</li>
+  <li>दोनों कंप्यूटरों पर <a href="/#download">Antenna</a>: आपके लैपटॉप पर app (macOS या Linux), दूसरे पर node या app।</li>
+</ul>
+
+<h2>Server पर</h2>
+<ol>
+  <li>Antenna node इंस्टॉल करें और उसे logout के बाद भी चलने दें:
+<pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+sudo loginctl enable-linger $USER</code></pre>
+  Installer Antenna को systemd user service के रूप में सेट करता है और एक password के साथ आपका node बनाता है। वह lingering चालू नहीं करता, सिर्फ़ याद दिलाता है: दूसरी लाइन के बिना logout करते ही service रुक जाती है।</li>
+  <li>Server को एक बार अपने लैपटॉप से जोड़ें। लैपटॉप पर: <strong>नया कॉन्टैक्ट → इनवाइट करें</strong>, <strong>यह मेरा अपना कंप्यूटर है (∞)</strong> पर tick करें, <strong>लिंक बनाएँ</strong> दबाएँ और लिंक कॉपी करें। Server पर: <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>, लैपटॉप पर दिखा कोड टाइप करें, फिर लैपटॉप पर <strong>कॉन्टैक्ट ने पुष्टि की — कोड मेल खाते हैं</strong> दबाएँ।</li>
+  <li>प्रोजेक्ट फ़ोल्डर में Claude Code को Antenna के ज़रिए शुरू करें (server पर tmux चाहिए):
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api
+antenna session attach api-dev</code></pre>
+  Claude Code के पहले सवालों का जवाब दें, जैसे कि क्या वह फ़ोल्डर पर भरोसा करे, फिर <code>Ctrl-b d</code> से बाहर निकलें। अब आपके लैपटॉप पर <code>api-dev</code> नाम की चैट है।</li>
+  <li>लैपटॉप को server के approval requests का जवाब देने दें: <code>antenna devices confirm mac</code>।</li>
+</ol>
+<p>अब SSH से logout कर दें। Service चलती रहती है, और Claude Code Antenna के अपने tmux server में चलता रहता है; आपके अपने tmux को छुआ नहीं जाता। हर कदम विस्तार से <a href="/guides/run-claude-code-on-a-vps">VPS पर Claude Code</a> में है।</p>
+
+<h2>हमेशा चालू Mac या डेस्कटॉप पर</h2>
+<ol>
+  <li>कंप्यूटर की system settings में उसे अपने-आप sleep न होने के लिए सेट करें। Antenna कंप्यूटर को जगाए नहीं रखता।</li>
+  <li>ऊपर की तरह उसे अपने लैपटॉप से जोड़ें, <strong>यह मेरा अपना कंप्यूटर है (∞)</strong> पर tick लगाकर।</li>
+  <li>उस कंप्यूटर पर <strong>Agents → AI apps</strong> खोलें और Claude Code के बगल में <strong>Code mode में शुरू करें</strong> दबाएँ। <strong>नया agent…</strong> चुनें और उसे नाम दें, <strong>काम का फ़ोल्डर</strong> चुनें, अपना password डालें और <strong>शुरू करें</strong> दबाएँ। Window Code mode में चली जाती है, और Claude Code उसके अंदर एक tab में चलता है।</li>
+  <li>Claude Code से उसके tab में एक बार कहें कि वह Antenna के ज़रिए आपके लैपटॉप को hello भेजे। फिर उसकी चैट लैपटॉप पर आ जाती है।</li>
+  <li>लैपटॉप को उसके approval requests का जवाब देने दें: <strong>My devices</strong> → लैपटॉप का कार्ड → <strong>मंज़ूरियाँ</strong> → <strong>… से signed मंज़ूरियाँ स्वीकार करें</strong>, अपने password के साथ।</li>
+</ol>
+<p>Antenna की window खुली रहने दें: उसे बंद करने से उसमें चल रहे agents रुक जाते हैं, और window पहले पूछती है।</p>
+
+<h2>उसे काम पर छोड़ दें</h2>
+<p>लैपटॉप पर agent की चैट में task लिखें: “migration tests चलाओ, जो fail हों उन्हें ठीक करो, और यहीं बताओ कि क्या बदला।” जब Claude Code अपने prompt पर ख़ाली बैठा होता है, Antenna एक तय लाइन टाइप करता है ताकि वह आपका मैसेज पढ़े; अगर वह किसी turn के बीच में है, तो turn ख़त्म होने पर उसे मैसेज मिलता है। Antenna आपका टेक्स्ट कभी terminal में टाइप नहीं करता। <em>Experimental।</em> फिर लैपटॉप बंद कर दें।</p>
+<p>लंबे run से पहले देख लें कि कोई पास न हो तो उसे क्या रोक सकता है:</p>
+<ul>
+  <li><strong>Claude Code का अपना permission prompt</strong> (“Do you want to proceed?”) उसके terminal में तब तक इंतज़ार करता है जब तक कोई जवाब न दे, और Antenna उसका जवाब कभी नहीं देता। Task को जिन tools की ज़रूरत है, उन्हें Claude Code की settings में allow कर दें।</li>
+  <li><strong>Antenna के approval requests</strong> 10 मिनट इंतज़ार करते हैं। उसके बाद कुछ नहीं चलता, और Claude Code को पता चलता है कि किसी ने मंज़ूरी नहीं दी। ∞ पर आपके अपने कंप्यूटर से दिया गया task अपनी commands और edits बिना पूछे चलाता है; Claude Code के अपने setup में बदलाव, जैसे <code>CLAUDE.md</code> या <code>.claude/</code>, के लिए अब भी पूछा जाता है।</li>
+</ul>
+
+<h2>जब लैपटॉप जागता है</h2>
+<p>लैपटॉप sleep में रहते हुए Claude Code के जवाब दूसरे कंप्यूटर की queue में इंतज़ार करते हैं, और Antenna उन्हें पहुँचाने की कोशिश करता रहता है। लैपटॉप के वापस online आते ही वे चैट में आ जाते हैं, और अगर Antenna की window सामने नहीं है तो notification के साथ। Offline रहते हुए लिखा गया मैसेज घड़ी का निशान दिखाता है और अपने-आप चला जाता है। जो requests अब भी आपकी मंज़ूरी का इंतज़ार कर रहे हैं, वे <strong>My devices</strong> में दूसरे कंप्यूटर के कार्ड पर दिखते हैं (<em>experimental</em>)।</p>
+
+<h2>दूसरा कंप्यूटर restart होने के बाद</h2>
+<p>Restart के बाद keys लॉक हो जाती हैं, इसलिए जब तक आप password नहीं डालते, उसके लिंक चुप रहते हैं। Server पर login करें और <code>antenna unlock</code> चलाएँ, फिर session दोबारा शुरू करें; <code>--resume</code> Claude Code का पिछला session आगे बढ़ाता है:</p>
+<pre><code>antenna session start api-dev --dir ~/projects/api --resume</code></pre>
+<p>Mac पर Antenna की window में password डालें और agent को फिर से शुरू करें।</p>
+
+<h2>सवाल-जवाब</h2>
+<details>
+  <summary>क्या लैपटॉप बंद करने पर Claude Code चलता रहता है?</summary>
+  <p>नहीं, अगर lid बंद करने पर लैपटॉप sleep में चला जाता है, जो आम setting है: Claude Code तब तक रुका रहता है जब तक आप लैपटॉप खोल न दें। उसे ऐसे कंप्यूटर पर चलाएँ जो चालू रहता है, तो वह काम करता रहता है।</p>
+</details>
+<details>
+  <summary>क्या Claude Code मेरे लैपटॉप पर background में चल सकता है?</summary>
+  <p>जब तक लैपटॉप जागा है, हाँ: Code mode में वह Antenna की window के एक tab में चलता है जिसे आपको देखते रहने की ज़रूरत नहीं, और मैसेज आने पर Antenna उसे जगाता है। फिर भी लैपटॉप sleep में जाने पर वह रुक जाता है।</p>
+</details>
+<details>
+  <summary>क्या मुझे SSH session खुला रखना होगा?</summary>
+  <p>नहीं। Claude Code server पर Antenna के tmux में चलता है, और आप चैट के ज़रिए उस तक पहुँचते हैं। दोनों कंप्यूटर बाहर की ओर कनेक्ट करते हैं, इसलिए कोई inbound port भी नहीं खुलता।</p>
+</details>
+<details>
+  <summary>क्या Antenna मेरे Mac को जगाए रखता है?</summary>
+  <p>नहीं। Mac की system settings में उसे sleep न होने के लिए सेट करें। Code mode के लिए Antenna की window खुली रहनी चाहिए।</p>
+</details>
+<details>
+  <summary>क्या मैं फ़ोन से उसका हाल देख सकता हूँ?</summary>
+  <p>अभी नहीं। Antenna आज macOS और Linux पर चलता है।</p>
+</details>

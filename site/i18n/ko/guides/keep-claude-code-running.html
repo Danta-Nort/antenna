@@ -1,0 +1,77 @@
+<!--guide {"title": "노트북을 닫아도 Claude Code 계속 돌리는 방법 — Antenna", "h1": "노트북을 닫아 둔 동안에도 Claude Code가 계속 일하게 하기", "description": "노트북을 닫으면 잠자기에 들어가고 Claude Code도 멈춰요. 늘 켜져 있는 컴퓨터에서 Claude Code를 돌리고, 노트북에서 Antenna로 작업을 맡기세요.", "summary": "노트북이 잠든 사이에도 서버나 늘 켜 둔 Mac에서 밤새 일하는 Claude Code에, 노트북 채팅으로 작업을 맡겨요.", "source": "2026-11-15"}-->
+<p class="lead">노트북 자체로는 안 돼요. 덮개를 닫으면 노트북이 잠자기에 들어가고, 잠든 컴퓨터에서는 아무것도 돌지 않으니 Claude Code도 함께 멈춰요. 방법은 Linux 서버나 잠자기하지 않게 설정한 Mac mini처럼 계속 켜져 있는 컴퓨터에서 Claude Code를 돌리는 거예요. 거기서 Antenna로 Claude Code를 시작하고, 노트북의 Antenna 채팅으로 작업을 맡기세요. 노트북을 닫아도 Claude Code는 다른 컴퓨터에서 계속 일하고, 답장은 노트북을 기다렸다가 노트북이 다시 온라인이 되면 도착해요.</p>
+
+<h2>왜 멈출까요</h2>
+<p>Claude Code는 실행한 컴퓨터에서 돌아요. 그 컴퓨터가 잠자기에 들어가면 Claude Code를 포함한 모든 프로그램이 깨어날 때까지 멈춰요. Claude Code가 돌고 있는 터미널이나 SSH 창을 닫아도 끝나요. 덮개를 닫은 채로 노트북을 깨어 있게 할 수도 있지만, 그러려면 전원에 꽂고 켜 둬야 하니 사실상 서버가 된 셈이에요. 그래서 일은 늘 켜져 있는 컴퓨터로 옮기고, 노트북은 그 컴퓨터와 대화만 해요.</p>
+
+<h2>준비물</h2>
+<ul>
+  <li>계속 켜져 있는 컴퓨터: x86_64 Linux 서버(VPS든 집에 있는 서버든), 또는 잠자기하지 않게 설정한 Mac이나 Linux 데스크톱.</li>
+  <li>그 컴퓨터에 설치되고 로그인된 Claude Code.</li>
+  <li>두 컴퓨터 모두에 <a href="/#download">Antenna</a>: 노트북에는 앱(macOS 또는 Linux), 다른 컴퓨터에는 노드나 앱.</li>
+</ul>
+
+<h2>서버에서</h2>
+<ol>
+  <li>Antenna 노드를 설치하고, 로그아웃한 뒤에도 돌게 하세요.
+<pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+sudo loginctl enable-linger $USER</code></pre>
+  설치 스크립트는 Antenna를 systemd 사용자 서비스로 설정하고, 비밀번호로 노드를 만들어요. lingering은 켜지 않고 알려 주기만 해요. 두 번째 줄이 없으면 로그아웃할 때 서비스가 멈춰요.</li>
+  <li>서버와 노트북을 한 번 페어링하세요. 노트북에서 <strong>새 연락처 → 초대</strong>로 가서 <strong>내 컴퓨터예요(∞)</strong>를 체크하고, <strong>링크 만들기</strong>를 눌러 링크를 복사하세요. 서버에서 <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>을 실행하고 노트북에 표시된 코드를 입력한 다음, 노트북에서 <strong>연락처가 확인함: 코드 일치</strong>를 누르세요.</li>
+  <li>프로젝트 폴더에서 Antenna로 Claude Code를 시작하세요(서버에 tmux가 있어야 해요).
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api
+antenna session attach api-dev</code></pre>
+  폴더를 신뢰할지 같은 Claude Code의 첫 질문에 답한 다음, <code>Ctrl-b d</code>로 빠져나오세요. 이제 노트북에 <code>api-dev</code>라는 채팅이 생겼어요.</li>
+  <li>서버의 승인 요청에 노트북이 답할 수 있게 하세요: <code>antenna devices confirm mac</code>.</li>
+</ol>
+<p>이제 SSH에서 로그아웃해도 돼요. 서비스는 계속 돌고, Claude Code도 Antenna 전용 tmux 서버에서 계속 돌아요. 내 tmux는 건드리지 않아요. 단계별 자세한 설명은 <a href="/guides/run-claude-code-on-a-vps">VPS에서 Claude Code 돌리기</a>에 있어요.</p>
+
+<h2>늘 켜져 있는 Mac이나 데스크톱에서</h2>
+<ol>
+  <li>시스템 설정에서 컴퓨터가 저절로 잠자기에 들어가지 않게 하세요. Antenna는 컴퓨터를 깨어 있게 하지 않아요.</li>
+  <li>위와 같이 <strong>내 컴퓨터예요(∞)</strong>를 체크해서 노트북과 페어링하세요.</li>
+  <li>그 컴퓨터에서 <strong>에이전트 → AI 앱</strong>을 열고 Claude Code 옆의 <strong>Code 모드로 시작</strong>을 누르세요. <strong>새 에이전트…</strong>를 골라 이름을 붙이고, <strong>작업 폴더</strong>를 고르고, 비밀번호를 입력한 다음 <strong>시작</strong>을 누르세요. 창이 Code 모드로 바뀌고, 그 안의 탭에서 Claude Code가 돌아요.</li>
+  <li>Claude Code의 탭에서 한 번만, Antenna로 노트북에 인사하라고 부탁하세요. 그러면 노트북에 그 채팅이 나타나요.</li>
+  <li>그 승인 요청에 노트북이 답할 수 있게 하세요. <strong>내 기기</strong> → 노트북의 카드 → <strong>승인</strong> → <strong>…(으)로 서명된 승인 받아들이기</strong>에서 비밀번호를 입력하면 돼요.</li>
+</ol>
+<p>Antenna 창은 열어 두세요. 창을 닫으면 그 안에서 돌던 에이전트가 멈추고, 창은 닫기 전에 먼저 물어봐요.</p>
+
+<h2>일을 맡겨 두기</h2>
+<p>노트북에 있는 에이전트의 채팅에 작업을 쓰세요: “마이그레이션 테스트 돌리고, 실패하는 거 고치고, 뭐가 바뀌었는지 여기에 답해 줘.” Claude Code가 프롬프트에서 쉬고 있으면 Antenna가 내장된 한 줄을 입력해서 메시지를 읽게 해요. 턴 도중이면 그 턴이 끝날 때 메시지를 받아요. Antenna는 내 텍스트를 터미널에 입력하지 않아요. <em>실험적 기능이에요.</em> 그다음 노트북을 닫으세요.</p>
+<p>오래 걸리는 작업 전에는, 아무도 없는 동안 작업을 멈추게 할 수 있는 것을 확인해 두세요.</p>
+<ul>
+  <li><strong>Claude Code 자체의 권한 확인 창</strong>(“Do you want to proceed?”)은 누군가 답할 때까지 터미널에서 기다리고, Antenna는 거기에 답하지 않아요. 작업에 필요한 도구는 Claude Code 설정에서 허용해 두세요.</li>
+  <li><strong>Antenna의 승인 요청</strong>은 10분 동안 기다려요. 그 뒤에는 아무것도 실행되지 않고, Claude Code는 아무도 승인하지 않았다는 걸 알게 돼요. ∞인 내 컴퓨터에서 맡긴 작업은 명령과 편집을 묻지 않고 실행해요. 다만 <code>CLAUDE.md</code>나 <code>.claude/</code> 같은 Claude Code 자체 설정의 변경은 그래도 물어봐요.</li>
+</ul>
+
+<h2>노트북이 깨어나면</h2>
+<p>노트북이 잠든 동안 Claude Code의 답장은 다른 컴퓨터의 대기열에서 기다리고, Antenna는 계속 전달을 시도해요. 노트북이 다시 온라인이 되면 답장이 채팅에 도착하고, Antenna 창이 앞에 있지 않으면 알림도 와요. 오프라인일 때 쓴 메시지에는 시계 표시가 붙고, 저절로 전송돼요. 아직 승인을 기다리는 요청은 <strong>내 기기</strong>에서 다른 컴퓨터의 카드에 보여요(<em>실험적 기능</em>).</p>
+
+<h2>다른 컴퓨터가 재시작되면</h2>
+<p>재시작한 뒤에는 키가 잠기기 때문에, 비밀번호를 입력할 때까지 그 컴퓨터의 연결은 조용히 있어요. 서버에서는 로그인해서 <code>antenna unlock</code>을 실행한 다음 세션을 다시 시작하세요. <code>--resume</code>을 붙이면 Claude Code의 마지막 세션을 이어가요.</p>
+<pre><code>antenna session start api-dev --dir ~/projects/api --resume</code></pre>
+<p>Mac에서는 Antenna 창에 비밀번호를 입력하고 에이전트를 다시 시작하세요.</p>
+
+<h2>자주 묻는 질문</h2>
+<details>
+  <summary>노트북을 닫아도 Claude Code가 계속 도나요?</summary>
+  <p>덮개를 닫으면 잠자기에 들어가는 설정이라면(보통 그래요) 아니요. 다시 열 때까지 Claude Code는 멈춰 있어요. 계속 켜져 있는 컴퓨터에서 돌리면 일을 이어가요.</p>
+</details>
+<details>
+  <summary>노트북에서 Claude Code를 백그라운드로 돌릴 수 있나요?</summary>
+  <p>노트북이 깨어 있는 동안은 돼요. Code 모드에서는 굳이 보지 않아도 되는 Antenna 창의 탭에서 돌고, 메시지가 오면 Antenna가 깨워요. 그래도 노트북이 잠자기에 들어가면 멈춰요.</p>
+</details>
+<details>
+  <summary>SSH 세션을 계속 열어 둬야 하나요?</summary>
+  <p>아니요. Claude Code는 서버에 있는 Antenna의 tmux에서 돌고, 채팅으로 닿을 수 있어요. 두 컴퓨터 모두 바깥으로 연결하니, 인바운드 포트를 열 일도 없어요.</p>
+</details>
+<details>
+  <summary>Antenna가 Mac을 깨어 있게 해 주나요?</summary>
+  <p>아니요. Mac의 시스템 설정에서 잠자기하지 않게 설정하세요. Code 모드를 쓰려면 Antenna 창이 열려 있어야 해요.</p>
+</details>
+<details>
+  <summary>휴대폰으로 확인할 수 있나요?</summary>
+  <p>아직은 안 돼요. 지금 Antenna는 macOS와 Linux에서 돌아가요.</p>
+</details>

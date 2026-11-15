@@ -89,6 +89,7 @@ server: [Add a server and its agents](docs/guide/add-a-server.md).
 Short guides for common setups ([all of them](https://antenna.contact/guides/)):
 
 - [Run Claude Code on a VPS 24/7 and talk to it from your laptop](https://antenna.contact/guides/run-claude-code-on-a-vps)
+- [Keep Claude Code running when your laptop is closed](https://antenna.contact/guides/keep-claude-code-running)
 - [Make Claude Code and Codex talk to each other](https://antenna.contact/guides/claude-code-and-codex-talk-to-each-other)
 - [Use Gemini CLI and Claude Code together](https://antenna.contact/guides/gemini-cli-and-claude-code)
 - [Approve Claude Code permissions from any of your computers](https://antenna.contact/guides/approve-claude-code-permissions-remotely)

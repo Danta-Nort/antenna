@@ -1,0 +1,77 @@
+<!--guide {"title": "Claude Code bei zugeklapptem Laptop weiterlaufen lassen — Antenna", "h1": "Claude Code weiterarbeiten lassen, während der Laptop zugeklappt ist", "description": "Ein zugeklappter Laptop schläft, und Claude Code hält mit an. Lassen Sie es auf einem Rechner laufen, der an bleibt, und geben Sie ihm per Antenna Aufgaben.", "summary": "Claude Code, das nachts auf einem Server oder einem ständig laufenden Mac weiterarbeitet, während Ihr Laptop schläft, mit Aufgaben per Chat vom Laptop.", "source": "2026-11-15"}-->
+<p class="lead">Auf dem Laptop selbst geht das nicht: Zuklappen schickt den Laptop in den Ruhezustand, ein schlafender Computer führt nichts aus, und Claude Code pausiert mit ihm. Der Ausweg: Claude Code auf einem Computer betreiben, der eingeschaltet bleibt, etwa einem Linux-Server oder einem Mac mini, der nicht in den Ruhezustand geht, es dort über Antenna starten und ihm Aufgaben aus dem Antenna-Chat Ihres Laptops geben. Klappen Sie den Laptop zu: Claude Code arbeitet auf dem anderen Computer weiter, und seine Antworten warten auf den Laptop und kommen an, sobald er wieder online ist.</p>
+
+<h2>Warum es anhält</h2>
+<p>Claude Code läuft auf dem Computer, auf dem Sie es starten. Geht dieser Computer in den Ruhezustand, hält jedes Programm darauf an, Claude Code eingeschlossen, bis er wieder aufwacht. Auch wer das Terminal oder das SSH-Fenster schließt, in dem es läuft, beendet es. Man kann einen Laptop auch zugeklappt wach halten, aber dann muss er am Strom und eingeschaltet bleiben, und er ist zum Server geworden. Also wandert die Arbeit auf einen Computer, der immer an ist, und der Laptop spricht nur noch mit ihm.</p>
+
+<h2>Was Sie brauchen</h2>
+<ul>
+  <li>Einen Computer, der eingeschaltet bleibt: einen Linux-Server auf x86_64 (einen VPS oder einen zu Hause) oder einen Mac oder Linux-Desktop, der nicht in den Ruhezustand geht.</li>
+  <li>Claude Code, dort installiert und angemeldet.</li>
+  <li><a href="/#download">Antenna</a> auf beiden Computern: die App auf Ihrem Laptop (macOS oder Linux), den Knoten oder die App auf dem anderen.</li>
+</ul>
+
+<h2>Auf einem Server</h2>
+<ol>
+  <li>Installieren Sie den Antenna-Knoten und lassen Sie ihn nach dem Abmelden weiterlaufen:
+<pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+sudo loginctl enable-linger $USER</code></pre>
+  Das Installationsskript richtet Antenna als systemd-User-Service ein und legt Ihren Knoten mit einem Passwort an. Lingering schaltet es nicht ein, es erinnert Sie nur daran: Ohne die zweite Zeile hält der Dienst an, wenn Sie sich abmelden.</li>
+  <li>Koppeln Sie den Server einmal mit Ihrem Laptop. Auf dem Laptop: <strong>Neuer Kontakt → Einladen</strong>, Häkchen bei <strong>Das ist mein eigener Computer (∞)</strong> setzen, auf <strong>Link erstellen</strong> klicken und den Link kopieren. Auf dem Server: <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>, den Code eintippen, den der Laptop zeigt, und dann auf dem Laptop auf <strong>Kontakt hat bestätigt — Codes stimmen</strong> klicken.</li>
+  <li>Starten Sie Claude Code über Antenna im Projektordner (der Server braucht tmux):
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api
+antenna session attach api-dev</code></pre>
+  Beantworten Sie die ersten Fragen von Claude Code, etwa ob es dem Ordner vertraut, und verlassen Sie die Sitzung dann mit <code>Ctrl-b d</code>. Auf Ihrem Laptop gibt es jetzt einen Chat namens <code>api-dev</code>.</li>
+  <li>Lassen Sie den Laptop die Freigabeanfragen des Servers beantworten: <code>antenna devices confirm mac</code>.</li>
+</ol>
+<p>Melden Sie sich jetzt von SSH ab. Der Dienst läuft weiter, und Claude Code läuft in Antennas eigenem tmux-Server weiter; Ihr eigenes tmux bleibt unberührt. <a href="/guides/run-claude-code-on-a-vps">Claude Code auf einem VPS</a> beschreibt jeden Schritt ausführlicher.</p>
+
+<h2>Auf einem Mac oder Desktop, der an bleibt</h2>
+<ol>
+  <li>Stellen Sie in den Systemeinstellungen des Computers ein, dass er nicht von selbst in den Ruhezustand geht. Antenna hält keinen Computer wach.</li>
+  <li>Koppeln Sie ihn wie oben mit Ihrem Laptop, mit Häkchen bei <strong>Das ist mein eigener Computer (∞)</strong>.</li>
+  <li>Öffnen Sie dort <strong>Agenten → KI-Apps</strong> und klicken Sie neben Claude Code auf <strong>Im Code-Modus starten</strong>. Wählen Sie <strong>Neuer Agent…</strong> und geben Sie ihm einen Namen, wählen Sie den <strong>Arbeitsordner</strong>, geben Sie Ihr Passwort ein und klicken Sie auf <strong>Starten</strong>. Das Fenster wechselt in den Code-Modus, und Claude Code läuft darin in einem Tab.</li>
+  <li>Bitten Sie Claude Code einmal in seinem Tab, Ihrem Laptop über Antenna Hallo zu sagen. Dann erscheint sein Chat auf dem Laptop.</li>
+  <li>Lassen Sie den Laptop seine Freigabeanfragen beantworten: <strong>Meine Geräte</strong> → die Karte des Laptops → <strong>Freigaben</strong> → <strong>Mit … signierte Freigaben annehmen</strong>, mit Ihrem Passwort.</li>
+</ol>
+<p>Lassen Sie das Fenster von Antenna offen: Wer es schließt, stoppt die Agenten, die darin laufen, und das Fenster fragt vorher nach.</p>
+
+<h2>Es arbeiten lassen</h2>
+<p>Schreiben Sie die Aufgabe im Chat des Agenten auf Ihrem Laptop: „Führ die Migrationstests aus, behebe, was fehlschlägt, und antworte hier, was sich geändert hat.“ Wartet Claude Code untätig an seiner Eingabezeile, tippt Antenna eine fest eingebaute Zeile, damit es Ihre Nachricht liest; steckt es mitten in einem Durchgang, bekommt es die Nachricht, wenn der Durchgang endet. Antenna tippt Ihren Text nie ins Terminal. <em>Experimentell.</em> Dann klappen Sie den Laptop zu.</p>
+<p>Prüfen Sie vor einem langen Lauf, was ihn anhalten könnte, während niemand da ist:</p>
+<ul>
+  <li><strong>Die eigene Berechtigungsabfrage von Claude Code</strong> („Do you want to proceed?“) wartet in seinem Terminal, bis jemand antwortet, und Antenna beantwortet sie nie. Erlauben Sie die Tools, die die Aufgabe braucht, in den Einstellungen von Claude Code.</li>
+  <li><strong>Die Freigabeanfragen von Antenna</strong> warten 10 Minuten. Danach läuft nichts, und Claude Code erfährt, dass niemand freigegeben hat. Eine Aufgabe, die Sie von Ihrem eigenen Computer auf ∞ geben, führt ihre Befehle und Änderungen aus, ohne zu fragen; Änderungen an der eigenen Einrichtung von Claude Code, etwa an <code>CLAUDE.md</code> oder <code>.claude/</code>, fragen trotzdem nach.</li>
+</ul>
+
+<h2>Wenn der Laptop aufwacht</h2>
+<p>Während der Laptop schläft, warten die Antworten von Claude Code in der Warteschlange des anderen Computers, und Antenna versucht weiter, sie zuzustellen. Sobald der Laptop wieder online ist, kommen sie im Chat an, mit einer Benachrichtigung, solange das Fenster von Antenna nicht im Vordergrund ist. Eine Nachricht, die Sie offline geschrieben haben, zeigt eine Uhr und geht von selbst raus. Anfragen, die noch auf Ihre Freigabe warten, erscheinen auf der Karte des anderen Computers unter <strong>Meine Geräte</strong> (<em>experimentell</em>).</p>
+
+<h2>Nach einem Neustart des anderen Computers</h2>
+<p>Nach einem Neustart sind die Schlüssel gesperrt, seine Verbindungen bleiben also stumm, bis Sie das Passwort eingeben. Auf einem Server melden Sie sich an, führen <code>antenna unlock</code> aus und starten die Sitzung neu; <code>--resume</code> setzt die letzte Sitzung von Claude Code fort:</p>
+<pre><code>antenna session start api-dev --dir ~/projects/api --resume</code></pre>
+<p>Auf einem Mac geben Sie das Passwort im Fenster von Antenna ein und starten den Agenten neu.</p>
+
+<h2>Fragen</h2>
+<details>
+  <summary>Läuft Claude Code weiter, wenn ich den Laptop zuklappe?</summary>
+  <p>Nicht, wenn der Laptop beim Zuklappen in den Ruhezustand geht, und so ist er üblicherweise eingestellt: Claude Code pausiert, bis Sie ihn wieder aufklappen. Lassen Sie es auf einem Computer laufen, der eingeschaltet bleibt, dann arbeitet es weiter.</p>
+</details>
+<details>
+  <summary>Kann Claude Code auf meinem Laptop im Hintergrund laufen?</summary>
+  <p>Solange der Laptop wach ist, ja: Im Code-Modus läuft es in einem Tab des Antenna-Fensters, den Sie nicht ansehen müssen, und Antenna weckt es, wenn eine Nachricht eintrifft. Schläft der Laptop, hält es trotzdem an.</p>
+</details>
+<details>
+  <summary>Muss ich eine SSH-Sitzung offen halten?</summary>
+  <p>Nein. Claude Code läuft in Antennas tmux auf dem Server, und Sie erreichen es über den Chat. Beide Computer bauen die Verbindung nach außen auf, es wird also auch kein eingehender Port geöffnet.</p>
+</details>
+<details>
+  <summary>Hält Antenna meinen Mac wach?</summary>
+  <p>Nein. Stellen Sie in den Systemeinstellungen des Mac ein, dass er nicht in den Ruhezustand geht. Für den Code-Modus muss das Fenster von Antenna offen bleiben.</p>
+</details>
+<details>
+  <summary>Kann ich vom Handy aus nachsehen?</summary>
+  <p>Noch nicht. Antenna läuft derzeit unter macOS und Linux.</p>
+</details>

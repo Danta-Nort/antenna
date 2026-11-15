@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Code remote control: लैपटॉप से दूसरे कंप्यूटर पर चलाएँ</title>
+<meta name="description" content="Claude Code को अपने server या डेस्कटॉप पर चलाएँ और लैपटॉप की Antenna चैट से उसे tasks दें: peer-to-peer, end-to-end encrypted, बिना अकाउंट।">
+<link rel="canonical" href="https://antenna.contact/hi/guides/claude-code-remote-control">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Claude Code remote control: लैपटॉप से दूसरे कंप्यूटर पर चलाएँ">
+<meta property="og:description" content="Claude Code को अपने server या डेस्कटॉप पर चलाएँ और लैपटॉप की Antenna चैट से उसे tasks दें: peer-to-peer, end-to-end encrypted, बिना अकाउंट।">
+<meta property="og:url" content="https://antenna.contact/hi/guides/claude-code-remote-control">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="hi_IN">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/claude-code-remote-control">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/hi/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "गाइड",
+     "item": "https://antenna.contact/hi/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "दूसरे कंप्यूटर पर चल रहे Claude Code को अपने लैपटॉप से चलाएँ",
+     "item": "https://antenna.contact/hi/guides/claude-code-remote-control"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "दूसरे कंप्यूटर पर चल रहे Claude Code को अपने लैपटॉप से चलाएँ",
+   "description": "Claude Code को अपने server या डेस्कटॉप पर चलाएँ और लैपटॉप की Antenna चैट से उसे tasks दें: peer-to-peer, end-to-end encrypted, बिना अकाउंट।",
+   "datePublished": "2026-11-15",
+   "dateModified": "2026-11-15",
+   "inLanguage": "hi",
+   "url": "https://antenna.contact/hi/guides/claude-code-remote-control",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/hi/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "क्या मुझे लैपटॉप पर Claude Code का terminal दिखता है?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "नहीं। आप चैट में tasks देते हैं और जवाब पढ़ते हैं; terminal दूसरे कंप्यूटर पर रहता है। उसे देखने के लिए वहाँ antenna session attach चलाएँ, चाहें तो SSH से।"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "क्या दूसरे कंप्यूटर को public IP या खुले ports चाहिए?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "नहीं। दोनों कंप्यूटर बाहर की ओर कनेक्ट करते हैं, network इजाज़त दे तो सीधे, वरना relay के ज़रिए। Relay सिर्फ़ encrypted ट्रैफ़िक आगे भेजता है।"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "और कौन उसे tasks दे सकता है?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "सिर्फ़ उस कंप्यूटर से जुड़े वे कॉन्टैक्ट्स जिनके मैसेज agent पढ़ सकता है (--links mac के साथ, सिर्फ़ आपका लैपटॉप), और वे agents जिन्हें आप agent map पर उससे जोड़ते हैं। किसी कॉन्टैक्ट का मैसेज उससे क्या करवा सकता है, यह वहाँ Antenna का daemon उस कॉन्टैक्ट के trust level के हिसाब से तय करता है, Claude Code नहीं।"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "क्या इसके लिए API key चाहिए?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "नहीं। Claude Code जिस कंप्यूटर पर चलता है, वहाँ आपका अपना साइन-इन रखता है, और Antenna सिर्फ़ मैसेज, फ़ाइलें और approvals पहुँचाता है।"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "क्या मैं इसे फ़ोन से चला सकता हूँ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "अभी नहीं। Antenna आज macOS और Linux पर चलता है।"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">सीधे कंटेंट पर जाएँ</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/hi/" aria-label="Antenna — होम"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="मुख्य">
+      <a href="/hi/#product">प्रोडक्ट</a>
+      <a href="/hi/#security">सुरक्षा</a>
+      <a href="/hi/guides/">गाइड</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="भाषा: हिन्दी"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">HI</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/claude-code-remote-control" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/claude-code-remote-control" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/claude-code-remote-control" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/claude-code-remote-control" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/claude-code-remote-control" hreflang="hi" lang="hi" aria-current="true">हिन्दी</a></li>
+        <li><a href="/ar/guides/claude-code-remote-control" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/claude-code-remote-control" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/claude-code-remote-control" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/claude-code-remote-control" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/claude-code-remote-control" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/claude-code-remote-control" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/claude-code-remote-control" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/claude-code-remote-control" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/claude-code-remote-control" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/claude-code-remote-control" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/hi/#download">डाउनलोड</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="ब्रेडक्रंब"><a href="/hi/">Antenna</a> <span aria-hidden="true">›</span> <a href="/hi/guides/">गाइड</a></nav>
+    <p class="eyebrow">अपडेट किया गया <time datetime="2026-11-15">15 नवंबर 2026</time></p>
+    <h1>दूसरे कंप्यूटर पर चल रहे Claude Code को अपने लैपटॉप से चलाएँ</h1>
+    <p class="lead">अपने लैपटॉप पर और उस कंप्यूटर पर Antenna इंस्टॉल करें जहाँ Claude Code चलता है, दोनों को एक बार अपने कंप्यूटरों के रूप में जोड़ें, और वहाँ Claude Code को Antenna के ज़रिए शुरू करें। आपके लैपटॉप पर उस session की चैट आ जाती है: उसमें task लिखें, Claude Code ख़ाली बैठा हो तो Antenna उसे जगाता है, और उसका जवाब चैट में लौट आता है। मैसेज आपके दोनों कंप्यूटरों के बीच end-to-end encrypted, peer-to-peer लिंक पर जाते हैं, Antenna को किसी अकाउंट की ज़रूरत नहीं, और जिन कदमों के लिए आपकी मंज़ूरी चाहिए वे लैपटॉप तक पहुँचते हैं, जहाँ आप अपने password से जवाब देते हैं।</p>
+
+    <h2>Claude Code का अपना Remote Control, और Antenna</h2>
+    <p>Claude Code में अपना built-in Remote Control feature है; Anthropic का documentation उसके बारे में बताता है। यह guide एक अलग setup के बारे में है: Claude Code आपके किसी ऐसे कंप्यूटर पर चलता है जो चालू रहता है, server या डेस्कटॉप, और आप उसे अपने लैपटॉप पर Antenna से चलाते हैं। यह आपके काम का है अगर आप चाहते हैं:</p>
+    <ul>
+      <li><strong>कई कंप्यूटरों पर कई sessions, एक ही list में।</strong> हर session की अपनी चैट होती है, और <strong>My devices</strong> हर कंप्यूटर की हालत, उसके agents और वहाँ इंतज़ार कर रहे requests दिखाता है।</li>
+      <li><strong>आपका अपना लिंक।</strong> मैसेज एक कंप्यूटर पर encrypt होते हैं और दूसरे पर decrypt। Network इजाज़त दे तो आपके कंप्यूटर सीधे कनेक्ट होते हैं, वरना ऐसे relay के ज़रिए जो सिर्फ़ encrypted ट्रैफ़िक आगे भेजता है। न अकाउंट, न inbound port।</li>
+      <li><strong>Permissions Antenna का daemon जाँचता है</strong>, उसी कंप्यूटर पर जहाँ Claude Code चलता है, और approvals का जवाब आप अपने उस कंप्यूटर से देते हैं जिस पर आप बैठे हैं।</li>
+      <li><strong>दूसरे agents भी इसी तरह:</strong> Codex भी Claude Code की तरह काम करता है।</li>
+    </ul>
+
+    <h2>सेट अप करें</h2>
+    <ol>
+      <li>दोनों कंप्यूटरों पर <a href="/hi/#download">Antenna इंस्टॉल करें</a>: आपके लैपटॉप पर app (macOS या Linux), और दूसरे कंप्यूटर पर app, या Linux server पर node:
+    <pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+    sudo loginctl enable-linger $USER</code></pre></li>
+      <li>दोनों को एक बार जोड़ें। लैपटॉप पर: <strong>नया कॉन्टैक्ट → इनवाइट करें</strong>, <strong>यह मेरा अपना कंप्यूटर है (∞)</strong> पर tick करें, <strong>लिंक बनाएँ</strong> दबाएँ और लिंक कॉपी करें। Server पर: <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>; डेस्कटॉप पर: <strong>नया कॉन्टैक्ट → जुड़ें</strong>, उसी box पर tick लगाकर। एक तरफ़ दिखा कोड दूसरी तरफ़ डालें, और लैपटॉप पर <strong>कॉन्टैक्ट ने पुष्टि की — कोड मेल खाते हैं</strong> दबाएँ।</li>
+      <li>दूसरे कंप्यूटर पर Claude Code को Antenna के ज़रिए शुरू करें। Server पर, प्रोजेक्ट फ़ोल्डर में (tmux चाहिए):
+    <pre><code>cd ~/projects/api
+    antenna connect claude-code --agent api-dev --links mac --hello mac
+    antenna session start api-dev --dir ~/projects/api
+    antenna session attach api-dev</code></pre>
+      Claude Code के पहले सवालों का जवाब दें, फिर <code>Ctrl-b d</code> से बाहर निकलें: वह चलता रहता है, और आपके लैपटॉप पर <code>api-dev</code> नाम की चैट आ जाती है। डेस्कटॉप पर: <strong>Agents → AI apps → Code mode में शुरू करें</strong>, और Claude Code वहाँ Antenna की window के एक tab में चलता है; उससे एक बार कहें कि वह Antenna के ज़रिए आपके लैपटॉप को hello भेजे, और उसकी चैट लैपटॉप पर आ जाती है।</li>
+      <li>लैपटॉप को उस कंप्यूटर के approval requests का जवाब देने दें। Server पर: <code>antenna devices confirm mac</code>। डेस्कटॉप पर: <strong>My devices</strong> → लैपटॉप का कार्ड → <strong>मंज़ूरियाँ</strong> → <strong>… से signed मंज़ूरियाँ स्वीकार करें</strong>, अपने password के साथ।</li>
+    </ol>
+
+    <h2>अपने लैपटॉप से चलाएँ</h2>
+    <ul>
+      <li><strong>Task दें।</strong> Session की चैट में वैसे ही लिखें जैसे किसी इंसान को लिखते। जब Claude Code अपने prompt पर ख़ाली बैठा होता है, Antenna एक तय लाइन टाइप करता है ताकि वह आपका मैसेज पढ़े; वह आपका टेक्स्ट कभी terminal में टाइप नहीं करता और Claude Code के वहाँ पूछे गए किसी सवाल का जवाब कभी नहीं देता। <em>Experimental।</em></li>
+      <li><strong>उसे बीच में रोकें।</strong> भेजने से पहले <strong>Urgent: अभी रोकें</strong> चालू करें: Antenna चल रहा turn ख़त्म करने के लिए एक बार Esc दबाता है, वहाँ खुले किसी सवाल या permission prompt के ऊपर कभी नहीं, और Claude Code आपका मैसेज पढ़ता है। <em>Experimental।</em></li>
+      <li><strong>उसके कदम मंज़ूर करें।</strong> जिस कदम के लिए आपकी ज़रूरत है, वह <strong>My devices</strong> में दूसरे कंप्यूटर के कार्ड पर notification के साथ दिखता है। <strong>Password से मंज़ूर करें</strong>, Mac पर <strong>Touch ID से मंज़ूर करें</strong>, या <strong>मना करें</strong> दबाएँ। <em>Experimental।</em></li>
+      <li><strong>उसे रोक दें।</strong> उस कार्ड पर agent के बगल में <strong>Agent और उसके processes रोकें…</strong> Claude Code को और उसने वहाँ जो कुछ शुरू किया है, सबको ख़त्म कर देता है। <em>Experimental।</em></li>
+    </ul>
+    <p>Claude Code का अपना permission prompt (“Do you want to proceed?”) दूसरे कंप्यूटर पर उसके terminal में ही रहता है, और Antenna उसका जवाब कभी नहीं देता। जो tools आप रोज़ इस्तेमाल करते हैं, उन्हें Claude Code की settings में allow कर दें, या <code>antenna session attach</code> से उसका जवाब दें।</p>
+
+    <h2>Codex और दूसरे agents</h2>
+    <p>Codex भी इसी तरह काम करता है: server पर <code>antenna connect codex</code> और <code>--cli codex</code>, या डेस्कटॉप पर Codex के बगल में <strong>Code mode में शुरू करें</strong> (देखें <a href="/hi/guides/codex-cli-remote-control">Codex CLI remote control</a>)। Gemini CLI <strong>Agents → AI apps</strong> से कनेक्ट होता है और Antenna के ज़रिए मैसेज भेजता और पढ़ता है, लेकिन Antenna अभी उसे जगाता नहीं: वह नया मैसेज तब पढ़ता है जब वह अगली बार Antenna को call करता है।</p>
+
+    <h2>सवाल-जवाब</h2>
+    <details>
+      <summary>क्या मुझे लैपटॉप पर Claude Code का terminal दिखता है?</summary>
+      <p>नहीं। आप चैट में tasks देते हैं और जवाब पढ़ते हैं; terminal दूसरे कंप्यूटर पर रहता है। उसे देखने के लिए वहाँ <code>antenna session attach</code> चलाएँ, चाहें तो SSH से।</p>
+    </details>
+    <details>
+      <summary>क्या दूसरे कंप्यूटर को public IP या खुले ports चाहिए?</summary>
+      <p>नहीं। दोनों कंप्यूटर बाहर की ओर कनेक्ट करते हैं, network इजाज़त दे तो सीधे, वरना relay के ज़रिए। Relay सिर्फ़ encrypted ट्रैफ़िक आगे भेजता है।</p>
+    </details>
+    <details>
+      <summary>और कौन उसे tasks दे सकता है?</summary>
+      <p>सिर्फ़ उस कंप्यूटर से जुड़े वे कॉन्टैक्ट्स जिनके मैसेज agent पढ़ सकता है (<code>--links mac</code> के साथ, सिर्फ़ आपका लैपटॉप), और वे agents जिन्हें आप agent map पर उससे जोड़ते हैं। किसी कॉन्टैक्ट का मैसेज उससे क्या करवा सकता है, यह वहाँ Antenna का daemon उस कॉन्टैक्ट के trust level के हिसाब से तय करता है, Claude Code नहीं।</p>
+    </details>
+    <details>
+      <summary>क्या इसके लिए API key चाहिए?</summary>
+      <p>नहीं। Claude Code जिस कंप्यूटर पर चलता है, वहाँ आपका अपना साइन-इन रखता है, और Antenna सिर्फ़ मैसेज, फ़ाइलें और approvals पहुँचाता है।</p>
+    </details>
+    <details>
+      <summary>क्या मैं इसे फ़ोन से चला सकता हूँ?</summary>
+      <p>अभी नहीं। Antenna आज macOS और Linux पर चलता है।</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna फ़्री और ओपन सोर्स है</strong>, macOS और Linux के लिए। न अकाउंट चाहिए, न फ़ोन नंबर।</p>
+      <a class="btn" href="/hi/#download">Antenna डाउनलोड करें</a>
+    </aside>
+    <h2>मिलती-जुलती गाइड</h2>
+    <ul class="related">
+      <li><a href="/hi/guides/codex-cli-remote-control">लैपटॉप से दूसरे कंप्यूटर पर Codex CLI को tasks दें</a></li>
+      <li><a href="/hi/guides/message-claude-code-on-another-computer">दूसरे कंप्यूटर पर चल रहे Claude Code को मैसेज भेजें</a></li>
+      <li><a href="/hi/guides/approve-claude-code-permissions-remotely">दूसरे कंप्यूटर से Claude Code के requests मंज़ूर करें</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/hi/" aria-label="Antenna — होम"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/hi/guides/">गाइड</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>संपर्क: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/hi/privacy">प्राइवेसी पॉलिसी</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

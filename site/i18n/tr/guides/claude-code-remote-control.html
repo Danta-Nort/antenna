@@ -1,0 +1,60 @@
+<!--guide {"title": "Claude Code uzaktan kontrol: başka bilgisayarda dizüstünden — Antenna", "h1": "Başka bir bilgisayardaki Claude Code’u dizüstünüzden yönetin", "description": "Claude Code’u sunucunuzda ya da masaüstünüzde çalıştırın, dizüstünüzdeki Antenna sohbetinden görev verin: eşler arası, uçtan uca şifreli, hesap gerekmez.", "summary": "Bir sunucuda ya da başka bir bilgisayarınızda çalışan Claude Code; görevleri ve onayları dizüstünüzden, kendi şifreli bağlantınız üzerinden.", "source": "2026-11-15"}-->
+<p class="lead">Antenna’yı dizüstünüze ve Claude Code’un çalıştığı bilgisayara kurun, ikisini kendi bilgisayarlarınız olarak bir kez eşleştirin ve Claude Code’u orada Antenna üzerinden başlatın. Dizüstünüzde o oturumla bir sohbet belirir: oraya bir görev yazın; Claude Code boşta beklerken Antenna onu uyandırır ve yanıtı sohbete geri gelir. Mesajlar iki bilgisayarınız arasında uçtan uca şifreli, eşler arası bir bağlantı üzerinden gider; Antenna hesap gerektirmez ve onayınızı gerektiren adımlar dizüstüne gelir, siz de parolanızla yanıtlarsınız.</p>
+
+<h2>Claude Code’un kendi Remote Control özelliği ve Antenna</h2>
+<p>Claude Code’un yerleşik, kendine ait bir Remote Control özelliği var; Anthropic’in belgeleri onu anlatıyor. Bu rehber farklı bir düzeni ele alıyor: Claude Code sizin sürekli açık kalan bir bilgisayarınızda, bir sunucuda ya da masaüstünde çalışır ve siz onu dizüstünüzdeki Antenna’dan yönetirsiniz. Şunları istiyorsanız size uygundur:</p>
+<ul>
+  <li><strong>Birkaç bilgisayardaki birkaç oturum, tek listede.</strong> Her oturum kendi sohbetidir ve <strong>Cihazlarım</strong> her bilgisayarın sağlık durumunu, ajanlarını ve orada bekleyen istekleri gösterir.</li>
+  <li><strong>Kendi bağlantınız.</strong> Mesajlar bir bilgisayarda şifrelenir, diğerinde çözülür. Bilgisayarlarınız ağ izin verdiğinde doğrudan, vermediğinde yalnızca şifreli trafiği ileten bir aktarma sunucusu (relay) üzerinden bağlanır. Hesap yok, gelen bağlantı portu yok.</li>
+  <li><strong>İzinleri Antenna daemon’u denetler</strong>, Claude Code’un çalıştığı bilgisayarda; onayları ise hangi bilgisayarınızın başındaysanız oradan yanıtlarsınız.</li>
+  <li><strong>Diğer ajanlar da aynı şekilde:</strong> Codex, Claude Code gibi çalışır.</li>
+</ul>
+
+<h2>Kurulum</h2>
+<ol>
+  <li>İki bilgisayara da <a href="/#download">Antenna’yı kurun</a>: dizüstünüze uygulamayı (macOS ya da Linux), diğer bilgisayara uygulamayı ya da, bir Linux sunucuysa, düğümü:
+<pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+sudo loginctl enable-linger $USER</code></pre></li>
+  <li>İkisini bir kez eşleştirin. Dizüstünde: <strong>Yeni kişi → Davet et</strong>, <strong>Bu benim kendi bilgisayarım (∞)</strong> seçeneğini işaretleyin, <strong>Bağlantı oluştur</strong> düğmesine basın ve bağlantıyı kopyalayın. Sunucuda: <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>; masaüstünde: aynı kutu işaretliyken <strong>Yeni kişi → Katıl</strong>. Bir tarafın gösterdiği kodu diğerine girin ve dizüstünde <strong>Kişi onayladı — kodlar eşleşiyor</strong> düğmesine basın.</li>
+  <li>Claude Code’u diğer bilgisayarda Antenna üzerinden başlatın. Sunucuda, proje klasöründe (tmux gerekir):
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api
+antenna session attach api-dev</code></pre>
+  Claude Code’un ilk sorularını yanıtlayın, sonra <code>Ctrl-b d</code> ile ayrılın: çalışmaya devam eder ve dizüstünüzde <code>api-dev</code> adlı bir sohbet olur. Masaüstünde: <strong>Ajanlar → Yapay zeka uygulamaları → Code modunda başlat</strong>; Claude Code oradaki Antenna penceresinin bir sekmesinde çalışır. Ondan bir kez Antenna üzerinden dizüstünüze selam vermesini isteyin; sohbeti dizüstünde belirir.</li>
+  <li>O bilgisayarın onay isteklerini dizüstünün yanıtlamasına izin verin. Sunucuda: <code>antenna devices confirm mac</code>. Masaüstünde: <strong>Cihazlarım</strong> → dizüstünün kartı → <strong>Onaylar</strong> → <strong>… ile imzalanmış onayları kabul et</strong>, parolanızla.</li>
+</ol>
+
+<h2>Dizüstünüzden yönetin</h2>
+<ul>
+  <li><strong>Görev verin.</strong> Oturumun sohbetine bir insana yazar gibi yazın. Claude Code komut isteminde boşta beklerken Antenna, mesajınızı okuması için yerleşik tek bir satır yazar; sizin metninizi terminale asla yazmaz ve Claude Code’un orada sorduğu bir soruyu asla yanıtlamaz. <em>Deneysel.</em></li>
+  <li><strong>Yarıda kesin.</strong> Göndermeden önce <strong>Acil: şimdi yarıda kes</strong> seçeneğini açın: Antenna çalışan turu bitirmek için bir kez Esc tuşuna basar, orada açık bir soru ya da izin sorusu varken asla basmaz, ve Claude Code mesajınızı okur. <em>Deneysel.</em></li>
+  <li><strong>Adımlarını onaylayın.</strong> Sizi gerektiren bir adım, <strong>Cihazlarım</strong> içinde diğer bilgisayarın kartında bir bildirimle görünür. <strong>Parolayla onayla</strong>, Mac’te <strong>Touch ID ile onayla</strong> ya da <strong>Reddet</strong> düğmesine basın. <em>Deneysel.</em></li>
+  <li><strong>Durdurun.</strong> O kartta ajanın yanındaki <strong>Ajanı ve işlemlerini durdur…</strong>, Claude Code’u ve onun orada başlattığı her şeyi sonlandırır. <em>Deneysel.</em></li>
+</ul>
+<p>Claude Code’un kendi izin sorusu (“Do you want to proceed?”) diğer bilgisayarda, kendi terminalinde kalır ve Antenna onu asla yanıtlamaz. Sürekli kullandığınız araçlara Claude Code’un ayarlarından izin verin ya da bu soruyu <code>antenna session attach</code> ile yanıtlayın.</p>
+
+<h2>Codex ve diğer ajanlar</h2>
+<p>Codex de aynı şekilde çalışır: sunucuda <code>antenna connect codex</code> ve <code>--cli codex</code>, masaüstünde ise Codex’in yanındaki <strong>Code modunda başlat</strong> (bkz. <a href="/guides/codex-cli-remote-control">Codex CLI’ı uzaktan kontrol</a>). Gemini CLI, <strong>Ajanlar → Yapay zeka uygulamaları</strong> üzerinden bağlanır ve Antenna aracılığıyla mesaj gönderip okur, ama Antenna onu henüz uyandırmıyor: yeni bir mesajı, Antenna’yı bir sonraki çağırışında okur.</p>
+
+<h2>Sorular</h2>
+<details>
+  <summary>Claude Code’un terminalini dizüstümde görebiliyor muyum?</summary>
+  <p>Hayır. Görevleri bir sohbette verir ve yanıtları orada okursunuz; terminal diğer bilgisayarda kalır. Bakmak isterseniz orada, dilerseniz SSH üzerinden, <code>antenna session attach</code> çalıştırın.</p>
+</details>
+<details>
+  <summary>Diğer bilgisayarın genel bir IP’ye ya da açık portlara ihtiyacı var mı?</summary>
+  <p>Hayır. İki bilgisayar da dışarıya bağlanır: ağ izin verdiğinde doğrudan, vermediğinde bir aktarma sunucusu üzerinden. Aktarma sunucusu yalnızca şifreli trafiği iletir.</p>
+</details>
+<details>
+  <summary>Ona başka kim görev verebilir?</summary>
+  <p>Yalnızca o bilgisayarla eşleştirilmiş ve mesajlarını ajanın okuyabildiği kişiler (<code>--links mac</code> ile yalnızca dizüstünüz) ve ajan haritasında ona bağladığınız ajanlar. Bir kişinin mesajının ona ne yaptırabileceğine Claude Code değil, oradaki Antenna daemon’u, o kişinin güven seviyesine göre karar verir.</p>
+</details>
+<details>
+  <summary>API anahtarı gerekiyor mu?</summary>
+  <p>Hayır. Claude Code, çalıştığı bilgisayarda sizin kendi oturumunuzla çalışır; Antenna yalnızca mesajları, dosyaları ve onayları taşır.</p>
+</details>
+<details>
+  <summary>Telefonumdan kontrol edebilir miyim?</summary>
+  <p>Henüz değil. Antenna bugün macOS ve Linux’ta çalışıyor.</p>
+</details>

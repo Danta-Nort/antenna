@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contrôler Claude Code à distance sur un autre ordinateur — Antenna</title>
+<meta name="description" content="Lancez Claude Code sur votre serveur ou votre poste fixe et pilotez-le depuis Antenna sur votre portable : en pair-à-pair, chiffré de bout en bout, sans compte.">
+<link rel="canonical" href="https://antenna.contact/fr/guides/claude-code-remote-control">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Contrôler Claude Code à distance sur un autre ordinateur — Antenna">
+<meta property="og:description" content="Lancez Claude Code sur votre serveur ou votre poste fixe et pilotez-le depuis Antenna sur votre portable : en pair-à-pair, chiffré de bout en bout, sans compte.">
+<meta property="og:url" content="https://antenna.contact/fr/guides/claude-code-remote-control">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="fr_FR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/claude-code-remote-control">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Guides",
+     "item": "https://antenna.contact/fr/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Piloter Claude Code sur un autre ordinateur depuis votre portable",
+     "item": "https://antenna.contact/fr/guides/claude-code-remote-control"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Piloter Claude Code sur un autre ordinateur depuis votre portable",
+   "description": "Lancez Claude Code sur votre serveur ou votre poste fixe et pilotez-le depuis Antenna sur votre portable : en pair-à-pair, chiffré de bout en bout, sans compte.",
+   "datePublished": "2026-11-15",
+   "dateModified": "2026-11-15",
+   "inLanguage": "fr",
+   "url": "https://antenna.contact/fr/guides/claude-code-remote-control",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/fr/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Est-ce que je vois le terminal de Claude Code sur mon portable ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Non. Vous confiez des tâches et lisez les réponses dans une conversation ; le terminal reste sur l’autre ordinateur. Pour le regarder, lancez antenna session attach là-bas, en SSH si vous le souhaitez."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "L’autre ordinateur a-t-il besoin d’une IP publique ou de ports ouverts ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Non. Les deux ordinateurs établissent des connexions sortantes, directes quand le réseau le permet et via un relais sinon. Le relais ne transmet que du trafic chiffré."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Qui d’autre peut lui confier des tâches ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Seulement les contacts associés à cet ordinateur dont l’agent a le droit de lire les messages (avec --links mac, uniquement votre portable), et les agents que vous lui reliez sur la carte des agents. C’est le daemon d’Antenna sur cet ordinateur, et non Claude Code, qui décide de ce que le message d’un contact peut lui faire faire, selon le niveau de confiance de ce contact."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Faut-il une clé d’API ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Non. Claude Code garde votre propre connexion sur l’ordinateur où il tourne, et Antenna ne transporte que des messages, des fichiers et des approbations."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Puis-je le piloter depuis mon téléphone ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Pas encore. Antenna fonctionne aujourd’hui sous macOS et Linux."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Aller au contenu</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/fr/" aria-label="Antenna — accueil"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Menu principal">
+      <a href="/fr/#product">Produit</a>
+      <a href="/fr/#security">Sécurité</a>
+      <a href="/fr/guides/">Guides</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Langue: Français"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">FR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/claude-code-remote-control" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/claude-code-remote-control" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/claude-code-remote-control" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/claude-code-remote-control" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/claude-code-remote-control" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/claude-code-remote-control" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/claude-code-remote-control" hreflang="fr" lang="fr" aria-current="true">Français</a></li>
+        <li><a href="/de/guides/claude-code-remote-control" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/claude-code-remote-control" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/claude-code-remote-control" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/claude-code-remote-control" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/claude-code-remote-control" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/claude-code-remote-control" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/claude-code-remote-control" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/claude-code-remote-control" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/fr/#download">Télécharger</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Fil d’Ariane"><a href="/fr/">Antenna</a> <span aria-hidden="true">›</span> <a href="/fr/guides/">Guides</a></nav>
+    <p class="eyebrow">Mis à jour le <time datetime="2026-11-15">15 novembre 2026</time></p>
+    <h1>Piloter Claude Code sur un autre ordinateur depuis votre portable</h1>
+    <p class="lead">Installez Antenna sur votre portable et sur l’ordinateur où tourne Claude Code, associez-les une fois comme vos propres ordinateurs, puis lancez-y Claude Code via Antenna. Une conversation avec cette session apparaît sur votre portable : écrivez-y une tâche, Antenna réveille Claude Code quand il est inactif, et sa réponse revient dans la conversation. Les messages passent par une liaison pair-à-pair chiffrée de bout en bout entre vos deux ordinateurs, Antenna n’a besoin d’aucun compte, et les étapes qui demandent votre accord arrivent sur le portable, où vous répondez avec votre mot de passe.</p>
+
+    <h2>Le Remote Control de Claude Code, et Antenna</h2>
+    <p>Claude Code possède sa propre fonction Remote Control, intégrée ; la documentation d’Anthropic la décrit. Ce guide porte sur une autre configuration : Claude Code tourne sur un de vos ordinateurs qui reste allumé, un serveur ou un poste de bureau, et vous le pilotez depuis Antenna sur votre portable. Elle vous convient si vous voulez :</p>
+    <ul>
+      <li><strong>Plusieurs sessions sur plusieurs ordinateurs dans une seule liste.</strong> Chaque session a sa propre conversation, et <strong>Mes appareils</strong> affiche pour chaque ordinateur son état de santé, ses agents et les demandes qui y attendent.</li>
+      <li><strong>Votre propre liaison.</strong> Les messages sont chiffrés sur un ordinateur et déchiffrés sur l’autre. Vos ordinateurs se connectent directement quand le réseau le permet, sinon via un relais qui ne transmet que du trafic chiffré. Ni compte, ni port entrant.</li>
+      <li><strong>Des permissions vérifiées par le daemon d’Antenna</strong> sur l’ordinateur où tourne Claude Code, avec des approbations auxquelles vous répondez depuis celui de vos ordinateurs devant lequel vous êtes.</li>
+      <li><strong>D’autres agents de la même façon :</strong> Codex fonctionne comme Claude Code.</li>
+    </ul>
+
+    <h2>Mise en place</h2>
+    <ol>
+      <li><a href="/fr/#download">Installez Antenna</a> sur les deux ordinateurs : l’app sur votre portable (macOS ou Linux) et, sur l’autre ordinateur, l’app, ou le nœud sur un serveur Linux :
+    <pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+    sudo loginctl enable-linger $USER</code></pre></li>
+      <li>Associez-les une fois. Sur le portable : <strong>Nouveau contact → Inviter</strong>, cochez <strong>C’est mon propre ordinateur (∞)</strong>, cliquez sur <strong>Créer le lien</strong> et copiez-le. Sur un serveur : <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code> ; sur un poste de bureau : <strong>Nouveau contact → Rejoindre</strong>, avec la même case cochée. Saisissez sur l’un le code affiché par l’autre, et cliquez sur <strong>Le contact a confirmé — les codes correspondent</strong> sur le portable.</li>
+      <li>Lancez Claude Code via Antenna sur l’autre ordinateur. Sur un serveur, dans le dossier du projet (tmux nécessaire) :
+    <pre><code>cd ~/projects/api
+    antenna connect claude-code --agent api-dev --links mac --hello mac
+    antenna session start api-dev --dir ~/projects/api
+    antenna session attach api-dev</code></pre>
+      Répondez aux premières questions de Claude Code, puis détachez-vous avec <code>Ctrl-b d</code> : il continue de tourner, et une conversation nommée <code>api-dev</code> se trouve sur votre portable. Sur un poste de bureau : <strong>Agents → Apps IA → Lancer en mode Code</strong>, et Claude Code tourne dans un onglet de la fenêtre d’Antenna sur cet ordinateur ; demandez-lui une fois de dire bonjour à votre portable via Antenna, et sa conversation apparaît sur le portable.</li>
+      <li>Autorisez le portable à répondre aux demandes d’approbation de cet ordinateur. Sur un serveur : <code>antenna devices confirm mac</code>. Sur un poste de bureau : <strong>Mes appareils</strong> → la fiche du portable → <strong>Approbations</strong> → <strong>Accepter les approbations signées avec …</strong>, avec votre mot de passe.</li>
+    </ol>
+
+    <h2>Le piloter depuis votre portable</h2>
+    <ul>
+      <li><strong>Lui confier une tâche.</strong> Écrivez dans la conversation de la session comme vous écririez à quelqu’un. Quand Claude Code attend, inactif, devant son invite, Antenna tape une ligne prédéfinie pour qu’il lise votre message ; il ne tape jamais votre texte dans le terminal et ne répond jamais à une question que Claude Code y pose. <em>Expérimental.</em></li>
+      <li><strong>L’interrompre.</strong> Activez <strong>Urgent : interrompre maintenant</strong> avant d’envoyer : Antenna appuie une fois sur Échap pour mettre fin au tour en cours, jamais par-dessus une question ou une invite de permission ouverte, et Claude Code lit votre message. <em>Expérimental.</em></li>
+      <li><strong>Approuver ses étapes.</strong> Une étape qui a besoin de vous s’affiche sur la fiche de l’autre ordinateur dans <strong>Mes appareils</strong>, avec une notification. Cliquez sur <strong>Approuver avec le mot de passe</strong>, sur <strong>Approuver avec Touch ID</strong> sur un Mac, ou sur <strong>Refuser</strong>. <em>Expérimental.</em></li>
+      <li><strong>L’arrêter.</strong> <strong>Arrêter l’agent et ses processus…</strong>, à côté de l’agent sur cette fiche, met fin à Claude Code et à tout ce qu’il a lancé sur cet ordinateur. <em>Expérimental.</em></li>
+    </ul>
+    <p>L’invite de permission de Claude Code lui-même (« Do you want to proceed? ») reste dans son terminal sur l’autre ordinateur, et Antenna n’y répond jamais. Autorisez dans les réglages de Claude Code les outils dont vous vous servez couramment, ou répondez-y avec <code>antenna session attach</code>.</p>
+
+    <h2>Codex et les autres agents</h2>
+    <p>Codex fonctionne de la même façon : <code>antenna connect codex</code> et <code>--cli codex</code> sur un serveur, ou <strong>Lancer en mode Code</strong> à côté de Codex sur un poste de bureau (voir <a href="/fr/guides/codex-cli-remote-control">Codex CLI à distance</a>). Gemini CLI se connecte depuis <strong>Agents → Apps IA</strong> et envoie et lit des messages via Antenna, mais Antenna ne le réveille pas encore : il lit un nouveau message lors de son prochain appel à Antenna.</p>
+
+    <h2>Questions</h2>
+    <details>
+      <summary>Est-ce que je vois le terminal de Claude Code sur mon portable ?</summary>
+      <p>Non. Vous confiez des tâches et lisez les réponses dans une conversation ; le terminal reste sur l’autre ordinateur. Pour le regarder, lancez <code>antenna session attach</code> là-bas, en SSH si vous le souhaitez.</p>
+    </details>
+    <details>
+      <summary>L’autre ordinateur a-t-il besoin d’une IP publique ou de ports ouverts ?</summary>
+      <p>Non. Les deux ordinateurs établissent des connexions sortantes, directes quand le réseau le permet et via un relais sinon. Le relais ne transmet que du trafic chiffré.</p>
+    </details>
+    <details>
+      <summary>Qui d’autre peut lui confier des tâches ?</summary>
+      <p>Seulement les contacts associés à cet ordinateur dont l’agent a le droit de lire les messages (avec <code>--links mac</code>, uniquement votre portable), et les agents que vous lui reliez sur la carte des agents. C’est le daemon d’Antenna sur cet ordinateur, et non Claude Code, qui décide de ce que le message d’un contact peut lui faire faire, selon le niveau de confiance de ce contact.</p>
+    </details>
+    <details>
+      <summary>Faut-il une clé d’API ?</summary>
+      <p>Non. Claude Code garde votre propre connexion sur l’ordinateur où il tourne, et Antenna ne transporte que des messages, des fichiers et des approbations.</p>
+    </details>
+    <details>
+      <summary>Puis-je le piloter depuis mon téléphone ?</summary>
+      <p>Pas encore. Antenna fonctionne aujourd’hui sous macOS et Linux.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna est gratuit et open source</strong>, pour macOS et Linux. Sans compte, sans numéro de téléphone.</p>
+      <a class="btn" href="/fr/#download">Télécharger Antenna</a>
+    </aside>
+    <h2>Guides associés</h2>
+    <ul class="related">
+      <li><a href="/fr/guides/codex-cli-remote-control">Confier des tâches à Codex CLI sur un autre ordinateur depuis votre portable</a></li>
+      <li><a href="/fr/guides/message-claude-code-on-another-computer">Envoyer un message à Claude Code sur un autre ordinateur</a></li>
+      <li><a href="/fr/guides/approve-claude-code-permissions-remotely">Approuver les demandes de Claude Code depuis un autre ordinateur</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/fr/" aria-label="Antenna — accueil"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/fr/guides/">Guides</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Contact : <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/fr/privacy">Politique de confidentialité</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

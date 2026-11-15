@@ -1,0 +1,77 @@
+<!--guide {"title": "合上笔记本后如何让 Claude Code 继续运行 — Antenna", "h1": "合上笔记本，让 Claude Code 继续运行", "description": "笔记本合盖就会睡眠，Claude Code 也随之停下。把 Claude Code 放到一台常开的电脑上运行，再通过 Antenna 在笔记本上给它派任务。", "summary": "笔记本睡眠时，Claude Code 在服务器或常开的 Mac 上通宵干活，你在笔记本上用聊天给它派任务。", "source": "2026-11-15"}-->
+<p class="lead">在笔记本本机上做不到：合上盖子笔记本就会睡眠，睡眠中的电脑什么都不运行，Claude Code 也随之暂停。解决办法是让 Claude Code 在一台保持开机的电脑上运行，比如 Linux 服务器，或者设置成不睡眠的 Mac mini，在那台电脑上通过 Antenna 启动它，然后在笔记本的 Antenna 聊天里给它派任务。合上笔记本后，Claude Code 仍在另一台电脑上工作，它的回复会等着笔记本，等笔记本重新联网时送达。</p>
+
+<h2>它为什么会停下</h2>
+<p>Claude Code 在哪台电脑上启动，就在哪台电脑上运行。那台电脑一睡眠，上面所有程序都会停下，Claude Code 也不例外，直到电脑被唤醒。关掉运行它的终端或 SSH 窗口，同样会让它结束。笔记本也可以设置成合盖不睡眠，但那样它就得一直插着电、开着机，等于变成了一台服务器。所以干脆把工作交给一台始终开着的电脑，笔记本只负责和它对话。</p>
+
+<h2>你需要准备</h2>
+<ul>
+  <li>一台保持开机的电脑：一台 x86_64 的 Linux 服务器（VPS 或家里的机器），或者设置成不睡眠的 Mac 或 Linux 台式机。</li>
+  <li>在那台电脑上装好并登录 Claude Code。</li>
+  <li>两台电脑上都装好 <a href="/#download">Antenna</a>：笔记本上装应用（macOS 或 Linux），另一台装节点或应用。</li>
+</ul>
+
+<h2>在服务器上</h2>
+<ol>
+  <li>安装 Antenna 节点，并让它在你退出登录后继续运行：
+<pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+sudo loginctl enable-linger $USER</code></pre>
+  安装脚本会把 Antenna 设置为 systemd 用户服务，并用一个密码创建你的节点。它不会替你开启 lingering，只会提醒你：没有第二行，你一退出登录，服务就会停止。</li>
+  <li>把服务器和笔记本配对一次。在笔记本上：<strong>新联系人 → 邀请</strong>，勾选 <strong>这是我自己的电脑（∞）</strong>，点 <strong>创建链接</strong> 并复制。在服务器上：<code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>，输入笔记本上显示的验证码，然后在笔记本上点 <strong>联系人已确认，验证码一致</strong>。</li>
+  <li>在项目文件夹里通过 Antenna 启动 Claude Code（服务器上需要有 tmux）：
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api
+antenna session attach api-dev</code></pre>
+  回答 Claude Code 一开始的几个问题（比如是否信任这个文件夹），然后按 <code>Ctrl-b d</code> 退出。现在你的笔记本上已经有一个名为 <code>api-dev</code> 的聊天。</li>
+  <li>让笔记本来回答服务器的批准请求：<code>antenna devices confirm mac</code>。</li>
+</ol>
+<p>现在可以退出 SSH 了。服务会继续运行，Claude Code 也继续在 Antenna 自己的 tmux 服务器里运行；你自己的 tmux 不受影响。每一步的详细说明见<a href="/guides/run-claude-code-on-a-vps">在 VPS 上运行 Claude Code</a>。</p>
+
+<h2>在常开的 Mac 或台式机上</h2>
+<ol>
+  <li>在系统设置里把这台电脑设置为不自动睡眠。Antenna 不会让电脑保持唤醒。</li>
+  <li>按上面的方法把它和笔记本配对，勾选 <strong>这是我自己的电脑（∞）</strong>。</li>
+  <li>在这台电脑上打开 <strong>智能体 → AI 应用</strong>，点 Claude Code 旁边的 <strong>以 Code 模式启动</strong>。选择 <strong>新智能体…</strong> 并起个名字，选好 <strong>工作文件夹</strong>，输入密码，然后点 <strong>启动</strong>。窗口会切换到 Code 模式，Claude Code 在其中的一个标签页里运行。</li>
+  <li>在 Claude Code 的标签页里让它通过 Antenna 跟你的笔记本打个招呼，只需一次。之后它的聊天就会出现在笔记本上。</li>
+  <li>让笔记本来回答它的批准请求：<strong>我的设备</strong> → 笔记本的卡片 → <strong>批准</strong> → <strong>接受用 … 签名的批准</strong>，输入你的密码。</li>
+</ol>
+<p>Antenna 的窗口要一直开着：关掉窗口会停止在其中运行的智能体，关之前窗口会先询问你。</p>
+
+<h2>让它接着干活</h2>
+<p>在笔记本上该智能体的聊天里写下任务：“跑一下迁移测试，修好失败的，然后在这里回复改了什么。”Claude Code 停在提示符前闲着时，Antenna 会输入一行固定的文字，让它去读你的消息；如果它正在执行某一轮，就会在这一轮结束后收到消息。Antenna 永远不会把你的原文输入终端。<em>实验性功能。</em>然后合上笔记本就行。</p>
+<p>在长时间运行之前，先检查一下无人值守时有什么可能让它停下：</p>
+<ul>
+  <li><strong>Claude Code 自己的权限提示</strong>（“Do you want to proceed?”）会一直停在它的终端里，直到有人回答，而 Antenna 从不替你回答。请在 Claude Code 的设置里放行这个任务需要的工具。</li>
+  <li><strong>Antenna 的批准请求</strong>会等待 10 分钟。超时后什么都不会执行，Claude Code 会得知没人批准。从你自己的 ∞ 级电脑派出的任务，执行命令和编辑时不会询问；但修改 Claude Code 自身的配置，比如 <code>CLAUDE.md</code> 或 <code>.claude/</code>，仍然需要批准。</li>
+</ul>
+
+<h2>笔记本唤醒之后</h2>
+<p>笔记本睡眠期间，Claude Code 的回复在另一台电脑的队列里等着，Antenna 会不断尝试投递。笔记本一重新联网，回复就会出现在聊天里；如果 Antenna 的窗口不在前台，还会弹出通知。你离线时写的消息会显示一个时钟图标，联网后自动发出。仍在等你批准的请求显示在 <strong>我的设备</strong> 中另一台电脑的卡片上（<em>实验性功能</em>）。</p>
+
+<h2>另一台电脑重启之后</h2>
+<p>重启后密钥会被锁定，所以在你输入密码之前，它的连接都保持静默。如果是服务器，登录后运行 <code>antenna unlock</code>，再重新启动会话；加上 <code>--resume</code> 会接着 Claude Code 上一次的会话继续：</p>
+<pre><code>antenna session start api-dev --dir ~/projects/api --resume</code></pre>
+<p>如果是 Mac，在 Antenna 的窗口里输入密码，然后重新启动智能体。</p>
+
+<h2>常见问题</h2>
+<details>
+  <summary>合上笔记本后 Claude Code 还会继续运行吗？</summary>
+  <p>如果合盖会让笔记本睡眠（这是通常的设置），就不会：Claude Code 会暂停，直到你打开笔记本。让它在一台保持开机的电脑上运行，它就会一直工作。</p>
+</details>
+<details>
+  <summary>Claude Code 能在我的笔记本上后台运行吗？</summary>
+  <p>笔记本醒着的时候可以：在 Code 模式下，它在 Antenna 窗口的一个标签页里运行，你不用盯着看，有消息到达时 Antenna 会唤醒它。但笔记本一睡眠，它还是会停下。</p>
+</details>
+<details>
+  <summary>需要一直开着 SSH 会话吗？</summary>
+  <p>不需要。Claude Code 在服务器上 Antenna 的 tmux 里运行，你通过聊天联系它。两台电脑都是主动向外连接，所以也不用开放任何入站端口。</p>
+</details>
+<details>
+  <summary>Antenna 会让我的 Mac 保持唤醒吗？</summary>
+  <p>不会。请在系统设置里把 Mac 设置为不睡眠。使用 Code 模式时，Antenna 的窗口需要一直开着。</p>
+</details>
+<details>
+  <summary>能用手机查看进度吗？</summary>
+  <p>暂时还不能。Antenna 目前在 macOS 和 Linux 上运行。</p>
+</details>

@@ -1,0 +1,77 @@
+<!--guide {"title": "ノート PC を閉じても Claude Code を動かし続ける方法 — Antenna", "h1": "ノート PC を閉じている間も Claude Code に作業を続けさせる", "description": "ノート PC を閉じるとスリープし、Claude Code も止まります。電源の入ったままのコンピューターで Claude Code を動かし、ノート PC から Antenna でタスクを渡しましょう。", "summary": "ノート PC がスリープしている間も、サーバーや常時起動の Mac で夜通し作業を続ける Claude Code に、ノート PC のチャットからタスクを渡す方法。", "source": "2026-11-15"}-->
+<p class="lead">ノート PC そのものでは無理です。ふたを閉じるとノート PC はスリープし、スリープ中のコンピューターでは何も動かず、Claude Code も一緒に止まります。解決策は、Linux サーバーや、スリープしないよう設定した Mac mini のような、電源が入ったままのコンピューターで Claude Code を動かすことです。そこで Antenna 経由で Claude Code を起動し、ノート PC の Antenna のチャットからタスクを渡します。ノート PC を閉じても、Claude Code はもう一方のコンピューターで作業を続け、返信はノート PC を待って、オンラインに戻ったときに届きます。</p>
+
+<h2>なぜ止まるのか</h2>
+<p>Claude Code は、起動したコンピューターの上で動きます。そのコンピューターがスリープすると、Claude Code を含むすべてのプログラムが、起きるまで止まります。Claude Code を動かしているターミナルや SSH のウィンドウを閉じても終了します。ふたを閉じたままノート PC を起こしておくこともできますが、それには電源につないで電源を入れたままにする必要があり、もはやサーバーです。そこで作業は常に電源の入ったコンピューターに移し、ノート PC はそれと話すだけにします。</p>
+
+<h2>必要なもの</h2>
+<ul>
+  <li>電源が入ったままのコンピューター。x86_64 の Linux サーバー（VPS でも自宅のマシンでも）、またはスリープしないよう設定した Mac か Linux デスクトップ。</li>
+  <li>そのコンピューターにインストール済みでサインイン済みの Claude Code。</li>
+  <li>両方のコンピューターに <a href="/#download">Antenna</a>。ノート PC にはアプリ（macOS または Linux）、もう一方にはノードかアプリ。</li>
+</ul>
+
+<h2>サーバーの場合</h2>
+<ol>
+  <li>Antenna のノードをインストールし、ログアウト後も動き続けるようにします。
+<pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+sudo loginctl enable-linger $USER</code></pre>
+  インストーラーは Antenna を systemd のユーザーサービスとして設定し、パスワード付きでノードを作成します。lingering は有効にせず、注意を促すだけです。2 行目がないと、ログアウトしたときにサービスが止まります。</li>
+  <li>サーバーとノート PC を一度だけペアリングします。ノート PC で <strong>新しい連絡先 → 招待</strong> を開き、<strong>これは自分のコンピューターです（∞）</strong> にチェックを入れて <strong>リンクを作成</strong> を押し、リンクをコピーします。サーバーで <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code> を実行し、ノート PC に表示されたコードを入力したら、ノート PC で <strong>相手が確認しました — コードは一致</strong> を押します。</li>
+  <li>プロジェクトフォルダーで、Antenna 経由で Claude Code を起動します（サーバーには tmux が必要です）。
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api
+antenna session attach api-dev</code></pre>
+  フォルダーを信頼するかどうかといった Claude Code の最初の質問に答え、<code>Ctrl-b d</code> で抜けます。これでノート PC に <code>api-dev</code> という名前のチャットができています。</li>
+  <li>サーバーからの承認リクエストにノート PC で答えられるようにします：<code>antenna devices confirm mac</code>。</li>
+</ol>
+<p>ここで SSH からログアウトしてかまいません。サービスは動き続け、Claude Code も Antenna 専用の tmux サーバーで動き続けます。あなた自身の tmux には触れません。各手順の詳しい説明は <a href="/guides/run-claude-code-on-a-vps">VPS で Claude Code を動かす</a>にあります。</p>
+
+<h2>電源の入ったままの Mac やデスクトップの場合</h2>
+<ol>
+  <li>システム設定で、コンピューターが勝手にスリープしないようにします。Antenna がコンピューターを起こしておくことはありません。</li>
+  <li>上と同じように、<strong>これは自分のコンピューターです（∞）</strong> にチェックを入れてノート PC とペアリングします。</li>
+  <li>そのコンピューターで <strong>エージェント → AI アプリ</strong> を開き、Claude Code の横の <strong>Code モードで起動</strong> を押します。<strong>新しいエージェント…</strong> を選んで名前を付け、<strong>作業フォルダー</strong> を選び、パスワードを入力して <strong>起動</strong> を押します。ウィンドウが Code モードに切り替わり、その中のタブで Claude Code が動きます。</li>
+  <li>Claude Code のタブで一度だけ、Antenna を通じてノート PC にあいさつするよう頼みます。すると、そのチャットがノート PC に現れます。</li>
+  <li>その承認リクエストにノート PC で答えられるようにします。<strong>自分のデバイス</strong> → ノート PC のカード → <strong>承認</strong> → <strong>… で署名された承認を受け付ける</strong> を開き、パスワードを入力します。</li>
+</ol>
+<p>Antenna のウィンドウは開いたままにしてください。閉じると、そこで動いているエージェントが止まります。閉じる前にはウィンドウが確認します。</p>
+
+<h2>作業を任せる</h2>
+<p>ノート PC のエージェントのチャットにタスクを書きます：「マイグレーションのテストを実行して、失敗したものを直し、何を変えたかここに返信して」。Claude Code がプロンプトで待機していると、Antenna が組み込みの 1 行を入力してあなたのメッセージを読ませます。ターンの途中なら、ターンが終わったときにメッセージを受け取ります。Antenna があなたのテキストをターミナルに入力することはありません。<em>実験的機能です。</em>あとはノート PC を閉じるだけです。</p>
+<p>長い作業の前に、誰もいない間にそれを止めてしまうものがないか確認しておきましょう。</p>
+<ul>
+  <li><strong>Claude Code 自身の権限確認</strong>（「Do you want to proceed?」）は、誰かが答えるまでターミナルで待ち続け、Antenna がそれに答えることはありません。タスクに必要なツールは Claude Code の設定で許可しておいてください。</li>
+  <li><strong>Antenna の承認リクエスト</strong>は 10 分待ちます。その後は何も実行されず、Claude Code には誰も承認しなかったことが伝わります。∞ の自分のコンピューターから渡したタスクは、コマンドも編集も確認なしで実行します。ただし、<code>CLAUDE.md</code> や <code>.claude/</code> など Claude Code 自身の設定の変更は、それでも確認を求めます。</li>
+</ul>
+
+<h2>ノート PC が起きたら</h2>
+<p>ノート PC がスリープしている間、Claude Code の返信はもう一方のコンピューターのキューで待ち、Antenna は配信を試み続けます。ノート PC がオンラインに戻ると返信はチャットに届き、Antenna のウィンドウが前面にないときは通知も出ます。オフラインの間に書いたメッセージには時計のマークが付き、自動で送信されます。まだ承認を待っているリクエストは、<strong>自分のデバイス</strong> にあるもう一方のコンピューターのカードに表示されます（<em>実験的機能</em>）。</p>
+
+<h2>もう一方のコンピューターが再起動したら</h2>
+<p>再起動後は鍵がロックされるので、パスワードを入力するまで、そのコンピューターのリンクは沈黙したままです。サーバーではログインして <code>antenna unlock</code> を実行し、セッションをもう一度起動します。<code>--resume</code> を付けると Claude Code の前回のセッションを続けられます。</p>
+<pre><code>antenna session start api-dev --dir ~/projects/api --resume</code></pre>
+<p>Mac では、Antenna のウィンドウでパスワードを入力し、エージェントをもう一度起動します。</p>
+
+<h2>よくある質問</h2>
+<details>
+  <summary>ノート PC を閉じても Claude Code は動き続けますか？</summary>
+  <p>ふたを閉じるとスリープする設定（ふつうはそうです）なら、動き続けません。開くまで Claude Code は止まったままです。電源の入ったままのコンピューターで動かせば、作業を続けます。</p>
+</details>
+<details>
+  <summary>Claude Code をノート PC のバックグラウンドで動かせますか？</summary>
+  <p>ノート PC が起きている間なら、できます。Code モードでは、見ていなくてもかまわない Antenna のウィンドウのタブで動き、メッセージが届くと Antenna が起こします。それでも、ノート PC がスリープすれば止まります。</p>
+</details>
+<details>
+  <summary>SSH セッションを開いたままにする必要はありますか？</summary>
+  <p>いいえ。Claude Code はサーバー上の Antenna の tmux で動き、チャットを通じてやり取りします。どちらのコンピューターも外向きに接続するので、受信用のポートを開けることもありません。</p>
+</details>
+<details>
+  <summary>Antenna は Mac をスリープさせないようにしてくれますか？</summary>
+  <p>いいえ。Mac のシステム設定でスリープしないように設定してください。Code モードを使うには、Antenna のウィンドウを開いたままにしておく必要があります。</p>
+</details>
+<details>
+  <summary>スマートフォンから様子を確認できますか？</summary>
+  <p>まだできません。現在、Antenna は macOS と Linux で動作します。</p>
+</details>

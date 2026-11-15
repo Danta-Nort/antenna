@@ -1,0 +1,60 @@
+<!--guide {"title": "Claude Code remote control: लैपटॉप से दूसरे कंप्यूटर पर चलाएँ", "h1": "दूसरे कंप्यूटर पर चल रहे Claude Code को अपने लैपटॉप से चलाएँ", "description": "Claude Code को अपने server या डेस्कटॉप पर चलाएँ और लैपटॉप की Antenna चैट से उसे tasks दें: peer-to-peer, end-to-end encrypted, बिना अकाउंट।", "summary": "आपके server या दूसरे कंप्यूटर पर Claude Code, जिसे आप अपने encrypted लिंक पर लैपटॉप से tasks और मंज़ूरियाँ देते हैं।", "source": "2026-11-15"}-->
+<p class="lead">अपने लैपटॉप पर और उस कंप्यूटर पर Antenna इंस्टॉल करें जहाँ Claude Code चलता है, दोनों को एक बार अपने कंप्यूटरों के रूप में जोड़ें, और वहाँ Claude Code को Antenna के ज़रिए शुरू करें। आपके लैपटॉप पर उस session की चैट आ जाती है: उसमें task लिखें, Claude Code ख़ाली बैठा हो तो Antenna उसे जगाता है, और उसका जवाब चैट में लौट आता है। मैसेज आपके दोनों कंप्यूटरों के बीच end-to-end encrypted, peer-to-peer लिंक पर जाते हैं, Antenna को किसी अकाउंट की ज़रूरत नहीं, और जिन कदमों के लिए आपकी मंज़ूरी चाहिए वे लैपटॉप तक पहुँचते हैं, जहाँ आप अपने password से जवाब देते हैं।</p>
+
+<h2>Claude Code का अपना Remote Control, और Antenna</h2>
+<p>Claude Code में अपना built-in Remote Control feature है; Anthropic का documentation उसके बारे में बताता है। यह guide एक अलग setup के बारे में है: Claude Code आपके किसी ऐसे कंप्यूटर पर चलता है जो चालू रहता है, server या डेस्कटॉप, और आप उसे अपने लैपटॉप पर Antenna से चलाते हैं। यह आपके काम का है अगर आप चाहते हैं:</p>
+<ul>
+  <li><strong>कई कंप्यूटरों पर कई sessions, एक ही list में।</strong> हर session की अपनी चैट होती है, और <strong>My devices</strong> हर कंप्यूटर की हालत, उसके agents और वहाँ इंतज़ार कर रहे requests दिखाता है।</li>
+  <li><strong>आपका अपना लिंक।</strong> मैसेज एक कंप्यूटर पर encrypt होते हैं और दूसरे पर decrypt। Network इजाज़त दे तो आपके कंप्यूटर सीधे कनेक्ट होते हैं, वरना ऐसे relay के ज़रिए जो सिर्फ़ encrypted ट्रैफ़िक आगे भेजता है। न अकाउंट, न inbound port।</li>
+  <li><strong>Permissions Antenna का daemon जाँचता है</strong>, उसी कंप्यूटर पर जहाँ Claude Code चलता है, और approvals का जवाब आप अपने उस कंप्यूटर से देते हैं जिस पर आप बैठे हैं।</li>
+  <li><strong>दूसरे agents भी इसी तरह:</strong> Codex भी Claude Code की तरह काम करता है।</li>
+</ul>
+
+<h2>सेट अप करें</h2>
+<ol>
+  <li>दोनों कंप्यूटरों पर <a href="/#download">Antenna इंस्टॉल करें</a>: आपके लैपटॉप पर app (macOS या Linux), और दूसरे कंप्यूटर पर app, या Linux server पर node:
+<pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+sudo loginctl enable-linger $USER</code></pre></li>
+  <li>दोनों को एक बार जोड़ें। लैपटॉप पर: <strong>नया कॉन्टैक्ट → इनवाइट करें</strong>, <strong>यह मेरा अपना कंप्यूटर है (∞)</strong> पर tick करें, <strong>लिंक बनाएँ</strong> दबाएँ और लिंक कॉपी करें। Server पर: <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>; डेस्कटॉप पर: <strong>नया कॉन्टैक्ट → जुड़ें</strong>, उसी box पर tick लगाकर। एक तरफ़ दिखा कोड दूसरी तरफ़ डालें, और लैपटॉप पर <strong>कॉन्टैक्ट ने पुष्टि की — कोड मेल खाते हैं</strong> दबाएँ।</li>
+  <li>दूसरे कंप्यूटर पर Claude Code को Antenna के ज़रिए शुरू करें। Server पर, प्रोजेक्ट फ़ोल्डर में (tmux चाहिए):
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api
+antenna session attach api-dev</code></pre>
+  Claude Code के पहले सवालों का जवाब दें, फिर <code>Ctrl-b d</code> से बाहर निकलें: वह चलता रहता है, और आपके लैपटॉप पर <code>api-dev</code> नाम की चैट आ जाती है। डेस्कटॉप पर: <strong>Agents → AI apps → Code mode में शुरू करें</strong>, और Claude Code वहाँ Antenna की window के एक tab में चलता है; उससे एक बार कहें कि वह Antenna के ज़रिए आपके लैपटॉप को hello भेजे, और उसकी चैट लैपटॉप पर आ जाती है।</li>
+  <li>लैपटॉप को उस कंप्यूटर के approval requests का जवाब देने दें। Server पर: <code>antenna devices confirm mac</code>। डेस्कटॉप पर: <strong>My devices</strong> → लैपटॉप का कार्ड → <strong>मंज़ूरियाँ</strong> → <strong>… से signed मंज़ूरियाँ स्वीकार करें</strong>, अपने password के साथ।</li>
+</ol>
+
+<h2>अपने लैपटॉप से चलाएँ</h2>
+<ul>
+  <li><strong>Task दें।</strong> Session की चैट में वैसे ही लिखें जैसे किसी इंसान को लिखते। जब Claude Code अपने prompt पर ख़ाली बैठा होता है, Antenna एक तय लाइन टाइप करता है ताकि वह आपका मैसेज पढ़े; वह आपका टेक्स्ट कभी terminal में टाइप नहीं करता और Claude Code के वहाँ पूछे गए किसी सवाल का जवाब कभी नहीं देता। <em>Experimental।</em></li>
+  <li><strong>उसे बीच में रोकें।</strong> भेजने से पहले <strong>Urgent: अभी रोकें</strong> चालू करें: Antenna चल रहा turn ख़त्म करने के लिए एक बार Esc दबाता है, वहाँ खुले किसी सवाल या permission prompt के ऊपर कभी नहीं, और Claude Code आपका मैसेज पढ़ता है। <em>Experimental।</em></li>
+  <li><strong>उसके कदम मंज़ूर करें।</strong> जिस कदम के लिए आपकी ज़रूरत है, वह <strong>My devices</strong> में दूसरे कंप्यूटर के कार्ड पर notification के साथ दिखता है। <strong>Password से मंज़ूर करें</strong>, Mac पर <strong>Touch ID से मंज़ूर करें</strong>, या <strong>मना करें</strong> दबाएँ। <em>Experimental।</em></li>
+  <li><strong>उसे रोक दें।</strong> उस कार्ड पर agent के बगल में <strong>Agent और उसके processes रोकें…</strong> Claude Code को और उसने वहाँ जो कुछ शुरू किया है, सबको ख़त्म कर देता है। <em>Experimental।</em></li>
+</ul>
+<p>Claude Code का अपना permission prompt (“Do you want to proceed?”) दूसरे कंप्यूटर पर उसके terminal में ही रहता है, और Antenna उसका जवाब कभी नहीं देता। जो tools आप रोज़ इस्तेमाल करते हैं, उन्हें Claude Code की settings में allow कर दें, या <code>antenna session attach</code> से उसका जवाब दें।</p>
+
+<h2>Codex और दूसरे agents</h2>
+<p>Codex भी इसी तरह काम करता है: server पर <code>antenna connect codex</code> और <code>--cli codex</code>, या डेस्कटॉप पर Codex के बगल में <strong>Code mode में शुरू करें</strong> (देखें <a href="/guides/codex-cli-remote-control">Codex CLI remote control</a>)। Gemini CLI <strong>Agents → AI apps</strong> से कनेक्ट होता है और Antenna के ज़रिए मैसेज भेजता और पढ़ता है, लेकिन Antenna अभी उसे जगाता नहीं: वह नया मैसेज तब पढ़ता है जब वह अगली बार Antenna को call करता है।</p>
+
+<h2>सवाल-जवाब</h2>
+<details>
+  <summary>क्या मुझे लैपटॉप पर Claude Code का terminal दिखता है?</summary>
+  <p>नहीं। आप चैट में tasks देते हैं और जवाब पढ़ते हैं; terminal दूसरे कंप्यूटर पर रहता है। उसे देखने के लिए वहाँ <code>antenna session attach</code> चलाएँ, चाहें तो SSH से।</p>
+</details>
+<details>
+  <summary>क्या दूसरे कंप्यूटर को public IP या खुले ports चाहिए?</summary>
+  <p>नहीं। दोनों कंप्यूटर बाहर की ओर कनेक्ट करते हैं, network इजाज़त दे तो सीधे, वरना relay के ज़रिए। Relay सिर्फ़ encrypted ट्रैफ़िक आगे भेजता है।</p>
+</details>
+<details>
+  <summary>और कौन उसे tasks दे सकता है?</summary>
+  <p>सिर्फ़ उस कंप्यूटर से जुड़े वे कॉन्टैक्ट्स जिनके मैसेज agent पढ़ सकता है (<code>--links mac</code> के साथ, सिर्फ़ आपका लैपटॉप), और वे agents जिन्हें आप agent map पर उससे जोड़ते हैं। किसी कॉन्टैक्ट का मैसेज उससे क्या करवा सकता है, यह वहाँ Antenna का daemon उस कॉन्टैक्ट के trust level के हिसाब से तय करता है, Claude Code नहीं।</p>
+</details>
+<details>
+  <summary>क्या इसके लिए API key चाहिए?</summary>
+  <p>नहीं। Claude Code जिस कंप्यूटर पर चलता है, वहाँ आपका अपना साइन-इन रखता है, और Antenna सिर्फ़ मैसेज, फ़ाइलें और approvals पहुँचाता है।</p>
+</details>
+<details>
+  <summary>क्या मैं इसे फ़ोन से चला सकता हूँ?</summary>
+  <p>अभी नहीं। Antenna आज macOS और Linux पर चलता है।</p>
+</details>

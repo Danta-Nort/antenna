@@ -1,0 +1,60 @@
+<!--guide {"title": "Claude Code 远程控制：在笔记本上操控另一台电脑上的 Claude Code — Antenna", "h1": "在笔记本上操控另一台电脑上的 Claude Code", "description": "在服务器或台式机上运行 Claude Code，在笔记本的 Antenna 聊天里给它派任务：点对点直连，端到端加密，无需注册账号。", "summary": "在你的服务器或另一台电脑上运行 Claude Code，通过你自己的加密连接在笔记本上派任务、做批准。", "source": "2026-11-15"}-->
+<p class="lead">在笔记本和运行 Claude Code 的电脑上都安装 Antenna，把两台电脑作为你自己的电脑配对一次，然后在那台电脑上通过 Antenna 启动 Claude Code。你的笔记本上会出现这个会话的聊天：在里面写下任务，Claude Code 闲着时 Antenna 会唤醒它，它的回复会回到聊天里。消息通过两台电脑之间端到端加密的点对点连接传输，Antenna 不需要任何账号，需要你批准的步骤会送到笔记本上，你用密码回答即可。</p>
+
+<h2>Claude Code 自带的 Remote Control 与 Antenna</h2>
+<p>Claude Code 内置了自己的 Remote Control 功能，Anthropic 的文档里有介绍。本指南讲的是另一种方案：Claude Code 运行在你自己一台常开的电脑上（服务器或台式机），你在笔记本上通过 Antenna 操控它。如果你有以下需求，这个方案适合你：</p>
+<ul>
+  <li><strong>多台电脑上的多个会话，集中在一个列表里。</strong>每个会话都是一个独立的聊天，<strong>我的设备</strong> 会显示每台电脑的运行状况、上面的智能体，以及在那里等待处理的请求。</li>
+  <li><strong>属于你自己的连接。</strong>消息在一台电脑上加密，在另一台电脑上解密。网络允许时两台电脑直连，否则经过一个只转发加密流量的中继。无需账号，也不用开放入站端口。</li>
+  <li><strong>由 Antenna 守护进程检查权限</strong>，检查发生在运行 Claude Code 的那台电脑上；你在哪台自己的电脑前，就在哪台上回答批准请求。</li>
+  <li><strong>其他智能体用法相同：</strong>Codex 的用法和 Claude Code 一样。</li>
+</ul>
+
+<h2>设置</h2>
+<ol>
+  <li>在两台电脑上<a href="/#download">安装 Antenna</a>：笔记本上装应用（macOS 或 Linux）；另一台电脑上装应用，如果是 Linux 服务器则装节点：
+<pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+sudo loginctl enable-linger $USER</code></pre></li>
+  <li>配对一次。在笔记本上：<strong>新联系人 → 邀请</strong>，勾选 <strong>这是我自己的电脑（∞）</strong>，点 <strong>创建链接</strong> 并复制。在服务器上：<code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>；在台式机上：<strong>新联系人 → 加入</strong>，同样勾选这一项。把一边显示的验证码输入另一边，然后在笔记本上点 <strong>联系人已确认，验证码一致</strong>。</li>
+  <li>在另一台电脑上通过 Antenna 启动 Claude Code。如果是服务器，在项目文件夹里执行（需要 tmux）：
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api
+antenna session attach api-dev</code></pre>
+  回答 Claude Code 一开始的几个问题，然后按 <code>Ctrl-b d</code> 退出：它会继续运行，你的笔记本上会出现一个名为 <code>api-dev</code> 的聊天。如果是台式机：<strong>智能体 → AI 应用 → 以 Code 模式启动</strong>，Claude Code 会在那台电脑上 Antenna 窗口的一个标签页里运行；让它通过 Antenna 跟你的笔记本打个招呼（只需一次），它的聊天就会出现在笔记本上。</li>
+  <li>让笔记本来回答那台电脑的批准请求。在服务器上：<code>antenna devices confirm mac</code>。在台式机上：<strong>我的设备</strong> → 笔记本的卡片 → <strong>批准</strong> → <strong>接受用 … 签名的批准</strong>，输入你的密码。</li>
+</ol>
+
+<h2>在笔记本上操控它</h2>
+<ul>
+  <li><strong>派任务。</strong>像给人发消息一样在会话的聊天里写。Claude Code 停在提示符前闲着时，Antenna 会输入一行固定的文字，让它去读你的消息；Antenna 永远不会把你的原文输入终端，也永远不会替你回答 Claude Code 在终端里提出的问题。<em>实验性功能。</em></li>
+  <li><strong>打断它。</strong>发送前打开 <strong>紧急：立即打断</strong>：Antenna 会按一次 Esc 结束正在进行的这一轮（如果那里正开着问题或权限提示，则绝不会按），然后 Claude Code 会读你的消息。<em>实验性功能。</em></li>
+  <li><strong>批准它的步骤。</strong>需要你批准的步骤会显示在 <strong>我的设备</strong> 中另一台电脑的卡片上，并弹出通知。点 <strong>用密码批准</strong>，在 Mac 上也可以点 <strong>用 Touch ID 批准</strong>，或者点 <strong>拒绝</strong>。<em>实验性功能。</em></li>
+  <li><strong>停止它。</strong>点该卡片上智能体旁边的 <strong>停止智能体及其进程…</strong>，会结束 Claude Code 以及它在那台电脑上启动的所有进程。<em>实验性功能。</em></li>
+</ul>
+<p>Claude Code 自己的权限提示（“Do you want to proceed?”）留在另一台电脑上它的终端里，Antenna 从不替你回答。你可以在 Claude Code 的设置里放行日常使用的工具，或者用 <code>antenna session attach</code> 进去回答。</p>
+
+<h2>Codex 和其他智能体</h2>
+<p>Codex 的用法完全一样：在服务器上用 <code>antenna connect codex</code> 和 <code>--cli codex</code>，在台式机上点 Codex 旁边的 <strong>以 Code 模式启动</strong>（见 <a href="/guides/codex-cli-remote-control">Codex CLI 远程控制</a>）。Gemini CLI 可以从 <strong>智能体 → AI 应用</strong> 接入，通过 Antenna 收发消息，但 Antenna 暂时还不会唤醒它：它要等下一次调用 Antenna 时才会读到新消息。</p>
+
+<h2>常见问题</h2>
+<details>
+  <summary>我能在笔记本上看到 Claude Code 的终端吗？</summary>
+  <p>不能。你在聊天里派任务、看回复；终端留在另一台电脑上。想看终端，就在那台电脑上运行 <code>antenna session attach</code>，也可以通过 SSH 进去运行。</p>
+</details>
+<details>
+  <summary>另一台电脑需要公网 IP 或开放端口吗？</summary>
+  <p>不需要。两台电脑都是主动向外连接，网络允许时直连，否则经过中继。中继只转发加密流量。</p>
+</details>
+<details>
+  <summary>还有谁能给它派任务？</summary>
+  <p>只有与那台电脑配对、并且该智能体可以读取其消息的联系人（加了 <code>--links mac</code> 时，只有你的笔记本），以及你在智能体地图上与它连接的智能体。联系人的消息能让它做什么，由那台电脑上的 Antenna 守护进程根据该联系人的信任级别决定，而不是由 Claude Code 决定。</p>
+</details>
+<details>
+  <summary>需要 API key 吗？</summary>
+  <p>不需要。Claude Code 在它运行的电脑上使用你自己的登录，Antenna 只负责传递消息、文件和批准。</p>
+</details>
+<details>
+  <summary>能用手机控制吗？</summary>
+  <p>暂时还不能。Antenna 目前在 macOS 和 Linux 上运行。</p>
+</details>

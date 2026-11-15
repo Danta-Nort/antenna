@@ -1,0 +1,60 @@
+<!--guide {"title": "التحكم في Claude Code عن بُعد على حاسوب آخر — Antenna", "h1": "تحكّم في Claude Code على حاسوب آخر من حاسوبك المحمول", "description": "شغّل Claude Code على خادمك أو حاسوبك المكتبي وأعطه المهام من محادثة Antenna على حاسوبك المحمول: اتصال ند لند (P2P)، بتشفير تام بين الطرفين، ودون حساب.", "summary": "Claude Code على خادم أو حاسوب آخر من حواسيبك، تعطيه المهام والموافقات من حاسوبك المحمول عبر رابطك المشفّر الخاص.", "source": "2026-11-15"}-->
+<p class="lead">ثبّت Antenna على حاسوبك المحمول وعلى الحاسوب الذي يعمل عليه Claude Code، واقرن الاثنين مرة واحدة على أنهما حاسوباك، وشغّل Claude Code هناك عبر Antenna. تظهر على حاسوبك المحمول محادثة مع تلك الجلسة: اكتب فيها مهمة، فيوقظ Antenna ‏Claude Code حين يكون خاملًا، ويعود رده إلى المحادثة. تنتقل الرسائل عبر رابط ند لند (peer-to-peer) مشفّر تشفيرًا تامًا بين الطرفين بين حاسوبيك، ولا يحتاج Antenna إلى أي حساب، والخطوات التي تحتاج إلى موافقتك تصل إلى الحاسوب المحمول، فتجيب عنها بكلمة مرورك.</p>
+
+<h2>ميزة Remote Control في Claude Code، وAntenna</h2>
+<p>لدى Claude Code ميزة Remote Control مدمجة خاصة به، وتشرحها وثائق Anthropic. أما هذا الدليل فيتناول إعدادًا مختلفًا: يعمل Claude Code على حاسوب من حواسيبك يبقى قيد التشغيل، خادم أو حاسوب مكتبي، وتتحكم فيه من Antenna على حاسوبك المحمول. ويناسبك إن كنت تريد:</p>
+<ul>
+  <li><strong>عدة جلسات على عدة حواسيب في قائمة واحدة.</strong> كل جلسة محادثة مستقلة، وتعرض <strong>My devices</strong> (أجهزتي) حالة كل حاسوب ووكلاءه والطلبات التي تنتظر هناك.</li>
+  <li><strong>رابطك الخاص.</strong> تُشفَّر الرسائل على حاسوب وتُفك على الآخر. تتصل حواسيبك مباشرة حين تسمح الشبكة، وإلا فعبر خادم ترحيل (relay) لا يمرر إلا حركة مرور مشفرة. لا حساب ولا منفذ وارد.</li>
+  <li><strong>أذونات تفحصها الخدمة الخلفية لـ Antenna</strong> على الحاسوب الذي يعمل عليه Claude Code، مع موافقات تجيب عنها من أي حاسوب من حواسيبك تجلس أمامه.</li>
+  <li><strong>وكلاء آخرون بالطريقة نفسها:</strong> يعمل Codex كما يعمل Claude Code.</li>
+</ul>
+
+<h2>الإعداد</h2>
+<ol>
+  <li><a href="/#download">ثبّت Antenna</a> على الحاسوبين: التطبيق على حاسوبك المحمول (macOS أو Linux)، وعلى الحاسوب الآخر التطبيق، أو العقدة إن كان خادم Linux:
+<pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+sudo loginctl enable-linger $USER</code></pre></li>
+  <li>اقرنهما مرة واحدة. على الحاسوب المحمول: <strong>New contact → Invite</strong> (جهة اتصال جديدة ← دعوة)، وحدّد <strong>This is my own computer (∞)</strong> (هذا حاسوبي أنا)، واضغط <strong>Create link</strong> (إنشاء رابط) وانسخه. وعلى خادم: <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>؛ وعلى حاسوب مكتبي: <strong>New contact → Join</strong> (جهة اتصال جديدة ← انضمام)، مع تحديد الخانة نفسها. أدخل الرمز الذي يعرضه أحد الطرفين في الطرف الآخر، واضغط <strong>The contact confirmed — codes match</strong> على الحاسوب المحمول.</li>
+  <li>شغّل Claude Code عبر Antenna على الحاسوب الآخر. على خادم، في مجلد المشروع (يلزم tmux):
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api
+antenna session attach api-dev</code></pre>
+  أجب عن أسئلة Claude Code الأولى، ثم اخرج بـ <code>Ctrl-b d</code>: فيواصل العمل، وتظهر على حاسوبك المحمول محادثة باسم <code>api-dev</code>. وعلى حاسوب مكتبي: <strong>Agents → AI apps → Start in Code mode</strong> (الوكلاء ← تطبيقات الذكاء الاصطناعي ← البدء في وضع Code)، فيعمل Claude Code هناك في تبويب من نافذة Antenna؛ اطلب منه مرة واحدة أن يلقي التحية على حاسوبك المحمول عبر Antenna، فتظهر محادثته على الحاسوب المحمول.</li>
+  <li>دع الحاسوب المحمول يجيب عن طلبات الموافقة الآتية من ذلك الحاسوب. على خادم: <code>antenna devices confirm mac</code>. وعلى حاسوب مكتبي: <strong>My devices</strong> → بطاقة الحاسوب المحمول → <strong>Approvals</strong> (الموافقات) → <strong>Accept approvals signed with …</strong>، بكلمة مرورك.</li>
+</ol>
+
+<h2>تحكّم فيه من حاسوبك المحمول</h2>
+<ul>
+  <li><strong>أعطه مهمة.</strong> اكتب في محادثة الجلسة كما تكتب لشخص. حين يكون Claude Code خاملًا أمام موجّهه، يكتب Antenna سطرًا ثابتًا واحدًا كي يقرأ رسالتك؛ ولا يكتب نصك في الطرفية أبدًا، ولا يجيب أبدًا عن سؤال يطرحه Claude Code هناك. <em>تجريبي.</em></li>
+  <li><strong>قاطعه.</strong> فعّل <strong>Urgent: interrupt now</strong> (عاجل: قاطِع الآن) قبل الإرسال: يضغط Antenna مفتاح Esc مرة واحدة لإنهاء الدورة الجارية، ولا يفعل ذلك أبدًا فوق سؤال أو نافذة أذونات مفتوحة هناك، ثم يقرأ Claude Code رسالتك. <em>تجريبي.</em></li>
+  <li><strong>وافق على خطواته.</strong> تظهر الخطوة التي تحتاج إليك على بطاقة الحاسوب الآخر في <strong>My devices</strong>، مع إشعار. اضغط <strong>Approve with password</strong> (الموافقة بكلمة المرور)، أو <strong>Approve with Touch ID</strong> على Mac، أو <strong>Deny</strong> (رفض). <em>تجريبي.</em></li>
+  <li><strong>أوقفه.</strong> يُنهي <strong>Stop agent and its processes…</strong> (إيقاف الوكيل وعملياته)، بجوار الوكيل على تلك البطاقة، Claude Code وكل ما بدأه هناك. <em>تجريبي.</em></li>
+</ul>
+<p>أما نافذة الأذونات الخاصة بـ Claude Code نفسه («Do you want to proceed?») فتبقى في طرفيته على الحاسوب الآخر، ولا يجيب عنها Antenna أبدًا. اسمح بالأدوات التي تستخدمها عادةً في إعدادات Claude Code، أو أجب عنها عبر <code>antenna session attach</code>.</p>
+
+<h2>Codex ووكلاء آخرون</h2>
+<p>يعمل Codex بالطريقة نفسها: <code>antenna connect codex</code> و<code>--cli codex</code> على خادم، أو <strong>Start in Code mode</strong> بجوار Codex على حاسوب مكتبي (انظر <a href="/guides/codex-cli-remote-control">التحكم في Codex CLI عن بُعد</a>). ويتصل Gemini CLI من <strong>Agents → AI apps</strong> ويرسل الرسائل ويقرأها عبر Antenna، لكن Antenna لا يوقظه بعد: فهو يقرأ الرسالة الجديدة حين يستدعي Antenna في المرة التالية.</p>
+
+<h2>أسئلة</h2>
+<details>
+  <summary>هل أرى طرفية Claude Code على حاسوبي المحمول؟</summary>
+  <p>لا. تعطي المهام وتقرأ الردود في محادثة؛ وتبقى الطرفية على الحاسوب الآخر. ولتنظر إليها، شغّل <code>antenna session attach</code> هناك، عبر SSH إن شئت.</p>
+</details>
+<details>
+  <summary>هل يحتاج الحاسوب الآخر إلى عنوان IP عام أو منافذ مفتوحة؟</summary>
+  <p>لا. يتصل الحاسوبان كلاهما نحو الخارج، مباشرة حين تسمح الشبكة وعبر خادم ترحيل في غير ذلك. وخادم الترحيل لا يمرر إلا حركة مرور مشفرة.</p>
+</details>
+<details>
+  <summary>من غيري يستطيع أن يعطيه مهام؟</summary>
+  <p>فقط جهات الاتصال المقترنة بذلك الحاسوب التي يحق للوكيل قراءة رسائلها (مع <code>--links mac</code>، حاسوبك المحمول وحده)، والوكلاء الذين تصلهم به على خريطة الوكلاء. والخدمة الخلفية لـ Antenna هناك، لا Claude Code، هي التي تقرر ما يمكن أن تدفعه رسالة جهة الاتصال إلى فعله، بحسب مستوى ثقة تلك الجهة.</p>
+</details>
+<details>
+  <summary>هل يحتاج إلى مفتاح API؟</summary>
+  <p>لا. يحتفظ Claude Code بتسجيل دخولك أنت على الحاسوب الذي يعمل عليه، ولا ينقل Antenna إلا الرسائل والملفات والموافقات.</p>
+</details>
+<details>
+  <summary>هل يمكنني التحكم فيه من هاتفي؟</summary>
+  <p>ليس بعد. يعمل Antenna اليوم على macOS وLinux.</p>
+</details>

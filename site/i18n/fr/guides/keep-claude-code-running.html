@@ -1,0 +1,77 @@
+<!--guide {"title": "Garder Claude Code actif quand le portable est fermé — Antenna", "h1": "Laisser Claude Code travailler quand votre portable est fermé", "description": "Un portable fermé se met en veille, et Claude Code s’arrête avec lui. Faites-le tourner sur un ordinateur toujours allumé et confiez-lui des tâches via Antenna.", "summary": "Claude Code qui travaille toute la nuit sur un serveur ou un Mac toujours allumé pendant que votre portable dort, et à qui vous écrivez depuis le portable.", "source": "2026-11-15"}-->
+<p class="lead">Sur le portable lui-même, c’est impossible : fermer l’écran met le portable en veille, un ordinateur en veille n’exécute rien, et Claude Code se met en pause avec lui. La solution consiste à faire tourner Claude Code sur un ordinateur qui reste allumé, par exemple un serveur Linux ou un Mac mini réglé pour ne pas se mettre en veille, à l’y lancer via Antenna et à lui confier des tâches depuis la conversation Antenna de votre portable. Fermez le portable : Claude Code continue de travailler sur l’autre ordinateur, et ses réponses attendent le portable pour arriver dès qu’il est de nouveau en ligne.</p>
+
+<h2>Pourquoi il s’arrête</h2>
+<p>Claude Code tourne sur l’ordinateur où vous le lancez. Quand cet ordinateur se met en veille, tous ses programmes s’arrêtent, Claude Code compris, jusqu’à son réveil. Fermer le terminal ou la fenêtre SSH dans laquelle il tourne y met fin aussi. On peut garder un portable éveillé écran fermé, mais il doit alors rester branché et allumé : c’est devenu un serveur. Le travail passe donc sur un ordinateur toujours allumé, et le portable se contente de lui parler.</p>
+
+<h2>Ce qu’il vous faut</h2>
+<ul>
+  <li>Un ordinateur qui reste allumé : un serveur Linux en x86_64 (un VPS ou une machine chez vous), ou un Mac ou un poste Linux réglé pour ne pas se mettre en veille.</li>
+  <li>Claude Code installé et connecté sur cet ordinateur.</li>
+  <li><a href="/#download">Antenna</a> sur les deux ordinateurs : l’app sur votre portable (macOS ou Linux), le nœud ou l’app sur l’autre.</li>
+</ul>
+
+<h2>Sur un serveur</h2>
+<ol>
+  <li>Installez le nœud Antenna et laissez-le tourner après votre déconnexion :
+<pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+sudo loginctl enable-linger $USER</code></pre>
+  L’installeur configure Antenna comme service utilisateur systemd et crée votre nœud avec un mot de passe. Il n’active pas le lingering, il vous le rappelle seulement : sans la deuxième ligne, le service s’arrête quand vous vous déconnectez.</li>
+  <li>Associez une fois le serveur à votre portable. Sur le portable : <strong>Nouveau contact → Inviter</strong>, cochez <strong>C’est mon propre ordinateur (∞)</strong>, cliquez sur <strong>Créer le lien</strong> et copiez-le. Sur le serveur : <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>, saisissez le code affiché par le portable, puis cliquez sur <strong>Le contact a confirmé — les codes correspondent</strong> sur le portable.</li>
+  <li>Lancez Claude Code via Antenna dans le dossier du projet (le serveur a besoin de tmux) :
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api
+antenna session attach api-dev</code></pre>
+  Répondez aux premières questions de Claude Code, par exemple s’il fait confiance au dossier, puis détachez-vous avec <code>Ctrl-b d</code>. Une conversation nommée <code>api-dev</code> se trouve désormais sur votre portable.</li>
+  <li>Autorisez le portable à répondre aux demandes d’approbation du serveur : <code>antenna devices confirm mac</code>.</li>
+</ol>
+<p>Fermez maintenant votre session SSH. Le service continue de tourner, et Claude Code aussi, dans le serveur tmux propre à Antenna ; votre tmux n’est pas touché. <a href="/guides/run-claude-code-on-a-vps">Claude Code sur un VPS</a> détaille chaque étape.</p>
+
+<h2>Sur un Mac ou un poste de bureau toujours allumé</h2>
+<ol>
+  <li>Dans les réglages système de l’ordinateur, empêchez-le de se mettre en veille tout seul. Antenna ne garde pas un ordinateur éveillé.</li>
+  <li>Associez-le à votre portable comme ci-dessus, en cochant <strong>C’est mon propre ordinateur (∞)</strong>.</li>
+  <li>Sur cet ordinateur, ouvrez <strong>Agents → Apps IA</strong> et cliquez sur <strong>Lancer en mode Code</strong> à côté de Claude Code. Choisissez <strong>Nouvel agent…</strong> et donnez-lui un nom, choisissez le <strong>Dossier de travail</strong>, saisissez votre mot de passe et cliquez sur <strong>Lancer</strong>. La fenêtre passe en mode Code, et Claude Code tourne dans un onglet à l’intérieur.</li>
+  <li>Demandez une fois à Claude Code, dans son onglet, de dire bonjour à votre portable via Antenna. Sa conversation apparaît alors sur le portable.</li>
+  <li>Autorisez le portable à répondre à ses demandes d’approbation : <strong>Mes appareils</strong> → la fiche du portable → <strong>Approbations</strong> → <strong>Accepter les approbations signées avec …</strong>, avec votre mot de passe.</li>
+</ol>
+<p>Laissez la fenêtre d’Antenna ouverte : la fermer arrête les agents qui y tournent, et la fenêtre vous le demande d’abord.</p>
+
+<h2>Le laisser travailler</h2>
+<p>Écrivez la tâche dans la conversation de l’agent sur votre portable : « Lance les tests de migration, corrige ce qui échoue et réponds ici avec ce qui a changé. » Quand Claude Code attend, inactif, devant son invite, Antenna tape une ligne prédéfinie pour qu’il lise votre message ; s’il est au milieu d’un tour, il reçoit le message à la fin de ce tour. Antenna ne tape jamais votre texte dans le terminal. <em>Expérimental.</em> Ensuite, fermez le portable.</p>
+<p>Avant une longue exécution, vérifiez ce qui pourrait l’arrêter pendant que personne n’est là :</p>
+<ul>
+  <li><strong>L’invite de permission de Claude Code lui-même</strong> (« Do you want to proceed? ») attend dans son terminal que quelqu’un réponde, et Antenna n’y répond jamais. Autorisez dans les réglages de Claude Code les outils dont la tâche a besoin.</li>
+  <li><strong>Les demandes d’approbation d’Antenna</strong> attendent 10 minutes. Ensuite, rien ne s’exécute, et Claude Code apprend que personne n’a approuvé. Une tâche confiée depuis votre propre ordinateur, au niveau ∞, exécute ses commandes et ses modifications sans rien demander ; les changements de la configuration de Claude Code lui-même, comme <code>CLAUDE.md</code> ou <code>.claude/</code>, demandent toujours votre accord.</li>
+</ul>
+
+<h2>Quand le portable se réveille</h2>
+<p>Pendant que le portable dort, les réponses de Claude Code attendent dans la file de l’autre ordinateur, et Antenna continue d’essayer de les remettre. Dès que le portable est de nouveau en ligne, elles arrivent dans la conversation, avec une notification si la fenêtre d’Antenna n’est pas au premier plan. Un message que vous avez écrit hors ligne affiche une horloge et part tout seul. Les demandes qui attendent encore votre approbation s’affichent sur la fiche de l’autre ordinateur dans <strong>Mes appareils</strong> (<em>expérimental</em>).</p>
+
+<h2>Après un redémarrage de l’autre ordinateur</h2>
+<p>Les clés sont verrouillées après un redémarrage : ses liaisons restent donc muettes jusqu’à ce que vous saisissiez le mot de passe. Sur un serveur, connectez-vous et lancez <code>antenna unlock</code>, puis relancez la session ; <code>--resume</code> reprend la dernière session de Claude Code :</p>
+<pre><code>antenna session start api-dev --dir ~/projects/api --resume</code></pre>
+<p>Sur un Mac, saisissez le mot de passe dans la fenêtre d’Antenna et relancez l’agent.</p>
+
+<h2>Questions</h2>
+<details>
+  <summary>Claude Code continue-t-il de tourner si je ferme mon portable ?</summary>
+  <p>Non, si fermer l’écran met le portable en veille, ce qui est le réglage habituel : Claude Code se met en pause jusqu’à ce que vous le rouvriez. Faites-le tourner sur un ordinateur qui reste allumé, et il continue de travailler.</p>
+</details>
+<details>
+  <summary>Claude Code peut-il tourner en arrière-plan sur mon portable ?</summary>
+  <p>Tant que le portable est éveillé, oui : en mode Code, il tourne dans un onglet de la fenêtre d’Antenna que vous n’avez pas besoin de regarder, et Antenna le réveille quand un message arrive. Il s’arrête quand même quand le portable se met en veille.</p>
+</details>
+<details>
+  <summary>Dois-je garder une session SSH ouverte ?</summary>
+  <p>Non. Claude Code tourne dans le tmux d’Antenna sur le serveur, et vous le joignez par la conversation. Les deux ordinateurs établissent des connexions sortantes : aucun port entrant n’est ouvert non plus.</p>
+</details>
+<details>
+  <summary>Antenna empêche-t-il mon Mac de se mettre en veille ?</summary>
+  <p>Non. Réglez le Mac pour qu’il ne se mette pas en veille dans ses réglages système. La fenêtre d’Antenna doit rester ouverte pour le mode Code.</p>
+</details>
+<details>
+  <summary>Puis-je le surveiller depuis mon téléphone ?</summary>
+  <p>Pas encore. Antenna fonctionne aujourd’hui sous macOS et Linux.</p>
+</details>

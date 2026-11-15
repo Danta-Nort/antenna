@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>كيف يبقى Claude Code يعمل بعد إغلاق الحاسوب المحمول — Antenna</title>
+<meta name="description" content="إغلاق الحاسوب المحمول يُدخله في وضع السكون فيتوقف Claude Code معه. شغّله على حاسوب يبقى قيد التشغيل وأعطه المهام من حاسوبك المحمول عبر Antenna.">
+<link rel="canonical" href="https://antenna.contact/ar/guides/keep-claude-code-running">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="كيف يبقى Claude Code يعمل بعد إغلاق الحاسوب المحمول — Antenna">
+<meta property="og:description" content="إغلاق الحاسوب المحمول يُدخله في وضع السكون فيتوقف Claude Code معه. شغّله على حاسوب يبقى قيد التشغيل وأعطه المهام من حاسوبك المحمول عبر Antenna.">
+<meta property="og:url" content="https://antenna.contact/ar/guides/keep-claude-code-running">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ar_AR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/keep-claude-code-running">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ar/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "الأدلة",
+     "item": "https://antenna.contact/ar/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "أبقِ Claude Code يعمل حين تُغلق حاسوبك المحمول",
+     "item": "https://antenna.contact/ar/guides/keep-claude-code-running"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "أبقِ Claude Code يعمل حين تُغلق حاسوبك المحمول",
+   "description": "إغلاق الحاسوب المحمول يُدخله في وضع السكون فيتوقف Claude Code معه. شغّله على حاسوب يبقى قيد التشغيل وأعطه المهام من حاسوبك المحمول عبر Antenna.",
+   "datePublished": "2026-11-15",
+   "dateModified": "2026-11-15",
+   "inLanguage": "ar",
+   "url": "https://antenna.contact/ar/guides/keep-claude-code-running",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ar/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "هل يبقى Claude Code يعمل إذا أغلقت حاسوبي المحمول؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "لا، إذا كان إغلاق الغطاء يُدخل الحاسوب المحمول في وضع السكون، وهو الإعداد المعتاد: يتوقف Claude Code مؤقتًا حتى تفتحه. شغّله على حاسوب يبقى قيد التشغيل، فيواصل العمل."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يمكن أن يعمل Claude Code في الخلفية على حاسوبي المحمول؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ما دام الحاسوب المحمول مستيقظًا، نعم: في وضع Code يعمل في تبويب من نافذة Antenna لا حاجة إلى أن تنظر إليه، ويوقظه Antenna حين تصل رسالة. لكنه يتوقف مع ذلك حين ينام الحاسوب المحمول."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل عليّ أن أُبقي جلسة SSH مفتوحة؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "لا. يعمل Claude Code في tmux الخاص بـ Antenna على الخادم، وتصل إليه عبر المحادثة. ويتصل الحاسوبان كلاهما نحو الخارج، فلا يُفتح أي منفذ وارد كذلك."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يُبقي Antenna جهاز Mac مستيقظًا؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "لا. اضبط Mac كي لا ينام من إعدادات النظام فيه. ويجب أن تبقى نافذة Antenna مفتوحة لوضع Code."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يمكنني متابعته من هاتفي؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ليس بعد. يعمل Antenna اليوم على macOS وLinux."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">انتقل إلى المحتوى</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="القائمة الرئيسية">
+      <a href="/ar/#product">المنتج</a>
+      <a href="/ar/#security">الأمان</a>
+      <a href="/ar/guides/">الأدلة</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="اللغة: العربية"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">AR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/keep-claude-code-running" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/keep-claude-code-running" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/keep-claude-code-running" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/keep-claude-code-running" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/keep-claude-code-running" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/keep-claude-code-running" hreflang="ar" lang="ar" aria-current="true">العربية</a></li>
+        <li><a href="/fr/guides/keep-claude-code-running" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/keep-claude-code-running" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/keep-claude-code-running" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/keep-claude-code-running" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/keep-claude-code-running" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/keep-claude-code-running" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/keep-claude-code-running" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/keep-claude-code-running" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/keep-claude-code-running" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ar/#download">تنزيل</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="مسار التنقل"><a href="/ar/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ar/guides/">الأدلة</a></nav>
+    <p class="eyebrow">آخر تحديث <time datetime="2026-11-15">15 نوفمبر 2026</time></p>
+    <h1>أبقِ Claude Code يعمل حين تُغلق حاسوبك المحمول</h1>
+    <p class="lead">لا يمكن ذلك على الحاسوب المحمول نفسه: فإغلاق الغطاء يُدخل الحاسوب المحمول في وضع السكون، والحاسوب النائم لا يشغّل شيئًا، فيتوقف Claude Code مؤقتًا معه. والحل أن تشغّل Claude Code على حاسوب يبقى قيد التشغيل، مثل خادم Linux أو جهاز Mac mini مضبوط كي لا ينام، وأن تبدأه هناك عبر Antenna، وتعطيه المهام من محادثة Antenna على حاسوبك المحمول. أغلق الحاسوب المحمول: يواصل Claude Code العمل على الحاسوب الآخر، وتنتظر ردوده حاسوبك المحمول وتصل حين يعود إلى الاتصال.</p>
+
+    <h2>لماذا يتوقف</h2>
+    <p>يعمل Claude Code على الحاسوب الذي تبدأه عليه. وحين ينام ذلك الحاسوب، يتوقف كل برنامج عليه، ومنها Claude Code، حتى يستيقظ. وإغلاق الطرفية أو نافذة SSH التي يعمل فيها يُنهيه أيضًا. يمكن إبقاء الحاسوب المحمول مستيقظًا والغطاء مغلق، لكنه عندئذ يجب أن يبقى موصولًا بالكهرباء وقيد التشغيل، أي أنه صار خادمًا. لذلك ينتقل العمل إلى حاسوب يعمل دائمًا، ولا يفعل الحاسوب المحمول سوى التحدث إليه.</p>
+
+    <h2>ما تحتاجه</h2>
+    <ul>
+      <li>حاسوب يبقى قيد التشغيل: خادم Linux بمعمارية x86_64 (خادم VPS أو خادم في المنزل)، أو جهاز Mac أو حاسوب مكتبي بنظام Linux مضبوط كي لا ينام.</li>
+      <li>Claude Code مثبّت عليه مع تسجيل الدخول.</li>
+      <li><a href="/ar/#download">Antenna</a> على الحاسوبين: التطبيق على حاسوبك المحمول (macOS أو Linux)، والعقدة أو التطبيق على الآخر.</li>
+    </ul>
+
+    <h2>على خادم</h2>
+    <ol>
+      <li>ثبّت عقدة Antenna واتركها تعمل بعد تسجيل خروجك:
+    <pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+    sudo loginctl enable-linger $USER</code></pre>
+      يُعدّ المثبّت Antenna كخدمة systemd على مستوى المستخدم، وينشئ عقدتك بكلمة مرور. ولا يفعّل خاصية lingering، بل يذكّرك بها فقط: فبدون السطر الثاني تتوقف الخدمة حين تسجّل خروجك.</li>
+      <li>اقرن الخادم بحاسوبك المحمول مرة واحدة. على الحاسوب المحمول: <strong>New contact → Invite</strong> (جهة اتصال جديدة ← دعوة)، وحدّد <strong>This is my own computer (∞)</strong> (هذا حاسوبي أنا)، واضغط <strong>Create link</strong> (إنشاء رابط) وانسخه. وعلى الخادم: <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>، واكتب الرمز الذي يعرضه الحاسوب المحمول، ثم اضغط <strong>The contact confirmed — codes match</strong> على الحاسوب المحمول.</li>
+      <li>شغّل Claude Code عبر Antenna في مجلد المشروع (يحتاج الخادم إلى tmux):
+    <pre><code>cd ~/projects/api
+    antenna connect claude-code --agent api-dev --links mac --hello mac
+    antenna session start api-dev --dir ~/projects/api
+    antenna session attach api-dev</code></pre>
+      أجب عن أسئلة Claude Code الأولى، مثل هل يثق بالمجلد، ثم اخرج بـ <code>Ctrl-b d</code>. صارت على حاسوبك المحمول الآن محادثة باسم <code>api-dev</code>.</li>
+      <li>دع الحاسوب المحمول يجيب عن طلبات الموافقة الآتية من الخادم: <code>antenna devices confirm mac</code>.</li>
+    </ol>
+    <p>سجّل الآن خروجك من SSH. تواصل الخدمة العمل، ويواصل Claude Code العمل في خادم tmux الخاص بـ Antenna؛ ولا يُمَس tmux الخاص بك. وتجد كل خطوة بتفصيل أكثر في <a href="/ar/guides/run-claude-code-on-a-vps">Claude Code على VPS</a>.</p>
+
+    <h2>على جهاز Mac أو حاسوب مكتبي يبقى قيد التشغيل</h2>
+    <ol>
+      <li>اضبط الحاسوب كي لا ينام من تلقاء نفسه، من إعدادات النظام فيه. فـ Antenna لا يُبقي الحاسوب مستيقظًا.</li>
+      <li>اقرنه بحاسوبك المحمول كما سبق، مع تحديد <strong>This is my own computer (∞)</strong>.</li>
+      <li>افتح عليه <strong>Agents → AI apps</strong> (الوكلاء ← تطبيقات الذكاء الاصطناعي) واضغط <strong>Start in Code mode</strong> (البدء في وضع Code) بجوار Claude Code. اختر <strong>New agent…</strong> (وكيل جديد) وسمّه، واختر <strong>Working folder</strong> (مجلد العمل)، وأدخل كلمة مرورك واضغط <strong>Start</strong> (ابدأ). تنتقل النافذة إلى وضع Code، ويعمل Claude Code في تبويب داخلها.</li>
+      <li>اطلب من Claude Code مرة واحدة، في تبويبه، أن يلقي التحية على حاسوبك المحمول عبر Antenna. فتظهر محادثته على الحاسوب المحمول.</li>
+      <li>دع الحاسوب المحمول يجيب عن طلبات الموافقة الآتية منه: <strong>My devices</strong> (أجهزتي) → بطاقة الحاسوب المحمول → <strong>Approvals</strong> (الموافقات) → <strong>Accept approvals signed with …</strong>، بكلمة مرورك.</li>
+    </ol>
+    <p>اترك نافذة Antenna مفتوحة: فإغلاقها يوقف الوكلاء الذين يعملون فيها، والنافذة تسألك قبل ذلك.</p>
+
+    <h2>اتركه يعمل</h2>
+    <p>اكتب المهمة في محادثة الوكيل على حاسوبك المحمول: «شغّل اختبارات الترحيل (migration)، وأصلح ما يفشل، وأخبرني هنا بما تغيّر». حين يكون Claude Code خاملًا أمام موجّهه، يكتب Antenna سطرًا ثابتًا واحدًا كي يقرأ رسالتك؛ وإن كان في منتصف دورة، تصله الرسالة حين تنتهي الدورة. ولا يكتب Antenna نصك في الطرفية أبدًا. <em>تجريبي.</em> ثم أغلق الحاسوب المحمول.</p>
+    <p>قبل مهمة طويلة، تحقّق مما قد يوقفها حين لا يكون أحد موجودًا:</p>
+    <ul>
+      <li><strong>نافذة الأذونات الخاصة بـ Claude Code نفسه</strong> («Do you want to proceed?») تنتظر في طرفيته حتى يجيب أحد، ولا يجيب عنها Antenna أبدًا. اسمح في إعدادات Claude Code بالأدوات التي تحتاجها المهمة.</li>
+      <li><strong>طلبات الموافقة في Antenna</strong> تنتظر 10 دقائق. بعدها لا يُنفَّذ شيء، ويعرف Claude Code أن أحدًا لم يوافق. والمهمة التي تعطيها من حاسوبك أنت في المستوى ∞ تنفّذ أوامرها وتعديلاتها دون أن تسأل؛ أما التغييرات في إعدادات Claude Code نفسه، مثل <code>CLAUDE.md</code> أو <code>.claude/</code>، فما زالت تطلب الموافقة.</li>
+    </ul>
+
+    <h2>حين يستيقظ الحاسوب المحمول</h2>
+    <p>بينما ينام الحاسوب المحمول، تنتظر ردود Claude Code في طابور الحاسوب الآخر، ويواصل Antenna محاولة تسليمها. وما إن يعود الحاسوب المحمول إلى الاتصال حتى تصل إلى المحادثة، مع إشعار إن لم تكن نافذة Antenna في المقدمة. والرسالة التي كتبتها وأنت غير متصل تظهر بجوارها ساعة، وتُرسَل من تلقاء نفسها. أما الطلبات التي ما زالت تنتظر موافقتك فتظهر على بطاقة الحاسوب الآخر في <strong>My devices</strong> ‏(<em>تجريبي</em>).</p>
+
+    <h2>بعد إعادة تشغيل الحاسوب الآخر</h2>
+    <p>تُقفل المفاتيح بعد إعادة التشغيل، فتبقى اتصالاته صامتة حتى تُدخل كلمة المرور. على خادم، سجّل الدخول وشغّل <code>antenna unlock</code>، ثم ابدأ الجلسة من جديد؛ ويتيح <code>--resume</code> مواصلة آخر جلسة لـ Claude Code:</p>
+    <pre><code>antenna session start api-dev --dir ~/projects/api --resume</code></pre>
+    <p>وعلى Mac، أدخل كلمة المرور في نافذة Antenna وابدأ الوكيل من جديد.</p>
+
+    <h2>أسئلة</h2>
+    <details>
+      <summary>هل يبقى Claude Code يعمل إذا أغلقت حاسوبي المحمول؟</summary>
+      <p>لا، إذا كان إغلاق الغطاء يُدخل الحاسوب المحمول في وضع السكون، وهو الإعداد المعتاد: يتوقف Claude Code مؤقتًا حتى تفتحه. شغّله على حاسوب يبقى قيد التشغيل، فيواصل العمل.</p>
+    </details>
+    <details>
+      <summary>هل يمكن أن يعمل Claude Code في الخلفية على حاسوبي المحمول؟</summary>
+      <p>ما دام الحاسوب المحمول مستيقظًا، نعم: في وضع Code يعمل في تبويب من نافذة Antenna لا حاجة إلى أن تنظر إليه، ويوقظه Antenna حين تصل رسالة. لكنه يتوقف مع ذلك حين ينام الحاسوب المحمول.</p>
+    </details>
+    <details>
+      <summary>هل عليّ أن أُبقي جلسة SSH مفتوحة؟</summary>
+      <p>لا. يعمل Claude Code في tmux الخاص بـ Antenna على الخادم، وتصل إليه عبر المحادثة. ويتصل الحاسوبان كلاهما نحو الخارج، فلا يُفتح أي منفذ وارد كذلك.</p>
+    </details>
+    <details>
+      <summary>هل يُبقي Antenna جهاز Mac مستيقظًا؟</summary>
+      <p>لا. اضبط Mac كي لا ينام من إعدادات النظام فيه. ويجب أن تبقى نافذة Antenna مفتوحة لوضع Code.</p>
+    </details>
+    <details>
+      <summary>هل يمكنني متابعته من هاتفي؟</summary>
+      <p>ليس بعد. يعمل Antenna اليوم على macOS وLinux.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna مجاني ومفتوح المصدر</strong>، لنظامي macOS وLinux. بلا حساب وبلا رقم هاتف.</p>
+      <a class="btn" href="/ar/#download">نزّل Antenna</a>
+    </aside>
+    <h2>أدلة ذات صلة</h2>
+    <ul class="related">
+      <li><a href="/ar/guides/run-claude-code-on-a-vps">شغّل Claude Code على خادم VPS على مدار الساعة، وتحدّث إليه من حاسوبك المحمول</a></li>
+      <li><a href="/ar/guides/claude-code-notifications">تلقَّ إشعارًا حين ينهي Claude Code عمله على خادم أو حاسوب آخر</a></li>
+      <li><a href="/ar/guides/approve-claude-code-permissions-remotely">وافق على طلبات Claude Code من حاسوب آخر</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ar/guides/">الأدلة</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>للتواصل: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ar/privacy">سياسة الخصوصية</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

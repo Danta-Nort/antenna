@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>التحكم في Claude Code عن بُعد على حاسوب آخر — Antenna</title>
+<meta name="description" content="شغّل Claude Code على خادمك أو حاسوبك المكتبي وأعطه المهام من محادثة Antenna على حاسوبك المحمول: اتصال ند لند (P2P)، بتشفير تام بين الطرفين، ودون حساب.">
+<link rel="canonical" href="https://antenna.contact/ar/guides/claude-code-remote-control">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="التحكم في Claude Code عن بُعد على حاسوب آخر — Antenna">
+<meta property="og:description" content="شغّل Claude Code على خادمك أو حاسوبك المكتبي وأعطه المهام من محادثة Antenna على حاسوبك المحمول: اتصال ند لند (P2P)، بتشفير تام بين الطرفين، ودون حساب.">
+<meta property="og:url" content="https://antenna.contact/ar/guides/claude-code-remote-control">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ar_AR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/claude-code-remote-control">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ar/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "الأدلة",
+     "item": "https://antenna.contact/ar/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "تحكّم في Claude Code على حاسوب آخر من حاسوبك المحمول",
+     "item": "https://antenna.contact/ar/guides/claude-code-remote-control"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "تحكّم في Claude Code على حاسوب آخر من حاسوبك المحمول",
+   "description": "شغّل Claude Code على خادمك أو حاسوبك المكتبي وأعطه المهام من محادثة Antenna على حاسوبك المحمول: اتصال ند لند (P2P)، بتشفير تام بين الطرفين، ودون حساب.",
+   "datePublished": "2026-11-15",
+   "dateModified": "2026-11-15",
+   "inLanguage": "ar",
+   "url": "https://antenna.contact/ar/guides/claude-code-remote-control",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ar/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "هل أرى طرفية Claude Code على حاسوبي المحمول؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "لا. تعطي المهام وتقرأ الردود في محادثة؛ وتبقى الطرفية على الحاسوب الآخر. ولتنظر إليها، شغّل antenna session attach هناك، عبر SSH إن شئت."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يحتاج الحاسوب الآخر إلى عنوان IP عام أو منافذ مفتوحة؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "لا. يتصل الحاسوبان كلاهما نحو الخارج، مباشرة حين تسمح الشبكة وعبر خادم ترحيل في غير ذلك. وخادم الترحيل لا يمرر إلا حركة مرور مشفرة."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "من غيري يستطيع أن يعطيه مهام؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "فقط جهات الاتصال المقترنة بذلك الحاسوب التي يحق للوكيل قراءة رسائلها (مع --links mac، حاسوبك المحمول وحده)، والوكلاء الذين تصلهم به على خريطة الوكلاء. والخدمة الخلفية لـ Antenna هناك، لا Claude Code، هي التي تقرر ما يمكن أن تدفعه رسالة جهة الاتصال إلى فعله، بحسب مستوى ثقة تلك الجهة."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يحتاج إلى مفتاح API؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "لا. يحتفظ Claude Code بتسجيل دخولك أنت على الحاسوب الذي يعمل عليه، ولا ينقل Antenna إلا الرسائل والملفات والموافقات."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "هل يمكنني التحكم فيه من هاتفي؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ليس بعد. يعمل Antenna اليوم على macOS وLinux."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">انتقل إلى المحتوى</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="القائمة الرئيسية">
+      <a href="/ar/#product">المنتج</a>
+      <a href="/ar/#security">الأمان</a>
+      <a href="/ar/guides/">الأدلة</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="اللغة: العربية"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">AR</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/claude-code-remote-control" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/claude-code-remote-control" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/claude-code-remote-control" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/claude-code-remote-control" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/claude-code-remote-control" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/claude-code-remote-control" hreflang="ar" lang="ar" aria-current="true">العربية</a></li>
+        <li><a href="/fr/guides/claude-code-remote-control" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/claude-code-remote-control" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/claude-code-remote-control" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/claude-code-remote-control" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/claude-code-remote-control" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/claude-code-remote-control" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/claude-code-remote-control" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/claude-code-remote-control" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/claude-code-remote-control" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ar/#download">تنزيل</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="مسار التنقل"><a href="/ar/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ar/guides/">الأدلة</a></nav>
+    <p class="eyebrow">آخر تحديث <time datetime="2026-11-15">15 نوفمبر 2026</time></p>
+    <h1>تحكّم في Claude Code على حاسوب آخر من حاسوبك المحمول</h1>
+    <p class="lead">ثبّت Antenna على حاسوبك المحمول وعلى الحاسوب الذي يعمل عليه Claude Code، واقرن الاثنين مرة واحدة على أنهما حاسوباك، وشغّل Claude Code هناك عبر Antenna. تظهر على حاسوبك المحمول محادثة مع تلك الجلسة: اكتب فيها مهمة، فيوقظ Antenna ‏Claude Code حين يكون خاملًا، ويعود رده إلى المحادثة. تنتقل الرسائل عبر رابط ند لند (peer-to-peer) مشفّر تشفيرًا تامًا بين الطرفين بين حاسوبيك، ولا يحتاج Antenna إلى أي حساب، والخطوات التي تحتاج إلى موافقتك تصل إلى الحاسوب المحمول، فتجيب عنها بكلمة مرورك.</p>
+
+    <h2>ميزة Remote Control في Claude Code، وAntenna</h2>
+    <p>لدى Claude Code ميزة Remote Control مدمجة خاصة به، وتشرحها وثائق Anthropic. أما هذا الدليل فيتناول إعدادًا مختلفًا: يعمل Claude Code على حاسوب من حواسيبك يبقى قيد التشغيل، خادم أو حاسوب مكتبي، وتتحكم فيه من Antenna على حاسوبك المحمول. ويناسبك إن كنت تريد:</p>
+    <ul>
+      <li><strong>عدة جلسات على عدة حواسيب في قائمة واحدة.</strong> كل جلسة محادثة مستقلة، وتعرض <strong>My devices</strong> (أجهزتي) حالة كل حاسوب ووكلاءه والطلبات التي تنتظر هناك.</li>
+      <li><strong>رابطك الخاص.</strong> تُشفَّر الرسائل على حاسوب وتُفك على الآخر. تتصل حواسيبك مباشرة حين تسمح الشبكة، وإلا فعبر خادم ترحيل (relay) لا يمرر إلا حركة مرور مشفرة. لا حساب ولا منفذ وارد.</li>
+      <li><strong>أذونات تفحصها الخدمة الخلفية لـ Antenna</strong> على الحاسوب الذي يعمل عليه Claude Code، مع موافقات تجيب عنها من أي حاسوب من حواسيبك تجلس أمامه.</li>
+      <li><strong>وكلاء آخرون بالطريقة نفسها:</strong> يعمل Codex كما يعمل Claude Code.</li>
+    </ul>
+
+    <h2>الإعداد</h2>
+    <ol>
+      <li><a href="/ar/#download">ثبّت Antenna</a> على الحاسوبين: التطبيق على حاسوبك المحمول (macOS أو Linux)، وعلى الحاسوب الآخر التطبيق، أو العقدة إن كان خادم Linux:
+    <pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+    sudo loginctl enable-linger $USER</code></pre></li>
+      <li>اقرنهما مرة واحدة. على الحاسوب المحمول: <strong>New contact → Invite</strong> (جهة اتصال جديدة ← دعوة)، وحدّد <strong>This is my own computer (∞)</strong> (هذا حاسوبي أنا)، واضغط <strong>Create link</strong> (إنشاء رابط) وانسخه. وعلى خادم: <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>؛ وعلى حاسوب مكتبي: <strong>New contact → Join</strong> (جهة اتصال جديدة ← انضمام)، مع تحديد الخانة نفسها. أدخل الرمز الذي يعرضه أحد الطرفين في الطرف الآخر، واضغط <strong>The contact confirmed — codes match</strong> على الحاسوب المحمول.</li>
+      <li>شغّل Claude Code عبر Antenna على الحاسوب الآخر. على خادم، في مجلد المشروع (يلزم tmux):
+    <pre><code>cd ~/projects/api
+    antenna connect claude-code --agent api-dev --links mac --hello mac
+    antenna session start api-dev --dir ~/projects/api
+    antenna session attach api-dev</code></pre>
+      أجب عن أسئلة Claude Code الأولى، ثم اخرج بـ <code>Ctrl-b d</code>: فيواصل العمل، وتظهر على حاسوبك المحمول محادثة باسم <code>api-dev</code>. وعلى حاسوب مكتبي: <strong>Agents → AI apps → Start in Code mode</strong> (الوكلاء ← تطبيقات الذكاء الاصطناعي ← البدء في وضع Code)، فيعمل Claude Code هناك في تبويب من نافذة Antenna؛ اطلب منه مرة واحدة أن يلقي التحية على حاسوبك المحمول عبر Antenna، فتظهر محادثته على الحاسوب المحمول.</li>
+      <li>دع الحاسوب المحمول يجيب عن طلبات الموافقة الآتية من ذلك الحاسوب. على خادم: <code>antenna devices confirm mac</code>. وعلى حاسوب مكتبي: <strong>My devices</strong> → بطاقة الحاسوب المحمول → <strong>Approvals</strong> (الموافقات) → <strong>Accept approvals signed with …</strong>، بكلمة مرورك.</li>
+    </ol>
+
+    <h2>تحكّم فيه من حاسوبك المحمول</h2>
+    <ul>
+      <li><strong>أعطه مهمة.</strong> اكتب في محادثة الجلسة كما تكتب لشخص. حين يكون Claude Code خاملًا أمام موجّهه، يكتب Antenna سطرًا ثابتًا واحدًا كي يقرأ رسالتك؛ ولا يكتب نصك في الطرفية أبدًا، ولا يجيب أبدًا عن سؤال يطرحه Claude Code هناك. <em>تجريبي.</em></li>
+      <li><strong>قاطعه.</strong> فعّل <strong>Urgent: interrupt now</strong> (عاجل: قاطِع الآن) قبل الإرسال: يضغط Antenna مفتاح Esc مرة واحدة لإنهاء الدورة الجارية، ولا يفعل ذلك أبدًا فوق سؤال أو نافذة أذونات مفتوحة هناك، ثم يقرأ Claude Code رسالتك. <em>تجريبي.</em></li>
+      <li><strong>وافق على خطواته.</strong> تظهر الخطوة التي تحتاج إليك على بطاقة الحاسوب الآخر في <strong>My devices</strong>، مع إشعار. اضغط <strong>Approve with password</strong> (الموافقة بكلمة المرور)، أو <strong>Approve with Touch ID</strong> على Mac، أو <strong>Deny</strong> (رفض). <em>تجريبي.</em></li>
+      <li><strong>أوقفه.</strong> يُنهي <strong>Stop agent and its processes…</strong> (إيقاف الوكيل وعملياته)، بجوار الوكيل على تلك البطاقة، Claude Code وكل ما بدأه هناك. <em>تجريبي.</em></li>
+    </ul>
+    <p>أما نافذة الأذونات الخاصة بـ Claude Code نفسه («Do you want to proceed?») فتبقى في طرفيته على الحاسوب الآخر، ولا يجيب عنها Antenna أبدًا. اسمح بالأدوات التي تستخدمها عادةً في إعدادات Claude Code، أو أجب عنها عبر <code>antenna session attach</code>.</p>
+
+    <h2>Codex ووكلاء آخرون</h2>
+    <p>يعمل Codex بالطريقة نفسها: <code>antenna connect codex</code> و<code>--cli codex</code> على خادم، أو <strong>Start in Code mode</strong> بجوار Codex على حاسوب مكتبي (انظر <a href="/ar/guides/codex-cli-remote-control">التحكم في Codex CLI عن بُعد</a>). ويتصل Gemini CLI من <strong>Agents → AI apps</strong> ويرسل الرسائل ويقرأها عبر Antenna، لكن Antenna لا يوقظه بعد: فهو يقرأ الرسالة الجديدة حين يستدعي Antenna في المرة التالية.</p>
+
+    <h2>أسئلة</h2>
+    <details>
+      <summary>هل أرى طرفية Claude Code على حاسوبي المحمول؟</summary>
+      <p>لا. تعطي المهام وتقرأ الردود في محادثة؛ وتبقى الطرفية على الحاسوب الآخر. ولتنظر إليها، شغّل <code>antenna session attach</code> هناك، عبر SSH إن شئت.</p>
+    </details>
+    <details>
+      <summary>هل يحتاج الحاسوب الآخر إلى عنوان IP عام أو منافذ مفتوحة؟</summary>
+      <p>لا. يتصل الحاسوبان كلاهما نحو الخارج، مباشرة حين تسمح الشبكة وعبر خادم ترحيل في غير ذلك. وخادم الترحيل لا يمرر إلا حركة مرور مشفرة.</p>
+    </details>
+    <details>
+      <summary>من غيري يستطيع أن يعطيه مهام؟</summary>
+      <p>فقط جهات الاتصال المقترنة بذلك الحاسوب التي يحق للوكيل قراءة رسائلها (مع <code>--links mac</code>، حاسوبك المحمول وحده)، والوكلاء الذين تصلهم به على خريطة الوكلاء. والخدمة الخلفية لـ Antenna هناك، لا Claude Code، هي التي تقرر ما يمكن أن تدفعه رسالة جهة الاتصال إلى فعله، بحسب مستوى ثقة تلك الجهة.</p>
+    </details>
+    <details>
+      <summary>هل يحتاج إلى مفتاح API؟</summary>
+      <p>لا. يحتفظ Claude Code بتسجيل دخولك أنت على الحاسوب الذي يعمل عليه، ولا ينقل Antenna إلا الرسائل والملفات والموافقات.</p>
+    </details>
+    <details>
+      <summary>هل يمكنني التحكم فيه من هاتفي؟</summary>
+      <p>ليس بعد. يعمل Antenna اليوم على macOS وLinux.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna مجاني ومفتوح المصدر</strong>، لنظامي macOS وLinux. بلا حساب وبلا رقم هاتف.</p>
+      <a class="btn" href="/ar/#download">نزّل Antenna</a>
+    </aside>
+    <h2>أدلة ذات صلة</h2>
+    <ul class="related">
+      <li><a href="/ar/guides/codex-cli-remote-control">أعطِ Codex CLI مهام على حاسوب آخر من حاسوبك المحمول</a></li>
+      <li><a href="/ar/guides/message-claude-code-on-another-computer">أرسل رسالة إلى Claude Code على حاسوب آخر</a></li>
+      <li><a href="/ar/guides/approve-claude-code-permissions-remotely">وافق على طلبات Claude Code من حاسوب آخر</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ar/" aria-label="Antenna — الصفحة الرئيسية"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ar/guides/">الأدلة</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>للتواصل: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ar/privacy">سياسة الخصوصية</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

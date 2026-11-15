@@ -1,0 +1,60 @@
+<!--guide {"title": "Claude Code をリモート操作：別のコンピューターをノート PC から — Antenna", "h1": "別のコンピューターの Claude Code をノート PC から操作する", "description": "サーバーやデスクトップで Claude Code を動かし、ノート PC の Antenna のチャットからタスクを渡せます。P2P でエンドツーエンド暗号化、アカウントは不要です。", "summary": "サーバーや自分の別のコンピューターで動く Claude Code に、ノート PC から自分専用の暗号化リンクでタスクを渡し、承認する方法。", "source": "2026-11-15"}-->
+<p class="lead">ノート PC と、Claude Code を動かすコンピューターの両方に Antenna をインストールし、2 台を自分のコンピューターとして一度だけペアリングして、そちらで Antenna 経由で Claude Code を起動します。するとノート PC にそのセッションとのチャットが現れます。そこにタスクを書くと、Claude Code が待機中なら Antenna が起こし、返信はチャットに戻ってきます。メッセージは 2 台のコンピューターの間をエンドツーエンド暗号化された P2P のリンクで行き来し、Antenna にアカウントは要りません。あなたの承認が必要な手順はノート PC に届き、パスワードで答えます。</p>
+
+<h2>Claude Code 自身の Remote Control と Antenna</h2>
+<p>Claude Code には、組み込みの Remote Control という独自の機能があり、Anthropic のドキュメントで説明されています。このガイドで扱うのは、それとは別の構成です。Claude Code は、電源の入ったままの自分のコンピューター（サーバーやデスクトップ）で動き、あなたはノート PC の Antenna からそれを操作します。次のようなことをしたい場合に向いています。</p>
+<ul>
+  <li><strong>複数のコンピューターの複数のセッションを、1 つのリストで。</strong>セッションごとにチャットが分かれ、<strong>自分のデバイス</strong> には各コンピューターの健全性、エージェント、そこで待っているリクエストが表示されます。</li>
+  <li><strong>自分専用のリンク。</strong>メッセージは一方のコンピューターで暗号化され、もう一方で復号されます。ネットワークが許せばコンピューター同士が直接つながり、そうでなければ暗号化された通信を転送するだけのリレーを経由します。アカウントも受信用のポートも要りません。</li>
+  <li><strong>Antenna のデーモンによる権限の検査。</strong>検査は Claude Code が動くコンピューターで行われ、承認にはいま使っている自分のコンピューターから答えられます。</li>
+  <li><strong>ほかのエージェントも同じように：</strong>Codex も Claude Code と同じように使えます。</li>
+</ul>
+
+<h2>セットアップ</h2>
+<ol>
+  <li>両方のコンピューターに <a href="/#download">Antenna をインストール</a>します。ノート PC にはアプリ（macOS または Linux）、もう一方のコンピューターにはアプリを、Linux サーバーならノードを入れます。
+<pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+sudo loginctl enable-linger $USER</code></pre></li>
+  <li>一度だけペアリングします。ノート PC で <strong>新しい連絡先 → 招待</strong> を開き、<strong>これは自分のコンピューターです（∞）</strong> にチェックを入れて <strong>リンクを作成</strong> を押し、リンクをコピーします。サーバーでは <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>、デスクトップでは同じチェックを入れて <strong>新しい連絡先 → 参加</strong> を開きます。一方に表示されたコードをもう一方に入力し、ノート PC で <strong>相手が確認しました — コードは一致</strong> を押します。</li>
+  <li>もう一方のコンピューターで、Antenna 経由で Claude Code を起動します。サーバーではプロジェクトフォルダーで（tmux が必要です）：
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api
+antenna session attach api-dev</code></pre>
+  Claude Code の最初の質問に答えたら <code>Ctrl-b d</code> で抜けます。Claude Code は動き続け、ノート PC には <code>api-dev</code> という名前のチャットができています。デスクトップでは <strong>エージェント → AI アプリ → Code モードで起動</strong> を押すと、そのコンピューターの Antenna のウィンドウのタブで Claude Code が動きます。一度だけ、Antenna を通じてノート PC にあいさつするよう頼むと、そのチャットがノート PC に現れます。</li>
+  <li>そのコンピューターからの承認リクエストにノート PC で答えられるようにします。サーバーでは <code>antenna devices confirm mac</code>。デスクトップでは <strong>自分のデバイス</strong> → ノート PC のカード → <strong>承認</strong> → <strong>… で署名された承認を受け付ける</strong> を開き、パスワードを入力します。</li>
+</ol>
+
+<h2>ノート PC から操作する</h2>
+<ul>
+  <li><strong>タスクを渡す。</strong>人に頼むように、セッションのチャットに書きます。Claude Code がプロンプトで待機していると、Antenna が組み込みの 1 行を入力してあなたのメッセージを読ませます。あなたのテキストをターミナルに入力することも、Claude Code がそこで尋ねた質問に答えることもありません。<em>実験的機能です。</em></li>
+  <li><strong>中断する。</strong>送信する前に <strong>緊急: 今すぐ中断</strong> をオンにします。Antenna が Esc を 1 回押して実行中のターンを終わらせ（そこで質問や権限確認が開いているときは押しません）、Claude Code があなたのメッセージを読みます。<em>実験的機能です。</em></li>
+  <li><strong>手順を承認する。</strong>あなたの判断が必要な手順は、<strong>自分のデバイス</strong> にあるもう一方のコンピューターのカードに、通知付きで表示されます。<strong>パスワードで承認</strong>、Mac なら <strong>Touch ID で承認</strong>、または <strong>拒否</strong> を押します。<em>実験的機能です。</em></li>
+  <li><strong>止める。</strong>そのカードのエージェントの横にある <strong>エージェントとそのプロセスを停止…</strong> を押すと、Claude Code と、それがそのコンピューターで起動したものがすべて終了します。<em>実験的機能です。</em></li>
+</ul>
+<p>Claude Code 自身の権限確認（「Do you want to proceed?」）は、もう一方のコンピューターのターミナルに残り、Antenna がそれに答えることはありません。いつも使うツールは Claude Code の設定で許可しておくか、<code>antenna session attach</code> で入って答えてください。</p>
+
+<h2>Codex やほかのエージェント</h2>
+<p>Codex も同じように使えます。サーバーでは <code>antenna connect codex</code> と <code>--cli codex</code>、デスクトップでは Codex の横の <strong>Code モードで起動</strong> です（<a href="/guides/codex-cli-remote-control">Codex CLI をリモート操作する</a>を参照）。Gemini CLI は <strong>エージェント → AI アプリ</strong> から接続して Antenna でメッセージを送受信できますが、Antenna はまだ Gemini CLI を起こせません。新しいメッセージは、次に Antenna を呼び出したときに読みます。</p>
+
+<h2>よくある質問</h2>
+<details>
+  <summary>ノート PC で Claude Code のターミナルが見えますか？</summary>
+  <p>いいえ。タスクを渡すのも返信を読むのもチャットで、ターミナルはもう一方のコンピューターに残ります。見たいときは、そちらで <code>antenna session attach</code> を実行してください。SSH 経由でもかまいません。</p>
+</details>
+<details>
+  <summary>もう一方のコンピューターにグローバル IP やポート開放は必要ですか？</summary>
+  <p>いいえ。どちらのコンピューターも外向きに接続します。ネットワークが許せば直接、そうでなければリレーを経由し、リレーは暗号化された通信を転送するだけです。</p>
+</details>
+<details>
+  <summary>ほかに誰がタスクを渡せますか？</summary>
+  <p>そのコンピューターとペアリングした連絡先のうち、エージェントがメッセージを読んでよい相手（<code>--links mac</code> ならノート PC だけ）と、エージェントマップでそのエージェントとつないだエージェントだけです。連絡先のメッセージで何をさせてよいかは、Claude Code ではなく、そのコンピューターの Antenna のデーモンが、その連絡先の信頼レベルに応じて決めます。</p>
+</details>
+<details>
+  <summary>API キーは必要ですか？</summary>
+  <p>いいえ。Claude Code は動いているコンピューターで、あなた自身のサインインのまま使われます。Antenna が運ぶのはメッセージ、ファイル、承認だけです。</p>
+</details>
+<details>
+  <summary>スマートフォンから操作できますか？</summary>
+  <p>まだできません。現在、Antenna は macOS と Linux で動作します。</p>
+</details>

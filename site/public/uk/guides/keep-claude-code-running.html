@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Code працює, навіть коли ноутбук закритий — Antenna</title>
+<meta name="description" content="Закритий ноутбук засинає, і Claude Code зупиняється разом із ним. Запустіть його на завжди ввімкненому комп’ютері й давайте завдання з ноутбука через Antenna.">
+<link rel="canonical" href="https://antenna.contact/uk/guides/keep-claude-code-running">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Claude Code працює, навіть коли ноутбук закритий — Antenna">
+<meta property="og:description" content="Закритий ноутбук засинає, і Claude Code зупиняється разом із ним. Запустіть його на завжди ввімкненому комп’ютері й давайте завдання з ноутбука через Antenna.">
+<meta property="og:url" content="https://antenna.contact/uk/guides/keep-claude-code-running">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="uk_UA">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/keep-claude-code-running">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/uk/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Інструкції",
+     "item": "https://antenna.contact/uk/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Хай Claude Code працює, поки ноутбук закритий",
+     "item": "https://antenna.contact/uk/guides/keep-claude-code-running"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Хай Claude Code працює, поки ноутбук закритий",
+   "description": "Закритий ноутбук засинає, і Claude Code зупиняється разом із ним. Запустіть його на завжди ввімкненому комп’ютері й давайте завдання з ноутбука через Antenna.",
+   "datePublished": "2026-11-15",
+   "dateModified": "2026-11-15",
+   "inLanguage": "uk",
+   "url": "https://antenna.contact/uk/guides/keep-claude-code-running",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/uk/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Чи працюватиме Claude Code далі, якщо закрити ноутбук?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Ні, якщо із закритою кришкою ноутбук засинає, а зазвичай так і налаштовано: Claude Code стоїть на паузі, доки ви його не відкриєте. Запустіть його на комп’ютері, який завжди ввімкнений, і він працюватиме далі."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Чи може Claude Code працювати у фоні на моєму ноутбуці?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Поки ноутбук не спить — так: у режимі Code він працює у вкладці вікна Antenna, на яку можна не дивитися, і Antenna будить його, коли приходить повідомлення. Але коли ноутбук засинає, він однаково зупиняється."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Чи треба тримати SSH-сесію відкритою?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Ні. Claude Code працює в tmux Antenna на сервері, а ви звертаєтеся до нього через чат. Обидва комп’ютери самі підключаються назовні, тож вхідний порт теж не відкривається."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Чи не дає Antenna моєму Mac заснути?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Ні. Забороніть Mac засинати в його системних налаштуваннях. Для режиму Code вікно Antenna має лишатися відкритим."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Чи можна перевірити, як ідуть справи, з телефона?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Ще ні. Наразі Antenna працює на macOS і Linux."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Перейти до вмісту</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/uk/" aria-label="Antenna — головна"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Головне меню">
+      <a href="/uk/#product">Продукт</a>
+      <a href="/uk/#security">Безпека</a>
+      <a href="/uk/guides/">Інструкції</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Мова: Українська"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">UK</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/keep-claude-code-running" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/keep-claude-code-running" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/keep-claude-code-running" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/keep-claude-code-running" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/keep-claude-code-running" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/keep-claude-code-running" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/keep-claude-code-running" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/keep-claude-code-running" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/keep-claude-code-running" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/keep-claude-code-running" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/keep-claude-code-running" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/keep-claude-code-running" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/keep-claude-code-running" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/keep-claude-code-running" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/keep-claude-code-running" hreflang="uk" lang="uk" aria-current="true">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/uk/#download">Завантажити</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Навігаційний ланцюжок"><a href="/uk/">Antenna</a> <span aria-hidden="true">›</span> <a href="/uk/guides/">Інструкції</a></nav>
+    <p class="eyebrow">Оновлено <time datetime="2026-11-15">15 листопада 2026 р.</time></p>
+    <h1>Хай Claude Code працює, поки ноутбук закритий</h1>
+    <p class="lead">На самому ноутбуці так не вийде: якщо закрити кришку, ноутбук засинає, сплячий комп’ютер нічого не виконує, і Claude Code стає на паузу разом із ним. Вихід — запустити Claude Code на комп’ютері, який завжди ввімкнений, наприклад на Linux-сервері чи на Mac mini, якому заборонено засинати, зробити це через Antenna й давати йому завдання з чату Antenna на ноутбуці. Закрийте ноутбук: Claude Code працюватиме далі на іншому комп’ютері, а його відповіді дочекаються ноутбука й прийдуть, щойно той знову буде в мережі.</p>
+
+    <h2>Чому він зупиняється</h2>
+    <p>Claude Code працює на тому комп’ютері, де ви його запустили. Коли цей комп’ютер засинає, зупиняються всі програми на ньому, зокрема Claude Code, аж до пробудження. Якщо закрити термінал чи вікно SSH, у якому він працює, він теж завершиться. Можна зробити так, щоб ноутбук не засинав і з закритою кришкою, але тоді він має весь час бути ввімкненим і під’єднаним до живлення — тобто він уже став сервером. Тож робота переїжджає на комп’ютер, який завжди ввімкнений, а ноутбук лише з ним листується.</p>
+
+    <h2>Що потрібно</h2>
+    <ul>
+      <li>Комп’ютер, який завжди ввімкнений: Linux-сервер на x86_64 (VPS чи домашній) або десктоп на macOS чи Linux, якому заборонено засинати.</li>
+      <li>Claude Code, встановлений на ньому, у який виконано вхід.</li>
+      <li><a href="/uk/#download">Antenna</a> на обох комп’ютерах: застосунок на ноутбуці (macOS чи Linux), вузол або застосунок на іншому.</li>
+    </ul>
+
+    <h2>На сервері</h2>
+    <ol>
+      <li>Встановіть вузол Antenna й дайте йому працювати після виходу з системи:
+    <pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+    sudo loginctl enable-linger $USER</code></pre>
+      Інсталятор налаштовує Antenna як користувацьку службу systemd і створює ваш вузол із паролем. Lingering він не вмикає, а лише нагадує про нього: без другого рядка служба зупиниться, щойно ви вийдете з системи.</li>
+      <li>Один раз з’єднайте сервер із ноутбуком. На ноутбуці: <strong>Новий контакт → Запросити</strong>, поставте позначку <strong>Це мій власний комп’ютер (∞)</strong>, натисніть <strong>Створити посилання</strong> і скопіюйте посилання. На сервері: <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>, введіть код, який показує ноутбук, а потім натисніть на ноутбуці <strong>Контакт підтвердив — коди збігаються</strong>.</li>
+      <li>Запустіть Claude Code через Antenna в теці проєкту (на сервері потрібен tmux):
+    <pre><code>cd ~/projects/api
+    antenna connect claude-code --agent api-dev --links mac --hello mac
+    antenna session start api-dev --dir ~/projects/api
+    antenna session attach api-dev</code></pre>
+      Дайте відповідь на перші запитання Claude Code — наприклад, чи довіряє він цій теці, — і вийдіть через <code>Ctrl-b d</code>. Тепер на ноутбуці є чат <code>api-dev</code>.</li>
+      <li>Дозвольте ноутбуку відповідати на запити сервера на схвалення: <code>antenna devices confirm mac</code>.</li>
+    </ol>
+    <p>Тепер можна вийти з SSH. Служба працює далі, а Claude Code — у власному tmux-сервері Antenna; ваш tmux не зачіпається. У посібнику <a href="/uk/guides/run-claude-code-on-a-vps">Claude Code на VPS</a> кожен крок описано докладніше.</p>
+
+    <h2>На Mac чи десктопі, який завжди ввімкнений</h2>
+    <ol>
+      <li>У системних налаштуваннях забороніть комп’ютеру засинати самостійно. Antenna не тримає комп’ютер увімкненим.</li>
+      <li>З’єднайте його з ноутбуком, як описано вище, з позначкою <strong>Це мій власний комп’ютер (∞)</strong>.</li>
+      <li>На ньому відкрийте <strong>Агенти → ШІ-застосунки</strong> і натисніть <strong>Запустити в режимі Code</strong> поруч із Claude Code. Виберіть <strong>Новий агент…</strong> і дайте йому назву, вкажіть теку в полі <strong>Робоча тека</strong>, введіть пароль і натисніть <strong>Запустити</strong>. Вікно перемкнеться в режим Code, і Claude Code працюватиме у вкладці всередині нього.</li>
+      <li>Один раз попросіть Claude Code в його вкладці привітатися з вашим ноутбуком через Antenna. Після цього його чат з’явиться на ноутбуці.</li>
+      <li>Дозвольте ноутбуку відповідати на його запити на схвалення: <strong>Мої пристрої</strong> → картка ноутбука → <strong>Схвалення</strong> → <strong>Приймати схвалення, підписані за допомогою …</strong>, з вашим паролем.</li>
+    </ol>
+    <p>Не закривайте вікно Antenna: якщо його закрити, зупиняться агенти, що в ньому працюють, і вікно спершу про це спитає.</p>
+
+    <h2>Залиште його працювати</h2>
+    <p>Напишіть завдання в чат агента на ноутбуці: «Запусти тести міграцій, виправ те, що падає, і напиши сюди, що змінилося». Коли Claude Code простоює на своєму запрошенні командного рядка, Antenna друкує один вбудований рядок, щоб він прочитав ваше повідомлення; якщо він посеред ходу, то отримає повідомлення, коли хід закінчиться. Ваш текст Antenna ніколи не друкує в термінал. <em>Експериментальна функція.</em> Тепер закрийте ноутбук.</p>
+    <p>Перед довгою роботою перевірте, що може її зупинити, поки поруч нікого немає:</p>
+    <ul>
+      <li><strong>Власний запит дозволу Claude Code</strong> («Do you want to proceed?») чекає в його терміналі, доки хтось не відповість, а Antenna на нього ніколи не відповідає. Дозвольте в налаштуваннях Claude Code інструменти, потрібні для завдання.</li>
+      <li><strong>Запити Antenna на схвалення</strong> чекають 10 хвилин. Потім нічого не виконується, і Claude Code дізнається, що ніхто їх не схвалив. Завдання, яке ви дали зі свого власного комп’ютера на рівні ∞, виконує команди й правки без запитань; зміни власних налаштувань Claude Code, як-от <code>CLAUDE.md</code> чи <code>.claude/</code>, однаково чекають на схвалення.</li>
+    </ul>
+
+    <h2>Коли ноутбук прокинеться</h2>
+    <p>Поки ноутбук спить, відповіді Claude Code чекають у черзі на іншому комп’ютері, і Antenna й далі намагається їх доставити. Щойно ноутбук знову в мережі, вони приходять у чат — зі сповіщенням, якщо вікно Antenna не на передньому плані. Повідомлення, яке ви написали без мережі, показує годинник і надсилається саме. Запити, що досі чекають на ваше схвалення, видно в картці іншого комп’ютера в розділі <strong>Мої пристрої</strong> (<em>експериментально</em>).</p>
+
+    <h2>Після перезавантаження іншого комп’ютера</h2>
+    <p>Після перезавантаження ключі заблоковано, тож його з’єднання мовчать, доки ви не введете пароль. На сервері ввійдіть і виконайте <code>antenna unlock</code>, а потім знову запустіть сесію; <code>--resume</code> продовжує останню сесію Claude Code:</p>
+    <pre><code>antenna session start api-dev --dir ~/projects/api --resume</code></pre>
+    <p>На Mac введіть пароль у вікні Antenna й знову запустіть агента.</p>
+
+    <h2>Запитання</h2>
+    <details>
+      <summary>Чи працюватиме Claude Code далі, якщо закрити ноутбук?</summary>
+      <p>Ні, якщо із закритою кришкою ноутбук засинає, а зазвичай так і налаштовано: Claude Code стоїть на паузі, доки ви його не відкриєте. Запустіть його на комп’ютері, який завжди ввімкнений, і він працюватиме далі.</p>
+    </details>
+    <details>
+      <summary>Чи може Claude Code працювати у фоні на моєму ноутбуці?</summary>
+      <p>Поки ноутбук не спить — так: у режимі Code він працює у вкладці вікна Antenna, на яку можна не дивитися, і Antenna будить його, коли приходить повідомлення. Але коли ноутбук засинає, він однаково зупиняється.</p>
+    </details>
+    <details>
+      <summary>Чи треба тримати SSH-сесію відкритою?</summary>
+      <p>Ні. Claude Code працює в tmux Antenna на сервері, а ви звертаєтеся до нього через чат. Обидва комп’ютери самі підключаються назовні, тож вхідний порт теж не відкривається.</p>
+    </details>
+    <details>
+      <summary>Чи не дає Antenna моєму Mac заснути?</summary>
+      <p>Ні. Забороніть Mac засинати в його системних налаштуваннях. Для режиму Code вікно Antenna має лишатися відкритим.</p>
+    </details>
+    <details>
+      <summary>Чи можна перевірити, як ідуть справи, з телефона?</summary>
+      <p>Ще ні. Наразі Antenna працює на macOS і Linux.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna безкоштовна й має відкритий код</strong>, працює на macOS і Linux. Без акаунта й без номера телефону.</p>
+      <a class="btn" href="/uk/#download">Завантажити Antenna</a>
+    </aside>
+    <h2>Схожі інструкції</h2>
+    <ul class="related">
+      <li><a href="/uk/guides/run-claude-code-on-a-vps">Як запустити Claude Code на VPS цілодобово й спілкуватися з ним з ноутбука</a></li>
+      <li><a href="/uk/guides/claude-code-notifications">Сповіщення, коли Claude Code завершив роботу на сервері чи іншому комп’ютері</a></li>
+      <li><a href="/uk/guides/approve-claude-code-permissions-remotely">Підтверджуйте запити Claude Code з іншого комп’ютера</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/uk/" aria-label="Antenna — головна"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/uk/guides/">Інструкції</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Контакти: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/uk/privacy">Політика конфіденційності</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

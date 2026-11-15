@@ -1,0 +1,77 @@
+<!--guide {"title": "Claude Code po zamknięciu laptopa: niech pracuje dalej — Antenna", "h1": "Claude Code pracuje dalej, gdy zamkniesz laptopa", "description": "Zamknięty laptop przechodzi w uśpienie, a Claude Code staje razem z nim. Uruchom go na komputerze, który stale działa, i zlecaj zadania z laptopa przez Antennę.", "summary": "Claude Code, który pracuje całą noc na serwerze albo stale włączonym Macu, gdy laptop śpi, z zadaniami zlecanymi z laptopa na czacie.", "source": "2026-11-15"}-->
+<p class="lead">Na samym laptopie się nie da: zamknięcie pokrywy usypia laptopa, uśpiony komputer niczego nie wykonuje, a Claude Code zatrzymuje się razem z nim. Wyjście jest takie: uruchom Claude Code na komputerze, który stale działa, na przykład na serwerze z Linuksem albo na Macu mini ustawionym tak, żeby nie przechodził w uśpienie, uruchom go tam przez Antennę i zlecaj mu zadania z czatu Antenny na laptopie. Zamknij laptopa: Claude Code pracuje dalej na drugim komputerze, a jego odpowiedzi czekają na laptopa i docierają, gdy ten wróci do sieci.</p>
+
+<h2>Dlaczego się zatrzymuje</h2>
+<p>Claude Code działa na komputerze, na którym go uruchomisz. Gdy ten komputer przechodzi w uśpienie, zatrzymuje się każdy program, łącznie z Claude Code, aż do wybudzenia. Zamknięcie terminala albo okna SSH, w którym działa, też go kończy. Laptopa można utrzymać w stanie czuwania przy zamkniętej pokrywie, ale wtedy musi być stale podłączony do zasilania i włączony, czyli w praktyce staje się serwerem. Dlatego praca przenosi się na komputer, który stale działa, a laptop tylko z nim rozmawia.</p>
+
+<h2>Czego potrzebujesz</h2>
+<ul>
+  <li>Komputera, który stale działa: serwera z Linuksem na x86_64 (VPS albo w domu) albo desktopa z macOS lub Linuksem ustawionego tak, żeby nie przechodził w uśpienie.</li>
+  <li>Zainstalowanego i zalogowanego tam Claude Code.</li>
+  <li><a href="/#download">Antenny</a> na obu komputerach: aplikacji na laptopie (macOS albo Linux), węzła albo aplikacji na drugim.</li>
+</ul>
+
+<h2>Na serwerze</h2>
+<ol>
+  <li>Zainstaluj węzeł Antenny i pozwól mu działać po wylogowaniu:
+<pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+sudo loginctl enable-linger $USER</code></pre>
+  Instalator konfiguruje Antennę jako usługę użytkownika systemd i tworzy twój węzeł z hasłem. Nie włącza lingeringu, tylko o nim przypomina: bez drugiej linii usługa zatrzyma się po wylogowaniu.</li>
+  <li>Raz połącz serwer z laptopem. Na laptopie: <strong>Nowy kontakt → Zaproś</strong>, zaznacz <strong>To mój własny komputer (∞)</strong>, kliknij <strong>Utwórz link</strong> i skopiuj link. Na serwerze: <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>, wpisz kod pokazany na laptopie, a potem na laptopie kliknij <strong>Kontakt potwierdził — kody się zgadzają</strong>.</li>
+  <li>Uruchom Claude Code przez Antennę w folderze projektu (serwer potrzebuje tmuxa):
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api
+antenna session attach api-dev</code></pre>
+  Odpowiedz na pierwsze pytania Claude Code, na przykład czy ufa temu folderowi, a potem odłącz się skrótem <code>Ctrl-b d</code>. Na laptopie jest już czat <code>api-dev</code>.</li>
+  <li>Pozwól laptopowi odpowiadać na prośby serwera o zgodę: <code>antenna devices confirm mac</code>.</li>
+</ol>
+<p>Teraz możesz wylogować się z SSH. Usługa działa dalej, a Claude Code działa dalej na własnym serwerze tmux Antenny; twojego tmuxa nic nie dotyka. Poradnik <a href="/guides/run-claude-code-on-a-vps">Claude Code na VPS</a> opisuje każdy krok dokładniej.</p>
+
+<h2>Na stale włączonym Macu albo desktopie</h2>
+<ol>
+  <li>W ustawieniach systemowych ustaw komputer tak, żeby sam nie przechodził w uśpienie. Antenna nie utrzymuje komputera w stanie czuwania.</li>
+  <li>Połącz go z laptopem jak wyżej, z zaznaczonym polem <strong>To mój własny komputer (∞)</strong>.</li>
+  <li>Na nim otwórz <strong>Agenci → Aplikacje AI</strong> i kliknij <strong>Uruchom w trybie Code mode</strong> obok Claude Code. Wybierz <strong>Nowy agent…</strong> i nadaj mu nazwę, wskaż folder w polu <strong>Folder roboczy</strong>, wpisz hasło i kliknij <strong>Uruchom</strong>. Okno przełącza się w tryb Code mode, a Claude Code działa w karcie w tym oknie.</li>
+  <li>Poproś raz Claude Code, w jego karcie, żeby przywitał się z twoim laptopem przez Antennę. Wtedy jego czat pojawi się na laptopie.</li>
+  <li>Pozwól laptopowi odpowiadać na jego prośby o zgodę: <strong>Moje urządzenia</strong> → karta laptopa → <strong>Zgody</strong> → <strong>Przyjmuj zgody podpisane kluczem: …</strong>, z twoim hasłem.</li>
+</ol>
+<p>Nie zamykaj okna Antenny: jego zamknięcie zatrzymuje agentów, którzy w nim działają, a okno najpierw o to zapyta.</p>
+
+<h2>Zostaw go przy pracy</h2>
+<p>Napisz zadanie na czacie agenta na laptopie: „Uruchom testy migracji, napraw to, co nie przechodzi, i odpisz tutaj, co się zmieniło”. Gdy Claude Code czeka bezczynnie przy swoim prompcie, Antenna wpisuje jedną wbudowaną linię, żeby przeczytał twoją wiadomość; jeśli jest w trakcie tury, dostanie wiadomość, gdy tura się skończy. Antenna nigdy nie wpisuje twojego tekstu do terminala. <em>Funkcja eksperymentalna.</em> Potem zamknij laptopa.</p>
+<p>Przed długą pracą sprawdź, co mogłoby ją zatrzymać, gdy nikogo nie ma:</p>
+<ul>
+  <li><strong>Własne pytanie Claude Code o zgodę</strong> („Do you want to proceed?”) czeka w jego terminalu, aż ktoś odpowie, a Antenna nigdy na nie nie odpowiada. Zezwól w ustawieniach Claude Code na narzędzia, których potrzebuje zadanie.</li>
+  <li><strong>Prośby Antenny o zgodę</strong> czekają 10 minut. Potem nic się nie wykonuje, a Claude Code dowiaduje się, że nikt ich nie zatwierdził. Zadanie zlecone z twojego własnego komputera na poziomie ∞ wykonuje polecenia i edycje bez pytania; zmiany we własnej konfiguracji Claude Code, takiej jak <code>CLAUDE.md</code> czy <code>.claude/</code>, nadal wymagają zgody.</li>
+</ul>
+
+<h2>Gdy laptop się wybudzi</h2>
+<p>Gdy laptop śpi, odpowiedzi Claude Code czekają w kolejce na drugim komputerze, a Antenna wciąż próbuje je dostarczyć. Gdy laptop wróci do sieci, trafiają na czat, z powiadomieniem, jeśli okno Antenny nie jest na wierzchu. Wiadomość napisana offline pokazuje zegar i wychodzi sama. Prośby, które wciąż czekają na twoją zgodę, widać na karcie drugiego komputera w sekcji <strong>Moje urządzenia</strong> (<em>funkcja eksperymentalna</em>).</p>
+
+<h2>Po restarcie drugiego komputera</h2>
+<p>Po restarcie klucze są zablokowane, więc jego połączenia milczą, dopóki nie wpiszesz hasła. Na serwerze zaloguj się i uruchom <code>antenna unlock</code>, a potem znowu uruchom sesję; <code>--resume</code> wznawia ostatnią sesję Claude Code:</p>
+<pre><code>antenna session start api-dev --dir ~/projects/api --resume</code></pre>
+<p>Na Macu wpisz hasło w oknie Antenny i znowu uruchom agenta.</p>
+
+<h2>Pytania</h2>
+<details>
+  <summary>Czy Claude Code działa dalej, gdy zamknę laptopa?</summary>
+  <p>Nie, jeśli zamknięcie pokrywy usypia laptopa, a tak jest zwykle ustawione: Claude Code stoi, dopóki go nie otworzysz. Uruchom go na komputerze, który stale działa, a będzie pracował dalej.</p>
+</details>
+<details>
+  <summary>Czy Claude Code może działać w tle na moim laptopie?</summary>
+  <p>Dopóki laptop nie śpi, tak: w trybie Code mode działa w karcie okna Antenny, na którą nie musisz patrzeć, a Antenna budzi go, gdy przyjdzie wiadomość. Ale gdy laptop przejdzie w uśpienie, i tak się zatrzyma.</p>
+</details>
+<details>
+  <summary>Czy muszę trzymać otwartą sesję SSH?</summary>
+  <p>Nie. Claude Code działa w tmuxie Antenny na serwerze, a ty docierasz do niego przez czat. Oba komputery łączą się na zewnątrz, więc nie otwiera się też żaden port przychodzący.</p>
+</details>
+<details>
+  <summary>Czy Antenna nie pozwala Macowi zasnąć?</summary>
+  <p>Nie. Ustaw Maca tak, żeby nie przechodził w uśpienie, w jego ustawieniach systemowych. Do trybu Code mode okno Antenny musi być otwarte.</p>
+</details>
+<details>
+  <summary>Czy mogę sprawdzić postęp z telefonu?</summary>
+  <p>Jeszcze nie. Antenna działa dziś na macOS i Linuksie.</p>
+</details>

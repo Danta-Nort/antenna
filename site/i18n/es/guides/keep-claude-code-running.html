@@ -1,0 +1,77 @@
+<!--guide {"title": "Mantener Claude Code en marcha con el portátil cerrado — Antenna", "h1": "Cómo mantener Claude Code en marcha con el portátil cerrado", "description": "Al cerrar el portátil, se suspende y Claude Code se detiene. Ejecútalo en una computadora siempre encendida y dale tareas desde tu portátil con Antenna.", "summary": "Claude Code trabajando toda la noche en un servidor o un Mac siempre encendido mientras tu portátil duerme, con tareas que le das por chat.", "source": "2026-11-15"}-->
+<p class="lead">En el propio portátil no se puede: al cerrar la tapa, el portátil entra en reposo, una computadora en reposo no ejecuta nada y Claude Code se queda en pausa con ella. La solución es ejecutar Claude Code en una computadora que siga encendida, como un servidor Linux o un Mac mini configurado para no entrar en reposo, iniciarlo allí a través de Antenna y darle tareas desde el chat de Antenna de tu portátil. Cierra el portátil: Claude Code sigue trabajando en la otra computadora, y sus respuestas esperan al portátil y llegan cuando vuelve a estar en línea.</p>
+
+<h2>Por qué se detiene</h2>
+<p>Claude Code se ejecuta en la computadora donde lo inicias. Cuando esa computadora entra en reposo, todos sus programas se detienen, Claude Code incluido, hasta que despierta. Cerrar la terminal o la ventana de SSH donde se ejecuta también lo termina. Puedes mantener despierto un portátil con la tapa cerrada, pero entonces tiene que seguir enchufado y encendido, y ya se ha convertido en un servidor. Por eso el trabajo pasa a una computadora que siempre está encendida, y el portátil solo habla con ella.</p>
+
+<h2>Qué necesitas</h2>
+<ul>
+  <li>Una computadora que siga encendida: un servidor Linux x86_64 (un VPS o uno en casa), o un Mac o un escritorio Linux configurado para no entrar en reposo.</li>
+  <li>Claude Code instalado en ella y con la sesión iniciada.</li>
+  <li><a href="/#download">Antenna</a> en las dos computadoras: la app en tu portátil (macOS o Linux) y el nodo o la app en la otra.</li>
+</ul>
+
+<h2>En un servidor</h2>
+<ol>
+  <li>Instala el nodo de Antenna y deja que siga en marcha cuando cierres la sesión:
+<pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+sudo loginctl enable-linger $USER</code></pre>
+  El instalador configura Antenna como servicio de usuario de systemd y crea tu nodo con una contraseña. No activa el lingering, solo te lo recuerda: sin la segunda línea, el servicio se detiene cuando cierras la sesión.</li>
+  <li>Empareja el servidor con tu portátil una vez. En el portátil: <strong>Contacto nuevo → Invitar</strong>, marca <strong>Es mi propia computadora (∞)</strong>, pulsa <strong>Crear enlace</strong> y cópialo. En el servidor: <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>, escribe el código que muestra el portátil y luego pulsa <strong>El contacto lo confirmó: los códigos coinciden</strong> en el portátil.</li>
+  <li>Inicia Claude Code a través de Antenna en la carpeta del proyecto (el servidor necesita tmux):
+<pre><code>cd ~/projects/api
+antenna connect claude-code --agent api-dev --links mac --hello mac
+antenna session start api-dev --dir ~/projects/api
+antenna session attach api-dev</code></pre>
+  Responde a las primeras preguntas de Claude Code, como si confía en la carpeta, y luego sal con <code>Ctrl-b d</code>. En tu portátil ya tienes un chat llamado <code>api-dev</code>.</li>
+  <li>Deja que el portátil responda a las peticiones de aprobación del servidor: <code>antenna devices confirm mac</code>.</li>
+</ol>
+<p>Ahora cierra la sesión de SSH. El servicio sigue en marcha, y Claude Code sigue ejecutándose en el servidor tmux propio de Antenna; tu tmux no se toca. En <a href="/guides/run-claude-code-on-a-vps">Claude Code en un VPS</a> tienes cada paso con más detalle.</p>
+
+<h2>En un Mac o un escritorio siempre encendido</h2>
+<ol>
+  <li>Configura la computadora para que no entre en reposo por sí sola, en sus ajustes del sistema. Antenna no mantiene despierta una computadora.</li>
+  <li>Emparéjala con tu portátil como arriba, con <strong>Es mi propia computadora (∞)</strong> marcado.</li>
+  <li>En ella, abre <strong>Agentes → Apps de IA</strong> y pulsa <strong>Iniciar en modo Code</strong> junto a Claude Code. Elige <strong>Agente nuevo…</strong> y ponle un nombre, elige la <strong>Carpeta de trabajo</strong>, escribe tu contraseña y pulsa <strong>Iniciar</strong>. La ventana pasa al modo Code, y Claude Code se ejecuta en una pestaña dentro de ella.</li>
+  <li>Pídele una vez a Claude Code, en su pestaña, que salude a tu portátil a través de Antenna. Entonces su chat aparece en el portátil.</li>
+  <li>Deja que el portátil responda a sus peticiones de aprobación: <strong>Mis dispositivos</strong> → la ficha del portátil → <strong>Aprobaciones</strong> → <strong>Aceptar aprobaciones firmadas con …</strong>, con tu contraseña.</li>
+</ol>
+<p>Deja abierta la ventana de Antenna: cerrarla detiene los agentes que se ejecutan en ella, y la ventana te pregunta antes.</p>
+
+<h2>Déjalo trabajando</h2>
+<p>Escribe la tarea en el chat del agente en tu portátil: «Ejecuta las pruebas de la migración, arregla lo que falle y responde aquí con lo que cambiaste». Cuando Claude Code está inactivo en su prompt, Antenna escribe una línea fija para que lea tu mensaje; si está a mitad de un turno, recibe el mensaje cuando el turno termina. Antenna nunca escribe tu texto en la terminal. <em>Experimental.</em> Luego cierra el portátil.</p>
+<p>Antes de una tarea larga, revisa qué podría detenerla mientras no hay nadie:</p>
+<ul>
+  <li><strong>El aviso de permisos propio de Claude Code</strong> («Do you want to proceed?») espera en su terminal hasta que alguien responde, y Antenna nunca lo responde. Permite en la configuración de Claude Code las herramientas que necesita la tarea.</li>
+  <li><strong>Las peticiones de aprobación de Antenna</strong> esperan 10 minutos. Después no se ejecuta nada, y Claude Code se entera de que nadie aprobó. Una tarea que das desde tu propia computadora en ∞ ejecuta sus comandos y ediciones sin preguntar; los cambios en la configuración propia de Claude Code, como <code>CLAUDE.md</code> o <code>.claude/</code>, siguen pidiendo aprobación.</li>
+</ul>
+
+<h2>Cuando el portátil despierta</h2>
+<p>Mientras el portátil duerme, las respuestas de Claude Code esperan en la cola de la otra computadora, y Antenna sigue intentando entregarlas. En cuanto el portátil vuelve a estar en línea, llegan al chat, con una notificación si la ventana de Antenna no está en primer plano. Un mensaje que escribiste sin conexión muestra un reloj y se envía solo. Las peticiones que aún esperan tu aprobación aparecen en la ficha de la otra computadora en <strong>Mis dispositivos</strong> (<em>experimental</em>).</p>
+
+<h2>Si la otra computadora se reinicia</h2>
+<p>Tras un reinicio las claves quedan bloqueadas, así que sus enlaces se quedan en silencio hasta que escribes la contraseña. En un servidor, inicia sesión, ejecuta <code>antenna unlock</code> y vuelve a iniciar la sesión de Claude Code; <code>--resume</code> continúa la última sesión de Claude Code:</p>
+<pre><code>antenna session start api-dev --dir ~/projects/api --resume</code></pre>
+<p>En un Mac, escribe la contraseña en la ventana de Antenna y vuelve a iniciar el agente.</p>
+
+<h2>Preguntas</h2>
+<details>
+  <summary>¿Claude Code sigue funcionando si cierro el portátil?</summary>
+  <p>No, si al cerrar la tapa el portátil entra en reposo, que es lo habitual: Claude Code se queda en pausa hasta que lo abres. Ejecútalo en una computadora que siga encendida y seguirá trabajando.</p>
+</details>
+<details>
+  <summary>¿Puede Claude Code ejecutarse en segundo plano en mi portátil?</summary>
+  <p>Mientras el portátil está despierto, sí: en modo Code se ejecuta en una pestaña de la ventana de Antenna que no necesitas mirar, y Antenna lo despierta cuando llega un mensaje. Aun así, se detiene cuando el portátil entra en reposo.</p>
+</details>
+<details>
+  <summary>¿Tengo que mantener abierta una sesión de SSH?</summary>
+  <p>No. Claude Code se ejecuta en el tmux de Antenna en el servidor, y llegas a él a través del chat. Las dos computadoras se conectan hacia fuera, así que tampoco se abre ningún puerto de entrada.</p>
+</details>
+<details>
+  <summary>¿Antenna mantiene despierto mi Mac?</summary>
+  <p>No. Configura el Mac para que no entre en reposo en sus ajustes del sistema. Para el modo Code, la ventana de Antenna tiene que seguir abierta.</p>
+</details>
+<details>
+  <summary>¿Puedo revisarlo desde el móvil?</summary>
+  <p>Todavía no. Por ahora Antenna funciona en macOS y Linux.</p>
+</details>

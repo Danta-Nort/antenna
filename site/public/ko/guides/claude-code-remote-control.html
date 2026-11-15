@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Code 원격 제어: 다른 컴퓨터의 Claude Code를 노트북에서 — Antenna</title>
+<meta name="description" content="서버나 데스크톱에서 Claude Code를 돌리고, 노트북의 Antenna 채팅으로 작업을 맡기세요. P2P에 종단 간 암호화, 계정은 필요 없어요.">
+<link rel="canonical" href="https://antenna.contact/ko/guides/claude-code-remote-control">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Claude Code 원격 제어: 다른 컴퓨터의 Claude Code를 노트북에서 — Antenna">
+<meta property="og:description" content="서버나 데스크톱에서 Claude Code를 돌리고, 노트북의 Antenna 채팅으로 작업을 맡기세요. P2P에 종단 간 암호화, 계정은 필요 없어요.">
+<meta property="og:url" content="https://antenna.contact/ko/guides/claude-code-remote-control">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ko_KR">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/claude-code-remote-control">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/claude-code-remote-control">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ko/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "가이드",
+     "item": "https://antenna.contact/ko/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "노트북에서 다른 컴퓨터의 Claude Code 조종하기",
+     "item": "https://antenna.contact/ko/guides/claude-code-remote-control"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "노트북에서 다른 컴퓨터의 Claude Code 조종하기",
+   "description": "서버나 데스크톱에서 Claude Code를 돌리고, 노트북의 Antenna 채팅으로 작업을 맡기세요. P2P에 종단 간 암호화, 계정은 필요 없어요.",
+   "datePublished": "2026-11-15",
+   "dateModified": "2026-11-15",
+   "inLanguage": "ko",
+   "url": "https://antenna.contact/ko/guides/claude-code-remote-control",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ko/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "노트북에서 Claude Code의 터미널이 보이나요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "아니요. 작업을 맡기고 답장을 읽는 건 채팅에서 하고, 터미널은 다른 컴퓨터에 있어요. 보고 싶다면 거기서 antenna session attach를 실행하세요. SSH로 들어가도 돼요."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "다른 컴퓨터에 공인 IP나 열린 포트가 필요한가요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "아니요. 두 컴퓨터 모두 바깥으로 연결해요. 네트워크가 허락하면 직접, 아니면 릴레이를 거쳐서요. 릴레이는 암호화된 트래픽만 전달해요."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "그 밖에 누가 작업을 맡길 수 있나요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "그 컴퓨터와 페어링된 연락처 중 에이전트가 메시지를 읽어도 되는 연락처(--links mac이면 내 노트북뿐)와, 에이전트 맵에서 그 에이전트와 연결한 에이전트뿐이에요. 연락처의 메시지로 무엇을 시킬 수 있는지는 Claude Code가 아니라 그 컴퓨터의 Antenna 데몬이 그 연락처의 신뢰 레벨에 따라 정해요."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "API 키가 필요한가요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "아니요. Claude Code는 돌아가는 컴퓨터에서 내 로그인을 그대로 쓰고, Antenna는 메시지, 파일, 승인만 실어 날라요."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "휴대폰으로 조종할 수 있나요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "아직은 안 돼요. 지금 Antenna는 macOS와 Linux에서 돌아가요."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ko/" aria-label="Antenna 홈"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="주 메뉴">
+      <a href="/ko/#product">제품</a>
+      <a href="/ko/#security">보안</a>
+      <a href="/ko/guides/">가이드</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="언어: 한국어"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">KO</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/claude-code-remote-control" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/claude-code-remote-control" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/claude-code-remote-control" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/claude-code-remote-control" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/claude-code-remote-control" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/claude-code-remote-control" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/claude-code-remote-control" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/claude-code-remote-control" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/claude-code-remote-control" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/claude-code-remote-control" hreflang="ko" lang="ko" aria-current="true">한국어</a></li>
+        <li><a href="/tr/guides/claude-code-remote-control" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/claude-code-remote-control" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/claude-code-remote-control" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/claude-code-remote-control" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/claude-code-remote-control" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ko/#download">다운로드</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="현재 위치"><a href="/ko/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ko/guides/">가이드</a></nav>
+    <p class="eyebrow">업데이트 <time datetime="2026-11-15">2026년 11월 15일</time></p>
+    <h1>노트북에서 다른 컴퓨터의 Claude Code 조종하기</h1>
+    <p class="lead">노트북과 Claude Code가 돌아가는 컴퓨터 양쪽에 Antenna를 설치하고, 두 컴퓨터를 내 컴퓨터로 한 번 페어링한 다음, 그 컴퓨터에서 Antenna로 Claude Code를 시작하세요. 그러면 노트북에 그 세션과의 채팅이 나타나요. 거기에 작업을 쓰면 Claude Code가 쉬고 있을 때 Antenna가 깨우고, 답장은 채팅으로 돌아와요. 메시지는 두 컴퓨터 사이의 종단 간 암호화된 P2P 연결로 오가고, Antenna에는 계정이 필요 없어요. 내 승인이 필요한 단계는 노트북으로 오고, 비밀번호로 답하면 돼요.</p>
+
+    <h2>Claude Code 자체의 Remote Control과 Antenna</h2>
+    <p>Claude Code에는 Remote Control이라는 자체 기능이 내장되어 있고, Anthropic 문서에 설명되어 있어요. 이 가이드는 그와 다른 구성을 다뤄요. Claude Code는 계속 켜져 있는 내 컴퓨터(서버나 데스크톱)에서 돌고, 나는 노트북의 Antenna로 그것을 조종해요. 이런 것을 원한다면 잘 맞아요.</p>
+    <ul>
+      <li><strong>여러 컴퓨터의 여러 세션을 한 목록에서.</strong> 세션마다 채팅이 따로 있고, <strong>내 기기</strong>에는 컴퓨터마다 상태, 에이전트, 거기서 기다리는 요청이 보여요.</li>
+      <li><strong>나만의 연결.</strong> 메시지는 한 컴퓨터에서 암호화되고 다른 컴퓨터에서 복호화돼요. 네트워크가 허락하면 컴퓨터끼리 직접 연결되고, 아니면 암호화된 트래픽만 전달하는 릴레이를 거쳐요. 계정도, 인바운드 포트도 없어요.</li>
+      <li><strong>Antenna 데몬이 확인하는 권한.</strong> 확인은 Claude Code가 돌아가는 컴퓨터에서 이뤄지고, 승인에는 지금 앞에 있는 내 컴퓨터에서 답할 수 있어요.</li>
+      <li><strong>다른 에이전트도 같은 방식으로:</strong> Codex도 Claude Code처럼 돼요.</li>
+    </ul>
+
+    <h2>설정하기</h2>
+    <ol>
+      <li>두 컴퓨터 모두에 <a href="/ko/#download">Antenna를 설치하세요</a>. 노트북에는 앱(macOS 또는 Linux), 다른 컴퓨터에는 앱을, Linux 서버라면 노드를 설치해요.
+    <pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+    sudo loginctl enable-linger $USER</code></pre></li>
+      <li>한 번 페어링하세요. 노트북에서 <strong>새 연락처 → 초대</strong>로 가서 <strong>내 컴퓨터예요(∞)</strong>를 체크하고, <strong>링크 만들기</strong>를 눌러 링크를 복사하세요. 서버에서는 <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>, 데스크톱에서는 같은 칸을 체크하고 <strong>새 연락처 → 참여</strong>로 가세요. 한쪽에 표시된 코드를 다른 쪽에 입력하고, 노트북에서 <strong>연락처가 확인함: 코드 일치</strong>를 누르세요.</li>
+      <li>다른 컴퓨터에서 Antenna로 Claude Code를 시작하세요. 서버라면 프로젝트 폴더에서(tmux 필요):
+    <pre><code>cd ~/projects/api
+    antenna connect claude-code --agent api-dev --links mac --hello mac
+    antenna session start api-dev --dir ~/projects/api
+    antenna session attach api-dev</code></pre>
+      Claude Code의 첫 질문에 답한 다음 <code>Ctrl-b d</code>로 빠져나오세요. Claude Code는 계속 돌고, 노트북에는 <code>api-dev</code>라는 채팅이 생겨요. 데스크톱이라면 <strong>에이전트 → AI 앱 → Code 모드로 시작</strong>을 누르면 그 컴퓨터의 Antenna 창 탭에서 Claude Code가 돌아요. Antenna로 노트북에 인사하라고 한 번만 부탁하면, 노트북에 그 채팅이 나타나요.</li>
+      <li>그 컴퓨터의 승인 요청에 노트북이 답할 수 있게 하세요. 서버에서는 <code>antenna devices confirm mac</code>. 데스크톱에서는 <strong>내 기기</strong> → 노트북의 카드 → <strong>승인</strong> → <strong>…(으)로 서명된 승인 받아들이기</strong>에서 비밀번호를 입력하면 돼요.</li>
+    </ol>
+
+    <h2>노트북에서 조종하기</h2>
+    <ul>
+      <li><strong>작업 맡기기.</strong> 사람에게 쓰듯 세션의 채팅에 쓰세요. Claude Code가 프롬프트에서 쉬고 있으면 Antenna가 내장된 한 줄을 입력해서 메시지를 읽게 해요. 내 텍스트를 터미널에 입력하거나, Claude Code가 거기서 묻는 질문에 답하는 일은 절대 없어요. <em>실험적 기능이에요.</em></li>
+      <li><strong>중단하기.</strong> 보내기 전에 <strong>긴급: 지금 중단</strong>을 켜세요. Antenna가 Esc를 한 번 눌러 진행 중인 턴을 끝내고(거기에 질문이나 권한 확인 창이 열려 있으면 누르지 않아요), Claude Code가 내 메시지를 읽어요. <em>실험적 기능이에요.</em></li>
+      <li><strong>단계 승인하기.</strong> 내가 필요한 단계는 <strong>내 기기</strong>에서 다른 컴퓨터의 카드에 알림과 함께 나타나요. <strong>비밀번호로 승인</strong>, Mac이라면 <strong>Touch ID로 승인</strong>, 또는 <strong>거부</strong>를 누르세요. <em>실험적 기능이에요.</em></li>
+      <li><strong>멈추기.</strong> 그 카드에서 에이전트 옆의 <strong>에이전트와 프로세스 중지…</strong>를 누르면 Claude Code와 그것이 그 컴퓨터에서 시작한 모든 것이 끝나요. <em>실험적 기능이에요.</em></li>
+    </ul>
+    <p>Claude Code 자체의 권한 확인 창(“Do you want to proceed?”)은 다른 컴퓨터의 터미널에 그대로 남고, Antenna는 거기에 답하지 않아요. 자주 쓰는 도구는 Claude Code 설정에서 허용해 두거나, <code>antenna session attach</code>로 들어가서 답하세요.</p>
+
+    <h2>Codex와 다른 에이전트</h2>
+    <p>Codex도 똑같이 돼요. 서버에서는 <code>antenna connect codex</code>와 <code>--cli codex</code>, 데스크톱에서는 Codex 옆의 <strong>Code 모드로 시작</strong>을 쓰세요(<a href="/ko/guides/codex-cli-remote-control">Codex CLI 원격 제어</a> 참고). Gemini CLI는 <strong>에이전트 → AI 앱</strong>에서 연결하고 Antenna로 메시지를 보내고 읽지만, Antenna가 아직 깨우지는 못해요. 다음에 Antenna를 호출할 때 새 메시지를 읽어요.</p>
+
+    <h2>자주 묻는 질문</h2>
+    <details>
+      <summary>노트북에서 Claude Code의 터미널이 보이나요?</summary>
+      <p>아니요. 작업을 맡기고 답장을 읽는 건 채팅에서 하고, 터미널은 다른 컴퓨터에 있어요. 보고 싶다면 거기서 <code>antenna session attach</code>를 실행하세요. SSH로 들어가도 돼요.</p>
+    </details>
+    <details>
+      <summary>다른 컴퓨터에 공인 IP나 열린 포트가 필요한가요?</summary>
+      <p>아니요. 두 컴퓨터 모두 바깥으로 연결해요. 네트워크가 허락하면 직접, 아니면 릴레이를 거쳐서요. 릴레이는 암호화된 트래픽만 전달해요.</p>
+    </details>
+    <details>
+      <summary>그 밖에 누가 작업을 맡길 수 있나요?</summary>
+      <p>그 컴퓨터와 페어링된 연락처 중 에이전트가 메시지를 읽어도 되는 연락처(<code>--links mac</code>이면 내 노트북뿐)와, 에이전트 맵에서 그 에이전트와 연결한 에이전트뿐이에요. 연락처의 메시지로 무엇을 시킬 수 있는지는 Claude Code가 아니라 그 컴퓨터의 Antenna 데몬이 그 연락처의 신뢰 레벨에 따라 정해요.</p>
+    </details>
+    <details>
+      <summary>API 키가 필요한가요?</summary>
+      <p>아니요. Claude Code는 돌아가는 컴퓨터에서 내 로그인을 그대로 쓰고, Antenna는 메시지, 파일, 승인만 실어 날라요.</p>
+    </details>
+    <details>
+      <summary>휴대폰으로 조종할 수 있나요?</summary>
+      <p>아직은 안 돼요. 지금 Antenna는 macOS와 Linux에서 돌아가요.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna는 무료 오픈소스예요.</strong> macOS와 Linux에서 쓸 수 있고, 계정도 전화번호도 필요 없어요.</p>
+      <a class="btn" href="/ko/#download">Antenna 다운로드</a>
+    </aside>
+    <h2>관련 가이드</h2>
+    <ul class="related">
+      <li><a href="/ko/guides/codex-cli-remote-control">노트북에서 다른 컴퓨터의 Codex CLI에 작업 맡기기</a></li>
+      <li><a href="/ko/guides/message-claude-code-on-another-computer">다른 컴퓨터의 Claude Code에 메시지 보내기</a></li>
+      <li><a href="/ko/guides/approve-claude-code-permissions-remotely">다른 컴퓨터에서 Claude Code의 요청 승인하기</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ko/" aria-label="Antenna 홈"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ko/guides/">가이드</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>문의: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ko/privacy">개인정보 처리방침</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ノート PC を閉じても Claude Code を動かし続ける方法 — Antenna</title>
+<meta name="description" content="ノート PC を閉じるとスリープし、Claude Code も止まります。電源の入ったままのコンピューターで Claude Code を動かし、ノート PC から Antenna でタスクを渡しましょう。">
+<link rel="canonical" href="https://antenna.contact/ja/guides/keep-claude-code-running">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="ノート PC を閉じても Claude Code を動かし続ける方法 — Antenna">
+<meta property="og:description" content="ノート PC を閉じるとスリープし、Claude Code も止まります。電源の入ったままのコンピューターで Claude Code を動かし、ノート PC から Antenna でタスクを渡しましょう。">
+<meta property="og:url" content="https://antenna.contact/ja/guides/keep-claude-code-running">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ja_JP">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/keep-claude-code-running">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/ja/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "ガイド",
+     "item": "https://antenna.contact/ja/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "ノート PC を閉じている間も Claude Code に作業を続けさせる",
+     "item": "https://antenna.contact/ja/guides/keep-claude-code-running"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "ノート PC を閉じている間も Claude Code に作業を続けさせる",
+   "description": "ノート PC を閉じるとスリープし、Claude Code も止まります。電源の入ったままのコンピューターで Claude Code を動かし、ノート PC から Antenna でタスクを渡しましょう。",
+   "datePublished": "2026-11-15",
+   "dateModified": "2026-11-15",
+   "inLanguage": "ja",
+   "url": "https://antenna.contact/ja/guides/keep-claude-code-running",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/ja/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "ノート PC を閉じても Claude Code は動き続けますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ふたを閉じるとスリープする設定（ふつうはそうです）なら、動き続けません。開くまで Claude Code は止まったままです。電源の入ったままのコンピューターで動かせば、作業を続けます。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Claude Code をノート PC のバックグラウンドで動かせますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ノート PC が起きている間なら、できます。Code モードでは、見ていなくてもかまわない Antenna のウィンドウのタブで動き、メッセージが届くと Antenna が起こします。それでも、ノート PC がスリープすれば止まります。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "SSH セッションを開いたままにする必要はありますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "いいえ。Claude Code はサーバー上の Antenna の tmux で動き、チャットを通じてやり取りします。どちらのコンピューターも外向きに接続するので、受信用のポートを開けることもありません。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Antenna は Mac をスリープさせないようにしてくれますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "いいえ。Mac のシステム設定でスリープしないように設定してください。Code モードを使うには、Antenna のウィンドウを開いたままにしておく必要があります。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "スマートフォンから様子を確認できますか？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "まだできません。現在、Antenna は macOS と Linux で動作します。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">本文へスキップ</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/ja/" aria-label="Antenna — ホーム"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="メイン">
+      <a href="/ja/#product">製品</a>
+      <a href="/ja/#security">セキュリティ</a>
+      <a href="/ja/guides/">ガイド</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="言語: 日本語"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">JA</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/keep-claude-code-running" hreflang="en" lang="en">English</a></li>
+        <li><a href="/es/guides/keep-claude-code-running" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/keep-claude-code-running" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/keep-claude-code-running" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/keep-claude-code-running" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/keep-claude-code-running" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/keep-claude-code-running" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/keep-claude-code-running" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/keep-claude-code-running" hreflang="ja" lang="ja" aria-current="true">日本語</a></li>
+        <li><a href="/ko/guides/keep-claude-code-running" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/keep-claude-code-running" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/keep-claude-code-running" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/keep-claude-code-running" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/keep-claude-code-running" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/keep-claude-code-running" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/ja/#download">ダウンロード</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="パンくずリスト"><a href="/ja/">Antenna</a> <span aria-hidden="true">›</span> <a href="/ja/guides/">ガイド</a></nav>
+    <p class="eyebrow">更新日 <time datetime="2026-11-15">2026年11月15日</time></p>
+    <h1>ノート PC を閉じている間も Claude Code に作業を続けさせる</h1>
+    <p class="lead">ノート PC そのものでは無理です。ふたを閉じるとノート PC はスリープし、スリープ中のコンピューターでは何も動かず、Claude Code も一緒に止まります。解決策は、Linux サーバーや、スリープしないよう設定した Mac mini のような、電源が入ったままのコンピューターで Claude Code を動かすことです。そこで Antenna 経由で Claude Code を起動し、ノート PC の Antenna のチャットからタスクを渡します。ノート PC を閉じても、Claude Code はもう一方のコンピューターで作業を続け、返信はノート PC を待って、オンラインに戻ったときに届きます。</p>
+
+    <h2>なぜ止まるのか</h2>
+    <p>Claude Code は、起動したコンピューターの上で動きます。そのコンピューターがスリープすると、Claude Code を含むすべてのプログラムが、起きるまで止まります。Claude Code を動かしているターミナルや SSH のウィンドウを閉じても終了します。ふたを閉じたままノート PC を起こしておくこともできますが、それには電源につないで電源を入れたままにする必要があり、もはやサーバーです。そこで作業は常に電源の入ったコンピューターに移し、ノート PC はそれと話すだけにします。</p>
+
+    <h2>必要なもの</h2>
+    <ul>
+      <li>電源が入ったままのコンピューター。x86_64 の Linux サーバー（VPS でも自宅のマシンでも）、またはスリープしないよう設定した Mac か Linux デスクトップ。</li>
+      <li>そのコンピューターにインストール済みでサインイン済みの Claude Code。</li>
+      <li>両方のコンピューターに <a href="/ja/#download">Antenna</a>。ノート PC にはアプリ（macOS または Linux）、もう一方にはノードかアプリ。</li>
+    </ul>
+
+    <h2>サーバーの場合</h2>
+    <ol>
+      <li>Antenna のノードをインストールし、ログアウト後も動き続けるようにします。
+    <pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+    sudo loginctl enable-linger $USER</code></pre>
+      インストーラーは Antenna を systemd のユーザーサービスとして設定し、パスワード付きでノードを作成します。lingering は有効にせず、注意を促すだけです。2 行目がないと、ログアウトしたときにサービスが止まります。</li>
+      <li>サーバーとノート PC を一度だけペアリングします。ノート PC で <strong>新しい連絡先 → 招待</strong> を開き、<strong>これは自分のコンピューターです（∞）</strong> にチェックを入れて <strong>リンクを作成</strong> を押し、リンクをコピーします。サーバーで <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code> を実行し、ノート PC に表示されたコードを入力したら、ノート PC で <strong>相手が確認しました — コードは一致</strong> を押します。</li>
+      <li>プロジェクトフォルダーで、Antenna 経由で Claude Code を起動します（サーバーには tmux が必要です）。
+    <pre><code>cd ~/projects/api
+    antenna connect claude-code --agent api-dev --links mac --hello mac
+    antenna session start api-dev --dir ~/projects/api
+    antenna session attach api-dev</code></pre>
+      フォルダーを信頼するかどうかといった Claude Code の最初の質問に答え、<code>Ctrl-b d</code> で抜けます。これでノート PC に <code>api-dev</code> という名前のチャットができています。</li>
+      <li>サーバーからの承認リクエストにノート PC で答えられるようにします：<code>antenna devices confirm mac</code>。</li>
+    </ol>
+    <p>ここで SSH からログアウトしてかまいません。サービスは動き続け、Claude Code も Antenna 専用の tmux サーバーで動き続けます。あなた自身の tmux には触れません。各手順の詳しい説明は <a href="/ja/guides/run-claude-code-on-a-vps">VPS で Claude Code を動かす</a>にあります。</p>
+
+    <h2>電源の入ったままの Mac やデスクトップの場合</h2>
+    <ol>
+      <li>システム設定で、コンピューターが勝手にスリープしないようにします。Antenna がコンピューターを起こしておくことはありません。</li>
+      <li>上と同じように、<strong>これは自分のコンピューターです（∞）</strong> にチェックを入れてノート PC とペアリングします。</li>
+      <li>そのコンピューターで <strong>エージェント → AI アプリ</strong> を開き、Claude Code の横の <strong>Code モードで起動</strong> を押します。<strong>新しいエージェント…</strong> を選んで名前を付け、<strong>作業フォルダー</strong> を選び、パスワードを入力して <strong>起動</strong> を押します。ウィンドウが Code モードに切り替わり、その中のタブで Claude Code が動きます。</li>
+      <li>Claude Code のタブで一度だけ、Antenna を通じてノート PC にあいさつするよう頼みます。すると、そのチャットがノート PC に現れます。</li>
+      <li>その承認リクエストにノート PC で答えられるようにします。<strong>自分のデバイス</strong> → ノート PC のカード → <strong>承認</strong> → <strong>… で署名された承認を受け付ける</strong> を開き、パスワードを入力します。</li>
+    </ol>
+    <p>Antenna のウィンドウは開いたままにしてください。閉じると、そこで動いているエージェントが止まります。閉じる前にはウィンドウが確認します。</p>
+
+    <h2>作業を任せる</h2>
+    <p>ノート PC のエージェントのチャットにタスクを書きます：「マイグレーションのテストを実行して、失敗したものを直し、何を変えたかここに返信して」。Claude Code がプロンプトで待機していると、Antenna が組み込みの 1 行を入力してあなたのメッセージを読ませます。ターンの途中なら、ターンが終わったときにメッセージを受け取ります。Antenna があなたのテキストをターミナルに入力することはありません。<em>実験的機能です。</em>あとはノート PC を閉じるだけです。</p>
+    <p>長い作業の前に、誰もいない間にそれを止めてしまうものがないか確認しておきましょう。</p>
+    <ul>
+      <li><strong>Claude Code 自身の権限確認</strong>（「Do you want to proceed?」）は、誰かが答えるまでターミナルで待ち続け、Antenna がそれに答えることはありません。タスクに必要なツールは Claude Code の設定で許可しておいてください。</li>
+      <li><strong>Antenna の承認リクエスト</strong>は 10 分待ちます。その後は何も実行されず、Claude Code には誰も承認しなかったことが伝わります。∞ の自分のコンピューターから渡したタスクは、コマンドも編集も確認なしで実行します。ただし、<code>CLAUDE.md</code> や <code>.claude/</code> など Claude Code 自身の設定の変更は、それでも確認を求めます。</li>
+    </ul>
+
+    <h2>ノート PC が起きたら</h2>
+    <p>ノート PC がスリープしている間、Claude Code の返信はもう一方のコンピューターのキューで待ち、Antenna は配信を試み続けます。ノート PC がオンラインに戻ると返信はチャットに届き、Antenna のウィンドウが前面にないときは通知も出ます。オフラインの間に書いたメッセージには時計のマークが付き、自動で送信されます。まだ承認を待っているリクエストは、<strong>自分のデバイス</strong> にあるもう一方のコンピューターのカードに表示されます（<em>実験的機能</em>）。</p>
+
+    <h2>もう一方のコンピューターが再起動したら</h2>
+    <p>再起動後は鍵がロックされるので、パスワードを入力するまで、そのコンピューターのリンクは沈黙したままです。サーバーではログインして <code>antenna unlock</code> を実行し、セッションをもう一度起動します。<code>--resume</code> を付けると Claude Code の前回のセッションを続けられます。</p>
+    <pre><code>antenna session start api-dev --dir ~/projects/api --resume</code></pre>
+    <p>Mac では、Antenna のウィンドウでパスワードを入力し、エージェントをもう一度起動します。</p>
+
+    <h2>よくある質問</h2>
+    <details>
+      <summary>ノート PC を閉じても Claude Code は動き続けますか？</summary>
+      <p>ふたを閉じるとスリープする設定（ふつうはそうです）なら、動き続けません。開くまで Claude Code は止まったままです。電源の入ったままのコンピューターで動かせば、作業を続けます。</p>
+    </details>
+    <details>
+      <summary>Claude Code をノート PC のバックグラウンドで動かせますか？</summary>
+      <p>ノート PC が起きている間なら、できます。Code モードでは、見ていなくてもかまわない Antenna のウィンドウのタブで動き、メッセージが届くと Antenna が起こします。それでも、ノート PC がスリープすれば止まります。</p>
+    </details>
+    <details>
+      <summary>SSH セッションを開いたままにする必要はありますか？</summary>
+      <p>いいえ。Claude Code はサーバー上の Antenna の tmux で動き、チャットを通じてやり取りします。どちらのコンピューターも外向きに接続するので、受信用のポートを開けることもありません。</p>
+    </details>
+    <details>
+      <summary>Antenna は Mac をスリープさせないようにしてくれますか？</summary>
+      <p>いいえ。Mac のシステム設定でスリープしないように設定してください。Code モードを使うには、Antenna のウィンドウを開いたままにしておく必要があります。</p>
+    </details>
+    <details>
+      <summary>スマートフォンから様子を確認できますか？</summary>
+      <p>まだできません。現在、Antenna は macOS と Linux で動作します。</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna は無料のオープンソース</strong>で、macOS と Linux に対応しています。アカウントも電話番号も必要ありません。</p>
+      <a class="btn" href="/ja/#download">Antenna をダウンロード</a>
+    </aside>
+    <h2>関連ガイド</h2>
+    <ul class="related">
+      <li><a href="/ja/guides/run-claude-code-on-a-vps">VPS で Claude Code を 24 時間動かし、ノート PC から話しかける</a></li>
+      <li><a href="/ja/guides/claude-code-notifications">サーバーや別のコンピューターの Claude Code が作業を終えたら通知を受け取る</a></li>
+      <li><a href="/ja/guides/approve-claude-code-permissions-remotely">Claude Code のリクエストを別のコンピューターから承認する</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/ja/" aria-label="Antenna — ホーム"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/ja/guides/">ガイド</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>お問い合わせ： <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/ja/privacy">プライバシーポリシー</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>

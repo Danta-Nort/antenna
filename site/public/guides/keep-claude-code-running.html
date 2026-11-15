@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Keep Claude Code running when your laptop is closed — Antenna</title>
+<meta name="description" content="A closed laptop sleeps, and Claude Code stops with it. Run Claude Code on a computer that stays on, and give it tasks from your laptop through Antenna.">
+<link rel="canonical" href="https://antenna.contact/guides/keep-claude-code-running">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Antenna">
+<meta property="og:title" content="Keep Claude Code running when your laptop is closed — Antenna">
+<meta property="og:description" content="A closed laptop sleeps, and Claude Code stops with it. Run Claude Code on a computer that stays on, and give it tasks from your laptop through Antenna.">
+<meta property="og:url" content="https://antenna.contact/guides/keep-claude-code-running">
+<meta property="og:image" content="https://antenna.contact/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="en" href="https://antenna.contact/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="es" href="https://antenna.contact/es/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="pt-BR" href="https://antenna.contact/pt/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="zh-Hans" href="https://antenna.contact/zh/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="hi" href="https://antenna.contact/hi/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="ar" href="https://antenna.contact/ar/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="fr" href="https://antenna.contact/fr/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="de" href="https://antenna.contact/de/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="ja" href="https://antenna.contact/ja/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="ko" href="https://antenna.contact/ko/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="tr" href="https://antenna.contact/tr/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="it" href="https://antenna.contact/it/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="pl" href="https://antenna.contact/pl/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="ru" href="https://antenna.contact/ru/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="uk" href="https://antenna.contact/uk/guides/keep-claude-code-running">
+<link rel="alternate" hreflang="x-default" href="https://antenna.contact/guides/keep-claude-code-running">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css?v=7">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Antenna",
+     "item": "https://antenna.contact/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Guides",
+     "item": "https://antenna.contact/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Keep Claude Code running when your laptop is closed",
+     "item": "https://antenna.contact/guides/keep-claude-code-running"
+    }
+   ]
+  },
+  {
+   "@type": "TechArticle",
+   "headline": "Keep Claude Code running when your laptop is closed",
+   "description": "A closed laptop sleeps, and Claude Code stops with it. Run Claude Code on a computer that stays on, and give it tasks from your laptop through Antenna.",
+   "datePublished": "2026-11-15",
+   "dateModified": "2026-11-15",
+   "inLanguage": "en",
+   "url": "https://antenna.contact/guides/keep-claude-code-running",
+   "image": "https://antenna.contact/og.png",
+   "author": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Stillbyte LLC",
+    "url": "https://antenna.contact/"
+   },
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "Antenna",
+    "url": "https://antenna.contact/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Does Claude Code keep running if I close my laptop?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Not if closing the lid puts the laptop to sleep, which is the usual setting: Claude Code pauses until you open it. Run it on a computer that stays on and it keeps working."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Can Claude Code run in the background on my laptop?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "While the laptop is awake, yes: in Code mode it runs in a tab of Antenna’s window that you need not look at, and Antenna wakes it when a message arrives. It still stops when the laptop sleeps."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Do I need to keep an SSH session open?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No. Claude Code runs in Antenna’s tmux on the server, and you reach it through the chat. Both computers connect out, so no inbound port is opened either."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Does Antenna keep my Mac awake?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No. Set the Mac not to sleep in its system settings. Antenna’s window has to stay open for Code mode."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Can I check on it from my phone?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Not yet. Antenna runs on macOS and Linux today."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="/" aria-label="Antenna — home"><img src="/assets/mark-blue.svg" alt="" width="26" height="35"><span class="wordmark">Antenna</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="/#product">Product</a>
+      <a href="/#security">Security</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Language: English"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5S12.2 15.4 10 17.5M10 2.5C7.8 4.6 6.8 7.1 6.8 10s1 5.4 3.2 7.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span class="lang-code">EN</span></summary>
+      <ul class="lang-menu">
+        <li><a href="/guides/keep-claude-code-running" hreflang="en" lang="en" aria-current="true">English</a></li>
+        <li><a href="/es/guides/keep-claude-code-running" hreflang="es" lang="es">Español</a></li>
+        <li><a href="/pt/guides/keep-claude-code-running" hreflang="pt-BR" lang="pt-BR">Português</a></li>
+        <li><a href="/zh/guides/keep-claude-code-running" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+        <li><a href="/hi/guides/keep-claude-code-running" hreflang="hi" lang="hi">हिन्दी</a></li>
+        <li><a href="/ar/guides/keep-claude-code-running" hreflang="ar" lang="ar">العربية</a></li>
+        <li><a href="/fr/guides/keep-claude-code-running" hreflang="fr" lang="fr">Français</a></li>
+        <li><a href="/de/guides/keep-claude-code-running" hreflang="de" lang="de">Deutsch</a></li>
+        <li><a href="/ja/guides/keep-claude-code-running" hreflang="ja" lang="ja">日本語</a></li>
+        <li><a href="/ko/guides/keep-claude-code-running" hreflang="ko" lang="ko">한국어</a></li>
+        <li><a href="/tr/guides/keep-claude-code-running" hreflang="tr" lang="tr">Türkçe</a></li>
+        <li><a href="/it/guides/keep-claude-code-running" hreflang="it" lang="it">Italiano</a></li>
+        <li><a href="/pl/guides/keep-claude-code-running" hreflang="pl" lang="pl">Polski</a></li>
+        <li><a href="/ru/guides/keep-claude-code-running" hreflang="ru" lang="ru">Русский</a></li>
+        <li><a href="/uk/guides/keep-claude-code-running" hreflang="uk" lang="uk">Українська</a></li>
+      </ul>
+    </details>
+    <a class="btn btn-small top-cta" href="/#download">Download</a>
+  </div>
+</header>
+<main id="main" class="doc guide">
+  <article class="wrap narrow">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Antenna</a> <span aria-hidden="true">›</span> <a href="/guides/">Guides</a></nav>
+    <p class="eyebrow">Updated <time datetime="2026-11-15">15 November 2026</time></p>
+    <h1>Keep Claude Code running when your laptop is closed</h1>
+    <p class="lead">You cannot, on the laptop itself: closing the lid puts a laptop to sleep, a sleeping computer runs nothing, and Claude Code pauses with it. The way out is to run Claude Code on a computer that stays on, such as a Linux server or a Mac mini set not to sleep, start it there through Antenna, and give it tasks from your laptop’s Antenna chat. Close the laptop: Claude Code keeps working on the other computer, and its replies wait for the laptop and arrive when it is back online.</p>
+
+    <h2>Why it stops</h2>
+    <p>Claude Code runs on the computer you start it on. When that computer sleeps, every program on it stops, Claude Code included, until it wakes up. Closing the terminal or the SSH window it runs in ends it too. A laptop can be kept awake with the lid shut, but then it has to stay plugged in and switched on, and it has become a server. So the work moves to a computer that is always on, and the laptop only talks to it.</p>
+
+    <h2>What you need</h2>
+    <ul>
+      <li>A computer that stays on: a Linux server on x86_64 (a VPS or one at home), or a Mac or Linux desktop set not to sleep.</li>
+      <li>Claude Code installed and signed in there.</li>
+      <li><a href="/#download">Antenna</a> on both computers: the app on your laptop (macOS or Linux), the node or the app on the other one.</li>
+    </ul>
+
+    <h2>On a server</h2>
+    <ol>
+      <li>Install the Antenna node and let it run after you log out:
+    <pre><code>curl -fsSL https://antenna.contact/install.sh | sh
+    sudo loginctl enable-linger $USER</code></pre>
+      The installer sets Antenna up as a systemd user service and creates your node with a password. It does not turn on lingering, it only reminds you: without the second line the service stops when you log out.</li>
+      <li>Pair the server with your laptop once. On the laptop: <strong>New contact → Invite</strong>, tick <strong>This is my own computer (∞)</strong>, press <strong>Create link</strong> and copy it. On the server: <code>antenna join '&lt;link&gt;' --trust 5 --label mac</code>, type the code the laptop shows, then press <strong>The contact confirmed — codes match</strong> on the laptop.</li>
+      <li>Start Claude Code through Antenna in the project folder (the server needs tmux):
+    <pre><code>cd ~/projects/api
+    antenna connect claude-code --agent api-dev --links mac --hello mac
+    antenna session start api-dev --dir ~/projects/api
+    antenna session attach api-dev</code></pre>
+      Answer Claude Code’s first questions, such as whether it trusts the folder, then leave with <code>Ctrl-b d</code>. A chat named <code>api-dev</code> is now on your laptop.</li>
+      <li>Let the laptop answer the server’s approval requests: <code>antenna devices confirm mac</code>.</li>
+    </ol>
+    <p>Now log out of SSH. The service keeps running, and Claude Code keeps running in Antenna’s own tmux server; your own tmux is not touched. <a href="/guides/run-claude-code-on-a-vps">Claude Code on a VPS</a> has each step in more detail.</p>
+
+    <h2>On a Mac or desktop that stays on</h2>
+    <ol>
+      <li>Set the computer not to sleep on its own, in its system settings. Antenna does not keep a computer awake.</li>
+      <li>Pair it with your laptop as above, with <strong>This is my own computer (∞)</strong> ticked.</li>
+      <li>On it, open <strong>Agents → AI apps</strong> and press <strong>Start in Code mode</strong> next to Claude Code. Pick <strong>New agent…</strong> and give it a name, choose the <strong>Working folder</strong>, enter your password and press <strong>Start</strong>. The window switches to Code mode, and Claude Code runs in a tab inside it.</li>
+      <li>Ask Claude Code once, in its tab, to say hello to your laptop over Antenna. Its chat then appears on the laptop.</li>
+      <li>Let the laptop answer its approval requests: <strong>My devices</strong> → the laptop’s card → <strong>Approvals</strong> → <strong>Accept approvals signed with …</strong>, with your password.</li>
+    </ol>
+    <p>Leave Antenna’s window open: closing it stops the agents running in it, and the window asks first.</p>
+
+    <h2>Leave it working</h2>
+    <p>Write the task in the agent’s chat on your laptop: “Run the migration tests, fix what fails, and reply here with what changed.” When Claude Code sits idle at its prompt, Antenna types one built-in line so it reads your message; if it is in the middle of a turn, it gets the message when the turn ends. Antenna never types your text into the terminal. <em>Experimental.</em> Then close the laptop.</p>
+    <p>Before a long run, check what could stop it while nobody is there:</p>
+    <ul>
+      <li><strong>Claude Code’s own permission prompt</strong> (“Do you want to proceed?”) waits in its terminal until someone answers, and Antenna never answers it. Allow the tools the task needs in Claude Code’s settings.</li>
+      <li><strong>Antenna’s approval requests</strong> wait 10 minutes. Then nothing runs, and Claude Code learns that nobody approved. A task you give from your own computer at ∞ runs its commands and edits without asking; changes to Claude Code’s own setup, such as <code>CLAUDE.md</code> or <code>.claude/</code>, still ask.</li>
+    </ul>
+
+    <h2>When the laptop wakes up</h2>
+    <p>While the laptop sleeps, Claude Code’s replies wait in the other computer’s queue, and Antenna keeps trying to deliver them. Once the laptop is back online they arrive in the chat, with a notification while Antenna’s window is not in front. A message you wrote while offline shows a clock and goes out by itself. Requests still waiting for your approval show on the other computer’s card in <strong>My devices</strong> (<em>experimental</em>).</p>
+
+    <h2>After the other computer restarts</h2>
+    <p>The keys are locked after a restart, so its links stay silent until you enter the password. On a server, log in and run <code>antenna unlock</code>, then start the session again; <code>--resume</code> continues Claude Code’s last session:</p>
+    <pre><code>antenna session start api-dev --dir ~/projects/api --resume</code></pre>
+    <p>On a Mac, enter the password in Antenna’s window and start the agent again.</p>
+
+    <h2>Questions</h2>
+    <details>
+      <summary>Does Claude Code keep running if I close my laptop?</summary>
+      <p>Not if closing the lid puts the laptop to sleep, which is the usual setting: Claude Code pauses until you open it. Run it on a computer that stays on and it keeps working.</p>
+    </details>
+    <details>
+      <summary>Can Claude Code run in the background on my laptop?</summary>
+      <p>While the laptop is awake, yes: in Code mode it runs in a tab of Antenna’s window that you need not look at, and Antenna wakes it when a message arrives. It still stops when the laptop sleeps.</p>
+    </details>
+    <details>
+      <summary>Do I need to keep an SSH session open?</summary>
+      <p>No. Claude Code runs in Antenna’s tmux on the server, and you reach it through the chat. Both computers connect out, so no inbound port is opened either.</p>
+    </details>
+    <details>
+      <summary>Does Antenna keep my Mac awake?</summary>
+      <p>No. Set the Mac not to sleep in its system settings. Antenna’s window has to stay open for Code mode.</p>
+    </details>
+    <details>
+      <summary>Can I check on it from my phone?</summary>
+      <p>Not yet. Antenna runs on macOS and Linux today.</p>
+    </details>
+    <aside class="guide-cta">
+      <p><strong>Antenna is free and open source</strong>, for macOS and Linux. No account, no phone number.</p>
+      <a class="btn" href="/#download">Download Antenna</a>
+    </aside>
+    <h2>Related guides</h2>
+    <ul class="related">
+      <li><a href="/guides/run-claude-code-on-a-vps">Run Claude Code on a VPS around the clock, and talk to it from your laptop</a></li>
+      <li><a href="/guides/claude-code-notifications">Get a notification when Claude Code finishes, on a server or another computer</a></li>
+      <li><a href="/guides/approve-claude-code-permissions-remotely">Approve Claude Code’s requests from another computer</a></li>
+    </ul>
+  </article>
+</main>
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand brand-small" href="/" aria-label="Antenna — home"><img src="/assets/mark-blue.svg" alt="" width="18" height="24"><span class="wordmark">Antenna</span></a>
+    <p><a href="/guides/">Guides</a></p>
+    <p><a href="https://github.com/Danta-Nort/antenna">GitHub</a></p>
+    <p>Contact: <a href="mailto:hello@antenna.contact">hello@antenna.contact</a></p>
+    <p><a href="/privacy">Privacy policy</a></p>
+    <p class="copy">© 2026 Stillbyte LLC</p>
+  </div>
+</footer>
+</body>
+</html>
